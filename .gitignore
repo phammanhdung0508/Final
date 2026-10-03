@@ -1,0 +1,46 @@
+# Local reference materials (books, slides, and papers)
+/Tai-lieu/
+/Tai-lieu.zip
+/Papers/
+
+# Secrets and local environment settings
+.env
+.env.*
+!.env.example
+!**/.env.example
+
+# Python environments, caches, and package metadata
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.ipynb_checkpoints/
+.coverage
+.coverage.*
+htmlcov/
+
+# JavaScript dependencies and Expo/build outputs
+node_modules/
+.expo/
+/build/
+/dist/
+
+# Editor and operating-system files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Local logs
+*.log
+
+# Movie4U datasets, checkpoints, and mobile builds are covered by
+# Movie4U/.gitignore. Keep source code, AGENTS.md, lockfiles, documentation,
+# and the project timeline spreadsheet tracked.

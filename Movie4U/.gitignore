@@ -1,0 +1,33 @@
+.env
+!**/.env.example
+*.egg-info/
+.ruff_cache/
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ipynb_checkpoints/
+
+# Local and generated data (keep agent guidance tracked)
+data/raw/**/*
+!data/raw/**/
+!data/raw/**/AGENTS.md
+!data/raw/.gitkeep
+data/processed/**/*
+!data/processed/**/
+!data/processed/**/AGENTS.md
+!data/processed/.gitkeep
+
+# Generated model outputs (keep agent guidance tracked)
+artifacts/models/*
+artifacts/metrics/*
+!artifacts/models/.gitkeep
+!artifacts/models/AGENTS.md
+!artifacts/metrics/.gitkeep
+!artifacts/metrics/AGENTS.md
+
+# Mobile build outputs
+mobile/node_modules/
+mobile/build/
+mobile/dist/
+mobile/.expo/
