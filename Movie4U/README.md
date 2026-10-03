@@ -32,6 +32,18 @@ Training is local and does not require external APIs, Neo4j, a GPU, or an LLM. I
 
 Open `http://localhost:8000/docs` for the API. See `mobile/README.md` to configure the backend address and run the Expo demo. The development API has no authentication; do not expose it to the public internet.
 
+## Single-notebook walkthrough
+
+Open `notebooks/Movie4U_walkthrough.ipynb` for dataset exploration, KG visualization, user recommendations, training curves, and evaluation comparison in one place.
+
+```sh
+source .venv/bin/activate
+pip install -e '.[notebook]'
+python -m ipykernel install --user --name movie4u --display-name 'Python (Movie4U)'
+```
+
+Select that kernel and Run All. The notebook loads existing artifacts without retraining or modifying source data. Change `USER_ID` to explore another profile. Notebook outputs are cleared in the committed version.
+
 ## Pipeline
 
 ```text
@@ -54,6 +66,7 @@ MovieLens -> validated KG -> chronological training view
 - `artifacts/`: generated checkpoints, histories, and comparison metrics
 - `tests/`: small-fixture unit and integration tests
 - `docs/`: KG schema and evaluation protocol
+- `notebooks/`: one end-to-end exploration and demonstration notebook
 
 ## API
 
