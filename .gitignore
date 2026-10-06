@@ -44,3 +44,13 @@ Thumbs.db
 # Movie4U datasets, checkpoints, and mobile builds are covered by
 # Movie4U/.gitignore. Keep source code, AGENTS.md, lockfiles, documentation,
 # and the project timeline spreadsheet tracked.
+
+# research projects
+/multiautoresearch/
+/kaggle-cli/
+
+# Amazon4U
+Amazon4U/data/*
+
+# Ebooks
+Ebooks/*

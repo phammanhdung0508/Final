@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>KG + GNN Recommender System</title>
+<style>
+  :root{
+    --bg:#0d1117;
+    --slide:#111827;
+    --panel:#172033;
+    --panel2:#0f172a;
+    --text:#f8fafc;
+    --muted:#aeb8c8;
+    --accent:#7dd3fc;
+    --accent2:#c4b5fd;
+    --accent3:#86efac;
+    --warn:#fbbf24;
+    --bad:#fca5a5;
+    --line:#334155;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,Segoe UI,Roboto,Arial,sans-serif;overflow:hidden}
+  .deck{height:100vh;width:100vw;position:relative}
+  .slide{position:absolute;inset:0;display:none;padding:54px 70px 64px;background:radial-gradient(circle at 85% 8%,rgba(125,211,252,.14),transparent 26%),radial-gradient(circle at 10% 90%,rgba(196,181,253,.13),transparent 28%),var(--slide);overflow:auto}
+  .slide.active{display:block}
+  h1{font-size:48px;line-height:1.05;margin:0 0 20px;letter-spacing:-.04em}
+  h2{font-size:39px;line-height:1.08;margin:0 0 20px;letter-spacing:-.035em}
+  h3{font-size:24px;margin:0 0 10px;color:var(--accent)}
+  p{font-size:22px;line-height:1.42;color:var(--muted);margin:0 0 16px}
+  .subtitle{font-size:24px;color:#dbeafe;max-width:1000px}
+  .kicker{font-size:15px;text-transform:uppercase;letter-spacing:.16em;color:var(--accent);font-weight:700;margin-bottom:14px}
+  .grid{display:grid;gap:18px}
+  .cols2{grid-template-columns:1fr 1fr}.cols3{grid-template-columns:1fr 1fr 1fr}.cols4{grid-template-columns:repeat(4,1fr)}
+  .card{background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.025));border:1px solid rgba(148,163,184,.25);border-radius:22px;padding:22px;box-shadow:0 20px 55px rgba(0,0,0,.23)}
+  .card strong{color:#fff}.small{font-size:18px}.tiny{font-size:15px}.muted{color:var(--muted)}
+  .accent{color:var(--accent)}.accent2{color:var(--accent2)}.accent3{color:var(--accent3)}.warn{color:var(--warn)}.bad{color:var(--bad)}
+  ul{margin:8px 0 0 0;padding-left:22px;color:var(--muted);font-size:21px;line-height:1.42} li{margin:6px 0}
+  .pill{display:inline-block;padding:8px 12px;border-radius:999px;background:rgba(125,211,252,.12);border:1px solid rgba(125,211,252,.35);color:#e0f2fe;font-size:16px;font-weight:650;margin:4px 6px 4px 0}
+  .pill.purple{background:rgba(196,181,253,.12);border-color:rgba(196,181,253,.35);color:#ede9fe}.pill.green{background:rgba(134,239,172,.12);border-color:rgba(134,239,172,.35);color:#dcfce7}.pill.yellow{background:rgba(251,191,36,.12);border-color:rgba(251,191,36,.35);color:#fef3c7}.pill.red{background:rgba(252,165,165,.12);border-color:rgba(252,165,165,.35);color:#fee2e2}
+  table{border-collapse:collapse;width:100%;font-size:18px;margin-top:10px;background:rgba(15,23,42,.55);border-radius:16px;overflow:hidden} th,td{padding:12px 14px;border-bottom:1px solid rgba(148,163,184,.2);text-align:left;color:#dbeafe} th{background:rgba(125,211,252,.12);color:#f8fafc} tr:last-child td{border-bottom:none}
+  code,.mono{font-family:"SFMono-Regular",Consolas,"Liberation Mono",monospace;background:rgba(15,23,42,.8);border:1px solid rgba(148,163,184,.22);border-radius:14px;padding:14px 16px;display:block;color:#e5e7eb;font-size:18px;line-height:1.38;white-space:pre-wrap}
+  .flow{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:20px 0}.node{border:1px solid rgba(125,211,252,.45);background:rgba(125,211,252,.11);border-radius:16px;padding:14px 16px;font-size:19px;font-weight:700;color:#ecfeff}.node.p{border-color:rgba(196,181,253,.48);background:rgba(196,181,253,.12);color:#f5f3ff}.node.g{border-color:rgba(134,239,172,.48);background:rgba(134,239,172,.12);color:#f0fdf4}.node.y{border-color:rgba(251,191,36,.48);background:rgba(251,191,36,.12);color:#fffbeb}.arrow{font-size:28px;color:var(--muted);font-weight:900}
+  .diagram{background:rgba(2,6,23,.38);border:1px solid rgba(148,163,184,.2);border-radius:22px;padding:22px;margin-top:16px}
+  .bigquote{font-size:28px;line-height:1.28;color:#fff;background:rgba(125,211,252,.08);border-left:5px solid var(--accent);border-radius:18px;padding:24px;margin:20px 0}
+  .tagline{font-size:31px;color:#fff;font-weight:750;line-height:1.25;letter-spacing:-.02em}.large{font-size:27px;line-height:1.35}
+  .label{font-size:13px;text-transform:uppercase;letter-spacing:.12em;color:#94a3b8;margin-bottom:8px;font-weight:800}
+  .slideNo{position:absolute;right:28px;bottom:22px;color:#64748b;font-size:14px}.hint{position:absolute;left:28px;bottom:22px;color:#64748b;font-size:13px}.source{position:absolute;left:70px;bottom:24px;color:#64748b;font-size:13px}.footer-spacer{height:20px}
+  .status{height:10px;background:#1e293b;position:fixed;bottom:0;left:0;right:0;z-index:20}.bar{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));width:0%}
+  .split-title{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;margin-bottom:16px}.split-title .right{font-size:17px;color:var(--muted);max-width:360px;text-align:right}
+  .score{font-size:42px;font-weight:850;color:#fff}.center{display:flex;align-items:center;justify-content:center;text-align:center}.grow{min-height:340px}
+  @media print{body{overflow:visible}.slide{display:block!important;position:relative;height:100vh;page-break-after:always}.hint,.status{display:none}}
+</style>
+</head>
+<body>
+<div class="deck">
+
+<section class="slide active">
+  <div class="kicker">KG + GNN Recommendation System</div>
+  <h1>The Recommendation Problem</h1>
+  <p class="subtitle">Users face too many choices. Standard recommendation models can learn behaviour, but they often struggle to explain meaning, intent and why a recommendation fits a specific user.</p>
+  <div class="grid cols3" style="margin-top:34px">
+    <div class="card"><h3>Too many choices</h3><p>Streaming platforms, e-commerce and learning systems contain thousands or millions of items.</p></div>
+    <div class="card"><h3>Sparse history</h3><p>A user may only rate or interact with a small number of items.</p></div>
+    <div class="card"><h3>Weak explanation</h3><p>“Similar users liked this” is useful, but it does not explain semantic fit.</p></div>
+  </div>
+  <div class="bigquote">Goal: move from behaviour-only recommendation to <span class="accent">semantic, personalized and explainable recommendation</span>.</div>
+  <div class="slideNo">1 / 26</div><div class="hint">Use ← → keys</div>
+</section>
+
+<section class="slide">
+  <div class="kicker">User-centred example</div>
+  <h2>Persona: Mai</h2>
+  <div class="grid cols2">
+    <div class="card">
+      <h3>Who is Mai?</h3>
+      <p>Mai is 28. She enjoys thoughtful science-fiction films, but does not want recommendations based only on the broad label “sci-fi”.</p>
+      <span class="pill">Thoughtful sci-fi</span><span class="pill purple">Time</span><span class="pill green">Humanity</span><span class="pill yellow">Space</span><span class="pill red">Less action-heavy</span>
+    </div>
+    <div class="card">
+      <h3>Mai's limited history</h3>
+      <table>
+        <tr><th>Movie</th><th>Rating</th><th>Signal</th></tr>
+        <tr><td>Interstellar</td><td>5/5</td><td>likes space, time, family</td></tr>
+        <tr><td>Arrival</td><td>5/5</td><td>likes language, first contact, humanity</td></tr>
+        <tr><td>Dune</td><td>4/5</td><td>likes world-building</td></tr>
+        <tr><td>Avengers: Endgame</td><td>2/5</td><td>less interested in action-heavy stories</td></tr>
+      </table>
+    </div>
+  </div>
+  <div class="slideNo">2 / 26</div>
+</section>
+
+<section class="slide">
+  <div class="kicker">Same user, same request</div>
+  <h2>User Scenario & Journey</h2>
+  <div class="bigquote">“I liked <strong>Interstellar</strong> and <strong>Arrival</strong>. Recommend something with similar ideas about space, time and humanity, but not something mainly focused on action.”</div>
+  <div class="flow">
+    <div class="node">Mai's request</div><div class="arrow">→</div>
+    <div class="node p">System interprets intent</div><div class="arrow">→</div>
+    <div class="node g">Ranks candidate movies</div><div class="arrow">→</div>
+    <div class="node y">Explains why</div>
+  </div>
+  <div class="grid cols4">
+    <div class="card"><div class="label">Need 1</div><p class="small">Personalization</p></div>
+    <div class="card"><div class="label">Need 2</div><p class="small">Semantic understanding</p></div>
+    <div class="card"><div class="label">Need 3</div><p class="small">Discovery beyond direct ratings</p></div>
+    <div class="card"><div class="label">Need 4</div><p class="small">Human-readable explanation</p></div>
+  </div>
+  <div class="slideNo">3 / 26</div>
+</section>
+
+<section class="slide">
+  <div class="kicker">Dataset grounding</div>
+  <h2>Dataset: MovieLens Small</h2>
+  <p>The textbook example uses the small MovieLens dataset for link prediction in recommendation. It contains user–movie interactions and structured movie metadata.</p>
+  <div class="grid cols4">
+    <div class="card center"><div><div class="score">~600</div><p class="small">users</p></div></div>
+    <div class="card center"><div><div class="score">~9k</div><p class="small">movies</p></div></div>
+    <div class="card center"><div><div class="score">~100k</div><p class="small">ratings</p></div></div>
+    <div class="card center"><div><div class="score">3.6k</div><p class="small">tag applications</p></div></div>
+  </div>
+  <div class="grid cols2" style="margin-top:20px">
+    <div class="card">
+      <h3>Sample movies.csv</h3>
+      <table>
+        <tr><th>movieId</th><th>genres</th></tr>
+        <tr><td>1</td><td>Adventure | Animation | Children | Comedy | Fantasy</td></tr>
+        <tr><td>2</td><td>Adventure | Children | Fantasy</td></tr>
+        <tr><td>3</td><td>Comedy | Romance</td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <h3>Sample ratings.csv</h3>
+      <table>
+        <tr><th>userId</th><th>movieId</th></tr>
+        <tr><td>1</td><td>1</td></tr><tr><td>1</td><td>3</td></tr><tr><td>1</td><td>6</td></tr><tr><td>1</td><td>47</td></tr>
+      </table>
+    </div>
+  </div>
+  <div class="source">Source basis: textbook Chapter 12 MovieLens example.</div><div class="slideNo">4 / 26</div>
+</section>
+
+<section class="slide">
+  <div class="kicker">Textbook-supported baseline</div>
+  <h2>What the Textbook Actually Uses</h2>
+  <div class="grid cols2">
+    <div class="card">
+      <h3>Graph structure</h3>
+      <div class="mono">User ──RATES──&gt; Movie
+
+Node types:
+  User
+  Movie
+
+Edge type:
+  rates</div>
+      <p class="small" style="margin-top:14px">This becomes a heterogeneous PyTorch Geometric graph.</p>
+    </div>
+    <div class="card">
+      <h3>Movie features</h3>
+      <div class="mono">Movie 1
+  Adventure = 1
+  Animation = 1
+  Children  = 1
+  Comedy    = 1
+  Fantasy   = 1
+
+Total genre vector: 20 features</div>
+    </div>
+  </div>
+  <div class="bigquote">Important: the textbook implementation is a <span class="accent">heterogeneous GNN recommender</span>, not yet a rich text-derived movie knowledge graph.</div>
+  <div class="slideNo">5 / 26</div>
+</section>
+
+<section class="slide">
+  <div class="kicker">Motivation for extension</div>
+  <h2>What Information Is Missing?</h2>
+  <div class="grid cols2">
+    <div class="card">
+      <h3>Available in baseline</h3>
+      <ul>
+        <li>User–movie interaction links</li>
+        <li>Movie IDs and titles</li>
+        <li>Genre labels encoded as features</li>
+        <li>Ratings and timestamps in the raw file</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Missing for rich KG construction</h3>
+      <ul>
+        <li>Movie plot descriptions</li>
+        <li>Reviews or long comments</li>
+        <li>Actors, directors and studios</li>
+        <li>Themes such as “time dilation” or “first contact”</li>
+        <li>Textual explanations of why users liked a movie</li>
+      </ul>
+    </div>
+  </div>
+  <div class="diagram">
+    <div class="flow"><div class="node red">Missing text</div><div class="arrow">→</div><div class="node p">LLM/NLP extraction</div><div class="arrow">→</div><div class="node g">Rich KG extension</div></div>
+  </div>
+  <div class="slideNo">6 / 26</div>
+</section>
+
+<section class="slide">
+  <div class="kicker">Method 1</div>
+  <h2>Traditional Recommendation</h2>
+  <p>Collaborative filtering learns from user behaviour. It asks: <strong>“Which users have similar ratings, and what else did they like?”</strong></p>
+  <div class="diagram">
+    <div class="flow"><div class="node">Mai</div><div class="arrow">→</div><div class="node p">Ratings</div><div class="arrow">→</div><div class="node g">Similar users</div><div class="arrow">→</div><div class="node y">Recommended movie</div></div>
+  </div>
+  <div class="grid cols2" style="margin-top:22px">
+    <div class="card"><h3>What it sees</h3><div class="mono">Mai likes:
+  Interstellar
+  Arrival
+  Dune
+
+Mai dislikes:
+  Avengers: Endgame</div></div>
+    <div class="card"><h3>What it misses</h3><ul><li>Why Mai likes those movies</li><li>Which themes matter most</li><li>How to explain meaning-based similarity</li></ul></div>
+  </div>
+  <div class="slideNo">7 / 26</div>
+</section>
+
+<section class="slide">
+  <div class="kicker">Method 1: user view</div>
+  <h2>What Mai Sees with Collaborative Filtering</h2>
+  <div class="card grow center">
+    <div>
+      <p class="label">Recommendation</p>
+      <div class="tagline">“The Martian”</div>
+      <p style="margin-top:20px">Reason given: <strong>Users with similar ratings also liked this movie.</strong></p>
+    </div>
+  </div>
+  <div class="grid cols2" style="margin-top:20px">
+    <div class="card"><h3>Strength</h3><p>Learns collective behaviour from many users.</p></div>
+    <div class="card"><h3>Problem</h3><p>Does not clearly explain whether the recommendation matches Mai's desired themes: time, humanity, space, low action.</p></div>
+  </div>
+  <div class="slideNo">8 / 26</div>
+</section>
+
+<section class="slide">
+  <div class="kicker">Method 2</div>
+  <h2>Traditional Knowledge Graph Recommendation</h2>
+  <p>A traditional KG adds semantic entities and relationships. The system can reason through explicit graph paths.</p>
+  <div class="diagram">
+    <div class="mono">Interstellar
+ ├─ HAS_GENRE → Science Fiction
+ ├─ HAS_THEME → Space Exploration
+ ├─ HAS_THEME → Time
+ ├─ HAS_THEME → Family
+ └─ DIRECTED_BY → Christopher Nolan
+
+Arrival
+ ├─ HAS_GENRE → Science Fiction
+ ├─ HAS_THEME → First Contact
+ ├─ HAS_THEME → Language
+ └─ HAS_THEME → Humanity</div>
+  </div>
+  <div class="slideNo">9 / 26</div>
+</section>
+
+<section class="slide">
+  <div class="kicker">Explicit semantic reasoning</div>
+  <h2>Traditional KG Reasoning Example</h2>
+  <p>The KG can follow paths from Mai's liked movies to semantically related candidates.</p>
+  <div class="grid cols2">
+    <div class="card">
+      <h3>Path 1: first contact</h3>
+      <div class="mono">Mai
+ ↓ liked
+Arrival
+ ↓ HAS_THEME
+First Contact
+ ↑ HAS_THEME
+Contact</div>
+    </div>
+    <div class="card">
+      <h3>Path 2: space + humanity</h3>
+      <div class="mono">Mai
+ ↓ liked
+Interstellar
+ ↓ HAS_THEME
+Space / Humanity
+ ↑ HAS_THEME
+Contact</div>
+    </div>
+  </div>
+  <div class="bigquote">Traditional KG recommendation is strong when the relevant knowledge is explicitly represented.</div>
+  <div class="slideNo">10 / 26</div>
+</section>
+
+<section class="slide">
+  <div class="kicker">Method 2: user view</div>
+  <h2>What Mai Sees with Traditional KG</h2>
+  <div class="card grow center">
+    <div>
+      <p class="label">Recommendation</p>
+      <div class="tagline">“Contact”</div>
+      <p style="margin-top:20px">Recommended because it shares semantic links with movies Mai likes:</p>
+      <span class="pill">Science fiction</span><span class="pill green">Space</span><span class="pill purple">First contact</span><span class="pill yellow">Humanity</span>
+    </div>
+  </div>
+  <p class="large" style="margin-top:20px">This is more explainable than collaborative filtering because the evidence path can be shown directly.</p>
+  <div class="slideNo">11 / 26</div>
+</section>
+
+<section class="slide">
+  <div class="kicker">Why KG alone is not enough</div>
+  <h2>Limitation of Traditional KG</h2>
+  <div class="grid cols2">
+    <div class="card">
+      <h3>Manual rules</h3>
+      <div class="mono">same genre    = +1
+same theme    = +2
+same director = +1</div>
+      <p class="small" style="margin-top:14px">But why should these weights be the same for every user?</p>
+    </div>
+    <div class="card">
+      <h3>Mai's real preference weights may differ</h3>
+      <div class="mono">Time theme        █████████
+Humanity          ████████
+Space             ███████
+Philosophy        ███████
+Director          ██
+Action            ▌</div>
+    </div>
+  </div>
+  <div class="bigquote">A KG stores explicit relationships, but it does not automatically learn which relationship combinations matter most to Mai.</div>
+  <div class="slideNo">12 / 26</div>
+</section>
+
+<section class="slide">
+  <div class="kicker">Method 3 setup</div>
+  <h2>From KG to KG + GNN</h2>
+  <div class="grid cols2">
+    <div class="card">
+      <h3>Knowledge Graph</h3>
+      <ul><li>Explicit facts</li><li>Typed relationships</li><li>Semantic paths</li><li>Explainable evidence</li></ul>
+    </div>
+    <div class="card">
+      <h3>Graph Neural Network</h3>
+      <ul><li>Message passing</li><li>Learned embeddings</li><li>Latent pattern discovery</li><li>Link prediction</li></ul>
+    </div>
+  </div>
+  <div class="diagram">
+    <div class="flow"><div class="node">Rich KG</div><div class="arrow">→</div><div class="node p">Message passing</div><div class="arrow">→</div><div class="node g">Node embeddings</div><div class="arrow">→</div><div class="node y">Preference prediction</div></div>
+  </div>
+  <div class="slideNo">13 / 26</div>
+</section>
+
+<section class="slide">
+  <div class="kicker">Why GNN adds value</div>
+  <h2>How Message Passing Helps Recommendation</h2>
+  <p>Mai's representation is updated by information flowing through movies, themes, genres, actors and directors.</p>
+  <div class="mono">Mai
+ ├─ rated → Interstellar
+ │           ├─ HAS_THEME → Time
+ │           ├─ HAS_THEME → Space
+ │           └─ DIRECTED_BY → Christopher Nolan
+ │
+ ├─ rated → Arrival
+ │           ├─ HAS_THEME → First Contact
+ │           └─ HAS_THEME → Humanity
+ │
+ └─ rated → Dune
+             └─ HAS_THEME → World-building
+
+Message passing learns a user embedding from this neighbourhood.</div>
+  <div class="slideNo">14 / 26</div>
+</section>
+
+<section class="slide">
+  <div class="kicker">Method 3</div>
+  <h2>KG + GNN Recommendation</h2>
+  <p>The GNN predicts missing links such as <strong>Mai → likely_to_like → Movie</strong>.</p>
+  <div class="grid cols3">
+    <div class="card"><h3>Candidate A</h3><p>Sci-fi + space + action</p><div class="score">0.54</div></div>
+    <div class="card"><h3>Candidate B</h3><p>Sci-fi + first contact + humanity + philosophy</p><div class="score accent3">0.91</div></div>
+    <div class="card"><h3>Candidate C</h3><p>Sci-fi + same director</p><div class="score">0.63</div></div>
+  </div>
+  <div class="bigquote">The KG can identify explicit relationships. The GNN learns which combinations of relationships best predict Mai's preference.</div>
+  <div class="slideNo">15 / 26</div>
+</section>
+
+<section class="slide">
+  <div class="kicker">Same user, three methodologies</div>
+  <h2>How Each Method Treats Mai Differently</h2>
+  <table>
+    <tr><th>Method</th><th>Main question</th><th>What Mai gets</th><th>Main weakness</th></tr>
+    <tr><td>Collaborative filtering</td><td>What did similar users like?</td><td>Recommendation from rating patterns</td><td>Weak semantic explanation</td></tr>
+    <tr><td>Traditional KG</td><td>What is semantically related?</td><td>Recommendation with graph path evidence</td><td>Manual rules and weights</td></tr>
+    <tr><td>KG + GNN</td><td>What relational patterns predict Mai's preference?</td><td>Personalized semantic recommendation</td><td>Needs careful training and evaluation</td></tr>
+  </table>
+  <div class="diagram">
+    <div class="flow"><div class="node">Behaviour</div><div class="arrow">+</div><div class="node p">Semantics</div><div class="arrow">+</div><div class="node g">Learned relational patterns</div><div class="arrow">=</div><div class="node y">KG + GNN</div></div>
+  </div>
+  <div class="slideNo">16 / 26</div>
+</section>
+
+<section class="slide">
+  <div class="kicker">Central comparison</div>
+  <h2>Traditional KG vs KG + GNN</h2>
+  <table>
+    <tr><th>Traditional Knowledge Graph</th><th>KG + GNN</th></tr>
+    <tr><td>Stores explicit facts</td><td>Stores facts + learns patterns</td></tr>
+    <tr><td>Uses paths, rules and queries</td><td>Uses message passing and embeddings</td></tr>
+    <tr><td>Relationship importance is usually hand-defined</td><td>Relationship importance can be learned from data</td></tr>
+    <tr><td>Highly interpretable</td><td>Predictive, with KG paths used for explanation</td></tr>
+    <tr><td>Good semantic matching</td><td>Semantic + personalized link prediction</td></tr>
+  </table>
+  <div class="bigquote">KG asks: <strong>What do we know?</strong> GNN asks: <strong>What patterns predict preference?</strong></div>
+  <div class="slideNo">17 / 26</div>
+</section>
+
+<section class="slide">
+  <div class="kicker">Project data model</div>
+  <h2>Proposed Rich KG Schema</h2>
+  <div class="grid cols2">
+    <div class="card">
+      <h3>Node types</h3>
+      <span class="pill">User</span><span class="pill">Movie</span><span class="pill purple">Genre</span><span class="pill purple">Theme</span><span class="pill green">Actor</span><span class="pill green">Director</span><span class="pill yellow">Studio</span><span class="pill yellow">Country</span>
+    </div>
+    <div class="card">
+      <h3>Relationship types</h3>
+      <span class="pill">RATED</span><span class="pill">WATCHED</span><span class="pill purple">HAS_GENRE</span><span class="pill purple">HAS_THEME</span><span class="pill green">STARS</span><span class="pill green">DIRECTED_BY</span><span class="pill yellow">PRODUCED_BY</span>
+    </div>
+  </div>
+  <div class="mono" style="margin-top:20px">Mai ─RATED→ Interstellar ─HAS_THEME→ Time
+Interstellar ─DIRECTED_BY→ Christopher Nolan
+Arrival ─HAS_THEME→ First Contact
+Contact ─HAS_THEME→ First Contact
+Contact ─HAS_THEME→ Humanity</div>
+  <div class="slideNo">18 / 26</div>
+</section>
+
+<section class="slide">
+  <div class="kicker">Project extension</div>
+  <h2>Text-to-KG Extension</h2>
+  <p>The textbook MovieLens example does not use rich descriptive text. The extension adds external text sources so a KG can be constructed from content.</p>
+  <div class="flow">
+    <div class="node">Movie descriptions</div><div class="arrow">→</div>
+    <div class="node p">LLM / NLP</div><div class="arrow">→</div>
+    <div class="node g">Entity extraction</div><div class="arrow">→</div>
+    <div class="node y">Relation extraction</div><div class="arrow">→</div>
+    <div class="node">KG</div>
+  </div>
+  <div class="grid cols2">
+    <div class="card"><h3>Input text example</h3><p class="small">“Interstellar is a science-fiction film directed by Christopher Nolan exploring space travel, time dilation and family relationships.”</p></div>
+    <div class="card"><h3>Extracted triples</h3><div class="mono">Interstellar → DIRECTED_BY → Nolan
+Interstellar → HAS_THEME → Time dilation
+Interstellar → HAS_THEME → Space travel
+Interstellar → HAS_THEME → Family</div></div>
+  </div>
+  <div class="slideNo">19 / 26</div>
+</section>
+
+<section class="slide">
+  <div class="kicker">End-to-end system</div>
+  <h2>Full Proposed Architecture</h2>
+  <div class="diagram">
+    <div class="flow"><div class="node">MovieLens ratings</div><div class="arrow">+</div><div class="node p">External text</div><div class="arrow">→</div><div class="node g">Rich KG</div><div class="arrow">→</div><div class="node y">Heterogeneous GNN</div></div>
+    <div class="flow"><div class="node">Embeddings</div><div class="arrow">→</div><div class="node p">Link prediction</div><div class="arrow">→</div><div class="node g">Recommendation</div><div class="arrow">→</div><div class="node y">KG-based explanation</div></div>
+  </div>
+  <div class="grid cols3">
+    <div class="card"><h3>Structured data</h3><p>ratings, users, movies, genres</p></div>
+    <div class="card"><h3>Unstructured data</h3><p>plots, reviews, comments, descriptions</p></div>
+    <div class="card"><h3>Prediction layer</h3><p>heterogeneous GNN predicts user–movie links</p></div>
+  </div>
+  <div class="slideNo">20 / 26</div>
+</section>
+
+<section class="slide">
+  <div class="kicker">Strong justification</div>
+  <h2>Cold-Start Scenario</h2>
+  <p>A new movie has no ratings yet, so collaborative filtering has little behavioural evidence.</p>
+  <div class="grid cols2">
+    <div class="card">
+      <h3>Without KG</h3>
+      <div class="mono">New Movie
+  no ratings
+  no similar users
+  weak recommendation signal</div>
+    </div>
+    <div class="card">
+      <h3>With KG + GNN</h3>
+      <div class="mono">New Movie
+ ├─ HAS_GENRE → Sci-Fi
+ ├─ HAS_THEME → Time
+ ├─ HAS_THEME → Humanity
+ └─ DIRECTED_BY → Known Director
+
+Message passing creates useful representation.</div>
+    </div>
+  </div>
+  <div class="bigquote">The KG gives the new item a semantic neighbourhood before user ratings accumulate.</div>
+  <div class="slideNo">21 / 26</div>
+</section>
+
+<section class="slide">
+  <div class="kicker">User-facing value</div>
+  <h2>Explainability</h2>
+  <div class="card grow center">
+    <div>
+      <p class="label">Recommendation for Mai</p>
+      <div class="tagline">“Contact”</div>
+      <p style="margin-top:16px">Prediction score: <strong class="accent3">0.91</strong></p>
+      <p>Evidence path:</p>
+      <div class="mono">Mai → liked → Arrival → HAS_THEME → First Contact ← HAS_THEME ← Contact
+Mai → liked → Interstellar → HAS_THEME → Space ← HAS_THEME ← Contact</div>
+    </div>
+  </div>
+  <p class="large" style="margin-top:18px">The GNN ranks the candidate; the KG explains the recommendation.</p>
+  <div class="slideNo">22 / 26</div>
+</section>
+
+<section class="slide">
+  <div class="kicker">Practical design</div>
+  <h2>Hybrid Recommendation Strategy</h2>
+  <p>A production-style system should not rely on one signal only. Combine explicit KG reasoning with learned GNN prediction.</p>
+  <div class="grid cols3">
+    <div class="card"><h3>KG rule score</h3><p>Shared themes, genres, actors, directors, paths.</p></div>
+    <div class="card"><h3>GNN score</h3><p>Learned probability that Mai will like the movie.</p></div>
+    <div class="card"><h3>Content score</h3><p>Optional text similarity from descriptions or reviews.</p></div>
+  </div>
+  <div class="mono" style="margin-top:22px">final_score = α × KG_rule_score
+            + β × GNN_prediction_score
+            + γ × content_similarity_score</div>
+  <div class="slideNo">23 / 26</div>
+</section>
+
+<section class="slide">
+  <div class="kicker">Research framing</div>
+  <h2>Evaluation & Ablation Study</h2>
+  <div class="grid cols2">
+    <div class="card">
+      <h3>Compare methods</h3>
+      <ul>
+        <li>Collaborative filtering baseline</li>
+        <li>Traditional KG recommender</li>
+        <li>KG + GNN recommender</li>
+        <li>KG + GNN + text-derived themes</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Metrics</h3>
+      <span class="pill">Precision@K</span><span class="pill">Recall@K</span><span class="pill">NDCG@K</span><span class="pill">Hit Rate</span><span class="pill purple">Coverage</span><span class="pill green">Explainability quality</span>
+    </div>
+  </div>
+  <div class="card" style="margin-top:20px"><h3>Ablations</h3><p>Remove genres, remove actor links, remove text-derived themes, compare GCN vs GAT vs GraphSAGE, compare KG-only vs KG+GNN.</p></div>
+  <div class="slideNo">24 / 26</div>
+</section>
+
+<section class="slide">
+  <div class="kicker">Implementation plan</div>
+  <h2>Technical Stack, Project Phases & Risks</h2>
+  <div class="grid cols3">
+    <div class="card"><h3>Stack</h3><p>Python, pandas, PyTorch Geometric, NetworkX/Neo4j, optional LLM extraction pipeline.</p></div>
+    <div class="card"><h3>Phases</h3><p>Baseline → KG → KG+GNN → Text-to-KG → explainable recommender.</p></div>
+    <div class="card"><h3>Risks</h3><p>Noisy KG edges, entity resolution errors, graph leakage, scalability, oversmoothing, biased evaluation.</p></div>
+  </div>
+  <div class="diagram"><div class="flow"><div class="node">V1 Baseline</div><div class="arrow">→</div><div class="node p">V2 Traditional KG</div><div class="arrow">→</div><div class="node g">V3 KG+GNN</div><div class="arrow">→</div><div class="node y">V4 Text-to-KG + explanations</div></div></div>
+  <div class="slideNo">25 / 26</div>
+</section>
+
+<section class="slide">
+  <div class="kicker">Future extension</div>
+  <h2>KG + GNN + LLM Agent</h2>
+  <p class="subtitle">The final extension turns the recommender into an interactive assistant that understands natural language, retrieves graph evidence and explains predictions.</p>
+  <div class="flow">
+    <div class="node">User request</div><div class="arrow">→</div>
+    <div class="node p">LLM / agent</div><div class="arrow">→</div>
+    <div class="node g">KG retrieval</div><div class="arrow">+</div>
+    <div class="node y">GNN ranking</div><div class="arrow">→</div>
+    <div class="node">Grounded explanation</div>
+  </div>
+  <div class="bigquote">The KG keeps the system grounded. The GNN predicts personalized preference. The LLM provides the natural-language interface and explanation.</div>
+  <div class="grid cols3">
+    <div class="card"><h3>KG</h3><p>What is explicitly known?</p></div>
+    <div class="card"><h3>GNN</h3><p>What does the graph imply?</p></div>
+    <div class="card"><h3>LLM Agent</h3><p>How do we communicate it clearly?</p></div>
+  </div>
+  <div class="slideNo">26 / 26</div>
+</section>
+
+</div>
+<div class="status"><div class="bar" id="bar"></div></div>
+<script>
+const slides=[...document.querySelectorAll('.slide')];
+let i=0;
+const bar=document.getElementById('bar');
+function show(n){i=Math.max(0,Math.min(slides.length-1,n));slides.forEach((s,k)=>s.classList.toggle('active',k===i));bar.style.width=((i+1)/slides.length*100)+'%';document.title=`${i+1}/${slides.length} KG + GNN Recommender`;}
+document.addEventListener('keydown',e=>{if(['ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();show(i+1)} if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();show(i-1)} if(e.key==='Home')show(0); if(e.key==='End')show(slides.length-1);});
+show(0);
+</script>
+</body>
+</html>

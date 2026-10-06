@@ -1,0 +1,6 @@
+data/raw/
+data/*.log
+__pycache__/
+.venv/
+data/processed/
+data/.work*/

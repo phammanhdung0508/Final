@@ -1,0 +1,22 @@
+{
+  "schema_version": "kg-v1",
+  "categories": ["Electronics", "Toys_and_Games", "Musical_Instruments"],
+  "graph_scope": "separate_per_category",
+  "interaction_split": "train",
+  "product_scope": "training_products_only",
+  "interaction_policy": "retain_all_training_ratings_as_observations_without_binarization",
+  "node_types": ["User", "Product", "CategoryPath", "Brand"],
+  "relations": ["rated", "belongs_to", "category_child_of", "has_brand"],
+  "approved_metadata_fields": ["parent_asin", "categories", "details.Brand"],
+  "brand_source": "explicit_string_details_Brand_only_not_store_or_Manufacturer",
+  "brand_placeholders_excluded": ["none", "null", "nan", "n/a", "unknown"],
+  "category_identity": "JSON_array_of_trimmed_observed_path_prefix_labels",
+  "category_hierarchy": "observed_path_prefix_not_verified_external_taxonomy",
+  "missing_metadata_policy": "product_still_exists_no_fabricated_attribute_edges",
+  "approved_node_features": [],
+  "embedding_policy": "no_embeddings_generated",
+  "excluded_metadata_fields": ["average_rating", "rating_number", "bought_together", "store", "main_category", "price", "title", "features", "description", "images", "videos", "subtitle", "author", "details_except_Brand"],
+  "cross_category_history": false,
+  "historical_metadata_availability": "unknown_snapshot_not_strictly_historical",
+  "training_authorized": false
+}
