@@ -2,7 +2,9 @@
 
 ## Task
 
-Recommend unseen movies likely to receive a rating >= 4. This differs from the book's Chapter 12 example, which treats every rating as an interaction and predicts rating-link existence.
+The task is **top-K recommendation**. The currently implemented experiment recommends unseen movies likely to receive a rating >= 4. This differs from the book's Chapter 12 example, which treats every rating as an interaction and predicts rating-link existence.
+
+The next experiment will compare all-rating behavior prediction with >=4 preference prediction, as specified below. This documentation update does not change the existing pipeline or establish results for the all-rating condition.
 
 ## Splits
 
@@ -22,6 +24,36 @@ Macro-average Precision@10, Recall@10, NDCG@10 and HitRate@10 over eligible user
 - **KG + GNN:** two heterogeneous GraphSAGE layers over User/Movie/Genre, learned node embeddings plus genre features, dot-product decoder, binary cross-entropy, one sampled unknown movie per supervised positive. Training unknowns may contain future positives because the trainer does not inspect held-out labels; absence is not confirmed dislike.
 
 The GNN checkpoint is selected by validation NDCG@10 only. The test split is evaluated after selection. Epoch limit and configuration are recorded; the training data fingerprint guards against mismatched checkpoint reuse.
+
+## Planned rating-policy sensitivity analysis
+
+Fix both conditions before running the new experiments:
+
+| Condition | Training positives | Relevant held-out items | Interpretation |
+|---|---|---|---|
+| **All ratings (primary planned condition)** | Every training-rated movie | Every held-out rated movie | Which unseen movie will the user interact with next? |
+| **Rating >= 4 (sensitivity condition)** | Training ratings >= 4 | Held-out ratings >= 4 | Which unseen movie will receive positive feedback? |
+
+MovieLens ratings represent recorded rating interactions, not a complete record of viewing behavior. The >=4 condition measures relevance among observed positively rated movies; it does not establish preferences for unobserved movies. With multiple held-out items, the protocol evaluates future-interaction ranking rather than strictly one next-item prediction.
+
+### Fixed rules across conditions
+
+- Preserve the published-in-this-project temporal split assignments: split **all ratings first**, then apply each condition's relevance policy. Do not re-split filtered data or substitute earlier positive ratings for low-rated holdout items.
+- Keep the same catalog and candidate rule in both conditions: exclude **all training-rated movies**, including low-rated ones. Do not consume validation interactions as test history.
+- Construct each condition's scoring/message-passing interaction graph from its training positives only. Both methods use the same permitted interaction graph within a condition and the same movie/genre metadata. No held-out rating, review, target edge or inverse target edge may enter training features, embeddings, scoring or explanations.
+- Under >=4, lower training ratings remain known history for candidate exclusion but are not positive graph edges. Neither low ratings nor unobserved movies automatically become verified negative examples. Record the training negative-sampling policy; do not consult held-out labels to choose negatives.
+- Evaluate every user with relevant held-out items in the all-rating condition. Under >=4, exclude users with no positive held-out target and report their counts separately for validation and test. Do not invent replacement targets or silently drop users whose filtered training profile is empty; define a training-only fallback or explicit cold-start handling before running.
+- Report user counts, positive interactions, graph sizes, recommendation coverage, and empty-profile/cold-start counts for each condition. Their eligible-user populations can differ, so absolute metric differences across conditions are not solely effects of the rating threshold.
+
+### Selection and reporting
+
+Use **NDCG@10 as the primary ranking metric** in each condition, with Precision@10, Recall@10, HitRate@10 and coverage as secondary metrics, retaining the definitions above. Retrain and select checkpoints separately using each condition's validation NDCG@10; never select the threshold or checkpoint using test results. Record the rating policy in configurations, graph fingerprints and checkpoint metadata so artifacts cannot be reused across conditions accidentally.
+
+Use identical splits, candidates, relevance rules and evaluation code across methods **within each condition**. Freeze training seeds, tuning budgets, fallback behavior and uncertainty reporting before execution. Report per-condition results over multiple seeds and, where appropriate, paired uncertainty estimates over users.
+
+Improvement by KG + GNN over KG-only under both conditions would strengthen robustness to the feedback definition. Improvement under only one condition is a condition-specific finding, not evidence to discard the other condition. Neither outcome establishes that the GNN must outperform the baseline.
+
+**Implementation status:** the current pipeline implements the >=4 condition only. The all-rating condition, condition-specific graph construction checks and multi-seed sensitivity runner require implementation before this plan can be executed. Existing results remain results of the original >=4 experiment; this prospective plan must not be described as having been registered before those results were observed.
 
 ## Interpretation and limitations
 

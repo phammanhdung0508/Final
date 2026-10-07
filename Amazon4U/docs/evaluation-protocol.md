@@ -8,7 +8,11 @@ The structural [KG-v1 schema](kg-schema.md) and `configs/kg-v1.json` are now
 implemented: separate per-category training graphs with category-path and explicit
 Brand relations, training-product catalog only, no node features or embeddings.
 See [audit findings](kg-input-audit.md). This graph construction policy does not
-finalize the task, rating threshold, candidates, metrics or model protocol.
+finalize the model protocol. The task is top-K ranking; all ratings are the
+primary condition and >=4 feedback is the planned sensitivity condition. The
+[candidate and cold-start protocol](candidates-and-cold-start.md) now specifies
+warm-only full ranking and frozen-model train+validation history filtering at test.
+Metrics and remaining training decisions are not yet frozen.
 
 ## Data and splits
 
@@ -69,31 +73,46 @@ and review-derived-content/timing audits before use.
 
 ## Decisions requiring finalization BEFORE training
 
-1. Task: explicit rating prediction or implicit top-K ranking (or separately
-   registered experiments).
-2. Rating policy: if binarized, exact positive threshold, treatment of low
-   ratings, repeated events and unobserved items. An unobserved item is not a
-   verified dislike. If explicit, specify rating scale and target handling.
+1. **Task finalized: top-K recommendation (implicit-feedback ranking).**
+   Rank candidate products for each user; explicit rating prediction is not the
+   primary task.
+2. **Feedback conditions finalized:** all ratings as positive recorded behavior
+   (primary); ratings >=4 as positive preference feedback (sensitivity).
+   Preserve the same raw split assignments and do not replace low-rated held-out
+   targets. Lower ratings and unobserved items are not verified negatives.
+   Build the condition's interaction view using its training positives only.
+   Existing KG-v1 is the all-rating structural graph, not a >=4 training artifact.
 3. Subset policy and seed, or explicit decision to use full downloaded splits.
 4. Evaluation: primary metric, secondary metrics, cutoff K, macro/micro
    aggregation, eligible users/items and handling of empty targets.
-5. Candidate universe and seen-item exclusion; full-catalog versus sampled
-   evaluation, negative sampling policy/seed, ties and duplicate handling.
+5. **Primary candidates/filtering finalized:** full ranking of training-warm
+   items; validation filters all training items; test filters all training plus
+   validation items, without supplying validation edges to the model. Exclude
+   filtered-history and cold targets from warm metrics and report them separately.
+   In >=4 sensitivity, warmth is derived from positive training edges; report the
+   resulting pool change rather than calling it a fixed-candidate ablation.
+   Training negative sampling, score ties and empty-profile fallback remain to
+   be frozen. See the linked candidate protocol for exact counts and cold rules.
 6. Final approved feature/relation list and per-field coverage.
 7. Category-only and optional cross-category experiments, including a concrete
    time-safe graph/embedding construction strategy.
 8. Baselines, comparable graph/splits/candidates, validation search budget,
    checkpoint selection rule, training seeds and reporting uncertainty.
-9. Cold-start/transductive assumptions and treatment of unmatched metadata.
-   The audit found held-out products absent from the current training-only
-   catalog; specify how to score/include them rather than silently dropping them.
+9. **Cold-item policy finalized:** exclude from primary warm metrics with
+   explicit counts/proportions. Supplementary cold ranking is allowed only after
+   registering and testing a metadata-inductive architecture, learned warm
+   metadata vocabulary, training-only preprocessing and no cold ID embeddings.
+   No such model/runner is currently implemented, so no cold performance is claimed.
+   Audit unknown users (verified zero here) separately from empty positive-history
+   users (nonzero under >=4). Freeze their training-only fallback before evaluation.
 10. Split-boundary timestamp ties (44/17/6 users across the three categories):
     retain publisher assignments and document tie semantics, or register a
     different protocol. No cross-category fitted representations are currently
     allowed because category-specific train timestamps can exceed other targets.
 
-Metric candidates (NOT finalized): NDCG@K and Recall@K for ranking; RMSE and MAE
-for explicit ratings. Freeze the primary metric and cutoffs before experiments.
+Metric candidates (NOT finalized): NDCG@K and Recall@K for top-K ranking.
+RMSE/MAE are not task metrics for this experiment. Freeze the primary metric and
+cutoffs before experiments.
 
 ## Freeze and amendments
 

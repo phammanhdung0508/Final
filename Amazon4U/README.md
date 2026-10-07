@@ -13,6 +13,7 @@ python -m venv .venv
 .venv/bin/python -m pip install -r requirements.txt
 .venv/bin/python scripts/inspect_data.py
 .venv/bin/python scripts/audit_kg_inputs.py
+.venv/bin/python scripts/audit_candidates.py
 .venv/bin/python scripts/build_kg.py
 .venv/bin/python scripts/validate_kg_splits.py
 .venv/bin/python -m unittest discover -s tests -v
@@ -30,13 +31,16 @@ resumes partial downloads, and verifies file sizes (not content hashes). Use
 - `data/raw/download_manifest_all.json`: source revision, file paths and sizes.
 - `data/reports/inspection.json`: schemas, counts, examples, and metadata join coverage.
 - `data/reports/kg-input-audit.json`: metadata quality, split integrity and cross-category timing.
+- `data/reports/candidate-audit.json`: warm/cold, history-filtering and metadata vocabulary counts for both feedback conditions.
 - `data/processed/kg-v1/`: structurally validated per-category training KGs and provenance manifest.
 - `data/reports/kg-split-validation.json`: independent source/split validation.
 - `data/*.log`: execution logs.
 
 See [KG schema](docs/kg-schema.md), [audit findings](docs/kg-input-audit.md),
 [graph configuration](configs/kg-v1.json) and the draft
-[evaluation protocol](docs/evaluation-protocol.md). Graphs are built; models are not trained.
+[evaluation protocol](docs/evaluation-protocol.md) and
+[candidate/cold-start rules](docs/candidates-and-cold-start.md).
+Graphs are built; models are not trained.
 The builder refuses to overwrite existing output; use `--output` for a new build.
 
 The agreed collections total approximately **4.31 GB** (26 files). Older Books and
