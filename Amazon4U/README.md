@@ -1,6 +1,11 @@
 # Amazon4U dataset exploration
 
-Starting categories: **Electronics**, **Toys_and_Games**, **Musical_Instruments**.
+Agreed scope: **full downloaded benchmark splits** for Electronics,
+Toys_and_Games and Musical_Instruments, evaluated separately under both feedback
+conditions. Start development/resource checks on Musical_Instruments, then
+Toys_and_Games and Electronics. No research subsampling or evaluation-user sampling.
+See `configs/dataset-scope.json` and the scope decision in
+`docs/evaluation-protocol.md`. Training still requires the remaining protocol freeze.
 Source: https://huggingface.co/datasets/McAuley-Lab/Amazon-Reviews-2023
 
 ## Reproduce
@@ -40,7 +45,10 @@ See [KG schema](docs/kg-schema.md), [audit findings](docs/kg-input-audit.md),
 [graph configuration](configs/kg-v1.json) and the draft
 [evaluation protocol](docs/evaluation-protocol.md) and
 [candidate/cold-start rules](docs/candidates-and-cold-start.md).
-Graphs are built; models are not trained.
+Metrics/ranking/reporting are frozen in `configs/evaluation-metrics.json`:
+NDCG@10 primary; HitRate@10 and CatalogCoverage@10 secondary; NDCG/HitRate
+at 5 and 20 supplementary, reported per category × feedback condition.
+Graphs are built; models are not trained. Other protocol decisions remain pending.
 The builder refuses to overwrite existing output; use `--output` for a new build.
 
 The agreed collections total approximately **4.31 GB** (26 files). Older Books and
@@ -83,10 +91,11 @@ images and other fields. `details` is a string, not a typed attribute dictionary
 inspect/parse its contents before constructing KG relations. Do not equate
 `store` with brand without checking the records.
 
-No training subset has been constructed yet. Randomly selecting 1,000 interactions
-would not retain 5-core guarantees; a user-history subset needs its own degree and
-coverage checks. Published 5-core guarantees also should not be assumed to hold
-on the training split alone.
+The approved research scope uses full downloaded splits, not a 1,000-interaction
+sample. Tiny fixtures serve correctness tests only. Any future resource-driven
+subset requires an approved, reproducible scope amendment before comparative
+results. Published 5-core guarantees should not be assumed to hold on the
+training split alone.
 
 Use training interactions only when constructing the recommendation interaction
 graph. Product-level `average_rating` and `rating_number` can incorporate future

@@ -1,0 +1,21 @@
+{
+  "scope_version": "dataset-scope-v1",
+  "decision_status": "user_approved",
+  "categories": ["Electronics", "Toys_and_Games", "Musical_Instruments"],
+  "execution_order": ["Musical_Instruments", "Toys_and_Games", "Electronics"],
+  "interaction_source": "benchmark/5core/last_out",
+  "metadata_source": "raw_meta_<Category>/*.parquet",
+  "split_policy": "preserve_published_train_valid_test_assignments",
+  "interaction_scope": "full_downloaded_splits",
+  "evaluation_user_sampling": false,
+  "research_interaction_subsampling": false,
+  "category_evaluation": "independent",
+  "cross_category_history": false,
+  "feedback_conditions": ["all_ratings", "rating_ge_4"],
+  "primary_feedback_condition": "all_ratings",
+  "graph_metadata_scope": "training_products_and_KG_v1_approved_relations_only",
+  "test_fixture_scope": "correctness_only_not_research_results",
+  "resource_check_category": "Musical_Instruments",
+  "scope_amendment_policy": "require_documented_approval_before_subsampling_or_comparative_results",
+  "training_authorized": false
+}

@@ -2,8 +2,9 @@
 
 **Primary all-rating configuration finalized before model training.** This is
 Amazon4U's protocol, not Movie4U's different split/catalog protocol. The overall
-[evaluation protocol](evaluation-protocol.md) remains a draft until metrics,
-training budgets and other remaining choices are frozen. No model has been run.
+[evaluation protocol](evaluation-protocol.md) remains a draft until training
+budgets and other remaining choices are frozen. Its metric/ranking/reporting
+section is frozen in `configs/evaluation-metrics.json`. No model has been run.
 
 ## Warmth and feedback conditions
 
@@ -30,6 +31,10 @@ and warm pools prevent attributing absolute score changes solely to the threshol
 
 - Full ranking over the warm pool; no sampled evaluation negatives. Training
   negative sampling, if any, is a separate configuration, not candidate sampling.
+- Rank score descending, then parent_asin ascending for exactly equal scores.
+  Reject non-finite scores. Return all remaining candidates if fewer than K are
+  available, without padding, and report affected counts at each cutoff.
+  CatalogCoverage@10 uses the entire condition warm pool as denominator.
 - Select hyperparameters/checkpoints with validation metrics, then freeze the
   selected checkpoint for test evaluation. No validation/test interactions,
   ratings or reviews enter the graph, feature fitting or embeddings. No refit on

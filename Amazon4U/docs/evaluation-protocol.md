@@ -12,7 +12,8 @@ finalize the model protocol. The task is top-K ranking; all ratings are the
 primary condition and >=4 feedback is the planned sensitivity condition. The
 [candidate and cold-start protocol](candidates-and-cold-start.md) now specifies
 warm-only full ranking and frozen-model train+validation history filtering at test.
-Metrics and remaining training decisions are not yet frozen.
+The metric/ranking/reporting section is now frozen in
+`configs/evaluation-metrics.json`; remaining training decisions are not yet frozen.
 
 ## Data and splits
 
@@ -29,6 +30,33 @@ Metrics and remaining training decisions are not yet frozen.
 - 5-core selection uses the overall collection; document its selection bias.
 - Any development subset needs a reproducible selection rule, seed, counts,
   degree checks and preserved split assignments, fixed before training.
+
+## Dataset scope — agreed before model training
+
+**Decision:** use the complete downloaded benchmark splits for Electronics,
+Toys_and_Games and Musical_Instruments, evaluated independently per category.
+Do not randomly subsample interactions or evaluation users for reported experiments.
+Full metadata remains available, but KG-v1 includes training products and approved
+relations only; full download scope does not authorize extra graph nodes/features.
+
+**Execution order:** develop and measure runtime/memory on Musical_Instruments
+first (396,958 training interactions; 24,556 warm items), then apply the same
+protocol to Toys_and_Games and Electronics. Tiny synthetic fixtures are for
+correctness tests only; they are not research datasets or reported model results.
+Both all-rating and >=4 conditions apply to every category, preserving publisher
+split assignments and condition-specific eligibility/candidates.
+
+**Rationale:** avoid an additional sampling choice and fragmented user histories;
+test robustness across domains with different metadata/interaction coverage; start
+with the smallest category to assess computational feasibility. Full downloaded
+5-core collections do not imply training splits are themselves 5-core.
+
+**Status:** user-approved scope; full source data and all-rating KGs already exist.
+Model training/evaluation under this scope has not started. Configuration:
+`configs/dataset-scope.json`. If runtime or memory requires a smaller scope, propose
+and document a reproducible amendment before using a subset or observing comparative
+model results; do not silently sample users, targets or interactions. Resource
+measurements do not authorize selecting categories based on model performance.
 
 ## Leakage boundaries
 
@@ -82,17 +110,22 @@ and review-derived-content/timing audits before use.
    targets. Lower ratings and unobserved items are not verified negatives.
    Build the condition's interaction view using its training positives only.
    Existing KG-v1 is the all-rating structural graph, not a >=4 training artifact.
-3. Subset policy and seed, or explicit decision to use full downloaded splits.
-4. Evaluation: primary metric, secondary metrics, cutoff K, macro/micro
-   aggregation, eligible users/items and handling of empty targets.
+3. **Dataset scope finalized:** full downloaded splits for all three categories,
+   independent graphs/experiments; Musical_Instruments first. No research subset
+   or evaluation-user sampling. See the scope section and configuration above.
+4. **Metrics/ranking/reporting finalized:** NDCG@10 primary; HitRate@10 and
+   CatalogCoverage@10 secondary; NDCG/HitRate at 5 and 20 supplementary. Macro-average
+   user ranking metrics, but compute coverage once over recommendations from all
+   eligible users. Report separately by category × feedback condition. See below.
 5. **Primary candidates/filtering finalized:** full ranking of training-warm
    items; validation filters all training items; test filters all training plus
    validation items, without supplying validation edges to the model. Exclude
    filtered-history and cold targets from warm metrics and report them separately.
    In >=4 sensitivity, warmth is derived from positive training edges; report the
    resulting pool change rather than calling it a fixed-candidate ablation.
-   Training negative sampling, score ties and empty-profile fallback remain to
-   be frozen. See the linked candidate protocol for exact counts and cold rules.
+   Exact score ties use parent_asin ascending; reject non-finite scores and report
+   users with fewer than K candidates. Training negative sampling and empty-profile
+   fallback remain to be frozen. See the linked candidate protocol for cold rules.
 6. Final approved feature/relation list and per-field coverage.
 7. Category-only and optional cross-category experiments, including a concrete
    time-safe graph/embedding construction strategy.
@@ -110,9 +143,75 @@ and review-derived-content/timing audits before use.
     different protocol. No cross-category fitted representations are currently
     allowed because category-specific train timestamps can exceed other targets.
 
-Metric candidates (NOT finalized): NDCG@K and Recall@K for top-K ranking.
-RMSE/MAE are not task metrics for this experiment. Freeze the primary metric and
-cutoffs before experiments.
+## Metrics, ranking and reporting — frozen before training
+
+**Status:** user-approved decision, documented but not yet implemented in an
+Amazon4U evaluator. Configuration: `configs/evaluation-metrics.json`. This replaces
+the earlier provisional metric candidates; no Amazon4U model results were inspected.
+
+| Role | Metrics |
+|---|---|
+| Primary | **NDCG@10** |
+| Secondary | HitRate@10, CatalogCoverage@10 |
+| Supplementary | NDCG@5, NDCG@20, HitRate@5, HitRate@20 |
+| Checkpoint/hyperparameter selection | **Validation NDCG@10 only** |
+
+Relevance is binary according to the feedback condition, not graded by rating.
+For the published one-target-per-user holdouts, if the eligible relevant target
+has rank r, NDCG@K is `1/log2(r+1)` when r<=K and zero otherwise; HitRate@K is
+one when r<=K and zero otherwise. Macro-average these metrics over eligible users.
+Recall@K equals HitRate@K with a single relevant target, so it is not an additional
+registered metric. Precision and rating-prediction RMSE/MAE are not registered here.
+
+CatalogCoverage@10 is the number of unique items in eligible users' Top-10 lists
+**divided by the entire condition-specific warm pool size**, before per-user
+history filtering. It is a group-level statistic, not a per-user macro-average.
+Use identical eligible users across methods within each category/condition/split.
+Coverage is secondary; breadth alone is not evidence of better relevance.
+
+### Deterministic ranking
+
+Apply the documented history/candidate filter before selecting Top-K. Sort by
+score descending, then **parent_asin ascending for exactly equal scores**. Do not
+use held-out feedback, popularity, randomized order or an unregistered tolerance
+to break ties. Apply the same ordering to every method. Reject NaN/infinite
+scores rather than silently ranking or discarding them. If fewer than K candidates
+remain, return all available candidates without padding and report affected-user
+counts separately at each cutoff. Do not change the eligibility population by
+method to hide scoring failures.
+
+### Reporting format
+
+Report six independent groups: each of the three categories × each of the two
+feedback conditions. Keep validation-selection results separate from final test
+results. Do not pool categories into a single primary score.
+
+For each group:
+
+1. Main method-comparison table: NDCG@10, HitRate@10, CatalogCoverage@10 for
+   popularity, collaborative, KG-only and KG + GNN methods once implemented.
+2. Supplementary table: NDCG/HitRate at 5 and 20; do not select the preferred K
+   or checkpoint using these test outcomes.
+3. Population table: warm pool size; eligible validation/test users; excluded
+   low-rated, cold, history-overlapping and unknown-user targets; empty-positive
+   histories and fallback usage; users with fewer than K candidates. If exclusion
+   reasons overlap, label reason counts as overlapping and report the distinct
+   excluded total separately (or register an explicit exclusion order).
+4. Multi-seed results and uncertainty once their procedure is finalized. Do not
+   invent intervals for single runs or treat paired user bootstraps as substitutes
+   for training-seed variability.
+
+A sensitivity summary compares KG + GNN against each baseline **within each
+group**, noting whether improvements occur in both feedback conditions. Absolute
+scores/coverage across conditions are not threshold-only comparisons because warm
+pools, relevance and eligible populations differ. Do not suppress an unfavorable
+condition or assume KG + GNN will win.
+
+**Rationale:** NDCG rewards placing the held-out target near the top; HitRate gives
+an interpretable retrieval-success rate; coverage measures recommendation breadth.
+Fixed supplementary cutoffs test ranking robustness without choosing K after results.
+The remaining fallback, seed/uncertainty, tuning-budget and model decisions still
+block training despite this section being frozen.
 
 ## Freeze and amendments
 
