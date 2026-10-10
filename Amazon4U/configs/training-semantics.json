@@ -1,6 +1,6 @@
 {
   "semantics_version": "training-semantics-v1",
-  "status": "partially_agreed_not_runnable",
+  "status": "blocks_1_2_3_agreed_profile_and_execution_details_pending_not_runnable",
   "training_authorized": false,
   "implementation_status": "documented_not_yet_implemented",
   "rating_ge_4_eligibility": {
@@ -13,7 +13,7 @@
     "heldout_data_access": false,
     "low_rated_observations": "neither_positive_edges_nor_sampled_negatives_for_that_user",
     "empty_negative_pool": "detect_and_report_never_relax_exclusions",
-    "empty_negative_pool_action": null
+    "empty_negative_pool_action": "skip_affected_positive_updates_report_counts_fail_if_no_trainable_examples_remain"
   },
   "target_edge_masking": {
     "decision_status": "user_approved",
@@ -88,25 +88,53 @@
     "implementation_status": "documented_not_yet_implemented"
   },
   "reproducibility": {
-    "decision_status": "user_approved_framework_contrast_metric_plan_pending",
+    "decision_status": "user_approved_Block_3_frozen",
     "training_seeds": [42, 2026, 3407],
     "configuration": "configs/reproducibility.json",
     "documentation": "docs/reproducibility-and-uncertainty.md",
-    "bootstrap_contrast_metric_plan": "must_finalize_before_experiments",
+    "bootstrap_contrast_metric_plan": "frozen_KG_GNN_minus_four_core_baselines_NDCG10_HitRate10_per_group",
+    "implementation_status": "documented_not_yet_implemented"
+  },
+  "learned_model_training_recipe": {
+    "decision_status": "user_approved_Block_2",
+    "applies_to": ["BPR-MF", "LightGCN", "Heterogeneous KG+GNN"],
+    "loss": {
+      "name": "BPR",
+      "ranking_term": "mean_softplus(negative_score_minus_positive_score)_over_valid_supervised_examples",
+      "regularization": "add_separately_agreed_endpoint_only_base_ID_penalty"
+    },
+    "negative_sampling_distribution": "uniform_over_agreed_user_eligible_warm_negative_pool",
+    "number_of_negatives_per_positive": 1,
+    "optimizer": {
+      "name": "Adam",
+      "betas": [0.9, 0.999],
+      "epsilon": 0.00000001,
+      "weight_decay": 0
+    },
+    "learning_rate": 0.001,
+    "learning_rate_policy": "constant",
+    "maximum_epochs": 100,
+    "early_stopping": {
+      "metric": "validation_NDCG@10",
+      "direction": "maximize",
+      "patience": 10,
+      "patience_unit": "validation_checks",
+      "improvement": "strictly_greater_than_best_score",
+      "minimum_delta": 0,
+      "checkpoint_exact_ties": "retain_earliest_checkpoint"
+    },
+    "empty_negative_pool_action": "skip_affected_positive_updates_report_counts_fail_if_no_trainable_examples_remain",
+    "no_valid_batch": "no_optimizer_or_regularization_only_update",
+    "validation_frequency": "profile_dependent_not_yet_frozen",
+    "batch_size": "profile_dependent_not_yet_frozen",
     "implementation_status": "documented_not_yet_implemented"
   },
   "pending_choices": [
-    "loss",
-    "negative_sampling_distribution",
-    "number_of_negatives",
-    "optimizer",
-    "learning_rate_policy",
-    "maximum_epochs",
-    "validation_frequency",
-    "early_stopping",
-    "batch_size",
-    "neighbor_sampling_and_architecture",
-    "bootstrap_comparison_metric_plan",
-    "empty_negative_pool_action"
+    "validation_frequency_after_profiling",
+    "model_specific_batch_sizes_after_profiling",
+    "GraphSAGE_neighbor_sampling_execution_and_fanout",
+    "LightGCN_exact_propagation_execution",
+    "BPR_MF_and_LightGCN_ID_initialization_distribution",
+    "numerical_tuning_budgets_search_spaces_and_tuning_seed"
   ]
 }

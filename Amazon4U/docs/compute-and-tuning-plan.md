@@ -17,7 +17,8 @@ GPU is the initial platform recommendation; TPU compatibility is not established
 - Keep **three final training seeds** for each learned method/category/feedback
   condition: **42, 2026, 3407**. Block 3's RNG/provenance and conditional paired
   bootstrap framework are agreed in [reproducibility](reproducibility-and-uncertainty.md).
-  The exact bootstrap contrast/metric list must still be registered before experiments.
+  The bootstrap contrast list is now frozen: KG + GNN minus each of four core
+  baselines for NDCG@10/HitRate@10, separately within all six experiment groups.
 - Use a small, profiling-informed hyperparameter search. **2–3 configurations per
   learned method per category × condition** is the planning range, not a frozen
   numerical trial budget or permission to pick its size after observing results.
@@ -61,7 +62,8 @@ The previously agreed validation-profiling decision is now recorded in Amazon4U:
    matrix. This is an execution strategy, not a smaller candidate universe.
 6. Any necessary frequency change requires an agreed, documented amendment before
    comparative experiments. Early-stopping patience is measured in validation
-   checks, not epochs. The proposed patience of 10 is not yet approved.
+   checks, not epochs. Block 2 now approves patience **10 validation checks**;
+   the final profiled validation frequency is still pending.
 
 Estimate required GPU-hours by summing measured/projected hours over all planned
 runs, documenting extrapolation assumptions. Report actual trial counts and

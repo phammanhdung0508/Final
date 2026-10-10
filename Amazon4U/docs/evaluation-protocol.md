@@ -133,7 +133,8 @@ and review-derived-content/timing audits before use.
    users with fewer than K candidates. **>=4 training-negative eligibility is now
    agreed:** sample only from that condition's warm pool, excluding all of the
    user's training-rated items, not just positives; never inspect held-out data.
-   Distribution, number of negatives and empty-pool action remain pending.
+   **Block 2 now agrees** uniform eligible-negative sampling, one negative per
+   positive, and skipping/reporting empty-pool positives (fail if none trainable).
    KG-only's no-usable-positive-weight-profile fallback is now agreed as
    condition-positive training popularity, with normal filters and subgroup
    reporting. Empty-positive-history fallback is now agreed across methods:
@@ -142,8 +143,10 @@ and review-derived-content/timing audits before use.
    input injection or scoring-failure fallback. See [training semantics](training-semantics.md), its configuration
    and the linked candidate protocol; the sampler is not implemented yet.
 6. Final approved feature/relation list and per-field coverage.
-7. Category-only and optional cross-category experiments, including a concrete
-   time-safe graph/embedding construction strategy.
+7. **Primary scope finalized:** independent category-only experiments with
+   `cross_category_history=false`. Cross-category history, shared fitted user
+   representations and merged interaction graphs are deferred, not prerequisites
+   for the primary protocol. See the future-experiments section below.
 8. Baselines, comparable graph/splits/candidates, validation search budget,
    checkpoint selection rule, training seeds and reporting uncertainty.
    **Core membership finalized:** Popularity, BPR-MF, LightGCN, KG-only and
@@ -168,7 +171,13 @@ and review-derived-content/timing audits before use.
    with training-edge reuse and no batch target masks. Profile exact propagation
    and GraphSAGE batch size/fanout; heterogeneous masking remains unchanged.
    Do not silently substitute masked/sampled LightGCN variants. Remaining
-   training settings and exact budgets are not approved by this block.
+   **Subsequent Block 2 approval** sets mean stable BPR, uniform one-negative
+   sampling, Adam (betas 0.9/0.999, epsilon 1e-8, weight decay 0), constant 0.001
+   learning rate, maximum 100 epochs, and patience 10 validation checks without
+   strict NDCG@10 improvement; earliest checkpoint wins exact ties. Empty-pool
+   updates are skipped/reported; fail if no trainable examples remain. See training
+   semantics for exact values. Batch size/fanout/validation frequency, MF/LightGCN
+   initialization and numerical tuning budgets remain pending.
    A separate regularization decision is now agreed: 1e-5 times mean squared L2
    row norm over unique supervised base user/item endpoint IDs only. Exclude
    neighbor-only/Brand/Category rows; transformation/bias/global weight decay is
@@ -178,8 +187,11 @@ and review-derived-content/timing audits before use.
    bootstrap on seed-averaged fixed test metrics (10,000 replicates, seed 12345,
    95% percentile intervals), exclusively post-selection. See
    [reproducibility](reproducibility-and-uncertainty.md) and `configs/reproducibility.json`.
-   Predeclare exact bootstrap contrasts/metrics before experiments; no total-
-   uncertainty or multiplicity-controlled significance claim.
+   **Contrast list now frozen:** KG + GNN minus Popularity, BPR-MF, LightGCN
+   and KG-only, each for NDCG@10/HitRate@10 in six separate category/condition
+   groups (48 planned descriptive intervals). No @5/@20 or coverage bootstrap;
+   optional methods require a pre-experiment amendment. No total-uncertainty or
+   multiplicity-controlled significance claim.
    The [compute and tuning plan](compute-and-tuning-plan.md) records conditional
    Kaggle capacity, a 20% reserve and a 2–3-configuration planning range. Profile
    Musical_Instruments before freezing trial counts/search spaces; no comparative
@@ -196,6 +208,20 @@ and review-derived-content/timing audits before use.
     retain publisher assignments and document tie semantics, or register a
     different protocol. No cross-category fitted representations are currently
     allowed because category-specific train timestamps can exceed other targets.
+
+## Deferred future experiments — not primary-protocol blockers
+
+Cross-category recommendation/history is **out of the current scope**. The
+approved dataset and KG configurations retain `cross_category_history=false`;
+primary graphs, histories and fitted user representations remain category-specific.
+No cross-category design or implementation is required to make the primary
+protocol ready for training.
+
+Revisiting this experiment requires a separate approved protocol amendment before
+execution, including globally time-safe history/graph/embedding construction,
+feature provenance, candidate/evaluation rules and leakage tests. Published
+category-specific training splits must not be assumed safe to merge. Deferral
+preserves the current scope; it does not authorize future cross-category runs.
 
 ## Metrics, ranking and reporting — frozen before training
 
@@ -257,7 +283,8 @@ For each group:
    resamples and full-population point estimates. Coverage is reported per seed,
    not per-user bootstrapped. Distinguish conditional user uncertainty from seed
    variability, partial failed-seed results, fallback subgroups and N/A empty
-   populations. Finalize the exact bootstrap contrast/metric list before experiments.
+   populations. Use the frozen four core baseline contrasts and NDCG@10/HitRate@10
+   list only; share resamples across contrasts/metrics and never select them after test.
 
 A sensitivity summary compares KG + GNN against each baseline **within each
 group**, noting whether improvements occur in both feedback conditions. Absolute
@@ -268,7 +295,7 @@ condition or assume KG + GNN will win.
 **Rationale:** NDCG rewards placing the held-out target near the top; HitRate gives
 an interpretable retrieval-success rate; coverage measures recommendation breadth.
 Fixed supplementary cutoffs test ranking robustness without choosing K after results.
-The remaining bootstrap contrast/metric plan, tuning-budget and training-execution decisions still
+The remaining tuning-budget and training-execution decisions still
 block training despite this section being frozen.
 
 ## Freeze and amendments

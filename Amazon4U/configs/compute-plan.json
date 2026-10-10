@@ -22,6 +22,8 @@
   "profile_metrics": ["training_epoch_time", "end_to_end_validation_time", "peak_memory"],
   "validation_schedule_change": "requires_documented_approval_before_comparative_experiments",
   "early_stopping_patience_unit": "validation_checks",
+  "early_stopping_patience": 10,
+  "training_recipe_reference": "configs/training-semantics.json",
   "parallel_runs": "independent_when_permitted_with_separate_artifacts",
   "hardware_and_environment_logging": true,
   "durable_resumable_checkpoints": true,

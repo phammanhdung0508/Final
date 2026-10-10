@@ -130,7 +130,7 @@
   },
   "interaction_encoder_edges": "binary_no_rating_value_features",
   "learned_ID_encoder_claim": "transductive_no_inductive_cold_start_claim",
-  "remaining_training_hyperparameters_status": "pending_agreement",
+  "remaining_training_hyperparameters_status": "Block_2_recipe_approved_profile_execution_MF_LightGCN_initialization_and_tuning_budget_pending",
   "implementation_status": "documented_not_yet_implemented",
   "training_authorized": false
 }

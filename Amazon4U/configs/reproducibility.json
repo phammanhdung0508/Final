@@ -1,6 +1,6 @@
 {
   "protocol_version": "reproducibility-v1",
-  "decision_status": "user_approved_framework_bootstrap_contrast_metric_list_pending",
+  "decision_status": "user_approved_Block_3_frozen_before_experiments",
   "implementation_status": "documented_not_yet_implemented",
   "training_authorized": false,
   "training_seeds": [42, 2026, 3407],
@@ -53,9 +53,20 @@
     "implementation_details": "record_RNG_algorithm_percentile_method_and_version",
     "uncertainty": "user_sampling_conditional_on_fitted_models_not_total_or_training_seed_uncertainty",
     "multiplicity": "unadjusted_descriptive_intervals_no_controlled_significance_claim",
-    "predeclared_comparisons": null,
-    "predeclared_metrics": null,
-    "comparison_metric_plan_status": "must_finalize_before_experiments_not_after_test_exposure",
+    "predeclared_comparisons": [
+      {"left": "Heterogeneous KG+GNN", "right": "Popularity"},
+      {"left": "Heterogeneous KG+GNN", "right": "BPR-MF"},
+      {"left": "Heterogeneous KG+GNN", "right": "LightGCN"},
+      {"left": "Heterogeneous KG+GNN", "right": "KG-only"}
+    ],
+    "comparison_direction": "left_minus_right_positive_favors_KG_GNN",
+    "predeclared_metrics": ["NDCG@10", "HitRate@10"],
+    "experiment_grouping": "each_of_three_categories_by_each_of_two_feedback_conditions_separately",
+    "planned_interval_count": 48,
+    "same_resamples_across_contrasts_and_metrics_within_group": true,
+    "supplementary_cutoffs": "per_seed_summaries_only_no_bootstrap_intervals",
+    "optional_methods": "excluded_unless_explicitly_amended_before_experiments",
+    "comparison_metric_plan_status": "user_approved_frozen_before_experiments",
     "CatalogCoverage_per_user_bootstrap": false,
     "empty_eligible_population": "N_A_not_zero"
   },

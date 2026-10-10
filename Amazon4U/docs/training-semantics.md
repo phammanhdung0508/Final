@@ -1,4 +1,4 @@
-# Training semantics — partially agreed, not implemented
+# Training semantics — approved recipe, execution and implementation pending
 
 Training remains blocked until the remaining choices in
 [evaluation-protocol.md](evaluation-protocol.md) are finalized. This document
@@ -37,7 +37,8 @@ not be reused inside the training sampler.
 
 If N(u) is empty, handle it explicitly and record it. Never relax exclusions,
 insert a low-rated observed item, or inspect held-out data to find a negative.
-The precise skip/fail policy remains to be agreed before execution.
+Block 2 now fixes the action: skip affected positive updates and report counts;
+fail if no trainable examples remain. No synthetic or regularization-only updates.
 
 **Rationale:** rating filtering changes positive feedback, not whether an item
 was observed. Keeping those concepts separate avoids converting low-rated
@@ -135,8 +136,10 @@ without training-batch target masks or adding held-out interactions.
 
 **Status:** user-approved design; not yet implemented. This supersedes the earlier
 unresolved choice between masking and disjoint supervision/message-passing.
-A disjoint partition is not the current plan. Node features, architecture and
-neighbor fanouts remain unresolved.
+A disjoint partition is not the current plan. The heterogeneous architecture,
+learned-ID inputs, relation operator, activations and initialization are approved in
+[heterogeneous encoder](heterogeneous-encoder.md). Its implementation/execution,
+neighbor-sampling strategy and fanouts remain pending profiling/specification.
 
 ### Required masking regression checks
 
@@ -184,7 +187,8 @@ mean squared row norm, not a mean over individual scalar embedding entries.
 - Neighbor-only parameters may still receive ranking-loss gradients. This penalty
   exclusion does not detach their representations or alter message passing.
 - No regularization-only update is created from a batch with no valid supervised
-  examples; empty-negative-pool handling remains a separate unresolved decision.
+  examples. Block 2 now specifies empty-negative-pool handling: skip/report
+  affected positives and fail if no trainable examples remain.
 
 **Status:** user-approved coefficient, scope and normalization; not implemented.
 This supersedes the ambiguous proposed “unique participating rows” definition.
@@ -211,18 +215,55 @@ Required tests before implementation acceptance:
 without making regularization scope depend on sampled neighborhoods or the full
 propagation graph. Configuration: `configs/training-semantics.json`.
 
-## Remaining choices — proposed, not approved
+## Block 2 — approved learned-model training recipe
 
-The initial recommendation was BPR loss, uniform eligible-negative sampling,
-one negative per positive, Adam with constant learning rate 0.001,
-maximum 100 epochs, validation every epoch,
-early-stopping patience 10, and 1,024 positives per batch. These numbers and
-policies are **proposals only**, not a runnable frozen training configuration.
-The [compute and tuning plan](compute-and-tuning-plan.md) now records the agreed
-approach: profile full-ranking validation every epoch on Musical_Instruments first,
-keep it if practical, and register any necessary frequency amendment before
-comparative experiments. Patience is measured in validation checks; its numerical
-value and the final measured schedule are not frozen.
+**Status:** user-approved before training, documented but not implemented. This
+supersedes the earlier proposed numerical recipe and empty-negative-pool action.
+Applies to BPR-MF, core LightGCN and heterogeneous KG + GNN, with their respective
+agreed graph semantics and the separate endpoint-only regularization formula.
+
+| Setting | Approved value |
+|---|---|
+| Ranking loss | Mean BPR, computed stably as `softplus(s_negative - s_positive)` over valid supervised examples |
+| Negative distribution | Uniform over the agreed user-specific eligible warm pool |
+| Negatives per positive | 1 |
+| Optimizer | Adam; betas (0.9, 0.999), epsilon 1e-8, weight decay 0 |
+| Learning rate | Constant 0.001 |
+| Maximum epochs | 100 |
+| Early-stopping metric | Validation NDCG@10 only |
+| Patience | 10 validation checks without strictly improved score |
+| Exact checkpoint-score ties | Retain earliest checkpoint |
+| Empty negative pool | Skip affected positive updates, report counts; fail if no trainable examples remain |
+
+The optimized loss is the mean ranking term plus the already approved explicit
+endpoint-only penalty. No hidden optimizer weight decay or neighbor/table-wide
+penalty is introduced. Strict improvement means `score > best_score` with no
+additional minimum-delta threshold. Exact ties do not reset patience. Validation
+failures/non-finite metrics remain failures, not successful patience checks.
+
+Skipping an unsampleable positive is not inventing a replacement example or
+relaxing exclusions. Report affected users/positive counts. A batch with no valid
+supervised examples produces no optimizer or regularization-only update. Detect
+and fail a dataset/condition with no trainable examples rather than reporting a
+fitted model. The empty-positive-history inference fallback is separate and does
+not manufacture training examples.
+
+**Rationale:** a modest common ranking recipe provides transparent baseline
+settings; fixed sampling exclusions, exact stopping semantics and explicit skip
+handling avoid implementation-dependent changes to the scientific protocol.
+This approval does not authorize an unregistered hyperparameter search.
+
+## Remaining profile-dependent and execution choices
+
+Batch size, GraphSAGE fanout/sampling, exact LightGCN execution and the final
+validation frequency are not frozen. Values 1,024 positives and fanout 10 remain
+profiling starting recommendations. The [compute plan](compute-and-tuning-plan.md)
+requires profiling full-ranking validation every epoch on Musical_Instruments
+first, retaining it if practical and registering any necessary schedule amendment
+before comparative experiments. Patience is now fixed at 10 **validation checks**,
+not epochs, regardless of the subsequently approved validation frequency.
+BPR-MF/LightGCN ID initialization distributions remain to specify separately;
+the heterogeneous encoder's initialization is already frozen.
 
 Batch target-edge masking for heterogeneous KG + GNN and binary, rating-free
 interaction encoder inputs are agreed above. Core LightGCN's fixed-graph
@@ -230,7 +271,8 @@ training-edge reuse is an explicit approved exception, not an unrecorded shortcu
 Sampling execution, fanouts and numerical resource/tuning budgets still require
 finalization; encoder specifications are in the model docs. Block 3 now freezes
 training seeds 42/2026/3407 and the reproducibility/uncertainty framework in
-[reproducibility](reproducibility-and-uncertainty.md). Register the exact bootstrap
-contrast/metric list before experiments; no test-based selection is allowed. The conditional Kaggle
+[reproducibility](reproducibility-and-uncertainty.md), including the frozen bootstrap
+contrast list: KG + GNN minus each core baseline, for NDCG@10/HitRate@10 in each
+category/condition. No test-based contrast/metric selection is allowed. The conditional Kaggle
 capacity plan and 20% contingency reserve are documented in the compute plan;
 2–3 tuning configurations is a planning range, not a frozen trial budget.

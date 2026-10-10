@@ -114,9 +114,11 @@ rating weights/popularity bonus keep the metadata scoring interpretation explici
   transformations and zero biases are agreed. No dropout or layer/output
   normalization. This supersedes the previously generic aggregation proposal;
   framework defaults may not substitute a different operator.
-- Block 1 does not itself approve loss, optimizer, sampling, stopping, seed values
-  or numerical tuning budgets. The subsequent endpoint-only regularization
-  decision is now separately agreed in [training semantics](training-semantics.md).
+- Block 1 did not itself approve the training recipe. Subsequent Block 2 now
+  approves BPR/uniform-one-negative/Adam/constant-0.001/max-100-epoch settings,
+  endpoint-only regularization and patience 10 validation checks in
+  [training semantics](training-semantics.md). Numerical tuning budgets and
+  profile-dependent execution settings remain pending.
 
 ## Optional comparisons and attribution limits
 
@@ -142,10 +144,12 @@ implementation and hand-calculated ranking tests remain pending. The exact GNN
 operator and initialization are also agreed; implementation/tests and sampling
 execution remain pending. Endpoint-only base-ID L2 (coefficient 1e-5) and zero
 transformation/global weight decay are now agreed. Model-specific training
-objectives, optimization, sampling, stopping and numerical tuning budgets still
+objectives, optimizer, negative distribution/count, learning rate, epoch cap,
+stopping and empty-pool handling are now approved in Block 2. Numerical tuning
+budgets, profile-dependent execution and BPR-MF/LightGCN ID initialization still
 require explicit agreement. Final seeds 42/2026/3407 and the uncertainty framework
-are agreed in [Block 3](reproducibility-and-uncertainty.md); its exact bootstrap
-contrast/metric list must still be registered before experiments. Profile-dependent execution must also be finalized. Learned graph methods
+are agreed in [Block 3](reproducibility-and-uncertainty.md), now including the frozen
+four KG + GNN-minus-baseline contrasts for NDCG@10/HitRate@10 per experiment group. Profile-dependent execution must also be finalized. Learned graph methods
 follow their explicitly agreed training graph semantics: heterogeneous batch
 masking versus core LightGCN fixed-graph training-edge reuse. Both exclude held-out
 edges. See [training semantics](training-semantics.md) and the LightGCN amendment.

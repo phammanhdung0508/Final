@@ -3,8 +3,9 @@
 **Status:** user-approved protocol and clarifications before comparative training.
 Implementation/tests pending; no models have been run. This resolves the earlier
 proposed seed values and uncertainty framework. The exact bootstrap contrast/metric
-list must still be predeclared before experiments; it may not be chosen after test
-exposure. The overall protocol remains draft for other training decisions.
+list is now user-approved and frozen below; it may not be changed based on test
+exposure. Block 3's protocol decisions are complete; implementation/tests remain
+pending. The overall protocol remains draft for other execution/tuning decisions.
 
 ## Fixed seeds and dataset membership
 
@@ -50,7 +51,9 @@ artifacts linked to their source predictions; never overwrite original results.
 ## Validation-only selection and resumability
 
 Select hyperparameters/checkpoints exclusively with validation NDCG@10 under the
-frozen selection rules; numerical early-stopping settings remain unresolved.
+frozen selection rules: Block 2 now sets patience 10 validation checks with strict
+score improvement, earliest exact-score tie, and a maximum of 100 epochs. The
+profiled validation frequency remains unresolved.
 Neither test predictions nor bootstrap intervals select models, seeds, checkpoints,
 search configurations or which results to report.
 
@@ -94,6 +97,33 @@ each user's metric over the three fixed seeds before paired bootstrap. Average
 metrics, not scores/ranks to form a newly evaluated recommendation ensemble.
 For deterministic methods use the single fixed per-user metric.
 
+## Frozen bootstrap contrast and metric list
+
+Within **each** of the three categories × two feedback conditions, report:
+
+| Direction (positive favors KG + GNN) | Bootstrap metrics |
+|---|---|
+| Heterogeneous KG + GNN minus Popularity | NDCG@10, HitRate@10 |
+| Heterogeneous KG + GNN minus BPR-MF | NDCG@10, HitRate@10 |
+| Heterogeneous KG + GNN minus LightGCN | NDCG@10, HitRate@10 |
+| Heterogeneous KG + GNN minus KG-only | NDCG@10, HitRate@10 |
+
+Four contrasts × two metrics × six separate experiment groups gives **48 planned
+descriptive intervals**, provided required runs and eligible populations are
+available; failure/empty-population rules still apply. Share each replicate's user
+resample across all compared methods, contrasts and both metrics within a group.
+Do not pool category/condition groups into a primary inference result.
+
+NDCG/HitRate at 5 and 20 retain their registered per-seed summaries, **without
+bootstrap intervals**. CatalogCoverage@10 also remains per-seed reporting only.
+Optional methods are outside this contrast plan unless explicitly amended before
+experiments. Intervals are unadjusted for multiplicity and must not be presented
+as controlled significance claims or used to select models.
+
+**Status:** user-approved list, frozen before experiments. This completes the
+previously pending Block 3 decision; it does not authorize training or implement
+bootstrap. The point-estimate, resampling and uncertainty rules below are unchanged.
+
 ## Paired user bootstrap
 
 For each predeclared method/metric contrast within a category × condition:
@@ -119,8 +149,8 @@ The interval measures **user-sampling variability conditional on fitted models
 and fixed predictions**. It does not resample training seeds or incorporate
 training-seed uncertainty. Report these separately, not as total uncertainty.
 Multiple unadjusted intervals are descriptive, not multiplicity-controlled
-significance claims. The exact contrast/metric list remains to be registered before
-experiments; no post-test selection of favorable intervals is permitted.
+significance claims. Use only the frozen contrast/metric list above;
+no post-test selection of favorable intervals is permitted.
 
 If no users are eligible, report relevant metrics/intervals as **N/A**, not zero.
 Do not fabricate intervals for missing seed results.

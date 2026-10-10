@@ -125,7 +125,9 @@ never choose thresholds, features or metrics based on test performance.
   negative eligibility is the condition warm pool minus ALL user training-rated
   items. A globally warm item rated below 4 by that user is forbidden as their
   negative. Never consult held-out data. Detect/report empty pools without
-  relaxing exclusions; the skip/fail policy and sampling parameters are pending.
+  relaxing exclusions. Block 2 uses uniform eligible sampling, one negative per
+  positive; skip/report empty-pool positive updates and fail if no trainable
+  examples remain. Never create synthetic or regularization-only updates.
 - Warm pool derives solely from permitted training interactions. Current >=4
   policy uses condition-specific warmth; explicitly report the resulting pool
   difference, not a fixed-candidate threshold-only ablation.
@@ -194,6 +196,20 @@ never choose thresholds, features or metrics based on test performance.
   optional control; do not claim metadata attribution from architecture-changing
   comparisons alone. No optional experiment has a finalized runnable configuration.
 
+## Agreed Block 2 training recipe
+
+- Learned methods: mean stable BPR via softplus(s_negative-s_positive), plus the
+  explicit endpoint-only penalty below; uniform eligible negatives, one per positive.
+- Adam, betas (0.9,0.999), epsilon 1e-8, zero weight decay; constant learning rate
+  0.001, maximum 100 epochs. Stop after 10 validation checks without strictly better
+  validation NDCG@10; exact ties retain the earliest checkpoint and do not reset
+  patience. Failed validation is a failure, not a valid patience check.
+- Empty negative pools skip/report affected positives; fail if no examples remain
+  trainable. Invalid empty batches have no optimizer/regularization-only update.
+- Model-specific batch sizes, fanouts, validation frequency, MF/LightGCN initialization
+  and tuning budgets still require specification/profiling before training.
+  Numerical approvals do not authorize training until the overall protocol is ready.
+
 ## Agreed endpoint regularization
 
 - Learned methods use explicit 1e-5 times the mean squared L2 row norm of unique
@@ -233,8 +249,12 @@ never choose thresholds, features or metrics based on test performance.
   Bootstrap fixed seed-averaged per-user test metrics after validation-only selection:
   10,000 shared paired-user resamples, seed 12345, 95% percentile intervals and
   full-test-population point estimates. Do not bootstrap coverage per user or
-  conflate user/seed uncertainty. Predeclare contrast/metric lists before experiments;
-  unadjusted intervals are descriptive, empty populations N/A, failed seeds explicit.
+  conflate user/seed uncertainty. The contrast list is frozen: KG + GNN minus
+  Popularity/BPR-MF/LightGCN/KG-only for NDCG@10/HitRate@10 per category/condition
+  (48 planned intervals). Share resamples across all contrasts/metrics within a
+  group; no bootstrap for @5/@20 or coverage and no optional-method contrasts
+  without pre-experiment amendment. Unadjusted intervals are descriptive,
+  empty populations N/A, failed seeds explicit.
   No hidden population changes, seed replacement or favorable-result retries.
 - Other training choices remain unresolved. Conditional 60 GPU-hours/week must
   be verified as permitted/available; reserve roughly 20%. Profile full-ranking
