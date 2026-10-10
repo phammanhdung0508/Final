@@ -22,9 +22,52 @@
       "runnable_configuration_status": "not_finalized"
     }
   ],
-  "heterogeneous_encoder_candidate": "GraphSAGE_style_not_yet_fully_specified",
-  "learned_ID_encoder_claim_if_adopted": "transductive_no_inductive_cold_start_claim",
-  "model_hyperparameters_status": "pending_agreement",
+  "block_1_status": "user_approved_architecture_scoring_implementation_pending",
+  "model_specifications": {
+    "Popularity": {
+      "score": "count_condition_positive_training_interactions_per_item"
+    },
+    "BPR-MF": {
+      "embedding_dimension": 64,
+      "inputs": "learned_user_item_ID_embeddings",
+      "decoder": "dot_product"
+    },
+    "LightGCN": {
+      "embedding_dimension": 64,
+      "propagation_layers": 3,
+      "layer_combination": "arithmetic_mean_layers_0_through_3",
+      "decoder": "dot_product",
+      "exact_propagation_implementation": "pending_profiling",
+      "target_masking": "approved_batch_masking_not_waived",
+      "sampled_propagation": "requires_explicit_amendment_and_sampled_LightGCN_variant_label"
+    },
+    "KG-only": {
+      "profiles": "training_warm_IDF_weighted_category_paths_and_brands",
+      "similarity": "cosine",
+      "rating_weights": false,
+      "popularity_bonus": false,
+      "ordered_category_brand_weight_grid": [[1.0, 0.0], [0.75, 0.25], [0.5, 0.5]],
+      "selection_group": "category_x_feedback_condition",
+      "selection_metric": "validation_NDCG@10_only",
+      "exact_selection_ties": "first_grid_entry_in_predeclared_order",
+      "trial_invariants": ["IDF_formula", "profile_construction", "missing_channel_handling", "candidate_rules"],
+      "exact_profile_IDF_and_missing_channel_formulas": "pending_specification",
+      "tuning_claim": "limited_validation_grid_not_exhaustive_optimization"
+    },
+    "Heterogeneous KG+GNN": {
+      "encoder": "heterogeneous_GraphSAGE_style",
+      "layers": 2,
+      "embedding_dimension": 64,
+      "inputs": "learned_node_ID_embeddings",
+      "aggregation": "relation_aware_exact_operator_pending",
+      "decoder": "dot_product",
+      "batch_size": "pending_profiling",
+      "neighbor_fanout": "pending_profiling"
+    }
+  },
+  "interaction_encoder_edges": "binary_no_rating_value_features",
+  "learned_ID_encoder_claim": "transductive_no_inductive_cold_start_claim",
+  "remaining_training_hyperparameters_status": "pending_agreement",
   "implementation_status": "documented_not_yet_implemented",
   "training_authorized": false
 }

@@ -144,8 +144,16 @@ and review-derived-content/timing audits before use.
    optional feature-augmentation comparison, not a clean KG + GNN ablation;
    a matched encoder without metadata relations is an optional recommended control.
    See [models and baselines](models-and-baselines.md). Learned-ID GraphSAGE-style
-   implementations are transductive, with no cold-start claim. Initialization,
-   architecture, model-specific training settings and exact budgets remain pending.
+   implementations are transductive, with no cold-start claim. **Block 1 is now
+   agreed:** 64d BPR-MF/dot product; 64d LightGCN, 3 layers, mean 0–3/dot product;
+   2-layer 64d learned-ID heterogeneous GraphSAGE-style/dot product; KG-only
+   training-warm IDF/cosine without rating weighting or popularity bonus.
+   KG-only uses ordered mixtures 1/0, 0.75/0.25, 0.5/0.5 selected by validation
+   NDCG@10 per category/condition, with first-entry tie-breaking. Exact profile/
+   missing-channel formulas, aggregation and initialization distribution remain
+   pending. Profile LightGCN exact propagation and GraphSAGE batch size/fanout;
+   do not waive masking or silently substitute sampled LightGCN. Remaining
+   training settings and exact budgets are not approved by this block.
    Three final training seeds are agreed; exact values/uncertainty remain pending.
    The [compute and tuning plan](compute-and-tuning-plan.md) records conditional
    Kaggle capacity, a 20% reserve and a 2–3-configuration planning range. Profile

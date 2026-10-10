@@ -128,7 +128,8 @@ never choose thresholds, features or metrics based on test performance.
   a target or silently omit empty positive profiles; freeze a common fallback.
 - A heterogeneous GraphSAGE-style recommender using learned node-ID embeddings
   is transductive, not automatically an inductive cold-start model. Learned-ID
-  initialization is still a proposal; no features/embeddings exist in KG-v1.
+  inputs are now agreed in Block 1, but their initialization distribution remains
+  pending; no features/embeddings have been generated in KG-v1.
   Report capability based on the implemented inputs/inference pathway, not the
   GraphSAGE name alone. See `docs/models-and-baselines.md`.
 - Cold performance is not currently supported/evaluated. Only register it after
@@ -142,7 +143,18 @@ never choose thresholds, features or metrics based on test performance.
 ## Agreed core models
 
 - Core: Popularity, BPR-MF, LightGCN, KG-only and Heterogeneous KG + GNN.
-  LightGCN is not optional. Model-specific settings are not yet frozen.
+  LightGCN is not optional. Block 1 freezes 64d BPR-MF/dot product, 64d LightGCN
+  with 3 layers/mean 0–3/dot product, and 2-layer 64d learned-ID heterogeneous
+  GraphSAGE-style/dot product. Exact aggregation/initialization and execution
+  details remain pending. Interaction inputs are binary and rating-free.
+- KG-only uses training-warm IDF profiles and cosine, no rating weighting or
+  popularity bonus. Tune category/brand mixtures in order 1/0, 0.75/0.25, 0.5/0.5
+  by validation NDCG@10 per category/condition; exact ties select the first entry.
+  Keep profile/IDF/missing-channel/candidate rules identical across trials; exact
+  formulas still need specification. Do not use test outcomes to select weights.
+- Profile exact LightGCN propagation without waiving batch target masks. Sampled
+  propagation requires an explicit amendment and sampled-variant labeling.
+  GraphSAGE batch size/fanout are profiling starting points, not frozen constants.
 - BPR-MF + metadata is an optional feature-augmentation comparison, not a clean
   KG + GNN ablation. A matched encoder without metadata relations is a recommended
   optional control; do not claim metadata attribution from architecture-changing
