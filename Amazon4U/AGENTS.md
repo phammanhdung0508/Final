@@ -28,7 +28,13 @@ construction or a metadata audit as authorization to train.
 - `docs/evaluation-protocol.md`: pre-training protocol and unresolved decisions.
 - `configs/dataset-scope.json`: approved full-data scope and execution order.
 - `configs/evaluation-metrics.json`: frozen metrics, ranking and reporting rules.
+- `docs/compute-and-tuning-plan.md` and `configs/compute-plan.json`: conditional
+  Kaggle capacity, profiling-first validation and budget-freeze approach.
+- `docs/training-semantics.md` and `configs/training-semantics.json`: agreed
+  sampling eligibility, required regression checks and pending training choices.
 - `docs/candidates-and-cold-start.md`: authoritative candidate/filtering policy.
+- `docs/models-and-baselines.md` and `configs/model-suite.json`: agreed core
+  membership, optional comparisons, attribution limits and model claim boundaries.
 - `docs/kg-schema.md` and `configs/kg-v1.json`: implemented structural allowlist.
 - `docs/kg-input-audit.md`: actual split/metadata findings and limitations.
 
@@ -79,8 +85,15 @@ never choose thresholds, features or metrics based on test performance.
 
 - Training graphs, inverse edges, user profiles, statistics and graph embeddings
   derive only from permitted training data. Never expose held-out labels/reviews.
-- A target review/rating must not become an input for predicting itself. Register
-  the message-passing versus supervision/target-masking design before GNN training.
+- A target review/rating must not become an input for predicting itself. The
+  agreed training-target shortcut safeguard is batch positive-edge masking:
+  exclude direct forward/reverse/duplicate equivalents before or during sampling
+  at every hop, not after neighborhood retrieval. Preserve unrelated edges and
+  valid remaining multi-hop KG paths. Both BPR scores, if BPR is adopted, use
+  the same masked view; no cached unmasked representations may bypass it.
+  Interaction encoder edges are binary, with no rating-value inputs. Masks are
+  batch-scoped, not permanent history deletion. Add regression checks for effective
+  adjacency, sampled neighborhoods and preservation of valid metadata paths.
 - Exclude `average_rating`, `rating_number`, bestseller ranks, `bought_together`,
   full details dictionaries and dataset-wide/review-derived aggregates. Other
   metadata/features require an audited, explicitly registered allowlist change.
@@ -95,6 +108,12 @@ never choose thresholds, features or metrics based on test performance.
 - Primary: all-rating recorded behavior. Sensitivity: training/held-out ratings
   >=4 as positive feedback. Low ratings/unobserved items are not verified negatives.
 - Preserve raw splits in both conditions; do not replace low-rated held-out items.
+- For >=4 training, keep positive history separate from all-rating observed
+  training history. Positives/forward/reverse-positive edges use >=4 only;
+  negative eligibility is the condition warm pool minus ALL user training-rated
+  items. A globally warm item rated below 4 by that user is forbidden as their
+  negative. Never consult held-out data. Detect/report empty pools without
+  relaxing exclusions; the skip/fail policy and sampling parameters are pending.
 - Warm pool derives solely from permitted training interactions. Current >=4
   policy uses condition-specific warmth; explicitly report the resulting pool
   difference, not a fixed-candidate threshold-only ablation.
@@ -107,6 +126,11 @@ never choose thresholds, features or metrics based on test performance.
 - Exclude cold/history-overlapping targets from primary warm metrics and report
   counts, proportions and eligible-user denominators. Never selectively restore
   a target or silently omit empty positive profiles; freeze a common fallback.
+- A heterogeneous GraphSAGE-style recommender using learned node-ID embeddings
+  is transductive, not automatically an inductive cold-start model. Learned-ID
+  initialization is still a proposal; no features/embeddings exist in KG-v1.
+  Report capability based on the implemented inputs/inference pathway, not the
+  GraphSAGE name alone. See `docs/models-and-baselines.md`.
 - Cold performance is not currently supported/evaluated. Only register it after
   verifying metadata-inductive inference, no cold-ID embeddings, learned warm
   metadata vocabulary and training-only preprocessing. ID-only models are N/A,
@@ -114,6 +138,15 @@ never choose thresholds, features or metrics based on test performance.
 - Audit unknown users rather than assuming 5-core makes them impossible. Full
   5-core does not imply training alone is 5-core. Timestamp ties and static
   metadata availability remain documented limitations.
+
+## Agreed core models
+
+- Core: Popularity, BPR-MF, LightGCN, KG-only and Heterogeneous KG + GNN.
+  LightGCN is not optional. Model-specific settings are not yet frozen.
+- BPR-MF + metadata is an optional feature-augmentation comparison, not a clean
+  KG + GNN ablation. A matched encoder without metadata relations is a recommended
+  optional control; do not claim metadata attribution from architecture-changing
+  comparisons alone. No optional experiment has a finalized runnable configuration.
 
 ## Frozen metrics and reporting
 
@@ -130,8 +163,14 @@ never choose thresholds, features or metrics based on test performance.
   Use the same eligible users across methods within a group. Separate validation
   from final test reporting and include eligibility/exclusion, empty-profile,
   fallback and candidate-shortage counts. Label overlapping exclusion reasons.
-- Seed/uncertainty procedures and other training choices remain unresolved;
-  freezing metrics does not authorize training.
+- Three final training seeds are agreed; exact values/uncertainty procedures and
+  other training choices remain unresolved. Conditional 60 GPU-hours/week must
+  be verified as permitted/available; reserve roughly 20%. Profile full-ranking
+  validation every epoch on Musical_Instruments first, then recheck larger
+  categories. Freeze trial budgets/search spaces before comparative results;
+  2–3 configurations is only a planning range. Frequency amendments need approval,
+  with patience counted in validation checks. Freezing metrics does not authorize
+  training or silently reduce dataset/candidate scope.
 
 ## Development and verification
 

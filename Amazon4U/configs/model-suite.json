@@ -1,0 +1,30 @@
+{
+  "suite_version": "model-suite-v1",
+  "core_membership_status": "user_approved_before_training",
+  "core_models": [
+    "Popularity",
+    "BPR-MF",
+    "LightGCN",
+    "KG-only",
+    "Heterogeneous KG+GNN"
+  ],
+  "optional_comparisons": [
+    {
+      "name": "BPR-MF + metadata",
+      "purpose": "feature_augmentation_comparison_not_clean_KG_GNN_ablation",
+      "required": false,
+      "runnable_configuration_status": "not_finalized"
+    },
+    {
+      "name": "Matched KG+GNN without metadata relations",
+      "purpose": "recommended_architecture_matched_metadata_ablation",
+      "required": false,
+      "runnable_configuration_status": "not_finalized"
+    }
+  ],
+  "heterogeneous_encoder_candidate": "GraphSAGE_style_not_yet_fully_specified",
+  "learned_ID_encoder_claim_if_adopted": "transductive_no_inductive_cold_start_claim",
+  "model_hyperparameters_status": "pending_agreement",
+  "implementation_status": "documented_not_yet_implemented",
+  "training_authorized": false
+}

@@ -67,11 +67,15 @@ measurements do not authorize selecting categories based on model performance.
   metadata and unseen item nodes are allowed under a transductive setting.
 - Exclude held-out ratings/reviews from user/item features and text embeddings.
 - Never use a target review as an input to predict its own interaction or rating.
-- Stored training ratings are observations/possible targets, not automatically
-  encoder inputs. For supervised rating prediction, do not feed an example's
-  target rating back through its own edge. Before GNN training, specify target
-  edge masking or a disjoint message-passing/supervision design, including inverse
-  edges; document any link-reconstruction objective separately.
+- Stored ratings remain observations; interaction encoder edges are binary and
+  rating values are not encoder features. Training target-edge shortcut/leakage
+  is controlled by masking batch-supervised positive interaction pairs and their
+  direct forward/reverse/duplicate equivalents before or during neighbor sampling.
+  Preserve unrelated edges and valid remaining multi-hop metadata/KG paths. For
+  BPR if adopted, both scores use the same masked graph view; negative target
+  edges normally do not exist. This is a training shortcut safeguard, distinct
+  from validation/test leakage. See [training semantics](training-semantics.md)
+  for the agreed design and required regression checks.
 - Cross-category history is a separate experiment. Include only allowed training
   events before the target timestamp across categories. Restrict embedding
   construction too; a filtered feature vector cannot fix future graph messages.
@@ -124,13 +128,29 @@ and review-derived-content/timing audits before use.
    In >=4 sensitivity, warmth is derived from positive training edges; report the
    resulting pool change rather than calling it a fixed-candidate ablation.
    Exact score ties use parent_asin ascending; reject non-finite scores and report
-   users with fewer than K candidates. Training negative sampling and empty-profile
-   fallback remain to be frozen. See the linked candidate protocol for cold rules.
+   users with fewer than K candidates. **>=4 training-negative eligibility is now
+   agreed:** sample only from that condition's warm pool, excluding all of the
+   user's training-rated items, not just positives; never inspect held-out data.
+   Distribution, number of negatives, empty-pool action and empty-profile fallback
+   remain pending. See [training semantics](training-semantics.md), its configuration
+   and the linked candidate protocol; the sampler is not implemented yet.
 6. Final approved feature/relation list and per-field coverage.
 7. Category-only and optional cross-category experiments, including a concrete
    time-safe graph/embedding construction strategy.
 8. Baselines, comparable graph/splits/candidates, validation search budget,
    checkpoint selection rule, training seeds and reporting uncertainty.
+   **Core membership finalized:** Popularity, BPR-MF, LightGCN, KG-only and
+   Heterogeneous KG + GNN (`configs/model-suite.json`). BPR-MF + metadata is an
+   optional feature-augmentation comparison, not a clean KG + GNN ablation;
+   a matched encoder without metadata relations is an optional recommended control.
+   See [models and baselines](models-and-baselines.md). Learned-ID GraphSAGE-style
+   implementations are transductive, with no cold-start claim. Initialization,
+   architecture, model-specific training settings and exact budgets remain pending.
+   Three final training seeds are agreed; exact values/uncertainty remain pending.
+   The [compute and tuning plan](compute-and-tuning-plan.md) records conditional
+   Kaggle capacity, a 20% reserve and a 2–3-configuration planning range. Profile
+   Musical_Instruments before freezing trial counts/search spaces; no comparative
+   results may be used to choose the budget. No profiling or model runs yet.
 9. **Cold-item policy finalized:** exclude from primary warm metrics with
    explicit counts/proportions. Supplementary cold ranking is allowed only after
    registering and testing a metadata-inductive architecture, learned warm

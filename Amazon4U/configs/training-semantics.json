@@ -1,0 +1,57 @@
+{
+  "semantics_version": "training-semantics-v1",
+  "status": "partially_agreed_not_runnable",
+  "training_authorized": false,
+  "implementation_status": "documented_not_yet_implemented",
+  "rating_ge_4_eligibility": {
+    "decision_status": "user_approved",
+    "positive_min_rating": 4,
+    "positive_source": "training_interactions_only",
+    "positive_graph": "forward_and_optional_reverse_edges_from_positive_history_only",
+    "negative_universe": "category_items_with_at_least_one_rating_ge_4_training_interaction",
+    "negative_exclusion": "all_user_training_rated_items_regardless_of_rating",
+    "heldout_data_access": false,
+    "low_rated_observations": "neither_positive_edges_nor_sampled_negatives_for_that_user",
+    "empty_negative_pool": "detect_and_report_never_relax_exclusions",
+    "empty_negative_pool_action": null
+  },
+  "target_edge_masking": {
+    "decision_status": "user_approved",
+    "issue": "training_target_edge_shortcut_not_in_itself_validation_test_leakage",
+    "design": "batch_supervised_positive_interaction_masking",
+    "mask_scope": "union_of_batch_positive_pairs_forward_reverse_and_direct_duplicate_equivalents",
+    "mask_timing": "before_or_during_neighbor_sampling_at_every_hop",
+    "preserve": "unrelated_interactions_metadata_edges_and_valid_remaining_multihop_KG_paths",
+    "bpr_scoring_if_adopted": "positive_and_negative_scores_use_same_masked_graph_view",
+    "negative_target_edge_mask": "not_needed_for_eligible_unobserved_negatives",
+    "unmasked_cached_representations": "prohibited_for_masked_training_step",
+    "interaction_encoder_edges": "binary_under_condition_positive_policy",
+    "rating_values_as_encoder_inputs": false,
+    "heldout_interaction_edges_in_encoder": false,
+    "mask_lifetime": "training_batch_only_not_permanent_graph_deletion",
+    "implementation_status": "documented_not_yet_implemented",
+    "regression_checks": [
+      "supervised_direct_equivalents_absent_from_adjacency_and_sampled_neighborhoods",
+      "valid_remaining_KG_paths_preserved",
+      "both_scores_use_same_masked_view",
+      "no_rating_encoder_features_or_heldout_interaction_edges",
+      "batch_masks_do_not_permanently_delete_training_history"
+    ]
+  },
+  "pending_choices": [
+    "loss",
+    "negative_sampling_distribution",
+    "number_of_negatives",
+    "optimizer",
+    "regularization",
+    "learning_rate_policy",
+    "maximum_epochs",
+    "validation_frequency",
+    "early_stopping",
+    "batch_size",
+    "neighbor_sampling_and_architecture",
+    "seeds_and_uncertainty",
+    "empty_positive_history_fallback",
+    "empty_negative_pool_action"
+  ]
+}
