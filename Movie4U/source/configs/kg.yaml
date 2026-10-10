@@ -1,0 +1,8 @@
+node_types:
+  - user
+  - movie
+  - genre
+relation_types:
+  - [user, rates, movie]
+  - [movie, has_genre, genre]
+positive_rating_threshold: 4.0

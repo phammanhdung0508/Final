@@ -1,3 +1,0 @@
-movielens_dir: data/raw/movielens/ml-latest-small
-kg_output_dir: data/processed/kg
-gnn_output_dir: data/processed/gnn

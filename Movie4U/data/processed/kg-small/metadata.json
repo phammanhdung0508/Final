@@ -1,0 +1,8 @@
+{
+  "users": 610,
+  "movies": 9742,
+  "genres": 19,
+  "ratings": 100836,
+  "genre_edges": 22050,
+  "source": "/home/sunf/FSB/Final/Movie4U/data/raw/movielens/ml-latest-small"
+}

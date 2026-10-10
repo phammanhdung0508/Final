@@ -1,0 +1,9 @@
+{
+  "train": 81200,
+  "validation": 9818,
+  "test": 9818,
+  "method": "per-user chronological 80/10/10 (rounded holdouts)",
+  "positive_threshold": 4.0,
+  "tie_break": "movieId",
+  "protocol": "fixed training history for validation and test; full unseen catalog"
+}

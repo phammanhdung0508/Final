@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "Movie4U",
+    "slug": "movie4u",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "dark",
+    "ios": {"supportsTablet": true},
+    "android": {"package": "org.movie4u.demo"}
+  }
+}

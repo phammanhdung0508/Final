@@ -1,0 +1,8 @@
+{
+  "users": 6040,
+  "movies": 3883,
+  "genres": 18,
+  "ratings": 1000209,
+  "genre_edges": 6408,
+  "source": "/home/sunf/FSB/Final/data/raw/movielens/ml-1m"
+}

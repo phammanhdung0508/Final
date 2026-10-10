@@ -1,9 +1,12 @@
-# Agent Notes
+---
+name: Movie4U Scope Constraint
+description: Enforces that all edits must be scoped to the Movie4U directory.
+trigger: always_on
+---
 
-Scope: the entire Movie4U project.
+# Movie4U Scope Constraints
 
-Keep the required KG-only recommender, KG + GNN, API, and mobile demo modular. Prefer small, tested changes.
-
-From this directory, run `.venv/bin/python -m pytest -q` and `.venv/bin/python -m ruff check src scripts tests` for Python changes. Run `npm run typecheck` from `mobile/` for mobile changes.
-
-Never modify raw MovieLens files or expose held-out rating edges to training. Check `docs/evaluation.md` before changing splits or metrics. Generated dependencies, caches, data, and build folders do not need their own AGENTS.md.
+1. **Restricted Scope**: Your editing scope is strictly limited to `/home/sunf/FSB/Final/Movie4U/`. **DO NOT** edit, create, or delete any files outside of this directory.
+2. **Suitable Placement**: Every edit or new file must be placed in a logically suitable location within the `Movie4U/` folder structure.
+3. **Safe Editing (Temp Copies)**: If you need to make structural or risky changes to original code, create a temporary copy of the file/folder (e.g., `*_temp`). Work on the temporary copy until everything runs smoothly, then apply the changes back or rename it, and delete the temporary copy to keep the workspace clean.
+4. **All Changes in One Place**: All development happens in this one consolidated project now. Do not spread code across external directories.
