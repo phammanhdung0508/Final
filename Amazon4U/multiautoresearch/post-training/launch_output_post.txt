@@ -1,0 +1,62 @@
+Kernel bundle generated at: /home/sunf/FSB/Final/Movie4U/multiautoresearch/post-training/.runtime/kaggle-kernel
+Pushing Kaggle kernel: dungsunf/posttrain-exp-20261009-231207
+  /home/sunf/FSB/Final/Movie4U/multiautoresearch/post-training/.venv/bin/kaggle kernels push -p /home/sunf/FSB/Final/Movie4U/multiautoresearch/post-training/.runtime/kaggle-kernel
+Kernel version 1 successfully pushed.  Please check progress at https://www.kaggle.com/code/dungsunf/posttrain-exp-20261009-231207
+Polling status for dungsunf/posttrain-exp-20261009-231207 every 30s ...
+  [23:12:10] dungsunf/posttrain-exp-20261009-231207 has status "KernelWorkerStatus.QUEUED"
+  [23:12:42] dungsunf/posttrain-exp-20261009-231207 has status "KernelWorkerStatus.RUNNING"
+  [23:13:13] dungsunf/posttrain-exp-20261009-231207 has status "KernelWorkerStatus.RUNNING"
+  [23:13:45] dungsunf/posttrain-exp-20261009-231207 has status "KernelWorkerStatus.RUNNING"
+  [23:14:16] dungsunf/posttrain-exp-20261009-231207 has status "KernelWorkerStatus.RUNNING"
+  [23:14:47] dungsunf/posttrain-exp-20261009-231207 has status "KernelWorkerStatus.RUNNING"
+  [23:15:19] dungsunf/posttrain-exp-20261009-231207 has status "KernelWorkerStatus.RUNNING"
+  [23:15:50] dungsunf/posttrain-exp-20261009-231207 has status "KernelWorkerStatus.RUNNING"
+  [23:16:22] dungsunf/posttrain-exp-20261009-231207 has status "KernelWorkerStatus.RUNNING"
+  [23:16:54] dungsunf/posttrain-exp-20261009-231207 has status "KernelWorkerStatus.RUNNING"
+  [23:17:25] dungsunf/posttrain-exp-20261009-231207 has status "KernelWorkerStatus.RUNNING"
+  [23:17:57] dungsunf/posttrain-exp-20261009-231207 has status "KernelWorkerStatus.RUNNING"
+  [23:18:29] dungsunf/posttrain-exp-20261009-231207 has status "KernelWorkerStatus.RUNNING"
+  [23:19:00] dungsunf/posttrain-exp-20261009-231207 has status "KernelWorkerStatus.RUNNING"
+  [23:19:32] dungsunf/posttrain-exp-20261009-231207 has status "KernelWorkerStatus.RUNNING"
+  [23:20:04] dungsunf/posttrain-exp-20261009-231207 has status "KernelWorkerStatus.RUNNING"
+  [23:20:35] dungsunf/posttrain-exp-20261009-231207 has status "KernelWorkerStatus.RUNNING"
+  [23:21:07] dungsunf/posttrain-exp-20261009-231207 has status "KernelWorkerStatus.RUNNING"
+  [23:21:39] dungsunf/posttrain-exp-20261009-231207 has status "KernelWorkerStatus.RUNNING"
+  [23:22:09] dungsunf/posttrain-exp-20261009-231207 has status "KernelWorkerStatus.RUNNING"
+  [23:22:40] dungsunf/posttrain-exp-20261009-231207 has status "KernelWorkerStatus.RUNNING"
+  [23:23:12] dungsunf/posttrain-exp-20261009-231207 has status "KernelWorkerStatus.RUNNING"
+  [23:23:44] dungsunf/posttrain-exp-20261009-231207 has status "KernelWorkerStatus.RUNNING"
+  [23:24:15] dungsunf/posttrain-exp-20261009-231207 has status "KernelWorkerStatus.COMPLETE"
+Kernel dungsunf/posttrain-exp-20261009-231207 completed successfully. Fetching output...
+Downloading output for dungsunf/posttrain-exp-20261009-231207 to /home/sunf/FSB/Final/Movie4U/multiautoresearch/post-training/.runtime/kaggle-logs/dungsunf_posttrain-exp-20261009-231207 ...
+Output file downloaded to /home/sunf/FSB/Final/Movie4U/multiautoresearch/post-training/.runtime/kaggle-logs/dungsunf_posttrain-exp-20261009-231207/experiment/AGENTS.md
+Output file downloaded to /home/sunf/FSB/Final/Movie4U/multiautoresearch/post-training/.runtime/kaggle-logs/dungsunf_posttrain-exp-20261009-231207/experiment/README.md
+Output file downloaded to /home/sunf/FSB/Final/Movie4U/multiautoresearch/post-training/.runtime/kaggle-logs/dungsunf_posttrain-exp-20261009-231207/experiment/__pycache__/evaluate.cpython-313.pyc
+Output file downloaded to /home/sunf/FSB/Final/Movie4U/multiautoresearch/post-training/.runtime/kaggle-logs/dungsunf_posttrain-exp-20261009-231207/experiment/__pycache__/prepare.cpython-313.pyc
+Output file downloaded to /home/sunf/FSB/Final/Movie4U/multiautoresearch/post-training/.runtime/kaggle-logs/dungsunf_posttrain-exp-20261009-231207/experiment/evaluate.py
+Output file downloaded to /home/sunf/FSB/Final/Movie4U/multiautoresearch/post-training/.runtime/kaggle-logs/dungsunf_posttrain-exp-20261009-231207/experiment/final_model/gnn.pt
+Output file downloaded to /home/sunf/FSB/Final/Movie4U/multiautoresearch/post-training/.runtime/kaggle-logs/dungsunf_posttrain-exp-20261009-231207/experiment/final_model/model_config.json
+Output file downloaded to /home/sunf/FSB/Final/Movie4U/multiautoresearch/post-training/.runtime/kaggle-logs/dungsunf_posttrain-exp-20261009-231207/experiment/final_model/training_history.json
+Output file downloaded to /home/sunf/FSB/Final/Movie4U/multiautoresearch/post-training/.runtime/kaggle-logs/dungsunf_posttrain-exp-20261009-231207/experiment/model.py
+Output file downloaded to /home/sunf/FSB/Final/Movie4U/multiautoresearch/post-training/.runtime/kaggle-logs/dungsunf_posttrain-exp-20261009-231207/experiment/models/__pycache__/model_kgat.cpython-313.pyc
+Output file downloaded to /home/sunf/FSB/Final/Movie4U/multiautoresearch/post-training/.runtime/kaggle-logs/dungsunf_posttrain-exp-20261009-231207/experiment/models/model_han.py
+Output file downloaded to /home/sunf/FSB/Final/Movie4U/multiautoresearch/post-training/.runtime/kaggle-logs/dungsunf_posttrain-exp-20261009-231207/experiment/models/model_kgat.py
+Output file downloaded to /home/sunf/FSB/Final/Movie4U/multiautoresearch/post-training/.runtime/kaggle-logs/dungsunf_posttrain-exp-20261009-231207/experiment/prepare.py
+Output file downloaded to /home/sunf/FSB/Final/Movie4U/multiautoresearch/post-training/.runtime/kaggle-logs/dungsunf_posttrain-exp-20261009-231207/experiment/program.md
+Output file downloaded to /home/sunf/FSB/Final/Movie4U/multiautoresearch/post-training/.runtime/kaggle-logs/dungsunf_posttrain-exp-20261009-231207/experiment/pyproject.toml
+Output file downloaded to /home/sunf/FSB/Final/Movie4U/multiautoresearch/post-training/.runtime/kaggle-logs/dungsunf_posttrain-exp-20261009-231207/experiment/train.py
+Output file downloaded to /home/sunf/FSB/Final/Movie4U/multiautoresearch/post-training/.runtime/kaggle-logs/dungsunf_posttrain-exp-20261009-231207/final_model/gnn.pt
+Output file downloaded to /home/sunf/FSB/Final/Movie4U/multiautoresearch/post-training/.runtime/kaggle-logs/dungsunf_posttrain-exp-20261009-231207/final_model/model_config.json
+Output file downloaded to /home/sunf/FSB/Final/Movie4U/multiautoresearch/post-training/.runtime/kaggle-logs/dungsunf_posttrain-exp-20261009-231207/final_model/training_history.json
+Output file downloaded to /home/sunf/FSB/Final/Movie4U/multiautoresearch/post-training/.runtime/kaggle-logs/dungsunf_posttrain-exp-20261009-231207/metrics.json
+Output file downloaded to /home/sunf/FSB/Final/Movie4U/multiautoresearch/post-training/.runtime/kaggle-logs/dungsunf_posttrain-exp-20261009-231207/posttrain-run.log
+Kernel log downloaded to /home/sunf/FSB/Final/Movie4U/multiautoresearch/post-training/.runtime/kaggle-logs/dungsunf_posttrain-exp-20261009-231207/posttrain-exp-20261009-231207.log 
+Post-Training Metrics:
+{
+  "coverage": 0.24337,
+  "eval_score": 0.08702,
+  "num_correct": 2064,
+  "num_examples": 5755,
+  "train_loss": 0.86904,
+  "training_seconds": 649.5
+}

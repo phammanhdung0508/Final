@@ -1,0 +1,1 @@
+run_id	created_at	status	job_id	campaign	experiment_id	worker_id	hypothesis	parent_hash	candidate_hash	val_bpb	training_seconds	total_seconds	peak_vram_mb	mfu_percent	promoted	comment

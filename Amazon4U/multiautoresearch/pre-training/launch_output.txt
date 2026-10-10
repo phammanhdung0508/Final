@@ -1,0 +1,40 @@
+Preflight Check:
+  master_val_bpb=0.962777
+  diff_hunks=0 changed_lines=0 categories=[]
+  [ERROR] train.py matches train_orig.py; no experiment change present (use 'baseline' ID to override)
+Kernel bundle generated at: /home/sunf/FSB/Final/Movie4U/multiautoresearch/pre-training/.runtime/kaggle-kernel
+Pushing Kaggle kernel: dungsunf/autolab-exp-20261009-231004
+  /home/sunf/FSB/Final/Movie4U/multiautoresearch/pre-training/.venv/bin/kaggle kernels push -p /home/sunf/FSB/Final/Movie4U/multiautoresearch/pre-training/.runtime/kaggle-kernel
+Kernel version 1 successfully pushed.  Please check progress at https://www.kaggle.com/code/dungsunf/autolab-exp-20261009-231004
+Polling status for dungsunf/autolab-exp-20261009-231004 every 30s ...
+  [23:10:07] dungsunf/autolab-exp-20261009-231004 has status "KernelWorkerStatus.QUEUED"
+  [23:10:38] dungsunf/autolab-exp-20261009-231004 has status "KernelWorkerStatus.RUNNING"
+  [23:11:08] dungsunf/autolab-exp-20261009-231004 has status "KernelWorkerStatus.RUNNING"
+  [23:11:39] dungsunf/autolab-exp-20261009-231004 has status "KernelWorkerStatus.COMPLETE"
+Kernel dungsunf/autolab-exp-20261009-231004 completed successfully. Fetching output...
+Downloading output for dungsunf/autolab-exp-20261009-231004 to /home/sunf/FSB/Final/Movie4U/multiautoresearch/pre-training/.runtime/kaggle-logs/dungsunf_autolab-exp-20261009-231004 ...
+Output file downloaded to /home/sunf/FSB/Final/Movie4U/multiautoresearch/pre-training/.runtime/kaggle-logs/dungsunf_autolab-exp-20261009-231004/autolab-run.log
+Output file downloaded to /home/sunf/FSB/Final/Movie4U/multiautoresearch/pre-training/.runtime/kaggle-logs/dungsunf_autolab-exp-20261009-231004/experiment/__pycache__/prepare.cpython-313.pyc
+Output file downloaded to /home/sunf/FSB/Final/Movie4U/multiautoresearch/pre-training/.runtime/kaggle-logs/dungsunf_autolab-exp-20261009-231004/experiment/evaluate.py
+Output file downloaded to /home/sunf/FSB/Final/Movie4U/multiautoresearch/pre-training/.runtime/kaggle-logs/dungsunf_autolab-exp-20261009-231004/experiment/final_model/gnn.pt
+Output file downloaded to /home/sunf/FSB/Final/Movie4U/multiautoresearch/pre-training/.runtime/kaggle-logs/dungsunf_autolab-exp-20261009-231004/experiment/final_model/model_config.json
+Output file downloaded to /home/sunf/FSB/Final/Movie4U/multiautoresearch/pre-training/.runtime/kaggle-logs/dungsunf_autolab-exp-20261009-231004/experiment/model.py
+Output file downloaded to /home/sunf/FSB/Final/Movie4U/multiautoresearch/pre-training/.runtime/kaggle-logs/dungsunf_autolab-exp-20261009-231004/experiment/models/__pycache__/model_kgat.cpython-313.pyc
+Output file downloaded to /home/sunf/FSB/Final/Movie4U/multiautoresearch/pre-training/.runtime/kaggle-logs/dungsunf_autolab-exp-20261009-231004/experiment/models/model_han.py
+Output file downloaded to /home/sunf/FSB/Final/Movie4U/multiautoresearch/pre-training/.runtime/kaggle-logs/dungsunf_autolab-exp-20261009-231004/experiment/models/model_kgat.py
+Output file downloaded to /home/sunf/FSB/Final/Movie4U/multiautoresearch/pre-training/.runtime/kaggle-logs/dungsunf_autolab-exp-20261009-231004/experiment/prepare.py
+Output file downloaded to /home/sunf/FSB/Final/Movie4U/multiautoresearch/pre-training/.runtime/kaggle-logs/dungsunf_autolab-exp-20261009-231004/experiment/prepare_post.py
+Output file downloaded to /home/sunf/FSB/Final/Movie4U/multiautoresearch/pre-training/.runtime/kaggle-logs/dungsunf_autolab-exp-20261009-231004/experiment/pyproject.toml
+Output file downloaded to /home/sunf/FSB/Final/Movie4U/multiautoresearch/pre-training/.runtime/kaggle-logs/dungsunf_autolab-exp-20261009-231004/experiment/train.py
+Output file downloaded to /home/sunf/FSB/Final/Movie4U/multiautoresearch/pre-training/.runtime/kaggle-logs/dungsunf_autolab-exp-20261009-231004/experiment/train_orig.py
+Output file downloaded to /home/sunf/FSB/Final/Movie4U/multiautoresearch/pre-training/.runtime/kaggle-logs/dungsunf_autolab-exp-20261009-231004/metrics.json
+Kernel log downloaded to /home/sunf/FSB/Final/Movie4U/multiautoresearch/pre-training/.runtime/kaggle-logs/dungsunf_autolab-exp-20261009-231004/autolab-exp-20261009-231004.log 
+Experiment Metrics:
+{
+  "mfu_percent": 0.0,
+  "num_steps": 160,
+  "peak_vram_mb": 0.0,
+  "total_seconds": 12.04,
+  "training_seconds": 12.04,
+  "val_bpb": 0.233312
+}

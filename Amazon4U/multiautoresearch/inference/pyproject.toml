@@ -1,0 +1,12 @@
+[project]
+name = "autoresearch-inference"
+version = "0.1.0"
+description = "Movie4U recommendation serving and inference optimization benchmark"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "torch>=2.2",
+    "torch-geometric>=2.5.0",
+    "pandas>=2.0",
+    "numpy>=1.24",
+]
