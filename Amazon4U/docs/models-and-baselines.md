@@ -25,7 +25,8 @@ support unseen products under a separately registered and validated pathway.
 
 **Decision status:** user-approved interpretation, claim boundary and Block 1
 architecture below. Learned IDs, two layers and 64 dimensions are agreed; the
-initialization distribution, exact aggregation operator and execution details
+initialization distribution and exact aggregation operator are now agreed in
+[heterogeneous encoder](heterogeneous-encoder.md). Execution/sampling details
 remain unresolved. The current warm-item protocol
 makes no cold-start performance claims. See
 [cold-start requirements](candidates-and-cold-start.md).
@@ -81,10 +82,13 @@ above. Freeze the selected mixture before evaluating test; no test metric or
 bootstrap interval may select weights.
 
 Keep IDF calculation, profile construction, missing-channel handling and candidate
-rules identical across the three trials. The exact IDF/profile and missing-channel
-formulas still require specification before implementation; grid approval does
-not silently decide those formulas. This is **limited validation tuning**, not
-exhaustive optimization. It supersedes the proposed fixed 0.75/0.25 heuristic.
+rules identical across the three trials. The exact formulas are now agreed in
+[KG-only scoring](kg-only-scoring.md): smoothed training-warm IDF, independently
+normalized product channels, normalized sums for user profiles, missing-channel
+cosine zero and no per-item weight renormalization. A whole-user popularity
+fallback applies only when no positively weighted user profile channel is usable;
+report its counts and subgroup metrics, never use it to hide scoring failures.
+This is **limited validation tuning**, not exhaustive optimization. It supersedes the proposed fixed 0.75/0.25 heuristic.
 
 **Rationale:** the small grid is inexpensive and makes the mixture choice more
 defensible than an arbitrary fixed split. Training-derived IDF and absence of
@@ -92,19 +96,27 @@ rating weights/popularity bonus keep the metadata scoring interpretation explici
 
 ### Profile-dependent execution and remaining operator choice
 
-- LightGCN exact full-graph propagation implementation remains pending profiling.
-  Do not weaken batch-specific supervised target-edge masking for convenience.
-  Any switch to sampled propagation requires an explicit protocol amendment and
-  the label **sampled LightGCN variant**, not standard exact LightGCN.
+- **LightGCN methodology amended to Option B:** the core baseline uses a fixed
+  graph of condition-positive training interactions, including supervised positive
+  pairs, with held-out edges excluded. No batch target masks apply to this core
+  method. See [LightGCN protocol](lightgcn-protocol.md). Exact propagation execution
+  remains pending profiling, not methodological selection. Masked Option A is a
+  target-edge-masked LightGCN variant; sampled propagation also requires explicit
+  amendment and sampled-variant labeling.
 - GraphSAGE batch size and neighbor fanout remain profile-dependent. Earlier
   suggestions of 1,024 positives and fanout 10 per relation/hop are starting
   recommendations, not frozen universal/scientific constants. Finalize execution
   settings after resource profiling and before comparative runs.
-- The exact GraphSAGE relation aggregation operator, activation/combination rules,
-  inverse-relation handling and initialization distribution remain to specify.
-  Approval of “relation-aware aggregation” is not approval of an implicit default.
-- None of this block approves remaining loss, optimizer, regularization, sampling,
-  stopping, seed values or numerical tuning budgets.
+- The [heterogeneous encoder](heterogeneous-encoder.md) now freezes dedicated
+  relation/layer transforms, one node-type self term, within-relation means and
+  an unweighted mean across active relations. Eight explicit directed relations,
+  ReLU then identity, Normal(0,0.1²) ID initialization, Xavier-uniform gain-1
+  transformations and zero biases are agreed. No dropout or layer/output
+  normalization. This supersedes the previously generic aggregation proposal;
+  framework defaults may not substitute a different operator.
+- Block 1 does not itself approve loss, optimizer, sampling, stopping, seed values
+  or numerical tuning budgets. The subsequent endpoint-only regularization
+  decision is now separately agreed in [training semantics](training-semantics.md).
 
 ## Optional comparisons and attribution limits
 
@@ -116,18 +128,27 @@ rating weights/popularity bonus keep the metadata scoring interpretation explici
 
 Neither optional comparison is required by the core suite, and neither has an
 approved runnable configuration. Comparison with LightGCN also changes architecture
-as well as metadata; beating it alone does not isolate metadata's causal contribution.
+as well as metadata and now also target-edge handling (fixed training-edge reuse
+versus heterogeneous batch masking); beating it alone does not isolate metadata's
+causal contribution.
 Report comparisons accurately and do not promote a feature-augmentation baseline
 as an architecture-matched ablation.
 
 ## Remaining decisions
 
 Core membership and Block 1 architecture/scoring are finalized as above, including
-the KG-only mixture grid. Exact profile/IDF/missing-channel formulas, aggregation,
-initialization distribution, model-specific training objectives, regularization,
-optimization, sampling, stopping, numerical tuning budgets and seed values still
-require explicit agreement. Profile-dependent execution must also be finalized. Learned graph methods
-must follow the agreed [training target-edge masking rules](training-semantics.md).
+the KG-only mixture grid and exact scoring/fallback specification. KG-only scorer
+implementation and hand-calculated ranking tests remain pending. The exact GNN
+operator and initialization are also agreed; implementation/tests and sampling
+execution remain pending. Endpoint-only base-ID L2 (coefficient 1e-5) and zero
+transformation/global weight decay are now agreed. Model-specific training
+objectives, optimization, sampling, stopping and numerical tuning budgets still
+require explicit agreement. Final seeds 42/2026/3407 and the uncertainty framework
+are agreed in [Block 3](reproducibility-and-uncertainty.md); its exact bootstrap
+contrast/metric list must still be registered before experiments. Profile-dependent execution must also be finalized. Learned graph methods
+follow their explicitly agreed training graph semantics: heterogeneous batch
+masking versus core LightGCN fixed-graph training-edge reuse. Both exclude held-out
+edges. See [training semantics](training-semantics.md) and the LightGCN amendment.
 Within each category/condition, share candidate, relevance, history filtering and
 eligibility rules across methods. No automatic cold-start claims apply to any
 model here. Training remains blocked by the overall protocol.

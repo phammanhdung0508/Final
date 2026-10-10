@@ -21,7 +21,7 @@
   "same_eligible_users_across_methods_within_group": true,
   "report_evaluation_population": true,
   "report_validation_and_test_separately": true,
-  "seed_and_uncertainty_policy": "pending_finalization",
+  "seed_and_uncertainty_policy": "agreed_in_reproducibility_json_bootstrap_contrast_metric_list_pending",
   "implementation_status": "documented_not_yet_implemented",
   "training_authorized": false
 }

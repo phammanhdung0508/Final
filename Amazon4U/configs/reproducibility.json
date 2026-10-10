@@ -1,0 +1,70 @@
+{
+  "protocol_version": "reproducibility-v1",
+  "decision_status": "user_approved_framework_bootstrap_contrast_metric_list_pending",
+  "implementation_status": "documented_not_yet_implemented",
+  "training_authorized": false,
+  "training_seeds": [42, 2026, 3407],
+  "same_seeds_across_learned_methods_and_groups": true,
+  "data_split_seed": null,
+  "split_assignments": "fixed_published_not_regenerated",
+  "seeded_components": ["Python", "NumPy", "PyTorch_CPU", "PyTorch_CUDA_if_applicable", "initialization", "epoch_shuffle", "negative_sampler", "neighbor_sampler", "DataLoader_generator", "DataLoader_workers"],
+  "RNG_streams": "separately_recorded_deterministic_derivations_where_practical",
+  "determinism": {
+    "enable_where_supported": true,
+    "unsupported_operation": "fail_first_no_automatic_disable",
+    "exceptions": "explicitly_documented_and_approved",
+    "cross_environment_bitwise_equality_claim": false
+  },
+  "provenance": {
+    "fields": ["method", "category", "feedback_condition", "training_seed", "resolved_model_training_config", "protocol_config_versions", "Git_commit", "dirty_tree_status", "data_split_fingerprints", "warm_pool_identity", "KG_fingerprint_if_applicable", "Python_framework_library_versions", "OS", "CPU_GPU_model", "CUDA_driver_if_applicable", "runtime", "failure_status", "nondeterministic_exceptions"],
+    "dirty_source": "preserve_relevant_tracked_diffs_and_hashes_and_reproducible_untracked_source_snapshots",
+    "exclude_from_code_snapshot": ["credentials", "unrelated_projects", "generated_datasets"],
+    "completed_runs": "immutable_except_explicitly_versioned_postprocessing"
+  },
+  "resumption": {
+    "minimum_intended_support": "epoch_boundary_independently_verified_before_claim",
+    "checkpoint_state": ["model", "optimizer", "epoch_step", "best_validation_score_selected_epoch", "early_stopping_counters", "RNG_states", "sampler_state", "scheduler_if_applicable", "AMP_scaler_if_applicable"],
+    "mid_epoch_claim": "requires_tested_sampler_order_cursor_batch_worker_prefetch_and_RNG_restoration",
+    "silent_scientific_changes": false
+  },
+  "evaluation_population": "fixed_before_method_comparison_same_for_all_methods_seeds",
+  "empty_positive_history": "agreed_evaluation_only_popularity_fallback_separate_nonpersonalized_route",
+  "per_seed_reporting": {
+    "metrics": ["NDCG@10", "HitRate@10", "CatalogCoverage@10", "NDCG@5", "NDCG@20", "HitRate@5", "HitRate@20"],
+    "summary": "mean_plus_minus_sample_standard_deviation_n_minus_1",
+    "interpretation": "descriptive_training_seed_variability",
+    "deterministic_methods": "single_execution_when_no_random_component",
+    "subgroups": "fallback_and_personalized_counts_and_metrics"
+  },
+  "per_user_results": "stable_user_ID_order_with_metric_route_eligibility_and_checkpoint_provenance",
+  "bootstrap": {
+    "method": "paired_user_percentile_bootstrap",
+    "replicates": 10000,
+    "seed": 12345,
+    "percentiles": [2.5, 97.5],
+    "learned_method_input": "per_user_metric_averaged_over_three_fixed_training_seeds",
+    "deterministic_method_input": "single_fixed_per_user_metric",
+    "same_user_resample_across_methods": true,
+    "point_estimate": "difference_on_complete_fixed_test_population_not_bootstrap_mean",
+    "selection_timing": "after_validation_only_model_hyperparameter_checkpoint_selection",
+    "postprocessing_only": true,
+    "retrain_rerank_or_reselect": false,
+    "index_storage": "streaming_or_chunked_no_full_replicates_by_users_matrix",
+    "implementation_details": "record_RNG_algorithm_percentile_method_and_version",
+    "uncertainty": "user_sampling_conditional_on_fitted_models_not_total_or_training_seed_uncertainty",
+    "multiplicity": "unadjusted_descriptive_intervals_no_controlled_significance_claim",
+    "predeclared_comparisons": null,
+    "predeclared_metrics": null,
+    "comparison_metric_plan_status": "must_finalize_before_experiments_not_after_test_exposure",
+    "CatalogCoverage_per_user_bootstrap": false,
+    "empty_eligible_population": "N_A_not_zero"
+  },
+  "failures": {
+    "record_all": true,
+    "replace_failed_seeds": false,
+    "silent_setting_population_changes": false,
+    "incomplete_seed_summary": "explicit_partial_not_planned_three_seed_result",
+    "interruption_recovery": "logged_same_configuration_allowed",
+    "protocol_changing_reruns": "explicit_documented_amendment_required"
+  }
+}

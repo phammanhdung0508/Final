@@ -28,6 +28,8 @@ construction or a metadata audit as authorization to train.
 - `docs/evaluation-protocol.md`: pre-training protocol and unresolved decisions.
 - `configs/dataset-scope.json`: approved full-data scope and execution order.
 - `configs/evaluation-metrics.json`: frozen metrics, ranking and reporting rules.
+- `docs/reproducibility-and-uncertainty.md` and `configs/reproducibility.json`:
+  agreed Block 3 seeds, provenance, resumption, failure and uncertainty rules.
 - `docs/compute-and-tuning-plan.md` and `configs/compute-plan.json`: conditional
   Kaggle capacity, profiling-first validation and budget-freeze approach.
 - `docs/training-semantics.md` and `configs/training-semantics.json`: agreed
@@ -35,6 +37,12 @@ construction or a metadata audit as authorization to train.
 - `docs/candidates-and-cold-start.md`: authoritative candidate/filtering policy.
 - `docs/models-and-baselines.md` and `configs/model-suite.json`: agreed core
   membership, optional comparisons, attribution limits and model claim boundaries.
+- `docs/kg-only-scoring.md`: frozen KG-only formulas, missing-channel policy,
+  whole-user fallback and required hand-calculated tests.
+- `docs/heterogeneous-encoder.md`: frozen relation operator, inverses, activations,
+  initialization and required tests; execution/sampling settings remain pending.
+- `docs/lightgcn-protocol.md`: explicit core Option B fixed-graph training-edge
+  reuse, exception to heterogeneous masking, variant labels and comparison limits.
 - `docs/kg-schema.md` and `configs/kg-v1.json`: implemented structural allowlist.
 - `docs/kg-input-audit.md`: actual split/metadata findings and limitations.
 
@@ -86,7 +94,8 @@ never choose thresholds, features or metrics based on test performance.
 - Training graphs, inverse edges, user profiles, statistics and graph embeddings
   derive only from permitted training data. Never expose held-out labels/reviews.
 - A target review/rating must not become an input for predicting itself. The
-  agreed training-target shortcut safeguard is batch positive-edge masking:
+  heterogeneous model's agreed training-target shortcut safeguard is batch
+  positive-edge masking:
   exclude direct forward/reverse/duplicate equivalents before or during sampling
   at every hop, not after neighborhood retrieval. Preserve unrelated edges and
   valid remaining multi-hop KG paths. Both BPR scores, if BPR is adopted, use
@@ -94,6 +103,9 @@ never choose thresholds, features or metrics based on test performance.
   Interaction encoder edges are binary, with no rating-value inputs. Masks are
   batch-scoped, not permanent history deletion. Add regression checks for effective
   adjacency, sampled neighborhoods and preservation of valid metadata paths.
+  Core LightGCN is an explicit approved exception: fixed condition-positive
+  training graph with supervised-edge reuse and no batch masks. Held-out edges
+  are still forbidden in both models; this is not validation/test leakage.
 - Exclude `average_rating`, `rating_number`, bestseller ranks, `bought_together`,
   full details dictionaries and dataset-wide/review-derived aggregates. Other
   metadata/features require an audited, explicitly registered allowlist change.
@@ -125,11 +137,16 @@ never choose thresholds, features or metrics based on test performance.
 - Freeze the selected model for test; no train+validation refit under this policy.
 - Exclude cold/history-overlapping targets from primary warm metrics and report
   counts, proportions and eligible-user denominators. Never selectively restore
-  a target or silently omit empty positive profiles; freeze a common fallback.
+  a target or silently omit empty positive profiles. Their agreed common fallback
+  is evaluation/inference-only condition-positive training popularity with normal
+  candidate/history filters. No synthetic personalized training positives/edges,
+  no popularity-vector model input and no personalized-prediction claim for these
+  users. Report non-personalized fallback counts and subgroup metrics separately;
+  scoring failures must still fail.
 - A heterogeneous GraphSAGE-style recommender using learned node-ID embeddings
   is transductive, not automatically an inductive cold-start model. Learned-ID
-  inputs are now agreed in Block 1, but their initialization distribution remains
-  pending; no features/embeddings have been generated in KG-v1.
+  inputs and encoder initialization are now agreed in Block 1; no learned
+  features/embeddings have been generated in KG-v1.
   Report capability based on the implemented inputs/inference pathway, not the
   GraphSAGE name alone. See `docs/models-and-baselines.md`.
 - Cold performance is not currently supported/evaluated. Only register it after
@@ -145,20 +162,53 @@ never choose thresholds, features or metrics based on test performance.
 - Core: Popularity, BPR-MF, LightGCN, KG-only and Heterogeneous KG + GNN.
   LightGCN is not optional. Block 1 freezes 64d BPR-MF/dot product, 64d LightGCN
   with 3 layers/mean 0–3/dot product, and 2-layer 64d learned-ID heterogeneous
-  GraphSAGE-style/dot product. Exact aggregation/initialization and execution
-  details remain pending. Interaction inputs are binary and rating-free.
+  GraphSAGE-style/dot product. Sampling/profiling execution details remain pending.
+  Exact heterogeneous aggregation/initialization
+  are now frozen in `docs/heterogeneous-encoder.md`: relation-specific transforms,
+  one node-type self term, within-relation means and mean over active relations;
+  explicit inverses, ReLU then identity, Normal(0,std=0.1) IDs, Xavier-uniform
+  gain-1 matrices, zero self biases, no dropout/layer/output normalization.
+  Interaction inputs are binary and rating-free.
 - KG-only uses training-warm IDF profiles and cosine, no rating weighting or
   popularity bonus. Tune category/brand mixtures in order 1/0, 0.75/0.25, 0.5/0.5
   by validation NDCG@10 per category/condition; exact ties select the first entry.
-  Keep profile/IDF/missing-channel/candidate rules identical across trials; exact
-  formulas still need specification. Do not use test outcomes to select weights.
-- Profile exact LightGCN propagation without waiving batch target masks. Sampled
+  Keep profile/IDF/missing-channel/candidate rules identical across trials.
+  IDF is 1+ln((N+1)/(df+1)) over all condition-warm products, with distinct-product
+  df. Normalize product channels separately; user channels are normalized sums
+  over distinct positive-history products. Missing-channel cosine is zero, with
+  no per-item mixture renormalization. Whole-user condition-positive popularity
+  fallback applies only if no positively weighted user profile is usable, never
+  per-item or for scoring failures. Report fallback counts/reasons/subgroup metrics.
+  Empty-positive-history fallback is shared across methods; KG-only's additional
+  missing-metadata fallback is distinct. Neither creates training examples or
+  model input features. Do not use test outcomes to select weights.
+- Core LightGCN uses approved Option B, exact propagation on the fixed training
+  graph without batch target masks. Profile execution, not methodological identity.
+  Masked Option A is a target-edge-masked variant, not the core baseline. Sampled
   propagation requires an explicit amendment and sampled-variant labeling.
+  Heterogeneous KG + GNN retains masking; do not attribute comparison gains solely
+  to metadata when architecture and training-edge use also differ.
   GraphSAGE batch size/fanout are profiling starting points, not frozen constants.
 - BPR-MF + metadata is an optional feature-augmentation comparison, not a clean
   KG + GNN ablation. A matched encoder without metadata relations is a recommended
   optional control; do not claim metadata attribution from architecture-changing
   comparisons alone. No optional experiment has a finalized runnable configuration.
+
+## Agreed endpoint regularization
+
+- Learned methods use explicit 1e-5 times the mean squared L2 row norm of unique
+  supervised base-ID endpoints: users plus union of positive/negative item IDs.
+  Deduplicate per typed ID across roles/examples; no extra dimension or half factor.
+- Do not select rows from the sampled computation graph or full propagation table.
+  Brand/Category rows are always excluded; a neighbor user/product row is included
+  only if it independently is a supervised endpoint. Use base rows, not propagated
+  representations.
+- Transformation matrices/biases and global optimizer weight decay are zero.
+  No hidden table-wide or decoupled weight decay may replace the explicit penalty.
+  Ranking-loss gradients through neighbors remain allowed; do not detach them.
+- Test endpoint deduplication, fanout independence of the penalty, base-row selection
+  and optimizer groups. No synthetic/regularization-only update for invalid empty
+  batches. Other training settings remain pending; see training-semantics documents.
 
 ## Frozen metrics and reporting
 
@@ -175,8 +225,18 @@ never choose thresholds, features or metrics based on test performance.
   Use the same eligible users across methods within a group. Separate validation
   from final test reporting and include eligibility/exclusion, empty-profile,
   fallback and candidate-shortage counts. Label overlapping exclusion reasons.
-- Three final training seeds are agreed; exact values/uncertainty procedures and
-  other training choices remain unresolved. Conditional 60 GPU-hours/week must
+- Block 3 freezes seeds 42/2026/3407 across learned methods/groups. Record RNG
+  streams/workers, environment and reconstructable source provenance (not just
+  dirty flags). Fail first on unsupported determinism; explicitly approve/log
+  exceptions. Claim resumption only at boundaries independently verified.
+- Report all registered metrics per seed, mean ± sample SD, and fallback subgroups.
+  Bootstrap fixed seed-averaged per-user test metrics after validation-only selection:
+  10,000 shared paired-user resamples, seed 12345, 95% percentile intervals and
+  full-test-population point estimates. Do not bootstrap coverage per user or
+  conflate user/seed uncertainty. Predeclare contrast/metric lists before experiments;
+  unadjusted intervals are descriptive, empty populations N/A, failed seeds explicit.
+  No hidden population changes, seed replacement or favorable-result retries.
+- Other training choices remain unresolved. Conditional 60 GPU-hours/week must
   be verified as permitted/available; reserve roughly 20%. Profile full-ranking
   validation every epoch on Musical_Instruments first, then recheck larger
   categories. Freeze trial budgets/search spaces before comparative results;

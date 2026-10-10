@@ -54,8 +54,11 @@ and warm pools prevent attributing absolute score changes solely to the threshol
   targets are not relevant; do not replace them with earlier positive targets.
 - Report eligible rows/users after all exclusions. Unknown-user behavior and
   users with no positive training history are distinct cases. There are no unknown
-  users in the current files, but the >=4 condition has empty positive histories;
-  a common training-only fallback remains to be frozen before that runner is used.
+  users in the current files, but the >=4 condition has empty positive histories.
+  The agreed common fallback is evaluation/inference-only condition-positive
+  training popularity, with normal filters and separate non-personalized subgroup
+  reporting. It generates no synthetic training positives and injects no popularity
+  vector into a learned model; scoring failures remain failures.
 
 ## Supplementary cold-item evaluation: conditional, not currently implemented
 
@@ -119,7 +122,7 @@ No targets overlap filtered history in either validation or test.
 
 Empty-positive-history counts are over all holdout users, not necessarily just
 warm eligible users. Eligible counts above do not silently exclude empty-profile
-users; their fallback must be specified before evaluation. Relevant cold ratios,
+users; use the agreed evaluation-only popularity fallback, with subgroup reporting. Relevant cold ratios,
 validation counts, and cold counts over all rows are in the JSON report.
 
 ## Limits and split verification

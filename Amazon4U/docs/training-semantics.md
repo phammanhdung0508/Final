@@ -57,7 +57,44 @@ Configuration: `configs/training-semantics.json`.
    same training data, configuration and seed.
 6. Empty negative pools are detected without silently weakening the rules.
 
-## Agreed: training target-edge masking
+## Agreed: empty-positive-history evaluation/inference fallback
+
+This policy applies across methods to otherwise eligible users with no positive
+training history under the feedback condition (notably users with only <4 training
+ratings under >=4). It is **not a training-data augmentation policy**.
+
+- Training: generate no personalized positive examples or positive interaction
+  edges for that user. Do not fabricate positives, copy popular items into their
+  history, or promote low-rated observations into positives.
+- Evaluation/inference: route that user to condition-specific training-positive
+  popularity scores, then apply the standard warm candidate pool and all normal
+  history filters. Do not inspect held-out ratings to build popularity or profiles.
+- This is a non-personalized fallback route, not a popularity vector injected into
+  the model, a trained user representation or a personalized model prediction.
+- Keep eligible users in overall evaluation, but report subgroup counts and
+  registered metrics separately for fallback versus personalized routes. Include
+  the feedback condition and distinguish empty history from KG-only's additional
+  missing-metadata/unusable-weighted-channel fallback reasons.
+- Fallback eligibility is determined from training history, not from scoring
+  failures. Exceptions, corrupt profiles and non-finite model scores still fail.
+
+**Status:** user-approved across-method empty-positive-history policy; not yet
+implemented. The KG-only metadata-profile fallback remains a separate approved
+case. Unknown-user/cold-target handling is governed by the existing candidate
+protocol, not silently overridden here. This decision does not approve the
+remaining loss, optimizer, negative-pool action or seed settings.
+
+Required regression checks: no synthetic positives or encoder edges for these
+users; popularity uses condition-positive training data only; identical candidate/
+history filtering; no model input injection; route labels and subgroup reporting;
+no fallback on scoring failures; held-out mutations leave fallback inputs unchanged.
+
+## Agreed: training target-edge masking for heterogeneous KG + GNN
+
+**Scope amendment:** this section applies to the heterogeneous encoder. Core
+LightGCN now uses approved Option B: fixed-graph training-positive edge reuse,
+without batch target masks. See [LightGCN methodology](lightgcn-protocol.md).
+Held-out-edge exclusion and binary/rating-free inputs apply to both models.
 
 **Issue:** target-edge shortcut / target-edge leakage during training. Encoding
 an interaction while supervising its existence can provide a shortcut. This is
@@ -116,11 +153,69 @@ neighbor fanouts remain unresolved.
 5. Training masks are batch-scoped: they do not permanently erase permitted
    training history used by subsequent batches or evaluation.
 
+## Agreed: endpoint-only base-ID embedding regularization
+
+For BPR-MF, core LightGCN and heterogeneous KG + GNN, define sets from the valid
+supervised batch actually used in the update:
+
+- U_B: unique supervised user IDs.
+- I_B: the union of unique positive and negative item IDs.
+
+Use the same explicit penalty for all three learned methods:
+
+`L_reg = (1e-5 / (|U_B| + |I_B|))`
+`        * (sum(||e_u^(0)||_2^2 for u in U_B)`
+`           + sum(||e_i^(0)||_2^2 for i in I_B))`
+
+Here e^(0) is the **base learned ID row**, not a propagated representation. Count
+each typed ID once; user/item namespaces are distinct. Deduplicate items across
+positive/negative roles and across examples. Do not separately average each role,
+divide by embedding dimension, or insert an extra factor of one-half. This is a
+mean squared row norm, not a mean over individual scalar embedding entries.
+
+- Include only supervised endpoints, regardless of full-graph or sampled execution.
+- Exclude neighbor-only IDs and all Brand/Category rows. A neighbor that also is
+  a supervised user/item endpoint is included only because of that endpoint role.
+- Do not regularize the full LightGCN embedding table or GraphSAGE computation
+  neighborhood merely because those rows participate in propagation.
+- Transformation matrices and biases receive **zero explicit L2 and zero optimizer
+  weight decay**. Global optimizer weight decay must also be zero; the explicit
+  endpoint penalty must not be replaced by whole-table or decoupled weight decay.
+- Neighbor-only parameters may still receive ranking-loss gradients. This penalty
+  exclusion does not detach their representations or alter message passing.
+- No regularization-only update is created from a batch with no valid supervised
+  examples; empty-negative-pool handling remains a separate unresolved decision.
+
+**Status:** user-approved coefficient, scope and normalization; not implemented.
+This supersedes the ambiguous proposed “unique participating rows” definition.
+Its scope is independent of fanout/graph degree, although ranking-loss gradients
+and regularization effects can still vary with batching, data and sampling.
+Future tuning of transformation regularization requires an explicit registered
+search-space amendment. Optimizer type, ranking loss and other training settings
+are not finalized by agreeing its weight-decay constraint.
+
+Required tests before implementation acceptance:
+
+1. Hand-calculate the penalty for distinct user/item endpoints.
+2. Repeated endpoints and items appearing in both roles are counted once.
+3. Adding neighbor-only nodes or changing fanout does not change this penalty
+   when base endpoint rows are fixed.
+4. LightGCN uses layer-0/base IDs, not layer-averaged representations; the same
+   endpoint formula is applied across learned methods.
+5. Brand/Category/neighbor-only rows and transformation parameters receive no
+   gradient from this explicit penalty alone, while ranking gradients are allowed.
+6. Optimizer groups have zero weight decay and no hidden additional penalty;
+   empty invalid batches cannot produce a division-by-zero or synthetic update.
+
+**Rationale:** an endpoint-only definition gives 1e-5 a reproducible meaning
+without making regularization scope depend on sampled neighborhoods or the full
+propagation graph. Configuration: `configs/training-semantics.json`.
+
 ## Remaining choices — proposed, not approved
 
 The initial recommendation was BPR loss, uniform eligible-negative sampling,
-one negative per positive, Adam with constant learning rate 0.001, explicit
-embedding L2 coefficient 1e-5, maximum 100 epochs, validation every epoch,
+one negative per positive, Adam with constant learning rate 0.001,
+maximum 100 epochs, validation every epoch,
 early-stopping patience 10, and 1,024 positives per batch. These numbers and
 policies are **proposals only**, not a runnable frozen training configuration.
 The [compute and tuning plan](compute-and-tuning-plan.md) now records the agreed
@@ -129,10 +224,13 @@ keep it if practical, and register any necessary frequency amendment before
 comparative experiments. Patience is measured in validation checks; its numerical
 value and the final measured schedule are not frozen.
 
-Batch target-edge masking and binary, rating-free interaction encoder inputs
-are now agreed above. Neighbor-sampling details, architecture, fanouts, other
-node features, seeds, uncertainty, empty-profile fallback and resource/tuning
-budgets still require finalization. Three final training seeds are now agreed;
-exact values and uncertainty procedures remain pending. The conditional Kaggle
+Batch target-edge masking for heterogeneous KG + GNN and binary, rating-free
+interaction encoder inputs are agreed above. Core LightGCN's fixed-graph
+training-edge reuse is an explicit approved exception, not an unrecorded shortcut. Empty-positive-history fallback is now agreed above as evaluation/inference only.
+Sampling execution, fanouts and numerical resource/tuning budgets still require
+finalization; encoder specifications are in the model docs. Block 3 now freezes
+training seeds 42/2026/3407 and the reproducibility/uncertainty framework in
+[reproducibility](reproducibility-and-uncertainty.md). Register the exact bootstrap
+contrast/metric list before experiments; no test-based selection is allowed. The conditional Kaggle
 capacity plan and 20% contingency reserve are documented in the compute plan;
 2–3 tuning configurations is a planning range, not a frozen trial budget.

@@ -15,8 +15,9 @@ GPU is the initial platform recommendation; TPU compatibility is not established
 ## Agreed experiment-planning approach
 
 - Keep **three final training seeds** for each learned method/category/feedback
-  condition. Exact seed values, RNG-stream handling and uncertainty procedures
-  remain to be finalized separately.
+  condition: **42, 2026, 3407**. Block 3's RNG/provenance and conditional paired
+  bootstrap framework are agreed in [reproducibility](reproducibility-and-uncertainty.md).
+  The exact bootstrap contrast/metric list must still be registered before experiments.
 - Use a small, profiling-informed hyperparameter search. **2–3 configurations per
   learned method per category × condition** is the planning range, not a frozen
   numerical trial budget or permission to pick its size after observing results.
@@ -72,6 +73,7 @@ full-ranking validation and larger datasets may dominate costs. Prioritize final
 seed variability and fair, modest tuning rather than an unmeasured large search.
 
 **Status:** user-approved planning approach; quota permission/availability not
-verified, profiling not performed, and exact tuning/seed settings not frozen.
+verified, profiling not performed, and exact tuning budgets/search seed not frozen.
+Final training seeds are frozen in `configs/reproducibility.json`.
 No models have been trained. Configuration: `configs/compute-plan.json`.
 This decision does not remove the overall pre-training protocol gate.

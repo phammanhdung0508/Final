@@ -18,6 +18,8 @@
   "target_edge_masking": {
     "decision_status": "user_approved",
     "issue": "training_target_edge_shortcut_not_in_itself_validation_test_leakage",
+    "applies_to": ["Heterogeneous KG+GNN"],
+    "core_LightGCN_exception": "approved_Option_B_fixed_graph_training_edge_reuse_no_batch_target_masks",
     "design": "batch_supervised_positive_interaction_masking",
     "mask_scope": "union_of_batch_positive_pairs_forward_reverse_and_direct_duplicate_equivalents",
     "mask_timing": "before_or_during_neighbor_sampling_at_every_hop",
@@ -38,20 +40,73 @@
       "batch_masks_do_not_permanently_delete_training_history"
     ]
   },
+  "core_LightGCN_training_graph": {
+    "decision_status": "user_approved_Option_B",
+    "propagation": "exact_full_fixed_condition_positive_training_interaction_graph",
+    "batch_target_edge_masking": false,
+    "training_positive_supervision_edge_reuse": true,
+    "heldout_interaction_edges_in_encoder": false,
+    "rating_values_as_encoder_inputs": false,
+    "implementation_status": "pending_profiling_and_implementation",
+    "amendment_document": "docs/lightgcn-protocol.md"
+  },
+  "empty_positive_history_fallback": {
+    "decision_status": "user_approved",
+    "scope": "otherwise_eligible_users_across_methods_under_feedback_condition",
+    "training_personalized_positive_examples": "none",
+    "synthetic_training_positives": false,
+    "synthetic_positive_encoder_edges": false,
+    "application_stage": "evaluation_and_inference_only",
+    "score": "condition_specific_training_positive_popularity",
+    "candidate_and_history_filters": "standard_unchanged",
+    "inject_popularity_vector_into_model": false,
+    "prediction_route": "non_personalized_fallback_not_personalized_model_prediction",
+    "reporting": "counts_and_registered_subgroup_metrics_separate_from_personalized_route_and_overall_results",
+    "fallback_on_scoring_failure": false,
+    "heldout_data_used_to_build_scores": false,
+    "KG_only_missing_metadata_fallback": "separate_approved_reason",
+    "implementation_status": "documented_not_yet_implemented"
+  },
+  "regularization": {
+    "decision_status": "user_approved",
+    "applies_to": ["BPR-MF", "LightGCN", "Heterogeneous KG+GNN"],
+    "coefficient": 0.00001,
+    "embedding_source": "base_learned_ID_rows_not_propagated_representations",
+    "selection": "unique_supervised_batch_user_IDs_and_union_of_positive_negative_item_IDs",
+    "deduplication": "once_per_typed_ID_across_examples_and_item_roles",
+    "formula": "coefficient_times_sum_endpoint_squared_L2_row_norms_divided_by_unique_endpoint_row_count",
+    "normalization": "combined_user_item_row_count_not_per_role_or_scalar_element_count",
+    "divide_by_embedding_dimension": false,
+    "extra_one_half_factor": false,
+    "excluded": ["neighbor_only_IDs", "Brand_IDs", "CategoryPath_IDs", "propagated_embeddings"],
+    "transformation_and_bias_explicit_L2": 0,
+    "transformation_and_bias_weight_decay": 0,
+    "global_optimizer_weight_decay": 0,
+    "ranking_gradients_to_neighbor_parameters": "permitted_not_detached",
+    "no_valid_supervised_batch": "no_regularization_only_or_synthetic_update",
+    "future_transformation_penalty_tuning": "requires_explicit_registered_search_space_amendment",
+    "implementation_status": "documented_not_yet_implemented"
+  },
+  "reproducibility": {
+    "decision_status": "user_approved_framework_contrast_metric_plan_pending",
+    "training_seeds": [42, 2026, 3407],
+    "configuration": "configs/reproducibility.json",
+    "documentation": "docs/reproducibility-and-uncertainty.md",
+    "bootstrap_contrast_metric_plan": "must_finalize_before_experiments",
+    "implementation_status": "documented_not_yet_implemented"
+  },
   "pending_choices": [
     "loss",
     "negative_sampling_distribution",
     "number_of_negatives",
     "optimizer",
-    "regularization",
     "learning_rate_policy",
     "maximum_epochs",
     "validation_frequency",
     "early_stopping",
     "batch_size",
     "neighbor_sampling_and_architecture",
-    "seeds_and_uncertainty",
-    "empty_positive_history_fallback",
+    "bootstrap_comparison_metric_plan",
     "empty_negative_pool_action"
   ]
 }

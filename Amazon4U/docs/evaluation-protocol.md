@@ -68,14 +68,16 @@ measurements do not authorize selecting categories based on model performance.
 - Exclude held-out ratings/reviews from user/item features and text embeddings.
 - Never use a target review as an input to predict its own interaction or rating.
 - Stored ratings remain observations; interaction encoder edges are binary and
-  rating values are not encoder features. Training target-edge shortcut/leakage
-  is controlled by masking batch-supervised positive interaction pairs and their
-  direct forward/reverse/duplicate equivalents before or during neighbor sampling.
-  Preserve unrelated edges and valid remaining multi-hop metadata/KG paths. For
-  BPR if adopted, both scores use the same masked graph view; negative target
-  edges normally do not exist. This is a training shortcut safeguard, distinct
-  from validation/test leakage. See [training semantics](training-semantics.md)
-  for the agreed design and required regression checks.
+  rating values are not encoder features. The heterogeneous encoder controls
+  training target-edge shortcut/leakage by batch-positive masking, including
+  forward/reverse/duplicate equivalents before/during sampling while preserving
+  valid remaining KG paths. Both scores use that same masked view if BPR is adopted.
+  **Core LightGCN explicitly uses Option B:** fixed training-positive graph,
+  allowing supervised training edges in propagation without batch target masks.
+  Conventional training-edge reuse is not held-out leakage. Validation/test edges
+  remain excluded for both. See [training semantics](training-semantics.md) and
+  [LightGCN amendment](lightgcn-protocol.md). Comparisons differ in graph use as well
+  as architecture/metadata; do not attribute gains solely to metadata.
 - Cross-category history is a separate experiment. Include only allowed training
   events before the target timestamp across categories. Restrict embedding
   construction too; a filtered feature vector cannot fix future graph messages.
@@ -131,8 +133,13 @@ and review-derived-content/timing audits before use.
    users with fewer than K candidates. **>=4 training-negative eligibility is now
    agreed:** sample only from that condition's warm pool, excluding all of the
    user's training-rated items, not just positives; never inspect held-out data.
-   Distribution, number of negatives, empty-pool action and empty-profile fallback
-   remain pending. See [training semantics](training-semantics.md), its configuration
+   Distribution, number of negatives and empty-pool action remain pending.
+   KG-only's no-usable-positive-weight-profile fallback is now agreed as
+   condition-positive training popularity, with normal filters and subgroup
+   reporting. Empty-positive-history fallback is now agreed across methods:
+   no synthetic training positives; evaluation/inference-only popularity scoring,
+   normal filters, separate non-personalized route counts/metrics, and no model
+   input injection or scoring-failure fallback. See [training semantics](training-semantics.md), its configuration
    and the linked candidate protocol; the sampler is not implemented yet.
 6. Final approved feature/relation list and per-field coverage.
 7. Category-only and optional cross-category experiments, including a concrete
@@ -149,12 +156,30 @@ and review-derived-content/timing audits before use.
    2-layer 64d learned-ID heterogeneous GraphSAGE-style/dot product; KG-only
    training-warm IDF/cosine without rating weighting or popularity bonus.
    KG-only uses ordered mixtures 1/0, 0.75/0.25, 0.5/0.5 selected by validation
-   NDCG@10 per category/condition, with first-entry tie-breaking. Exact profile/
-   missing-channel formulas, aggregation and initialization distribution remain
-   pending. Profile LightGCN exact propagation and GraphSAGE batch size/fanout;
-   do not waive masking or silently substitute sampled LightGCN. Remaining
+   NDCG@10 per category/condition, with first-entry tie-breaking. Exact KG-only
+   IDF/profile/missing-channel formulas and whole-user fallback are now agreed in
+   [KG-only scoring](kg-only-scoring.md); implementation/tests are still pending.
+   Exact [heterogeneous encoder](heterogeneous-encoder.md) aggregation, inverses,
+   activations and initialization are now agreed; implementation/tests are pending.
+   Use dedicated relation/layer transforms, one node-type self term, means within
+   relations and across active relations, ReLU then identity, Normal(0,0.1²) IDs,
+   Xavier-uniform gain-1 matrices and zero biases; no dropout/normalization.
+   LightGCN methodology is now explicitly Option B: fixed training-positive graph
+   with training-edge reuse and no batch target masks. Profile exact propagation
+   and GraphSAGE batch size/fanout; heterogeneous masking remains unchanged.
+   Do not silently substitute masked/sampled LightGCN variants. Remaining
    training settings and exact budgets are not approved by this block.
-   Three final training seeds are agreed; exact values/uncertainty remain pending.
+   A separate regularization decision is now agreed: 1e-5 times mean squared L2
+   row norm over unique supervised base user/item endpoint IDs only. Exclude
+   neighbor-only/Brand/Category rows; transformation/bias/global weight decay is
+   zero. See [training semantics](training-semantics.md) for exact normalization.
+   **Block 3 agreed:** final seeds 42/2026/3407 across all learned methods/groups;
+   full provenance/determinism/resumption rules; mean ± sample SD; paired-user
+   bootstrap on seed-averaged fixed test metrics (10,000 replicates, seed 12345,
+   95% percentile intervals), exclusively post-selection. See
+   [reproducibility](reproducibility-and-uncertainty.md) and `configs/reproducibility.json`.
+   Predeclare exact bootstrap contrasts/metrics before experiments; no total-
+   uncertainty or multiplicity-controlled significance claim.
    The [compute and tuning plan](compute-and-tuning-plan.md) records conditional
    Kaggle capacity, a 20% reserve and a 2–3-configuration planning range. Profile
    Musical_Instruments before freezing trial counts/search spaces; no comparative
@@ -165,7 +190,8 @@ and review-derived-content/timing audits before use.
    metadata vocabulary, training-only preprocessing and no cold ID embeddings.
    No such model/runner is currently implemented, so no cold performance is claimed.
    Audit unknown users (verified zero here) separately from empty positive-history
-   users (nonzero under >=4). Freeze their training-only fallback before evaluation.
+   users (nonzero under >=4). Their agreed training-derived popularity fallback
+   is evaluation/inference-only, not synthetic training data; report it separately.
 10. Split-boundary timestamp ties (44/17/6 users across the three categories):
     retain publisher assignments and document tie semantics, or register a
     different protocol. No cross-category fitted representations are currently
@@ -225,9 +251,13 @@ For each group:
    histories and fallback usage; users with fewer than K candidates. If exclusion
    reasons overlap, label reason counts as overlapping and report the distinct
    excluded total separately (or register an explicit exclusion order).
-4. Multi-seed results and uncertainty once their procedure is finalized. Do not
-   invent intervals for single runs or treat paired user bootstraps as substitutes
-   for training-seed variability.
+4. Report all registered metrics per seed and mean ± sample SD under the agreed
+   Block 3 protocol; deterministic methods run once. Bootstrap fixed seed-averaged
+   per-user ranking metrics only after validation-only selection; use shared user
+   resamples and full-population point estimates. Coverage is reported per seed,
+   not per-user bootstrapped. Distinguish conditional user uncertainty from seed
+   variability, partial failed-seed results, fallback subgroups and N/A empty
+   populations. Finalize the exact bootstrap contrast/metric list before experiments.
 
 A sensitivity summary compares KG + GNN against each baseline **within each
 group**, noting whether improvements occur in both feedback conditions. Absolute
@@ -238,7 +268,7 @@ condition or assume KG + GNN will win.
 **Rationale:** NDCG rewards placing the held-out target near the top; HitRate gives
 an interpretable retrieval-success rate; coverage measures recommendation breadth.
 Fixed supplementary cutoffs test ranking robustness without choosing K after results.
-The remaining fallback, seed/uncertainty, tuning-budget and model decisions still
+The remaining bootstrap contrast/metric plan, tuning-budget and training-execution decisions still
 block training despite this section being frozen.
 
 ## Freeze and amendments
