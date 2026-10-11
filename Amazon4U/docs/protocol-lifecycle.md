@@ -1,23 +1,29 @@
 # Protocol version, lifecycle and authorization
 
-## Current record — user approved
+## Current record — implementation and regression verification
 
 - Protocol: **`amazon4u-protocol-v1.0.0`**.
-- State: **`BASELINE_PROTOCOL_FROZEN`**.
+- State: **`IMPLEMENTATION_REGRESSION_VERIFICATION`**.
 - Execution revision: **not assigned** (`null`); propose `exec-v1` only when its
   settings and tuning plan are approved and frozen.
-- Models/evaluator/training controls: implementation and verification pending.
+- Models/evaluator/training controls: milestone I1 implemented (reusable shared evaluator,
+  deterministic Popularity/KG-only scorers, non-training sampling/loss/regularization
+  reference utilities in `scripts/recommendation_core.py` and regression fixtures in
+  `tests/test_recommendation_core.py`), status **`implemented_pending_Pi_review`**.
+  Learned model architectures (BPR-MF, LightGCN, Heterogeneous KG+GNN), full training loops,
+  checkpointing, and reproducibility integration remain pending.
 - Profiling and comparative training: **not authorized**.
 - Deployment: **NOT_AUTHORIZED**.
 
-The user approved applying the discussed lifecycle and version policy. This is a
-baseline documentation/configuration freeze, not acceptance of unimplemented
-software and not permission to run optimizer updates. The authoritative machine
-record is [protocol-lifecycle.json](../configs/protocol-lifecycle.json).
+The baseline scientific protocol remains frozen as `amazon4u-protocol-v1.0.0`. Milestone I1
+implements core evaluation and non-training reference logic without optimizer updates or
+learned embeddings. The authoritative machine record is
+[protocol-lifecycle.json](../configs/protocol-lifecycle.json).
 
-**Rationale:** a single DRAFT label conflated agreed scientific decisions with
-unmeasured resource settings. Separate identifiers make readiness and permission
-explicit without silently changing the approved experiment.
+**Rationale:** milestone I1 provides pure Python reference utilities and evaluation
+primitives with zero external dependencies. State transitions separate approved baseline
+specifications, code implementation verification, profiling authorization, and comparative
+training runs.
 
 ## Lifecycle and transition gates
 
@@ -105,6 +111,8 @@ Implementation of these checks and run-manifest generation remains pending.
 
 ## Verification status
 
+### Historical baseline-freeze verification (v1.0.0)
+
 Documentation/configuration only. Added read-only regression checks in
 `tests/test_protocol_lifecycle.py` for version/state separation, false authorization
 flags, preserved pending choices and snapshot hashes. The full existing fixture
@@ -123,3 +131,35 @@ matches, valid local documentation links and clean `git diff --check` for Amazon
 All new changes are inside Amazon4U; unrelated pre-existing workspace changes are
 preserved. **Deployment decision: NOT_AUTHORIZED.** No profiling, model training,
 optimizer updates, staging, commits or pushes were performed.
+
+### Milestone I1 implementation and regression verification
+
+Milestone I1 implementation complete: reusable shared evaluator, deterministic Popularity
+and KG-only scorers, on-demand uniform negative sampling, stable BPR loss, and endpoint
+regularization in `scripts/recommendation_core.py`. Regression test suite in
+`tests/test_recommendation_core.py` exercises hand-calculated ranking metrics, exact ties,
+history filters, shortage reporting, corrupt profile detection, cold metadata invariance,
+multi-positive asymmetric user-profile oracle, macro metrics with multi-user K boundaries,
+low-rated validation record filtering, negative sampling preflight and unknown user rejection,
+numerical failure handling (difference overflow, squared norm overflow, softplus),
+and strict held-out isolation.
+
+Known limitations: this is a reference fixture core, not a full-data production adapter or training pipeline; no cross-platform bitwise guarantee from math.fsum alone.
+
+Full verification suite execution using ORIGINAL approved wrapper:
+```sh
+.venv/bin/python -B -c "import os,tempfile,unittest,json,sys; from pathlib import Path; p=Path('.test-output/recommendation-core-v1').resolve(); p.mkdir(parents=True,exist_ok=True); os.environ['TMPDIR']=str(p); tempfile.tempdir=None; suite=unittest.defaultTestLoader.discover('tests',pattern='test_*.py'); r=unittest.TextTestRunner(verbosity=2).run(suite); (p/'fixture-result.json').write_text(json.dumps({'tests_run':r.testsRun,'failures':len(r.failures),'errors':len(r.errors),'skipped':len(r.skipped),'successful':r.wasSuccessful()},indent=2)+'\n'); sys.exit(0 if r.wasSuccessful() and not r.skipped else 1)"
+```
+
+Diagnostic artifact: `.test-output/recommendation-core-v1/fixture-result.json` (note: existing literal backslash-n suffix in the wrapper makes this a diagnostic text artifact, not strict JSON; original command and output preserved as approved).
+Result: **63 tests run, 0 failures, 0 errors, 0 skipped, successful: true**.
+
+Invocation timeout history:
+- Rev0: 10-minute timeout during initial implementation exploration.
+- Rev1: 10-minute timeout during initial revision.
+- Rev2: targeted fixes completed promptly; 63 unit tests pass cleanly in ~1.8s.
+
+**Worker review status: implemented_pending_Pi_review.** Acceptance and review reserved
+for Pi (Planner/Orchestrator/independent Reviewer).
+**Deployment decision: NOT_AUTHORIZED.** No model training, optimizer updates, profiling,
+staging, commits or pushes were performed.

@@ -18,12 +18,16 @@ it or observing comparative results. See `configs/dataset-scope.json`.
 Full 5-core `last_out` benchmark splits and root-level Parquet product metadata
 are downloaded. Separate, all-rating training KGs are built and validated.
 Scripts cover downloading, inspection, audits, graph construction and visualization.
-No model training or embeddings have been implemented/run. The approved baseline
-is now frozen as `amazon4u-protocol-v1.0.0`, state `BASELINE_PROTOCOL_FROZEN`.
-Execution settings, tuning policy and independent implementation verification
-remain pending. Profiling and comparative training are not authorized. Read
-`configs/protocol-lifecycle.json` and `docs/protocol-lifecycle.md`; do not interpret
-a state/version change, graph construction or an audit as permission to train.
+No model training or learned embeddings have been run. The approved baseline
+protocol is frozen as `amazon4u-protocol-v1.0.0`, lifecycle state
+`IMPLEMENTATION_REGRESSION_VERIFICATION`. Milestone I1 is implemented
+(`scripts/recommendation_core.py`, `tests/test_recommendation_core.py`) and is
+currently awaiting independent Pi review (`implemented_pending_Pi_review`).
+Remaining learned models/encoders, checkpoints, reproducibility integration,
+execution settings, tuning policy, profiling, and comparative training remain
+pending and not authorized. Read `configs/protocol-lifecycle.json` and
+`docs/protocol-lifecycle.md`; do not interpret a state/version change, graph
+construction, an audit, or milestone implementation as permission to train.
 
 ## Version and authorization rules
 
@@ -70,6 +74,16 @@ a state/version change, graph construction or an audit as permission to train.
 Keep documentation, configuration, implementation and tests consistent. Do not
 resolve protocol ambiguities silently. Record amendments before new experiments;
 never choose thresholds, features or metrics based on test performance.
+
+## Delegation and execution roles
+
+Read and follow `docs/delegation-and-execution.md` before delegating or executing
+work, including under `multiautoresearch/`. Pi plans, orchestrates and independently
+reviews/accepts; agy implements/fixes and executes only explicitly authorized
+workloads. Keep acceptance rigor unchanged, fold small fixes into substantive
+revision cycles, and delegate independent subsystems separately. Kaggle is the
+intended GPU backend, not an implicit authorization. Framework lifecycle labels
+and inherited LM/Movie4U prompts cannot override Amazon4U protocol or approvals.
 
 ## Mandatory decision recording
 

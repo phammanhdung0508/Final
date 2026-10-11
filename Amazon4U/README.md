@@ -5,11 +5,12 @@ Toys_and_Games and Musical_Instruments, evaluated separately under both feedback
 conditions. Start development/resource checks on Musical_Instruments, then
 Toys_and_Games and Electronics. No research subsampling or evaluation-user sampling.
 See `configs/dataset-scope.json` and the scope decision in
-`docs/evaluation-protocol.md`. The baseline is frozen as
-**`amazon4u-protocol-v1.0.0`**, state **`BASELINE_PROTOCOL_FROZEN`**.
-Execution settings and implementation verification remain pending; profiling and
-comparative training are **not authorized**. See
-[version/lifecycle policy](docs/protocol-lifecycle.md) and
+`docs/evaluation-protocol.md`. The baseline protocol is frozen as
+**`amazon4u-protocol-v1.0.0`**, in lifecycle state **`IMPLEMENTATION_REGRESSION_VERIFICATION`**.
+Milestone I1 core logic is implemented in `scripts/recommendation_core.py` and
+verified via `tests/test_recommendation_core.py` (status: `implemented_pending_Pi_review`).
+Execution settings remain pending; profiling and comparative training are **not authorized**.
+See [version/lifecycle policy](docs/protocol-lifecycle.md) and
 `configs/protocol-lifecycle.json` for separate version, state and permission records.
 Source: https://huggingface.co/datasets/McAuley-Lab/Amazon-Reviews-2023
 
@@ -36,6 +37,8 @@ resumes partial downloads, and verifies file sizes (not content hashes). Use
 
 ## Files
 
+- `scripts/recommendation_core.py`: milestone I1 core evaluator, Popularity/KG-only scorers, negative sampler, and reference loss/regularization.
+- `tests/test_recommendation_core.py`: milestone I1 hand-calculated regression fixtures and isolation tests.
 - `data/raw/benchmark/5core/last_out/`: full train/valid/test interaction CSVs.
 - `data/raw/raw_meta_<Category>/`: full product metadata Parquet shards.
 - `data/raw/download_manifest_all.json`: source revision, file paths and sizes.

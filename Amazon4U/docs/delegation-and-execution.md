@@ -1,0 +1,82 @@
+# Delegation and execution agreement
+
+## Status and scope
+
+User-agreed operating roles and delegation rules for Amazon4U, recorded from
+our discussion. Applies to Pi and agy, including work under `multiautoresearch/`.
+This document records workflow decisions, not implementation acceptance or
+permission to launch experiments. Preserve the frozen scientific protocol and
+consult `protocol-lifecycle.md` for authorization gates.
+
+## Roles
+
+- **Pi = planner + orchestrator + independent reviewer.** Pi defines coherent
+  task scope, original acceptance criteria, approved verification commands and
+  revision limits; reviews actual code, callers, dependencies, tests and evidence;
+  independently verifies results; and retains ACCEPT/REVISE/ESCALATE authority.
+- **agy = implementation and explicitly authorized execution worker.** agy
+  implements code, fixtures and related documentation in the pinned isolated
+  worktree, and fixes consolidated Pi review findings within the revision limit.
+  Worker reports are untrusted submissions, not independent acceptance.
+- After explicit execution authorization, agy may submit only the specified
+  Kaggle job, monitor it and collect logs, metrics, checkpoints and provenance.
+  Pi reviews the evidence and decides the next step.
+- agy cannot independently change the protocol, expand scope or budgets, tune
+  on test data, promote models, deploy, launch subagents or start another research
+  cycle. Neither agent stages, commits or pushes without explicit user request.
+
+## Delegation principles
+
+1. Never lower acceptance criteria solely to save tokens.
+2. Do not delegate tiny few-line changes separately; incorporate small fixes in
+   an existing substantive task's revision cycle.
+3. Do not bundle independently implementable/verifiable subsystems into one task.
+
+Use one coherent subsystem with its fixtures and relevant documentation per
+substantive task. Consolidate review findings and correction feedback. Save
+context through targeted evidence navigation, never incomplete review:
+diff-first is not diff-only. Exhausted revisions or incomplete mandatory evidence
+require escalation, not a fabricated completion or automatic replacement task.
+
+## Operating loop
+
+1. Pi plans and predeclares scope, criteria, commands, permitted outputs and limits.
+2. agy implements the scoped deliverable in an isolated worktree.
+3. Pi inspects actual changes and independently runs approved original checks.
+4. agy addresses consolidated findings within the declared revision limit.
+5. Pi records acceptance or escalation, with explicit acceptance scope and
+   separate deployment decision.
+6. Only after a separate explicit execution approval, agy runs the authorized
+   Kaggle workload and returns complete artifacts and evidence.
+7. Pi reviews results before proposing any further work.
+
+Task/benchmark ACCEPT never implies deployment approval. Where deployment or
+held-out generalization evaluation matters, predeclare its policy before task
+submission; complete mandatory evaluation before final acceptance. No automatic
+revision or retuning after held-out exposure. Without a predeclared deployment
+policy, deployment is NOT_AUTHORIZED.
+
+## Lifecycle structure and execution backend
+
+We intend to adapt `multiautoresearch`'s pre-training, post-training and inference
+separation and Kaggle orchestration rather than duplicate its control plane.
+Kaggle is the intended GPU execution backend; local activity focuses on planning,
+implementation, review and authorized synthetic regression verification.
+
+Exact Amazon-specific stage mappings and runner adaptation remain to be agreed
+and implemented. Optional self-supervised KG pre-training is not part of the
+frozen baseline. BPR models trained from scratch must not be mislabeled as
+fine-tuning. Lifecycle directory names do not grant execution permission.
+
+Existing LM/Movie4U runners, metrics and agent prompts are not authoritative for
+Amazon4U. Verify the actual Kaggle runner and reconcile conflicting instructions
+before using them; preserve the original framework context rather than silently
+claiming it has already been adapted.
+
+## Authorization unchanged
+
+This record does not authorize profiling, model training, optimizer updates,
+real-data experiments, deployment, framework changes or new worker invocations.
+Those require their respective scoped approvals and prerequisite verification.
+Prior escalated implementation tasks remain unaccepted; no historical decision
+is superseded by this workflow agreement.
