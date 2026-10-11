@@ -29,5 +29,7 @@
   "durable_resumable_checkpoints": true,
   "full_dataset_and_full_ranking_preserved": true,
   "profiling_status": "not_performed",
+  "profiling_authorized": false,
+  "lifecycle_reference": "configs/protocol-lifecycle.json",
   "training_authorized": false
 }

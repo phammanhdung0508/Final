@@ -1,0 +1,136 @@
+{
+  "suite_version": "model-suite-v1",
+  "core_membership_status": "user_approved_before_training",
+  "core_models": [
+    "Popularity",
+    "BPR-MF",
+    "LightGCN",
+    "KG-only",
+    "Heterogeneous KG+GNN"
+  ],
+  "optional_comparisons": [
+    {
+      "name": "BPR-MF + metadata",
+      "purpose": "feature_augmentation_comparison_not_clean_KG_GNN_ablation",
+      "required": false,
+      "runnable_configuration_status": "not_finalized"
+    },
+    {
+      "name": "Matched KG+GNN without metadata relations",
+      "purpose": "recommended_architecture_matched_metadata_ablation",
+      "required": false,
+      "runnable_configuration_status": "not_finalized"
+    }
+  ],
+  "block_1_status": "user_approved_architecture_scoring_implementation_pending",
+  "model_specifications": {
+    "Popularity": {
+      "score": "count_condition_positive_training_interactions_per_item"
+    },
+    "BPR-MF": {
+      "embedding_dimension": 64,
+      "inputs": "learned_user_item_ID_embeddings",
+      "decoder": "dot_product"
+    },
+    "LightGCN": {
+      "embedding_dimension": 64,
+      "propagation_layers": 3,
+      "layer_combination": "arithmetic_mean_layers_0_through_3",
+      "decoder": "dot_product",
+      "methodology_status": "user_approved_Option_B_standard_fixed_graph",
+      "methodology_document": "docs/lightgcn-protocol.md",
+      "propagation_graph": "fixed_all_condition_positive_training_interactions_and_reverses",
+      "normalization": "standard_symmetric_training_degree_normalization",
+      "training_positive_edges_used_for_supervision": "permitted_in_propagation_graph",
+      "heldout_interaction_edges": "excluded_in_all_directions",
+      "exact_propagation_implementation": "pending_profiling_not_methodology_selection",
+      "target_masking": false,
+      "masked_Option_A": "optional_target_edge_masked_LightGCN_variant_not_core",
+      "sampled_propagation": "requires_explicit_amendment_and_sampled_LightGCN_variant_label"
+    },
+    "KG-only": {
+      "profiles": "training_warm_IDF_weighted_category_paths_and_brands",
+      "similarity": "cosine",
+      "rating_weights": false,
+      "popularity_bonus": false,
+      "ordered_category_brand_weight_grid": [[1.0, 0.0], [0.75, 0.25], [0.5, 0.5]],
+      "selection_group": "category_x_feedback_condition",
+      "selection_metric": "validation_NDCG@10_only",
+      "exact_selection_ties": "first_grid_entry_in_predeclared_order",
+      "trial_invariants": ["IDF_formula", "profile_construction", "missing_channel_handling", "candidate_rules"],
+      "scoring_specification_status": "user_approved_not_yet_implemented",
+      "scoring_specification_document": "docs/kg-only-scoring.md",
+      "IDF": {
+        "formula": "1 + ln((N + 1) / (df + 1))",
+        "logarithm": "natural",
+        "N": "all_condition_training_warm_products_including_missing_channels",
+        "df": "distinct_warm_products_containing_attribute_once_per_product",
+        "channels": "separate_category_path_and_brand_vocabularies"
+      },
+      "product_profile": "IDF_weighted_binary_attribute_presence_L2_normalized_per_channel_zero_if_absent",
+      "category_attributes": "all_observed_KG_v1_category_path_prefix_IDs",
+      "brand_attributes": "explicit_approved_KG_v1_Brand_IDs",
+      "user_profile": "L2_normalized_sum_of_normalized_product_channel_vectors_over_distinct_condition_positive_training_items",
+      "missing_channel_cosine": 0,
+      "score_formula": "alpha_times_category_cosine_plus_beta_times_brand_cosine",
+      "per_item_weight_renormalization": false,
+      "whole_user_fallback": {
+        "trigger": "no_nonzero_user_channel_with_strictly_positive_mixture_weight",
+        "score": "condition_positive_training_interaction_count_per_candidate_item",
+        "same_candidate_and_history_filters": true,
+        "report": "counts_reasons_and_subgroup_metrics_per_trial_and_selected_configuration",
+        "per_item_fallback": false,
+        "scoring_failure_fallback": false,
+        "application_stage": "evaluation_and_inference_only_no_synthetic_training_positives",
+        "scope": "KG_only_unusable_metadata_profiles_plus_shared_empty_positive_history_policy",
+        "route_label": "non_personalized_fallback_no_model_input_injection"
+      },
+      "tuning_claim": "limited_validation_grid_not_exhaustive_optimization"
+    },
+    "Heterogeneous KG+GNN": {
+      "encoder": "heterogeneous_GraphSAGE_style",
+      "layers": 2,
+      "embedding_dimension": 64,
+      "inputs": "learned_node_ID_embeddings",
+      "encoder_specification_status": "user_approved_not_yet_implemented",
+      "encoder_specification_document": "docs/heterogeneous-encoder.md",
+      "directed_relations": [
+        ["User", "rated", "Product"],
+        ["Product", "rated_by", "User"],
+        ["Product", "belongs_to", "CategoryPath"],
+        ["CategoryPath", "contains_product", "Product"],
+        ["Product", "has_brand", "Brand"],
+        ["Brand", "brand_of", "Product"],
+        ["CategoryPath", "category_child_of", "CategoryPath"],
+        ["CategoryPath", "category_parent_of", "CategoryPath"]
+      ],
+      "relation_transformations": "independent_64x64_per_directed_relation_per_layer_no_message_bias",
+      "self_transformations": "independent_64x64_plus_64_bias_per_node_type_per_layer_applied_once",
+      "within_relation_aggregation": "mean_incoming_permitted_neighbor_representations_then_relation_transform",
+      "cross_relation_aggregation": "unweighted_mean_over_active_incoming_relation_types",
+      "active_relations": "nonempty_permitted_neighbors_in_current_masked_adjacency",
+      "no_active_relations": "zero_neighbor_contribution_self_term_retained",
+      "learned_relation_mixing": false,
+      "extra_self_loop_messages": false,
+      "activations": ["ReLU", "identity"],
+      "dropout": 0,
+      "layer_normalization": false,
+      "output_L2_normalization": false,
+      "initialization": {
+        "learned_node_ID_embeddings": {"distribution": "normal", "mean": 0, "std": 0.1},
+        "relation_and_self_matrices": {"distribution": "xavier_uniform", "gain": 1},
+        "self_biases": 0
+      },
+      "inverse_edge_source": "permitted_training_forward_edges_only",
+      "sampled_aggregation_if_adopted": "approximate_within_relation_mean_without_silently_dropping_active_relations",
+      "decoder": "dot_product",
+      "batch_size": "pending_profiling",
+      "neighbor_fanout": "pending_profiling"
+    }
+  },
+  "interaction_encoder_edges": "binary_no_rating_value_features",
+  "learned_ID_encoder_claim": "transductive_no_inductive_cold_start_claim",
+  "remaining_training_hyperparameters_status": "Block_2_recipe_approved_profile_execution_MF_LightGCN_initialization_and_tuning_budget_pending",
+  "implementation_status": "documented_not_yet_implemented",
+  "training_authorized": false
+}

@@ -1,0 +1,112 @@
+{
+  "manifest_schema_version": "baseline-manifest-v1",
+  "protocol_version": "amazon4u-protocol-v1.0.0",
+  "lifecycle_at_freeze": "BASELINE_PROTOCOL_FROZEN",
+  "execution_revision": null,
+  "source_git_revision": "03866b37a986a7ac791107ecd6a68423bff42be1",
+  "source_state": "local_uncommitted_freeze_snapshot_not_a_new_commit",
+  "profiling_authorized_by_freeze": false,
+  "training_authorized_by_freeze": false,
+  "deployment_decision": "NOT_AUTHORIZED",
+  "heldout_model_results_exposed": false,
+  "prior_split_metadata_audits_already_performed": true,
+  "hash_algorithm": "SHA-256",
+  "files": [
+    {
+      "source_path": "configs/dataset-scope.json",
+      "snapshot_path": "snapshot/configs/dataset-scope.json",
+      "bytes": 1049,
+      "sha256": "0180eaba9c4431cd8a5765b873e49dfe1f4169eb7c0a95698cc3a021cf387e01"
+    },
+    {
+      "source_path": "configs/evaluation-metrics.json",
+      "snapshot_path": "snapshot/configs/evaluation-metrics.json",
+      "bytes": 1333,
+      "sha256": "1a490fd7cb5b406e6ec204bcd8e79d0d3413aaf466e6e9727cd9bd59bd2db188"
+    },
+    {
+      "source_path": "configs/model-suite.json",
+      "snapshot_path": "snapshot/configs/model-suite.json",
+      "bytes": 6812,
+      "sha256": "82ef4bcdad4e88ef4aaaac2eaba2cc21428b8f485257376f999ef7f785752f8e"
+    },
+    {
+      "source_path": "configs/training-semantics.json",
+      "snapshot_path": "snapshot/configs/training-semantics.json",
+      "bytes": 7398,
+      "sha256": "b2a6470780eb5ec8eea588374058b49c55d1f2c636d86f2acd742e1dcdccebd4"
+    },
+    {
+      "source_path": "configs/reproducibility.json",
+      "snapshot_path": "snapshot/configs/reproducibility.json",
+      "bytes": 5060,
+      "sha256": "8d8a43518d20aa1a97adabbf6af147fe99c71247a6ecf6ad1bb8c0f50346042a"
+    },
+    {
+      "source_path": "configs/kg-v1.json",
+      "snapshot_path": "snapshot/configs/kg-v1.json",
+      "bytes": 1380,
+      "sha256": "6f3317ce4873c8c26771a2dc6e5959691bab7a9cc25ac71d20ad6db11baf593e"
+    },
+    {
+      "source_path": "docs/evaluation-protocol.md",
+      "snapshot_path": "snapshot/docs/evaluation-protocol.md",
+      "bytes": 21000,
+      "sha256": "ca3dc6126d9859c5b5f49edc03ab325f0afd87a24d0b46dc6f89db234898b124"
+    },
+    {
+      "source_path": "docs/training-semantics.md",
+      "snapshot_path": "snapshot/docs/training-semantics.md",
+      "bytes": 16369,
+      "sha256": "cc3951a9190dc2e8f9da113df409bb965e2b48bf808a3769681fba5ef4e849fc"
+    },
+    {
+      "source_path": "docs/candidates-and-cold-start.md",
+      "snapshot_path": "snapshot/docs/candidates-and-cold-start.md",
+      "bytes": 8820,
+      "sha256": "543bf043358e25921790038c1ca453d56d0edd71b27ec38b94c5f3399e6c179d"
+    },
+    {
+      "source_path": "docs/models-and-baselines.md",
+      "snapshot_path": "snapshot/docs/models-and-baselines.md",
+      "bytes": 9774,
+      "sha256": "4b28862ff72e8f0bdfb26d709f16b05e989e380c3acff9efbb810f35f0f4b25d"
+    },
+    {
+      "source_path": "docs/kg-only-scoring.md",
+      "snapshot_path": "snapshot/docs/kg-only-scoring.md",
+      "bytes": 7047,
+      "sha256": "9c71ce368f514763e2b646c89feedbce00a516ec6cdb1993c295ec73d3f62355"
+    },
+    {
+      "source_path": "docs/heterogeneous-encoder.md",
+      "snapshot_path": "snapshot/docs/heterogeneous-encoder.md",
+      "bytes": 6910,
+      "sha256": "4e7c5fae14fa6a9fb6113d3a93d4d9d05aaf639e11022539356c977945889193"
+    },
+    {
+      "source_path": "docs/lightgcn-protocol.md",
+      "snapshot_path": "snapshot/docs/lightgcn-protocol.md",
+      "bytes": 4595,
+      "sha256": "88006a083b2afea8e2730fddd0886fa48e13f9e14d9bf9903fab793ae6e06f09"
+    },
+    {
+      "source_path": "docs/reproducibility-and-uncertainty.md",
+      "snapshot_path": "snapshot/docs/reproducibility-and-uncertainty.md",
+      "bytes": 10832,
+      "sha256": "0b6e1112aac7783afaf8dfd8ab4aa8435ad1d11ba80beade0a4a94ade5ee2c4c"
+    },
+    {
+      "source_path": "docs/kg-schema.md",
+      "snapshot_path": "snapshot/docs/kg-schema.md",
+      "bytes": 5638,
+      "sha256": "8697c793d437ca548743cb8d43186fd526853bc4dc700585a87ef4288c8b6b6c"
+    },
+    {
+      "source_path": "docs/kg-input-audit.md",
+      "snapshot_path": "snapshot/docs/kg-input-audit.md",
+      "bytes": 4474,
+      "sha256": "e9def51297aad6f4781ba6be1c21993b6409e08dd6bbe82ffe8428dc82190c1b"
+    }
+  ]
+}

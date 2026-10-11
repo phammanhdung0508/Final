@@ -18,9 +18,30 @@ it or observing comparative results. See `configs/dataset-scope.json`.
 Full 5-core `last_out` benchmark splits and root-level Parquet product metadata
 are downloaded. Separate, all-rating training KGs are built and validated.
 Scripts cover downloading, inspection, audits, graph construction and visualization.
-No model training or embeddings have been implemented/run. Training is blocked
-until the remaining evaluation decisions are frozen; do not interpret graph
-construction or a metadata audit as authorization to train.
+No model training or embeddings have been implemented/run. The approved baseline
+is now frozen as `amazon4u-protocol-v1.0.0`, state `BASELINE_PROTOCOL_FROZEN`.
+Execution settings, tuning policy and independent implementation verification
+remain pending. Profiling and comparative training are not authorized. Read
+`configs/protocol-lifecycle.json` and `docs/protocol-lifecycle.md`; do not interpret
+a state/version change, graph construction or an audit as permission to train.
+
+## Version and authorization rules
+
+- Protocol version, lifecycle state and execution revision are separate identifiers.
+  Component/schema versions are not the global experiment version.
+- Preserve frozen snapshots/manifests under `configs/protocols/`; append amendments
+  with approval, rationale, changed rules and held-out exposure. Never overwrite
+  earlier baselines to match later code/configs.
+- Major bumps cover split/scope/relevance/candidate/core-comparison changes; minor
+  bumps cover substantive methodological amendments/additions; patches are
+  behavior-preserving clarifications. State changes alone do not bump versions.
+- Bounded profiling needs explicit scope, limits, provisional settings, optimizer
+  permission and fresh outputs, after prerequisite regression review. No test model
+  evaluation or performance-driven tuning during profiling.
+- Before comparative runs, freeze pending initialization/execution/tuning settings,
+  verify implementation and record explicit training authorization. Run artifacts
+  must include baseline/execution identifiers and hashes, authorization and complete
+  code/data/config provenance. Deployment remains separately NOT_AUTHORIZED.
 
 ## Read before changing the pipeline
 

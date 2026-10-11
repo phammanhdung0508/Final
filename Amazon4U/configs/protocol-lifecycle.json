@@ -1,0 +1,56 @@
+{
+  "schema_version": "protocol-lifecycle-v1",
+  "protocol_version": "amazon4u-protocol-v1.0.0",
+  "lifecycle_state": "BASELINE_PROTOCOL_FROZEN",
+  "decision_status": "user_approved_documentation_and_configuration_only",
+  "execution_revision": null,
+  "execution_settings_status": "not_frozen",
+  "implementation_status": "models_evaluator_and_training_controls_not_yet_implemented_or_verified",
+  "profiling_authorized": false,
+  "training_authorized": false,
+  "deployment_decision": "NOT_AUTHORIZED",
+  "profiling_scope": null,
+  "comparative_training_scope": null,
+  "baseline_manifest": "configs/protocols/v1.0.0/baseline-manifest.json",
+  "documentation": "docs/protocol-lifecycle.md",
+  "lifecycle_order": [
+    "DRAFT",
+    "BASELINE_PROTOCOL_FROZEN",
+    "IMPLEMENTATION_REGRESSION_VERIFICATION",
+    "BOUNDED_PROFILING_AUTHORIZED",
+    "EXECUTION_SETTINGS_AND_TUNING_PLAN_FROZEN",
+    "COMPARATIVE_TRAINING_AUTHORIZED",
+    "EXPERIMENTS_RUNNING",
+    "RESULTS_FROZEN_ANALYSIS"
+  ],
+  "version_policy": {
+    "major": "changes_to_splits_scope_relevance_candidates_or_core_comparison_design",
+    "minor": "approved_experiment_additions_or_substantive_methodological_amendments",
+    "patch": "clarifications_with_no_change_to_experimental_behavior",
+    "state_transition_changes_version": false,
+    "state_transition_grants_authorization": false
+  },
+  "pending_before_comparative_training": [
+    "implementation_and_independent_regression_verification",
+    "BPR_MF_and_LightGCN_ID_initialization_distribution",
+    "model_specific_batch_sizes",
+    "GraphSAGE_neighbor_sampling_execution_fanouts_and_inference",
+    "LightGCN_exact_propagation_execution",
+    "validation_frequency_after_authorized_profiling",
+    "tuning_search_spaces_trial_budgets_seed_and_reuse_policy",
+    "explicit_comparative_training_authorization"
+  ],
+  "history": [
+    {
+      "event": "initial_baseline_freeze",
+      "from_state": "DRAFT",
+      "to_state": "BASELINE_PROTOCOL_FROZEN",
+      "protocol_version": "amazon4u-protocol-v1.0.0",
+      "approval": "user_requested_application_of_discussed_lifecycle_and_version_policy",
+      "rationale": "separate_approved_scientific_baseline_from_pending_implementation_execution_and_authorization",
+      "heldout_model_results_exposed": false,
+      "prior_split_and_metadata_audits": "already_performed_not_unseen_data",
+      "profiling_or_training_authorized_by_event": false
+    }
+  ]
+}

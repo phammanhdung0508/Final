@@ -5,7 +5,12 @@ Toys_and_Games and Musical_Instruments, evaluated separately under both feedback
 conditions. Start development/resource checks on Musical_Instruments, then
 Toys_and_Games and Electronics. No research subsampling or evaluation-user sampling.
 See `configs/dataset-scope.json` and the scope decision in
-`docs/evaluation-protocol.md`. Training still requires the remaining protocol freeze.
+`docs/evaluation-protocol.md`. The baseline is frozen as
+**`amazon4u-protocol-v1.0.0`**, state **`BASELINE_PROTOCOL_FROZEN`**.
+Execution settings and implementation verification remain pending; profiling and
+comparative training are **not authorized**. See
+[version/lifecycle policy](docs/protocol-lifecycle.md) and
+`configs/protocol-lifecycle.json` for separate version, state and permission records.
 Source: https://huggingface.co/datasets/McAuley-Lab/Amazon-Reviews-2023
 
 ## Reproduce
@@ -42,7 +47,7 @@ resumes partial downloads, and verifies file sizes (not content hashes). Use
 - `data/*.log`: execution logs.
 
 See [KG schema](docs/kg-schema.md), [audit findings](docs/kg-input-audit.md),
-[graph configuration](configs/kg-v1.json) and the draft
+[graph configuration](configs/kg-v1.json) and the baseline-frozen
 [evaluation protocol](docs/evaluation-protocol.md) and
 [candidate/cold-start rules](docs/candidates-and-cold-start.md).
 Metrics/ranking/reporting are frozen in `configs/evaluation-metrics.json`:

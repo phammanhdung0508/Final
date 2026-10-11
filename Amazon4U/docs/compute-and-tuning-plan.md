@@ -47,6 +47,16 @@ tuning. Two or three configurations per learned method/group would imply 36 or
 identical, or that previously computed trials may be reused without a registered
 reuse policy. Popularity and KG-only have separate runtime/weighting budgets.
 
+## Lifecycle and authorization
+
+The baseline is frozen as `amazon4u-protocol-v1.0.0`; this compute plan remains
+pending measured execution settings and numerical tuning policy. See
+[protocol lifecycle](protocol-lifecycle.md). The profiling-first approach below is
+agreed, but **no bounded profiling run is authorized yet**. Approval must declare
+scope, compute limits, provisional settings, permitted optimizer updates and outputs
+following prerequisite regression verification. Comparative training is separately
+unauthorized until execution/tuning freeze and explicit approval.
+
 ## Profile first: full-ranking validation
 
 The previously agreed validation-profiling decision is now recorded in Amazon4U:
