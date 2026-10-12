@@ -92,7 +92,16 @@ See `evaluator-integration.md`, `evaluator-verification-runtime-separated.md` an
 Historical ESCALATEs remain unchanged; runtime-separated outputs and report closure
 were handled autonomously under standing noncritical recovery authorization.
 
-Step 2: next, separate remaining-I1 scorer/sampler/reference-loss verification;
-passing evaluator integration does not by itself accept that scope. Steps 3–4:
-queued, not completed. Profiling/training execution unauthorized; deployment
-NOT_AUTHORIZED. No model training, optimizer updates or profiling has run.
+Step 2: **complete and accepted task-only**. Remaining-I1 PopularityScorer,
+KGOnlyScorer, NegativeSampler, BPR loss/reference utilities and endpoint
+regularization were independently verified under task
+`cc64f3cb-9a4f-40aa-abbf-5ced6c1bd000`; decision
+`agy-evidence-8cfc6826-f8ae-4ea6-be7c-dc1c838cd036`; benchmark evidence
+`agy-evidence-db13c5d9-6593-49d8-8586-3ff66cd9f6f3`: **115 tests passed**,
+zero failures/errors/skips. Historical noncritical recovery ESCALATEs remain
+preserved and do not change this final Step 2 acceptance.
+
+Step 3: next, learned models and training harness implementation/verification.
+Step 4: queued, bounded Musical_Instruments profiling plan preparation. Profiling
+and training execution remain unauthorized; deployment NOT_AUTHORIZED. No model
+training, optimizer updates or profiling has run.

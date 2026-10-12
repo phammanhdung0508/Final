@@ -10,12 +10,14 @@ See `configs/dataset-scope.json` and the scope decision in
 **Evaluator integration is complete in the main checkout**: `recommendation_core.py`
 uses the shared engine in `scripts/recommendation_evaluation.py`, with guarded KG-only
 fallback. The preserved evaluator artifact received **ACCEPT (task_only)**; the
-integrated main suite passed **113 tests, zero failures/errors/skips**. See
+integrated main suite initially passed **113 tests, zero failures/errors/skips**. See
 [the integration record](docs/evaluator-integration.md) for acceptance and evidence.
-Remaining I1 scorer/sampler/reference-loss review and learned model/training-harness
-implementation are still pending—not covered by evaluator acceptance. Next steps
-are in [the implementation roadmap](docs/implementation-roadmap.md).
-Execution settings remain pending; profiling and comparative training are **not authorized**.
+Remaining I1 scorer/sampler/reference-loss verification is now also **ACCEPTED
+(task_only)** under task `cc64f3cb-9a4f-40aa-abbf-5ced6c1bd000`; current v2 full
+suite: **115 tests, zero failures/errors/skips**. Learned model/training-harness
+implementation is still pending. Next steps are in
+[the implementation roadmap](docs/implementation-roadmap.md). Execution settings
+remain pending; profiling and comparative training are **not authorized**.
 Deployment remains **NOT_AUTHORIZED**.
 
 The active suite is **Popularity, LightGCN, KG-only and Heterogeneous KG+GNN**.

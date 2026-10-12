@@ -21,14 +21,14 @@ Scripts cover downloading, inspection, audits, graph construction and visualizat
 No model training or learned embeddings have been run. The approved baseline
 protocol is frozen as `amazon4u-protocol-v2.0.0` after user-approved removal of
 BPR-MF (see `docs/bpr-mf-removal-amendment.md`); v1.0.0 remains preserved. Lifecycle state
-`IMPLEMENTATION_REGRESSION_VERIFICATION`. Milestone I1 is implemented
-(`scripts/recommendation_core.py`, `tests/test_recommendation_core.py`) and is
-currently awaiting completion of independent Pi review (`implemented_pending_Pi_review`).
-Step 1 evaluator artifact has task-only ACCEPT and is integrated in main with 113
-passing regressions; see `docs/evaluator-integration.md` and
-`docs/implementation-roadmap.md`. Remaining-I1 scorer/sampler/loss acceptance is
-separate and still next; this does not authorize profiling/training or deployment.
-Remaining learned models/encoders, checkpoints, reproducibility integration,
+`IMPLEMENTATION_REGRESSION_VERIFICATION`. Milestone I1 reference components are
+implemented and independently verified task-only: Step 1 evaluator integration is
+accepted in main, and Step 2 remaining Popularity/KG-only scorer, sampler, BPR
+loss/reference utility and endpoint-regularization verification is accepted under
+`cc64f3cb-9a4f-40aa-abbf-5ced6c1bd000` with the current v2 suite at 115 passing
+regressions; see `docs/evaluator-integration.md`, `docs/implementation-roadmap.md`
+and `docs/protocol-lifecycle.md`. This does not authorize profiling/training or
+deployment. Remaining learned models/encoders, checkpoints, reproducibility integration,
 execution settings, tuning policy, profiling, and comparative training remain
 pending and not authorized. Read `configs/protocol-lifecycle.json` and
 `docs/protocol-lifecycle.md`; do not interpret a state/version change, graph

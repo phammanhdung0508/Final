@@ -13,8 +13,9 @@
   `scripts/recommendation_core.py` with guarded KG fallback. Integrated main suite:
   **113 tests, zero failures/errors/skips**. See [integration evidence](evaluator-integration.md).
 - Remaining I1: Popularity/KG-only scorers and non-training sampler/loss/regularization
-  reference utilities are implemented, but their separate independent acceptance
-  is still pending. Evaluator acceptance does not accept all I1 components.
+  reference utilities are independently verified and **ACCEPTED (task_only)**
+  under task `cc64f3cb-9a4f-40aa-abbf-5ced6c1bd000`; benchmark evidence:
+  **115 tests, zero failures/errors/skips**.
 - Learned models (LightGCN, Heterogeneous KG+GNN), full training loops,
   checkpointing and reproducibility integration remain pending. See
   [the implementation roadmap](implementation-roadmap.md).
@@ -190,7 +191,7 @@ from remaining-I1 review and learned-model/harness work. A component-progress ev
 is appended to its history, without changing the lifecycle state, protocol version,
 execution revision, pending execution choices or authorization flags. Frozen
 snapshots/manifests and historical ESCALATEs remain untouched. Musical_Instruments
-profiling preparation is a next deliverable; execution is not yet authorized.
+profiling preparation is a later deliverable; execution is not yet authorized.
 
 Following the user's status-consistency correction, README, this document and
 `configs/protocol-lifecycle.json` were synchronized. Independent validation matched
@@ -215,3 +216,27 @@ provenance; v1.0.0 and historical lifecycle events remain unchanged. The active
 protocol version and baseline pointer change, not the lifecycle state, execution
 revision, authorization flags, data scope, graph/evaluator rules or remaining
 training recipe. See [the amendment record](bpr-mf-removal-amendment.md).
+
+### Current remaining-I1 acceptance
+
+Pi independently accepted the remaining Milestone I1 reference components under
+Task `cc64f3cb-9a4f-40aa-abbf-5ced6c1bd000`, revision 0; acceptance_scope
+**task_only**, deployment **NOT_AUTHORIZED**. Decision:
+`agy-evidence-8cfc6826-f8ae-4ea6-be7c-dc1c838cd036`. The accepted scope covers
+PopularityScorer, KGOnlyScorer, NegativeSampler, `bpr_loss`/`stable_softplus` and
+`endpoint_regularization` only. It does not accept learned models, full training
+loops, profiling execution or deployment.
+
+Pi reviewed the actual implementation in `scripts/recommendation_core.py`, shared
+context/evaluator dependencies in `scripts/recommendation_evaluation.py`, focused
+regression tests in `tests/test_recommendation_core.py` and v2 protocol/config
+records. Independent benchmark verification used
+`PYTHONDONTWRITEBYTECODE=1 /home/sunf/FSB/Final/Amazon4U/.venv/bin/python -m unittest discover -s tests`
+and passed **115 tests, zero failures/errors/skips**, 1.515 seconds; evidence
+`agy-evidence-db13c5d9-6593-49d8-8586-3ff66cd9f6f3`. Prior setup/environment
+ESCALATEs remain preserved as noncritical recovery history.
+
+The next implementation gate is learned models/training harness verification
+(Step 3). Profiling and training execution remain unauthorized pending their
+separate gates; no model training, optimizer updates or Musical_Instruments
+profiling has run.
