@@ -4,3 +4,6 @@ __pycache__/
 .venv/
 data/processed/
 data/.work*/
+
+# Coding-tool telemetry runtime files (at any depth within Amazon4U).
+datacloud_telemetry/

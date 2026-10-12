@@ -36,7 +36,9 @@ Use one coherent subsystem with its fixtures and relevant documentation per
 substantive task. Consolidate review findings and correction feedback. Save
 context through targeted evidence navigation, never incomplete review:
 diff-first is not diff-only. Exhausted revisions or incomplete mandatory evidence
-require escalation, not a fabricated completion or automatic replacement task.
+require escalation, not a fabricated completion. The standing authorization below
+permits bounded noncritical recovery after recording ESCALATE; it never permits
+resetting revision limits to keep retuning an exhausted source task.
 
 ## Operating loop
 
@@ -56,6 +58,47 @@ submission; complete mandatory evaluation before final acceptance. No automatic
 revision or retuning after held-out exposure. Without a predeclared deployment
 policy, deployment is NOT_AUTHORIZED.
 
+## Standing authorization: noncritical recovery without repeated questions
+
+Status: **user-approved**, following the verification-only scratch-output
+ESCALATE. The user explicitly requested durable recording:
+
+> Again, please take note somewhere incase you keep forget, i only care about final result like 'implementation + regression testing + profiling on Musical_Instruments' if the ESCALATE is not critical. no need to ask me every time. you can decide by yourself as long as follow the rule loop we agree on.
+
+The delivery goal is **implementation + regression testing + profiling on
+Musical_Instruments**, not repeated approval exchanges about administrative issues.
+This supplements the approved implementation sequence in `implementation-roadmap.md`.
+
+- Pi classifies and records findings using their actual impact. A formal ESCALATE
+  does not automatically require interrupting the user. Noncritical infrastructure,
+  scratch/output-layout, setup and verification-evidence issues may be handled by
+  Pi autonomously, including a prospectively scoped fresh verification task.
+- Preserve source and original evidence/decisions first; record the recovery scope,
+  permitted outputs, exact commands, budgets and revision limits before execution.
+  Then follow the same agy implementation / Pi independent inspection, verification
+  and acceptance loop. Never waive an unmet criterion or claim incomplete work is
+  accepted. Fresh recovery does not retroactively authorize previous writes.
+- The current scratch-runtime issue is within this standing noncritical recovery
+  authorization. Pi may preserve its files, separate/predeclare infrastructure
+  outputs and fixture scratch, and arrange fresh verification without asking again.
+  Historical `07318909-7b11-4a46-810a-c11d6c2c8b3a` remains ESCALATE; no
+  evaluator rewrite is justified merely by that infrastructure finding.
+- Keep recoveries bounded by the declared limits. Do not evade exhausted source
+  revisions through replacement tasks or run indefinite retries. If the issue
+  cannot be resolved within the agreed limits, explain the consequential decision
+  that actually requires the user rather than repeatedly asking to rerun checks.
+- Ask for decisions affecting scientific semantics, leakage/test use, data integrity,
+  security, project scope, material resource/cost limits, or execution permission
+  not already granted. Passing tests do not make such issues noncritical.
+- The goal includes Musical_Instruments profiling, but execution still follows the
+  existing prerequisite, bounded-plan and explicit execution-authorization gates.
+  This is not blanket permission for real-data training, optimizer updates,
+  comparative/held-out experiments, deployment, commits or pushes.
+
+This standing authorization supersedes the need for a new user confirmation for
+otherwise in-scope noncritical recovery. It does **not** supersede mandatory
+verification, frozen scientific rules, acceptance authority or historical records.
+
 ## Lifecycle structure and execution backend
 
 We intend to adapt `multiautoresearch`'s pre-training, post-training and inference
@@ -73,10 +116,12 @@ Amazon4U. Verify the actual Kaggle runner and reconcile conflicting instructions
 before using them; preserve the original framework context rather than silently
 claiming it has already been adapted.
 
-## Authorization unchanged
+## Execution boundaries and historical approvals
 
-This record does not authorize profiling, model training, optimizer updates,
-real-data experiments, deployment, framework changes or new worker invocations.
-Those require their respective scoped approvals and prerequisite verification.
-Prior escalated implementation tasks remain unaccepted; no historical decision
-is superseded by this workflow agreement.
+The original role agreement alone did not authorize workloads or new Worker tasks.
+Subsequent implementation-sequence approvals and the standing authorization above
+permit their stated scoped delegations and noncritical recovery. They do not grant
+blanket profiling, model training, optimizer updates, real-data experiments,
+deployment or unrelated framework changes. Those retain their respective execution
+approvals and prerequisite verification. Prior escalated tasks remain unaccepted;
+no historical decision is superseded by the new operating authorization.

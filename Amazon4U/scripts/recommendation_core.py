@@ -21,71 +21,30 @@ Provides:
 from collections import defaultdict
 import math
 import random
+import sys
 from typing import Any, Callable, Dict, Iterable, List, Optional, Sequence, Set, Tuple, Union
 
+# Canonicalize module in sys.modules so scripts.recommendation_core and recommendation_core
+# share the exact same module object and class identities.
+if __name__ == "scripts.recommendation_core":
+    sys.modules.setdefault("recommendation_core", sys.modules[__name__])
+elif __name__ == "recommendation_core":
+    sys.modules.setdefault("scripts.recommendation_core", sys.modules[__name__])
+    if "scripts" in sys.modules:
+        setattr(sys.modules["scripts"], "recommendation_core", sys.modules[__name__])
 
-class ScoringFailureError(Exception):
-    """Raised when candidate scoring fails, returns non-finite values, or produces corrupt outputs."""
-    pass
-
-
-class TrainingContext:
-    """Validated training-only context for recommendation evaluation and modeling."""
-
-    def __init__(
-        self,
-        interactions: Iterable[Union[Tuple[str, str, float], Dict[str, Any]]],
-        condition: str = "all_ratings",
-    ) -> None:
-        if condition not in ("all_ratings", "rating_ge_4"):
-            raise ValueError(f"Invalid feedback condition: {condition}. Must be 'all_ratings' or 'rating_ge_4'.")
-        self.condition = condition
-
-        self.all_rated_history: Dict[str, Set[str]] = defaultdict(set)
-        self.positive_history: Dict[str, Set[str]] = defaultdict(set)
-        self.users: Set[str] = set()
-        self.all_training_items: Set[str] = set()
-        self._positive_interaction_counts: Dict[str, int] = defaultdict(int)
-
-        seen_pairs: Set[Tuple[str, str]] = set()
-
-        for record in interactions:
-            if isinstance(record, dict):
-                user_id = record.get("user_id")
-                parent_asin = record.get("parent_asin")
-                rating = record.get("rating")
-            else:
-                user_id, parent_asin, rating = record
-
-            if not isinstance(user_id, str) or not user_id.strip():
-                raise ValueError(f"Invalid user_id: {user_id!r}. Must be a non-empty string.")
-            if not isinstance(parent_asin, str) or not parent_asin.strip():
-                raise ValueError(f"Invalid parent_asin: {parent_asin!r}. Must be a non-empty string.")
-            if isinstance(rating, bool) or not isinstance(rating, (int, float)) or math.isnan(rating) or math.isinf(rating):
-                raise ValueError(f"Invalid rating: {rating!r}. Must be a finite number and not boolean.")
-
-            pair = (user_id, parent_asin)
-            if pair in seen_pairs:
-                raise ValueError(f"Duplicate training user-item pair detected: {pair}")
-            seen_pairs.add(pair)
-
-            self.users.add(user_id)
-            self.all_training_items.add(parent_asin)
-            self.all_rated_history[user_id].add(parent_asin)
-
-            is_positive = True if condition == "all_ratings" else (rating >= 4.0)
-            if is_positive:
-                self.positive_history[user_id].add(parent_asin)
-                self._positive_interaction_counts[parent_asin] += 1
-
-        if condition == "all_ratings":
-            self.warm_items: Set[str] = set(self.all_training_items)
-        else:
-            self.warm_items = {item for item, count in self._positive_interaction_counts.items() if count > 0}
-
-        self.sorted_warm_items: List[str] = sorted(self.warm_items)
-        self.popularity: Dict[str, int] = {item: self._positive_interaction_counts[item] for item in self.warm_items}
-        self.positive_users: Set[str] = {u for u, items in self.positive_history.items() if len(items) > 0}
+if __package__:
+    from .recommendation_evaluation import (
+        Evaluator as BaseEvaluator,
+        ScoringFailureError,
+        TrainingContext,
+    )
+else:
+    from recommendation_evaluation import (
+        Evaluator as BaseEvaluator,
+        ScoringFailureError,
+        TrainingContext,
+    )
 
 
 class PopularityScorer:
@@ -223,35 +182,47 @@ class KGOnlyScorer:
         # Validate that profiles do not contain non-finite values
         self._validate_profile_finiteness()
 
+    @staticmethod
+    def _validate_profile_dict(profile: Any, label: str = "profile") -> None:
+        if not isinstance(profile, dict):
+            raise ScoringFailureError(f"Corrupt profile dictionary for {label}: {profile!r}")
+        for k, v in profile.items():
+            if isinstance(v, bool) or not isinstance(v, (int, float)) or math.isnan(v) or math.isinf(v):
+                raise ScoringFailureError(f"Corrupt non-finite value in {label}: {v!r}")
+
+    @property
+    def user_category_profiles(self) -> Dict[str, Dict[str, float]]:
+        return self.user_cat_vec
+
+    @property
+    def user_brand_profiles(self) -> Dict[str, Dict[str, float]]:
+        return self.user_brand_vec
+
+    @property
+    def item_category_profiles(self) -> Dict[str, Dict[str, float]]:
+        return self.product_cat_vec
+
+    @property
+    def item_brand_profiles(self) -> Dict[str, Dict[str, float]]:
+        return self.product_brand_vec
+
     def _validate_profile_finiteness(self) -> None:
         for p, vec in self.product_cat_vec.items():
-            for k, v in vec.items():
-                if math.isnan(v) or math.isinf(v):
-                    raise ScoringFailureError(f"Corrupt non-finite value in product category vector for {p}: {v}")
+            KGOnlyScorer._validate_profile_dict(vec, f"product category vector for {p}")
         for p, vec in self.product_brand_vec.items():
-            for k, v in vec.items():
-                if math.isnan(v) or math.isinf(v):
-                    raise ScoringFailureError(f"Corrupt non-finite value in product brand vector for {p}: {v}")
+            KGOnlyScorer._validate_profile_dict(vec, f"product brand vector for {p}")
         for u, vec in self.user_cat_vec.items():
-            for k, v in vec.items():
-                if math.isnan(v) or math.isinf(v):
-                    raise ScoringFailureError(f"Corrupt non-finite value in user category vector for {u}: {v}")
+            KGOnlyScorer._validate_profile_dict(vec, f"user category vector for {u}")
         for u, vec in self.user_brand_vec.items():
-            for k, v in vec.items():
-                if math.isnan(v) or math.isinf(v):
-                    raise ScoringFailureError(f"Corrupt non-finite value in user brand vector for {u}: {v}")
+            KGOnlyScorer._validate_profile_dict(vec, f"user brand vector for {u}")
 
     def score_candidates(self, user_id: str, candidate_items: Sequence[str]) -> Tuple[Dict[str, float], str, Optional[str]]:
         u_cat = self.user_cat_vec.get(user_id, {})
         u_brand = self.user_brand_vec.get(user_id, {})
 
         # Verify profile finiteness for this user across both channels regardless of mixture
-        for k, v in u_cat.items():
-            if math.isnan(v) or math.isinf(v):
-                raise ScoringFailureError(f"Corrupt non-finite user profile value for {user_id}: {v}")
-        for k, v in u_brand.items():
-            if math.isnan(v) or math.isinf(v):
-                raise ScoringFailureError(f"Corrupt non-finite user profile value for {user_id}: {v}")
+        KGOnlyScorer._validate_profile_dict(u_cat, f"user category profile for {user_id}")
+        KGOnlyScorer._validate_profile_dict(u_brand, f"user brand profile for {user_id}")
 
         pos_items = self.context.positive_history.get(user_id, set())
         if not pos_items:
@@ -271,12 +242,8 @@ class KGOnlyScorer:
             p_brand = self.product_brand_vec.get(item, {})
 
             # Check candidate product profiles for non-finite corruption
-            for k, v in p_cat.items():
-                if math.isnan(v) or math.isinf(v):
-                    raise ScoringFailureError(f"Corrupt non-finite product profile for candidate {item}: {v}")
-            for k, v in p_brand.items():
-                if math.isnan(v) or math.isinf(v):
-                    raise ScoringFailureError(f"Corrupt non-finite product profile for candidate {item}: {v}")
+            KGOnlyScorer._validate_profile_dict(p_cat, f"product category profile for candidate {item}")
+            KGOnlyScorer._validate_profile_dict(p_brand, f"product brand profile for candidate {item}")
 
             c_cat = 0.0
             if cat_usable and p_cat:
@@ -296,323 +263,110 @@ class KGOnlyScorer:
         return scores, "personalized", None
 
 
-class Evaluator:
-    """Reusable evaluator enforcing history filtering, target auditing, ranking, metrics, and subgroup reporting."""
+class Evaluator(BaseEvaluator):
+    """Core evaluator extending shared BaseEvaluator with guarded KG metadata fallback."""
 
-    CUTOFFS = (5, 10, 20)
+    DEFAULT_FALLBACK_REASONS: Tuple[str, ...] = (
+        "empty_positive_history",
+        "unusable_metadata_profile",
+    )
 
-    def __init__(self, context: TrainingContext) -> None:
-        self.context = context
+    def _get_default_fallback_reasons(self) -> Set[str]:
+        return set(self.DEFAULT_FALLBACK_REASONS)
 
-    def evaluate(
+    def _validate_provider_result(
         self,
-        targets: Iterable[Union[Tuple[str, str, float], Dict[str, Any]]],
         scorer: Any,
-        split: str = "validation",
-        validation_history: Optional[Union[Dict[str, Any], Iterable[Any]]] = None,
-    ) -> Dict[str, Any]:
-        if split not in ("validation", "test"):
-            raise ValueError(f"Invalid split: {split}. Must be 'validation' or 'test'.")
+        user_id: str,
+        authoritative_candidates: Sequence[str],
+        scores: Any,
+        route: Any,
+        reason: Any,
+    ) -> Tuple[Dict[str, float], str, Optional[str]]:
+        """Validate provider scores, route, and fallback reason.
 
-        val_history_map: Dict[str, Set[str]] = defaultdict(set)
-        if split == "test":
-            if validation_history is None:
-                raise ValueError("validation_history must be explicitly provided for test split.")
-            if isinstance(validation_history, dict):
-                for u, items in validation_history.items():
-                    if not isinstance(u, str) or not u.strip():
-                        raise ValueError(f"Invalid user_id in validation_history: {u!r}")
-                    if isinstance(items, (str, bytes)):
-                        raise ValueError(f"Validation history items for user {u} must be an item collection, not a string.")
-                    if not isinstance(items, (list, tuple, set, frozenset)):
-                        raise ValueError(f"Validation history items for user {u} must be a collection of item IDs.")
-                    for item in items:
-                        if not isinstance(item, str) or not item.strip():
-                            raise ValueError(f"Invalid item ID {item!r} in validation_history for user {u}.")
-                        val_history_map[u].add(item)
-            elif isinstance(validation_history, (list, tuple, set)):
-                for rec in validation_history:
-                    if isinstance(rec, dict):
-                        u = rec.get("user_id")
-                        item = rec.get("parent_asin")
-                    elif isinstance(rec, (list, tuple)) and len(rec) >= 2:
-                        u, item = rec[0], rec[1]
-                    else:
-                        raise ValueError(f"Invalid validation_history record: {rec!r}")
-                    if not isinstance(u, str) or not u.strip():
-                        raise ValueError(f"Invalid user_id {u!r} in validation_history record.")
-                    if not isinstance(item, str) or not item.strip():
-                        raise ValueError(f"Invalid item ID {item!r} in validation_history record.")
-                    val_history_map[u].add(item)
-            else:
-                raise ValueError("validation_history must be a dictionary or sequence of records.")
+        Permits strictly validated whole-user unusable_metadata_profile fallback
+        only for legitimate same-context KGOnlyScorer instances with unusable positively
+        weighted profiles and exact condition-positive popularity scores.
+        All other provider fallback claims, wrong contexts, corrupt profiles, usable profiles,
+        spoofed reasons/scores, and scoring failures are rejected.
+        Ordinary routes ('personalized', 'non_personalized') are delegated to super().
+        """
+        if route != "fallback":
+            return super()._validate_provider_result(
+                scorer, user_id, authoritative_candidates, scores, route, reason
+            )
 
-        target_records: List[Tuple[str, str, float]] = []
-        seen_target_users: Set[str] = set()
+        # route == "fallback"
+        if not isinstance(scores, dict):
+            raise ScoringFailureError(f"Scorer must return a dictionary of candidate scores for user {user_id}.")
 
-        for rec in targets:
-            if isinstance(rec, dict):
-                u = rec.get("user_id")
-                p = rec.get("parent_asin")
-                r = rec.get("rating")
-            elif isinstance(rec, (list, tuple)) and len(rec) >= 3:
-                u, p, r = rec[0], rec[1], rec[2]
-            else:
-                raise ValueError(f"Invalid target record: {rec!r}")
+        if not isinstance(reason, str) or reason != "unusable_metadata_profile":
+            raise ScoringFailureError(f"Invalid fallback reason {reason!r} for user {user_id}. Only 'unusable_metadata_profile' may be reported by scorer.")
 
-            if not isinstance(u, str) or not u.strip():
-                raise ValueError(f"Invalid target user_id: {u!r}. Must be a non-empty string.")
-            if not isinstance(p, str) or not p.strip():
-                raise ValueError(f"Invalid target parent_asin: {p!r}. Must be a non-empty string.")
-            if isinstance(r, bool) or not isinstance(r, (int, float)) or math.isnan(r) or math.isinf(r):
-                raise ValueError(f"Invalid target rating: {r!r} for user {u}. Must be a finite number and not boolean.")
+        if not isinstance(scorer, KGOnlyScorer):
+            raise ScoringFailureError(f"Metadata fallback 'unusable_metadata_profile' can only be reported by KGOnlyScorer, got {type(scorer).__name__} for user {user_id}.")
 
-            if u in seen_target_users:
-                raise ValueError(f"Duplicate held-out target for user {u}. Exactly one target per user permitted.")
-            seen_target_users.add(u)
+        if scorer.context is not self.context:
+            raise ScoringFailureError(f"Scorer context is not identical to Evaluator context for user {user_id}.")
 
-            # In test split, require explicit validation history entry for known target users
-            if split == "test" and (u in self.context.users) and (u not in val_history_map):
-                raise ValueError(f"Missing validation history entry for known target user {u} in test split.")
+        pos_items = self.context.positive_history.get(user_id, set())
+        if not pos_items:
+            raise ScoringFailureError(f"Empty-positive fallback is evaluator-owned; cannot be reported by scorer for user {user_id}.")
 
-            target_records.append((u, p, float(r)))
+        # Validate outer profile containers exist and are dictionaries
+        for attr in ("user_cat_vec", "user_brand_vec", "product_cat_vec", "product_brand_vec"):
+            if not hasattr(scorer, attr) or not isinstance(getattr(scorer, attr), dict):
+                raise ScoringFailureError(f"Scorer profile container {attr!r} is missing or not a dictionary for user {user_id}.")
 
-        target_records.sort(key=lambda x: x[0])
+        # Validate user channel profile existence and finiteness via authoritative base validator
+        if user_id not in scorer.user_cat_vec:
+            raise ScoringFailureError(f"Scorer user category profile container missing entry for user {user_id}.")
+        if user_id not in scorer.user_brand_vec:
+            raise ScoringFailureError(f"Scorer user brand profile container missing entry for user {user_id}.")
 
-        warm_pool = self.context.warm_items
-        warm_pool_size = len(warm_pool)
+        u_cat = scorer.user_cat_vec[user_id]
+        u_brand = scorer.user_brand_vec[user_id]
+        KGOnlyScorer._validate_profile_dict(u_cat, f"user category profile for {user_id}")
+        KGOnlyScorer._validate_profile_dict(u_brand, f"user brand profile for {user_id}")
 
-        unknown_users = 0
-        irrelevant_targets = 0
-        cold_targets = 0
-        history_overlaps = 0
-        overlapping_reasons: Dict[str, int] = defaultdict(int)
+        # Validate candidate channel profile existence and finiteness via authoritative base validator
+        for item in authoritative_candidates:
+            if item not in scorer.product_cat_vec:
+                raise ScoringFailureError(f"Scorer product category profile container missing entry for candidate {item}.")
+            if item not in scorer.product_brand_vec:
+                raise ScoringFailureError(f"Scorer product brand profile container missing entry for candidate {item}.")
+            p_cat = scorer.product_cat_vec[item]
+            p_brand = scorer.product_brand_vec[item]
+            KGOnlyScorer._validate_profile_dict(p_cat, f"product category profile for candidate {item}")
+            KGOnlyScorer._validate_profile_dict(p_brand, f"product brand profile for candidate {item}")
 
-        eligible_records: List[Tuple[str, str, float, Set[str]]] = []
+        # Validate mixture weights exist and are finite numbers
+        if not hasattr(scorer, "alpha") or not hasattr(scorer, "beta"):
+            raise ScoringFailureError(f"Scorer mixture weights missing for user {user_id}.")
+        if isinstance(scorer.alpha, bool) or not isinstance(scorer.alpha, (int, float)) or math.isnan(scorer.alpha) or math.isinf(scorer.alpha):
+            raise ScoringFailureError(f"Scorer alpha mixture weight must be a finite number for user {user_id}.")
+        if isinstance(scorer.beta, bool) or not isinstance(scorer.beta, (int, float)) or math.isnan(scorer.beta) or math.isinf(scorer.beta):
+            raise ScoringFailureError(f"Scorer beta mixture weight must be a finite number for user {user_id}.")
 
-        for u, p, r in target_records:
-            is_known = u in self.context.users
-            is_relevant = True if self.context.condition == "all_ratings" else (r >= 4.0)
-            is_warm = p in warm_pool
+        # Enforce positively weighted channel usability: user cannot claim metadata fallback if any positively weighted channel is usable
+        cat_usable = (scorer.alpha > 0.0) and (len(u_cat) > 0)
+        brand_usable = (scorer.beta > 0.0) and (len(u_brand) > 0)
+        if cat_usable or brand_usable:
+            raise ScoringFailureError(f"User {user_id} has usable positively weighted metadata channels; metadata fallback is invalid.")
 
-            if split == "validation":
-                filtered_history = set(self.context.all_rated_history.get(u, set()))
-            else:
-                filtered_history = set(self.context.all_rated_history.get(u, set())) | set(val_history_map.get(u, set()))
+        # Enforce exact condition-positive popularity scores for all authoritative candidates
+        for item in authoritative_candidates:
+            if item not in scores:
+                raise ScoringFailureError(f"Fallback scores missing candidate {item} for user {user_id}.")
+            s = scores[item]
+            if isinstance(s, bool) or not isinstance(s, (int, float)) or math.isnan(s) or math.isinf(s):
+                raise ScoringFailureError(f"Non-finite candidate score {s!r} for user {user_id}, item {item}.")
+            expected = float(self.context.popularity.get(item, 0))
+            if s != expected:
+                raise ScoringFailureError(f"Fallback score for candidate {item} ({s!r}) does not match condition-positive popularity {expected}.")
 
-            in_history = p in filtered_history
-
-            reasons: List[str] = []
-            if not is_known:
-                unknown_users += 1
-                reasons.append("unknown_user")
-            if not is_relevant:
-                irrelevant_targets += 1
-                reasons.append("irrelevant_target")
-            if not is_warm:
-                cold_targets += 1
-                reasons.append("cold_target")
-            if in_history:
-                history_overlaps += 1
-                reasons.append("history_overlap")
-
-            if reasons:
-                reasons_key = "+".join(sorted(reasons))
-                overlapping_reasons[reasons_key] += 1
-            else:
-                eligible_records.append((u, p, r, filtered_history))
-
-        eligible_count = len(eligible_records)
-        shortage_counts = {k: 0 for k in self.CUTOFFS}
-
-        per_user_results: List[Dict[str, Any]] = []
-        recommended_at_10: Set[str] = set()
-
-        for u, target_item, rating, filtered_history in eligible_records:
-            candidates = [item for item in self.context.sorted_warm_items if item not in filtered_history]
-
-            for k in self.CUTOFFS:
-                if len(candidates) < k:
-                    shortage_counts[k] += 1
-
-            has_positive_history = len(self.context.positive_history.get(u, set())) > 0
-
-            if not has_positive_history:
-                route = "fallback"
-                fallback_reason = "empty_positive_history"
-                scores = {item: float(self.context.popularity.get(item, 0)) for item in candidates}
-            else:
-                try:
-                    if hasattr(scorer, "score_candidates"):
-                        res = scorer.score_candidates(u, candidates)
-                    elif callable(scorer):
-                        res = scorer(u, candidates)
-                    else:
-                        raise ScoringFailureError(f"Scorer {scorer} has no score_candidates method and is not callable.")
-
-                    if isinstance(res, tuple):
-                        if len(res) == 3:
-                            scores, route, fallback_reason = res
-                        elif len(res) == 2:
-                            scores, route = res
-                            fallback_reason = None
-                        else:
-                            raise ScoringFailureError(f"Scorer returned unexpected tuple length: {len(res)}")
-                    elif isinstance(res, dict):
-                        scores = res
-                        route = "personalized"
-                        fallback_reason = None
-                    else:
-                        raise ScoringFailureError(f"Scorer returned invalid output type: {type(res)}")
-                except ScoringFailureError:
-                    raise
-                except Exception as exc:
-                    raise ScoringFailureError(f"Scorer failed during evaluation for user {u}: {exc}") from exc
-
-                if not isinstance(scores, dict):
-                    raise ScoringFailureError(f"Scorer must return a dictionary of candidate scores for user {u}.")
-
-                if not isinstance(route, str) or route not in ("personalized", "non_personalized", "fallback"):
-                    raise ScoringFailureError(f"Invalid route {route!r} for user {u}. Must be 'personalized', 'non_personalized', or 'fallback'.")
-
-                if route in ("personalized", "non_personalized"):
-                    if fallback_reason is not None:
-                        raise ScoringFailureError(f"Non-fallback route {route!r} must have fallback_reason None, got {fallback_reason!r} for user {u}.")
-                elif route == "fallback":
-                    if not isinstance(fallback_reason, str) or fallback_reason not in ("empty_positive_history", "unusable_metadata_profile"):
-                        raise ScoringFailureError(f"Invalid fallback reason {fallback_reason!r} for user {u}. Must be 'empty_positive_history' or 'unusable_metadata_profile'.")
-                    if fallback_reason == "empty_positive_history":
-                        raise ScoringFailureError(f"Empty-positive fallback is evaluator-owned; cannot be reported by scorer for user {u} with positive history.")
-                    if fallback_reason == "unusable_metadata_profile" and not isinstance(scorer, KGOnlyScorer):
-                        raise ScoringFailureError(f"Metadata fallback 'unusable_metadata_profile' can only be reported by KGOnlyScorer, got {type(scorer).__name__} for user {u}.")
-
-            # Validate that every candidate is scored
-            for item in candidates:
-                if item not in scores:
-                    raise ScoringFailureError(f"Scorer missing candidate score for item {item} for user {u}.")
-                s = scores[item]
-                if isinstance(s, bool) or not isinstance(s, (int, float)) or math.isnan(s) or math.isinf(s):
-                    raise ScoringFailureError(f"Non-finite candidate score {s!r} for user {u}, item {item}.")
-
-            ranked_items = sorted(candidates, key=lambda item: (-scores[item], item))
-
-            user_metrics: Dict[str, float] = {}
-            for k in self.CUTOFFS:
-                top_k = ranked_items[:k]
-                if target_item in top_k:
-                    rank_1based = top_k.index(target_item) + 1
-                    user_metrics[f"HitRate@{k}"] = 1.0
-                    user_metrics[f"NDCG@{k}"] = 1.0 / math.log2(rank_1based + 1.0)
-                else:
-                    user_metrics[f"HitRate@{k}"] = 0.0
-                    user_metrics[f"NDCG@{k}"] = 0.0
-
-            top_5 = ranked_items[:5]
-            top_10 = ranked_items[:10]
-            top_20 = ranked_items[:20]
-            recommended_at_10.update(top_10)
-
-            per_user_results.append({
-                "user_id": u,
-                "target_item": target_item,
-                "route": route,
-                "fallback_reason": fallback_reason,
-                "candidate_count": len(candidates),
-                "metrics": user_metrics,
-                "top_5": top_5,
-                "top_10": top_10,
-                "top_20": top_20,
-                "top_k": {5: top_5, 10: top_10, 20: top_20},
-            })
-
-        if eligible_count == 0:
-            overall_metrics: Dict[str, Optional[float]] = {
-                "NDCG@5": None,
-                "NDCG@10": None,
-                "NDCG@20": None,
-                "HitRate@5": None,
-                "HitRate@10": None,
-                "HitRate@20": None,
-                "CatalogCoverage@10": None,
-            }
-        else:
-            overall_metrics = {}
-            for k in self.CUTOFFS:
-                overall_metrics[f"NDCG@{k}"] = sum(r["metrics"][f"NDCG@{k}"] for r in per_user_results) / eligible_count
-                overall_metrics[f"HitRate@{k}"] = sum(r["metrics"][f"HitRate@{k}"] for r in per_user_results) / eligible_count
-            overall_metrics["CatalogCoverage@10"] = (len(recommended_at_10) / warm_pool_size) if warm_pool_size > 0 else 0.0
-
-        # Subgroup aggregation across protocol routes
-        all_routes = ["personalized", "non_personalized", "fallback"]
-        subgroup_results: Dict[str, Any] = {}
-
-        for route_name in all_routes:
-            sub_users = [r for r in per_user_results if r["route"] == route_name]
-            count = len(sub_users)
-            if count == 0:
-                sub_metrics: Dict[str, Optional[float]] = {
-                    "NDCG@5": None, "NDCG@10": None, "NDCG@20": None,
-                    "HitRate@5": None, "HitRate@10": None, "HitRate@20": None,
-                    "CatalogCoverage@10": None,
-                }
-            else:
-                sub_metrics = {}
-                for k in self.CUTOFFS:
-                    sub_metrics[f"NDCG@{k}"] = sum(r["metrics"][f"NDCG@{k}"] for r in sub_users) / count
-                    sub_metrics[f"HitRate@{k}"] = sum(r["metrics"][f"HitRate@{k}"] for r in sub_users) / count
-                sub_rec_10 = set().union(*(r["top_10"] for r in sub_users))
-                sub_metrics["CatalogCoverage@10"] = (len(sub_rec_10) / warm_pool_size) if warm_pool_size > 0 else 0.0
-
-            subgroup_results[route_name] = {
-                "count": count,
-                "metrics": sub_metrics,
-            }
-
-        # Fallback by reason aggregation
-        fallback_users = [r for r in per_user_results if r["route"] == "fallback"]
-        observed_reasons = ["empty_positive_history", "unusable_metadata_profile"]
-        by_reason: Dict[str, Any] = {}
-
-        for reason in observed_reasons:
-            reason_users = [r for r in fallback_users if r["fallback_reason"] == reason]
-            r_count = len(reason_users)
-            if r_count == 0:
-                r_metrics: Dict[str, Optional[float]] = {
-                    "NDCG@5": None, "NDCG@10": None, "NDCG@20": None,
-                    "HitRate@5": None, "HitRate@10": None, "HitRate@20": None,
-                    "CatalogCoverage@10": None,
-                }
-            else:
-                r_metrics = {}
-                for k in self.CUTOFFS:
-                    r_metrics[f"NDCG@{k}"] = sum(r["metrics"][f"NDCG@{k}"] for r in reason_users) / r_count
-                    r_metrics[f"HitRate@{k}"] = sum(r["metrics"][f"HitRate@{k}"] for r in reason_users) / r_count
-                r_rec_10 = set().union(*(r["top_10"] for r in reason_users))
-                r_metrics["CatalogCoverage@10"] = (len(r_rec_10) / warm_pool_size) if warm_pool_size > 0 else 0.0
-
-            by_reason[reason] = {"count": r_count, "metrics": r_metrics}
-
-        subgroup_results["fallback"]["by_reason"] = by_reason
-
-        return {
-            "split": split,
-            "condition": self.context.condition,
-            "audit": {
-                "total_targets": len(target_records),
-                "eligible_users": eligible_count,
-                "excluded_targets": len(target_records) - eligible_count,
-                "warm_pool_size": warm_pool_size,
-                "unknown_users": unknown_users,
-                "irrelevant_targets": irrelevant_targets,
-                "cold_targets": cold_targets,
-                "history_overlaps": history_overlaps,
-                "overlapping_reasons": dict(overlapping_reasons),
-            },
-            "candidate_shortages": shortage_counts,
-            "overall_metrics": overall_metrics,
-            "subgroups": subgroup_results,
-            "per_user_results": per_user_results,
-        }
+        return scores, route, reason
 
 
 def select_kg_only_mixture(

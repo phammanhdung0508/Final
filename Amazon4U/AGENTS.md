@@ -22,7 +22,11 @@ No model training or learned embeddings have been run. The approved baseline
 protocol is frozen as `amazon4u-protocol-v1.0.0`, lifecycle state
 `IMPLEMENTATION_REGRESSION_VERIFICATION`. Milestone I1 is implemented
 (`scripts/recommendation_core.py`, `tests/test_recommendation_core.py`) and is
-currently awaiting independent Pi review (`implemented_pending_Pi_review`).
+currently awaiting completion of independent Pi review (`implemented_pending_Pi_review`).
+Step 1 evaluator artifact has task-only ACCEPT and is integrated in main with 113
+passing regressions; see `docs/evaluator-integration.md` and
+`docs/implementation-roadmap.md`. Remaining-I1 scorer/sampler/loss acceptance is
+separate and still next; this does not authorize profiling/training or deployment.
 Remaining learned models/encoders, checkpoints, reproducibility integration,
 execution settings, tuning policy, profiling, and comparative training remain
 pending and not authorized. Read `configs/protocol-lifecycle.json` and
@@ -80,8 +84,16 @@ never choose thresholds, features or metrics based on test performance.
 Read and follow `docs/delegation-and-execution.md` before delegating or executing
 work, including under `multiautoresearch/`. Pi plans, orchestrates and independently
 reviews/accepts; agy implements/fixes and executes only explicitly authorized
-workloads. Keep acceptance rigor unchanged, fold small fixes into substantive
-revision cycles, and delegate independent subsystems separately. Kaggle is the
+workloads. **Standing user authorization:** prioritize implementation + regression
+testing + profiling on Musical_Instruments; handle in-scope noncritical setup and
+verification recoveries autonomously, without repeated user confirmation. Record
+ESCALATE when required, preserve its evidence, and continue only under a prospectively
+scoped recovery with unchanged independent-review rigor and agreed limits. Ask only
+for critical decisions or permissions not already granted; profiling execution still
+requires its bounded plan/prerequisites/explicit authorization. Read the standing
+authorization in `docs/delegation-and-execution.md` before asking to repeat a
+noncritical verification. Fold small fixes into substantive revision cycles, and
+delegate independent subsystems separately. Kaggle is the
 intended GPU backend, not an implicit authorization. Framework lifecycle labels
 and inherited LM/Movie4U prompts cannot override Amazon4U protocol or approvals.
 
