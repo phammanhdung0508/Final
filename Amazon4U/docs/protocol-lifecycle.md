@@ -2,20 +2,28 @@
 
 ## Current record — implementation and regression verification
 
-- Protocol: **`amazon4u-protocol-v1.0.0`**.
+- Protocol: **`amazon4u-protocol-v2.0.0`**, following the user-approved
+  [model-suite removal](bpr-mf-removal-amendment.md); v1.0.0 remains preserved.
 - State: **`IMPLEMENTATION_REGRESSION_VERIFICATION`**.
 - Execution revision: **not assigned** (`null`); propose `exec-v1` only when its
   settings and tuning plan are approved and frozen.
-- Models/evaluator/training controls: milestone I1 implemented (reusable shared evaluator,
-  deterministic Popularity/KG-only scorers, non-training sampling/loss/regularization
-  reference utilities in `scripts/recommendation_core.py` and regression fixtures in
-  `tests/test_recommendation_core.py`), status **`implemented_pending_Pi_review`**.
-  Learned model architectures (BPR-MF, LightGCN, Heterogeneous KG+GNN), full training loops,
-  checkpointing, and reproducibility integration remain pending.
+- Evaluator: preserved artifact **ACCEPT (task_only)**, task
+  `2562b8ec-cf57-4ace-b348-9fbd6c994262`; shared engine in
+  `scripts/recommendation_evaluation.py` integrated into main
+  `scripts/recommendation_core.py` with guarded KG fallback. Integrated main suite:
+  **113 tests, zero failures/errors/skips**. See [integration evidence](evaluator-integration.md).
+- Remaining I1: Popularity/KG-only scorers and non-training sampler/loss/regularization
+  reference utilities are implemented, but their separate independent acceptance
+  is still pending. Evaluator acceptance does not accept all I1 components.
+- Learned models (LightGCN, Heterogeneous KG+GNN), full training loops,
+  checkpointing and reproducibility integration remain pending. See
+  [the implementation roadmap](implementation-roadmap.md).
 - Profiling and comparative training: **not authorized**.
 - Deployment: **NOT_AUTHORIZED**.
 
-The baseline scientific protocol remains frozen as `amazon4u-protocol-v1.0.0`. Milestone I1
+The active scientific protocol is `amazon4u-protocol-v2.0.0`. The original v1.0.0
+snapshot remains byte-for-byte intact. The major amendment removes the MF baseline
+and metadata variant, retaining BPR loss for both remaining learned models. Milestone I1
 implements core evaluation and non-training reference logic without optimizer updates or
 learned embeddings. The authoritative machine record is
 [protocol-lifecycle.json](../configs/protocol-lifecycle.json).
@@ -46,7 +54,7 @@ Deployment approval is separate from all research lifecycle states and task ACCE
 The baseline freezes scope, split/candidate/relevance rules, core suite, approved
 architectures/scoring, Block 2 numerical recipe, graph semantics, metrics and
 Block 3 reproducibility/bootstrap decisions. It **does not** freeze unresolved
-MF/LightGCN initialization, execution/sampling/fanout/inference, batch sizes,
+LightGCN initialization, execution/sampling/fanout/inference, batch sizes,
 validation frequency or tuning budgets. Filling these declared pending slots
 requires approval and a frozen execution revision before comparative training;
 changing an already frozen scientific rule additionally requires a protocol bump.
@@ -132,7 +140,7 @@ All new changes are inside Amazon4U; unrelated pre-existing workspace changes ar
 preserved. **Deployment decision: NOT_AUTHORIZED.** No profiling, model training,
 optimizer updates, staging, commits or pushes were performed.
 
-### Milestone I1 implementation and regression verification
+### Historical milestone I1 Worker submission (not independent acceptance)
 
 Milestone I1 implementation complete: reusable shared evaluator, deterministic Popularity
 and KG-only scorers, on-demand uniform negative sampling, stable BPR loss, and endpoint
@@ -159,7 +167,51 @@ Invocation timeout history:
 - Rev1: 10-minute timeout during initial revision.
 - Rev2: targeted fixes completed promptly; 63 unit tests pass cleanly in ~1.8s.
 
-**Worker review status: implemented_pending_Pi_review.** Acceptance and review reserved
-for Pi (Planner/Orchestrator/independent Reviewer).
+**Historical Worker review status: implemented_pending_Pi_review.** This original
+submission is preserved, not retroactively accepted. The subsequent evaluator-only
+acceptance and main integration are recorded below; remaining I1 review stays separate.
 **Deployment decision: NOT_AUTHORIZED.** No model training, optimizer updates, profiling,
 staging, commits or pushes were performed.
+
+### Current evaluator acceptance and main integration
+
+Pi independently accepted the preserved evaluator artifact under task
+`2562b8ec-cf57-4ace-b348-9fbd6c994262`, revision 0; acceptance_scope **task_only**,
+deployment **NOT_AUTHORIZED**. Decision:
+`agy-evidence-f04ab70a-955f-4b89-8da0-2a484c1a4740`.
+Artifact benchmark: 113 tests passed. After byte-identical mechanical source/test
+integration into main, Pi verified the 63-test pre-integration baseline and
+**113-test integrated suite** (zero failures/errors/skips, 1.334 seconds).
+Evidence: `data/reports/evaluator-main-integration-v1-provenance/` and
+[evaluator-integration.md](evaluator-integration.md).
+
+The mutable lifecycle record now distinguishes this verified evaluator component
+from remaining-I1 review and learned-model/harness work. A component-progress event
+is appended to its history, without changing the lifecycle state, protocol version,
+execution revision, pending execution choices or authorization flags. Frozen
+snapshots/manifests and historical ESCALATEs remain untouched. Musical_Instruments
+profiling preparation is a next deliverable; execution is not yet authorized.
+
+Following the user's status-consistency correction, README, this document and
+`configs/protocol-lifecycle.json` were synchronized. Independent validation matched
+component task/counts to preserved integration evidence and confirmed prior history,
+scientific/version/state/execution fields and authorization flags unchanged. Full
+main regressions passed again: **113 tests, zero failures/errors/skips**, 2.547 seconds;
+fixture scratch cleaned and `git diff --check` passed. These are status-record edits,
+not a new implementation acceptance or execution authorization.
+
+### User-approved v2.0.0 suite amendment
+
+The user explicitly removed BPR-MF entirely, including the metadata variant, and
+approved Pi performing this config/documentation cleanup directly rather than
+launching an agy task. No runnable MF model existed; BPR loss/reference utilities
+remain unchanged for LightGCN and Heterogeneous KG+GNN. Active core membership is
+Popularity, LightGCN, KG-only and Heterogeneous KG+GNN. The paired bootstrap plan
+now has three baseline contrasts and 36 descriptive intervals; two learned core
+methods imply 36 final seed fits before tuning, not a permission to execute them.
+
+`configs/protocols/v2.0.0/` provides a new immutable snapshot/manifest with predecessor
+provenance; v1.0.0 and historical lifecycle events remain unchanged. The active
+protocol version and baseline pointer change, not the lifecycle state, execution
+revision, authorization flags, data scope, graph/evaluator rules or remaining
+training recipe. See [the amendment record](bpr-mf-removal-amendment.md).

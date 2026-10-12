@@ -17,7 +17,7 @@ GPU is the initial platform recommendation; TPU compatibility is not established
 - Keep **three final training seeds** for each learned method/category/feedback
   condition: **42, 2026, 3407**. Block 3's RNG/provenance and conditional paired
   bootstrap framework are agreed in [reproducibility](reproducibility-and-uncertainty.md).
-  The bootstrap contrast list is now frozen: KG + GNN minus each of four core
+  The bootstrap contrast list is now frozen: KG + GNN minus each of three core
   baselines for NDCG@10/HitRate@10, separately within all six experiment groups.
 - Use a small, profiling-informed hyperparameter search. **2–3 configurations per
   learned method per category × condition** is the planning range, not a frozen
@@ -40,16 +40,16 @@ GPU is the initial platform recommendation; TPU compatibility is not established
   only an ephemeral runtime. Log failures and restarts; never silently change the
   scientific configuration in response to an OOM or quota interruption.
 
-Three learned core methods (BPR-MF, LightGCN, heterogeneous KG + GNN) across six
-category × condition groups and three seeds imply **54 final fits**, before extra
-tuning. Two or three configurations per learned method/group would imply 36 or
-54 tuning trials, respectively. Do not assume tuning and final-run costs are
+Two learned core methods (LightGCN and heterogeneous KG + GNN) across six
+category × condition groups and three seeds imply **36 final fits**, before extra
+tuning. Two or three configurations per learned method/group would imply 24 or
+36 tuning trials, respectively. Do not assume tuning and final-run costs are
 identical, or that previously computed trials may be reused without a registered
 reuse policy. Popularity and KG-only have separate runtime/weighting budgets.
 
 ## Lifecycle and authorization
 
-The baseline is frozen as `amazon4u-protocol-v1.0.0`; this compute plan remains
+The active baseline is `amazon4u-protocol-v2.0.0`; this compute plan remains
 pending measured execution settings and numerical tuning policy. See
 [protocol lifecycle](protocol-lifecycle.md). The profiling-first approach below is
 agreed, but **no bounded profiling run is authorized yet**. Approval must declare

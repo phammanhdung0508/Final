@@ -1,0 +1,141 @@
+{
+  "semantics_version": "training-semantics-v2",
+  "status": "blocks_1_2_3_agreed_profile_and_execution_details_pending_not_runnable",
+  "training_authorized": false,
+  "lifecycle_reference": "configs/protocol-lifecycle.json",
+  "implementation_status": "documented_not_yet_implemented",
+  "rating_ge_4_eligibility": {
+    "decision_status": "user_approved",
+    "positive_min_rating": 4,
+    "positive_source": "training_interactions_only",
+    "positive_graph": "forward_and_optional_reverse_edges_from_positive_history_only",
+    "negative_universe": "category_items_with_at_least_one_rating_ge_4_training_interaction",
+    "negative_exclusion": "all_user_training_rated_items_regardless_of_rating",
+    "heldout_data_access": false,
+    "low_rated_observations": "neither_positive_edges_nor_sampled_negatives_for_that_user",
+    "empty_negative_pool": "detect_and_report_never_relax_exclusions",
+    "empty_negative_pool_action": "skip_affected_positive_updates_report_counts_fail_if_no_trainable_examples_remain"
+  },
+  "target_edge_masking": {
+    "decision_status": "user_approved",
+    "issue": "training_target_edge_shortcut_not_in_itself_validation_test_leakage",
+    "applies_to": ["Heterogeneous KG+GNN"],
+    "core_LightGCN_exception": "approved_Option_B_fixed_graph_training_edge_reuse_no_batch_target_masks",
+    "design": "batch_supervised_positive_interaction_masking",
+    "mask_scope": "union_of_batch_positive_pairs_forward_reverse_and_direct_duplicate_equivalents",
+    "mask_timing": "before_or_during_neighbor_sampling_at_every_hop",
+    "preserve": "unrelated_interactions_metadata_edges_and_valid_remaining_multihop_KG_paths",
+    "bpr_scoring_if_adopted": "positive_and_negative_scores_use_same_masked_graph_view",
+    "negative_target_edge_mask": "not_needed_for_eligible_unobserved_negatives",
+    "unmasked_cached_representations": "prohibited_for_masked_training_step",
+    "interaction_encoder_edges": "binary_under_condition_positive_policy",
+    "rating_values_as_encoder_inputs": false,
+    "heldout_interaction_edges_in_encoder": false,
+    "mask_lifetime": "training_batch_only_not_permanent_graph_deletion",
+    "implementation_status": "documented_not_yet_implemented",
+    "regression_checks": [
+      "supervised_direct_equivalents_absent_from_adjacency_and_sampled_neighborhoods",
+      "valid_remaining_KG_paths_preserved",
+      "both_scores_use_same_masked_view",
+      "no_rating_encoder_features_or_heldout_interaction_edges",
+      "batch_masks_do_not_permanently_delete_training_history"
+    ]
+  },
+  "core_LightGCN_training_graph": {
+    "decision_status": "user_approved_Option_B",
+    "propagation": "exact_full_fixed_condition_positive_training_interaction_graph",
+    "batch_target_edge_masking": false,
+    "training_positive_supervision_edge_reuse": true,
+    "heldout_interaction_edges_in_encoder": false,
+    "rating_values_as_encoder_inputs": false,
+    "implementation_status": "pending_profiling_and_implementation",
+    "amendment_document": "docs/lightgcn-protocol.md"
+  },
+  "empty_positive_history_fallback": {
+    "decision_status": "user_approved",
+    "scope": "otherwise_eligible_users_across_methods_under_feedback_condition",
+    "training_personalized_positive_examples": "none",
+    "synthetic_training_positives": false,
+    "synthetic_positive_encoder_edges": false,
+    "application_stage": "evaluation_and_inference_only",
+    "score": "condition_specific_training_positive_popularity",
+    "candidate_and_history_filters": "standard_unchanged",
+    "inject_popularity_vector_into_model": false,
+    "prediction_route": "non_personalized_fallback_not_personalized_model_prediction",
+    "reporting": "counts_and_registered_subgroup_metrics_separate_from_personalized_route_and_overall_results",
+    "fallback_on_scoring_failure": false,
+    "heldout_data_used_to_build_scores": false,
+    "KG_only_missing_metadata_fallback": "separate_approved_reason",
+    "implementation_status": "documented_not_yet_implemented"
+  },
+  "regularization": {
+    "decision_status": "user_approved",
+    "applies_to": ["LightGCN", "Heterogeneous KG+GNN"],
+    "coefficient": 0.00001,
+    "embedding_source": "base_learned_ID_rows_not_propagated_representations",
+    "selection": "unique_supervised_batch_user_IDs_and_union_of_positive_negative_item_IDs",
+    "deduplication": "once_per_typed_ID_across_examples_and_item_roles",
+    "formula": "coefficient_times_sum_endpoint_squared_L2_row_norms_divided_by_unique_endpoint_row_count",
+    "normalization": "combined_user_item_row_count_not_per_role_or_scalar_element_count",
+    "divide_by_embedding_dimension": false,
+    "extra_one_half_factor": false,
+    "excluded": ["neighbor_only_IDs", "Brand_IDs", "CategoryPath_IDs", "propagated_embeddings"],
+    "transformation_and_bias_explicit_L2": 0,
+    "transformation_and_bias_weight_decay": 0,
+    "global_optimizer_weight_decay": 0,
+    "ranking_gradients_to_neighbor_parameters": "permitted_not_detached",
+    "no_valid_supervised_batch": "no_regularization_only_or_synthetic_update",
+    "future_transformation_penalty_tuning": "requires_explicit_registered_search_space_amendment",
+    "implementation_status": "documented_not_yet_implemented"
+  },
+  "reproducibility": {
+    "decision_status": "user_approved_Block_3_frozen",
+    "training_seeds": [42, 2026, 3407],
+    "configuration": "configs/reproducibility.json",
+    "documentation": "docs/reproducibility-and-uncertainty.md",
+    "bootstrap_contrast_metric_plan": "frozen_KG_GNN_minus_three_core_baselines_NDCG10_HitRate10_per_group",
+    "implementation_status": "documented_not_yet_implemented"
+  },
+  "learned_model_training_recipe": {
+    "decision_status": "user_approved_Block_2",
+    "applies_to": ["LightGCN", "Heterogeneous KG+GNN"],
+    "loss": {
+      "name": "BPR",
+      "ranking_term": "mean_softplus(negative_score_minus_positive_score)_over_valid_supervised_examples",
+      "regularization": "add_separately_agreed_endpoint_only_base_ID_penalty"
+    },
+    "negative_sampling_distribution": "uniform_over_agreed_user_eligible_warm_negative_pool",
+    "number_of_negatives_per_positive": 1,
+    "optimizer": {
+      "name": "Adam",
+      "betas": [0.9, 0.999],
+      "epsilon": 0.00000001,
+      "weight_decay": 0
+    },
+    "learning_rate": 0.001,
+    "learning_rate_policy": "constant",
+    "maximum_epochs": 100,
+    "early_stopping": {
+      "metric": "validation_NDCG@10",
+      "direction": "maximize",
+      "patience": 10,
+      "patience_unit": "validation_checks",
+      "improvement": "strictly_greater_than_best_score",
+      "minimum_delta": 0,
+      "checkpoint_exact_ties": "retain_earliest_checkpoint"
+    },
+    "empty_negative_pool_action": "skip_affected_positive_updates_report_counts_fail_if_no_trainable_examples_remain",
+    "no_valid_batch": "no_optimizer_or_regularization_only_update",
+    "validation_frequency": "profile_dependent_not_yet_frozen",
+    "batch_size": "profile_dependent_not_yet_frozen",
+    "implementation_status": "documented_not_yet_implemented"
+  },
+  "pending_choices": [
+    "validation_frequency_after_profiling",
+    "model_specific_batch_sizes_after_profiling",
+    "GraphSAGE_neighbor_sampling_execution_and_fanout",
+    "LightGCN_exact_propagation_execution",
+    "LightGCN_ID_initialization_distribution",
+    "numerical_tuning_budgets_search_spaces_and_tuning_seed"
+  ]
+}

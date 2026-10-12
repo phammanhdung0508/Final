@@ -5,7 +5,8 @@ Implementation/tests pending; no models have been run. This resolves the earlier
 proposed seed values and uncertainty framework. The exact bootstrap contrast/metric
 list is now user-approved and frozen below; it may not be changed based on test
 exposure. Block 3's protocol decisions are complete; implementation/tests remain
-pending. The baseline protocol is now frozen as v1.0.0; execution/tuning settings
+pending. The active protocol is v2.0.0 following the user-approved model-suite amendment;
+execution/tuning settings
 and scoped permissions remain pending. See [protocol lifecycle](protocol-lifecycle.md).
 
 ## Fixed seeds and dataset membership
@@ -105,11 +106,10 @@ Within **each** of the three categories × two feedback conditions, report:
 | Direction (positive favors KG + GNN) | Bootstrap metrics |
 |---|---|
 | Heterogeneous KG + GNN minus Popularity | NDCG@10, HitRate@10 |
-| Heterogeneous KG + GNN minus BPR-MF | NDCG@10, HitRate@10 |
 | Heterogeneous KG + GNN minus LightGCN | NDCG@10, HitRate@10 |
 | Heterogeneous KG + GNN minus KG-only | NDCG@10, HitRate@10 |
 
-Four contrasts × two metrics × six separate experiment groups gives **48 planned
+Three contrasts × two metrics × six separate experiment groups gives **36 planned
 descriptive intervals**, provided required runs and eligible populations are
 available; failure/empty-population rules still apply. Share each replicate's user
 resample across all compared methods, contrasts and both metrics within a group.

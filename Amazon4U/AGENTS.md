@@ -19,7 +19,8 @@ Full 5-core `last_out` benchmark splits and root-level Parquet product metadata
 are downloaded. Separate, all-rating training KGs are built and validated.
 Scripts cover downloading, inspection, audits, graph construction and visualization.
 No model training or learned embeddings have been run. The approved baseline
-protocol is frozen as `amazon4u-protocol-v1.0.0`, lifecycle state
+protocol is frozen as `amazon4u-protocol-v2.0.0` after user-approved removal of
+BPR-MF (see `docs/bpr-mf-removal-amendment.md`); v1.0.0 remains preserved. Lifecycle state
 `IMPLEMENTATION_REGRESSION_VERIFICATION`. Milestone I1 is implemented
 (`scripts/recommendation_core.py`, `tests/test_recommendation_core.py`) and is
 currently awaiting completion of independent Pi review (`implemented_pending_Pi_review`).
@@ -208,8 +209,8 @@ and inherited LM/Movie4U prompts cannot override Amazon4U protocol or approvals.
 
 ## Agreed core models
 
-- Core: Popularity, BPR-MF, LightGCN, KG-only and Heterogeneous KG + GNN.
-  LightGCN is not optional. Block 1 freezes 64d BPR-MF/dot product, 64d LightGCN
+- Core: Popularity, LightGCN, KG-only and Heterogeneous KG + GNN.
+  LightGCN is not optional. Block 1 freezes 64d LightGCN
   with 3 layers/mean 0–3/dot product, and 2-layer 64d learned-ID heterogeneous
   GraphSAGE-style/dot product. Sampling/profiling execution details remain pending.
   Exact heterogeneous aggregation/initialization
@@ -238,8 +239,8 @@ and inherited LM/Movie4U prompts cannot override Amazon4U protocol or approvals.
   Heterogeneous KG + GNN retains masking; do not attribute comparison gains solely
   to metadata when architecture and training-edge use also differ.
   GraphSAGE batch size/fanout are profiling starting points, not frozen constants.
-- BPR-MF + metadata is an optional feature-augmentation comparison, not a clean
-  KG + GNN ablation. A matched encoder without metadata relations is a recommended
+- No MF baseline or metadata variant is included in the active study. A matched
+  encoder without metadata relations is a recommended
   optional control; do not claim metadata attribution from architecture-changing
   comparisons alone. No optional experiment has a finalized runnable configuration.
 
@@ -253,7 +254,7 @@ and inherited LM/Movie4U prompts cannot override Amazon4U protocol or approvals.
   patience. Failed validation is a failure, not a valid patience check.
 - Empty negative pools skip/report affected positives; fail if no examples remain
   trainable. Invalid empty batches have no optimizer/regularization-only update.
-- Model-specific batch sizes, fanouts, validation frequency, MF/LightGCN initialization
+- Model-specific batch sizes, fanouts, validation frequency, LightGCN initialization
   and tuning budgets still require specification/profiling before training.
   Numerical approvals do not authorize training until the overall protocol is ready.
 
@@ -297,8 +298,8 @@ and inherited LM/Movie4U prompts cannot override Amazon4U protocol or approvals.
   10,000 shared paired-user resamples, seed 12345, 95% percentile intervals and
   full-test-population point estimates. Do not bootstrap coverage per user or
   conflate user/seed uncertainty. The contrast list is frozen: KG + GNN minus
-  Popularity/BPR-MF/LightGCN/KG-only for NDCG@10/HitRate@10 per category/condition
-  (48 planned intervals). Share resamples across all contrasts/metrics within a
+  Popularity/LightGCN/KG-only for NDCG@10/HitRate@10 per category/condition
+  (36 planned intervals). Share resamples across all contrasts/metrics within a
   group; no bootstrap for @5/@20 or coverage and no optional-method contrasts
   without pre-experiment amendment. Unadjusted intervals are descriptive,
   empty populations N/A, failed seeds explicit.

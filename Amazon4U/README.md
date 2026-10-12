@@ -6,10 +6,23 @@ conditions. Start development/resource checks on Musical_Instruments, then
 Toys_and_Games and Electronics. No research subsampling or evaluation-user sampling.
 See `configs/dataset-scope.json` and the scope decision in
 `docs/evaluation-protocol.md`. The baseline protocol is frozen as
-**`amazon4u-protocol-v1.0.0`**, in lifecycle state **`IMPLEMENTATION_REGRESSION_VERIFICATION`**.
-Milestone I1 core logic is implemented in `scripts/recommendation_core.py` and
-verified via `tests/test_recommendation_core.py` (status: `implemented_pending_Pi_review`).
+**`amazon4u-protocol-v2.0.0`**, in lifecycle state **`IMPLEMENTATION_REGRESSION_VERIFICATION`**.
+**Evaluator integration is complete in the main checkout**: `recommendation_core.py`
+uses the shared engine in `scripts/recommendation_evaluation.py`, with guarded KG-only
+fallback. The preserved evaluator artifact received **ACCEPT (task_only)**; the
+integrated main suite passed **113 tests, zero failures/errors/skips**. See
+[the integration record](docs/evaluator-integration.md) for acceptance and evidence.
+Remaining I1 scorer/sampler/reference-loss review and learned model/training-harness
+implementation are still pending—not covered by evaluator acceptance. Next steps
+are in [the implementation roadmap](docs/implementation-roadmap.md).
 Execution settings remain pending; profiling and comparative training are **not authorized**.
+Deployment remains **NOT_AUTHORIZED**.
+
+The active suite is **Popularity, LightGCN, KG-only and Heterogeneous KG+GNN**.
+The user-approved [v2.0.0 amendment](docs/bpr-mf-removal-amendment.md) removes BPR-MF
+and its metadata variant entirely, while retaining BPR loss for the two learned
+models. The v1.0.0 frozen snapshot remains unchanged; the bootstrap plan now has
+three baseline contrasts and 36 descriptive intervals.
 See [version/lifecycle policy](docs/protocol-lifecycle.md) and
 `configs/protocol-lifecycle.json` for separate version, state and permission records.
 Source: https://huggingface.co/datasets/McAuley-Lab/Amazon-Reviews-2023
@@ -37,8 +50,11 @@ resumes partial downloads, and verifies file sizes (not content hashes). Use
 
 ## Files
 
-- `scripts/recommendation_core.py`: milestone I1 core evaluator, Popularity/KG-only scorers, negative sampler, and reference loss/regularization.
+- `scripts/recommendation_core.py`: shared-evaluator subclass with guarded KG fallback, Popularity/KG-only scorers, negative sampler, and reference loss/regularization.
+- `scripts/recommendation_evaluation.py`: authoritative shared context/error and candidate/filtering/ranking/metrics engine.
 - `tests/test_recommendation_core.py`: milestone I1 hand-calculated regression fixtures and isolation tests.
+- `tests/test_recommendation_evaluation.py`: shared evaluator and adversarial candidate-isolation regressions.
+- `tests/test_evaluator_integration.py`: core/shared API identity, guarded fallback and exact metric integration oracles.
 - `data/raw/benchmark/5core/last_out/`: full train/valid/test interaction CSVs.
 - `data/raw/raw_meta_<Category>/`: full product metadata Parquet shards.
 - `data/raw/download_manifest_all.json`: source revision, file paths and sizes.

@@ -1,9 +1,10 @@
 # Models and baselines — design discussion
 
-No Amazon4U model or learned embeddings have been implemented/trained. This
+No Amazon4U learned model or learned embeddings have been implemented/trained. This
 record distinguishes agreed interpretation from proposed implementation choices.
-The baseline [evaluation protocol](evaluation-protocol.md) is frozen as v1.0.0;
-execution settings, verification and training authorization remain pending.
+The active [evaluation protocol](evaluation-protocol.md) is v2.0.0;
+[user-approved removal](bpr-mf-removal-amendment.md) supersedes the v1.0.0 suite.
+Execution settings, verification and training authorization remain pending.
 See [protocol lifecycle](protocol-lifecycle.md).
 
 ## Agreed: GraphSAGE-style model interpretation
@@ -39,16 +40,16 @@ from the actual recommender's inputs, training scope and inference capability.
 ## Core comparison suite — user-approved membership
 
 1. **Popularity:** non-personalized reference using permitted training feedback.
-2. **BPR-MF:** interaction-only collaborative baseline.
-3. **LightGCN:** core interaction-graph baseline. It tests embedding propagation
+2. **LightGCN:** core interaction-graph baseline. It tests embedding propagation
    without Brand/Category KG relations.
-4. **KG-only:** metadata/graph-based personalization without learned GNN propagation.
-5. **Heterogeneous KG + GNN:** the main graph-aware model; GraphSAGE-style
+3. **KG-only:** metadata/graph-based personalization without learned GNN propagation.
+4. **Heterogeneous KG + GNN:** the main graph-aware model; GraphSAGE-style
    implementation details remain to be finalized.
 
 **Status:** core membership finalized by the user, before training. Configuration:
-`configs/model-suite.json`. This supersedes the initial four-method recommendation
-that treated LightGCN as optional. LightGCN is core because an interaction-graph
+`configs/model-suite.json`. The v2.0.0 amendment removes BPR-MF entirely, including
+its metadata variant; the old five-method suite is preserved in the v1.0.0
+snapshot. LightGCN is core because an interaction-graph
 baseline is needed before attributing improvements to KGs or metadata.
 
 ## Block 1 — frozen architecture and scoring, implementation pending
@@ -61,7 +62,6 @@ profiling or comparative training, or claim implementation readiness.
 | Core method | Agreed specification |
 |---|---|
 | Popularity | Count permitted positive training interactions per item; all ratings in the primary condition, >=4 in the sensitivity condition |
-| BPR-MF | 64-dimensional learned user/item embeddings; dot-product score |
 | LightGCN | 64-dimensional embeddings, 3 propagation layers, arithmetic mean of layers 0–3; dot-product score |
 | KG-only | Training-warm IDF-weighted category-path/brand profiles; cosine similarity; no rating weighting or popularity bonus |
 | Heterogeneous KG + GNN | Two-layer heterogeneous GraphSAGE-style encoder, 64-dimensional learned node-ID embeddings, relation-aware aggregation; dot-product score |
@@ -125,13 +125,11 @@ rating weights/popularity bonus keep the metadata scoring interpretation explici
 
 ## Optional comparisons and attribution limits
 
-- **BPR-MF + metadata:** optional feature-augmentation comparison. It is not a
-  clean ablation of KG + GNN because architecture and metadata handling differ.
 - **Matched KG + GNN without metadata relations:** optional, recommended ablation
   for isolating the contribution of metadata relations. Keep the encoder design,
   decoder and training budget comparable; exact construction is not frozen.
 
-Neither optional comparison is required by the core suite, and neither has an
+This optional comparison is not required by the core suite and has no
 approved runnable configuration. Comparison with LightGCN also changes architecture
 as well as metadata and now also target-edge handling (fixed training-edge reuse
 versus heterogeneous batch masking); beating it alone does not isolate metadata's
@@ -142,17 +140,18 @@ as an architecture-matched ablation.
 ## Remaining decisions
 
 Core membership and Block 1 architecture/scoring are finalized as above, including
-the KG-only mixture grid and exact scoring/fallback specification. KG-only scorer
-implementation and hand-calculated ranking tests remain pending. The exact GNN
+the KG-only mixture grid and exact scoring/fallback specification. KG-only reference
+scoring and fixtures exist; remaining I1 independent review and the full runnable
+harness are still pending. The exact GNN
 operator and initialization are also agreed; implementation/tests and sampling
 execution remain pending. Endpoint-only base-ID L2 (coefficient 1e-5) and zero
 transformation/global weight decay are now agreed. Model-specific training
 objectives, optimizer, negative distribution/count, learning rate, epoch cap,
 stopping and empty-pool handling are now approved in Block 2. Numerical tuning
-budgets, profile-dependent execution and BPR-MF/LightGCN ID initialization still
+budgets, profile-dependent execution and LightGCN ID initialization still
 require explicit agreement. Final seeds 42/2026/3407 and the uncertainty framework
 are agreed in [Block 3](reproducibility-and-uncertainty.md), now including the frozen
-four KG + GNN-minus-baseline contrasts for NDCG@10/HitRate@10 per experiment group. Profile-dependent execution must also be finalized. Learned graph methods
+three KG + GNN-minus-baseline contrasts for NDCG@10/HitRate@10 per experiment group. Profile-dependent execution must also be finalized. Learned graph methods
 follow their explicitly agreed training graph semantics: heterogeneous batch
 masking versus core LightGCN fixed-graph training-edge reuse. Both exclude held-out
 edges. See [training semantics](training-semantics.md) and the LightGCN amendment.

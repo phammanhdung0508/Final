@@ -1,6 +1,8 @@
 # Pre-training evaluation protocol
 
-Status: **BASELINE_PROTOCOL_FROZEN — `amazon4u-protocol-v1.0.0`.**
+Status: **BASELINE_PROTOCOL_FROZEN — `amazon4u-protocol-v2.0.0`.**
+The user-approved [suite amendment](bpr-mf-removal-amendment.md) removes BPR-MF
+entirely; the preceding v1.0.0 snapshot and historical decisions are preserved.
 Implementation/regression verification and execution settings remain pending;
 profiling and comparative training are **not authorized**. See
 [version and lifecycle policy](protocol-lifecycle.md) and
@@ -153,13 +155,13 @@ and review-derived-content/timing audits before use.
    for the primary protocol. See the future-experiments section below.
 8. Baselines, comparable graph/splits/candidates, validation search budget,
    checkpoint selection rule, training seeds and reporting uncertainty.
-   **Core membership finalized:** Popularity, BPR-MF, LightGCN, KG-only and
-   Heterogeneous KG + GNN (`configs/model-suite.json`). BPR-MF + metadata is an
-   optional feature-augmentation comparison, not a clean KG + GNN ablation;
-   a matched encoder without metadata relations is an optional recommended control.
+   **Core membership finalized:** Popularity, LightGCN, KG-only and
+   Heterogeneous KG + GNN (`configs/model-suite.json`). A matched encoder without
+   metadata relations remains an optional recommended control; no MF variant is
+   included in the active study.
    See [models and baselines](models-and-baselines.md). Learned-ID GraphSAGE-style
    implementations are transductive, with no cold-start claim. **Block 1 is now
-   agreed:** 64d BPR-MF/dot product; 64d LightGCN, 3 layers, mean 0–3/dot product;
+   agreed:** 64d LightGCN, 3 layers, mean 0–3/dot product;
    2-layer 64d learned-ID heterogeneous GraphSAGE-style/dot product; KG-only
    training-warm IDF/cosine without rating weighting or popularity bonus.
    KG-only uses ordered mixtures 1/0, 0.75/0.25, 0.5/0.5 selected by validation
@@ -180,7 +182,7 @@ and review-derived-content/timing audits before use.
    learning rate, maximum 100 epochs, and patience 10 validation checks without
    strict NDCG@10 improvement; earliest checkpoint wins exact ties. Empty-pool
    updates are skipped/reported; fail if no trainable examples remain. See training
-   semantics for exact values. Batch size/fanout/validation frequency, MF/LightGCN
+   semantics for exact values. Batch size/fanout/validation frequency, LightGCN
    initialization and numerical tuning budgets remain pending.
    A separate regularization decision is now agreed: 1e-5 times mean squared L2
    row norm over unique supervised base user/item endpoint IDs only. Exclude
@@ -191,9 +193,9 @@ and review-derived-content/timing audits before use.
    bootstrap on seed-averaged fixed test metrics (10,000 replicates, seed 12345,
    95% percentile intervals), exclusively post-selection. See
    [reproducibility](reproducibility-and-uncertainty.md) and `configs/reproducibility.json`.
-   **Contrast list now frozen:** KG + GNN minus Popularity, BPR-MF, LightGCN
-   and KG-only, each for NDCG@10/HitRate@10 in six separate category/condition
-   groups (48 planned descriptive intervals). No @5/@20 or coverage bootstrap;
+   **Contrast list now frozen:** KG + GNN minus Popularity, LightGCN and KG-only,
+   each for NDCG@10/HitRate@10 in six separate category/condition groups
+   (36 planned descriptive intervals). No @5/@20 or coverage bootstrap;
    optional methods require a pre-experiment amendment. No total-uncertainty or
    multiplicity-controlled significance claim.
    The [compute and tuning plan](compute-and-tuning-plan.md) records conditional
@@ -287,7 +289,7 @@ For each group:
    resamples and full-population point estimates. Coverage is reported per seed,
    not per-user bootstrapped. Distinguish conditional user uncertainty from seed
    variability, partial failed-seed results, fallback subgroups and N/A empty
-   populations. Use the frozen four core baseline contrasts and NDCG@10/HitRate@10
+   populations. Use the frozen three core baseline contrasts and NDCG@10/HitRate@10
    list only; share resamples across contrasts/metrics and never select them after test.
 
 A sensitivity summary compares KG + GNN against each baseline **within each
@@ -304,7 +306,7 @@ block training despite this section being frozen.
 
 ## Freeze and amendments
 
-The approved baseline is now frozen as `amazon4u-protocol-v1.0.0`, separately
+The approved baseline is now frozen as `amazon4u-protocol-v2.0.0`, separately
 from execution readiness and authorization. Follow the
 [version/lifecycle policy](protocol-lifecycle.md): preserve frozen snapshots,
 register approved execution revisions and scoped permissions, and append amendments.

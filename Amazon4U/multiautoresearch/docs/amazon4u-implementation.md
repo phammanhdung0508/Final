@@ -67,12 +67,12 @@ Milestone I1 implements the reusable shared evaluation harness, deterministic Po
 | Phase / Milestone | Description | Status | Gate Requirement |
 |---|---|---|---|
 | **Milestone I1** | Core shared evaluator, Popularity, KG-only, reference sampling & loss | **implemented_pending_Pi_review** | Complete regression suite passing |
-| **Milestone I2** | Learned baseline architectures (BPR-MF, LightGCN, Heterogeneous KG+GNN) reference modules | Pending | Milestone I1 accepted by Pi |
+| **Milestone I2** | Learned baseline architectures (LightGCN, Heterogeneous KG+GNN) reference modules | Pending | Milestone I1 accepted by Pi |
 | **Milestone I3** | Batch data loaders, batch positive-edge masking, and training loop harness | Pending | Milestone I2 verified |
 | **Milestone I4** | Bounded profiling gate on Musical_Instruments | **NOT AUTHORIZED** | Explicit user approval & budget freeze |
 | **Milestone I5** | Comparative training runs across categories and conditions | **NOT AUTHORIZED** | Profiling review & execution plan freeze |
 
-## 4. Verification Results
+## 4. Historical initial I1 verification (not Pi acceptance)
 
 Execution command:
 ```sh
@@ -100,7 +100,10 @@ Bounded profiling must NOT proceed without separate, explicit user authorization
 
 ## 6. Current Lifecycle State
 
-- **Protocol Version**: `amazon4u-protocol-v1.0.0` (unchanged)
+- **Protocol Version**: `amazon4u-protocol-v2.0.0` (user-approved suite amendment;
+  v1.0.0 snapshot and initial verification history preserved). Pi directly performed
+  this config/documentation cleanup under the user's scoped exception; no agy task
+  was launched. See [amendment](../../docs/bpr-mf-removal-amendment.md).
 - **Lifecycle State**: `IMPLEMENTATION_REGRESSION_VERIFICATION`
 - **Execution Revision**: `null` (not assigned)
 - **Profiling Authorized**: `false`

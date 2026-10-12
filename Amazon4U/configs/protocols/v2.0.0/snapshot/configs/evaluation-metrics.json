@@ -1,0 +1,27 @@
+{
+  "metric_protocol_version": "metrics-v1",
+  "decision_status": "user_approved_frozen_before_training",
+  "primary_metric": "NDCG@10",
+  "secondary_metrics": ["HitRate@10", "CatalogCoverage@10"],
+  "supplementary_metrics": ["NDCG@5", "NDCG@20", "HitRate@5", "HitRate@20"],
+  "ranking_cutoffs": [5, 10, 20],
+  "relevance": "binary_according_to_feedback_condition",
+  "aggregation": {
+    "NDCG": "macro_average_over_eligible_users",
+    "HitRate": "macro_average_over_eligible_users",
+    "CatalogCoverage": "unique_recommended_items_across_eligible_users_divided_by_condition_warm_pool_size"
+  },
+  "report_grouping": ["category", "feedback_condition"],
+  "cross_category_primary_score": false,
+  "checkpoint_selection_metric": "validation_NDCG@10",
+  "ranking_order": ["score_descending", "parent_asin_ascending_for_exact_score_ties"],
+  "history_filter_timing": "before_top_K_selection",
+  "nonfinite_score_policy": "reject",
+  "fewer_than_K_candidates": "return_all_available_without_padding_and_report_count",
+  "same_eligible_users_across_methods_within_group": true,
+  "report_evaluation_population": true,
+  "report_validation_and_test_separately": true,
+  "seed_and_uncertainty_policy": "Block_3_frozen_in_reproducibility_json",
+  "implementation_status": "documented_not_yet_implemented",
+  "training_authorized": false
+}

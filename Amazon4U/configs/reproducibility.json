@@ -1,5 +1,5 @@
 {
-  "protocol_version": "reproducibility-v1",
+  "protocol_version": "reproducibility-v2",
   "decision_status": "user_approved_Block_3_frozen_before_experiments",
   "implementation_status": "documented_not_yet_implemented",
   "training_authorized": false,
@@ -55,14 +55,13 @@
     "multiplicity": "unadjusted_descriptive_intervals_no_controlled_significance_claim",
     "predeclared_comparisons": [
       {"left": "Heterogeneous KG+GNN", "right": "Popularity"},
-      {"left": "Heterogeneous KG+GNN", "right": "BPR-MF"},
       {"left": "Heterogeneous KG+GNN", "right": "LightGCN"},
       {"left": "Heterogeneous KG+GNN", "right": "KG-only"}
     ],
     "comparison_direction": "left_minus_right_positive_favors_KG_GNN",
     "predeclared_metrics": ["NDCG@10", "HitRate@10"],
     "experiment_grouping": "each_of_three_categories_by_each_of_two_feedback_conditions_separately",
-    "planned_interval_count": 48,
+    "planned_interval_count": 36,
     "same_resamples_across_contrasts_and_metrics_within_group": true,
     "supplementary_cutoffs": "per_seed_summaries_only_no_bootstrap_intervals",
     "optional_methods": "excluded_unless_explicitly_amended_before_experiments",

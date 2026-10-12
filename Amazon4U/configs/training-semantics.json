@@ -1,5 +1,5 @@
 {
-  "semantics_version": "training-semantics-v1",
+  "semantics_version": "training-semantics-v2",
   "status": "blocks_1_2_3_agreed_profile_and_execution_details_pending_not_runnable",
   "training_authorized": false,
   "lifecycle_reference": "configs/protocol-lifecycle.json",
@@ -70,7 +70,7 @@
   },
   "regularization": {
     "decision_status": "user_approved",
-    "applies_to": ["BPR-MF", "LightGCN", "Heterogeneous KG+GNN"],
+    "applies_to": ["LightGCN", "Heterogeneous KG+GNN"],
     "coefficient": 0.00001,
     "embedding_source": "base_learned_ID_rows_not_propagated_representations",
     "selection": "unique_supervised_batch_user_IDs_and_union_of_positive_negative_item_IDs",
@@ -93,12 +93,12 @@
     "training_seeds": [42, 2026, 3407],
     "configuration": "configs/reproducibility.json",
     "documentation": "docs/reproducibility-and-uncertainty.md",
-    "bootstrap_contrast_metric_plan": "frozen_KG_GNN_minus_four_core_baselines_NDCG10_HitRate10_per_group",
+    "bootstrap_contrast_metric_plan": "frozen_KG_GNN_minus_three_core_baselines_NDCG10_HitRate10_per_group",
     "implementation_status": "documented_not_yet_implemented"
   },
   "learned_model_training_recipe": {
     "decision_status": "user_approved_Block_2",
-    "applies_to": ["BPR-MF", "LightGCN", "Heterogeneous KG+GNN"],
+    "applies_to": ["LightGCN", "Heterogeneous KG+GNN"],
     "loss": {
       "name": "BPR",
       "ranking_term": "mean_softplus(negative_score_minus_positive_score)_over_valid_supervised_examples",
@@ -135,7 +135,7 @@
     "model_specific_batch_sizes_after_profiling",
     "GraphSAGE_neighbor_sampling_execution_and_fanout",
     "LightGCN_exact_propagation_execution",
-    "BPR_MF_and_LightGCN_ID_initialization_distribution",
+    "LightGCN_ID_initialization_distribution",
     "numerical_tuning_budgets_search_spaces_and_tuning_seed"
   ]
 }

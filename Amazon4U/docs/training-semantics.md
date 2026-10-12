@@ -158,13 +158,13 @@ neighbor-sampling strategy and fanouts remain pending profiling/specification.
 
 ## Agreed: endpoint-only base-ID embedding regularization
 
-For BPR-MF, core LightGCN and heterogeneous KG + GNN, define sets from the valid
+For core LightGCN and heterogeneous KG + GNN, define sets from the valid
 supervised batch actually used in the update:
 
 - U_B: unique supervised user IDs.
 - I_B: the union of unique positive and negative item IDs.
 
-Use the same explicit penalty for all three learned methods:
+Use the same explicit penalty for both learned methods:
 
 `L_reg = (1e-5 / (|U_B| + |I_B|))`
 `        * (sum(||e_u^(0)||_2^2 for u in U_B)`
@@ -219,7 +219,7 @@ propagation graph. Configuration: `configs/training-semantics.json`.
 
 **Status:** user-approved before training, documented but not implemented. This
 supersedes the earlier proposed numerical recipe and empty-negative-pool action.
-Applies to BPR-MF, core LightGCN and heterogeneous KG + GNN, with their respective
+Applies to core LightGCN and heterogeneous KG + GNN, with their respective
 agreed graph semantics and the separate endpoint-only regularization formula.
 
 | Setting | Approved value |
@@ -262,7 +262,7 @@ requires profiling full-ranking validation every epoch on Musical_Instruments
 first, retaining it if practical and registering any necessary schedule amendment
 before comparative experiments. Patience is now fixed at 10 **validation checks**,
 not epochs, regardless of the subsequently approved validation frequency.
-BPR-MF/LightGCN ID initialization distributions remain to specify separately;
+The LightGCN ID initialization distribution remains to specify separately;
 the heterogeneous encoder's initialization is already frozen.
 
 Batch target-edge masking for heterogeneous KG + GNN and binary, rating-free

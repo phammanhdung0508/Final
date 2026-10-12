@@ -1,0 +1,116 @@
+{
+  "manifest_schema_version": "baseline-manifest-v1",
+  "protocol_version": "amazon4u-protocol-v2.0.0",
+  "lifecycle_at_freeze": "IMPLEMENTATION_REGRESSION_VERIFICATION",
+  "execution_revision": null,
+  "source_git_revision": "67e5004f21a95976a444c58b0aeb3ffebd3cc86a",
+  "source_state": "local_uncommitted_user_approved_amendment_snapshot_not_a_new_commit",
+  "profiling_authorized_by_freeze": false,
+  "training_authorized_by_freeze": false,
+  "deployment_decision": "NOT_AUTHORIZED",
+  "heldout_model_results_exposed": false,
+  "prior_split_metadata_audits_already_performed": true,
+  "hash_algorithm": "SHA-256",
+  "predecessor_manifest": "configs/protocols/v1.0.0/baseline-manifest.json",
+  "predecessor_manifest_sha256": "7a19eec510050417700c462ac502c41811bdedd9a541b5f527ee9d6eb144475a",
+  "amendment_document": "docs/bpr-mf-removal-amendment.md",
+  "approval": "user_explicitly_removed_BPR_MF_entirely_and_approved_Pi_direct_config_document_cleanup",
+  "files": [
+    {
+      "source_path": "configs/dataset-scope.json",
+      "snapshot_path": "snapshot/configs/dataset-scope.json",
+      "bytes": 1049,
+      "sha256": "0180eaba9c4431cd8a5765b873e49dfe1f4169eb7c0a95698cc3a021cf387e01"
+    },
+    {
+      "source_path": "configs/evaluation-metrics.json",
+      "snapshot_path": "snapshot/configs/evaluation-metrics.json",
+      "bytes": 1333,
+      "sha256": "1a490fd7cb5b406e6ec204bcd8e79d0d3413aaf466e6e9727cd9bd59bd2db188"
+    },
+    {
+      "source_path": "configs/model-suite.json",
+      "snapshot_path": "snapshot/configs/model-suite.json",
+      "bytes": 6451,
+      "sha256": "e5047f7552e3acec9c9ce51230ea8cc63316b9fd04c69066a4d6a6acd08b768b"
+    },
+    {
+      "source_path": "configs/training-semantics.json",
+      "snapshot_path": "snapshot/configs/training-semantics.json",
+      "bytes": 7368,
+      "sha256": "7fe24c08c2e7d619b9be4496c6054e60d569298867d475aface369bc5e9fc32f"
+    },
+    {
+      "source_path": "configs/reproducibility.json",
+      "snapshot_path": "snapshot/configs/reproducibility.json",
+      "bytes": 5001,
+      "sha256": "96eec65552d1543cb939a00954533fa83a31d614adde944ebb10795b53ad2bf7"
+    },
+    {
+      "source_path": "configs/kg-v1.json",
+      "snapshot_path": "snapshot/configs/kg-v1.json",
+      "bytes": 1380,
+      "sha256": "6f3317ce4873c8c26771a2dc6e5959691bab7a9cc25ac71d20ad6db11baf593e"
+    },
+    {
+      "source_path": "docs/evaluation-protocol.md",
+      "snapshot_path": "snapshot/docs/evaluation-protocol.md",
+      "bytes": 21073,
+      "sha256": "95699cb38d1233a87aded3b9e965304c037c09a88dc542ff6d28d55e689709e6"
+    },
+    {
+      "source_path": "docs/training-semantics.md",
+      "snapshot_path": "snapshot/docs/training-semantics.md",
+      "bytes": 16345,
+      "sha256": "e4568556dd88a2df8c690b12dc229a5a75387621ff28ad8e9ff1b7600538f42e"
+    },
+    {
+      "source_path": "docs/candidates-and-cold-start.md",
+      "snapshot_path": "snapshot/docs/candidates-and-cold-start.md",
+      "bytes": 8820,
+      "sha256": "543bf043358e25921790038c1ca453d56d0edd71b27ec38b94c5f3399e6c179d"
+    },
+    {
+      "source_path": "docs/models-and-baselines.md",
+      "snapshot_path": "snapshot/docs/models-and-baselines.md",
+      "bytes": 9645,
+      "sha256": "557ba091cef5ba3a54b47ca415ce4b1d475615d766929ad9a7831b399ba0e259"
+    },
+    {
+      "source_path": "docs/kg-only-scoring.md",
+      "snapshot_path": "snapshot/docs/kg-only-scoring.md",
+      "bytes": 7047,
+      "sha256": "9c71ce368f514763e2b646c89feedbce00a516ec6cdb1993c295ec73d3f62355"
+    },
+    {
+      "source_path": "docs/heterogeneous-encoder.md",
+      "snapshot_path": "snapshot/docs/heterogeneous-encoder.md",
+      "bytes": 6910,
+      "sha256": "4e7c5fae14fa6a9fb6113d3a93d4d9d05aaf639e11022539356c977945889193"
+    },
+    {
+      "source_path": "docs/lightgcn-protocol.md",
+      "snapshot_path": "snapshot/docs/lightgcn-protocol.md",
+      "bytes": 4595,
+      "sha256": "88006a083b2afea8e2730fddd0886fa48e13f9e14d9bf9903fab793ae6e06f09"
+    },
+    {
+      "source_path": "docs/reproducibility-and-uncertainty.md",
+      "snapshot_path": "snapshot/docs/reproducibility-and-uncertainty.md",
+      "bytes": 10805,
+      "sha256": "11c0b6eeecf746b62e5189be9cba676d15efd4e4f04cdf3b4e1affa88722001f"
+    },
+    {
+      "source_path": "docs/kg-schema.md",
+      "snapshot_path": "snapshot/docs/kg-schema.md",
+      "bytes": 5638,
+      "sha256": "8697c793d437ca548743cb8d43186fd526853bc4dc700585a87ef4288c8b6b6c"
+    },
+    {
+      "source_path": "docs/kg-input-audit.md",
+      "snapshot_path": "snapshot/docs/kg-input-audit.md",
+      "bytes": 4474,
+      "sha256": "e9def51297aad6f4781ba6be1c21993b6409e08dd6bbe82ffe8428dc82190c1b"
+    }
+  ]
+}
