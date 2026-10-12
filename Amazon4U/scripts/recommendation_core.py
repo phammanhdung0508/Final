@@ -619,3 +619,34 @@ def endpoint_regularization(
     if math.isnan(penalty) or math.isinf(penalty):
         raise ValueError("Non-finite endpoint penalty computed.")
     return penalty
+
+
+if __package__:
+    from .learned_models import (
+        LightGCNConfig,
+        LightGCNGraph,
+        LightGCNScorer,
+        MissingIdError,
+        TrainingHarnessGuard,
+        UnknownIdError,
+        build_lightgcn_graph,
+        compute_bpr_batch_loss,
+        create_checkpoint_manifest,
+        propagate_lightgcn,
+        validate_checkpoint_manifest,
+    )
+else:
+    from learned_models import (
+        LightGCNConfig,
+        LightGCNGraph,
+        LightGCNScorer,
+        MissingIdError,
+        TrainingHarnessGuard,
+        UnknownIdError,
+        build_lightgcn_graph,
+        compute_bpr_batch_loss,
+        create_checkpoint_manifest,
+        propagate_lightgcn,
+        validate_checkpoint_manifest,
+    )
+

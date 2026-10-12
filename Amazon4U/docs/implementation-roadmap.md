@@ -101,7 +101,26 @@ regularization were independently verified under task
 zero failures/errors/skips. Historical noncritical recovery ESCALATEs remain
 preserved and do not change this final Step 2 acceptance.
 
-Step 3: next, learned models and training harness implementation/verification.
-Step 4: queued, bounded Musical_Instruments profiling plan preparation. Profiling
-and training execution remain unauthorized; deployment NOT_AUTHORIZED. No model
-training, optimizer updates or profiling has run.
+Step 3: **Step 3a complete and accepted task-only**. Learned-model training
+harness foundation, LightGCN fixed Option B graph construction, exact full-batch
+propagation, dot-product candidate scoring, composed BPR batch loss, endpoint
+regularization, training harness guards against empty-batch/unauthorized updates,
+and serializable checkpoint/provenance contracts are implemented in
+`scripts/learned_models.py` (and re-exported in `scripts/recommendation_core.py`)
+with 25 synthetic unit tests in `tests/test_learned_models.py`. Final acceptance
+task `8153df65-e2e2-4571-a4ce-340d0ffeb1c2`; decision
+`agy-evidence-1ad0bf36-5bef-4661-824d-c7b6dfef8295`; benchmark evidence
+`agy-evidence-81230b37-ea8a-40f5-a8f9-613e4f95420b`: **140 tests passed**,
+zero failures/errors/skips. LightGCNConfig validates exact 3 propagation layers;
+`propagate_lightgcn` validates exact key matching for `graph.users` and
+`graph.warm_items`, rejecting missing/unknown IDs; `TrainingHarnessGuard` fails
+closed unconditionally for real data (even if `allow_synthetic_updates=True`) and
+requires `allow_synthetic_updates=True` for non-real-data reference validation.
+Historical Step 3a recovery ESCALATEs remain preserved.
+
+Next Step 3 work: Heterogeneous KG+GNN implementation and verification. Real
+optimizer updates, full training loops, profiling, training execution and
+deployment remain NOT_AUTHORIZED. Step 4 remains queued: bounded
+Musical_Instruments profiling plan preparation. No model training, optimizer
+updates or profiling has run.
+

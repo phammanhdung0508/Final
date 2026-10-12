@@ -2,10 +2,10 @@
   "schema_version": "protocol-lifecycle-v1",
   "protocol_version": "amazon4u-protocol-v2.0.0",
   "lifecycle_state": "IMPLEMENTATION_REGRESSION_VERIFICATION",
-  "decision_status": "milestone_I1_remaining_components_accepted_learned_implementation_pending",
+  "decision_status": "step_3a_lightgcn_foundation_accepted_heterogeneous_and_execution_pending",
   "execution_revision": null,
   "execution_settings_status": "not_frozen",
-  "implementation_status": "I1_evaluator_and_remaining_reference_components_regression_verified_learned_implementation_pending",
+  "implementation_status": "I1_and_step_3a_lightgcn_reference_regression_verified_heterogeneous_and_execution_pending",
   "component_status": {
     "evaluator": {
       "artifact_review": "ACCEPT",
@@ -42,7 +42,32 @@
         "benchmark_evidence": "agy-evidence-db13c5d9-6593-49d8-8586-3ff66cd9f6f3"
       }
     },
-    "learned_models_and_training_harness": "implementation_pending",
+    "learned_models_and_training_harness": {
+      "step_3a_lightgcn_foundation": {
+        "artifact_review": "ACCEPT",
+        "artifact_task_id": "8153df65-e2e2-4571-a4ce-340d0ffeb1c2",
+        "acceptance_scope": "task_only",
+        "decision_evidence": "agy-evidence-1ad0bf36-5bef-4661-824d-c7b6dfef8295",
+        "benchmark_evidence": "agy-evidence-81230b37-ea8a-40f5-a8f9-613e4f95420b",
+        "verified_components": [
+          "LightGCNConfig",
+          "LightGCNGraph",
+          "propagate_lightgcn",
+          "LightGCNScorer",
+          "compute_bpr_batch_loss",
+          "TrainingHarnessGuard",
+          "checkpoint_manifest_helpers"
+        ],
+        "main_regression": {
+          "tests_run": 140,
+          "failures": 0,
+          "errors": 0,
+          "skips": 0
+        }
+      },
+      "heterogeneous_kg_gnn": "implementation_pending",
+      "full_training_loops_and_optimizer_updates": "not_authorized"
+    },
     "Musical_Instruments_profiling": "plan_and_execution_authorization_pending"
   },
   "profiling_authorized": false,
@@ -150,6 +175,27 @@
       "decision_evidence": "agy-evidence-8cfc6826-f8ae-4ea6-be7c-dc1c838cd036",
       "benchmark_evidence": "agy-evidence-db13c5d9-6593-49d8-8586-3ff66cd9f6f3",
       "main_regression_tests": 115,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "historical_escalations_preserved": true,
+      "heldout_model_results_exposed": false,
+      "prior_split_and_metadata_audits": "already_performed_not_unseen_data",
+      "profiling_or_training_authorized_by_event": false
+    },
+    {
+      "event": "step_3a_lightgcn_foundation_acceptance_and_main_transfer",
+      "from_state": "IMPLEMENTATION_REGRESSION_VERIFICATION",
+      "to_state": "IMPLEMENTATION_REGRESSION_VERIFICATION",
+      "protocol_version": "amazon4u-protocol-v2.0.0",
+      "approval": "user_requested_step_3_learned_model_training_harness_start",
+      "rationale": "record_task_only_acceptance_of_LightGCN_reference_foundation_and_training_harness_guards_without_authorizing_real_training_or_profiling",
+      "artifact_task_id": "8153df65-e2e2-4571-a4ce-340d0ffeb1c2",
+      "artifact_review": "ACCEPT",
+      "acceptance_scope": "task_only",
+      "decision_evidence": "agy-evidence-1ad0bf36-5bef-4661-824d-c7b6dfef8295",
+      "benchmark_evidence": "agy-evidence-81230b37-ea8a-40f5-a8f9-613e4f95420b",
+      "main_regression_tests": 140,
       "failures": 0,
       "errors": 0,
       "skips": 0,

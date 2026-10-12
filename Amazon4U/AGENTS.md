@@ -25,12 +25,15 @@ BPR-MF (see `docs/bpr-mf-removal-amendment.md`); v1.0.0 remains preserved. Lifec
 implemented and independently verified task-only: Step 1 evaluator integration is
 accepted in main, and Step 2 remaining Popularity/KG-only scorer, sampler, BPR
 loss/reference utility and endpoint-regularization verification is accepted under
-`cc64f3cb-9a4f-40aa-abbf-5ced6c1bd000` with the current v2 suite at 115 passing
-regressions; see `docs/evaluator-integration.md`, `docs/implementation-roadmap.md`
-and `docs/protocol-lifecycle.md`. This does not authorize profiling/training or
-deployment. Remaining learned models/encoders, checkpoints, reproducibility integration,
-execution settings, tuning policy, profiling, and comparative training remain
-pending and not authorized. Read `configs/protocol-lifecycle.json` and
+`cc64f3cb-9a4f-40aa-abbf-5ced6c1bd000` with the v2 suite at 115 passing
+regressions. Step 3a learned-model foundation and core LightGCN reference
+implementation is accepted under `8153df65-e2e2-4571-a4ce-340d0ffeb1c2` with the
+current suite at 140 passing regressions; see `docs/evaluator-integration.md`,
+`docs/implementation-roadmap.md` and `docs/protocol-lifecycle.md`. This does not
+authorize profiling/training or deployment. Remaining Heterogeneous KG+GNN,
+full training loops/optimizer execution, encoders, checkpoints beyond manifest
+contracts, reproducibility integration, execution settings, tuning policy,
+profiling, and comparative training remain pending and not authorized. Read `configs/protocol-lifecycle.json` and
 `docs/protocol-lifecycle.md`; do not interpret a state/version change, graph
 construction, an audit, or milestone implementation as permission to train.
 

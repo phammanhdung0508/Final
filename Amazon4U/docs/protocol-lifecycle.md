@@ -16,10 +16,16 @@
   reference utilities are independently verified and **ACCEPTED (task_only)**
   under task `cc64f3cb-9a4f-40aa-abbf-5ced6c1bd000`; benchmark evidence:
   **115 tests, zero failures/errors/skips**.
-- Learned models (LightGCN, Heterogeneous KG+GNN), full training loops,
-  checkpointing and reproducibility integration remain pending. See
-  [the implementation roadmap](implementation-roadmap.md).
+- Step 3a: learned-model training harness foundation and core LightGCN reference
+  implementation are independently verified and **ACCEPTED (task_only)** under
+  task `8153df65-e2e2-4571-a4ce-340d0ffeb1c2`. Code lives in
+  `scripts/learned_models.py` (re-exported in `scripts/recommendation_core.py`)
+  with 25 synthetic correctness unit tests in `tests/test_learned_models.py`;
+  regression suite: **140 tests, zero failures/errors/skips**. Heterogeneous
+  KG+GNN, optimizer training loops, real-data training, profiling and deployment
+  remain NOT_AUTHORIZED. See [the implementation roadmap](implementation-roadmap.md).
 - Profiling and comparative training: **not authorized**.
+
 - Deployment: **NOT_AUTHORIZED**.
 
 The active scientific protocol is `amazon4u-protocol-v2.0.0`. The original v1.0.0
@@ -236,7 +242,29 @@ and passed **115 tests, zero failures/errors/skips**, 1.515 seconds; evidence
 `agy-evidence-db13c5d9-6593-49d8-8586-3ff66cd9f6f3`. Prior setup/environment
 ESCALATEs remain preserved as noncritical recovery history.
 
-The next implementation gate is learned models/training harness verification
-(Step 3). Profiling and training execution remain unauthorized pending their
-separate gates; no model training, optimizer updates or Musical_Instruments
-profiling has run.
+The next implementation gate is the remaining Step 3 Heterogeneous KG+GNN
+implementation and verification. Profiling and training execution remain
+unauthorized pending their separate gates; no model training, optimizer updates or
+Musical_Instruments profiling has run.
+
+### Current Step 3a LightGCN foundation acceptance
+
+Pi independently accepted the learned-model foundation and core LightGCN reference
+implementation under Task `8153df65-e2e2-4571-a4ce-340d0ffeb1c2`, revision 0;
+acceptance_scope **task_only**, deployment **NOT_AUTHORIZED**. Decision:
+`agy-evidence-1ad0bf36-5bef-4661-824d-c7b6dfef8295`. The accepted scope covers
+`LightGCNConfig`, `LightGCNGraph`, `propagate_lightgcn`, `LightGCNScorer`,
+`compute_bpr_batch_loss`, `TrainingHarnessGuard` and checkpoint/provenance
+manifest helpers.
+
+Pi reviewed the final implementation in `scripts/learned_models.py`, re-exports
+in `scripts/recommendation_core.py`, synthetic tests in `tests/test_learned_models.py`
+and mutable status records. Independent benchmark verification used
+`PYTHONDONTWRITEBYTECODE=1 /home/sunf/FSB/Final/Amazon4U/.venv/bin/python -m unittest discover -s tests`
+and passed **140 tests, zero failures/errors/skips**, 1.542 seconds; evidence
+`agy-evidence-81230b37-ea8a-40f5-a8f9-613e4f95420b`. Historical Step 3a
+implementation/recovery ESCALATEs remain preserved as noncritical recovery history.
+
+This acceptance does not authorize real-data training, optimizer updates,
+profiling, Kaggle execution, comparative training or deployment. Heterogeneous
+KG+GNN remains pending.

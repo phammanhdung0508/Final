@@ -14,10 +14,12 @@ integrated main suite initially passed **113 tests, zero failures/errors/skips**
 [the integration record](docs/evaluator-integration.md) for acceptance and evidence.
 Remaining I1 scorer/sampler/reference-loss verification is now also **ACCEPTED
 (task_only)** under task `cc64f3cb-9a4f-40aa-abbf-5ced6c1bd000`; current v2 full
-suite: **115 tests, zero failures/errors/skips**. Learned model/training-harness
-implementation is still pending. Next steps are in
-[the implementation roadmap](docs/implementation-roadmap.md). Execution settings
-remain pending; profiling and comparative training are **not authorized**.
+suite: **115 tests, zero failures/errors/skips**. Step 3a learned-model foundation
+and core LightGCN reference implementation are also **ACCEPTED (task_only)** under
+task `8153df65-e2e2-4571-a4ce-340d0ffeb1c2`; current suite: **140 tests, zero
+failures/errors/skips**. Heterogeneous KG+GNN and full training harness execution
+remain pending. Next steps are in [the implementation roadmap](docs/implementation-roadmap.md).
+Execution settings remain pending; profiling and comparative training are **not authorized**.
 Deployment remains **NOT_AUTHORIZED**.
 
 The active suite is **Popularity, LightGCN, KG-only and Heterogeneous KG+GNN**.
@@ -52,11 +54,13 @@ resumes partial downloads, and verifies file sizes (not content hashes). Use
 
 ## Files
 
-- `scripts/recommendation_core.py`: shared-evaluator subclass with guarded KG fallback, Popularity/KG-only scorers, negative sampler, and reference loss/regularization.
+- `scripts/recommendation_core.py`: shared-evaluator subclass with guarded KG fallback, Popularity/KG-only scorers, negative sampler, reference loss/regularization, and learned-model re-exports.
 - `scripts/recommendation_evaluation.py`: authoritative shared context/error and candidate/filtering/ranking/metrics engine.
+- `scripts/learned_models.py`: Step 3a LightGCN reference graph/propagation/scorer, loss-composition, training guard and checkpoint manifest helpers.
 - `tests/test_recommendation_core.py`: milestone I1 hand-calculated regression fixtures and isolation tests.
 - `tests/test_recommendation_evaluation.py`: shared evaluator and adversarial candidate-isolation regressions.
 - `tests/test_evaluator_integration.py`: core/shared API identity, guarded fallback and exact metric integration oracles.
+- `tests/test_learned_models.py`: synthetic Step 3a LightGCN and training-harness foundation tests.
 - `data/raw/benchmark/5core/last_out/`: full train/valid/test interaction CSVs.
 - `data/raw/raw_meta_<Category>/`: full product metadata Parquet shards.
 - `data/raw/download_manifest_all.json`: source revision, file paths and sizes.
