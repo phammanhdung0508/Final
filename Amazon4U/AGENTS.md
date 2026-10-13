@@ -27,12 +27,21 @@ accepted in main, and Step 2 remaining Popularity/KG-only scorer, sampler, BPR
 loss/reference utility and endpoint-regularization verification is accepted under
 `cc64f3cb-9a4f-40aa-abbf-5ced6c1bd000` with the v2 suite at 115 passing
 regressions. Step 3a learned-model foundation and core LightGCN reference
-implementation is accepted under `8153df65-e2e2-4571-a4ce-340d0ffeb1c2` with the
-current suite at 140 passing regressions; see `docs/evaluator-integration.md`,
-`docs/implementation-roadmap.md` and `docs/protocol-lifecycle.md`. This does not
-authorize profiling/training or deployment. Remaining Heterogeneous KG+GNN,
-full training loops/optimizer execution, encoders, checkpoints beyond manifest
-contracts, reproducibility integration, execution settings, tuning policy,
+implementation is accepted under `8153df65-e2e2-4571-a4ce-340d0ffeb1c2`; Step
+3b Heterogeneous KG+GNN reference encoder foundation is accepted under
+`d35b3d7c-3cd6-4f8e-8ecf-adcb963f4b93`, with the current suite at 163 passing
+regressions. Differentiable CPU models/training-only graphs have frozen-verification
+ACCEPT under `f709d062-ae0e-4eb6-960c-f94728180d1b` and separately reviewed main
+integration; current main suite is 204 passing tests. Checkpoint/provenance task
+`e1f1ea4c-de9a-4a53-ad3a-7b394fb4da1a` remains ESCALATE/unaccepted in isolation;
+both corrective revisions used after operator-authorized same-task reopening;
+final benchmark still has six errors, no draft transferred to main. Further source
+work requires an explicit consequential plan; no automatic task/budget reset. See
+`docs/training-harness-review.md`, `docs/differentiable-models-recovery.md`,
+`docs/evaluator-integration.md`, `docs/implementation-roadmap.md`
+and `docs/protocol-lifecycle.md`. This does not authorize profiling/training or
+deployment. Remaining full training loops/optimizer execution, checkpoints beyond
+manifest contracts, reproducibility integration, execution settings, tuning policy,
 profiling, and comparative training remain pending and not authorized. Read `configs/protocol-lifecycle.json` and
 `docs/protocol-lifecycle.md`; do not interpret a state/version change, graph
 construction, an audit, or milestone implementation as permission to train.

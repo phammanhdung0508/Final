@@ -16,14 +16,27 @@
   reference utilities are independently verified and **ACCEPTED (task_only)**
   under task `cc64f3cb-9a4f-40aa-abbf-5ced6c1bd000`; benchmark evidence:
   **115 tests, zero failures/errors/skips**.
-- Step 3a: learned-model training harness foundation and core LightGCN reference
-  implementation are independently verified and **ACCEPTED (task_only)** under
-  task `8153df65-e2e2-4571-a4ce-340d0ffeb1c2`. Code lives in
+- Step 3a/3b learned-model foundations are independently verified and **ACCEPTED
+  (task_only)**: LightGCN foundation under task
+  `8153df65-e2e2-4571-a4ce-340d0ffeb1c2` and Heterogeneous KG+GNN foundation
+  under task `d35b3d7c-3cd6-4f8e-8ecf-adcb963f4b93`. Code lives in
   `scripts/learned_models.py` (re-exported in `scripts/recommendation_core.py`)
-  with 25 synthetic correctness unit tests in `tests/test_learned_models.py`;
-  regression suite: **140 tests, zero failures/errors/skips**. Heterogeneous
-  KG+GNN, optimizer training loops, real-data training, profiling and deployment
-  remain NOT_AUTHORIZED. See [the implementation roadmap](implementation-roadmap.md).
+  with synthetic correctness tests in `tests/test_learned_models.py` and
+  `tests/test_heterogeneous_kgnn.py`; regression suite: **163 tests, zero
+  failures/errors/skips**. Optimizer training loops, real-data training, profiling
+  and deployment remain NOT_AUTHORIZED. See [the implementation roadmap](implementation-roadmap.md).
+- Differentiable CPU model/graph recovery: frozen verification **ACCEPT (task_only)**
+  under `f709d062-ae0e-4eb6-960c-f94728180d1b`, followed by separately recorded
+  Pi-local main import integration and **204 passing tests**. Frozen source-task
+  ESCALATE remains preserved; this is not full-harness acceptance.
+- Checkpoint/provenance task `e1f1ea4c-de9a-4a53-ad3a-7b394fb4da1a`:
+  **ESCALATE / not accepted**; isolated draft only, 168 tests/6 errors and missing
+  completion/doc evidence after timeouts. Operator-authorized same-task reopening
+  allowed final revision 2, which timed out without changing the draft. Both
+  revisions are now used; final independent decision
+  `agy-evidence-411171fa-c296-40bc-9346-667b9d7c5b97` is ESCALATE, task_only not
+  accepted, deployment NOT_AUTHORIZED. No automatic retry or task/budget reset.
+  See [harness review](training-harness-review.md).
 - Profiling and comparative training: **not authorized**.
 
 - Deployment: **NOT_AUTHORIZED**.
@@ -242,10 +255,10 @@ and passed **115 tests, zero failures/errors/skips**, 1.515 seconds; evidence
 `agy-evidence-db13c5d9-6593-49d8-8586-3ff66cd9f6f3`. Prior setup/environment
 ESCALATEs remain preserved as noncritical recovery history.
 
-The next implementation gate is the remaining Step 3 Heterogeneous KG+GNN
-implementation and verification. Profiling and training execution remain
-unauthorized pending their separate gates; no model training, optimizer updates or
-Musical_Instruments profiling has run.
+The next implementation gate is full training-loop/execution integration and then
+bounded Musical_Instruments profiling-plan preparation, both still requiring their
+separate gates. Profiling and training execution remain unauthorized; no model
+training, optimizer updates or Musical_Instruments profiling has run.
 
 ### Current Step 3a LightGCN foundation acceptance
 
@@ -266,5 +279,25 @@ and passed **140 tests, zero failures/errors/skips**, 1.542 seconds; evidence
 implementation/recovery ESCALATEs remain preserved as noncritical recovery history.
 
 This acceptance does not authorize real-data training, optimizer updates,
-profiling, Kaggle execution, comparative training or deployment. Heterogeneous
-KG+GNN remains pending.
+profiling, Kaggle execution, comparative training or deployment.
+
+### Current Step 3b Heterogeneous KG+GNN foundation acceptance
+
+Pi independently accepted the synthetic Heterogeneous KG+GNN reference encoder
+foundation under Task `d35b3d7c-3cd6-4f8e-8ecf-adcb963f4b93`, revision 0;
+acceptance_scope **task_only**, deployment **NOT_AUTHORIZED**. Decision:
+`agy-evidence-94db11ba-75bf-43f4-a255-7a975db8cede`. The accepted scope covers
+`HeterogeneousKGNNConfig`, `HeterogeneousKGNNGraph`, `build_heterogeneous_graph`,
+`mask_heterogeneous_batch_edges`, `propagate_heterogeneous_kgnn`,
+`HeterogeneousKGNNScorer` and `compute_heterogeneous_bpr_batch_loss`.
+
+Pi reviewed the final implementation in `scripts/learned_models.py`, re-exports
+in `scripts/recommendation_core.py` and synthetic tests in
+`tests/test_heterogeneous_kgnn.py`. Independent benchmark verification used
+`PYTHONDONTWRITEBYTECODE=1 /home/sunf/FSB/Final/Amazon4U/.venv/bin/python -m unittest discover -s tests`
+and passed **163 tests, zero failures/errors/skips**, 2.703 seconds; evidence
+`agy-evidence-bca4a17c-806d-4bee-935b-9206520885be`. Historical Step 3b timeout
+ESCALATE remains preserved as noncritical recovery history.
+
+This acceptance does not authorize real-data training, optimizer updates,
+profiling, Kaggle execution, comparative training or deployment.

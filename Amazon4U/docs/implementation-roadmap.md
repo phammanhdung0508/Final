@@ -118,9 +118,43 @@ closed unconditionally for real data (even if `allow_synthetic_updates=True`) an
 requires `allow_synthetic_updates=True` for non-real-data reference validation.
 Historical Step 3a recovery ESCALATEs remain preserved.
 
-Next Step 3 work: Heterogeneous KG+GNN implementation and verification. Real
-optimizer updates, full training loops, profiling, training execution and
-deployment remain NOT_AUTHORIZED. Step 4 remains queued: bounded
+Step 3b: **complete and accepted task-only**. The synthetic Heterogeneous KG+GNN
+reference encoder foundation is implemented in `scripts/learned_models.py` and
+re-exported in `scripts/recommendation_core.py`, with tests in
+`tests/test_heterogeneous_kgnn.py`. Final acceptance task
+`d35b3d7c-3cd6-4f8e-8ecf-adcb963f4b93`; decision
+`agy-evidence-94db11ba-75bf-43f4-a255-7a975db8cede`; benchmark evidence
+`agy-evidence-bca4a17c-806d-4bee-935b-9206520885be`: **163 tests passed**,
+zero failures/errors/skips. Accepted scope covers the typed graph/config, batch
+positive-edge masking helper, deterministic synthetic relation/self aggregation,
+scorer, and BPR loss-composition reference utilities only. Historical Step 3b
+timeout ESCALATE remains preserved.
+
+Step 3c models/graphs recovery: **frozen verification ACCEPT / task_only /
+NOT_AUTHORIZED**, task `f709d062-ae0e-4eb6-960c-f94728180d1b`, decision
+`agy-evidence-bd7419a4-e9bb-4669-b261-4fb3064d5900`, benchmark
+`agy-evidence-118bdab1-f944-443c-99e6-1b9410fe28f6` (180 clone tests passed).
+The differentiable CPU PyTorch models/training-only graphs and 40 tests are now
+in main; a Pi-local import compatibility repair and fresh-process test bring
+main regression to **204 passed**, zero failures/errors/skips. See
+`differentiable-models-recovery.md`, `training-harness-review.md` and
+`data/reports/differentiable-models-main-integration/`. The preserved frozen
+candidate is unchanged and historical source ESCALATEs remain intact.
+
+The **full training harness remains unfinished/unaccepted**. Checkpoint/provenance
+task `e1f1ea4c-de9a-4a53-ad3a-7b394fb4da1a` is **ESCALATE**, preserved in isolation:
+168 tests/6 errors, required doc/report absent. After user-approved shared-tool
+repair, the operator reopened the same task and Pi launched final revision 2;
+it timed out, leaving the draft unchanged. Both revisions are now used. Complete
+independent source/test/dependency review confirms unresolved identity/provenance/
+state/IO blockers; original benchmark still fails. Final decision:
+`agy-evidence-411171fa-c296-40bc-9346-667b9d7c5b97`, task_only not accepted,
+deployment NOT_AUTHORIZED. No automatic retry, replacement task or budget reset. See `checkpoint-recovery-plan.md`
+and `checkpoint-final-review.md`. Remaining separate work is checkpoint closure
+and training-loop/continuation tests,
+followed by integrated review. Real optimizer updates, full training loops,
+profiling, real-data training execution and deployment remain NOT_AUTHORIZED
+except any separately predeclared bounded synthetic test scope. Step 4 remains queued: bounded
 Musical_Instruments profiling plan preparation. No model training, optimizer
 updates or profiling has run.
 

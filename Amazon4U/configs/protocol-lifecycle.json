@@ -2,10 +2,10 @@
   "schema_version": "protocol-lifecycle-v1",
   "protocol_version": "amazon4u-protocol-v2.0.0",
   "lifecycle_state": "IMPLEMENTATION_REGRESSION_VERIFICATION",
-  "decision_status": "step_3a_lightgcn_foundation_accepted_heterogeneous_and_execution_pending",
+  "decision_status": "step_3c_differentiable_models_graphs_integrated_regression_verified_execution_pending",
   "execution_revision": null,
   "execution_settings_status": "not_frozen",
-  "implementation_status": "I1_and_step_3a_lightgcn_reference_regression_verified_heterogeneous_and_execution_pending",
+  "implementation_status": "I1_lightgcn_heterogeneous_reference_and_differentiable_models_graphs_regression_verified_execution_pending",
   "component_status": {
     "evaluator": {
       "artifact_review": "ACCEPT",
@@ -65,8 +65,88 @@
           "skips": 0
         }
       },
-      "heterogeneous_kg_gnn": "implementation_pending",
-      "full_training_loops_and_optimizer_updates": "not_authorized"
+      "heterogeneous_kg_gnn": {
+        "artifact_review": "ACCEPT",
+        "artifact_task_id": "d35b3d7c-3cd6-4f8e-8ecf-adcb963f4b93",
+        "acceptance_scope": "task_only",
+        "decision_evidence": "agy-evidence-94db11ba-75bf-43f4-a255-7a975db8cede",
+        "benchmark_evidence": "agy-evidence-bca4a17c-806d-4bee-935b-9206520885be",
+        "verified_components": [
+          "HeterogeneousKGNNConfig",
+          "HeterogeneousKGNNGraph",
+          "build_heterogeneous_graph",
+          "mask_heterogeneous_batch_edges",
+          "propagate_heterogeneous_kgnn",
+          "HeterogeneousKGNNScorer",
+          "compute_heterogeneous_bpr_batch_loss"
+        ],
+        "main_regression": {
+          "tests_run": 163,
+          "failures": 0,
+          "errors": 0,
+          "skips": 0
+        }
+      },
+      "full_training_loops_and_optimizer_updates": "not_authorized",
+      "checkpoint_provenance_recovery": {
+        "artifact_review": "ESCALATE",
+        "artifact_task_id": "e1f1ea4c-de9a-4a53-ad3a-7b394fb4da1a",
+        "acceptance_scope": "task_only_not_accepted",
+        "deployment_decision": "NOT_AUTHORIZED",
+        "decision_evidence": "agy-evidence-411171fa-c296-40bc-9346-667b9d7c5b97",
+        "benchmark_evidence": "agy-evidence-402110be-9f88-4882-9c98-12a1fde2a51c",
+        "historical_decision_evidence": "agy-evidence-267a7fbd-265f-4d48-8e45-76e8999552c6",
+        "historical_benchmark_evidence": "agy-evidence-041357ae-6be6-4d3f-b42b-6177ac52d694",
+        "fresh_inspection_evidence": "agy-evidence-4224f211-2783-428a-b20b-15215b7d451c",
+        "unittest_duration_seconds": 3.065,
+        "tests_run": 168,
+        "errors": 6,
+        "corrective_revisions_used": 2,
+        "corrective_revisions_limit": 2,
+        "final_revision_authorized_by_user": true,
+        "final_revision_launched": true,
+        "final_revision_status": "timeout",
+        "revision_blocker": "revision_budget_exhausted_after_final_review",
+        "same_task_reopening_required": false,
+        "same_task_reopened_by_operator": true,
+        "supplemental_review": "docs/checkpoint-final-review.md",
+        "main_transfer": "not_performed",
+        "reason": "final_worker_timeout_failed_benchmark_missing_doc_report_and_independently_confirmed_identity_provenance_state_IO_failures",
+        "documentation": "docs/checkpoint-recovery-plan.md"
+      },
+      "differentiable_models_graphs_recovery": {
+        "artifact_review": "ACCEPT",
+        "artifact_task_id": "f709d062-ae0e-4eb6-960c-f94728180d1b",
+        "source_task_id": "ca73a153-6f02-45f3-b5d0-c4e93fffefb7",
+        "source_task_decision": "ESCALATE_preserved",
+        "acceptance_scope": "task_only_frozen_verification",
+        "main_integration": "Pi_local_regression_verified",
+        "main_integration_evidence": "data/reports/differentiable-models-main-integration/review.json",
+        "decision_evidence": "agy-evidence-bd7419a4-e9bb-4669-b261-4fb3064d5900",
+        "benchmark_evidence": "agy-evidence-118bdab1-f944-443c-99e6-1b9410fe28f6",
+        "verified_components": [
+          "canonical_category_and_brand_identity_validation",
+          "HeteroTrainingGraph",
+          "DifferentiableHeteroGNN",
+          "DifferentiableLightGCN",
+          "BPR_tensor_loss_helpers",
+          "endpoint_only_regularization"
+        ],
+        "main_regression": {
+          "tests_run": 204,
+          "failures": 0,
+          "errors": 0,
+          "skips": 0
+        },
+        "scope_limits": [
+          "no_optimizer_step",
+          "no_training_loop",
+          "no_checkpoint_resume_full_harness",
+          "no_real_data_training",
+          "no_profiling",
+          "deployment_not_authorized"
+        ]
+      }
     },
     "Musical_Instruments_profiling": "plan_and_execution_authorization_pending"
   },
@@ -203,6 +283,74 @@
       "heldout_model_results_exposed": false,
       "prior_split_and_metadata_audits": "already_performed_not_unseen_data",
       "profiling_or_training_authorized_by_event": false
+    },
+    {
+      "event": "step_3b_heterogeneous_kgnn_foundation_acceptance_and_main_transfer",
+      "from_state": "IMPLEMENTATION_REGRESSION_VERIFICATION",
+      "to_state": "IMPLEMENTATION_REGRESSION_VERIFICATION",
+      "protocol_version": "amazon4u-protocol-v2.0.0",
+      "approval": "user_requested_step_3_heterogeneous_kg_gnn_continuation",
+      "rationale": "record_task_only_acceptance_of_synthetic_Heterogeneous_KG_GNN_reference_encoder_foundation_without_authorizing_real_training_or_profiling",
+      "artifact_task_id": "d35b3d7c-3cd6-4f8e-8ecf-adcb963f4b93",
+      "artifact_review": "ACCEPT",
+      "acceptance_scope": "task_only",
+      "decision_evidence": "agy-evidence-94db11ba-75bf-43f4-a255-7a975db8cede",
+      "benchmark_evidence": "agy-evidence-bca4a17c-806d-4bee-935b-9206520885be",
+      "main_regression_tests": 163,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "historical_escalations_preserved": true,
+      "heldout_model_results_exposed": false,
+      "prior_split_and_metadata_audits": "already_performed_not_unseen_data",
+      "profiling_or_training_authorized_by_event": false
+    },
+    {
+      "event": "differentiable_models_graphs_recovery_acceptance_and_main_integration_verification",
+      "from_state": "IMPLEMENTATION_REGRESSION_VERIFICATION",
+      "to_state": "IMPLEMENTATION_REGRESSION_VERIFICATION",
+      "protocol_version": "amazon4u-protocol-v2.0.0",
+      "approval": "standing_noncritical_recovery_and_user_continue_request",
+      "rationale": "record task-only frozen verification acceptance and separately verified Pi-local main integration with 204 passing regressions including both import orders; no full training harness acceptance",
+      "artifact_task_id": "f709d062-ae0e-4eb6-960c-f94728180d1b",
+      "source_task_id": "ca73a153-6f02-45f3-b5d0-c4e93fffefb7",
+      "source_task_decision": "ESCALATE_preserved",
+      "artifact_review": "ACCEPT",
+      "acceptance_scope": "task_only",
+      "decision_evidence": "agy-evidence-bd7419a4-e9bb-4669-b261-4fb3064d5900",
+      "benchmark_evidence": "agy-evidence-118bdab1-f944-443c-99e6-1b9410fe28f6",
+      "main_regression": {
+        "tests_run": 204,
+        "failures": 0,
+        "errors": 0,
+        "skips": 0
+      },
+      "heldout_model_results_exposed": false,
+      "prior_split_and_metadata_audits": "already_performed_not_unseen_data",
+      "profiling_or_training_authorized_by_event": false,
+      "deployment_decision": "NOT_AUTHORIZED"
+    },
+    {
+      "event": "checkpoint_same_task_reopening_final_revision_and_independent_escalation",
+      "from_state": "IMPLEMENTATION_REGRESSION_VERIFICATION",
+      "to_state": "IMPLEMENTATION_REGRESSION_VERIFICATION",
+      "protocol_version": "amazon4u-protocol-v2.0.0",
+      "approval": "operator_confirmed_same_task_reopening_and_final_revision_preserving_original_spec_and_budget_after_user_approved_tool_repair",
+      "artifact_task_id": "e1f1ea4c-de9a-4a53-ad3a-7b394fb4da1a",
+      "artifact_review": "ESCALATE",
+      "acceptance_scope": "task_only_not_accepted",
+      "corrective_revisions_used": 2,
+      "corrective_revisions_limit": 2,
+      "decision_evidence": "agy-evidence-411171fa-c296-40bc-9346-667b9d7c5b97",
+      "benchmark_evidence": "agy-evidence-402110be-9f88-4882-9c98-12a1fde2a51c",
+      "fresh_inspection_evidence": "agy-evidence-4224f211-2783-428a-b20b-15215b7d451c",
+      "tests_run": 168,
+      "errors": 6,
+      "main_transfer": "not_performed",
+      "historical_escalations_preserved": true,
+      "heldout_model_results_exposed": false,
+      "profiling_or_training_authorized_by_event": false,
+      "deployment_decision": "NOT_AUTHORIZED"
     }
   ]
 }

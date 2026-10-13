@@ -623,30 +623,51 @@ def endpoint_regularization(
 
 if __package__:
     from .learned_models import (
+        HeterogeneousKGNNConfig,
+        HeterogeneousKGNNGraph,
+        HeterogeneousKGNNScorer,
+        HeterogeneousParameters,
         LightGCNConfig,
         LightGCNGraph,
         LightGCNScorer,
         MissingIdError,
         TrainingHarnessGuard,
         UnknownIdError,
+        build_heterogeneous_graph,
         build_lightgcn_graph,
         compute_bpr_batch_loss,
+        compute_heterogeneous_bpr_batch_loss,
         create_checkpoint_manifest,
+        initialize_heterogeneous_parameters,
+        initialize_node_embeddings,
+        mask_heterogeneous_batch_edges,
+        propagate_heterogeneous_kgnn,
         propagate_lightgcn,
         validate_checkpoint_manifest,
     )
 else:
     from learned_models import (
+        HeterogeneousKGNNConfig,
+        HeterogeneousKGNNGraph,
+        HeterogeneousKGNNScorer,
+        HeterogeneousParameters,
         LightGCNConfig,
         LightGCNGraph,
         LightGCNScorer,
         MissingIdError,
         TrainingHarnessGuard,
         UnknownIdError,
+        build_heterogeneous_graph,
         build_lightgcn_graph,
         compute_bpr_batch_loss,
+        compute_heterogeneous_bpr_batch_loss,
         create_checkpoint_manifest,
+        initialize_heterogeneous_parameters,
+        initialize_node_embeddings,
+        mask_heterogeneous_batch_edges,
+        propagate_heterogeneous_kgnn,
         propagate_lightgcn,
         validate_checkpoint_manifest,
     )
+
 

@@ -16,9 +16,19 @@ Remaining I1 scorer/sampler/reference-loss verification is now also **ACCEPTED
 (task_only)** under task `cc64f3cb-9a4f-40aa-abbf-5ced6c1bd000`; current v2 full
 suite: **115 tests, zero failures/errors/skips**. Step 3a learned-model foundation
 and core LightGCN reference implementation are also **ACCEPTED (task_only)** under
-task `8153df65-e2e2-4571-a4ce-340d0ffeb1c2`; current suite: **140 tests, zero
-failures/errors/skips**. Heterogeneous KG+GNN and full training harness execution
-remain pending. Next steps are in [the implementation roadmap](docs/implementation-roadmap.md).
+task `8153df65-e2e2-4571-a4ce-340d0ffeb1c2`; Step 3b Heterogeneous KG+GNN
+reference encoder foundation is **ACCEPTED (task_only)** under task
+`d35b3d7c-3cd6-4f8e-8ecf-adcb963f4b93`. Differentiable CPU models/training-only
+graphs have frozen-verification **ACCEPT (task_only)** under
+`f709d062-ae0e-4eb6-960c-f94728180d1b`, with separately reviewed main import
+integration; current main suite: **204 tests, zero failures/errors/skips**.
+Full training harness remains unfinished. Checkpoint/provenance task
+`e1f1ea4c-de9a-4a53-ad3a-7b394fb4da1a` is **ESCALATE / not accepted** after
+the authorized final revision timed out; both revisions are used. Independent
+benchmark: 168 tests, 6 errors. No checkpoint draft transferred to main; no
+automatic retry or revision reset. See [final review](docs/checkpoint-final-review.md).
+See [the harness review](docs/training-harness-review.md).
+Next steps are in [the implementation roadmap](docs/implementation-roadmap.md).
 Execution settings remain pending; profiling and comparative training are **not authorized**.
 Deployment remains **NOT_AUTHORIZED**.
 
@@ -56,11 +66,12 @@ resumes partial downloads, and verifies file sizes (not content hashes). Use
 
 - `scripts/recommendation_core.py`: shared-evaluator subclass with guarded KG fallback, Popularity/KG-only scorers, negative sampler, reference loss/regularization, and learned-model re-exports.
 - `scripts/recommendation_evaluation.py`: authoritative shared context/error and candidate/filtering/ranking/metrics engine.
-- `scripts/learned_models.py`: Step 3a LightGCN reference graph/propagation/scorer, loss-composition, training guard and checkpoint manifest helpers.
+- `scripts/learned_models.py`: Step 3a/3b LightGCN and Heterogeneous KG+GNN reference graph/propagation/scorer, loss-composition, masking, training guard and checkpoint manifest helpers.
 - `tests/test_recommendation_core.py`: milestone I1 hand-calculated regression fixtures and isolation tests.
 - `tests/test_recommendation_evaluation.py`: shared evaluator and adversarial candidate-isolation regressions.
 - `tests/test_evaluator_integration.py`: core/shared API identity, guarded fallback and exact metric integration oracles.
 - `tests/test_learned_models.py`: synthetic Step 3a LightGCN and training-harness foundation tests.
+- `tests/test_heterogeneous_kgnn.py`: synthetic Step 3b Heterogeneous KG+GNN graph, masking, propagation, scorer and loss-composition tests.
 - `data/raw/benchmark/5core/last_out/`: full train/valid/test interaction CSVs.
 - `data/raw/raw_meta_<Category>/`: full product metadata Parquet shards.
 - `data/raw/download_manifest_all.json`: source revision, file paths and sizes.
