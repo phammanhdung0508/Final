@@ -10,6 +10,26 @@ Nothing transferred to main. Acceptance_scope: task_only (not accepted);
 deployment_decision: NOT_AUTHORIZED. No automatic retry/replacement/budget reset.
 See `checkpoint-final-review.md` for all five criterion outcomes and fresh inspection.
 
+## Approved consequential recovery
+
+The user now approved exactly three substantive deliverables: identity/provenance,
+payload validation, and secure checkpoint IO plus integration verification. They
+must **not** be subdivided into smaller micro-tasks; fixes remain within their
+owning deliverable. See [the approved boundaries](checkpoint-three-part-recovery.md).
+This approval preserves the original exhausted ESCALATE; it does not reopen/reset
+that task, accept its draft, or authorize training/deployment. Implementation and
+independent acceptance of the new deliverables remain pending.
+
+First whole-deliverable task `2b5b2471-9f30-4e24-aaa6-b7653d359449` subsequently
+received final ESCALATE after initial/both-revision timeouts and 232 tests/1 new
+fixture error; all 204 baseline tests passed. Both new corrective slots are used.
+Final decision: `agy-evidence-5a5f3a35-ea45-4f1f-8eff-dc6565a54cd0`, task_only not
+accepted, deployment NOT_AUTHORIZED. Complete settings, requested adversarial
+coverage and completed-report/documentation gates remain unmet. No main transfer;
+other two deliverables not started. Keep exactly three boundaries; no further
+micro-tasks or automatic retries. Full criterion review is in the approved-boundary
+record linked above.
+
 ## Preserved earlier recovery history
 
 Historical revision-1 decision: `agy-evidence-267a7fbd-265f-4d48-8e45-76e8999552c6`.
