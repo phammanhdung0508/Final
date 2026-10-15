@@ -344,3 +344,46 @@ If authorized, Pi first validates setup and the 249-test baseline, then submits 
 whole deliverable with this fixed specification and at most two corrective revisions.
 Any material specification change requires approval before delegation; no scope
 changes, extra tasks or execution are inferred from this recommendation.
+
+## User-agreed clarification — fixture budget versus runtime policy
+
+The user approved Pi's recommendation to separate the synthetic verification budget
+from runtime validation limits and requested that agreement be recorded. This is a
+scope/policy agreement only, **not implementation or execution authorization**.
+
+1. **Synthetic verification retains the 2MiB budget.** It bounds small correctness
+   fixtures; it was inherited from `checkpoint-recovery-plan.md:157` and
+   `checkpoint-three-part-recovery.md:74,100–101`, not derived from production model
+   size or hardware capacity. Narrow oversized rejection fixtures remain subject to
+   the separately specified test policy.
+2. **Runtime validation has no universal hardcoded 2MiB architectural ceiling.**
+   It must use an explicit, configurable, independently trusted resource policy,
+   sized for the intended model and available memory. Assess current model weights,
+   Adam state, selected-best weights and validation copies, not only serialized file
+   size. Include metadata/provenance, complete backing storage and sparse index/value
+   storage in the applicable accounting.
+3. **Limits are selected and pinned before execution.** An untrusted payload cannot
+   choose or enlarge them. Do not silently increase limits, choose an unlimited
+   fallback, or automatically treat detected free RAM as allocation permission.
+   Larger profiles require explicit authorization and verification before use.
+4. **Input and output checks remain required under that policy.** Retain the safety
+   objective of checking incoming full backing storage and projected owned output
+   copies before allocation; the runtime threshold comes from the trusted profile,
+   not a permanently embedded 2,097,152-byte constant.
+5. **Deliverable 3 must enforce corresponding actual file/decoding limits.** This
+   agreement does not itself enlarge its historical file limit or authorize larger
+   file loading. A profile that permits larger runtime state needs aligned, separately
+   authorized and verified IO/decoding limits before end-to-end use.
+
+This clarification **supersedes the earlier recommendation insofar as its 2MiB
+rejection rule could be read as a universal runtime limit**. The earlier formula and
+numeric structural bounds remain preserved as a proposed small-fixture profile,
+not newly approved production defaults. Exact runtime policy fields, selected larger
+limits (none selected here) and detailed accounting still require specification
+before delegation. Original C1–C10 remain unchanged and apply to the approved profile;
+this clarification waives none of their assigned safety requirements.
+
+No identity/provenance redo, source/schema change, broader device/model support,
+hardware-capacity verification, Worker launch, tests, training, main transfer or
+deployment is authorized. Exactly three checkpoint deliverables remain; Deliverable2
+is still unimplemented and requires separate implementation authorization.
