@@ -1,0 +1,96 @@
+{
+  "record_kind": "deliverable_scope_proposal_not_execution_policy",
+  "project": "Amazon4U",
+  "deliverable": 2,
+  "name": "Payload Validation",
+  "checkpoint_deliverables_total": 3,
+  "scope_definition_authorized": true,
+  "detailed_scope_status": "proposed_for_separate_implementation_authorization",
+  "implementation_authorized": false,
+  "implementation_started": false,
+  "worker_submitted": false,
+  "tests_executed_for_this_scope_definition": false,
+  "accepted": false,
+  "planned_acceptance_scope": "task_only",
+  "deployment_decision": "NOT_AUTHORIZED",
+  "authoritative_scope_and_criteria": "docs/checkpoint-payload.md",
+  "dependency": {
+    "task_id": "8a86cfbb-437b-4873-bc45-1e44da1d4b04",
+    "decision": "ACCEPT",
+    "decision_evidence": "agy-evidence-5a2fc59d-465d-4fa3-b53b-6b81628a5236",
+    "main_integration_review": "data/reports/checkpoint-identity-main-integration/review.json",
+    "main_integration_decision": "ACCEPT",
+    "main_integration_tests": 249,
+    "redo_identity_provenance": false,
+    "frozen_sha256": {
+      "scripts/checkpoint_identity.py": "6c91bab8229be89453e9b485f3f8df758bfa91e2611296b68c61c5cbe5bb5b2c",
+      "tests/test_checkpoint_identity.py": "72c874a40f8686e5ab1a914cb9427ec0f9470c127221960195cf8d465532c468",
+      "docs/checkpoint-identity.md": "c84d28069e5877154534c32e2f67ca40d36544c0bf3027ab6f4021d57dce0601"
+    }
+  },
+  "proposed_worker_writable_files_project_relative": [
+    "scripts/checkpoint_payload.py",
+    "tests/test_checkpoint_payload.py",
+    "docs/checkpoint-payload.md"
+  ],
+  "criteria_ids_in_authoritative_document": [
+    "C1", "C2", "C3", "C4", "C5", "C6", "C7", "C8", "C9", "C10"
+  ],
+  "supported_model_families": ["LightGCN", "Heterogeneous KG+GNN"],
+  "state_validation_required": [
+    "strict_versioned_envelope_and_existing_identity_provenance_bindings",
+    "complete_current_and_applicable_best_model_state",
+    "Adam_groups_moments_lazy_initialization_and_parameter_update_counts",
+    "all_applicable_RNG_roles_and_engine_states",
+    "sampler_and_quiescent_epoch_boundary_state",
+    "progress_validation_history_selection_and_patience",
+    "explicit_scheduler_AMP_and_CUDA_inapplicability",
+    "nonmutating_owned_output_and_bounded_domain_diagnostics"
+  ],
+  "proposed_verification_limits_not_execution_authorization": {
+    "baseline_tests_to_retain": 249,
+    "suite_ceiling_seconds": 120,
+    "full_unittest_discovery_only": true,
+    "training_allowed": false,
+    "optimizer_steps": 0,
+    "backward_passes": 0,
+    "CPU_tensor_fixtures_proposed": true,
+    "meta_device_negative_fixtures_proposed": true,
+    "CUDA_execution": false,
+    "max_fixture_users": 8,
+    "max_fixture_products": 12,
+    "max_fixture_metadata_nodes_per_type": 8,
+    "max_fixture_dimensions": 64,
+    "fixture_payload_ceiling_bytes": 2097152,
+    "max_corrective_revisions_after_authorization": 2,
+    "hashing_budget_proposed": {
+      "max_file_bytes": 134217728,
+      "max_total_bytes": 536870912,
+      "file_timeout_ms": 60000,
+      "snapshot_timeout_ms": 300000
+    }
+  },
+  "must_be_pinned_before_delegation": [
+    "separate_explicit_whole_deliverable_implementation_authorization",
+    "clean_repository_setup_with_frozen_monitored_accepted_dependency_without_automatic_commit",
+    "absolute_working_directory_project_root_and_Git_relative_allowed_paths",
+    "exact_Python_argv_command_cwd_and_120_second_timeout",
+    "fresh_generated_paths_temporary_directories_and_cleanup_policy",
+    "exact_payload_content_and_full_backing_storage_accounting_structural_bounds_and_negative_boundary_fixtures",
+    "protected_ignored_references_recursive_sentinels_and_artifact_budgets"
+  ],
+  "deliverable_3_owns": [
+    "serialization_and_safe_bounded_weights_only_decoding",
+    "physical_source_acquisition",
+    "descriptor_anchored_roots_symlink_and_parent_race_defense",
+    "atomic_exclusive_no_clobber_publication_and_owned_cleanup",
+    "end_to_end_serialization_validation_only_integration"
+  ],
+  "live_restoration_authorized": false,
+  "training_profiling_real_data_or_remote_jobs_authorized": false,
+  "heldout_evaluation_authorized": false,
+  "main_transfer_authorized": false,
+  "staging_commits_or_pushes_authorized": false,
+  "new_scientific_defaults_approved_by_this_record": false,
+  "historical_task_decisions_and_budgets_unchanged": true
+}
