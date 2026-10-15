@@ -247,3 +247,100 @@ Implementation approval must explicitly accept this whole scope, settle the list
 submission-time accounting/setup details, and predeclare exact commands/paths/budgets
 before any Worker starts. Later main integration needs its own authorization.
 There is no deployment policy; deployment/generalization remains NOT_AUTHORIZED.
+
+## Recommended execution specification — awaiting separate authorization
+
+The user asked for Pi's recommendation, not implementation. The following selects
+concrete proposed setup, command and accounting rules; it authorizes none of their
+execution. Existing C1–C10 remain unchanged.
+
+### Setup and command
+
+- Prepare a fresh local full clone at
+  `/home/sunf/FSB/Final/Amazon4U/.worktrees/checkpoint-payload-review`, pinned to the
+  currently observed source HEAD `f145e93abea96db7fb429e546c7c097d9dc78e86`.
+  The accepted identity source/tests/doc and these planning records are now tracked
+  at that HEAD; no commit, staging, dependency rewrite or ignore-rule workaround is
+  needed. Verify their accepted hashes and a clean clone before the baseline. If
+  that path becomes occupied or the pinned inputs disagree, stop instead of
+  overwriting/reusing a checkout or silently selecting another HEAD.
+- Pin the project/cwd to that clone's `Amazon4U/` directory. Only the three proposed
+  implementation files are Worker-writable. All existing dependency/protocol/history
+  files and Git state remain protected. No main-tree transfer is included.
+- Use the existing main Python executable
+  `/home/sunf/FSB/Final/Amazon4U/.venv/bin/python`, `-B`, and the exact `-c` script
+  recorded in the companion JSON's `execution_recommendation.benchmark`.
+  It sets both `TMPDIR` and `tempfile.tempdir`, disables bytecode, discovers all
+  `tests`, runs with verbosity 2 and exits nonzero on failure. Pin cwd and a 120s
+  timeout. Use exactly this command for the isolated baseline, Worker, corrective
+  revisions and independent Pi benchmark; no additional candidate commands.
+- The proposed sole fresh generated/temp subtree is Git-root-relative
+  `Amazon4U/.test-output/checkpoint-payload-v1/`, inside the clone. Require it empty
+  before and after each run. Benchmark logs/receipts are Pi-controlled evidence,
+  not permission for Worker writes to other locations. Baseline must reproduce
+  all 249 accepted tests before delegation. No setup or baseline has run here.
+
+### Exact proposed 2MiB accounting
+
+Use a **logical payload-content budget**, not pickle size or claimed process RAM:
+`B = 2,097,152 bytes`. Reject unless BOTH of these are at most B:
+
+1. metadata charge + incoming distinct full backing-storage bytes;
+2. metadata charge + projected storage bytes of the owned output copies.
+
+For incoming CPU tensors count the entire underlying storage, once per distinct
+storage across the payload, not just `numel * element_size` of a visible view.
+Sparse COO tensors contribute index and value storages, without densification.
+For projected compact output copies count each tensor occurrence independently;
+use dense logical element bytes, or sparse index/value logical element bytes.
+This prevents shared input storage from disguising an oversized copied result.
+Check before cloning/materializing. Reject unsupported devices/layouts first.
+
+Define metadata charge by a type-directed traversal of the declared payload:
+
+| Value | Charge in bytes |
+|---|---|
+| None / bool | 1 |
+| exact integer | 1 sign byte + max(1, ceil(abs(integer).bit_length()/8)) |
+| finite float | 8 |
+| Unicode string | 8 + length of strict UTF8 encoding |
+| bytes | 8 + byte length |
+| dict | 8 + charges of every key and value |
+| list / tuple | 8 + charges of every element |
+| tensor | charge of its descriptor tuple, plus separately accounted storage |
+
+A dense tensor descriptor is `(dtype_name, layout_name, device_name, shape_tuple,
+stride_tuple, storage_offset)`. A sparse COO descriptor is `(dtype_name,
+layout_name, device_name, shape_tuple, is_coalesced)` plus descriptors of its index
+and value tensors. Names use the pinned framework's string representations; shape,
+stride and offset components are exact integers. Descriptor tuple/element charges
+use the same table. This is accounting, not a new identity hash or serialization.
+Metadata aliases are charged at each occurrence; cycles/custom objects are rejected.
+Traverse only allowed primitive containers and supported tensors; count safely and
+stop at excess without first building an unbounded encoding or diagnostic.
+
+Additional proposed structural limits: root container depth 1, maximum container
+nesting depth **32**, and **16,384 visited values** (including keys and tensor
+component descriptors). Tensor descriptors and their elements count under the same
+traversal rules; tensor elements themselves are storage, not individual metadata
+nodes. Repeated references count as repeated visits. These are technical bounds
+for this small CPU profile, not new scientific settings or integer validity caps.
+
+Boundary tests must cover exactly B and just over B, oversized backing storage
+behind a tiny view, shared-storage output expansion, sparse index/value accounting,
+and structural limits. Allow one deliberately oversized negative fixture at a time,
+with combined accounted input no greater than B + **4096 bytes**; it must be rejected
+before output allocation. This narrow exception is only for quota-rejection tests.
+
+Embedded source/provenance bytes count in this payload budget. A record valid under
+Deliverable 1's independent source-byte limit need not fit inside a complete 2MiB
+payload with tensors and other metadata. This adds no change to Deliverable 1.
+Passing this accounting does not promise a serialized file will fit within 2MiB:
+Deliverable 3 must separately enforce its actual file and safe-decoding limits.
+The budget also does not count every interpreter/framework temporary allocation or
+establish an OS/process-memory sandbox.
+
+If authorized, Pi first validates setup and the 249-test baseline, then submits the
+whole deliverable with this fixed specification and at most two corrective revisions.
+Any material specification change requires approval before delegation; no scope
+changes, extra tasks or execution are inferred from this recommendation.

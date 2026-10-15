@@ -92,5 +92,49 @@
   "main_transfer_authorized": false,
   "staging_commits_or_pushes_authorized": false,
   "new_scientific_defaults_approved_by_this_record": false,
-  "historical_task_decisions_and_budgets_unchanged": true
+  "historical_task_decisions_and_budgets_unchanged": true,
+  "execution_recommendation": {
+    "status": "recommended_not_authorized_or_executed",
+    "base_head": "f145e93abea96db7fb429e546c7c097d9dc78e86",
+    "repository_root": "/home/sunf/FSB/Final/Amazon4U/.worktrees/checkpoint-payload-review",
+    "project_root_git_relative": "Amazon4U",
+    "project_cwd": "/home/sunf/FSB/Final/Amazon4U/.worktrees/checkpoint-payload-review/Amazon4U",
+    "clean_local_clone_with_already_tracked_accepted_dependency": true,
+    "create_commit_or_change_ignore_rules": false,
+    "allowed_paths_git_relative": [
+      "Amazon4U/scripts/checkpoint_payload.py",
+      "Amazon4U/tests/test_checkpoint_payload.py",
+      "Amazon4U/docs/checkpoint-payload.md"
+    ],
+    "fresh_generated_subtree_git_relative": "Amazon4U/.test-output/checkpoint-payload-v1/",
+    "scratch_must_be_empty_before_and_after_each_run": true,
+    "benchmark": {
+      "command": "/home/sunf/FSB/Final/Amazon4U/.venv/bin/python",
+      "args": [
+        "-B",
+        "-c",
+        "import os,tempfile,unittest,sys; from pathlib import Path; p=Path('/home/sunf/FSB/Final/Amazon4U/.worktrees/checkpoint-payload-review/Amazon4U/.test-output/checkpoint-payload-v1'); p.mkdir(parents=True,exist_ok=True); tempfile.tempdir=str(p); os.environ['TMPDIR']=str(p); os.environ['PYTHONDONTWRITEBYTECODE']='1'; suite=unittest.defaultTestLoader.discover('tests'); result=unittest.TextTestRunner(verbosity=2).run(suite); sys.exit(not result.wasSuccessful())"
+      ],
+      "cwd": "/home/sunf/FSB/Final/Amazon4U/.worktrees/checkpoint-payload-review/Amazon4U",
+      "timeout_ms": 120000,
+      "baseline_worker_revision_and_Pi_command_identical": true,
+      "baseline_required_tests": 249,
+      "executed": false
+    },
+    "resource_accounting": {
+      "definition": "docs/checkpoint-payload.md#exact-proposed-2mib-accounting",
+      "logical_payload_budget_bytes": 2097152,
+      "incoming_test": "metadata_charge_plus_full_distinct_backing_storage_bytes_at_most_budget",
+      "output_test": "metadata_charge_plus_projected_independent_compact_tensor_copy_bytes_at_most_budget",
+      "sparse_COO_counts_index_and_value_storage": true,
+      "metadata_includes_embedded_provenance_source_bytes": true,
+      "max_container_depth_root_is_one": 32,
+      "max_visited_values_including_keys_and_descriptors": 16384,
+      "negative_fixture_excess_allowance_bytes": 4096,
+      "simultaneous_oversized_negative_fixtures": 1,
+      "reject_before_output_allocation": true,
+      "not_serialized_file_size_or_total_process_memory": true,
+      "not_a_new_integer_validity_cap": true
+    }
+  }
 }
