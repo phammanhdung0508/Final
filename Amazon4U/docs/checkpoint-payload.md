@@ -902,3 +902,98 @@ The preparation gate has passed. The next decision is **separate authorization t
 implement the whole Deliverable2** against the frozen full specification. Any later
 change to operative code/specification/environment must be assessed for freshness;
 this receipt is not permission to reuse stale evidence or bypass submission gates.
+
+## Separate whole-deliverable implementation authorization
+
+The user subsequently authorized:
+
+> I authorize implementation of the complete Deliverable 2 — Payload Validation, under the finalized frozen specification and mandatory acceptance criteria C1–C10.
+>
+> Use the independently accepted preparation baseline and the exact approved execution setup. Ensure the Worker receives the complete frozen specification, not an older checkout draft.
+>
+> Keep the accepted Identity/Provenance implementation and protected dependencies unchanged. Allow one whole-deliverable Worker task with at most two consolidated corrective revisions.
+>
+> Pi must independently verify the implementation, full regression suite, resource limits, and all mandatory criteria before ACCEPT.
+>
+> No training, optimizer steps, profiling, GPU/Kaggle, real datasets, Deliverable 3 implementation, live restoration, main integration, or deployment is authorized. Preserve all historical ESCALATE records and revision budgets.
+
+This changes the implementation authorization only; it does not rewrite frozen
+technical requirements, historical evidence or original C1–C10. Pi freshly checked
+the prepared clone: its pinned HEAD, all412 monitored files,8 protected input files,
+accepted dependency hashes and empty scratch still match the accepted preparation.
+The entire59605-byte frozen specification and its complete companion configuration
+remain at the declared protected input paths. They—not the older tracked drafts—are
+the mandatory original implementation specification. The Worker must read both fully,
+retain original criteria/contracts in its writable documentation and disclose any
+ambiguity or inability to meet them rather than silently redefine them.
+
+Submission: one whole-deliverable task, max_revisions=2, approved long-running Worker
+transport with synchronous candidate commands; original verification executable/argv/
+cwd/scratch and120s benchmark ceiling unchanged. Working directory/project root is
+`/home/sunf/FSB/Final/Amazon4U/.worktrees/checkpoint-payload-review/Amazon4U`;
+Git-root-relative writable paths remain exactly the three originally declared files.
+All eight frozen input files are protected ignored references; all other tracked/
+nonignored dependencies and outside-project sentinels remain monitored. Explicit
+recursive-sentinel and artifact hashing policies retain128MiB/file512MiB/aggregate,
+60s/file300s/snapshot. Fresh generated/temp path is solely the approved clone scratch
+subtree, training_allowed=false. No deployment policy or held-out evaluation.
+
+The baseline preparation ACCEPT is not implementation acceptance. Pi must inspect
+actual changes diff-first, read complete functions/callers/dependencies/tests, run the
+unchanged approved full-suite benchmark and review all C1–C10 independently before
+recording ACCEPT/REVISE/ESCALATE. No automatic replacement tasks or budget resets.
+Implementation is authorized but no result is accepted by this authorization record;
+main transfer and deployment remain NOT_AUTHORIZED.
+
+### Metadata-only preflight failure before Worker launch
+
+Submission `7a2e4620-af51-4f63-bd55-3b8a3aebc089` recorded ESCALATE before its
+Worker call because harness temporary directories must be outside the repository.
+Original task/spec/decision are preserved; no Worker artifact, code changes or consumed
+corrective revision. Inspection found zero changed paths/Git changes, and benchmark
+verification correctly refused the finalized non-pending task without running tests.
+See `data/reports/checkpoint-payload-implementation-setup/preflight-recovery.md` for
+full evidence references and the prospective standing-authorized setup correction.
+
+Distinguish the unchanged generated fixture scratch from the harness/SDK runtime:
+`/home/sunf/FSB/Final/Amazon4U/data/reports/checkpoint-payload-implementation-setup/worker-runtime`
+is an initially empty canonical infrastructure temporary directory OUTSIDE the pinned
+clone, within Amazon4U. It is not a source/test/fixture or handoff destination. Original
+benchmark script/executable/argv/cwd/120s ceiling still explicitly select the same
+clone fixture scratch before discovery. Only temporary_directories metadata and an
+appended explanatory context change for the same whole-deliverable submission.
+Original frozen technical requirements/C1–C10/protected dependencies/allowed paths/
+max_revisions2 are unchanged. This preserves a setup-only failure, not a Worker source
+retry, historical budget reset or extra independent deliverable. Exactly one actual
+whole-deliverable Worker initial invocation and at most two corrective revisions remain.
+
+### Initial implementation — independent review requires correction
+
+Actual whole-deliverable task: `84e7dfa0-cf76-4efe-aeaf-ef7d87b6c2dc`, initial
+invocation `b41829b9-2c87-4863-a474-4d6b42e2d32b`. Worker returned only the3declared
+paths. Independent original benchmark passed **267tests6.637s/8780ms**, evidence
+`agy-evidence-d5fc880a-6fbc-47b3-b684-0ac53df08e0c`. This is NOT implementation
+ACCEPT: complete actual source/tests/docs review found assigned validation/resource/
+error-domain/coverage defects, including missing Adam moment shapes/parameter recipe
+binding, incomplete trusted RNG seed/worker checks, storage-pointer/depth accounting,
+unsafe malformed-input diagnostics and insufficient boundary matrices. Selection
+stop-epoch/bitwise checks and owned-output validation also require correction.
+
+Full initial files and immutable original evidence are preserved under
+`data/reports/checkpoint-payload-implementation-setup/initial-review/`. The full CLI
+audit shows6original approved full-suite executions (5failed before final267OK),
+although the Worker report disclosed only the last. Their exact commands, results,
+available original truncation notices and raw transcript are preserved; the report
+history must be corrected in the next report without rewriting the original.
+Full frozen inputs were viewed in both required ranges; all52fileviews,3writes,
+12replacements,8shell calls and1finish were audited, not just decoded candidate
+navigation. No alternate candidate command, source dependency edit, optimizer step,
+training, actual worker process fixture, GPU or dataset workload was found.
+
+One consolidated corrective revision is requested on this SAME source task, not a
+new task or a reset. Complete actionable feedback is in `initial-review/consolidated-feedback.md`
+and `initial-review/feedback-supplement.md` under that evidence directory; original
+C1–C10/full frozen specification/approved command/paths/budgets remain unchanged.
+The earlier metadata-only preflight ESCALATE remains historical. Main integration
+and deployment remain NOT_AUTHORIZED; passing267regressions alone does not waive any
+assigned guard, test matrix, report or independent acceptance gate.
