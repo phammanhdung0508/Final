@@ -34,6 +34,12 @@ pass. Independent integration decision:
 No D3, profiling/training, deployment, commit or push is authorized by integration;
 **deployment_decision: NOT_AUTHORIZED**.
 
+**D2 is concluded. D3 preparation is now authorized**, not implementation or execution.
+See [D3 secure checkpoint storage/retrieval](docs/checkpoint-storage.md) and
+`configs/checkpoint-storage-scope.json`. D2 validates already-decoded state; D3 owns
+secure file/source IO, decoding-time bounds and integration with D1/D2. No additional
+D2 correction, re-audit or security-controller work is planned absent a new error.
+
 The preceding isolated source acceptance remains unchanged. The separately
 approved [A04/D01 round](docs/checkpoint-payload-a04-d01-correction.md) closes the
 original whole-D2 C1–C10 contract. Final full discovery: **355 tests, no failures,

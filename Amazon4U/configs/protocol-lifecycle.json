@@ -413,6 +413,28 @@
         "deployment_decision": "NOT_AUTHORIZED",
         "documentation": "docs/checkpoint-identity-repair.md"
       },
+      "checkpoint_secure_IO_preparation": {
+        "authority": "user_concluded_D2_and_requested_D3_preparation",
+        "D2_status": "CONCLUDED_ACCEPTED_MAIN_INTEGRATED_TASK_ONLY",
+        "D2_decision": "data/reports/checkpoint-payload-main-integration/review.json",
+        "D2_new_error_identified": false,
+        "D2_additional_correction_reaudit_controller_work": "not_planned_absent_concrete_new_error",
+        "D3_status": "PREPARATION_STARTED_SPECIFICATION_NOT_YET_FROZEN",
+        "preparation_authorized": true,
+        "implementation_authorized": false,
+        "worker_or_candidate_execution_authorized": false,
+        "checkpoint_IO_execution_authorized": false,
+        "documentation": "docs/checkpoint-storage.md",
+        "scope_configuration": "configs/checkpoint-storage-scope.json",
+        "D2_boundary": "validation_of_already_decoded_state",
+        "D3_boundary": "secure_storage_retrieval_bounded_decoding_and_D1_D2_integration",
+        "single_substantive_D3_deliverable": true,
+        "accepted_dependencies_and_original_reports_unchanged": true,
+        "profiling_authorized": false,
+        "training_authorized": false,
+        "deployment_decision": "NOT_AUTHORIZED",
+        "commit_or_push_authorized": false
+      },
       "checkpoint_payload_main_integration": {
         "authority": "user_explicitly_requested_D2_main_integration",
         "integration_review": "ACCEPT",

@@ -79,6 +79,32 @@ accepted adversarial fixtures must remain passing. No scientific-rule amendment.
 
 ## Current status
 
+### Active checkpoint position — D2 concluded, prepare D3
+
+D1 identity/provenance and D2 payload validation are accepted and integrated in main.
+D2's separate integration decision is
+`data/reports/checkpoint-payload-main-integration/review.json`:355 passing tests,
+zero failures/errors/skips,56.643s complete process within120s, task_only and
+NOT_AUTHORIZED for deployment. Later historical entries below remain historical
+records; their exhausted tasks are not reopened or reset.
+
+The user has concluded D2 and directed **D3 preparation only**. No additional D2
+correction, re-audit or security-controller investigation is planned absent a newly
+identified concrete error. Preserve accepted D1/D2/model code/tests and their reports.
+D2 validates checkpoint mappings **after decoding**; D3 owns secure checkpoint
+storage/retrieval, decoding-time resource bounds, allowlisted physical acquisition,
+no-clobber publication/cleanup and integration with D1/D2.
+
+See [the D3 scope/evidence draft](checkpoint-storage.md) and
+`configs/checkpoint-storage-scope.json`. Finalize format/decoder bounds, IO policy,
+root/race/platform contract, publication/failure semantics and exact APIs/tests/setup
+before implementation authorization. No D3 Worker, source implementation, checkpoint
+IO or fresh regression execution is authorized by this preparation. Keep one
+substantive D3 deliverable and the established text-only channel; no tooling detour.
+Training, profiling and deployment remain separately unauthorized.
+
+### Preserved earlier milestone records
+
 Step 1: **evaluator integrated and regression-verified in main**. Preserved
 artifact task `2562b8ec-cf57-4ace-b348-9fbd6c994262` received recorded
 **ACCEPT/task_only/NOT_AUTHORIZED**; decision

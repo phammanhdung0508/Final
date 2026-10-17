@@ -1,0 +1,82 @@
+{
+  "schema_version": "amazon4u-checkpoint-storage-scope-v1",
+  "deliverable": "D3_secure_checkpoint_IO_and_D1_D2_integration_verification",
+  "status": "PREPARATION_STARTED_SPECIFICATION_NOT_YET_FROZEN",
+  "authority": "User directed: conclude D2 and move on to preparing D3; no additional D2 correction/controller investigation/audit absent a new error.",
+  "documentation": "docs/checkpoint-storage.md",
+  "D2_status": "CONCLUDED_ACCEPTED_AND_MAIN_INTEGRATED_TASK_ONLY",
+  "D2_integration_decision": "data/reports/checkpoint-payload-main-integration/review.json",
+  "D2_historical_verified_baseline_tests": 355,
+  "fresh_D3_baseline_performed": false,
+  "boundaries": {
+    "D1": "Existing canonical identity/provenance and actual/expected validation APIs; no rewrite.",
+    "D2": "Validate an already-decoded checkpoint mapping; existing owned-output, schema and per-object logical resource checks; no rewrite.",
+    "D3": "Secure approved-root storage/retrieval, bounded serialization/decoding, no-clobber publication, owned temporary cleanup, physical allowlisted source acquisition and integration with accepted D1/D2.",
+    "not_D3": ["live model/optimizer/RNG restoration", "training loop", "exact continuation or physical-origin proof", "general agent/security controller", "OS/process-memory sandbox"]
+  },
+  "preparation_authorized": true,
+  "implementation_authorized": false,
+  "worker_authorized": false,
+  "candidate_tests_authorized": false,
+  "checkpoint_IO_execution_authorized": false,
+  "source_acquisition_execution_authorized": false,
+  "D2_reaudit_or_correction_authorized": false,
+  "D2_new_error_identified_in_this_preparation": false,
+  "protected_accepted_paths": [
+    "scripts/checkpoint_identity.py",
+    "tests/test_checkpoint_identity.py",
+    "docs/checkpoint-identity.md",
+    "scripts/checkpoint_payload.py",
+    "tests/test_checkpoint_payload.py",
+    "docs/checkpoint-payload.md",
+    "scripts/differentiable_models.py",
+    "tests/test_differentiable_models.py"
+  ],
+  "proposed_D3_implementation_paths": [
+    "scripts/checkpoint_storage.py",
+    "tests/test_checkpoint_storage.py",
+    "docs/checkpoint-storage.md"
+  ],
+  "proposed_operations": ["acquire_explicitly_allowlisted_source_snapshots", "publish_validated_checkpoint_no_clobber", "read_and_decode_checkpoint_then_validate_D1_D2"],
+  "mandatory_contracts": [
+    "Preserve accepted D1/D2/models/baseline/protocols/history/Git/siblings; one substantive D3 deliverable, not micro-tasks.",
+    "Narrow independently approved roots, descriptor-anchored traversal, symlink/escape/nonregular and parent-race refusal.",
+    "File bounds before decoding and reconstructed-storage/allocation bounds during decoding; D2 after decode is not sufficient.",
+    "Retain weights_only=True for Torch loading; no unsafe fallback or arbitrary global allowlisting.",
+    "Bounded serialization and atomic exclusive no-clobber publication; clean up only owned incomplete temporaries.",
+    "Bounded actual source bytes from explicit physical allowlists, supplied to existing D1 APIs; no broad host or credential capture.",
+    "Full write/read/decoder/D1/D2 verification with mandatory independent expectations and owned state, no live restoration.",
+    "Prospectively pinned complete regression within120seconds, no failures/errors/skips; independent code/results/ordered-limitation review before acceptance."
+  ],
+  "unsettled_before_submission": [
+    "Exact on-disk format/version and demonstrable pre-allocation bounded restricted-decoding mechanism on pinned framework.",
+    "Mandatory IO-policy schema/accounting, file/storage/structural limits and alignment with independent D2 resource_policy.",
+    "Root bootstrap/path/platform/filesystem primitives, concurrency/adversary assumptions and precise race refusal semantics.",
+    "No-replace publication primitive and owned-temporary failure cleanup; distinguish atomic visibility from durability claims.",
+    "Exact public signatures/exception family, part-level evidence plan, isolated checkout/HEAD/dependency hashes, baseline355, exact command/scratch/outputs and bounded request/revision/execution budgets."
+  ],
+  "prospective_test_envelope_not_execution_permission": {
+    "CPU_only": true,
+    "max_users": 8,
+    "max_products": 12,
+    "max_metadata_nodes_per_type": 8,
+    "max_dimensions": 64,
+    "max_fixture_file_bytes": 2097152,
+    "full_suite_timeout_seconds": 120,
+    "new_training_backward_optimizer_steps": false,
+    "live_restoration": false,
+    "CUDA_or_worker_processes": false,
+    "real_data_remote_or_heldout_work": false,
+    "existing_accepted_baseline_exceptions": "Unchanged synthetic differentiability/import-order tests only.",
+    "oversized_file_tests": "Use a smaller explicit test IO budget while actual fixture stays within2MiB; no automatic extension of D2 negative exceptions to physical files.",
+    "aggregate_fixture_and_decode_quotas": "To be specified before authorization, not unlimited."
+  },
+  "worker_channel_when_later_authorized": "Reuse established text-only patch-only SDK unchanged; no architecture/controller detour.",
+  "main_transfer_authorized": false,
+  "profiling_authorized": false,
+  "training_authorized": false,
+  "deployment_policy": null,
+  "acceptance_scope_if_later_earned": "task_only",
+  "deployment_decision": "NOT_AUTHORIZED",
+  "stage_commit_push_authorized": false
+}

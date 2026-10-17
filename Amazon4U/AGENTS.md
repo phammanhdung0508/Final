@@ -46,7 +46,16 @@ under120s. Source/tests/documentation are byte-identical to the accepted artifac
 all249 baseline IDs/bytes and3564 expanded cases pass. See
 `data/reports/checkpoint-payload-main-integration/review.json` and
 `docs/checkpoint-payload-main-integration.md`. No Worker/source revision or commit/push.
-D3/profiling/training remain unauthorized and deployment **NOT_AUTHORIZED**.
+D3 implementation/profiling/training remain unauthorized and deployment **NOT_AUTHORIZED**.
+The user has now directed **D2 concluded; D3 preparation only**, recorded in
+`docs/checkpoint-storage.md` and `configs/checkpoint-storage-scope.json`. No new
+D2 error has been identified; do not start another D2 correction/re-audit/Worker or
+security-controller investigation absent a concrete new error. D2 validates decoded
+state; D3 owns secure storage/retrieval, decoding-time bounds and D1/D2 integration.
+Prepare D3 as one substantive deliverable without modifying accepted dependencies.
+Exact format/IO policy/root-race/publication/API/test details must be settled before
+separate implementation/execution authorization. Preparation grants no checkpoint IO,
+Worker, tests or production execution. Reuse the existing text-only channel later.
 All earlier ESCALATE decisions/budgets and failed attempts remain preserved.
 Historical explicitly bounded D2 correction `6efb0ae5-6a62-4376-91e9-7b358c51013f` remains **ESCALATE at1/1**:
 its isolated283-test suite passes, but required schema/applicability/diagnostic/coverage/
