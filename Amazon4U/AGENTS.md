@@ -38,6 +38,10 @@ D2 correction `6efb0ae5-6a62-4376-91e9-7b358c51013f` remains **ESCALATE at1/1**:
 its isolated283-test suite passes, but required schema/applicability/diagnostic/coverage/
 disclosure contracts remain unmet. No rejected payload source transferred to main;
 D3/profiling/training remain blocked. See `docs/checkpoint-payload-authorized-correction.md`.
+The Worker-free37-part preparation matrix and proposed correction assignment are recorded
+in `docs/checkpoint-payload-blocker-matrix.md` and
+`docs/checkpoint-payload-correction-assignment.md`. Preparation is ready for authorization
+review only; new cases have not run and no new correction authority is granted.
 Do not reopen/reset/automatically replace exhausted tasks. Checkpoint/provenance task
 `e1f1ea4c-de9a-4a53-ad3a-7b394fb4da1a` remains ESCALATE/unaccepted in isolation;
 both corrective revisions used after operator-authorized same-task reopening;

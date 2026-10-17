@@ -8,8 +8,12 @@ errors and unsupported completion claims, and preserve independent review. The D
 failure pattern motivated this procedure but does not limit its applicability. The user
 need not repeat it at later stages. This is not a guarantee of bug-free Worker output.
 
-For the current D2 case, preparation remains the next prerequisite and its blocker
-matrix has **not yet been compiled**. This process decision grants no additional
+For the current D2 case, the **37-part matrix and proposed correction assignment are
+prepared for authorization review**, not D2 acceptance. See
+`checkpoint-payload-blocker-matrix.md`, `checkpoint-payload-correction-assignment.md`
+and `data/reports/d2-part-level-preparation/review.json` for evidence and the three
+practical-outcome assessments. New reproductions remain unexecuted; no Worker or
+candidate tests ran during preparation. This process decision grants no additional
 implementation, candidate-execution, revision-budget, research or deployment authority.
 
 ## Before implementation or substantive corrective delegation
