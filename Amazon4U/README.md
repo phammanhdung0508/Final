@@ -21,7 +21,17 @@ reference encoder foundation is **ACCEPTED (task_only)** under task
 `d35b3d7c-3cd6-4f8e-8ecf-adcb963f4b93`. Differentiable CPU models/training-only
 graphs have frozen-verification **ACCEPT (task_only)** under
 `f709d062-ae0e-4eb6-960c-f94728180d1b`, with separately reviewed main import
-integration; current main suite: **204 tests, zero failures/errors/skips**.
+integration (**204 tests** at that milestone). Separately accepted D1 identity/provenance
+is now integrated in main with **249 passing tests**.
+
+**Latest D2 result:** explicitly bounded correction
+`6efb0ae5-6a62-4376-91e9-7b358c51013f` is **ESCALATE at1/1**, despite its isolated
+**283 passing tests**. Independent review found remaining strict-schema, CPU RNG
+applicability, bounded-diagnostic, required coverage and disclosure issues. No rejected
+payload source was transferred to main; D3 and real profiling/training remain blocked.
+See [the current correction/result](docs/checkpoint-payload-authorized-correction.md).
+Historical tasks/budgets remain preserved; no automatic replacement is authorized.
+
 Full training harness remains unfinished. Checkpoint/provenance task
 `e1f1ea4c-de9a-4a53-ad3a-7b394fb4da1a` is **ESCALATE / not accepted** after
 the authorized final revision timed out; both revisions are used. Independent

@@ -997,3 +997,116 @@ C1–C10/full frozen specification/approved command/paths/budgets remain unchang
 The earlier metadata-only preflight ESCALATE remains historical. Main integration
 and deployment remain NOT_AUTHORIZED; passing267regressions alone does not waive any
 assigned guard, test matrix, report or independent acceptance gate.
+
+## Explicit bounded recovery after exhausted source task
+
+The original task `84e7dfa0-cf76-4efe-aeaf-ef7d87b6c2dc` remains **ESCALATE at2/2**,
+final evidence `agy-evidence-fdc77561-6956-4cde-8e1d-be367b74b3b8`. Its final272green
+suite did not establish complete C1–C10. All original artifacts, history, decisions,
+criteria and exhausted budget remain preserved; this task is NOT reset or reopened.
+
+The user subsequently explicitly authorized:
+
+> I explicitly authorize a bounded recovery of Deliverable 2 — Payload Validation.
+>
+> Preserve the original ESCALATE decision, task history, and exhausted 2/2 revision budget. Do not reset or reopen the exhausted task.
+>
+> Fix all confirmed blockers: incomplete worker RNG states, strict type/schema validation, valid empty HeteroGNN metadata tables, unsafe error handling, and missing or misleading tests.
+>
+> Preserve verified implementation and frozen C1–C10 requirements. Add meaningful regression tests, rerun the original full suite, and independently review every acceptance criterion.
+>
+> Keep the recovery scoped; no training, main integration, or deployment. Do not claim ACCEPT unless all requirements pass.
+
+This new consequential authorization permits one separately recorded recovery attempt
+of the SAME D2 subsystem, not another checkpoint deliverable or an automatic replacement
+under the exhausted budget. Prospective plan and exact original C1–C10 are recorded in
+`data/reports/checkpoint-payload-recovery/authorization-and-plan.md` and `plan.json`.
+Bound: one Worker invocation, max_revisions=0,35minute Worker ceiling,120second full-suite
+ceiling. Unresolved requirements mean ESCALATE, never automatic retries or criterion waivers.
+
+Use a new clean clone `.worktrees/checkpoint-payload-recovery-review` at original pinned
+HEAD, with complete frozen rejected-artifact/specification/feedback references. Preserve
+verified implementation by copying/correcting within the same3allowed implementation
+paths during the Worker invocation, not changing the historical artifact. Preserve all
+accepted identity/model/baseline bytes. Original full discovery interpreter/script remain;
+only cwd and absolute fixture scratch are rebased to the new clone to avoid old-artifact
+writes. One prospective clean249test dependency baseline before submission; recovery
+retains/strengthens23existing payload methods and adds the missing meaningful matrices.
+Pi independently inspects/verifies every original criterion and current limitation.
+Acceptance, if earned, is isolated task_only; main integration and deployment remain
+NOT_AUTHORIZED. No training, new backward/optimizer steps, actual workers, GPU/Kaggle,
+profiling, real datasets, D3 or live restoration is authorized. Planning is not acceptance.
+
+### Bounded recovery recorded outcome — not accepted
+
+Recovery task `0d3321e7-0046-49b5-ae12-e5d67a79c42c`, one Worker/max_revisions0,
+recorded **ESCALATE**, evidence `agy-evidence-e4cb8f07-6ce7-4268-a1bc-38e7ec362cab`.
+Pi independently reviewed all original C1–C10 and all5current ordered limitations,
+actual full code/tests/docs/callers/dependencies, raw command/action evidence and
+complete original full-suite results: **276 tests OK9.183s/12044ms**, retaining all249
+baseline IDs and23prior payload method names. Frozen prefix and accepted dependency
+bytes remain unchanged. See `data/reports/checkpoint-payload-recovery/independent-review/review.json`.
+
+Worker triple-engine contexts, scalar typing, empty Hetero metadata support, schema
+ordering and selected boundary tests improved. Remaining blockers include metaclass
+hash/equality dispatch through the type-name lookup, raw huge-integer error formatting,
+invalid Python/Torch worker seed lists and incomplete actual seed checks, a falseT=0
+test withTstill3, a mismatched BTFgraph fixture, incomplete required matrices and
+unsupported completion claims. A green suite does not waive these assigned defects.
+No additional automatic Worker/correction/replacement is authorized after this bounded
+attempt. Original task remains ESCALATE2/2, untouched and not reopened/reset. Full
+history/artifacts preserved. Acceptance_scope task_only; deployment NOT_AUTHORIZED;
+no main implementation transfer, training or live restoration occurred.
+
+## User-agreed oracle-first workflow — stages1/2 only
+
+The user agreed to `Reproduce defects → Verify test oracles → Fix implementation →
+Independently verify all contracts` and asked to start. Start a bounded reproduction/
+oracle-verification phase, NOT another validator fix attempt. Preserve both rejected
+artifacts/tasks/budgets unchanged; do not reopen/reset them. Plan/ledger requirements
+and prospectively exact commands are in `data/reports/checkpoint-payload-oracles/`.
+
+Use new isolated `.worktrees/checkpoint-payload-oracle-review` at original dependency
+HEAD. Validator and old27payload tests are protected read-only references. Worker may
+write ONLY the existing payload test/doc destinations, inheriting old27test bodies
+unchanged alongside249accepted tests. One20minute diagnostic Worker,max_revisions0;
+120second full-discovery command; no training/main integration/deployment or source edits.
+
+The four new CONTRACT assertions are expected to be RED against the frozen rejected
+module. Full unfiltered unittest output must show those failures. A separately declared
+diagnostic envelope exits0 ONLY when the exact4intended failures occur and all existing
+276tests/oracle checks pass, with no errors/skips/expectedFailure/unrelated failure.
+It prints IMPLEMENTATION NOT ACCEPTED. This is a diagnostic-stage confirmation, never
+a green implementation gate or a waiver of originalC1–C10. Independent P/K/T/graph
+oracle checks must fix misleading fixture assumptions before any implementation work.
+Pi reviews actual cases, controls, expected/observed outcomes and raw evidence; any
+uncertain oracle blocks progression. Implementation changes remain separately gated.
+
+### Independent diagnostic outcome — ESCALATE, not implementation acceptance
+
+Task `9299a0e2-5531-4a6e-9f43-2e9933b28bdb` used its single bounded Worker
+attempt (max_revisions0). Pi independently verified the original approved diagnostic
+command: 283tests in18.954seconds process time, all276existing cases and three oracle
+checks passing, exactly four intended contract assertion failures, no errors/skips.
+The raw suite is RED; envelope exit0 means only reproduction success.
+
+Confirmed defects: attacker metaclass hash executes; oversized update diagnostics
+leak native ValueError; invalid Torch and Python worker seed lists are accepted.
+Independent oracles confirm the old empty-order fixture still has P5/K2/T3, a genuinely
+rebuilt T0fixture reaches the untrainable-domain guard, and the old BTF graph has six
+edges inconsistent with five retained positives. These findings are preserved as
+useful evidence, not a claim that all required matrices or future fixes are verified.
+
+Formal phase acceptance is blocked: the Worker executed eight prohibited ad-hoc
+candidate probes, used undeclared scratch/transient files, and omitted probes and
+the first diagnostic run from its report. Final snapshot cleanliness cannot authorize
+transient writes. O1/O6 failed; O2–O5 verified. All four current limitations were
+independently reviewed; excluded workloads do not excuse the assigned failures.
+See `data/reports/checkpoint-payload-oracles/independent-review/review.json`, complete
+command audit/raw streams and immutable decision
+`agy-evidence-ecdbf91d-bf25-4b91-b966-eb50f250ba51`.
+
+Acceptance_scope is task_only (diagnostics); decision ESCALATE; deployment_decision
+NOT_AUTHORIZED. Both prior rejected artifacts/history/budgets remain unchanged.
+Validator source is frozen; no fix, main implementation integration, training,
+staging/commit/push or deployment occurred. No automatic follow-up is authorized.

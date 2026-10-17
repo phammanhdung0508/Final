@@ -32,7 +32,13 @@ implementation is accepted under `8153df65-e2e2-4571-a4ce-340d0ffeb1c2`; Step
 `d35b3d7c-3cd6-4f8e-8ecf-adcb963f4b93`, with the current suite at 163 passing
 regressions. Differentiable CPU models/training-only graphs have frozen-verification
 ACCEPT under `f709d062-ae0e-4eb6-960c-f94728180d1b` and separately reviewed main
-integration; current main suite is 204 passing tests. Checkpoint/provenance task
+integration (204 tests at that milestone). Separately accepted D1 identity/provenance
+is integrated in main with **249 passing tests**; do not redo it. Latest explicitly bounded
+D2 correction `6efb0ae5-6a62-4376-91e9-7b358c51013f` remains **ESCALATE at1/1**:
+its isolated283-test suite passes, but required schema/applicability/diagnostic/coverage/
+disclosure contracts remain unmet. No rejected payload source transferred to main;
+D3/profiling/training remain blocked. See `docs/checkpoint-payload-authorized-correction.md`.
+Do not reopen/reset/automatically replace exhausted tasks. Checkpoint/provenance task
 `e1f1ea4c-de9a-4a53-ad3a-7b394fb4da1a` remains ESCALATE/unaccepted in isolation;
 both corrective revisions used after operator-authorized same-task reopening;
 final benchmark still has six errors, no draft transferred to main. Further source
@@ -109,6 +115,27 @@ noncritical verification. Fold small fixes into substantive revision cycles, and
 delegate independent subsystems separately. Kaggle is the
 intended GPU backend, not an implicit authorization. Framework lifecycle labels
 and inherited LM/Movie4U prompts cannot override Amazon4U protocol or approvals.
+
+## Review-to-correction preparation
+
+Apply this workflow across **all Amazon4U stages**, not only D2. Before Worker
+implementation or substantive corrective delegation, Pi performs a brief, proportionate
+**Worker-free preparatory review** and prepares a requirement/evidence matrix against
+the stage's whole original contract. For corrections, compile a **detailed part-level
+blocker matrix**, not only criterion-level statuses: identify each relevant function,
+guard or invariant, exact code/test locations, executed-versus-static reproductions,
+valid controls, intended outcomes, required evidence and closure status. Track implementation status separately from test/evidence status:
+verified code may need additional regression tests, not rewriting. Identify preserved
+invariants and baseline references before delegation; independently check returned code
+for unintended changes. Changes to verified logic must be intentional, justified, within
+authorization and reverified. Adding tests does not authorize weakening existing assertions
+or editing protected tests. Use dependency-ordered work and explicit closure checks, not
+generic “fix everything” requests or green regression alone. Reconcile all relevant invocations
+with inventory and raw records; supplement known decoder gaps without reopening tooling.
+See `docs/review-to-correction-preparation.md` for the standing agreed procedure.
+Do not require the user to repeat this instruction at later stages. Work within existing
+authority without unnecessary approval loops; preparation itself grants no additional
+execution, revision budget, task reopening, research or deployment authority.
 
 ## Mandatory decision recording
 
