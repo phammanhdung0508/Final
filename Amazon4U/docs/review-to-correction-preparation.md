@@ -121,7 +121,10 @@ with explicit closure checks, not a generic instruction to “fix everything.”
 controls and independent positive/negative oracles before spending implementation/revision
 budget. Each finding must map to a correction and verifiable closure evidence; Worker
 claims and green regression alone do not close it. Review complete relevant code and
-actual results independently before deciding that a requirement is satisfied.
+actual results independently before deciding that a requirement is satisfied. Screen
+changed test/setup code for prohibited execution and scope violations **before** running
+it, not only afterward; a pinned full-suite command does not authorize forbidden
+operations embedded in tests. A blocked mandatory evaluation is not ACCEPT.
 
 Use existing authorization for routine in-scope work without unnecessary approval loops.
 Any additional execution or expanded scope still requires prospective authority; D2's
@@ -141,3 +144,80 @@ mandatory evidence still blocks acceptance; task acceptance is not deployment ap
 D3 and research execution remain behind their existing acceptance and authorization
 gates. See `checkpoint-payload-authorized-correction.md` for the current unaccepted
 D2 artifact and immutable decision references.
+
+## Scoped text-only patch context and application boundaries
+
+The user agreed this architecture is promising but explicitly withheld new D2 launch
+authority. Do not build a controller merely to impose patch-only behavior. Verify an
+existing genuinely text-only model configuration instead; never call native agy tool-free
+while its native tools remain. The one-shot existing SDK direct-completion verification
+and synthetic patch demonstration succeeded; see `text-only-channel-check.md`.
+
+For any future authorized text-only iteration, provide relevant complete functions,
+necessary callers/dependencies, exact applicable frozen requirements and pertinent
+failure/control evidence, not the entire codebase every time. Retain all original
+requirements as authoritative; scoped context is not a waiver or semantic rewrite.
+Require baseline hashes and verify all changed-file/relevant-dependency hashes before
+application; reject drift instead of applying fuzzily. Request missing context explicitly.
+
+Pi checks exact allowed paths, patch contents, protected implementation and test changes
+before mechanical application. For D2 only its three approved files are eligible; no
+undeclared helpers, path escapes, renames/deletions or assertion weakening/skips. Review
+all selected test/setup execution paths, including inherited fixtures, for prohibited
+actions such as global `torch.manual_seed`; do not reexecute the unsafe320-case artifact
+just to bootstrap. Static screening supplements full semantic review, not a universal
+unsafe-code detector or sandbox. No actual patch or tests ran in the synthetic demo.
+
+A direct API channel does not automatically inherit native delegation receipts. Future
+D2 authority must explicitly predeclare bounded requests/context/patch/history records
+and all mandatory independent inspection, verification and acceptance gates without
+silently bypassing them. Do not alter old task reports, decisions, criteria or budgets,
+and do not turn this into a tooling project or automatic D2 relaunch.
+
+## Bounded text-only D2 follow-up — result, not new authority
+
+Subsequent separate user `procced` authorized the pinned text-only correction in
+`checkpoint-payload-text-correction.md`. That round stopped ESCALATE at1/1, with no
+native Worker tools/commands and no new controller. All320inherited tests pass, but
+final337tests retain2valid fractional-Adam-step failures;3140expanded assertions pass
+without closing all37rows. D01raw identifier bounds and coverage remain incomplete.
+Preserve the useful fixes/tests and exact current reports; do not manufacture green,
+change acceptance criteria, extend budgets or automatically replace the round.
+
+The two private-generator fixture edits were independently reviewed/applied before
+safe red discovery. One ambiguous anchor was rejected rather than silently patched
+into an older helper. Reports honestly declared partial work. Capability removal
+successfully prevented direct Worker probes/writes; it did not guarantee complete
+implementation/coverage. Neither response timed out. Final next-source work requires
+appropriate bounded authority; no D3/main transfer/training/deployment follows.
+
+## Frozen-contract evidence, not expanding requirements
+
+The user explicitly reaffirmed this for the next D2round: no additional Worker
+architecture work; preserve the337-test candidate and verified fixes; prioritize the
+well-defined A04/D01implementation defects under new authorization. Use ledger-backed
+coverage additions without confusing missing evidence with a demonstrated source bug.
+Do not regenerate the suite or rewrite unrelated protected guards to gain coverage.
+
+C1–C10 and the original frozen specification are the acceptance authority, not an
+expanding reviewer wish list. Every proposed test must demonstrate an existing contract
+clause. A matrix/ledger item is evidence navigation, not independent authority to add
+technical requirements. If a request lacks an original-contract basis, identify the
+review discrepancy prospectively rather than silently create an acceptance blocker.
+Keep original reports/criteria/decisions unchanged and retain all mandatory independent
+review, execution-safety and verification gates. This direction grants no new execution
+or revision budget; see `checkpoint-payload-text-correction.md`.
+
+## Matrix-guided execution follow-up
+
+The subsequently approved attempt `eb5065fc-234e-4d6f-ac63-b788d55b1502` is ESCALATE;
+see `checkpoint-payload-matrix-correction.md`. The matrix's six implementation blocker
+groups were reproduced and protected code stayed unchanged, but the Worker timed out
+before fixes and used prohibited probes/subsets/external helper scripts. One revision
+was deliberately left unused because source changes cannot undo historical process
+violations. Thus the third practical outcome—compliant correction execution—was not
+achieved; a detailed assignment alone is not proof of effective Worker follow-through.
+Pi's benchmark also ran new global-seeding fixture operations before they were noticed;
+the screening-order mistake is explicitly recorded. Do not respond with another generic
+automatic retry or reopen tooling. Historical preparation assessments remain unchanged;
+they were qualified plan-level assessments, not promises of execution success.

@@ -5,5 +5,8 @@ __pycache__/
 data/processed/
 data/.work*/
 
+# Local isolated implementation/review checkouts
+/.worktrees/
+
 # Coding-tool telemetry runtime files (at any depth within Amazon4U).
 datacloud_telemetry/

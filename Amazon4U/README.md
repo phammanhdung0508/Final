@@ -24,13 +24,39 @@ graphs have frozen-verification **ACCEPT (task_only)** under
 integration (**204 tests** at that milestone). Separately accepted D1 identity/provenance
 is now integrated in main with **249 passing tests**.
 
-**Latest D2 result:** explicitly bounded correction
-`6efb0ae5-6a62-4376-91e9-7b358c51013f` is **ESCALATE at1/1**, despite its isolated
-**283 passing tests**. Independent review found remaining strict-schema, CPU RNG
-applicability, bounded-diagnostic, required coverage and disclosure issues. No rejected
-payload source was transferred to main; D3 and real profiling/training remain blocked.
-See [the current correction/result](docs/checkpoint-payload-authorized-correction.md).
-Historical tasks/budgets remain preserved; no automatic replacement is authorized.
+**Latest D2 result: ACCEPT (task_only), isolated artifact only.** The separately
+approved [A04/D01 round](docs/checkpoint-payload-a04-d01-correction.md) closes the
+original whole-D2 C1–C10 contract. Final full discovery: **355 tests, no failures,
+errors or skips**, 111.539s unittest / **116.571s process**, within the unchanged
+120-second limit. All337 inherited tests remain; all3564 expanded cases pass.
+The independent review resolves both submission-time evidence questions and assesses
+all six limitations in order. Failed attempts and Pi-authored verification corrections
+remain disclosed. See `data/reports/checkpoint-payload-a04-d01-correction/review.json`.
+No payload source transferred to main (main remains249 tests); integration needs
+separate authorization. D3, profiling/training and deployment remain unauthorized;
+**deployment_decision: NOT_AUTHORIZED**.
+
+**Prior text-only D2 result:** the separately authorized [text-only correction](docs/checkpoint-payload-text-correction.md)
+is **ESCALATE at1/1**, not accepted. Two no-tool SDK responses produced localized fixes
+and expanded evidence without Worker commands. After fixture screening/private-generator
+corrections, final independent full discovery: **337tests,2failures,0errors,0skips,
+46.429s**. All320inherited methods pass;3140expanded assertions succeed. Both failures
+expose pre-existing Adam acceptance of step4.5with updates4. Whole-path diagnostic and
+37-row evidence gaps remain. Useful isolated code/tests are preserved; no automatic
+third response, source fix or main transfer. This was response/revision-count use, not
+a Worker timeout. D3/training/deployment remain unauthorized.
+
+**Prior matrix-guided D2 result:** correction
+`eb5065fc-234e-4d6f-ac63-b788d55b1502` is **ESCALATE after its initial30minute timeout**.
+Independent test-first run: **320cases,6failures,14errors**; all283old cases and verified
+implementation bytes remain unchanged. New cases reproduce all6implementation blocker
+groups, but no source fixes were made. Raw records prove prohibited probes/subsets and
+external helper scripts, so Pi stopped with **one revision unused—not budget exhaustion**.
+The detailed matrix preserved correct code and identified real defects, but compliant
+Worker completion was not achieved. See [current review](docs/checkpoint-payload-matrix-correction.md).
+The previous [283-green unaccepted correction](docs/checkpoint-payload-authorized-correction.md)
+and all historical tasks/budgets remain preserved. No rejected payload source transferred
+to main; D3 and real profiling/training remain blocked. No automatic replacement is authorized.
 
 Full training harness remains unfinished. Checkpoint/provenance task
 `e1f1ea4c-de9a-4a53-ad3a-7b394fb4da1a` is **ESCALATE / not accepted** after

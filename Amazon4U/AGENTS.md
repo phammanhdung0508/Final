@@ -33,15 +33,37 @@ implementation is accepted under `8153df65-e2e2-4571-a4ce-340d0ffeb1c2`; Step
 regressions. Differentiable CPU models/training-only graphs have frozen-verification
 ACCEPT under `f709d062-ae0e-4eb6-960c-f94728180d1b` and separately reviewed main
 integration (204 tests at that milestone). Separately accepted D1 identity/provenance
-is integrated in main with **249 passing tests**; do not redo it. Latest explicitly bounded
-D2 correction `6efb0ae5-6a62-4376-91e9-7b358c51013f` remains **ESCALATE at1/1**:
+is integrated in main with **249 passing tests**; do not redo it.
+The separately authorized A04/D01 round now has **whole-D2 ACCEPT, task_only**, in
+its isolated candidate:355 passing tests/zero failures/errors/skips,111.539s unittest,
+116.571s complete process under the unchanged120s limit. All337 inherited tests and
+3564 expanded cases pass. Six ordered limitations and both submission-time evidence
+questions are independently resolved in
+`data/reports/checkpoint-payload-a04-d01-correction/review.json`.
+No main transfer; main remains249 tests. Integration needs separate authorization;
+D3/profiling/training remain unauthorized and deployment **NOT_AUTHORIZED**.
+All earlier ESCALATE decisions/budgets and failed attempts remain preserved.
+Historical explicitly bounded D2 correction `6efb0ae5-6a62-4376-91e9-7b358c51013f` remains **ESCALATE at1/1**:
 its isolated283-test suite passes, but required schema/applicability/diagnostic/coverage/
 disclosure contracts remain unmet. No rejected payload source transferred to main;
 D3/profiling/training remain blocked. See `docs/checkpoint-payload-authorized-correction.md`.
-The Worker-free37-part preparation matrix and proposed correction assignment are recorded
-in `docs/checkpoint-payload-blocker-matrix.md` and
-`docs/checkpoint-payload-correction-assignment.md`. Preparation is ready for authorization
-review only; new cases have not run and no new correction authority is granted.
+The Worker-free37-part preparation matrix and correction assignment are recorded in
+`docs/checkpoint-payload-blocker-matrix.md` and `docs/checkpoint-payload-correction-assignment.md`.
+The subsequently approved matrix-guided task `eb5065fc-234e-4d6f-ac63-b788d55b1502`
+is now **ESCALATE after its initial30minute timeout**:320tests/6failures/14errors,
+with all283old cases preserved and no implementation fixes. Raw records prove forbidden
+probes/subsets and external helper writes. **One revision remains unused; not budget
+exhaustion.** Do not automatically spend it/reopen/replace a task whose historical
+process violations block acceptance. See `docs/checkpoint-payload-matrix-correction.md`.
+The subsequently authorized text-only correction is also **ESCALATE at1/1**. Two
+completed no-tool SDK responses produced real fixes/coverage without Worker commands;
+Pi screened private fixture RNG changes before execution. Final337tests/2failures/
+0errors/0skips in46.429s: both new negatives expose pre-existing Adam step4.5 accepted
+with updates4. All320inherited cases pass and3140expanded assertions succeed, but raw
+identifier diagnostics and full37-row evidence remain incomplete. Preserve this useful
+isolated artifact; no automatic third response, numerical Pi fix, task replacement or
+main transfer. This was response/revision-count exhaustion, not another Worker timeout.
+See `docs/checkpoint-payload-text-correction.md` and its independent review.
 Do not reopen/reset/automatically replace exhausted tasks. Checkpoint/provenance task
 `e1f1ea4c-de9a-4a53-ad3a-7b394fb4da1a` remains ESCALATE/unaccepted in isolation;
 both corrective revisions used after operator-authorized same-task reopening;
@@ -134,12 +156,63 @@ invariants and baseline references before delegation; independently check return
 for unintended changes. Changes to verified logic must be intentional, justified, within
 authorization and reverified. Adding tests does not authorize weakening existing assertions
 or editing protected tests. Use dependency-ordered work and explicit closure checks, not
-generic “fix everything” requests or green regression alone. Reconcile all relevant invocations
-with inventory and raw records; supplement known decoder gaps without reopening tooling.
+generic “fix everything” requests or green regression alone. Before independently
+executing Worker tests, screen changed test/setup code for prohibited workloads,
+paths, global setters and other scope violations; an approved command does not authorize
+forbidden embedded behavior. If that blocks mandatory evaluation, record the block,
+never ACCEPT incomplete verification or run it just to obtain a result. Reconcile all
+relevant invocations with inventory and raw records; supplement known decoder gaps
+without reopening tooling.
 See `docs/review-to-correction-preparation.md` for the standing agreed procedure.
 Do not require the user to repeat this instruction at later stages. Work within existing
 authority without unnecessary approval loops; preparation itself grants no additional
 execution, revision budget, task reopening, research or deployment authority.
+
+## Text-only patch direction and bounded D2 authorization
+
+Subsequent user `procced` separately authorizes the bounded D2 text-only correction,
+recorded prospectively in `docs/checkpoint-payload-text-correction.md` and its plan.
+It did not reopen old tasks or enlarge original criteria; main/D3/training/deployment
+remain unauthorized. The bounded round has now stopped ESCALATE at1/1; no further
+Worker/source correction is authorized automatically. Retain its fixture-screening and
+independent-review lessons. Historical capability-only verification below did not grant
+its implementation authority.
+
+The user supports a genuinely text-only configuration, not a new security controller
+or agent-system modification. A bounded existing-SDK direct-completion check succeeded;
+see `docs/text-only-channel-check.md`. Native agy remains unchanged and is NOT tool-free.
+Send scoped relevant functions/dependencies, exact applicable frozen requirements and
+test evidence rather than the whole codebase each iteration; bind patches to independently
+checked baseline/dependency hashes. Missing context must be requested, not guessed.
+Pi must review paths, contents, protected invariants and test changes before mechanically
+applying any future authorized patch, and screen the entire selected execution path before
+running it. Never execute inherited unsafe fixtures merely as a bootstrap. D2 patches
+remain limited to its three approved files; other stages use their own approved scope.
+The check used synthetic content only, with no actual D2 patch/test/Worker execution.
+It grants no implementation/revision-budget/deployment authority and does not inherit
+native delegation receipts or permit bypassing mandatory acceptance gates. Do not restart
+controller/tooling research. The newly recorded D2 authority applies only to that bounded
+text-only correction; further work outside it still requires appropriate authorization.
+
+## Next D2 correction direction — frozen contract, no architecture detour
+
+A subsequent user `procced` now separately authorizes the new bounded round in
+`docs/checkpoint-payload-a04-d01-correction.md` and its pinned plan. Preserve the337-test
+baseline; prioritize A04/D01 with the unchanged text-only channel. This new authority
+supersedes the prior discussion-only hold for that round, not old decisions or budgets.
+
+User-agreed after the337-test text-only round: preserve that candidate and suite;
+do not regenerate tests, rewrite verified fixes or alter unrelated protected guards.
+No further Worker architecture/controller work is needed. Under a separate new bounded
+authorization, reuse patch-only proposals and prioritize A04integer-valued Adam steps
+and D01bounded diagnostics. Address ledger-backed coverage gaps additively; missing
+tests are not new implementation errors or permission to rewrite source.
+Do not introduce technical requirements beyond original C1–C10/frozen D2specification.
+Every proposed new test must demonstrate an existing requirement. The37-part matrix
+maps evidence; it cannot independently expand acceptance. Flag any unsupported reviewer
+request without changing original records or waiving original mandatory gates.
+See the next-round direction in `docs/checkpoint-payload-text-correction.md`.
+This discussion grants no Worker/source/test execution, budget reset or task reopening.
 
 ## Mandatory decision recording
 
