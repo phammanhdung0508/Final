@@ -40,7 +40,12 @@ its isolated candidate:355 passing tests/zero failures/errors/skips,111.539s uni
 3564 expanded cases pass. Six ordered limitations and both submission-time evidence
 questions are independently resolved in
 `data/reports/checkpoint-payload-a04-d01-correction/review.json`.
-No main transfer; main remains249 tests. Integration needs separate authorization;
+The user subsequently authorized exact D2 main integration, now **ACCEPTED,
+task_only** with355 tests/zero failures/errors/skips,54.139s unittest/56.643s process
+under120s. Source/tests/documentation are byte-identical to the accepted artifact;
+all249 baseline IDs/bytes and3564 expanded cases pass. See
+`data/reports/checkpoint-payload-main-integration/review.json` and
+`docs/checkpoint-payload-main-integration.md`. No Worker/source revision or commit/push.
 D3/profiling/training remain unauthorized and deployment **NOT_AUTHORIZED**.
 All earlier ESCALATE decisions/budgets and failed attempts remain preserved.
 Historical explicitly bounded D2 correction `6efb0ae5-6a62-4376-91e9-7b358c51013f` remains **ESCALATE at1/1**:

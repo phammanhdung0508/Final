@@ -24,7 +24,17 @@ graphs have frozen-verification **ACCEPT (task_only)** under
 integration (**204 tests** at that milestone). Separately accepted D1 identity/provenance
 is now integrated in main with **249 passing tests**.
 
-**Latest D2 result: ACCEPT (task_only), isolated artifact only.** The separately
+**D2: ACCEPT (task_only), now integrated in main.** Separate user-authorized
+[main integration](docs/checkpoint-payload-main-integration.md) copied the exact
+accepted source/tests/documentation. Main baseline249 passed; full integration
+**355 tests, zero failures/errors/skips**,54.139s unittest / **56.643s process**,
+under the unchanged120-second limit. All249 baseline tests and3564 expanded cases
+pass. Independent integration decision:
+`data/reports/checkpoint-payload-main-integration/review.json`.
+No D3, profiling/training, deployment, commit or push is authorized by integration;
+**deployment_decision: NOT_AUTHORIZED**.
+
+The preceding isolated source acceptance remains unchanged. The separately
 approved [A04/D01 round](docs/checkpoint-payload-a04-d01-correction.md) closes the
 original whole-D2 C1–C10 contract. Final full discovery: **355 tests, no failures,
 errors or skips**, 111.539s unittest / **116.571s process**, within the unchanged
@@ -32,8 +42,8 @@ errors or skips**, 111.539s unittest / **116.571s process**, within the unchange
 The independent review resolves both submission-time evidence questions and assesses
 all six limitations in order. Failed attempts and Pi-authored verification corrections
 remain disclosed. See `data/reports/checkpoint-payload-a04-d01-correction/review.json`.
-No payload source transferred to main (main remains249 tests); integration needs
-separate authorization. D3, profiling/training and deployment remain unauthorized;
+Its original source-only no-transfer boundary is historical; the separate main
+integration above fulfills the later authorization. D3, profiling/training and deployment remain unauthorized;
 **deployment_decision: NOT_AUTHORIZED**.
 
 **Prior text-only D2 result:** the separately authorized [text-only correction](docs/checkpoint-payload-text-correction.md)
