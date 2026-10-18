@@ -79,9 +79,22 @@ accepted adversarial fixtures must remain passing. No scientific-rule amendment.
 
 ## Current status
 
-### Active checkpoint position — D2 concluded, D3 isolated task-only ACCEPT
+### Active checkpoint position — D3 main integration ACCEPT, isolated phase retired
 
-Latest independent D3 decision is **ACCEPT/task_only** after the explicitly authorized
+The user separately authorized decommissioning isolated D3 implementation and bounded
+main integration. Both original D3 trees/evidence remain unchanged,audit-only;no delete,
+move,chmod,Gitmetadata change or additional isolated execution. Pi copied only the
+exact3accepted D3files after355main baselineOK56.293s;fullmain389OK57.452s process,
+0failures/errors/skips,under240s each. All355IDs/bytes/3564expanded/34D3methods preserved.
+Complete MI1–MI5/IO1–IO8/current8orderedlimitation adjudication: **ACCEPT/task_only** in
+`data/reports/checkpoint-storage-main-integration/review.json`;see
+`docs/checkpoint-storage-main-integration.md`. Old mainD3doc archived;transferred API
+artifact exact,with Worker submission-status history preserved andthisreceipt current.
+FourWorker attempts/sevenoldfullruns plus2mainruns retained,nine total,no reset/retry.
+Deployment NOT_AUTHORIZED;no further automatic tests/Worker/corrections,profiling/training,
+heldout/remote,stage/commit/push/release/rollback. Researchexecution still separate gates.
+
+Previous isolated independent D3 decision is **ACCEPT/task_only** after the explicitly authorized
 Pi-only sourceFIFO oracle correction:389OK,0failures/errors/skips,53.292s unittest/
 55.890s process under240s. All355 accepted dependencies/IDs and3564expanded cases
 preserved;production andcandidateAPI docs unchanged. FullIO1–IO8 and8exactordered

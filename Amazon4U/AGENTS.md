@@ -6,6 +6,26 @@ not change sibling projects unless explicitly requested.
 
 ## Goal and current state
 
+**Current D3 authority: bounded main integration.** The user directed retirement of
+isolated D3 implementation/execution and transition to main. Both original D3 trees
+and all evidence/history remain audit-only at their original paths;no delete/move,
+chmod,Git metadata changes or further isolated runs. Pi may run one355 main baseline,
+copy exactly the3accepted D3files (archive current main doc),then one389 full main
+regression,each<=240s. No Worker/code/test rewrite,retry,training/profiling/deployment.
+Four Worker attempts/seven old full runs remain retained;two integration runs are
+separately bounded,not a reset. See `docs/checkpoint-storage-main-integration.md`,
+`configs/checkpoint-storage-main-integration.json` and its frozen report plan.
+**D3 main integration is now ACCEPT/task_only** in
+`data/reports/checkpoint-storage-main-integration/review.json`:355baselineOK
+56.293s process,389integratedOK57.452s process,0failures/errors/skips under240s each.
+All355 IDs/bytes and3564expanded cases/34D3methods preserved;only accepted3files
+transferred byte-identically. Old main D3doc archived;separate integration doc/receipt
+supersedes preserved Worker submission-status paragraphs in the transferred API doc.
+Both retired D3 trees/all old reports/Git/siblings unchanged. AllMI1–MI5/IO1–IO8 and
+8exact ordered limitation reviews verified. Four Worker attempts/seven old runs plus
+2main runs retained (nine total),no reset. No further execution/correction automatically.
+Deployment NOT_AUTHORIZED;profiling/training/heldout/remote/stage/commit/push remainblocked.
+
 Compare KG-only and KG + GNN methods for **top-K Amazon product recommendation**,
 with popularity and collaborative-filtering baselines under shared evaluation rules.
 Agreed scope: **full downloaded splits** for Electronics, Toys_and_Games and

@@ -1,5 +1,16 @@
 # Amazon4U dataset exploration
 
+**Current checkpoint milestone: D3 main integration ACCEPT/task_only.**
+[Independent main integration/retirement record](docs/checkpoint-storage-main-integration.md):
+355baselineOK56.293s process;389integratedOK57.452s process,0failures/errors/skips
+under240s each. All355baseline IDs/bytes,3564expanded cases/34D3methods preserved.
+Three accepted D3files copied exactly;old main doc archived. Both isolated D3 trees
+are retired from active work,retained unchanged for audit. No newWorker/rewrite/retry.
+Review: `data/reports/checkpoint-storage-main-integration/review.json`.
+**acceptance_scope: task_only; deployment_decision: NOT_AUTHORIZED.**
+No training/profiling/heldout/remote work or stage/commit/push/release authorized.
+The following milestone and failed-attempt entries retain their chronological history.
+
 Agreed scope: **full downloaded benchmark splits** for Electronics,
 Toys_and_Games and Musical_Instruments, evaluated separately under both feedback
 conditions. Start development/resource checks on Musical_Instruments, then
@@ -89,7 +100,7 @@ The user subsequently directed [one Pi-only test-oracle correction/full regressi
 not a production rewrite or new Worker response. Same-source-size singleton control
 and FIFO target;one seventh full240s suite only,prior counts and failed389 preserved.
 No further unrequested cycle;wholeIO1–IO8 and ordered limitation review still required.
-**Latest D3 result: ACCEPT/task_only in the isolated candidate**,389OK,0failures/errors/
+**Previous isolated D3 result: ACCEPT/task_only in the isolated candidate**,389OK,0failures/errors/
 skips,53.292s unittest/55.890s process under240s. All355 and3564expanded cases preserved.
 Only the authorized Pi oracle method changed;production/API docs unchanged. FullIO1–IO8
 and8exact ordered limitation reviews completed;oldfailed389/ESCALATEs stayhistory.

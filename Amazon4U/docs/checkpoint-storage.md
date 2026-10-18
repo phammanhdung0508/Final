@@ -208,228 +208,381 @@ supports it. If safe mandatory evaluation is blocked, report that concrete obsta
 and use the bounded correction process; never run an unsafe test merely to get red.
 Acceptance remains task_only; deployment NOT_AUTHORIZED.
 
-### Pre-Worker gate result — blocked, no implementation claim
+## D3 implementation proposal — current API, format and limits
 
-The newly pinned D3 dependency baseline was attempted twice with the exact original
-full-discovery command, unchanged355-test bytes and120s limit. Both were incomplete:
-120.117s/120.116s, termination exit−15, no completed suite footer. The captured streams
-are byte-identical and stop during the optional-name matrix;2631 expanded assertions
-completed before each stop, with no failure/error traceback observed before termination.
-This is **not** a passing baseline or a demonstrated D2 correctness defect.
+This section records the implementation-first technical choices; it does not change
+any preceding requirement or historical result. The approved prospective D3 full-suite
+ceiling is now **240 seconds**, not the historical 120 seconds above. Pi supplied a
+fresh unchanged 355-test baseline receipt: zero failures/errors/skips, 52.493s unittest,
+55.645s process, and 3564/3564 expanded cases across 35 ledgers. That receipt is a
+dependency gate, not D3 acceptance. Worker executions/tests: **0**.
 
-Pi recorded **ESCALATE, task_only not accepted**, in
-`data/reports/checkpoint-storage-implementation/review.json`. The initial timeout,
-one bounded exact-command verification recovery, full streams and stable snapshots
-are retained. The earlier archive pathspec/cwd setup failure is also retained; it
-occurred before project creation/candidate execution and was corrected without any
-scope/HEAD change. Observed host load is not proof of the timeout's cause.
+### Public APIs and trust inputs
 
-No D3 Worker generation request or revision has run; both response slots remain
-unused. No D3 source/test module, serialization/decoding, unsafe IO test, main transfer
-or D2 correction was performed. Stop here rather than silently extending timeout,
-pruning/changing tests, changing thread/environment policy, repeating indefinitely,
-starting a Worker without its baseline, or expanding the D3 design. The specific
-next obstacle is the fresh baseline execution precondition; further recovery must be
-prospectively assessed/recorded with appropriate authority. D2 remains concluded.
+All three operations live in `scripts/checkpoint_storage.py`; canonical and top-level
+imports share the module and accepted exception classes.
 
-### Later explicitly authorized diagnostic — data collection only
+- `acquire_sources(root_fd, source_sizes, *, git_evidence, environment_records,
+  expected_provenance, io_policy) -> dict`: `source_sizes` is an exact nonempty dict
+  from D1-registered two-component POSIX source/config path to independently approved
+  **exact** nonnegative byte length. Every request path/type and aggregate declared
+  length is checked before acquisition; all physical sizes are checked before reads
+  or hashing. Actual bytes feed D1 `build_source_provenance`, followed by
+  `validate_source_provenance(actual, expected_provenance)`. The returned provenance
+  includes the actual bytes. No D1 allowlist extension, Git invocation, environment
+  discovery, directory scan or live source capture is implemented.
+- `publish_checkpoint(root_fd, name, payload, *, expected_identity,
+  expected_provenance, expected_model, expected_runtime, resource_policy, io_policy)
+  -> str`: D2 validates and owns the input first; bounded serialization precedes any
+  output creation. The return value is the published basename.
+- `retrieve_checkpoint(root_fd, name, *, expected_identity, expected_provenance,
+  expected_model, expected_runtime, resource_policy, io_policy) -> dict`: anchored
+  bounded acquisition, complete wire preflight, CPU reconstruction, then accepted
+  D2 validation (including D1 identity/provenance validation), returning D2-owned state.
 
-The user separately approved **one full355-test diagnostic**,120seconds, collecting
-per-test elapsed times, CPU/RSS/fault/context-switch/swap metrics and stack snapshots.
-Implementation/assertions were unchanged; no subset or D2 audit was authorized.
-The user expressly distinguished instrumentation overhead/timeouts from correctness.
+Every expected descriptor and both policies are mandatory independent caller inputs.
+Neither a checkpoint nor its digest supplies trusted origin, expectations or policy.
+There is no restoration, model/optimizer argument, automatic rollback or training API.
+Filesystem failures become `CheckpointSecurityError`; malformed wire/native tensor
+reconstruction failures become `CheckpointValidationError`. Accepted D1/D2 errors
+retain their existing family. Unexpected programming failures are not broadly caught.
 
-Data and full analysis: `data/reports/checkpoint-storage-implementation/full-suite-diagnostic/`.
-The diagnostic selected355 tests, completed60 OK, and stopped with one active/294 not
-yet started at120.167s. The dominant completed method was
-`test_dense_parameter_slots`:73.97s wall/73.72s CPU,0 major faults. The optional-name
-matrix began only110.26s into the run and had9.74s left. Thus its repeated position
-as the last log entry did not establish a hang or defect in that method.
+### Explicit format decision: A4UCP v1, no native archive ingestion
 
-Process CPU was118.88s, sampled peak RSS about607MiB, sampled process swap0. Host
-paging occurred but is not established as the dominant process bottleneck. Stacks
-showed differing fingerprint/copy/tensor-check/resource-preflight paths. Seven periodic
-plus one near-deadline Python snapshots were captured; two have incomplete unwinding.
-Noninteractive sudo required a password, so no elevated/native C++ backtrace was
-claimed; tests and accessible monitoring ran as the ordinary user without bypass.
+The proposed on-disk format deliberately replaces native Torch/pickle archives at
+this D3 boundary. This is an explicit format choice, not an unsafe fallback or an
+assertion that `weights_only` bounds memory. **No `torch.load` path exists.** Native
+Torch archives, legacy archives, pickle streams, compression, arbitrary globals,
+object reducers and extensions are unsupported and refused. Consequently there is
+no call that could omit `weights_only=True` or CPU mapping; a future native-loading
+path would require separate review and explicit `weights_only=True, map_location='cpu'`
+plus independent preallocation proof. Whether this no-native-loader interpretation
+satisfies the retained IO4 Torch-loading wording requires Pi's explicit adjudication.
 
-These observations support an expensive CPU-workload bottleneck in this diagnostic,
-not a deadlock finding or an explanation of all earlier timing variation. Instrumentation
-overhead was not separately calibrated. Full per-test/counter/stack evidence is retained.
-This is **not** a new acceptance benchmark, does not waive the original baseline gate,
-and authorizes no further run, optimization, timeout/environment change, D2 correction,
-Worker, main transfer or deployment. Original baseline reviews remain unchanged.
+The 48-byte envelope is magic `A4UCP\\0\\1\\n` (8 bytes), big-endian uint64 body
+length, and SHA-256 of the body. Length must match exactly, with no trailing bytes.
+The digest detects accidental corruption; it is not independent authenticity evidence.
 
-### Runtime investigation concluded; prospective D3 budget amendment proposed
+The body uses one-byte tags: `n/t/f` for None/booleans; `i` for sign byte plus
+uint64-length minimal unsigned big-endian magnitude; `r` for finite IEEE binary64;
+`s/b` for uint64-length strict UTF8/raw bytes; `m/l/u` for uint32-count insertion-ordered
+plain dict/list/tuple. Dict keys are supported primitive keys or recursively primitive
+tuples; duplicate/equality-colliding keys are refused. Large exact integers, integer
+optimizer keys, bytes and list/tuple distinctions survive without JSON coercion.
+D2 retains authority over its stricter semantic/container rules.
 
-The user has directed closure of the runtime investigation on the existing evidence:
-no further diagnostics/profiler, C++ backtrace, sudo, thread-policy experiment or
-accepted-test modification. D2 remains concluded; no correctness error is inferred
-from a timeout or the instrumented run.
+`D` is a dense tensor: dtype byte, uint32 rank, uint64 dimensions, uint64 byte count,
+and the complete raw compact storage. Dtype codes are 1 uint8, 2 int64, 3 float32,
+4 float64, 5 int32, 6 int16, 7 int8, 8 bool, 9 float16 and 10 bfloat16. Raw tensor
+bytes currently use native endianness; **cross-endian interchange is unsupported**.
+This is a concrete format limitation, not a portable interchange claim. The format
+implicitly requires canonical contiguous strides and offset zero; arbitrary strided
+storage declarations, aliases, views, tensor subclasses and storage resize instructions
+cannot be expressed. D2 checks full input storage before its owned compact copy;
+publication does not silently hide a large input backing storage.
 
-The proposed D3-only amendment is **120s →240s per full-suite invocation**, including
-both one fresh unchanged uninstrumented355-test baseline and later full suites with
-additional D3 tests.240s is an upper ceiling, not expected runtime or a per-test
-allowance. See [the formal proposal](checkpoint-storage-execution-budget-amendment.md)
-and `configs/checkpoint-storage-execution-budget-amendment.json`.
+`C` is coalesced sparse COO: logical shape followed by dense index and value records.
+Descriptor compatibility is checked before tensor reconstruction. Coordinates are then
+checked for bounds and strict lexicographic uniqueness before the native sparse
+constructor, also using `check_invariants=True`. No densification or coalescing occurs.
+The supported logical sparse shape itself must satisfy the configured element bound.
 
-**Pending explicit approval; not effective.** No new run, verifier timeout change or
-Worker has occurred. Original120s plans/criteria/failed results and diagnostic reports
-remain unchanged; nothing exceeding120s is retroactively compliant. After approval,
-record a versioned prospective verifier/receipt, run the fresh full355 baseline with
-unchanged tests/assertions, and proceed with the already authorized Worker-led IO1–IO8
-process only if that baseline passes. Preserve all other safety/resource/review/request
-limits and histories; no automatic further increase or reset. Deployment NOT_AUTHORIZED.
+The entire file is parsed into bounded primitive metadata and internal raw-byte tensor
+specifications before **any** tensor reconstruction. Every dense record must have
+actual raw bytes exactly equal to its checked shape extent times dtype width. Rank,
+every dimension, canonical stride extent, aggregate full storage and projected copy
+bytes are checked first. Zero dimensions cannot conceal enormous trailing extents.
+Only after complete preflight does reconstruction use explicit CPU `empty` or bounded
+`frombuffer` backing bytes; sparse construction also explicitly selects CPU. There is
+no pickle parser, archive parser, arbitrary-global resolution or native tensor rebuild
+whose untrusted shape can expand storage. Exact float32 bits are preserved by raw byte
+encoding, including signed zero and current/best bindings checked by D2.
 
-### Subsequent approval and bounded implementation result — ESCALATE
+Serialization makes a complete counting pass before creating tensor byte copies or
+output files, followed by a bounded encoding pass. Caller payload/expectation mutation
+during either public operation is unsupported, as in D2. The count comparison detects
+size changes but is not a concurrent-memory sandbox or semantic mutation detector.
 
-The user's **“Approve. please procced”** prospectively approved the240s ceiling.
-Original proposal/120s plan/verifier/reports remain unchanged; `effective-plan-240.json`
-and `verify_240.py` bind only future executions to that approval. Fresh unchanged,
-uninstrumented dependency baseline: **355OK,52.493s unittest/55.645s process**,
-zero failures/errors/skips;35 ledgers/3564 successful cases. See `baseline-240-review.json`
-in `data/reports/checkpoint-storage-implementation/`. This satisfied launch, not D3 acceptance.
+### Mandatory independent IO policy
 
-Initial text-only Worker source/tests/docs were independently reviewed and mechanically
-applied in the isolated D3 project, never main. Full approved regression completed
-**379tests,1failure/2errors/0skips,53.213s unittest/55.993s process**. All355 inherited
-IDs and3564 expanded cases pass; streams/snapshots are complete. Fresh source-fixture
-permissions caused early refusals and prevented the parent-swap injection being reached.
-Pi's safety prescreen missed that mode mismatch; it was not a D2 defect. No dangerous
-allocation/decoder probe, runtime investigation or environment tuning was performed.
+An exact dict has exactly `schema_version='amazon4u-checkpoint-io-v1'`, a nonempty
+clean UTF8 `profile_id` (at most 256 characters), and these positive exact integer
+limits, each at most signed-64-bit maximum:
 
-Pi's consolidated review also identified mutable-temp check/link and check/unlink
-windows, special-file opens before classification, incomplete parent-race proof and
-unidentified native byte order. See `consolidated-feedback.md`. Pi explicitly recorded
-the non-pickle format as a permissible original technical choice: there is no native
-archive loader to relax, no required native archive interoperability, and every future
-Torch load would still require explicit weights_only=True/CPU plus preallocation proof.
-The original IO1–IO8 texts and initial report are not rewritten by that interpretation.
+| Field | Accounting |
+|---|---|
+| `max_file_bytes` | Complete envelope plus body, on read and write |
+| `max_scalar_bytes` | Each encoded string, bytes value or integer magnitude |
+| `max_nodes` | Every wire value occurrence, including dict keys and sparse components |
+| `max_depth` | Wire-value nesting, root depth 1, including sparse components |
+| `max_storage_bytes` | Sum of complete raw dense storage records, including COO components |
+| `max_copy_bytes` | Sum of independent compact tensor bytes projected for D2 output |
+| `max_tensor_elements` | Per-tensor canonical extent product, also for sparse logical shapes |
+| `max_dimension` | Every individual tensor dimension |
+| `max_rank` | Every tensor rank |
+| `max_source_bytes` | Aggregate approved source bytes, no greater than D1's 2MiB invariant |
+| `max_source_files` | Source request count, no greater than D1's registered set size |
 
-The **sole consolidated revision** proposes explicit private fixtures, anonymous
-O_TMPFILE/descriptor-bound publication, O_PATH classification and an explicit v2
-little-endian wire marker. It was read completely as an **inspection-only preview**,
-not applied or executed: its production-source baseline SHA is65characters and does
-not match the independently pinned64-character hash. The original response/hash/report
-were not silently repaired. More importantly, independent source review confirms the
-assigned **IO2 source-parent ancestry/race guarantee remains unresolved**; this alone
-blocks acceptance even if that metadata typo were corrected. Both response slots are
-consumed; no third Worker, automatic source/hash fix, new task or budget reset.
+Equality is permitted. V1 additionally restricts wire depth to 128, rank to 32 and
+node count to uint32 representation. These are format/parser bounds, not selected
+production byte budgets. Runtime byte capacities require independently authorized
+explicit profiles; no free-RAM sizing or default profile exists. D2's separate
+metadata/storage/copy/depth/visit policy remains unchanged and is enforced separately.
+IO counters are not D2 counters. Multiple bounded copies, input/expected objects,
+Python metadata, sparse invariant checks and library overhead can coexist: neither
+policy is a total process-memory, time or OS sandbox guarantee.
 
-Final recorded decision: **ESCALATE, acceptance_scope task_only, task_accepted false**;
-**deployment_decision NOT_AUTHORIZED**. Current report:
-`data/reports/checkpoint-storage-implementation/final-review-evidence/review.json`.
-Original pre-Worker `review.json` remains historical and byte-preserved. Initial tested
-candidate and nonapplicable revision are retained separately. No D3 main source/test
-transfer, training/profiling, held-out execution, commit/push/release/rollback. Further
-implementation requires separately explicit scoped authority; review-only reassessment
-does not permit implementation fixes. D1/D2 remain concluded, accepted and protected.
+### Directory descriptors, parent races and supported ownership contract
 
-### User-approved bounded correction amendment — no reset
+Linux descriptor-relative open/stat/link/unlink, `O_NOFOLLOW`, `O_NONBLOCK`,
+`O_DIRECTORY` and `O_CLOEXEC` are required. The caller independently approves and
+opens a narrow directory **inode**, then passes its descriptor; D3 duplicates it and
+never resolves an absolute root pathname or its ancestors. The caller retains its
+original descriptor. Ancestor pathname renames do not redefine that approved object.
+Checkpoint names are only `[A-Za-z0-9][A-Za-z0-9_-]{0,95}.a4ucp`, a direct child of
+that object: publication has no traversed parent components to swap.
 
-The subsequent user conditions explicitly authorize one additional bounded correction,
-not replacement of the original task/history. Exact authority, prior counters and
-Pi-verified baseline hashes are recorded under
-`data/reports/checkpoint-storage-implementation/bounded-correction-amendment-v1/`;
-see [the amendment](checkpoint-storage-bounded-correction-amendment.md). Initial
-candidate and both ESCALATE reports remain unchanged. A byte-identical new isolated
-copy supplies independently checked baseline hashes before Worker implementation.
-One additional30minute text request, no revisions/retries; at most one reviewed240s
-full discovery with the same body/interpreter, relocated declared scratch only.
-Preserve verified D3 logic and355 dependencies; no rewrite, unsafe filesystem
-experiment, controller or separate race research. Worker must resolve original IO2
-with clear guarantees or precisely identify the unmet clause and stop. Pi reviews all
-IO1–IO8, especially IO2/3/5/6/7. No automatic follow-up if IO2 remains unresolved;
-no acceptance/main transfer/research/deployment is granted by this amendment.
+Directories must belong to the effective UID and not be group/world writable.
+Opened files must be same-device, caller-owned, single-link regular files and not
+group/world writable. Symlinks and cross-device descendants are refused. Source
+parents are opened relative to the held root, never through pathname resolve/reopen.
+Before reads and after acquisition/validation, root metadata, every parent edge,
+held directory inode and opened file identity/size/mtime/ctime are compared with the
+original snapshots. Observed parent replacements, renames and file mutation fail
+closed. Final leaf opens are nonblocking so a FIFO cannot block while being classified.
+Tests use only synthetic FIFOs, never device nodes or host targets.
 
-The additional request subsequently ended with SDK stop_reason:error,HTTP200 and
-0response bytes after371.113s. No patch or precise feasibility report returned;
-no candidate code changed and no new full suite or filesystem experiment ran. Exact
-underlying error text was not retained by the credential-safe client. Independent
-request/context hashes and before/after snapshots confirm both candidates and all
-prior history preserved. **ESCALATE/task_only/not accepted**, deployment NOT_AUTHORIZED:
-`data/reports/checkpoint-storage-implementation/bounded-correction-amendment-v1/review.json`.
-IO2 remains the prior unresolved assigned blocker, not proven infeasible by this
-incomplete completion. Three overall request attempts used, two technical responses;
-no automatic retry, follow-up, source/hash fix, new task or budget reset.
+This contract requires caller-controlled directories and no malicious same-UID or
+privileged namespace/file mutator, including writers that can chmod directories,
+substitute a special device, rewrite open files, or swap and restore namespace entries
+between checks. Callers must prevent concurrent namespace mutation; competing
+publishers may add distinct names or race for the same destination but must not
+modify/delete each other's owned temporaries or completed files. Read/source checks
+may conservatively refuse unrelated concurrent directory changes. Metadata snapshots
+are not an atomic ancestry lock, and cannot prove refusal of every transient hostile
+parent race. **The strongest adversarial interpretation of IO2 is therefore an
+unresolved issue, not a proved guarantee or an implicit criterion waiver.** The tests
+exercise a deterministic observed parent swap without escaping overall scratch.
 
-### Focused IO2/domain and SDK assessment — proposal only
+### Publication, cleanup and durability
 
-Before any additional execution privileges, the user requested a specific technical
-decision, not race-condition research/controller work. See
-[the decision and bounded-correction proposal](checkpoint-storage-io2-technical-decision.md).
-Naively dropping scripts/configs prefixes would violate accepted D1. The recommended
-specification uses independently approved directory-inode roots per existing logical
-prefix and direct-child physical opens, retaining every registered D1 identifier and
-existing actual-byte/provenance validation. No mandatory deeper logical source path
-was found among the20 registered paths. Root-inode approval must be explicit; this is
-insufficient if a single-project-root ancestry proof is instead mandatory. No original
-IO2/IO6 clause or threat-model requirement is silently amended.
+A random exclusively created 0600 temporary is written with bounded chunks and
+fsynced. Its held descriptor is compared with the temporary name before linking.
+A same-directory hard link publishes the completed inode atomically and exclusively;
+existing files, directories and symlinks cause collision rather than replacement.
+There is no exists-then-overwriting-rename sequence. Successful publication removes
+only its owned temporary name. Error cleanup verifies the temporary inode before
+unlinking it, refusing to delete a substituted unrelated object. No directory scan or
+cleanup of previous callers' incomplete files occurs.
 
-Local static SDK review verified full context in the observed failed payload; no
-max-output-token field was sent despite requested maxTokens32768. Current SDK supports
-terminal error metadata that our wrapper did not retain. Exact historical failure
-cause remains unknown. Small wrapper preflight/error-metadata corrections and one
-future bounded patch are proposed, not executed/authorized. No further model call,
-product change or regression in this assessment; all histories and used counts stay.
-Current IO2 remains unresolved, IO3/IO5 unverified, IO6/IO7 unpassed. Full IO1–IO8 and
-ordered limitation review still govern any task_only ACCEPT; deployment NOT_AUTHORIZED.
+Same-directory hard-link atomicity on a local filesystem with ordinary POSIX semantics
+is required; network/distributed filesystems are not claimed supported. File fsync is
+requested, but directory fsync, crash recovery, persistence after power loss and
+filesystem fault tolerance are not established. An error after the publication link
+can leave a complete destination; it is never automatically removed or rolled back.
+Hostile temporary-name substitution remains outside the ownership contract above.
 
-### Subsequent approved prefix-root bounded correction
+### Proposed verification and current status
 
-The user has now finalized the technical choice: independently approved directory FD
-per D1 prefix;direct-child physical basenames,unchanged logical identifiers,no continuous
-project-root pathname ancestry claims. Scope SDK wrapper changes to terminal-error
-metadata and request/context validation;no model/controller/routing changes. Authorize
-one specific correction phase from the existing candidate,not additional cycles/reset.
-See [approved phase](checkpoint-storage-prefix-root-correction.md),its exact authority
-and plan under `data/reports/checkpoint-storage-implementation/prefix-root-correction-v1/`.
-Three old request attempts stay used;one fourth request30minutes/no retry or revision;
-Pi reviews complete IO1–IO8 before at most one pinned full240s suite. No test/probe,
-unsafe FS experiment,main transfer or research work beyond that explicit scope.
+The new test module imports only existing fixture functions and independently copies
+each argument. Proposed cases cover complete LightGCN and 36-parameter Hetero mappings
+at initial/completed boundaries; physical-source/D1/D2 integration; exact returned
+bits/types and ownership; unchanged global RNG/default dtype; independent expectation
+and payload corruption; source request/physical aggregate preflight; missing/symlink
+sources; flat path refusal, directories and nonblocking FIFO refusal; deterministic
+parent swap; exact/one-over small-policy limits; malformed storage/extents and complete
+preflight-before-native tripwires; unsupported formats/hooks; no-clobber collisions,
+competing publication and interrupted-write cleanup. None has been executed by Worker.
 
-The approved phase returned a valid bound Worker patch;Pi read full785-line source,
-815-line tests,docs/callers/native references and applied only3reviewed candidate files.
-The sole full run completed389tests,1failure/0errors/0skips,55.852s unittest/62.611s
-process;all355 and3564expanded cases pass. Actual root/decoder/anonymous-publication and
-source→D1→checkpoint→D2 controls pass;9preserved nodes remain exact. A new sourceFIFO
-oracle globally blocks a valid configs `_readable` before reaching its scripts FIFO
-negative. This is not evidence of FIFO data opening. Pi's prescreen missed the ordering;
-no accepted dependency defect or unsafe filesystem experiment was found.
-Current **ESCALATE/task_only/not accepted**,deployment NOT_AUTHORIZED:
-`data/reports/checkpoint-storage-implementation/prefix-root-correction-v1/review.json`.
-IO8zero-failure gate still blocksACCEPT. No source/oracle fix,rerun,extraWorker or reset;
-4request attempts and6conservativefullruns retained. Further test-only correction and
-verification,if desired,require explicit bounded authority;no main/research transfer.
+All generated fixtures and sentinels are fresh children of
+`TemporaryDirectory(dir=tempfile.tempdir)`. No execution-bearing pickle, giant tensor,
+compression bomb, process/thread, live source read or actual host escape target is
+constructed. Existing 355 tests/dependencies remain untouched. Pi must statically
+screen the complete implementation/tests before the authorized full discovery under
+240 seconds. The baseline receipt alone establishes no new D3 test result.
 
-### Subsequent Pi-only test-oracle direction
+Current status: implementation submitted, runtime evidence pending. Two concrete
+adjudications remain assigned: IO2's strongest hostile-parent-race requirement is not
+established by this ownership-and-snapshot mechanism; IO4's retained native-loading
+wording must be reconciled explicitly with the proposed no-pickle/no-native-archive
+format. Neither is silently marked satisfied. No D3 ACCEPT is claimed. Acceptance
+scope remains task_only; deployment NOT_AUTHORIZED.
 
-The user recommends approving a Pi-implemented test-oracle-only correction followed
-by full regression,no additionalWorker unless newproductiondefects are discovered.
-This is recorded prospectively as that specific continuation:
-[Pi-only oracle plan](checkpoint-storage-oracle-only-correction.md). Only the sourceFIFO
-method changes;independent singleton zero-byte regular-file positive then same-size
-FIFO makes the global tripwire target-specific and excludes size-mismatch shortcuts.
-Production/othermethods/355dependencies/old389failure stayexact. One seventh full240s
-run after complete review,no Worker/reset/additional cycles. Full IO1–IO8 and exact
-ordered current limitation review still required;task_only,NOT_AUTHORIZED deployment.
+## User-approved prefix-root correction — fourth request overall
 
-### Final isolated D3 acceptance after authorized Pi oracle correction
+This appended section supersedes the earlier proposal's current root API, leaf-open,
+publication, byte-profile and unresolved-adjudication descriptions, not their history
+or the original IO1–IO8. The user explicitly approved these conditions:
 
-The only newproduct-artifact change was Pi's namedFIFO testmethod:independent singleton
-emptyregular positive,then same-sizeFIFO andregular-type reason,withno-readable/read
-tripwires andownedrestoration. Production andcandidateAPI docs remain byte-identical to
-Worker's reviewed prefix-root implementation;allothermethodAST/355accepted files exact.
-One authorized seventh full discovery: **389OK,0failures/errors/skips**,53.292s unittest /
-55.890s process under240s;35ledgers/3564expanded cases preserved andstdout identical to
-acceptedbaseline. Complete streams/scope/Git/ignored-evidence/scratch checks retained.
+> Each D1 prefix must have an independently approved directory FD; D3 shall only expose direct-child basenames while preserving logical identifiers. No claims of continuous ancestry regarding the project-root pathname are permitted.
 
-Pi verified every originalIO1–IO8 andeachcurrentWorker limitation in exactorder/text,
-usingactualcode/native dependencies/results andoriginalscopequotes. No assigned requirement
-waived. Pendingreport evidence issues closed for this user-authorized derivative,not a
-rewrite orretroacceptance ofWorker's earlier failed389variant. Alloldreports/ESCALATEs and
-budgets remain preserved;4Worker attempts,7conservativefullruns,no newWorker thisphase.
-**ACCEPT,acceptance_scope task_only**,isolated D3 only:
-`data/reports/checkpoint-storage-implementation/oracle-only-correction-v1/review.json`.
-**deployment_decision NOT_AUTHORIZED**;no main source/test transfer,training/profiling,
-heldout,stage/commit/push/release/rollback. Main integration requires separateapproval.
+> Scope changes to collecting terminal-error metadata and validating request/context bounds; do not unilaterally alter models, controllers, or routing.
+
+> Proceed from the existing candidate, conduct a comprehensive review against criteria IO1–IO8, and ensure no history is reset—nor should any additional, unrequested correction cycles be initiated.
+
+The second condition concerns the separately bounded SDK wrapper, which these product
+patches do not modify. This is the same OriginalD3 deliverable. Three prior request
+attempts, two prior technical responses, the incomplete completion, unapplied reference,
+old ESCALATE reports and five prior full-suite-associated runs remain history. This is
+one additional response, fourth overall, with no retry, follow-up or revision requested.
+The supplied initial candidate and all 355 accepted dependencies remain the baseline.
+
+### Current source-root API and acquisition ordering
+
+`acquire_sources(source_roots, source_sizes, *, git_evidence, environment_records,
+expected_provenance, io_policy) -> dict` replaces the single project-root source API.
+`source_roots` must be an exact dict with exactly the exact-string keys `scripts` and
+`configs`, even for a request using only one prefix. Each value must be an exact
+nonnegative integer directory descriptor, independently approved by the caller for
+that logical prefix. Both bindings are validated and duplicated; their directory
+inodes must be distinct. Wrong-type, missing, unknown, non-directory and aliased-inode
+bindings are refused. D3 closes only its duplicate descriptors. Binding approval is
+an external trust input, not something inferred from descriptor numbers, checkpoint
+contents or a project pathname.
+
+`source_sizes` keeps the existing nonempty exact-dict contract: registered full D1
+logical identifier to independently approved exact nonnegative byte length. All 20
+existing identifiers remain supported without extending D1. For example,
+`scripts/checkpoint_identity.py` selects `source_roots['scripts']` by mapping lookup
+and opens only `checkpoint_identity.py` relative to its held duplicate. Likewise,
+`configs/compute-plan.json` selects the independently approved configs directory.
+The full logical identifiers remain provenance keys and entry paths; they are not
+flattened. No source-directory component is traversed and no source file descriptor
+must be preopened by the caller. No live source files are moved.
+
+All request syntax, declared aggregate bounds and root bindings are preflighted before
+source-leaf acquisition. Each leaf is first opened with `O_PATH|O_NOFOLLOW|O_CLOEXEC`.
+A symlink, FIFO, device, directory or other unsupported object is refused by metadata
+classification before any data-capable open. Caller ownership, no group/world write,
+single-link regular type, same-device membership within its own prefix root, and exact
+physical size remain required. All physical sizes precede the first source read or
+hash. A trusted procfs descriptor transport reopens the classified held inode, not the
+mutable leaf filename; the readable descriptor's full signature must match. Leaf
+namespace and held-file signatures and approved-root signatures are checked before
+reads, after acquisition and after D1 validation. Observed mutations fail before an
+accepted return. Root permissions are also checked when the acquisition snapshot is
+created, rather than merely assuming the earlier descriptor-duplication check persists.
+
+Ancestor pathname replacement cannot redirect a held approved root to a replacement
+directory. The approved object is the directory inode. There is no continuous ancestry
+claim concerning a project-root pathname and no remaining intermediate source-parent
+edge to traverse. The earlier source-parent-escape issue is therefore superseded by
+the explicitly approved object model, not silently waived under the obsolete API.
+Snapshots can conservatively refuse unrelated directory activity. They do not constitute
+an atomic namespace lock or detect every change restored between observations.
+
+Roots, expected provenance, Git evidence, environment records and both policies remain
+independently supplied. Actual acquired bounded bytes still pass through unchanged D1
+build/validation APIs; returned payloads still pass unchanged D2 validation. No Git,
+environment discovery, directory-wide capture, live restoration or model changes occur.
+
+### Current platform and trusted descriptor transport
+
+Filesystem operations require little-endian Linux x86_64 with the glibc native ABI,
+Linux descriptor flags, genuine trusted procfs, and a local filesystem implementing
+`O_TMPFILE` and ordinary atomic exclusive hard-link semantics. There is no named or
+privileged fallback if required facilities fail. The process and its mount namespace
+must be trusted; `/proc/self/fd` is an internal held-descriptor transport, not permission
+to follow caller-supplied symlinks. Other operating systems, architectures, libcs and
+network/distributed filesystem semantics are not claimed supported.
+
+Before native calls, the implementation checks Linux, `uname().machine == 'x86_64'`,
+glibc identification from `confstr`, int width 4, long/unsigned-long/pointer widths 8,
+and the explicit statfs structure's 120-byte size, 8-byte alignment and key offsets.
+The structure has two longs, five unsigned longs, a two-int fsid, three further longs
+and four spare longs; fsid/namelen/flags/spare offsets are 56/64/80/88. This is the
+Linux x86_64 glibc ABI, not an assertion that all LP64 ABIs are interchangeable.
+`fstatfs` has a typed pointer to that checked structure and must report procfs magic
+`0x9fa0`. `linkat` has explicit int/char-pointer argument types and int return type;
+its only flag is Linux `AT_SYMLINK_FOLLOW` (`0x400`) on the internal procfs fd link.
+Native errors and missing facilities fail closed without capability, mount, privilege
+or OS-security changes. These declarations still require Pi's independent review.
+
+### Current publication and cleanup mechanism
+
+After unchanged D2 validation and complete bounded serialization, publication creates
+an anonymous `O_TMPFILE|O_RDWR|O_CLOEXEC` inode relative to the approved destination FD,
+requesting mode 0600. `O_EXCL` is deliberately absent because it would prohibit later
+linking of an O_TMPFILE inode. Initial regular type, ownership, same-device membership,
+zero link count, zero size and non-writable-to-others mode are checked. The process
+umask may restrict the requested permissions further; it is never changed.
+
+Bounded writes and exact final length precede file fsync. Native `linkat` follows the
+internal procfs reference to this held descriptor and exclusively creates the flat
+destination basename. There is no mutable temporary directory entry to check and
+then link, no check/unlink cleanup window, no overwrite and no named fallback. Every
+cleanup path only closes the owned descriptor. An incomplete anonymous inode is
+released by close; after publication, close leaves the completed destination intact.
+An error after the atomic link may leave a complete artifact, never an automatic
+completed rollback. Collisions preserve every existing destination type. Directory
+fsync and crash durability remain unpromised.
+
+### Current wire profile: A4UCP v2 L
+
+The 48-byte envelope now starts with the eight literal bytes `A4UCP\x00\x02L`.
+`L` explicitly selects little-endian dense numeric storage. Envelope lengths, structural
+fields, integer metadata and scalar IEEE binary64 encoding retain their previous
+big-endian definitions. Dense numeric bytes are little-endian; opaque uint8 native
+RNG bytes are preserved unchanged and are not byte-swapped or reinterpreted by D3.
+Both encoding and decoding refuse a non-little-endian native platform. Old ambiguous
+v1 magic, unknown versions and unsupported profiles are refused before parsing or
+native tensor construction; there is no archive recreation, native loading or legacy
+conversion. This is a marked supported profile, not universal RNG-ABI portability.
+
+Only the codec entry guards and magic change. `_policy`, `_shape`, `_Meter`, `_key`,
+`_Encoder`, `_Parser`, `_materialize`, `_read_fd` and `_write_all` remain unchanged.
+The full counting pass, exact canonical extents and storage, complete aggregate
+preflight before the first tensor rebuild, CPU reconstruction, owned output, exact
+metadata types/bits and independent D1/D2 expectations remain in force. The retained
+Pi adjudication permits this non-pickle format for IO4: no Torch load exists or is
+needed merely to supply its flag. Any future Torch-loading path would still require
+separate review, explicit weights_only=True and CPU placement plus preallocation proof.
+
+### Corrected synthetic evidence and unexecuted verification gate
+
+Fixture directories are explicitly private 0700 and regular fixture files explicitly
+0600, without a global umask setter. Independently approved synthetic prefix FDs are
+bootstrapped before syscall tripwire contexts. Every source-tree negative starts from
+a successful full physical-source control. The retained source cases now use direct
+prefix roots; additional cases cover all 20 logical IDs, malformed root bindings,
+non-directory/aliased roots, both-prefix FIFO refusal, ancestor replacement without
+redirection and both-prefix leaf substitution before a readable open. Device-mode
+classification uses mocked metadata on an ordinary synthetic file, never a device.
+
+Publication controls retain collisions, bounded serialization, partial-write failure
+and deterministic competition, and add held-inode/decoy identity, close-only cleanup,
+required-facility failure and completed-artifact preservation after an injected
+post-link error. Literal independently constructed little-endian float/int records,
+opaque uint8 bytes, unsupported-profile dispatch and non-little-endian tripwires
+supplement the existing quota, malformed-record and aggregate-preflight controls.
+All targets remain fresh owned children of the configured overall scratch. No new
+subprocess, thread, training, unsafe pickle, huge allocation or live-host source test
+is introduced. Both families' initial/epoch full pipeline tests and all 355 inherited
+files remain unchanged except the declared D3 test file's targeted fixture/API edits.
+
+Worker executions/tests remain **0**. User-supplied historical evidence is retained:
+the initial 379-test run had one failure, two errors and zero skips; all 355 inherited
+tests and 3564 expanded cases passed. Those results do not establish revised-product
+success. Pi must review exact bindings, complete changed code/callers/native assumptions
+and fixtures before the sole preauthorized full discovery, with a 240-second ceiling,
+no failures/errors/skips, complete streams, scope checks and empty-before/after scratch.
+At most the sixth aggregate full-suite-associated run is authorized; history is not
+reset. No candidate probe, subset or additional correction cycle is requested.
+
+### Ordered current limitations
+
+1. Filesystem IO requires Linux x86_64 glibc, genuine trusted procfs and local O_TMPFILE/exclusive-link support; there is no portable, named or privileged fallback.
+2. Directory-inode and prefix-binding approval is supplied independently by the caller; D3 does not establish continuous project-root pathname ancestry.
+3. Metadata observations refuse observed namespace/content mutations, but are not an atomic namespace lock and cannot detect every mutation restored between checks or defend against a compromised process or privileged mount mutator.
+4. IO and D2 quotas bound specified logical content, storage and copies, not total process RAM, wall time or an OS sandbox.
+5. File fsync is requested; directory durability, power-loss persistence, crash recovery and automatic rollback are not provided.
+6. The embedded digest detects corruption, not authenticity, historical origin or authorized provenance acquisition.
+7. Only A4UCP v2 L is accepted; native archives, old ambiguous profiles, cross-endian conversion and universal native-RNG ABI portability are unsupported.
+8. Validation returns owned data without live restoration and does not prove historical training trajectories or exact future continuation.
+
+Current status: targeted correction submitted for independent Pi review, not ACCEPT.
+The old root-model uncertainty and IO4 wording adjudication above are historical, not
+current assigned gaps. Revised IO3/IO5 evidence, IO6/IO7 pipeline success, full regression
+and scope/native review remain unverified mandatory gates; no runtime success is
+asserted. Acceptance remains task_only; deployment NOT_AUTHORIZED. No main transfer,
+research, training, staging, commit, push, release or rollback is authorized here.
