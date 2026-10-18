@@ -79,7 +79,42 @@ accepted adversarial fixtures must remain passing. No scientific-rule amendment.
 
 ## Current status
 
-### Active checkpoint position — D2 concluded, prepare D3
+### Active checkpoint position — D2 concluded, D3 isolated task-only ACCEPT
+
+Latest independent D3 decision is **ACCEPT/task_only** after the explicitly authorized
+Pi-only sourceFIFO oracle correction:389OK,0failures/errors/skips,53.292s unittest/
+55.890s process under240s. All355 accepted dependencies/IDs and3564expanded cases
+preserved;production andcandidateAPI docs unchanged. FullIO1–IO8 and8exactordered
+limitation reviews completed. See
+`data/reports/checkpoint-storage-implementation/oracle-only-correction-v1/review.json`.
+AllpriorESCALATEs/failed389 and4Worker/7conservativefullrun history remainunchanged.
+Deployment NOT_AUTHORIZED;D3 main source/test integration/regression requires separate
+approval. No profiling/training,heldout,stage/commit/push or additional cycles. The
+following entries preserve the implementation authority and earlier gate history.
+
+Latest user approval supersedes the preparation-only hold below: execute D3 within
+IO1–IO8 using implementation-first, evidence-driven correction. Worker may propose
+and implement scoped technical choices; Pi verifies source and tests, targets concrete
+obstacles and never claims unproved guarantees or executes unsafe IO tests. The bounded
+plan is `data/reports/checkpoint-storage-implementation/plan.json`. D1/D2 remain closed
+and protected; no controller investigation, main transfer or research authorization.
+The historical pre-Worker ESCALATE after two120s timeouts remains in
+`data/reports/checkpoint-storage-implementation/review.json`; no D2 defect was shown.
+Runtime investigation is closed: no profiler, diagnostics, sudo, C++ trace, thread
+experiment or accepted-test edit. User subsequently approved the D3-only240s ceiling
+in `checkpoint-storage-execution-budget-amendment.md`; fresh unchanged355 baseline
+passed55.645s process. Original120s outcomes remain unchanged.
+
+Initial full D3 regression:379tests,1failure/2errors/0skips,55.993s process; all355
+inherited tests and3564 expanded cases pass. New source fixture modes caused early
+refusals. One consolidated revision proposed targeted permission, inode-publication,
+O_PATH-classification and byte-order corrections, but remains **unapplied/unexecuted**:
+its source baseline hash is malformed, and the assigned IO2 parent-race guarantee is
+still unresolved. Both response slots used. Final **ESCALATE/task_only/not accepted**:
+`data/reports/checkpoint-storage-implementation/final-review-evidence/review.json`.
+No automatic third request, Pi production/hash fix, budget reset, main transfer or
+research execution; deployment NOT_AUTHORIZED. Retain both proposals and old reports.
+Earlier preparation status below is retained as history, not an active prohibition.
 
 D1 identity/provenance and D2 payload validation are accepted and integrated in main.
 D2's separate integration decision is

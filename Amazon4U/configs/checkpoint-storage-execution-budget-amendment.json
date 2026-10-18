@@ -1,0 +1,53 @@
+{
+  "schema_version": "amazon4u-d3-execution-budget-amendment-v1",
+  "status": "APPROVED_PROSPECTIVE_D3_EXECUTION_AMENDMENT",
+  "effective": true,
+  "approval_received": true,
+  "approval_text": "Approve. please procced",
+  "approval_record": "data/reports/checkpoint-storage-implementation/budget-amendment-v1/approval.json",
+  "effective_full_suite_timeout_seconds": 240,
+  "effective_plan": "data/reports/checkpoint-storage-implementation/effective-plan-240.json",
+  "documentation": "docs/checkpoint-storage-execution-budget-amendment.md",
+  "original_plan": "data/reports/checkpoint-storage-implementation/plan.json",
+  "original_review": "data/reports/checkpoint-storage-implementation/review.json",
+  "runtime_investigation_status": "CLOSED_BY_USER_DIRECTION_ON_EXISTING_EVIDENCE",
+  "no_further_runtime_investigation": ["diagnostics", "profiler", "C++ backtraces", "sudo operations", "thread-policy experiments", "accepted-test edits"],
+  "active_timeout_seconds_until_approval": 120,
+  "proposed_full_suite_timeout_seconds": 240,
+  "limit_interpretation": "Upper wall-clock ceiling per entire invocation including startup/discovery, not expected runtime, target, per-test allowance or guaranteed sufficient budget.",
+  "applies_to_if_approved": [
+    "One fresh uninstrumented complete355-test D3 dependency baseline",
+    "D3 initial/revision/independent full-suite verification including all355 existing tests and every added D3 test"
+  ],
+  "approval_effect": "Prospective D3 execution-limit amendment only; preserve original IO1-IO8/plan and attach amendment explicitly to versioned future commands/receipts.",
+  "does_not_change": [
+    "D2 acceptance or its original120-second criterion",
+    "historical120-second timeouts, ESCALATE decisions and diagnostic interpretation",
+    "existing implementation, test method bodies or assertions",
+    "IO1-IO8 substantive requirements",
+    "exact uninstrumented discovery body, interpreter, selected project/scratch and fixture bounds",
+    "Worker request/revision budgets, used counters and bounded verification counts",
+    "no unsafe IO, live restoration, training/profiling, held-out evaluation, deployment or main-transfer restrictions"
+  ],
+  "fresh_baseline_if_approved": {
+    "full_discoveries": 1,
+    "test_count": 355,
+    "instrumentation": false,
+    "subsets_or_skips": false,
+    "implementation_assertion_or_environment_changes": false,
+    "required_result": "Complete within240seconds,exit0,zero failures/errors/skips,all355 identities preserved,full streams and stable snapshots",
+    "on_pass": "Proceed with already authorized Worker-led D3 within IO1-IO8 and independent review, not D3 acceptance",
+    "on_failure_or_timeout": "Preserve evidence and report specific issue; no automatic larger limit, test weakening, replacement task or budget reset"
+  },
+  "new_runs_executed_under_proposal": 4,
+  "new_Worker_requests": 4,
+  "D2_status": "CONCLUDED_ACCEPTED_UNCHANGED",
+  "D3_status": "ACCEPT_TASK_ONLY_ISOLATED_AFTER_AUTHORIZED_PI_ORACLE_FIX",
+  "fresh_baseline_result": "355OK_55.645s_process",
+  "initial_candidate_result": "379tests_1failure_2errors_all355baseline_pass",
+  "phase_review": "data/reports/checkpoint-storage-implementation/oracle-only-correction-v1/review.json",
+  "revision_applied_or_executed": false,
+  "acceptance_scope_if_later_earned": "task_only",
+  "deployment_decision": "NOT_AUTHORIZED",
+  "stage_commit_push_authorized": false
+}

@@ -169,3 +169,267 @@ this preparation. Next: finish the five bounded D3 specification decisions above
 record the exact part-level source/evidence/test plan, then obtain implementation
 and execution authorization. This draft does not grant that later authority.
 Acceptance, if later earned, is **task_only**; deployment **NOT_AUTHORIZED**.
+
+## Subsequent user approval — implementation-first, evidence-driven correction
+
+The user subsequently agreed to this plan and explicitly directed execution within
+**IO1–IO8**, allowing the Worker to propose and implement technical solutions.
+Pi verifies actual guarantees through source review and testing; specific evidenced
+obstacles receive targeted correction, not expansion of the whole design. Unsupported
+safety claims and unsafe testing remain forbidden.
+
+This supersedes the earlier preparation-only implementation hold and the suggestion
+that Pi must settle every technical choice before a Worker proposal. The earlier
+scope, IO1–IO8 and history remain unchanged. Worker discretion covers exact APIs,
+format, explicit IO policy and technical mechanisms **within** those criteria, not
+unsafe fallbacks, silent weakening, new scientific defaults or dependency rewrites.
+
+Prospective plan, complete exact user approval, original preparation text, pinned
+HEAD, three patch paths, command/cwd/scratch and fixture/response/execution bounds:
+`data/reports/checkpoint-storage-implementation/plan.json` and its `inputs/`.
+One initial text-only response and at most one consolidated revision,30minutes each,
+one generation request each/no retries; no architecture or controller changes.
+Pi alone screens before each original full discovery (120s, at most6per round,
+including the initial355-test dependency baseline). This is a fresh D3 dependency
+baseline, not reopening or auditing D2.
+
+Only fresh owned synthetic scratch IO may run after source/test semantic review.
+No unsafe pickle/loader fallback, attacker-hook execution, giant allocation or
+bomb-decompression test, live host/source/credential/data target, restoration,
+training, CUDA, worker process, remote/heldout work, main transfer or commit/push.
+New files≤2MiB; concurrent new fixtures≤8MiB/128files and decoded tensor storage≤2MiB;
+D2's synthetic logical bounds remain unchanged. Small explicit IO-policy negatives
+and nonexecuting boundary tripwires must replace dangerous test workloads.
+These are verification budgets, not universal production-capacity guarantees.
+
+Current status: **D3 implementation authorized, no implementation accepted yet**.
+Do not claim a path/race/decoder/allocation/publication guarantee until evidence
+supports it. If safe mandatory evaluation is blocked, report that concrete obstacle
+and use the bounded correction process; never run an unsafe test merely to get red.
+Acceptance remains task_only; deployment NOT_AUTHORIZED.
+
+### Pre-Worker gate result — blocked, no implementation claim
+
+The newly pinned D3 dependency baseline was attempted twice with the exact original
+full-discovery command, unchanged355-test bytes and120s limit. Both were incomplete:
+120.117s/120.116s, termination exit−15, no completed suite footer. The captured streams
+are byte-identical and stop during the optional-name matrix;2631 expanded assertions
+completed before each stop, with no failure/error traceback observed before termination.
+This is **not** a passing baseline or a demonstrated D2 correctness defect.
+
+Pi recorded **ESCALATE, task_only not accepted**, in
+`data/reports/checkpoint-storage-implementation/review.json`. The initial timeout,
+one bounded exact-command verification recovery, full streams and stable snapshots
+are retained. The earlier archive pathspec/cwd setup failure is also retained; it
+occurred before project creation/candidate execution and was corrected without any
+scope/HEAD change. Observed host load is not proof of the timeout's cause.
+
+No D3 Worker generation request or revision has run; both response slots remain
+unused. No D3 source/test module, serialization/decoding, unsafe IO test, main transfer
+or D2 correction was performed. Stop here rather than silently extending timeout,
+pruning/changing tests, changing thread/environment policy, repeating indefinitely,
+starting a Worker without its baseline, or expanding the D3 design. The specific
+next obstacle is the fresh baseline execution precondition; further recovery must be
+prospectively assessed/recorded with appropriate authority. D2 remains concluded.
+
+### Later explicitly authorized diagnostic — data collection only
+
+The user separately approved **one full355-test diagnostic**,120seconds, collecting
+per-test elapsed times, CPU/RSS/fault/context-switch/swap metrics and stack snapshots.
+Implementation/assertions were unchanged; no subset or D2 audit was authorized.
+The user expressly distinguished instrumentation overhead/timeouts from correctness.
+
+Data and full analysis: `data/reports/checkpoint-storage-implementation/full-suite-diagnostic/`.
+The diagnostic selected355 tests, completed60 OK, and stopped with one active/294 not
+yet started at120.167s. The dominant completed method was
+`test_dense_parameter_slots`:73.97s wall/73.72s CPU,0 major faults. The optional-name
+matrix began only110.26s into the run and had9.74s left. Thus its repeated position
+as the last log entry did not establish a hang or defect in that method.
+
+Process CPU was118.88s, sampled peak RSS about607MiB, sampled process swap0. Host
+paging occurred but is not established as the dominant process bottleneck. Stacks
+showed differing fingerprint/copy/tensor-check/resource-preflight paths. Seven periodic
+plus one near-deadline Python snapshots were captured; two have incomplete unwinding.
+Noninteractive sudo required a password, so no elevated/native C++ backtrace was
+claimed; tests and accessible monitoring ran as the ordinary user without bypass.
+
+These observations support an expensive CPU-workload bottleneck in this diagnostic,
+not a deadlock finding or an explanation of all earlier timing variation. Instrumentation
+overhead was not separately calibrated. Full per-test/counter/stack evidence is retained.
+This is **not** a new acceptance benchmark, does not waive the original baseline gate,
+and authorizes no further run, optimization, timeout/environment change, D2 correction,
+Worker, main transfer or deployment. Original baseline reviews remain unchanged.
+
+### Runtime investigation concluded; prospective D3 budget amendment proposed
+
+The user has directed closure of the runtime investigation on the existing evidence:
+no further diagnostics/profiler, C++ backtrace, sudo, thread-policy experiment or
+accepted-test modification. D2 remains concluded; no correctness error is inferred
+from a timeout or the instrumented run.
+
+The proposed D3-only amendment is **120s →240s per full-suite invocation**, including
+both one fresh unchanged uninstrumented355-test baseline and later full suites with
+additional D3 tests.240s is an upper ceiling, not expected runtime or a per-test
+allowance. See [the formal proposal](checkpoint-storage-execution-budget-amendment.md)
+and `configs/checkpoint-storage-execution-budget-amendment.json`.
+
+**Pending explicit approval; not effective.** No new run, verifier timeout change or
+Worker has occurred. Original120s plans/criteria/failed results and diagnostic reports
+remain unchanged; nothing exceeding120s is retroactively compliant. After approval,
+record a versioned prospective verifier/receipt, run the fresh full355 baseline with
+unchanged tests/assertions, and proceed with the already authorized Worker-led IO1–IO8
+process only if that baseline passes. Preserve all other safety/resource/review/request
+limits and histories; no automatic further increase or reset. Deployment NOT_AUTHORIZED.
+
+### Subsequent approval and bounded implementation result — ESCALATE
+
+The user's **“Approve. please procced”** prospectively approved the240s ceiling.
+Original proposal/120s plan/verifier/reports remain unchanged; `effective-plan-240.json`
+and `verify_240.py` bind only future executions to that approval. Fresh unchanged,
+uninstrumented dependency baseline: **355OK,52.493s unittest/55.645s process**,
+zero failures/errors/skips;35 ledgers/3564 successful cases. See `baseline-240-review.json`
+in `data/reports/checkpoint-storage-implementation/`. This satisfied launch, not D3 acceptance.
+
+Initial text-only Worker source/tests/docs were independently reviewed and mechanically
+applied in the isolated D3 project, never main. Full approved regression completed
+**379tests,1failure/2errors/0skips,53.213s unittest/55.993s process**. All355 inherited
+IDs and3564 expanded cases pass; streams/snapshots are complete. Fresh source-fixture
+permissions caused early refusals and prevented the parent-swap injection being reached.
+Pi's safety prescreen missed that mode mismatch; it was not a D2 defect. No dangerous
+allocation/decoder probe, runtime investigation or environment tuning was performed.
+
+Pi's consolidated review also identified mutable-temp check/link and check/unlink
+windows, special-file opens before classification, incomplete parent-race proof and
+unidentified native byte order. See `consolidated-feedback.md`. Pi explicitly recorded
+the non-pickle format as a permissible original technical choice: there is no native
+archive loader to relax, no required native archive interoperability, and every future
+Torch load would still require explicit weights_only=True/CPU plus preallocation proof.
+The original IO1–IO8 texts and initial report are not rewritten by that interpretation.
+
+The **sole consolidated revision** proposes explicit private fixtures, anonymous
+O_TMPFILE/descriptor-bound publication, O_PATH classification and an explicit v2
+little-endian wire marker. It was read completely as an **inspection-only preview**,
+not applied or executed: its production-source baseline SHA is65characters and does
+not match the independently pinned64-character hash. The original response/hash/report
+were not silently repaired. More importantly, independent source review confirms the
+assigned **IO2 source-parent ancestry/race guarantee remains unresolved**; this alone
+blocks acceptance even if that metadata typo were corrected. Both response slots are
+consumed; no third Worker, automatic source/hash fix, new task or budget reset.
+
+Final recorded decision: **ESCALATE, acceptance_scope task_only, task_accepted false**;
+**deployment_decision NOT_AUTHORIZED**. Current report:
+`data/reports/checkpoint-storage-implementation/final-review-evidence/review.json`.
+Original pre-Worker `review.json` remains historical and byte-preserved. Initial tested
+candidate and nonapplicable revision are retained separately. No D3 main source/test
+transfer, training/profiling, held-out execution, commit/push/release/rollback. Further
+implementation requires separately explicit scoped authority; review-only reassessment
+does not permit implementation fixes. D1/D2 remain concluded, accepted and protected.
+
+### User-approved bounded correction amendment — no reset
+
+The subsequent user conditions explicitly authorize one additional bounded correction,
+not replacement of the original task/history. Exact authority, prior counters and
+Pi-verified baseline hashes are recorded under
+`data/reports/checkpoint-storage-implementation/bounded-correction-amendment-v1/`;
+see [the amendment](checkpoint-storage-bounded-correction-amendment.md). Initial
+candidate and both ESCALATE reports remain unchanged. A byte-identical new isolated
+copy supplies independently checked baseline hashes before Worker implementation.
+One additional30minute text request, no revisions/retries; at most one reviewed240s
+full discovery with the same body/interpreter, relocated declared scratch only.
+Preserve verified D3 logic and355 dependencies; no rewrite, unsafe filesystem
+experiment, controller or separate race research. Worker must resolve original IO2
+with clear guarantees or precisely identify the unmet clause and stop. Pi reviews all
+IO1–IO8, especially IO2/3/5/6/7. No automatic follow-up if IO2 remains unresolved;
+no acceptance/main transfer/research/deployment is granted by this amendment.
+
+The additional request subsequently ended with SDK stop_reason:error,HTTP200 and
+0response bytes after371.113s. No patch or precise feasibility report returned;
+no candidate code changed and no new full suite or filesystem experiment ran. Exact
+underlying error text was not retained by the credential-safe client. Independent
+request/context hashes and before/after snapshots confirm both candidates and all
+prior history preserved. **ESCALATE/task_only/not accepted**, deployment NOT_AUTHORIZED:
+`data/reports/checkpoint-storage-implementation/bounded-correction-amendment-v1/review.json`.
+IO2 remains the prior unresolved assigned blocker, not proven infeasible by this
+incomplete completion. Three overall request attempts used, two technical responses;
+no automatic retry, follow-up, source/hash fix, new task or budget reset.
+
+### Focused IO2/domain and SDK assessment — proposal only
+
+Before any additional execution privileges, the user requested a specific technical
+decision, not race-condition research/controller work. See
+[the decision and bounded-correction proposal](checkpoint-storage-io2-technical-decision.md).
+Naively dropping scripts/configs prefixes would violate accepted D1. The recommended
+specification uses independently approved directory-inode roots per existing logical
+prefix and direct-child physical opens, retaining every registered D1 identifier and
+existing actual-byte/provenance validation. No mandatory deeper logical source path
+was found among the20 registered paths. Root-inode approval must be explicit; this is
+insufficient if a single-project-root ancestry proof is instead mandatory. No original
+IO2/IO6 clause or threat-model requirement is silently amended.
+
+Local static SDK review verified full context in the observed failed payload; no
+max-output-token field was sent despite requested maxTokens32768. Current SDK supports
+terminal error metadata that our wrapper did not retain. Exact historical failure
+cause remains unknown. Small wrapper preflight/error-metadata corrections and one
+future bounded patch are proposed, not executed/authorized. No further model call,
+product change or regression in this assessment; all histories and used counts stay.
+Current IO2 remains unresolved, IO3/IO5 unverified, IO6/IO7 unpassed. Full IO1–IO8 and
+ordered limitation review still govern any task_only ACCEPT; deployment NOT_AUTHORIZED.
+
+### Subsequent approved prefix-root bounded correction
+
+The user has now finalized the technical choice: independently approved directory FD
+per D1 prefix;direct-child physical basenames,unchanged logical identifiers,no continuous
+project-root pathname ancestry claims. Scope SDK wrapper changes to terminal-error
+metadata and request/context validation;no model/controller/routing changes. Authorize
+one specific correction phase from the existing candidate,not additional cycles/reset.
+See [approved phase](checkpoint-storage-prefix-root-correction.md),its exact authority
+and plan under `data/reports/checkpoint-storage-implementation/prefix-root-correction-v1/`.
+Three old request attempts stay used;one fourth request30minutes/no retry or revision;
+Pi reviews complete IO1–IO8 before at most one pinned full240s suite. No test/probe,
+unsafe FS experiment,main transfer or research work beyond that explicit scope.
+
+The approved phase returned a valid bound Worker patch;Pi read full785-line source,
+815-line tests,docs/callers/native references and applied only3reviewed candidate files.
+The sole full run completed389tests,1failure/0errors/0skips,55.852s unittest/62.611s
+process;all355 and3564expanded cases pass. Actual root/decoder/anonymous-publication and
+source→D1→checkpoint→D2 controls pass;9preserved nodes remain exact. A new sourceFIFO
+oracle globally blocks a valid configs `_readable` before reaching its scripts FIFO
+negative. This is not evidence of FIFO data opening. Pi's prescreen missed the ordering;
+no accepted dependency defect or unsafe filesystem experiment was found.
+Current **ESCALATE/task_only/not accepted**,deployment NOT_AUTHORIZED:
+`data/reports/checkpoint-storage-implementation/prefix-root-correction-v1/review.json`.
+IO8zero-failure gate still blocksACCEPT. No source/oracle fix,rerun,extraWorker or reset;
+4request attempts and6conservativefullruns retained. Further test-only correction and
+verification,if desired,require explicit bounded authority;no main/research transfer.
+
+### Subsequent Pi-only test-oracle direction
+
+The user recommends approving a Pi-implemented test-oracle-only correction followed
+by full regression,no additionalWorker unless newproductiondefects are discovered.
+This is recorded prospectively as that specific continuation:
+[Pi-only oracle plan](checkpoint-storage-oracle-only-correction.md). Only the sourceFIFO
+method changes;independent singleton zero-byte regular-file positive then same-size
+FIFO makes the global tripwire target-specific and excludes size-mismatch shortcuts.
+Production/othermethods/355dependencies/old389failure stayexact. One seventh full240s
+run after complete review,no Worker/reset/additional cycles. Full IO1–IO8 and exact
+ordered current limitation review still required;task_only,NOT_AUTHORIZED deployment.
+
+### Final isolated D3 acceptance after authorized Pi oracle correction
+
+The only newproduct-artifact change was Pi's namedFIFO testmethod:independent singleton
+emptyregular positive,then same-sizeFIFO andregular-type reason,withno-readable/read
+tripwires andownedrestoration. Production andcandidateAPI docs remain byte-identical to
+Worker's reviewed prefix-root implementation;allothermethodAST/355accepted files exact.
+One authorized seventh full discovery: **389OK,0failures/errors/skips**,53.292s unittest /
+55.890s process under240s;35ledgers/3564expanded cases preserved andstdout identical to
+acceptedbaseline. Complete streams/scope/Git/ignored-evidence/scratch checks retained.
+
+Pi verified every originalIO1–IO8 andeachcurrentWorker limitation in exactorder/text,
+usingactualcode/native dependencies/results andoriginalscopequotes. No assigned requirement
+waived. Pendingreport evidence issues closed for this user-authorized derivative,not a
+rewrite orretroacceptance ofWorker's earlier failed389variant. Alloldreports/ESCALATEs and
+budgets remain preserved;4Worker attempts,7conservativefullruns,no newWorker thisphase.
+**ACCEPT,acceptance_scope task_only**,isolated D3 only:
+`data/reports/checkpoint-storage-implementation/oracle-only-correction-v1/review.json`.
+**deployment_decision NOT_AUTHORIZED**;no main source/test transfer,training/profiling,
+heldout,stage/commit/push/release/rollback. Main integration requires separateapproval.
