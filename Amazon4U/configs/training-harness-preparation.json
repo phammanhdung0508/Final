@@ -1,0 +1,274 @@
+{
+  "schema_version": "amazon4u-training-harness-preparation-v1",
+  "status": "PREPARATION_READY_FOR_SCOPED_IMPLEMENTATION_DECISION_NOT_EXECUTION_READY",
+  "principle": "Reuse orchestration, not inherited training methodology.",
+  "authority": "data/reports/training-harness-preparation-v1/inputs/authority.txt",
+  "planning_HEAD": "d2938ba20ccc5cf5281197b2ef08f571dd14eae6",
+  "implementation_authorized": false,
+  "Worker_authorized": false,
+  "production_or_legacy_component_modification_authorized": false,
+  "tests_optimizer_updates_restore_or_profiling_authorized": false,
+  "Kaggle_network_upload_launch_or_credentials_authorized": false,
+  "acceptance_scope": "preparation_only_no_implementation_ACCEPT",
+  "deployment_decision": "NOT_AUTHORIZED",
+  "deployment_policy": null,
+  "documentation": "docs/training-harness-preparation.md",
+  "matrix_documentation": "docs/training-harness-requirements.md",
+  "detailed_matrix": "data/reports/training-harness-preparation-v1/requirements.json",
+  "matrix_parts": 34,
+  "proposed_acceptance_criteria": [
+    {
+      "id": "HC1",
+      "criterion": "Preserve accepted Amazon4U model/evaluator/D1-D3 implementations,389 inherited tests,frozen scientific contracts,history,Git and siblings;adapt only explicitly approved harness/orchestration paths."
+    },
+    {
+      "id": "HC2",
+      "criterion": "Run declared CPU recommendation-training-from-scratch semantics using existing training-only context,sampler,models,BPR/endpoint penalty and actual Adam updates without leakage,empty updates or inherited LM/Movie methodology."
+    },
+    {
+      "id": "HC3",
+      "criterion": "Bind explicit initialization,RNG,sampler/batch/runtime/provenance expectations;capture and restore complete initial/quiescent-epoch state through unchanged D1-D3 with independently verified CPU continuation and no partial live mutation."
+    },
+    {
+      "id": "HC4",
+      "criterion": "Use authoritative full-ranking evaluator/eligibility/fallback rules and validation-only strict checkpoint selection;isolate test and preserve registered output/population/seed reporting contracts."
+    },
+    {
+      "id": "HC5",
+      "criterion": "Reuse the existing managed Kaggle runner with a scoped Amazon4U profile,explicit bounded packaging/entrypoint and versioned source/input/run/artifact manifests;no competing orchestration framework."
+    },
+    {
+      "id": "HC6",
+      "criterion": "Propagate dependency,input,training,validation,checkpoint,CLI,status,timeout and artifact errors truthfully;bound polling and collection,retain failure history,no automatic ambiguous resubmission or overwrite."
+    },
+    {
+      "id": "HC7",
+      "criterion": "Enforce execution approval and resource/file/fixture budgets;pure offline rendering and mocked transport tests cannot access credentials,network,real data or remote jobs;CPU-only acceptance cannot claim GPU/profile readiness."
+    },
+    {
+      "id": "HC8",
+      "criterion": "Independently review actual changed code/callers/generated entrypoints/tests,verify exact original approved full suites and preserved bytes/IDs/ledgers,adjudicate every current limitation in exact order with original scope evidence;no unresolved mandatory gate ACCEPT."
+    },
+    {
+      "id": "HC9",
+      "criterion": "Document actual methodology/stages,proposed adaptation boundaries,CPU/GPU/initialization/source-closure/durability/execution blockers and truthful tested-versus-static evidence;task acceptance is never deployment authority."
+    },
+    {
+      "id": "HC10",
+      "criterion": "Keep Musical_Instruments profiling,Toys/Electronics feasibility,comparative tuning/execution freeze and final-test/postprocessing as explicit later gates without inheriting test-based promotion,unregistered searches or quota assumptions."
+    }
+  ],
+  "authoritative_components": {
+    "models": "scripts/differentiable_models.py",
+    "context_sampler_baselines": "scripts/recommendation_core.py",
+    "evaluator": "scripts/recommendation_evaluation.py",
+    "identity": "scripts/checkpoint_identity.py",
+    "payload": "scripts/checkpoint_payload.py",
+    "storage": "scripts/checkpoint_storage.py",
+    "preserve": "All current scripts/tests/accepted docs/scientific configs/frozen snapshots/old reports except the explicitly proposed future legacy runner path;no accepted numeric changes."
+  },
+  "orchestration": {
+    "foundation": "Amazon4U/multiautoresearch",
+    "selected_existing_runner": "multiautoresearch/post-training/scripts/kaggle_job.py",
+    "proposed_profile": "multiautoresearch/adapters/amazon4u.py",
+    "physical_legacy_directory_is_not_training_stage": true,
+    "competing_framework": false,
+    "legacy_pretraining_LM_Movie_objectives_or_promotion_inherited": false,
+    "external_cli_read_only_reference": {
+      "path": "/home/sunf/my-project/kaggle-cli",
+      "HEAD": "6894864ff4095cf98e9e36d3a694ff5fc9ba3818",
+      "installed_capability_or_account_verified": false
+    }
+  },
+  "proposed_work_packages": [
+    {
+      "id": "H",
+      "scope": "CPU training/data/validation/capture-restore integration using accepted APIs",
+      "future_Git_root_relative_paths": [
+        "Amazon4U/scripts/training_harness.py",
+        "Amazon4U/scripts/training_data.py",
+        "Amazon4U/scripts/training_entrypoint.py",
+        "Amazon4U/tests/test_training_harness.py",
+        "Amazon4U/tests/test_training_data.py",
+        "Amazon4U/docs/training-harness.md"
+      ]
+    },
+    {
+      "id": "O",
+      "scope": "Targeted existing managed-runner adaptation plus explicit Amazon4U profile/offline packaging/status/artifact integration",
+      "future_Git_root_relative_paths": [
+        "Amazon4U/multiautoresearch/post-training/scripts/kaggle_job.py",
+        "Amazon4U/multiautoresearch/adapters/__init__.py",
+        "Amazon4U/multiautoresearch/adapters/amazon4u.py",
+        "Amazon4U/tests/test_kaggle_orchestration.py",
+        "Amazon4U/multiautoresearch/docs/amazon4u-runner.md"
+      ],
+      "instruction_conflict_resolution": "Prospectively add narrow Amazon4U-profile exceptions to framework/post-training instructions only if separately included in approval;do not replace legacy objectives now or run inherited agent loops."
+    }
+  ],
+  "stages": [
+    "package_and_input_verification",
+    "recommendation_training_from_scratch",
+    "validation_only_selection",
+    "frozen_model_final_test_separately_authorized",
+    "post_selection_reporting_uncertainty_separately_scoped"
+  ],
+  "real_data_order": [
+    "Musical_Instruments",
+    "Toys_and_Games",
+    "Electronics"
+  ],
+  "first_implementation_acceptance_boundary": "CPU float32 harness plus offline/mock orchestration;not GPU/full-data profiling/real Kaggle readiness",
+  "open_gates": [
+    {
+      "id": "G1",
+      "issue": "Acceptedmodels explicitly CPU-only;GPU/backend/scaling notverified;no guardbypass or silentCPUfallback.",
+      "blocks": "GPU profiling/research readiness",
+      "needed": "Separate device path decision/scope and CPU reference parity/determinism evidence."
+    },
+    {
+      "id": "G2",
+      "issue": "LightGCN ID initialization distribution unapproved.",
+      "blocks": "Meaningful realmodel launch",
+      "needed": "Explicit approved initialization/archive profile;fixtures use explicit tensors."
+    },
+    {
+      "id": "G3",
+      "issue": "Batch policy,size,RNGderivation,threads/determinism,sampling/fanout andfinalvalidationfrequency unresolved.",
+      "blocks": "Production execution freeze",
+      "needed": "Explicit profile;filter_before_batch onlyproposed,1024/fanout10 notdefaults."
+    },
+    {
+      "id": "G4",
+      "issue": "Accountquota,CLI/environment/nativeIO/full-data mounts/durablecheckpoint sink unverified.",
+      "blocks": "Remote execution and cross-session recovery claims",
+      "needed": "Separate bounded permission/preflight plan;no checksnow."
+    },
+    {
+      "id": "G5",
+      "issue": "D1registeredsourceallowlist excludesnewharness/framework modules.",
+      "blocks": "Complete new-code provenance/resume guarantee until external envelope contract approved",
+      "needed": "Independent expected completebundlemanifest/run/source/checkpoint binding outsideunchangedD1/D2;no self-authenticationclaim."
+    },
+    {
+      "id": "G6",
+      "issue": "No implementation/Worker/syntheticupdate/restore/test authority.",
+      "blocks": "All implementation and new test execution",
+      "needed": "Separate bounded approval andfreshroot/hashes/originalcommands;D3budgetnotinherited."
+    }
+  ],
+  "proposed_budgets_not_approved": {
+    "work_packages": 2,
+    "generation_requests_per_package": {
+      "initial": 1,
+      "max_consolidated_revision": 1,
+      "milliseconds_each": 1800000,
+      "retries": 0
+    },
+    "total_new_requests_max": 4,
+    "Worker_tools_tests_commands": 0,
+    "full_discoveries": {
+      "baseline": 1,
+      "H_initial_optional_revision": 2,
+      "O_initial_optional_revision": 2,
+      "joint_final": 1,
+      "total_max": 6,
+      "seconds_per_full_invocation": 240,
+      "no_subsets_smoke_probes_compileall": true,
+      "main_integration": "separate later approval,not implicit additional runs"
+    },
+    "fixtures": {
+      "CPU_only": true,
+      "users": 8,
+      "products": 12,
+      "metadata_nodes_per_type": 8,
+      "dimensions": 64,
+      "file_bytes": 2097152,
+      "concurrent_fixture_bytes": 8388608,
+      "concurrent_files": 128,
+      "decoded_checkpoint_storage_bytes": 2097152,
+      "synthetic_bundle_unpacked_bytes": 8388608,
+      "synthetic_bundle_files": 128,
+      "max_actual_epochs_or_Adam_steps_per_numeric_branch": 4,
+      "controller_trace_events_without_training": 101,
+      "newglobal_RNG_dtype_umask_security_setters": false,
+      "newCUDA_network_remote_CLI_workerprocesses": false,
+      "existing389exceptions": "Preserve existing differentiability/import-order exceptions only.",
+      "max_aggregate_new_Adam_steps_per_full_discovery": 128,
+      "max_new_Adam_steps_across_5_post_baseline_invocations": 640
+    },
+    "raw_snapshot": {
+      "max_file_bytes": 134217728,
+      "max_total_bytes": 536870912,
+      "file_timeout_ms": 60000,
+      "snapshot_timeout_ms": 300000,
+      "not_OSsandbox_or_exhaustive_transient_write_history": true
+    },
+    "real_run_time_RAM_VRAM_disk_budget": null,
+    "real_run_numeric_caps_require_separate_approval": true,
+    "process_acceptance": {
+      "peak_RSS_bytes": 2147483648,
+      "new_scratch_bytes_per_invocation": 67108864,
+      "max_complete_stdout_or_stderr_bytes": 8388608,
+      "RSS_measurement": "Future independently approved parent-wrapper OS accounting receipt;no profiler/subset/global rlimit setter or sandbox claim. Missing counters unverified;no invented passing measurement."
+    }
+  },
+  "proposed_verification_command": {
+    "command": "/home/sunf/FSB/Final/Amazon4U/.venv/bin/python",
+    "args": [
+      "-B",
+      "-c",
+      "import os,tempfile,unittest,sys; from pathlib import Path; p=Path('/home/sunf/FSB/Final/Amazon4U/.worktrees/training-harness-implementation-v1/Amazon4U/.test-output/training-harness-v1'); p.mkdir(parents=True,exist_ok=True); tempfile.tempdir=str(p); os.environ['TMPDIR']=str(p); os.environ['PYTHONDONTWRITEBYTECODE']='1'; suite=unittest.defaultTestLoader.discover('tests'); result=unittest.TextTestRunner(verbosity=2).run(suite); sys.exit(not (result.wasSuccessful() and not result.skipped))"
+    ],
+    "cwd": "/home/sunf/FSB/Final/Amazon4U/.worktrees/training-harness-implementation-v1/Amazon4U",
+    "timeout_seconds_proposed": 240,
+    "approval_status": "PROPOSED_ONLY_REPIN_BEFORE_IMPLEMENTATION_AUTHORITY"
+  },
+  "proposed_test_policy": {
+    "generated_paths": [
+      "/home/sunf/FSB/Final/Amazon4U/.worktrees/training-harness-implementation-v1/Amazon4U/.test-output/training-harness-v1"
+    ],
+    "temporary_directories": [
+      "/home/sunf/FSB/Final/Amazon4U/.worktrees/training-harness-implementation-v1/Amazon4U/.test-output/training-harness-v1"
+    ],
+    "training_allowed": false,
+    "future_permission_requested_only": "Tiny bounded CPU backward/Adam/private staged restore in declared tests only;not grantedbythisfile.",
+    "must_repin_ignored_implementation_and_all_output_paths_before_approval": true
+  },
+  "current_counts": {
+    "Workers": 0,
+    "candidate_tests": 0,
+    "new_regressions": 0,
+    "optimizer_steps": 0,
+    "training": 0,
+    "profiling": 0,
+    "remote_jobs_calls_or_uploads": 0
+  },
+  "historical_D3_counters_preserved": {
+    "Worker_attempts": 4,
+    "full_associated_runs": 9
+  },
+  "next_gate": "Review/approveexplicit CPU/offline H+Oscope,budgets/testpermissions andG5interface orrequest targeted amendments;do not startWorker automatically.",
+  "proposed_interface_contract": {
+    "run_spec_version": "amazon4u-run-spec-v1",
+    "run_spec_required_sections": [
+      "identity",
+      "authority",
+      "protocol",
+      "inputs",
+      "execution",
+      "initialization",
+      "expected_checkpoint_contracts",
+      "code",
+      "limits",
+      "transport"
+    ],
+    "result_version": "amazon4u-run-result-v1",
+    "artifact_manifest_version": "amazon4u-artifacts-v1",
+    "strict_unknown_fields": true,
+    "independent_approval_and_source_expectations_required": true,
+    "source_manifest_not_independent_authenticity": true,
+    "all_details": "docs/training-harness-preparation.md#frozen-handoff-interface-proposal-approve-before-ho-implementation",
+    "artifact_stream_hard_caps": "Use targeted bounded stream wrapper over existing transport listing/auth/download primitives;legacy CLI output+postscan not claimed actual byte cap. No new authentication/framework."
+  }
+}

@@ -1,5 +1,12 @@
 # Amazon4U Implementation Control-Plane: Milestone I1
 
+> Historical initial I1 implementation record. Current accepted main components and
+> D1–D3 decisions are in `../../docs/implementation-roadmap.md`. Current next-stage
+> authority is preparation only: `../../docs/training-harness-preparation.md` and
+> `../../docs/training-harness-requirements.md`. Reuse existing Kaggle orchestration,
+> not LM/Movie training methodology. No inherited commands below authorize execution;
+> no new Worker,legacy replacement,training/profiling or Kaggle calls are approved.
+
 ## 1. Roles and Governance
 
 - **Pi**: Planner, Orchestrator, and independent Reviewer. Responsible for design decisions, task authorization, verification review, and held-out evaluation.

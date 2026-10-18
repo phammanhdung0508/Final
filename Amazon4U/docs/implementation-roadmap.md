@@ -79,6 +79,27 @@ accepted adversarial fixtures must remain passing. No scientific-rule amendment.
 
 ## Current status
 
+### Training Harness preparation — current next-stage proposal, not execution approval
+
+The user authorized preparing the requirement/evidence matrix and bounded plan under
+**reuse orchestration,not inherited training methodology**. See
+[the plan](training-harness-preparation.md),[34-part matrix](training-harness-requirements.md)
+and `configs/training-harness-preparation.json`. Existing managed Kaggle runner is the
+foundation;propose explicit Amazon4U profile/targeted replacements,not a competing
+framework. All new paths/Worker budgets/synthetic optimizer-restore tests/240s limits
+are proposals only. No production/legacy replacement or execution now.
+
+First implementation scope proposed: authoritative CPU models plus state/data/evaluator
+integration,and offline packaging/entrypoint/failure/status/artifact orchestration.
+CPU/GPU readiness,LightGCN initialization,full source closure outside D1's20paths,
+Kaggle compatibility/durable checkpoint storage and remaining execution choices are
+explicit gates—not solved by selecting Kaggle GPU metadata. Stage names are recommender
+training from scratch,validation selection,frozen final test andpost-selection reporting;
+not fine-tuning or self-supervised pre-training. Preserve D1–D3/code/evidence/history.
+After separate implementation/main-integration approval and readiness review,prepare
+bounded full-scope Musical_Instruments profiling;then Toys_and_Games/Electronics checks,
+execution/tuning freeze and separately authorized comparative/final-test work.
+
 ### Active checkpoint position — D3 main integration ACCEPT, isolated phase retired
 
 The user separately authorized decommissioning isolated D3 implementation and bounded

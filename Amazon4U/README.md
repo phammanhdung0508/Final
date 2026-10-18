@@ -1,5 +1,12 @@
 # Amazon4U dataset exploration
 
+**Next stage—preparation only:** [Training Harness bounded plan](docs/training-harness-preparation.md)
+and [34-part requirement/evidence matrix](docs/training-harness-requirements.md).
+Reuse `multiautoresearch` Kaggle orchestration,not legacy Movie/LM training methodology.
+Accepted model/evaluator/D1–D3 code is unchanged. The proposal separates CPU/offline
+harness verification from unresolved GPU/initialization/provenance/durability/execution
+gates;no Worker,tests,training/profiling,remote calls or legacy replacement yet.
+
 **Current checkpoint milestone: D3 main integration ACCEPT/task_only.**
 [Independent main integration/retirement record](docs/checkpoint-storage-main-integration.md):
 355baselineOK56.293s process;389integratedOK57.452s process,0failures/errors/skips

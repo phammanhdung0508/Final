@@ -14,6 +14,19 @@ instructions (including `GEMINI.md` and nested prompts) do not override Amazon4U
 protocol, scoped task commands or approvals. Do not launch inherited autonomous
 loops, subagents or training merely because a framework document describes them.
 
+## Current Amazon4U preparation direction
+
+User-agreed: **Reuse orchestration, not inherited training methodology.** Current
+permission is preparation only;see `../docs/training-harness-preparation.md` and
+`../docs/training-harness-requirements.md`. Proposed adaptation uses the existing
+post-training/scripts/kaggle_job.py transport with an explicit Amazon4U profile,
+not its LM/Movie objectives/evaluator/model/promoted-master logic. Its physical
+folder name must not label recommender training from scratch as fine-tuning.
+No production/legacy replacement,Worker,CLI dry-run,credentials read,Kaggle call,
+training/profiling or test execution is authorized now. Keep accepted Amazon4U
+APIs authoritative;CPU/GPU and source-provenance/runtime gates remain explicit.
+The external `/home/sunf/my-project/kaggle-cli/` is read-only reference only.
+
 ## Existing framework layout
 
 This repository is a three-project workspace.

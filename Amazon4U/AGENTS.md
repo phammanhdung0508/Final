@@ -6,6 +6,20 @@ not change sibling projects unless explicitly requested.
 
 ## Goal and current state
 
+**Current user direction: Training Harness preparation only.** Reuse existing
+`multiautoresearch` orchestration (Kaggle packaging/submission/status/logging/output),
+not inherited LM/Movie methodology. See `docs/training-harness-preparation.md`,
+`docs/training-harness-requirements.md` and `configs/training-harness-preparation.json`.
+The34-part/10-criterion plan proposes scoped CPU harness and managed-runner adapters;
+no production/legacy component replacement,Worker,test,optimizer/restore,training,
+profiling,Kaggle call/credential lookup or deployment is authorized now. External
+`/home/sunf/my-project/kaggle-cli/` is read-only reference,not a live CLI permission.
+Accepted models/evaluator/D1–D3 and389main baseline remain protected. CPU-only guards,
+LightGCN initialization,complete bundle provenance outside D1's20paths,Kaggle runtime/
+durability and execution settings remain explicit gates;do not hide these behind
+"GPU-ready"/"fine-tuning" labels. Future budgets/240s/Worker scopes in the proposal
+need separate approval and do not reset4Worker/9D3-run history. No automatic launch.
+
 **Current D3 authority: bounded main integration.** The user directed retirement of
 isolated D3 implementation/execution and transition to main. Both original D3 trees
 and all evidence/history remain audit-only at their original paths;no delete/move,

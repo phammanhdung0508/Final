@@ -88,6 +88,22 @@
         }
       },
       "full_training_loops_and_optimizer_updates": "not_authorized",
+      "training_harness_preparation": {
+        "authority": "user_explicit_preparation_only_reuse_orchestration_not_inherited_methodology",
+        "status": "MATRIX_AND_BOUNDED_PLAN_PREPARED_IMPLEMENTATION_NOT_AUTHORIZED",
+        "configuration": "configs/training-harness-preparation.json",
+        "documentation": "docs/training-harness-preparation.md",
+        "matrix": "docs/training-harness-requirements.md",
+        "matrix_parts": 34,
+        "proposed_criteria": 10,
+        "orchestration_foundation": "multiautoresearch",
+        "methodology": "frozen_Amazon4U_training_from_scratch_not_finetuning",
+        "accepted_components_unchanged": true,
+        "first_proposed_scope": "CPU_harness_and_offline_orchestration_not_GPU_readiness",
+        "implementation_Worker_tests_optimizer_restore_remote_profiling_training_authorized": false,
+        "acceptance_scope": "preparation_only_no_implementation_ACCEPT",
+        "deployment_decision": "NOT_AUTHORIZED"
+      },
       "checkpoint_provenance_recovery": {
         "artifact_review": "ESCALATE",
         "artifact_task_id": "e1f1ea4c-de9a-4a53-ad3a-7b394fb4da1a",
