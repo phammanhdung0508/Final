@@ -1,5 +1,15 @@
 # User-approved implementation sequence and gates
 
+**Current Worker governance:** [native agy through the delegation extension is the
+implementation default](worker-delegation-policy.md). Pi plans/scopes/orchestrates,
+independently verifies and decides acceptance. Native recovery maxima are separately
+authorized **2 + 2 + 2**, with cumulative history and root-cause review after each
+substantive ESCALATE; #3 requires a recommendation,not automatic fallback. Every SDK
+text-only generation request needs explicit user approval. Standing noncritical
+recovery discretion and historical SDK preferences do not expand task/round budgets,
+change channels silently or authorize execution. Historical approvals below remain
+phase-scoped; the new policy resets none of their counters or decisions.
+
 The user approved proceeding in order 1 → 4, including scoped delegation to agy
 without repeated confirmation. Pi plans and independently reviews each subsystem;
 agy implements/fixes; acceptance criteria and original verification commands are
@@ -35,7 +45,7 @@ implicitly authorize training/profiling execution or deployment.
 Deployment remains **NOT_AUTHORIZED**. No implementation commits or pushes are
 included in this approval. Frozen scientific snapshots/configs remain unchanged.
 
-## Step 1 architecture and preservation
+## Historical Step 1 architecture and preservation (HEAD at that milestone)
 
 Current main HEAD: `ed60be08f3d1f22a9d76eecbee282415f95a6a5c`. Pi preserved and
 byte-verified all 229 tracked Amazon4U files (6,349,614 bytes) before modifications:
@@ -79,19 +89,49 @@ accepted adversarial fixtures must remain passing. No scientific-rule amendment.
 
 ## Current status
 
-### H-REF first bounded implementation round — ESCALATE/no files
+### Current H-REF — corrected six-file candidate, ESCALATE pending regression
+
+The recorded sequence used **four SDK text-only generation requests**, not native agy
+invocations. Request3 delivered six proposed files; request4 corrected four files and
+retained training_data.py/training_entrypoint.py byte-identically. Pi reviewed the
+actual changes and relevant callers/native boundary: B1's scoped CPU Adam guard and
+F2–F5's checkpoint-name,exception,fallback and source-closure corrections are statically
+addressed,not runtime-verified. No accepted model/evaluator/D1–D3 or methodology change.
+Latest selected review: `data/reports/training-harness-h-ref-v1/correction-v1/review.json`.
+Selected proposal: `data/reports/training-harness-h-ref-v1/correction-v1/correction/preview/Amazon4U/`.
+
+The candidate remains **unapplied to isolated/main code and unaccepted**. The original
+389-test dependency baseline passed (57.732s unittest,64.917s process,661983232bytes
+peakRSS;3564expanded cases). **Zero H candidate suites or new numeric updates ran.**
+Static discovery predicts412 methods,not a PASS. H2–H8 require actual mandatory evidence.
+
+Next gate,only if separately authorized: mechanical isolated application of the exact
+six-file proposal,fresh safety/preservation review and one original full regression
+under **240s / 2GiB** and unchanged log/scratch/fixture limits. Then Pi assesses all
+original H1–H9 and current limitations before any acceptance. No new generation is
+needed just to verify the candidate. No new native/SDK call,regression,main integration
+or experiment is authorized by this status update. The four SDK requests remain
+consumed; prospective native 2 + 2 + 2 does not reset/replenish that history.
+Acceptance_scope: **H-REF CPU reference,not accepted**; deployment **NOT_AUTHORIZED**.
+O-OFFLINE remains unassigned;GPU-READY and full-data profiling remain separate gates.
+[Authority and complete phase history](training-harness-h-ref.md).
+
+### Historical first two-SDK-request H result — ESCALATE/no files, not latest
 
 User approved H only withdevice interfaces. Fresh389baselineOK64.917s process,
-57.732s unittest/661983232bytespeakRSS,3564expanded pass. agy authored nofilesin either
-of2requests:missingfrozencontracts,thenloss-returnkeyabsentfromPi's freshAPI excerpt.
-Pi owns contextomission;no modelbug/CPUharnessinfeasibility established. No newtests,
-updates/restore or candidatefullsuite;isolated316-filebaseline remainsunchanged.
-`data/reports/training-harness-h-ref-v1/review.json`: ESCALATE/task_only/notaccepted,
-deploymentNOT_AUTHORIZED. Exact missing completefunctions nowrecorded,butbudget2of2
-used,noautomaticthirdrequest/Pi sourcefix/replacement/reset. O/GPU/research/maintransfer
-remainseparateunapprovedgates. [Current authority/result](training-harness-h-ref.md).
+57.732s unittest/661983232bytespeakRSS,3564expanded pass. The two SDK responses returned
+no files:missingfrozencontracts,thenloss-returnkeyabsentfromPi's freshAPI excerpt.
+Pi owns contextomission;no modelbug/CPUharnessinfeasibility established. At that stop,
+no newtests,updates/restore or candidatefullsuite;isolated316-filebaseline unchanged.
+`data/reports/training-harness-h-ref-v1/review.json` retains that ESCALATE and two used
+requests. Later separately bounded continuations delivered the proposal above,without
+rewriting this original decision/plan or reclassifying SDK requests as native agy.
 
-### Training Harness preparation — current next-stage proposal, not execution approval
+### Historical Training Harness preparation proposal — O-OFFLINE still unassigned
+
+The proposal below predates the later H-REF phases. Its preparation-only statements
+and proposed paths/budgets are historical,not the current H candidate state or a
+standing SDK channel. Current policy and the latest H review above govern next steps.
 
 User-agreed clarification: **CPU reference first,not permanent CPU architecture**;
 see [device-transition gate](training-harness-device-transition.md). H-REF andO-OFFLINE

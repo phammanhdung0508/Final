@@ -1,18 +1,40 @@
 # Amazon4U dataset exploration
 
-**Latest H-REF round: ESCALATE/not accepted.** [H authority/result](docs/training-harness-h-ref.md):
-389baselineOK64.917s process/631.3MiBpeakRSS;twoWorker responses returned0files because
-requiredcontext remainedincomplete (Pi omittedloss-returnkeyinfreshprompt). No Hcode,
-newtests/Adamupdates/restore/candidateverification. Two-requestbudgetused,noautomatic
-thirdcall/Pi sourcefix/reset. AcceptedD1–D3/models/389baseline andhistorypreserved.
-Review: `data/reports/training-harness-h-ref-v1/review.json`. Deployment NOT_AUTHORIZED.
+**Current H-REF status: corrected candidate preserved; ESCALATE/not accepted pending
+mandatory regression.** [H authority/history](docs/training-harness-h-ref.md).
+Four `sdk_text_only_generation_request` events are consumed—not native agy invocations.
+The third response delivered six proposed files; the fourth corrected four and retained
+two byte-identically. Pi statically reviewed B1 and F2–F5; runtime evidence remains
+unverified. The selected six-file candidate is **unapplied in isolated/main code**.
+Latest review: `data/reports/training-harness-h-ref-v1/correction-v1/review.json`.
 
-**Next stage—preparation only:** [Training Harness bounded plan](docs/training-harness-preparation.md)
-and [34-part requirement/evidence matrix](docs/training-harness-requirements.md).
-Reuse `multiautoresearch` Kaggle orchestration,not legacy Movie/LM training methodology.
-Accepted model/evaluator/D1–D3 code is unchanged. The proposal separates CPU/offline
-harness verification from unresolved GPU/initialization/provenance/durability/execution
-gates;no Worker,tests,training/profiling,remote calls or legacy replacement yet.
+One unchanged **389-test dependency baseline** passed (64.917s process,631.3MiB peakRSS);
+**zero H candidate full suites or new numeric updates have run**. The next gate is
+separately authorized isolated application, fresh safety/preservation review and one
+original full regression under **240 seconds / 2 GiB** and unchanged fixture/log/scratch
+limits. Static inventory predicts412 tests; that is not a passing result. No new generation
+is needed merely to verify this candidate. No new execution is authorized by this status.
+**Acceptance scope: H-REF CPU reference, not accepted; deployment: NOT_AUTHORIZED.**
+
+**Current Worker policy:** [native agy delegation is the default](docs/worker-delegation-policy.md).
+The prospective maximum is separately authorized **2 + 2 + 2**, not six automatic calls.
+Every SDK fallback request requires explicit user approval. Historical SDK calls remain
+consumed; the new policy does not reset H budgets or grant new native/SDK requests.
+
+**O-OFFLINE and later experiment gates remain separate.** The [historical preparation
+proposal](docs/training-harness-preparation.md) and [34-part matrix](docs/training-harness-requirements.md)
+remain evidence/scope references, not the latest H implementation state or launch authority.
+O-OFFLINE is unassigned. Reuse `multiautoresearch` orchestration,not Movie/LM methodology.
+GPU-READY,production initialization/environment/provenance/durability,main integration
+and Musical_Instruments profiling still require their applicable approvals and evidence.
+Accepted models/evaluator/D1–D3 and the frozen scientific protocol remain unchanged.
+
+**Historical first two-SDK-request H result (not current):** both responses returned
+zero files because of missing handoff context,including Pi's omitted loss-return key.
+That two-request ESCALATE remains preserved at
+`data/reports/training-harness-h-ref-v1/review.json`; later continuations did not erase
+its decision or reset its consumed budget. None of those SDK requests was a native agy
+invocation.
 
 **Current checkpoint milestone: D3 main integration ACCEPT/task_only.**
 [Independent main integration/retirement record](docs/checkpoint-storage-main-integration.md):
