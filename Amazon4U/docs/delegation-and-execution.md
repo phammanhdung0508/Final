@@ -25,6 +25,53 @@ consult `protocol-lifecycle.md` for authorization gates.
   on test data, promote models, deploy, launch subagents or start another research
   cycle. Neither agent stages, commits or pushes without explicit user request.
 
+## Standing user direction: delegate bounded implementation
+
+User reaffirmed: Pi should prioritize planning, assigning work, managing execution,
+receiving results, coordinating corrections and independent verification—not routinely
+spend its context authoring straightforward implementation. Within an authorized
+implementation scope, delegate clear, independently verifiable simple/medium programming
+work to agy: utility functions, unit tests and local bug fixes, with explicit inputs,
+outputs, allowed paths, preservation rules and acceptance criteria. Bundle related
+utilities/fixes with their tests into coherent bounded assignments rather than one
+request per trivial edit. Independent subsystems remain separately assigned.
+
+Pi retains consequential design/security/protocol decisions, full necessary code review,
+independent verification and final acceptance authority. Worker reports remain untrusted;
+delegation does not reduce review rigor. Pi may handle brief governance records and
+mechanical application/integration of reviewed Worker patches; exceptions involving
+Pi-authored implementation must be explicit, not a default substitute for Worker work.
+Use scoped relevant context without omitting original requirements or necessary callers.
+
+This is a work-allocation policy, not new execution authority or a budget reset. The
+current Training Harness remains preparation-only: no Worker launch, implementation,
+new tests/optimizer work or remote execution until its separate scope is approved.
+Existing controller-free text-only channel and all review/safety/deployment gates remain.
+
+## Worker dependency and scope-change approval
+
+Standing user direction: if agy proposes a package, framework, architectural structure
+or other change not covered by its assigned task, it must **ask Pi before implementing
+or installing it**. Existing approved dependencies/structures may be used as declared;
+an undeclared dependency, broad refactor, new service or structural expansion is not
+implicitly permitted because it seems useful. Pause the affected work and provide the
+purpose/version or design, affected paths/interfaces, installation/network/resource/
+security impact and proposed verification; do not code first and disclose afterward.
+The text-only Worker returns this request without host actions or unauthorized tools.
+
+Pi approves, narrows or rejects ordinary implementation choices within the user's
+broader authorized project scope; no repeated user approval is needed for those
+choices. Before affected work resumes, record the decision and prospectively declare
+any approved paths/dependencies/outputs/commands and verification changes. Preserve
+original requirements, reports and history; approval does not silently rewrite criteria,
+reset response/revision budgets or authorize an extra Worker invocation. If the approved
+mechanism cannot resume within current authority/budget, stop and record that boundary.
+
+This discretion does not authorize violating frozen science, security/data safeguards,
+project boundaries or ungranted material resource/real-execution permissions. Current
+Training Harness work is still preparation-only. No automatic install, remote job,
+training/profiling, controller redesign or new Worker follows from this policy.
+
 ## Delegation principles
 
 1. Never lower acceptance criteria solely to save tokens.
@@ -98,6 +145,18 @@ This supplements the approved implementation sequence in `implementation-roadmap
 This standing authorization supersedes the need for a new user confirmation for
 otherwise in-scope noncritical recovery. It does **not** supersede mandatory
 verification, frozen scientific rules, acceptance authority or historical records.
+
+## Subsequent Package H authority and stopped result
+
+The user subsequently approved bounded H-REF CPU-reference implementation with device
+interfaces;that specific approval superseded earlier preparation-only statements for
+H only. See `docs/training-harness-h-ref.md`. The two permitted text-only responses are
+now consumed with no files:requested frozen context,thenmissing total-loss return key
+in Pi's fresh context. Fresh389baseline passed,butno Himplementation/newtests/updates
+or candidate verification occurred. Pi records ESCALATE/notaccepted andowns the handoff
+omission;this is not a verified accepted-model defect. No third request,Pi substitute
+implementation,source task replacement orbudgetreset automatically. Originalrequests/
+reports/criteria andD3history remainintact. O/GPU/Kaggle/profiling/maintransfer notapproved.
 
 ## Lifecycle structure and execution backend
 

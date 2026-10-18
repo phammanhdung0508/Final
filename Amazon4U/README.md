@@ -1,5 +1,12 @@
 # Amazon4U dataset exploration
 
+**Latest H-REF round: ESCALATE/not accepted.** [H authority/result](docs/training-harness-h-ref.md):
+389baselineOK64.917s process/631.3MiBpeakRSS;twoWorker responses returned0files because
+requiredcontext remainedincomplete (Pi omittedloss-returnkeyinfreshprompt). No Hcode,
+newtests/Adamupdates/restore/candidateverification. Two-requestbudgetused,noautomatic
+thirdcall/Pi sourcefix/reset. AcceptedD1–D3/models/389baseline andhistorypreserved.
+Review: `data/reports/training-harness-h-ref-v1/review.json`. Deployment NOT_AUTHORIZED.
+
 **Next stage—preparation only:** [Training Harness bounded plan](docs/training-harness-preparation.md)
 and [34-part requirement/evidence matrix](docs/training-harness-requirements.md).
 Reuse `multiautoresearch` Kaggle orchestration,not legacy Movie/LM training methodology.

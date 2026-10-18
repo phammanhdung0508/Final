@@ -79,6 +79,18 @@ accepted adversarial fixtures must remain passing. No scientific-rule amendment.
 
 ## Current status
 
+### H-REF first bounded implementation round — ESCALATE/no files
+
+User approved H only withdevice interfaces. Fresh389baselineOK64.917s process,
+57.732s unittest/661983232bytespeakRSS,3564expanded pass. agy authored nofilesin either
+of2requests:missingfrozencontracts,thenloss-returnkeyabsentfromPi's freshAPI excerpt.
+Pi owns contextomission;no modelbug/CPUharnessinfeasibility established. No newtests,
+updates/restore or candidatefullsuite;isolated316-filebaseline remainsunchanged.
+`data/reports/training-harness-h-ref-v1/review.json`: ESCALATE/task_only/notaccepted,
+deploymentNOT_AUTHORIZED. Exact missing completefunctions nowrecorded,butbudget2of2
+used,noautomaticthirdrequest/Pi sourcefix/replacement/reset. O/GPU/research/maintransfer
+remainseparateunapprovedgates. [Current authority/result](training-harness-h-ref.md).
+
 ### Training Harness preparation — current next-stage proposal, not execution approval
 
 User-agreed clarification: **CPU reference first,not permanent CPU architecture**;

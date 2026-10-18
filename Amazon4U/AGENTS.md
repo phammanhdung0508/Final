@@ -6,6 +6,60 @@ not change sibling projects unless explicitly requested.
 
 ## Goal and current state
 
+**Subsequent user direction permits one limited same-H continuation**,not a newproject
+orhistoryreset. See `data/reports/training-harness-h-ref-v1/continuation-v1/plan.json`.
+Pi must finish source/APIhandoff audit beforeoneadditional30mintext-onlyresponse,no
+retry/revision;Hrequests2used→ceiling3. Same316-filebaseline/root/sixnewpaths;one reviewed
+candidatefullsuite inoriginalunusedinitialslot,unchanged240s/2GiB/fixturebudgets.
+Originaltwo-responseESCALATE remainshistorical;no O/GPU/remote/maintransferauthority.
+
+**Subsequent user direction/Pi approval grants one targeted same-H correction:**see
+`data/reports/training-harness-h-ref-v1/correction-v1/decision.json`. Prior3 requests,
+candidate and ESCALATEs remain unchanged;one fourth30mintext-onlyresponse,no retry or
+revision. B1 is a library compatibility/capability-check boundary,not a model defect;
+Pi prospectively approves only an H-local CPU Adam health-check adapter preserving
+native math/state,not driver probes/global patches/new packages. One F2–F5 brief,
+no new Package H/planning matrix. No application,test,CUDA or other execution authority
+is granted by this phase;review first and full regression only if separately released.
+**Fourth response now received:**four proposed files corrected,two retained exactly;
+Pi reviewed B1/F2–F5 statically and preserved native Adam math/accepted components.
+See `data/reports/training-harness-h-ref-v1/correction-v1/review.json`. Decision ESCALATE
+only pending mandatory authorized verification,not ACCEPT. No source application,
+candidate tests,updates or driver probes. Four requests used/ceiling4,none remaining;
+old389baseline remains the sole Hsuite. Next gate is isolated application plus the
+original full regression if separately released,no new Package H or automatic fifthcall.
+
+**That prior continuation is ESCALATE,not accepted:**third response delivered all six
+files,but they remain unapplied previews. Complete static review found invalid D3
+basenames,wrong checkpoint-exception assertions,unknown-user/fallback oracle confusion
+and omitted D2 source closure. Installed Torch CPU Adam can enter a CUDA-driver
+availability path;Pi missed this native dependency in the pre-request audit and owns
+that preparation omission. No candidate import/test/update or driver probe was run.
+See `data/reports/training-harness-h-ref-v1/continuation-v1/review.json`. All316 baseline
+files/main accepted code/Git/siblings/old reports remain exact. Three Hrequests used,
+none remaining;one old baseline and zero candidate suites. No fourth request,Pi source
+fix,extra test,CUDA permission orhistoryreset automatically. Deployment NOT_AUTHORIZED.
+
+**Historical H-REF result: ESCALATE/not accepted;two responses consumed,zero files.**
+Fresh389baseline passed57.732s unittest/64.917s process,661983232bytespeakRSS;all3564
+expanded cases pass. FirstWorker requestedfrozencontracts;finalWorker refusedto guess
+loss-returnkeyomittedbyPiinfreshcontext. No Hcode/newtests/updates/restore/candidatesuite.
+Pi responsibility andexactcompleteAPI supplement recorded in
+`data/reports/training-harness-h-ref-v1/review.json`. Selected316-filebaseline,accepted
+code/history/Git/siblings preserved. No thirdrequest,Pi sourcefix,extra test/replacement
+orbudgetreset automatically. H1preservation/H9process verified;assignedH2–H8incomplete.
+Scope task_only_H_REF_CPU_reference_not_accepted;deployment NOT_AUTHORIZED.
+
+**Historical latest authority: Package H (H-REF) bounded implementation approved**,including
+CPU-reference device-capability interfaces. See `docs/training-harness-h-ref.md` and
+`data/reports/training-harness-h-ref-v1/plan.json`. Pi delegates six new H files to agy
+through existing tool-free text-only channel,one initial+one consolidated revision max,
+30min each,no retries. Pi-only pre-reviewed389baseline/Hinitial/optionalHrevision full
+suites<=240s/2GiBpeakRSS withbounded tinyCPUupdates/private stagedrestore now permitted
+only under that plan. Allaccepted code/tests/history remainprotected;oldD3archivesretired.
+Out-of-task packages/frameworks/structures ask Pi first. No PackageO/GPU/Kaggle/realdata/
+profiling/comparative training/main source transfer/stage/commit/push authority.
+
 **Device clarification:** CPU reference first is a correctness milestone,not a
 permanent CPU architecture rule. See `docs/training-harness-device-transition.md`.
 H-REF/O-OFFLINE must retain explicit device/tensor/state-transfer interfaces;GPU-READY
@@ -295,6 +349,18 @@ resolve protocol ambiguities silently. Record amendments before new experiments;
 never choose thresholds, features or metrics based on test performance.
 
 ## Delegation and execution roles
+
+**Standing user preference:** Pi prioritizes planning/assignment/execution management,
+receiving results/correction coordination and independent verification. Delegate clear,
+bounded utility/test/local-fix implementation to agy within approved scope,grouping
+related code and tests rather than micromanaging tiny requests. Pi retains review and
+acceptance;no reduced verification or new Worker authority for preparation-only work.
+See `docs/delegation-and-execution.md#standing-user-direction-delegate-bounded-implementation`.
+**Worker scope/dependency rule:** agy must ask Pi before implementing/installing any
+package,framework,structure or other change outside its task. Pi decides ordinary
+in-authority choices without repeatedly asking the user;record approval/rejection and
+scope/verification amendments before resuming. No silent scope expansion,extra calls,
+budget resets or override of frozen science/security/execution permission.
 
 Read and follow `docs/delegation-and-execution.md` before delegating or executing
 work, including under `multiautoresearch/`. Pi plans, orchestrates and independently
