@@ -81,6 +81,14 @@ accepted adversarial fixtures must remain passing. No scientific-rule amendment.
 
 ### Training Harness preparation — current next-stage proposal, not execution approval
 
+User-agreed clarification: **CPU reference first,not permanent CPU architecture**;
+see [device-transition gate](training-harness-device-transition.md). H-REF andO-OFFLINE
+can establish limited milestones,but GPU-READY remains required before planned GPU
+profiling. Design shared device/capability/transfer seams now;do not rewrite the GNN
+or launch GPU work now. Numeric parity,determinism,GPU RNG/checkpoint/runtime and
+actual Kaggle compatibility must later be verified;full-data feasibility still needs
+bounded Musical_Instruments profiling. No old criteria/budgets/report resets.
+
 The user authorized preparing the requirement/evidence matrix and bounded plan under
 **reuse orchestration,not inherited training methodology**. See
 [the plan](training-harness-preparation.md),[34-part matrix](training-harness-requirements.md)

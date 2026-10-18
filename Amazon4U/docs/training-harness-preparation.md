@@ -87,6 +87,22 @@ autonomous loops, credentials machinery, provider routing or the external CLI re
 
 These are not reasons to rewrite both full runners or to execute the legacy programs.
 
+## Device-transition clarification — CPU reference, not permanent CPU architecture
+
+The user agrees to CPU reference correctness first,not an immediate GPU GNN rewrite.
+See [the recorded device-transition clarification](training-harness-device-transition.md)
+and `configs/training-harness-device-transition.json`. H-REF/O-OFFLINE are milestones;
+the overall planned GPU experiment harness is **not ready** merely because both pass.
+GPU-READY is a required planned gate before large-scale GPU profiling,not optional
+work discovered after declaring completion. Build explicit device/capability and tensor/
+state-transfer seams in H/O now;initial implementation supports CPU honestly while
+orchestration remains device-explicit. No duplicate harness or guard bypass.
+Earlier CPU-only labels below describe the first verification scope,not a prohibition
+on a later separately scoped device adaptation. Current D2 CPU runtime/RNG profile
+also needs compatibility assessment for GPU resume;CPU weight copies alone do not
+solve that. Original proposed criteria/budgets and old reports remain unchanged;
+no implementation/Worker/CUDA execution is authorized by this discussion.
+
 ## Authoritative components and implementation seams
 
 **Protected**: every existing `scripts/*.py`, existing tests, accepted D1–D3 docs,

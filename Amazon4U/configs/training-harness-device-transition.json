@@ -1,0 +1,38 @@
+{
+  "schema_version": "amazon4u-training-harness-device-transition-v1",
+  "status": "PREPARATION_CLARIFICATION_ONLY_IMPLEMENTATION_HOLD",
+  "decision": "CPU reference first is a verification milestone,not a permanent architecture restriction",
+  "documentation": "docs/training-harness-device-transition.md",
+  "source_proposal": "configs/training-harness-preparation.json",
+  "accepted_CPU_models_evaluator_D1_D3_unchanged": true,
+  "initial_H_O_scopes": ["H_REF_CPU_reference_correctness", "O_OFFLINE_device_explicit_orchestration"],
+  "overall_harness_ready_after_H_REF_and_O_OFFLINE_alone": false,
+  "required_later_gate": "GPU_READY_before_planned_large_scale_GPU_profiling",
+  "GPU_READY_implies_full_data_feasibility": false,
+  "H_O_interface_supplements_proposed": [
+    "explicit_backend_device_capability_dispatch_with_initial_CPU_only_support",
+    "narrow_tensor_graph_cache_state_transfer_adapters_not_CPU_assumptions_in_controller",
+    "same_Kaggle_runner_profile_propagates_accelerator_device_runtime_and_rejects_mismatch",
+    "fake_capability_tests_now_in_future_H_O_scope_no_actual_CUDA",
+    "separate_CPU_checkpoint_representation_from_training_device_without_dropping_GPU_RNG_requirements"
+  ],
+  "future_GPU_evidence_proposed": [
+    "both_model_forward_loss_gradient_Adam_parity_with_CPU_reference",
+    "explicit_parameter_index_sparse_buffer_temporary_placement",
+    "recorded_tolerances_preserve_frozen_math_no_cross_device_bitwise_claim",
+    "determinism_fail_first_exceptions_only_by_approval",
+    "GPU_runtime_RNG_checkpoint_resume_profile_complete_not_weights_only",
+    "observed_Kaggle_environment_package_native_IO_artifact_durable_sink_compatibility",
+    "full_Musical_Instruments_resource_feasibility_under_separate_profiling_approval"
+  ],
+  "current_checkpoint_boundary": "D2_CPU_profile_rejects_active_CUDA_RNG;assess_versioned_extension_if_required_without_bypassing_accepted_guards",
+  "GPU_rewrite_required_now": false,
+  "to_cuda_alone_proven_sufficient": false,
+  "CPU_model_guards_removed_or_production_changed": false,
+  "implementation_Worker_tests_CUDA_Kaggle_training_profiling_authorized": false,
+  "existing_H_O_proposed_request_and_full_suite_budgets_changed": false,
+  "new_GPU_budget_or_execution_authority": null,
+  "historical_reports_criteria_D3_budgets_preserved": true,
+  "acceptance_scope": "preparation_only_no_implementation_ACCEPT",
+  "deployment_decision": "NOT_AUTHORIZED"
+}

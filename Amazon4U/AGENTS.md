@@ -6,6 +6,13 @@ not change sibling projects unless explicitly requested.
 
 ## Goal and current state
 
+**Device clarification:** CPU reference first is a correctness milestone,not a
+permanent CPU architecture rule. See `docs/training-harness-device-transition.md`.
+H-REF/O-OFFLINE must retain explicit device/tensor/state-transfer interfaces;GPU-READY
+is required before planned large-scale GPU profiling. Do not declare the whole harness
+experiment-ready from CPU/offline acceptance alone. No GNN rewrite/guard relaxation,
+Worker,CUDA test,remote preflight or execution is authorized by this discussion.
+
 **Current user direction: Training Harness preparation only.** Reuse existing
 `multiautoresearch` orchestration (Kaggle packaging/submission/status/logging/output),
 not inherited LM/Movie methodology. See `docs/training-harness-preparation.md`,

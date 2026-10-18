@@ -13,6 +13,7 @@
   "deployment_decision": "NOT_AUTHORIZED",
   "deployment_policy": null,
   "documentation": "docs/training-harness-preparation.md",
+  "device_transition_clarification": "configs/training-harness-device-transition.json",
   "matrix_documentation": "docs/training-harness-requirements.md",
   "detailed_matrix": "data/reports/training-harness-preparation-v1/requirements.json",
   "matrix_parts": 34,

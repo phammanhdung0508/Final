@@ -69,6 +69,20 @@ Source aliases: `post-training/` means `Amazon4U/multiautoresearch/post-training
 `externalCLI` and `externalAPI` resolve to the exact read-only paths in the JSON
 source_aliases object;other project-relative paths are under Amazon4U.
 
+## Device-transition supplement to TH31 — preparation only
+
+Original34 rows/HC1–HC10 remain the first CPU-reference/offline proposal,not overall
+GPU readiness. The user agrees CPU reference updates should be verified first without
+rewriting the GNN for GPU now. See [device-transition plan](training-harness-device-transition.md).
+Proposed H/O closure supplements: explicit device/capability dispatch;controller free
+of permanent CPU-placement assumptions;one runner carries device/accelerator/runtime;
+fake mismatch/unsupported-device controls prove honest dispatch (not CUDA execution).
+The future GPU-READY gate must verify both-model numeric/update parity,placement,
+determinism and complete GPU/RNG/checkpoint/runtime compatibility before real profiling.
+Passing H-REF/O-OFFLINE must not close overall study-readiness G1. No accepted CPU
+code/guards changed;no new GPU budgets,Worker or tests authorized. Earlier matrix/report
+bytes are retained in the versioned clarification inputs,not retroactively accepted.
+
 ## Review disclosure
 
 L1–L9 are source-level findings on legacy runners, not tested deployed failures. CPU
