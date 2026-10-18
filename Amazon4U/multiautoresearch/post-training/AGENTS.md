@@ -1,5 +1,15 @@
 # Agent Instructions
 
+> **Amazon4U scope override:** inherit `../AGENTS.md` and
+> `../../docs/worker-delegation-policy.md`. Native agy through the delegation extension
+> is the default for substantive implementation; SDK is not native agy and requires
+> explicit user approval before EVERY request. Native recovery maxima are separately
+> authorized 2 + 2 + 2 with cumulative history and root-cause review, not six free calls.
+> The legacy LM/Movie/post-training/subagent workflows below are reference only for
+> Amazon4U. Reuse orchestration, not their methodology. They authorize no code/test
+> execution, model fitting, credentials, remote jobs or commits. O-OFFLINE is unassigned;
+> no new H-REF invocation or execution follows from this governance correction.
+
 This is the post-training project. It is separate from `../pre-training`.
 
 ## Goal

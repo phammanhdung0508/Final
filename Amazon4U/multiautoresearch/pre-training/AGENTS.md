@@ -1,5 +1,14 @@
 # Agent Instructions
 
+> **Amazon4U scope override:** inherit `../AGENTS.md` and
+> `../../docs/worker-delegation-policy.md`. Native agy through the delegation extension
+> is the default for substantive implementation; SDK is not native agy and requires
+> explicit user approval before EVERY request. Native recovery maxima are separately
+> authorized 2 + 2 + 2 with cumulative history and root-cause review, not six free calls.
+> The legacy LM/OpenCode/autonomous/promotion workflows below are reference only for
+> Amazon4U. They authorize no subagent, code/test execution, model fitting, credential
+> access, remote job or commit; frozen Amazon4U science and scoped approvals prevail.
+
 This repo is a live Autolab experiment repo with a local promoted master.
 
 ## Goal

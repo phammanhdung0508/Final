@@ -1,5 +1,25 @@
 {
   "schema_version": "protocol-lifecycle-v1",
+  "current_worker_governance_overlay": {
+    "policy": "configs/worker-delegation-policy.json",
+    "documentation": "docs/worker-delegation-policy.md",
+    "applies_prospectively_only": true,
+    "default_implementation_channel": "native_agy_worker_invocation",
+    "native_round_maxima": [2, 2, 2],
+    "blanket_six_call_authorization": false,
+    "explicit_user_approval_before_every_SDK_request": true,
+    "original_component_status_decisions_plans_counts_unchanged": true,
+    "historical_H_REF_recorded_sequence": {
+      "sdk_text_only_generation_request": 4,
+      "native_agy_worker_invocation": 0,
+      "pi_independent_verification_full_dependency_baseline": 1,
+      "pi_independent_verification_H_candidate_full_regression": 0,
+      "old_generic_Worker_fields_preserved_not_reclassified": true,
+      "new_native_or_SDK_allowance": false,
+      "original_evidence": "data/reports/training-harness-h-ref-v1/"
+    },
+    "new_implementation_verification_experiment_or_deployment_authority": false
+  },
   "protocol_version": "amazon4u-protocol-v2.0.0",
   "lifecycle_state": "IMPLEMENTATION_REGRESSION_VERIFICATION",
   "decision_status": "step_3c_differentiable_models_graphs_integrated_regression_verified_execution_pending",

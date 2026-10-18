@@ -4,7 +4,49 @@ Scope: this directory and all descendants. Amazon4U is independent of Movie4U;
 do not copy MovieLens split rules, candidate rules or ID assumptions here, and do
 not change sibling projects unless explicitly requested.
 
-## Goal and current state
+## Current Worker governance — prospective, no execution authority
+
+Read `docs/worker-delegation-policy.md` and `configs/worker-delegation-policy.json`
+with `docs/delegation-and-execution.md`. **Native agy Worker invocation through the
+delegation extension is the default for substantive implementation.** Pi plans,
+scopes, orchestrates, independently verifies and decides acceptance; native agy
+implements/corrects/tests/documents only within explicitly authorized scope.
+
+Use distinct labels: `native_agy_worker_invocation`,
+`sdk_text_only_generation_request`, and `pi_independent_verification`.
+SDK direct completion is NOT native agy. Retain SDK only as an optional fallback:
+**explicit user approval before every SDK request**, with why native agy is unsuitable,
+exact task/unresolved criteria, model/channel, source/output paths, request ceiling,
+time/resource/verification limits and independent acceptance procedure. No automatic
+fallback, silent switch, budget transfer or inherited SDK permission.
+
+Prospective native recovery maximum is **2 + 2 + 2**: round1 attempts1/2 initial and
+consolidated correction; round2 attempts3/4 targeted continuation and correction;
+round3 attempts5/6 final continuation and correction. Maximum two per round/six per
+deliverable, not blanket permission. Authorize each task/round prospectively; stop on
+acceptance, no credible resolution path, an authorization boundary or critical safety.
+After every substantive ESCALATE preserve evidence/counts, identify actual root cause
+(including Pi handoff vs Worker failure), remaining gaps, material next-round changes,
+technical justification and needed approval. After ESCALATE #3 present an evidenced
+stop/exceptional-native-continuation/SDK recommendation, never execute fallback.
+Repeated reports of one decision are not new ESCALATEs. Completed round counters and
+same-task cumulative history never reset; all extension gates remain mandatory.
+
+This policy is prospective and grants NO new native/SDK invocation, application,
+regression, experiment, integration or deployment. Historical H-REF recorded four SDK
+requests, NOT four native agy calls; they remain consumed. No new H native allocation
+or SDK request follows. Preserve original plans/evidence/budgets and accepted science,
+models/evaluator/D1–D3. No extension/SDK/controller/source/test changes, Kaggle/GPU/
+training/profiling, stage/commit/push from this governance correction.
+
+## Historical task record — scope-limited, not current channel authority
+
+The following accumulated approvals/status snapshots retain their original histories.
+Their "current/latest/now" wording is local to the recorded phase, not a live launch
+permission. In the H-REF text-only sequence, generic "Worker/agy" labels refer to SDK
+generation, not native agy. D2/D3 SDK exceptions never establish a future default.
+Original task criteria, counts and decisions remain unchanged; the policy above governs
+new channel/recovery decisions without reopening or resetting any old task.
 
 **Subsequent user direction permits one limited same-H continuation**,not a newproject
 orhistoryreset. See `data/reports/training-harness-h-ref-v1/continuation-v1/plan.json`.
@@ -350,6 +392,11 @@ never choose thresholds, features or metrics based on test performance.
 
 ## Delegation and execution roles
 
+The current `docs/worker-delegation-policy.md` applies here: native agy is the default,
+2 + 2 + 2 is a prospective maximum with separately authorized rounds, and SDK requires
+explicit user approval before every request. Historical channel preferences below do
+not override this policy or supply new implementation/execution authority.
+
 **Standing user preference:** Pi prioritizes planning/assignment/execution management,
 receiving results/correction coordination and independent verification. Delegate clear,
 bounded utility/test/local-fix implementation to agy within approved scope,grouping
@@ -404,7 +451,7 @@ Do not require the user to repeat this instruction at later stages. Work within 
 authority without unnecessary approval loops; preparation itself grants no additional
 execution, revision budget, task reopening, research or deployment authority.
 
-## Text-only patch direction and bounded D2 authorization
+## Historical, D2-scoped text-only patch direction and authorization
 
 Subsequent user `procced` separately authorizes the bounded D2 text-only correction,
 recorded prospectively in `docs/checkpoint-payload-text-correction.md` and its plan.
@@ -430,7 +477,7 @@ native delegation receipts or permit bypassing mandatory acceptance gates. Do no
 controller/tooling research. The newly recorded D2 authority applies only to that bounded
 text-only correction; further work outside it still requires appropriate authorization.
 
-## Next D2 correction direction — frozen contract, no architecture detour
+## Historical next-D2 direction — frozen contract, no standing SDK authority
 
 A subsequent user `procced` now separately authorizes the new bounded round in
 `docs/checkpoint-payload-a04-d01-correction.md` and its pinned plan. Preserve the337-test

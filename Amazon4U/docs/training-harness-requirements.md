@@ -1,5 +1,13 @@
 # Training Harness requirement/evidence matrix
 
+> Historical preparation matrix; all HC/TH requirements and recorded evidence below
+> are preserved. Current prospective Worker routing/recovery is defined by
+> [worker-delegation-policy.md](worker-delegation-policy.md): native agy default,
+> separately authorized 2 + 2 + 2 maxima, explicit user approval before EVERY SDK
+> request. This matrix supplies no native/SDK/execution authority and does not reset
+> H-REF history or imply O-OFFLINE is assigned. Later H approvals are phase-scoped;
+> original preparation-only status labels are not a current implementation channel.
+
 **Preparation only.** All new controls below are proposed, not executed. Existing
 accepted model/evaluator/D1–D3 evidence is inherited, not new harness proof. Current
 user requirements and frozen protocol clauses—not this matrix alone—define scope.

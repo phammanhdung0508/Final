@@ -1,5 +1,12 @@
 # Review-to-correction preparation
 
+> Current channel/recovery policy: [worker-delegation-policy.md](worker-delegation-policy.md).
+> Native agy is the default for future substantive implementation; SDK is an exception
+> requiring explicit user approval before every request. Native recovery maximum is
+> separately authorized 2 + 2 + 2, with root-cause review after each substantive
+> ESCALATE and mandatory recommendation after #3. Historical D2 text-only examples
+> below are scope-limited, not a standing SDK route or authority to reset budgets.
+
 ## Decision and status
 
 Standing user-agreed workflow for **all Amazon4U stages and future Worker assignments**,
@@ -145,7 +152,7 @@ D3 and research execution remain behind their existing acceptance and authorizat
 gates. See `checkpoint-payload-authorized-correction.md` for the current unaccepted
 D2 artifact and immutable decision references.
 
-## Scoped text-only patch context and application boundaries
+## Historical D2-scoped text-only patch context and application boundaries
 
 The user agreed this architecture is promising but explicitly withheld new D2 launch
 authority. Do not build a controller merely to impose patch-only behavior. Verify an

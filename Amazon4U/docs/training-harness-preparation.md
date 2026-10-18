@@ -1,5 +1,14 @@
 # Training Harness: preparation and bounded implementation proposal
 
+> **Historical preparation proposal, not current channel/launch authority.**
+> H-REF later received bounded phase-specific approvals; its recorded four SDK
+> completions remain SDK calls, not native agy. O-OFFLINE remains unassigned.
+> [Current Worker governance](worker-delegation-policy.md) supersedes this proposal's
+> text-only/default-channel preference for future work: native agy is the default,
+> recovery maxima are separately authorized 2 + 2 + 2, and every SDK fallback request
+> requires explicit user approval. The original proposed budgets/commands/criteria
+> below remain historical, unchanged in substance; no new native/SDK/test authority.
+
 ## Authority, status, and evidence
 
 **PREPARATION ONLY; implementation, Worker requests, tests, training, profiling,
@@ -352,7 +361,12 @@ Do not label known GPU/durability/source-closure gaps out-of-scope for overall s
 readiness. At harness review, unresolved assigned CPU/transport guarantees block ACCEPT;
 record the explicit CPU-only acceptance scope and remaining profiling prerequisites.
 
-## Proposed budgets and independent verification (not approved)
+## Historical proposed budgets and independent verification (not approved)
+
+These original H/O proposal numbers are not the current native recovery policy and
+are not SDK authorization. Future tasks/rounds require prospective budgets under
+`worker-delegation-policy.md`; no historical ceiling is reset or transferred. The
+following text-only proposal is retained for provenance, not as a future default.
 
 - Fresh independent harness project beneath `.worktrees/training-harness-implementation-v1/`
   only after approval; pin then-current HEAD/source hashes and all accepted dependencies.

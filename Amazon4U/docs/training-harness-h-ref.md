@@ -1,5 +1,19 @@
 # H-REF bounded implementation authority
 
+> **Current governance / historical route clarification:**
+> [Worker delegation policy](worker-delegation-policy.md) now governs prospective
+> assignments: native agy is the default; SDK needs explicit user approval before
+> every request; native recovery maximum is separately authorized 2 + 2 + 2.
+> The approvals and result narratives below are preserved phase-local history, not
+> new launch permission. Their H text-only "Worker/agy" wording describes four
+> `sdk_text_only_generation_request` events, **not native agy invocations**. The
+> requests remain consumed, with one historical `pi_independent_verification` full
+> dependency baseline and zero H candidate full regressions. No native allocation,
+> extra SDK request, candidate application or regression is authorized here now.
+> Do not map old SDK ESCALATE/status repetitions into three native recovery rounds.
+> Original plans, counts, criteria, evidence and decisions are unchanged. Later
+> "existing text-only channel" preferences below are not the prospective default.
+
 User approval: “I support the preparation and approval of the bounded implementation
 of Package H (H-REF), with the device-capability interfaces as described. you may proceed”.
 Exact request/plan: `data/reports/training-harness-h-ref-v1/inputs/authority.txt` and

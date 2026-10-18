@@ -1,5 +1,13 @@
 # Text-only channel: bounded capability verification
 
+> **Historical SDK capability demonstration, not native agy delegation.** Its
+> decision/evidence below remain unchanged and grant no standing fallback permission.
+> The mechanism is retained. Current [Worker policy](worker-delegation-policy.md)
+> makes native agy the default and requires explicit user approval before EVERY SDK
+> generation request, with exact task/criteria, model/channel, paths, count, time/
+> resource/verification limits and independent acceptance procedure. No historical
+> D2 approval, failed tool, recovery recommendation or unused slot authorizes reuse.
+
 ## Decision and authority
 
 User-approved direction: do not build a controller or modify the native agent merely

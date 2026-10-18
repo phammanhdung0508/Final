@@ -1,5 +1,14 @@
 # Agent Instructions
 
+> **Amazon4U scope override:** inherit `../AGENTS.md` and
+> `../../docs/worker-delegation-policy.md`. Native agy through the delegation extension
+> is the default for substantive implementation; SDK requires explicit user approval
+> before EVERY request and is not native agy. Recovery maxima are separately authorized
+> 2 + 2 + 2, with cumulative history and root-cause review. The llama.cpp/local-server/
+> benchmark/agent workflows below are legacy reference, not Amazon4U execution authority.
+> No model download, server/GPU/benchmark launch, code changes or extra Worker/SDK calls
+> are authorized by this governance correction. Keep the frozen recommendation protocol.
+
 This is the llama.cpp inference optimization project. It is separate from
 `../pre-training` and `../post-training`.
 

@@ -1,5 +1,31 @@
 # Delegation and execution agreement
 
+## Current prospective channel and recovery policy
+
+The current user-approved [Worker delegation policy](worker-delegation-policy.md)
+and `../configs/worker-delegation-policy.json` govern all future Amazon4U work,
+including H-REF/O-OFFLINE and multiautoresearch. **Native agy Worker invocation via
+the delegation extension is the default for substantive implementation.** SDK direct
+completion is not native agy and is only an explicitly user-approved fallback.
+
+Use separate `native_agy_worker_invocation`, `sdk_text_only_generation_request` and
+`pi_independent_verification` records. Native recovery maxima are **2 + 2 + 2**:
+initial/correction, targeted continuation/correction, final continuation/correction.
+Each task/round requires prospective authority and budgets; six is not blanket approval.
+After each substantive ESCALATE perform the six-part root-cause/gap/change/justification/
+authorization review in the policy. After ESCALATE #3 present an evidenced stop,
+exceptional-native-continuation or SDK recommendation, never automatic fallback.
+Preserve completed counters and cumulative same-deliverable history; duplicate status
+reports do not increment ESCALATE occurrences. Stop earlier when required.
+
+Before EVERY SDK request obtain explicit user approval identifying why native agy is
+unsuitable, exact task/unresolved criteria, model/channel, source/output paths, request
+ceiling, time/resource/verification limits and independent acceptance procedure. No
+silent switch, budget transfer or inherited SDK approval, including old D2/D3/H choices.
+All extension inspection/verification/review, original criteria and safety gates remain.
+This governance correction grants no task launch, execution or new round and does not
+change the extension, SDK, controller, accepted code/tests or scientific methodology.
+
 ## Status and scope
 
 User-agreed operating roles and delegation rules for Amazon4U, recorded from
@@ -14,9 +40,10 @@ consult `protocol-lifecycle.md` for authorization gates.
   task scope, original acceptance criteria, approved verification commands and
   revision limits; reviews actual code, callers, dependencies, tests and evidence;
   independently verifies results; and retains ACCEPT/REVISE/ESCALATE authority.
-- **agy = implementation and explicitly authorized execution worker.** agy
-  implements code, fixtures and related documentation in the pinned isolated
-  worktree, and fixes consolidated Pi review findings within the revision limit.
+- **Native agy = implementation and explicitly authorized execution worker.**
+  Actual native invocations use the delegation extension, not an SDK prompt named agy.
+  Native agy implements code, fixtures/tests and related documentation in the pinned
+  isolated worktree, and fixes consolidated Pi findings within approved round limits.
   Worker reports are untrusted submissions, not independent acceptance.
 - After explicit execution authorization, agy may submit only the specified
   Kaggle job, monitor it and collect logs, metrics, checkpoints and provenance.
@@ -43,10 +70,12 @@ mechanical application/integration of reviewed Worker patches; exceptions involv
 Pi-authored implementation must be explicit, not a default substitute for Worker work.
 Use scoped relevant context without omitting original requirements or necessary callers.
 
-This is a work-allocation policy, not new execution authority or a budget reset. The
-current Training Harness remains preparation-only: no Worker launch, implementation,
-new tests/optimizer work or remote execution until its separate scope is approved.
-Existing controller-free text-only channel and all review/safety/deployment gates remain.
+This is a work-allocation policy, not new execution authority or a budget reset.
+Native agy is the default; a controller-free SDK channel is only a separately approved
+exception, never an implicit replacement for delegation. Earlier preparation-only
+statements were phase-scoped. H-REF's historical four SDK completions remain SDK calls,
+unapplied/unaccepted, with no fresh native/SDK/regression authority from this policy.
+O-OFFLINE remains unassigned. All original review/safety/deployment gates remain.
 
 ## Worker dependency and scope-change approval
 
@@ -57,7 +86,9 @@ an undeclared dependency, broad refactor, new service or structural expansion is
 implicitly permitted because it seems useful. Pause the affected work and provide the
 purpose/version or design, affected paths/interfaces, installation/network/resource/
 security impact and proposed verification; do not code first and disclose afterward.
-The text-only Worker returns this request without host actions or unauthorized tools.
+The native agy Worker must pause the affected work and return the scope request without
+unauthorized actions. A separately approved SDK fallback returns text only and is labeled
+`sdk_text_only_generation_request`, not a native agy invocation.
 
 Pi approves, narrows or rejects ordinary implementation choices within the user's
 broader authorized project scope; no repeated user approval is needed for those
@@ -69,8 +100,9 @@ mechanism cannot resume within current authority/budget, stop and record that bo
 
 This discretion does not authorize violating frozen science, security/data safeguards,
 project boundaries or ungranted material resource/real-execution permissions. Current
-Training Harness work is still preparation-only. No automatic install, remote job,
-training/profiling, controller redesign or new Worker follows from this policy.
+Training Harness execution remains subject to its applicable phase-specific approvals.
+No automatic install, remote job, training/profiling, controller redesign, new native
+round or SDK request follows from this discretion.
 
 ## Delegation principles
 
@@ -106,6 +138,11 @@ revision or retuning after held-out exposure. Without a predeclared deployment
 policy, deployment is NOT_AUTHORIZED.
 
 ## Standing authorization: noncritical recovery without repeated questions
+
+This discretion is constrained by the current prospective Worker policy: it does not
+expand existing task/round budgets or execution permissions. Every substantive ESCALATE
+still requires root-cause review. It never authorizes SDK fallback without explicit
+user approval before each request or bypasses extension continuation/terminal gates.
 
 Status: **user-approved**, following the verification-only scratch-output
 ESCALATE. The user explicitly requested durable recording:
@@ -146,7 +183,12 @@ This standing authorization supersedes the need for a new user confirmation for
 otherwise in-scope noncritical recovery. It does **not** supersede mandatory
 verification, frozen scientific rules, acceptance authority or historical records.
 
-## Subsequent Package H authority and stopped result
+## Historical Package H authority and two-request stopped result
+
+This paragraph is the earlier two-SDK-request snapshot, not the latest H counter or
+future channel policy. Later recorded H continuations bring that SDK sequence to four
+requests, not native agy invocations; see `training-harness-h-ref.md`. No historical
+counter/decision is reset or converted into a prospective native round.
 
 The user subsequently approved bounded H-REF CPU-reference implementation with device
 interfaces;that specific approval superseded earlier preparation-only statements for

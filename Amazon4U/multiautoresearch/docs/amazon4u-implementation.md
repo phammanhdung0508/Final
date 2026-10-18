@@ -1,5 +1,13 @@
 # Amazon4U Implementation Control-Plane: Milestone I1
 
+> **Current governance clarification:** [Worker delegation policy](../../docs/worker-delegation-policy.md)
+> governs future assignments: native agy through the delegation extension is default;
+> native recovery maximum is separately authorized 2 + 2 + 2, with cumulative history
+> and root-cause review. SDK text generation is not native agy and requires explicit
+> user approval before EVERY request. The I1 statuses/preparation-only snapshots below
+> are historical; they neither grant launch authority nor override later scoped H-REF
+> history. O-OFFLINE remains unassigned. No original acceptance/evidence/count is changed.
+
 > Historical initial I1 implementation record. Current accepted main components and
 > D1–D3 decisions are in `../../docs/implementation-roadmap.md`. Current next-stage
 > authority is preparation only: `../../docs/training-harness-preparation.md` and
