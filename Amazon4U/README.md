@@ -1,20 +1,27 @@
 # Amazon4U dataset exploration
 
-**Current H-REF status: corrected candidate preserved; ESCALATE/not accepted pending
-mandatory regression.** [H authority/history](docs/training-harness-h-ref.md).
-Four `sdk_text_only_generation_request` events are consumed—not native agy invocations.
-The third response delivered six proposed files; the fourth corrected four and retained
-two byte-identically. Pi statically reviewed B1 and F2–F5; runtime evidence remains
-unverified. The selected six-file candidate is **unapplied in isolated/main code**.
-Latest review: `data/reports/training-harness-h-ref-v1/correction-v1/review.json`.
+**H-REF: ACCEPT / task_only. Deployment: NOT_AUTHORIZED.**
+[Final independent Pi acceptance](docs/h-ref-pi-final-acceptance.md):
+`data/reports/training-harness-h-ref-v1/pi-final-acceptance-v1/review.json`.
 
-One unchanged **389-test dependency baseline** passed (64.917s process,631.3MiB peakRSS);
-**zero H candidate full suites or new numeric updates have run**. The next gate is
-separately authorized isolated application, fresh safety/preservation review and one
-original full regression under **240 seconds / 2 GiB** and unchanged fixture/log/scratch
-limits. Static inventory predicts412 tests; that is not a passing result. No new generation
-is needed merely to verify this candidate. No new execution is authorized by this status.
-**Acceptance scope: H-REF CPU reference, not accepted; deployment: NOT_AUTHORIZED.**
+Under explicit user authorization, Pi independently verified H1–H9 and every current
+Worker limitation/issue using existing evidence. Assigned Pi duties are **fulfilled**,
+not out of scope. The separate append-only Pi decision accepts the pinned isolated
+bounded CPU-reference implementation and H-side interfaces—not main integration,
+production/GPU readiness or experiments. All322isolated files,H8 and science unchanged.
+
+Existing approved verification: **412PASS,0failures/errors/skips**,**81.938s child**,
+~830.1MiB peakRSS within240s/2GiB;all389inherited/34D3methods/3564expanded cases pass.
+Complete logs,owner-safe fresh-cache cleanup,empty fresh scratch and preservation PASS.
+No new test or implementation change was made for final acceptance.
+
+Native task `3606687c-beba-4d3f-bd24-03ae5238da37` remains historical **ESCALATE**,with
+its failed original verification and unchanged reports/budgets. No native ACCEPT,
+receipt rewrite,reopening,reassessment or extension change. Hierarchy:
+**User authorization → Pi final acceptance authority → native agy execution evidence**.
+Counts preserved:SDK4/native1(secondunused),**4actual H full runs**. Main integration,
+O-OFFLINE,GPU-READY,profiling,comparative/final-test execution and deployment remain
+separate gates. No new Worker,SDK,regression,experiment or main transfer authorized.
 
 **Current Worker policy:** [native agy delegation is the default](docs/worker-delegation-policy.md).
 The prospective maximum is separately authorized **2 + 2 + 2**, not six automatic calls.

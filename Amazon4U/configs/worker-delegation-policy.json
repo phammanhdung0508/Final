@@ -70,6 +70,8 @@
     "fabricated_native_task_or_verification_receipts": false
   },
   "history": {
+    "recorded_application_verification_counts_scope": "at_governance_policy_adoption_not_live_H_status",
+    "later_H_verification_reference": "data/reports/training-harness-h-ref-v1/verification-v1/review.json",
     "prospective_only": true,
     "retroactively_authorizes_rounds": false,
     "historical_plans_reports_decisions_counts_evidence_immutable": true,
@@ -86,6 +88,21 @@
       "old_generic_Worker_fields_unchanged": true,
       "prior_SDK_decisions_not_mapped_to_native_recovery_rounds": true
     }
+  },
+  "H_REF_final_Pi_acceptance_amendment": {
+    "authority": "data/reports/training-harness-h-ref-v1/pi-final-acceptance-v1/authority.txt",
+    "governance_hierarchy": ["User authorization", "Pi final deliverable acceptance", "Native agy implementation and execution evidence"],
+    "separate_append_only_Pi_review": "data/reports/training-harness-h-ref-v1/pi-final-acceptance-v1/review.json",
+    "decision": "ACCEPT",
+    "acceptance_scope": "task_only",
+    "assigned_Pi_duties": "fulfilled_only_with_independent_evidence_not_out_of_scope",
+    "native_task_historical_decision_preserved": "ESCALATE",
+    "native_original_verification_failure_reports_and_budgets_preserved": true,
+    "native_ACCEPT_reopen_receipt_substitution_or_extension_modification": false,
+    "native_tool_schema_changed": false,
+    "criteria_waived": false,
+    "new_Worker_SDK_implementation_regression_main_integration_experiment_or_deployment_authorized": false,
+    "deployment_decision": "NOT_AUTHORIZED"
   },
   "safeguards": {
     "frozen_methodology_and_evaluation_preserved": true,

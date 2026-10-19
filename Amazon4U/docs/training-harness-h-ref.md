@@ -1,5 +1,111 @@
 # H-REF bounded implementation authority
 
+## Latest final Pi deliverable acceptance — ACCEPT/task_only
+
+Explicit user governance amendment:Pi is final Amazon4U deliverable acceptance authority;
+native agy is an implementation Worker. User→Pi final authority→native execution evidence.
+A separate append-only final review using existing independent evidence is authorized.
+Decision **ACCEPT/task_only**,deployment **NOT_AUTHORIZED**,recorded in
+`data/reports/training-harness-h-ref-v1/pi-final-acceptance-v1/review.json`.
+Exact authority,322-file artifact,original H1–H9,ordered limitation/issue adjudication
+and preservation are in that directory. [Accepted scope](h-ref-pi-final-acceptance.md).
+
+All H1–H9 fulfilled;assigned Pi duties and original review deferral are independently
+fulfilled,not outside scope. Existing412overallPASS/81.938s/870412288bytes,389inherited/
+34D3/3564expanded,complete streams,empty fresh scratch/owned cleanup/preservation support
+acceptance. No new Worker,SDK,implementation,test or extension change. H8/science exact.
+Native task3606687c-beba-4d3f-bd24-03ae5238da37 remains historical ESCALATE with original
+failed verification and all reports/budgets unchanged. No native ACCEPT,receipt rewrite,
+reopening/reassessment or bypass. Prior holds are not retroactively rewritten.
+
+Accepted scope:isolated bounded CPU H-REF implementation/H interfaces only. SDK4/native1/
+4full H runs retained. Main integration,O/GPU/production initialization/physical deployed-
+source collection/full-data profiling/comparative/final-test/deployment remain separate
+and unauthorized. The user-approved Pi record—not the historical native outcome—is
+current deliverable-level acceptance. Native extension restrictions remain unchanged.
+
+## Previous Pi-only cache lifecycle — overallPASS,acceptancehold
+
+Explicit user approval:cache path/cleanup infrastructure only,one separately allocated
+full regression,no training/H8 change. Scope/source/ownership/proof in
+`data/reports/training-harness-h-ref-v1/cache-lifecycle-v1/` and
+[cache lifecycle agreement](training-harness-cache-lifecycle.md).
+Nine mock-only infrastructure checks PASS. The sole new full discovery OVERALLPASS:
+412tests/0failures/errors/skips,74.875s unittest/81.938s child/870412288bytespeakRSS;
+all389inherited/34D3/3564expanded preserved. ParentPID1363626 owns/manages freshcache,
+child1363657 consumes it;only exactinode-checked ownedemptycache removed finallyafter
+childsettlement. Freshscratch empty,oldunownedcache3413649 unchanged. All322sourcefiles
+and H8/science/math/protocol untouched. Old3fullslots exhausted+new1used=4;SDK4/native1.
+
+Latest additive final-adjudication-v1/acceptance-packet.json corrects earlier all-H1–H9-verified
+wording: H8 runtime PASS, but full acceptance adjudication is pending. Two external
+boundaries have original-scope quotes; two assigned Pi review duties must NOT be called
+out of scope. The tool blocks a nonempty original unresolved_issues array and has no
+separate Pi resolution/fulfilled-assigned format. No existing command binds this
+amended verification. The exact operator proposal in final-adjudication-v1/operator-decision-required.md
+is NOT approved and grants no Worker or test budget.
+HREF ACCEPT NOTrecorded. Native task3606687c-
+beba-4d3f-bd24-03ae5238da37 is terminalESCALATE with its preservedfailedoriginalbenchmark;
+this new authorized path/budget verification cannot silently rewrite/reopen/reassess or
+retroaccept it. See cache-lifecycle-v1/acceptance-gate-review.json. Operator-supported
+acceptance handling is required;original-command-only reassessment cannot substitute
+newcommand. No replacementtask/reset,extraWorker/SDK/run/extensionchange/mainintegration
+or deployment authority. Acceptance_scope taskonlyHREFCPUreference NOTaccepted;
+deploymentNOT_AUTHORIZED. Currentreview.json/report.md distinguish technicalPASSfromgate.
+
+## Previous targeted native correction —412functionalPASS,cleanupESCALATE
+
+User explicitly approved at most2native agy invocations on canonical D1 dictionary
+adaptation/related fixtures and NaN exception ordering,with independent Pi regression.
+One native call corrected only isolated training_data.py and two H test modules;all
+accepted code/science/math and other3Hfiles unchanged. Native task
+`3606687c-beba-4d3f-bd24-03ae5238da37`:ESCALATE/task_only,not accepted.
+Current `data/reports/training-harness-h-ref-v1/native-correction-v1/review.json` and
+`root-cause-review.md` preserve actual source/trace/benchmark/RCA/ordered limitations.
+
+One full re-test:412PASS,0failures/errors/skips,72.582s unittest/79.580s child,
+863043584bytespeakRSS within240s/2GiB. All389inherited/34D3/3564expanded pass;
+both-model numerical/private restart/closure/device/entrypoint controls now execute.
+Yet mandatory supervisor exits1:one EMPTY torchinductor_sunf directory remains in
+required-empty scratch. TorchDynamo module import initializes its cache root;Pi missed
+framework-cache ownership/cleanup. No numerical/model/native-fix defect observed.
+Monitored file/Git bytes and complete streams preserved;cache directory retained,
+no fakepassingcleanupreceipt. H remains unaccepted;deployment NOT_AUTHORIZED.
+
+Counts:SDK4/native1of2(secondunused),Hfull3of3used(1baseline+2candidates). STOP on this
+re-test issue:user forbids automatic Worker requests. No additional SDK,Worker,cleanup,
+sourcefix,rerun,maintransfer or budget reset. Proposed only:separately approve Pi-only
+cache-lifecycle/fresh-scratch verification infrastructure plus explicit extra full-suite
+budget,respecting terminal/operator/original-command gates and old immutable evidence.
+[Approved scope/result](training-harness-native-correction.md). Earlier phases below
+remain local historical snapshots,not current counts or launch authority.
+
+## Previous Pi-only verification — isolated application, failed regression
+
+The user approved verification first,not another generation. Pi preserved all316
+inherited files,reviewed the exact selected six-file SDK proposal and native/test
+boundaries,applied it only to the existing isolated H tree,then ran ONE original full
+suite. Result: **412tests,0failures,24error events(20parent methods),0skips**,63.883s
+unittest/71.231s process,668835840bytespeakRSS within240s/2GiB. All389inherited IDs,
+34D3methods and3564expanded cases pass;stdout bytes/logs/scratch/scope preserved.
+
+The canonical dictionary-record ABI mismatch causes23errors;one NaN negative expects
+HarnessError but D2 preflight correctly raises CheckpointValidationError. Pi's frozen
+handoff incorrectly described retained validation records as tuples andstatic review
+missed this plus NaN's first guard. No accepted dependency/model defect or native agy
+capability failure is established. Zero new H Adam updates;CPU adapter/restart/runtime
+integration unverified. Related tuple-index mutation helpers need targeted correction.
+
+Decision **ESCALATE/not accepted**: `data/reports/training-harness-h-ref-v1/verification-v1/review.json`;
+full `root-cause-review.md` in that phase. Exact failed candidate retained in isolated
+code,not main. Four SDK requests/native0 remain unchanged;actual Hsuites are now one
+old baseline plus one candidate run. No rollback,fix,extra generation or rerun.
+Targeted native correction(max2invocations) and a further original regression are
+recommendations requiring appropriate new approval,not launched work. No new Package H,
+round reset,SDKfallback or experiment authority. Deployment NOT_AUTHORIZED.
+
+## Preserved earlier governance and phase records
+
 > **Current governance / historical route clarification:**
 > [Worker delegation policy](worker-delegation-policy.md) now governs prospective
 > assignments: native agy is the default; SDK needs explicit user approval before
@@ -7,9 +113,10 @@
 > The approvals and result narratives below are preserved phase-local history, not
 > new launch permission. Their H text-only "Worker/agy" wording describes four
 > `sdk_text_only_generation_request` events, **not native agy invocations**. The
-> requests remain consumed, with one historical `pi_independent_verification` full
-> dependency baseline and zero H candidate full regressions. No native allocation,
-> extra SDK request, candidate application or regression is authorized here now.
+> requests remain consumed. At governance-policy adoption there was one historical
+> `pi_independent_verification` dependency baseline and zero H candidate regressions;
+> the later separately approved verification is recorded above,not retroactively in
+> those records. No new native allocation or SDK request follows from that history.
 > Do not map old SDK ESCALATE/status repetitions into three native recovery rounds.
 > Original plans, counts, criteria, evidence and decisions are unchanged. Later
 > "existing text-only channel" preferences below are not the prospective default.

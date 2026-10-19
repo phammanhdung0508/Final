@@ -39,6 +39,80 @@ or SDK request follows. Preserve original plans/evidence/budgets and accepted sc
 models/evaluator/D1–D3. No extension/SDK/controller/source/test changes, Kaggle/GPU/
 training/profiling, stage/commit/push from this governance correction.
 
+## Current H-REF — final Pi ACCEPT/task_only
+
+The user explicitly authorized a separate append-only final Pi H-REF acceptance review
+using existing independently verified evidence. Hierarchy: User authorization → Pi final
+acceptance authority → native agy implementation/execution evidence. Current decision:
+ACCEPT/task_only at `data/reports/training-harness-h-ref-v1/pi-final-acceptance-v1/review.json`;
+authority/artifact/report in that directory and `docs/h-ref-pi-final-acceptance.md`.
+
+All original H1–H9 independently verified. Ordered Worker limitations0/2 are verified
+external boundaries with original quotes;assigned Pi duties1/3 and the original deferred-
+review issue are fulfilled with evidence,NOT outside scope. No substantive acceptance
+blocker remains. Existing412overallPASS/81.938s/870412288bytes,389inherited/34D3/3564cases,
+empty fresh scratch/owner-safe cleanup/preservation;all322isolated files/H8/science exact.
+No new Worker,SDK,implementation,regression or extension change for this final review.
+
+Native task3606687c-beba-4d3f-bd24-03ae5238da37 remains historical ESCALATE with original
+failed verification/report/budgets unchanged. No native ACCEPT/reopen/reassessment/receipt
+substitution or extension restriction bypass. The latest user amendment permits a
+separate Pi deliverable record,not a native-tool schema/status change. SDK4/native1,
+old3full+separate1full=4 retained. Main H integration,O/GPU/profiling/experiments/deployment
+remain unapproved;deployment NOT_AUTHORIZED. No stage/commit/push authority.
+
+## Previous cache lifecycle review — overallPASS,formal acceptance hold
+
+User approved Pi-only cache path/cleanup infrastructure and ONE separately allocated
+full run. No training/H8 change. Fresh owned cache:creator/manager PiPID1363626,
+consumer childPID1363657;private held-FD/inode/dev/UID/mode checks,empty-only rmdir
+finally after child settled. Nine mock-only checks cover failure/refusal paths;no real
+foreign/pre-existing/nonempty directory deleted. Oldcache3413649 remains unchanged.
+Overall verifierPASS:412tests/0failures/errors/skips,74.875s unittest/81.938s child/
+870412288bytesRSS;389inherited/34D3/3564expanded and preservation/emptyscratchPASS.
+All322isolated files exact;source/model/BPR/Adam/science/H8 remain unchanged.
+Latest additive `data/reports/training-harness-h-ref-v1/cache-lifecycle-v1/final-adjudication-v1/acceptance-packet.json`.
+
+The prior all-H1–H9-verified wording overstated H8: runtime PASS, but full acceptance
+closure is pending. Two external limitation boundaries have original-scope quotes;
+two assigned Pi review duties must NOT be called out of scope. The tool has no separate
+issue-resolution field, blocks a nonempty original unresolved_issues array, and allows
+only out_of_scope/unresolved limitation labels. See final-adjudication-v1/operator-decision-required.md:
+an explicit procedural decision is needed, not new H code, Worker requests or tests.
+No workflow, source, report rewrite or policy exception is inferred.
+HREF ACCEPT NOTrecorded:existingnative task
+3606687c-beba-4d3f-bd24-03ae5238da37 remains terminalESCALATE withfailedoriginalcommand.
+This approved amended Pi verification does not reopen/reassess/retroaccept it or permit
+rewritingoldverifier/receipts/replacementtasks. See acceptance-gate-review.json:operator-
+supported handling is needed;original-command-only reassessment is not permission to
+substitute newcommand. No furtherWorker/SDK/run/extensionedit or maintransfer authority.
+CountersSDK4/native1(secondunused),old3full+separate1full=4,allconsumed. Hstillnotaccepted;
+deploymentNOT_AUTHORIZED. Preserve alloldreports/failures/cache andcurrentpassingproof.
+
+## Previous native correction —412functionalPASS,cleanupESCALATE
+
+User separately approved at most2native invocations on canonical dictionary adaptation/
+related fixtures and NaN exception ordering,plus Pi's one full regression. One actual
+native invocation corrected only isolated training_data.py and two H test modules;
+no accepted D1–D3/model/BPR/Adam/science changes. Native task
+`3606687c-beba-4d3f-bd24-03ae5238da37` is ESCALATE/task_only,not accepted.
+Latest `data/reports/training-harness-h-ref-v1/native-correction-v1/review.json`.
+
+All412functionaltests/389inherited/34D3methods/3564expanded cases PASS,0failures/errors/
+skips,72.582s unittest/79.580s child/863043584bytespeakRSS. Numerical/private D3 restart/
+device/closure/entrypoint controls now pass. Mandatory supervisor nevertheless exits1:
+EMPTY torchinductor_sunf directory remains in required-empty scratch. Source-only RCA
+traces native optimizer's lazy Dynamo import to module-global cache_dir creation;Pi
+missed framework-cache lifecycle,not a model/math/native-correction defect. Preserve
+candidate,complete logs,empty directory and all history;no cleanup/fix/rerun/rollback.
+
+Counts:SDK4/native1of2(secondunused),fullH3of3used(1baseline+2candidates). User explicitly
+forbids automatic Worker requests on re-test issues. No second Worker/SDK/new test or
+main H transfer. Proposed only:Pi-only verification-infrastructure/cache ownership and
+fresh-scratch plan plus explicit extra-suite budget;respect terminal/operator/original-
+command gates,no task replacement/reset or edits to frozen old verifier/evidence.
+H remains unaccepted;deployment NOT_AUTHORIZED. Original24-error regression preserved.
+
 ## Historical task record — scope-limited, not current channel authority
 
 The following accumulated approvals/status snapshots retain their original histories.

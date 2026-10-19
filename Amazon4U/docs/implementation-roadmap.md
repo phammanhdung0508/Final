@@ -89,32 +89,93 @@ accepted adversarial fixtures must remain passing. No scientific-rule amendment.
 
 ## Current status
 
-### Current H-REF — corrected six-file candidate, ESCALATE pending regression
+### Current H-REF — independent Pi ACCEPT/task_only
 
-The recorded sequence used **four SDK text-only generation requests**, not native agy
-invocations. Request3 delivered six proposed files; request4 corrected four files and
-retained training_data.py/training_entrypoint.py byte-identically. Pi reviewed the
-actual changes and relevant callers/native boundary: B1's scoped CPU Adam guard and
-F2–F5's checkpoint-name,exception,fallback and source-closure corrections are statically
-addressed,not runtime-verified. No accepted model/evaluator/D1–D3 or methodology change.
-Latest selected review: `data/reports/training-harness-h-ref-v1/correction-v1/review.json`.
-Selected proposal: `data/reports/training-harness-h-ref-v1/correction-v1/correction/preview/Amazon4U/`.
+User explicitly authorized append-only final Pi acceptance using existing verified
+results. `data/reports/training-harness-h-ref-v1/pi-final-acceptance-v1/review.json`
+records **ACCEPT/task_only** for the pinned isolated bounded CPU-reference H-REF/H-side
+interfaces. All original H1–H9 verified;assigned Pi review duties and original deferred
+issue fulfilled with independent evidence,not mislabeled outside scope. All322isolated
+files,accepted components,Adam/BPR/science and H8 unchanged.
 
-The candidate remains **unapplied to isolated/main code and unaccepted**. The original
-389-test dependency baseline passed (57.732s unittest,64.917s process,661983232bytes
-peakRSS;3564expanded cases). **Zero H candidate suites or new numeric updates ran.**
-Static discovery predicts412 methods,not a PASS. H2–H8 require actual mandatory evidence.
+Existing overall412PASS/0failures/errors/skips,81.938s child/870412288bytesRSS,
+389inherited/34D3/3564expanded preserved;complete logs,empty fresh scratch,owner-safe
+cache cleanup and preservation PASS. No new implementation or regression for acceptance.
+Native task3606687c-beba-4d3f-bd24-03ae5238da37 remains historical ESCALATE with original
+failed verification/report/budgets intact. No native ACCEPT or extension bypass.
+Hierarchy:User→Pi final deliverable authority→native Worker/execution evidence.
 
-Next gate,only if separately authorized: mechanical isolated application of the exact
-six-file proposal,fresh safety/preservation review and one original full regression
-under **240s / 2GiB** and unchanged log/scratch/fixture limits. Then Pi assesses all
-original H1–H9 and current limitations before any acceptance. No new generation is
-needed just to verify the candidate. No new native/SDK call,regression,main integration
-or experiment is authorized by this status update. The four SDK requests remain
-consumed; prospective native 2 + 2 + 2 does not reset/replenish that history.
-Acceptance_scope: **H-REF CPU reference,not accepted**; deployment **NOT_AUTHORIZED**.
-O-OFFLINE remains unassigned;GPU-READY and full-data profiling remain separate gates.
-[Authority and complete phase history](training-harness-h-ref.md).
+SDK4/native1/4actualHfullruns retained. Main integration is a separate next approval,
+not authorized here. O-OFFLINE,GPU-READY,production initialization/collection/full-data
+feasibility,Musical_Instruments→Toys→Electronics profiling,comparative/final-test and
+deployment remain separate gates. **Deployment NOT_AUTHORIZED.**
+[Final authority/scope](h-ref-pi-final-acceptance.md). Older holds remain preserved.
+
+### Previous cache lifecycle review — overall412PASS,formalacceptancehold
+
+User approved Pi-only cache path/cleanup infrastructure and one separatelyallocated
+full regression,not training/H8 changes. All322isolated files exact. ParentPID1363626
+creates/manages the fresh private cache,child1363657 consumes its configured path;
+finallycleanup rmdir's only that inode-checked EMPTY ownedcache after childsettlement.
+Freshscratch empty,oldunownedcache3413649/history/source/Git untouched. Nine mock-only
+infrastructure checks PASS(success/failure/refusal);one complete regression OVERALLPASS:
+**412tests/0failures/errors/skips,74.875s unittest/81.938s child,870412288bytesRSS**,
+all389inherited/34D3/3564expanded preserved within original240s/2GiB/log/fixture limits.
+
+Latest additive review:`data/reports/training-harness-h-ref-v1/cache-lifecycle-v1/final-adjudication-v1/acceptance-packet.json`.
+Earlier all-H1–H9-verified wording overstated H8: runtime PASS, full final adjudication
+pending. Two external boundaries have scope quotes; two assigned Pi duties are NOT
+outside scope. The tool blocks a nonempty original unresolved_issues array and has no
+independent resolution/fulfilled-assigned disposition. No existing operator command
+can bind this amendment without new authority. See final-adjudication-v1/operator-decision-required.md.
+No new Worker or tests are recommended.
+HREFACCEPTNOTrecorded. Existingnative task3606687c-beba-4d3f-bd24-
+03ae5238da37 is terminalESCALATE andhasitsoriginalfailedstoredbenchmark. No silent
+rebinding,oldverifier/receipt rewrite,automaticreassessment orreplacementtask. Operator-
+supported handling of the explicitlyapproved amended verification is required;see
+acceptance-gate-review.json. No new source defect or extra Worker recommendation.
+SDK4/native1unchanged(secondunused),fullH old3/3+extra1/1=4. No further test/Worker/SDK/
+maintransfer/extensionchange authorized. HCPUreference NOTaccepted;deploymentNOT_AUTHORIZED.
+[Scope/ownership/result](training-harness-cache-lifecycle.md). Older phases below remain
+immutable chronological evidence,not current counts or launch permission.
+
+### Previous native correction —412functionalPASS;mandatorycleanupFAIL/ESCALATE
+
+User authorized at most2native agy invocations for canonical D1 dictionary adaptation/
+related fixtures and NaN exception ordering,with Pi-only regression. **One native call**
+corrected exactly isolated training_data.py and the two H test modules. All316accepted
+files/other3Hfiles/D1–D3/models/BPR/Adam math/protocol/main/siblings/Git/history preserved.
+Native task `3606687c-beba-4d3f-bd24-03ae5238da37` is **ESCALATE/task_only,not accepted**.
+Latest `data/reports/training-harness-h-ref-v1/native-correction-v1/review.json` and
+`root-cause-review.md`;raw source/action/verification evidence is preserved there.
+
+Pi independently reviewed complete actual functions/callers/tests/native boundaries
+and ran ONE full original discovery. **412testsPASS,0failures/errors/skips**;72.582s
+unittest/**79.580s child**,**863043584bytes peakRSS (~823.1MiB)** within240s/2GiB.
+All389inherited/34D3methods/35ledgers/3564expanded cases pass;complete stdout is
+baseline-byte-identical. Both-model independent Adam oracles and uninterrupted/private
+D2-D3 restart trajectories,closure/device/selection/entrypoint controls now pass.
+36successful Hsteps are inferred from completed test branches,not an instrumented
+counter. No new numerical/model or accepted-dependency defect was observed.
+
+But the predeclared verification supervisor **exits1**:one EMPTY torchinductor_sunf
+framework directory remains in required-empty scratch. Native optimizer initialization
+lazily imports Dynamo;package module-global cache initialization calls Inductor
+cache_dir/os.makedirs under tempfile's owned scratch. Pi missed this framework-cache
+ownership/cleanup lifecycle. Required empty scratch/native benchmark is FAILED,not
+waived despite412green. Source/Git file maps are unchanged;directory-aware assertion
+correctly detects what file-only hashes miss. No passing preservation receipt is
+fabricated;the directory,failed wrapper and complete child logs remain untouched.
+
+Counts preserved:SDK4/native1of2(secondunused),Hfull3of3used(1baseline+2candidates).
+The earlier24-error candidate suite/SDK proposals remain historical,not retroaccepted.
+**STOP:no extra Worker/SDK,cleanup,fix or rerun.** Proposed next gate only:separately
+approve Pi-only cache-lifecycle/fresh-scratch verification infrastructure and an explicit
+additional full-suite budget;respect native terminal/operator/original-command gates,
+not replacement-task resets or edits to old evidence. No new implementation round is
+recommended for passing adapter/math code. HCPUreference **not accepted**;deployment
+**NOT_AUTHORIZED**. Main integration,O-OFFLINE,GPU-READY and experiments remain separate.
+[Authority/history](training-harness-h-ref.md).
 
 ### Historical first two-SDK-request H result — ESCALATE/no files, not latest
 

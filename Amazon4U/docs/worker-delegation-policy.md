@@ -155,6 +155,13 @@ All SDK-generated code remains an untrusted candidate requiring independent veri
 
 ## Existing H-REF history is unchanged
 
+The following application/verification-state snapshot is **as of policy adoption**,
+not a live H status counter. Later separately authorized verification is recorded in
+`training-harness-h-ref.md` and `../data/reports/training-harness-h-ref-v1/verification-v1/`.
+That phase applied the existing candidate in isolation and ran412tests with24errors;
+it added no SDK/native invocation or new round. Original four-SDK request history and
+the adoption snapshot below are preserved,not reset or converted into native rounds.
+
 The recorded H-REF sequence contains **four `sdk_text_only_generation_request` events**,
 not four native agy invocations. Evidence is the original `execution.json` in:
 `training-harness-h-ref-v1/initial/`, `revision/`,
@@ -168,6 +175,30 @@ and the existing candidate remains unapplied/unaccepted pending its applicable g
 The recorded H full dependency baseline is one `pi_independent_verification` regression;
 there have been zero H candidate full regressions. Prior D1–D3 acceptance, counters,
 reports and retired archives remain unchanged. O-OFFLINE remains separately unassigned.
+
+## User-authorized final Pi H-REF deliverable review
+
+For H-REF, the user explicitly authorized a separate append-only final Pi acceptance
+record using existing independently verified evidence. See
+`h-ref-pi-final-acceptance.md` and
+`../data/reports/training-harness-h-ref-v1/pi-final-acceptance-v1/authority.txt`.
+The hierarchy is **User authorization → Pi final acceptance authority → native agy
+implementation/execution evidence**. Native agy is not the ultimate H-REF acceptor.
+
+The final Pi record is **ACCEPT/task_only**, with deployment **NOT_AUTHORIZED**.
+Assigned Pi-review/resource/adjudication duties are recorded as **fulfilled** only
+with independent evidence, not out_of_scope. Original limitation/issue text and order,
+all H1–H9 and budgets remain preserved. This disposition is authorized for the separate
+Pi H-REF record; it does not alter the native tool schema or any original report.
+Native task3606687c-beba-4d3f-bd24-03ae5238da37 remains historical ESCALATE,including
+its failed original verification. No native ACCEPT,receipt rewrite,reopen/reassessment,
+new delegation,extension change or bypass occurs. The historical outcome is not a
+permanent veto over this explicitly authorized deliverable-level decision.
+
+This is not blanket permission to disregard failed criteria or launch work. A substantive
+unresolved requirement still blocks ACCEPT. No new Worker/SDK/implementation/regression/
+main integration/experiment/deployment or Git action is authorized. Existing channel,
+recovery,security and native-extension restrictions remain unchanged.
 
 ## Safeguards and reporting
 

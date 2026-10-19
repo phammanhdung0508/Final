@@ -10,7 +10,7 @@
     "explicit_user_approval_before_every_SDK_request": true,
     "historical_proposed_budgets_commands_criteria_counts_unchanged": true,
     "historical_H_REF_SDK_calls_not_native_invocations": true,
-    "H_REF_latest_history": "data/reports/training-harness-h-ref-v1/correction-v1/review.json",
+    "H_REF_latest_history": "data/reports/training-harness-h-ref-v1/pi-final-acceptance-v1/review.json",
     "O_OFFLINE_unassigned": true,
     "new_Worker_SDK_or_execution_authority": false
   },

@@ -26,6 +26,22 @@ All extension inspection/verification/review, original criteria and safety gates
 This governance correction grants no task launch, execution or new round and does not
 change the extension, SDK, controller, accepted code/tests or scientific methodology.
 
+## Final Pi H-REF acceptance amendment
+
+User explicitly authorized the governance hierarchy **User authorization → Pi final
+acceptance authority → native agy implementation/execution evidence**,and a separate
+append-only final H-REF review based on existing independent evidence. See
+`h-ref-pi-final-acceptance.md` and
+`../data/reports/training-harness-h-ref-v1/pi-final-acceptance-v1/authority.txt`.
+Current H-REF decision is **ACCEPT/task_only**,deployment **NOT_AUTHORIZED**.
+Assigned Pi review duties/issue deferrals are fulfilled with evidence,not out_of_scope;
+original scope/criteria/reports/text/order/budgets stay intact. Native task3606687c-beba-
+4d3f-bd24-03ae5238da37 remains historical ESCALATE with its original verification failure.
+No native ACCEPT,receipt substitution,reopen/reassessment,extension change or bypass.
+This changes the authorized H-REF deliverable review basis,not native tool state/schema.
+No new Worker/SDK/implementation/regression/main integration/experiment/deployment/Git
+activity follows. Other workflow/security/channel/budget restrictions remain in force.
+
 ## Status and scope
 
 User-agreed operating roles and delegation rules for Amazon4U, recorded from
@@ -73,9 +89,25 @@ Use scoped relevant context without omitting original requirements or necessary 
 This is a work-allocation policy, not new execution authority or a budget reset.
 Native agy is the default; a controller-free SDK channel is only a separately approved
 exception, never an implicit replacement for delegation. Earlier preparation-only
-statements were phase-scoped. H-REF's historical four SDK completions remain SDK calls,
-unapplied/unaccepted, with no fresh native/SDK/regression authority from this policy.
-O-OFFLINE remains unassigned. All original review/safety/deployment gates remain.
+statements were phase-scoped. H-REF's historical four SDK completions remain SDK calls.
+Later user-approved Pi-only verification first reported24errors. A separately approved
+native correction used1of2calls on exactly3isolated files;all412functionaltests now
+pass,but mandatory verification fails on an empty Torch cache directory left in scratch.
+Pi owns missed framework-cache lifecycle. See
+`../data/reports/training-harness-h-ref-v1/native-correction-v1/review.json`:ESCALATE,
+not accepted at that stop. User subsequently approved Pi-only cache lifecycle and one
+separate full regression:overall412PASS,emptyscratch/preservationPASS,training/H8unchanged.
+Latest `../data/reports/training-harness-h-ref-v1/cache-lifecycle-v1/review.json` technically
+records passing runtime evidence but does NOT record H-REF ACCEPT. The additive
+cache-lifecycle-v1/final-adjudication-v1/acceptance-packet.json corrects earlier full-H8
+verification wording: final adjudication is pending, and assigned Pi duties are not
+outside scope. The tool blocks original unresolved_issues entries and offers no separate
+resolution/fulfilled-assigned disposition. The native task remains terminal ESCALATE and
+needs supported operator acceptance handling for this authorizedverificationamendment,
+not oldreceipt/command rewriting or replacementtask. SDK4/native1/old3full+extra1full=4,
+allreleasedfullbudgetsused. No additionalWorker/SDK/test/rerun/extensionchange/main H
+source transfer is authorized. O-OFFLINE
+remains unassigned. All original review/safety/deployment gates remain.
 
 ## Worker dependency and scope-change approval
 
