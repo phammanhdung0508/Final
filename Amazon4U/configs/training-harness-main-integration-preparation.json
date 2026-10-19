@@ -1,0 +1,318 @@
+{
+  "schema": "amazon4u-H-REF-main-integration-preparation-v1",
+  "project": "Amazon4U",
+  "status": "PREPARATION_ONLY_PROPOSAL_AWAITING_INTEGRATION_APPROVAL",
+  "documentation": "docs/training-harness-main-integration-preparation.md",
+  "authority": "data/reports/training-harness-main-integration-preparation-v1/authority.txt",
+  "evidence": "data/reports/training-harness-main-integration-preparation-v1/inspection.json",
+  "preparation_review": "data/reports/training-harness-main-integration-preparation-v1/review.json",
+  "current_authority": {
+    "metadata_and_static_preparation": true,
+    "implementation": false,
+    "main_transfer": false,
+    "test_or_probe_execution": false,
+    "Worker": false,
+    "SDK": false,
+    "cache_mutation": false,
+    "extension_change": false,
+    "Git_writes": false,
+    "deployment": false
+  },
+  "main_head": "5d0d8e176e8c0d1781bf480065a2fd994dc3644f",
+  "accepted_H_REF": {
+    "review": "data/reports/training-harness-h-ref-v1/pi-final-acceptance-v1/review.json",
+    "artifact": "data/reports/training-harness-h-ref-v1/pi-final-acceptance-v1/artifact.json",
+    "decision": "ACCEPT",
+    "acceptance_scope": "task_only_isolated_bounded_CPU_reference",
+    "source_root": "/home/sunf/FSB/Final/Amazon4U/.worktrees/training-harness-implementation-v1/Amazon4U",
+    "six_file_sha256": {
+      "scripts/training_harness.py": "855352bbb7ebac305f03e4efae0527ced8b26d01c664ebf0c3d9bd7e18ad1ac5",
+      "scripts/training_data.py": "80a9523b87fd5b902821c8d6b44d1283ca42570448ee59f5b4122ab5605048a4",
+      "scripts/training_entrypoint.py": "4b608e423226f035e9b32e67cf18494b22069fb6bd9d9ea7d8ca97124b178e26",
+      "tests/test_training_harness.py": "d470f8ebbc5d9e0c46d85ccf8cf44386d36aff88c6490ca575ac0cad28e5c149",
+      "tests/test_training_data.py": "18c7c222d30246d34b786c5358e0e239b38eae948f436edccf2c7c1d37fcc18e",
+      "docs/training-harness.md": "6e090aea10460568d7eb46c245e8eb4083cd7195a1fd6cc6f997922bb10b6b34"
+    },
+    "all322checked": true
+  },
+  "compatibility": {
+    "all26inherited_python_modules_byte_identical": true,
+    "six_destinations_absent": true,
+    "static_main_methods": 389,
+    "static_after_transfer_methods": 412,
+    "static_not_executed": true,
+    "no_source_test_conflict_found": true,
+    "noncode_shared_differences": 16,
+    "noncode_drift_evidence": "data/reports/training-harness-main-integration-preparation-v1/main-context-drift.diff",
+    "main_governance_metadata_must_not_be_overwritten_from_isolation": true,
+    "frozen_protocol_and_scientific_configurations_preserved": true,
+    "fresh_environment_native_safety_not_probed_or_released": true
+  },
+  "proposed_future_integration": {
+    "authorized": false,
+    "approval_required": true,
+    "execution_records_root": "/home/sunf/FSB/Final/Amazon4U/data/reports/training-harness-main-integration-v1",
+    "scope": "Pi-only mechanical H-REF CPU-reference main integration,not new implementation or experiment readiness",
+    "transfer_paths_relative_to_Amazon4U": [
+      "scripts/training_harness.py",
+      "scripts/training_data.py",
+      "scripts/training_entrypoint.py",
+      "tests/test_training_harness.py",
+      "tests/test_training_data.py",
+      "docs/training-harness.md"
+    ],
+    "exclusive_target_creation_only": true,
+    "prevalidate_all_sources_and_destinations_before_first_write": true,
+    "partial_failure_action": "STOP,preserve partial transfer/evidence,no overwrite,cleanup,rollback or automatic correction",
+    "verification_source_creation_paths": [
+      "/home/sunf/FSB/Final/Amazon4U/data/reports/training-harness-main-integration-v1/verify_main.py",
+      "/home/sunf/FSB/Final/Amazon4U/data/reports/training-harness-main-integration-v1/cache_lifecycle.py",
+      "/home/sunf/FSB/Final/Amazon4U/data/reports/training-harness-main-integration-v1/test_cache_lifecycle.py"
+    ],
+    "verifier_adaptation_scope": "Fresh main-specific path/HEAD/source/output/snapshot/one-shot gating only;reuse reviewed child/full discovery,resource supervision and owner-safe cache lifecycle. No new controller or alteration of frozen old runner.",
+    "byte_identical_cache_primitive_source": "data/reports/training-harness-h-ref-v1/cache-lifecycle-v1/cache_lifecycle.py",
+    "byte_identical_mock_checks_source": "data/reports/training-harness-h-ref-v1/cache-lifecycle-v1/test_cache_lifecycle.py",
+    "verifier_must_not_run_or_mutate_old_isolated_snapshot_plan": true,
+    "new_runtime_infrastructure_not_created_during_preparation": true,
+    "proposed_snapshot_scope": {
+      "root_tracked_and_nonignored_files": "/home/sunf/FSB/Final",
+      "nested_repository_sentinels": "Recursively include boundary HEAD/index/status and tracked/nonignored file content;read-only outside Amazon4U,never sibling writes.",
+      "protected_ignored_roots": [
+        "/home/sunf/FSB/Final/Amazon4U/.worktrees/checkpoint-storage-implementation",
+        "/home/sunf/FSB/Final/Amazon4U/.worktrees/checkpoint-storage-bounded-correction-v1",
+        "/home/sunf/FSB/Final/Amazon4U/.worktrees/training-harness-implementation-v1/Amazon4U",
+        "/home/sunf/FSB/Final/Amazon4U/data/reports/checkpoint-storage-implementation",
+        "/home/sunf/FSB/Final/Amazon4U/data/reports/checkpoint-storage-main-integration",
+        "/home/sunf/FSB/Final/Amazon4U/data/reports/checkpoint-payload-a04-d01-correction",
+        "/home/sunf/FSB/Final/Amazon4U/data/reports/checkpoint-payload-main-integration",
+        "/home/sunf/FSB/Final/Amazon4U/data/reports/training-harness-preparation-v1",
+        "/home/sunf/FSB/Final/Amazon4U/data/reports/training-harness-device-transition-v1",
+        "/home/sunf/FSB/Final/Amazon4U/data/reports/training-harness-h-ref-v1",
+        "/home/sunf/FSB/Final/Amazon4U/data/reports/training-harness-main-integration-preparation-v1",
+        "/home/sunf/FSB/Final/Amazon4U/.test-output"
+      ],
+      "new_phase_infrastructure_and_control_files": "Hash even when ignored;exclude only declared fresh active-stage outputs/scratch. Freeze prior-stage receipts and source/tests/infrastructure during each run.",
+      "directory_state": "Record preserved cache/scratch namespace,dev/inode/UID/mode and relevant mtime/ctime;file-only hashes do not prove required-empty scratch.",
+      "raw_byte_reads": "Stream SHA-256 under declared file/aggregate/time budgets;interrupted,unstable or over-budget evidence blocks acceptance.",
+      "undeclared_ignored_paths": "Not exhaustively monitored;not an OS sandbox or hostile-sameUID security claim."
+    },
+    "mock_only_checks": {
+      "max_invocations": 1,
+      "expected_checks": 9,
+      "max_seconds": 60,
+      "peak_RSS_bytes": 2147483648,
+      "stream_limit_each_bytes": 8388608,
+      "command": {
+        "command": "/home/sunf/FSB/Final/Amazon4U/.venv/bin/python",
+        "args": [
+          "-B",
+          "/home/sunf/FSB/Final/Amazon4U/data/reports/training-harness-main-integration-v1/test_cache_lifecycle.py"
+        ],
+        "cwd": "/home/sunf/FSB/Final/Amazon4U"
+      },
+      "output_directory": "/home/sunf/FSB/Final/Amazon4U/data/reports/training-harness-main-integration-v1/infrastructure-checks",
+      "no_target_scientific_framework_imports_or_real_cache_mkdir_rmdir": true,
+      "permitted_imports": "stdlib and byte-identical declared cache_lifecycle helper only",
+      "does_not_replace_independent_new_wrapper_review": true
+    },
+    "full_discoveries_max": 2,
+    "stages": [
+      {
+        "stage": "baseline",
+        "max_invocations": 1,
+        "expected_test_methods": 389,
+        "supervisor": {
+          "command": "/home/sunf/FSB/Final/Amazon4U/.venv/bin/python",
+          "args": [
+            "-B",
+            "/home/sunf/FSB/Final/Amazon4U/data/reports/training-harness-main-integration-v1/verify_main.py",
+            "baseline"
+          ],
+          "cwd": "/home/sunf/FSB/Final/Amazon4U"
+        },
+        "child": {
+          "command": "/home/sunf/FSB/Final/Amazon4U/.venv/bin/python",
+          "args": [
+            "-B",
+            "-c",
+            "import os,tempfile,unittest,sys; from pathlib import Path; p=Path('/home/sunf/FSB/Final/Amazon4U/.test-output/training-harness-main-integration-baseline-v1'); p.mkdir(parents=True,exist_ok=True); tempfile.tempdir=str(p); os.environ['TMPDIR']=str(p); os.environ['PYTHONDONTWRITEBYTECODE']='1'; suite=unittest.defaultTestLoader.discover('tests'); result=unittest.TextTestRunner(verbosity=2).run(suite); sys.exit(not (result.wasSuccessful() and not result.skipped))"
+          ],
+          "cwd": "/home/sunf/FSB/Final/Amazon4U"
+        },
+        "child_command_change": "Only original isolated scratch literal replaced;full discovery/verbosity/zero-skip success predicate unchanged. CWD explicitly main.",
+        "child_environment_overlay": {
+          "PYTHONDONTWRITEBYTECODE": "1",
+          "TMPDIR": "/home/sunf/FSB/Final/Amazon4U/.test-output/training-harness-main-integration-baseline-v1",
+          "TORCHINDUCTOR_CACHE_DIR": "/home/sunf/FSB/Final/Amazon4U/.test-output/training-harness-main-integration-baseline-v1/inductor-cache"
+        },
+        "fresh_scratch_root": "/home/sunf/FSB/Final/Amazon4U/.test-output/training-harness-main-integration-baseline-v1",
+        "fresh_parent_evidence_directory": "/home/sunf/FSB/Final/Amazon4U/data/reports/training-harness-main-integration-v1/benchmarks/baseline",
+        "source_review_required_before_execution": true,
+        "verifier_implemented_or_executed": false
+      },
+      {
+        "stage": "integrated",
+        "max_invocations": 1,
+        "expected_test_methods": 412,
+        "supervisor": {
+          "command": "/home/sunf/FSB/Final/Amazon4U/.venv/bin/python",
+          "args": [
+            "-B",
+            "/home/sunf/FSB/Final/Amazon4U/data/reports/training-harness-main-integration-v1/verify_main.py",
+            "integrated"
+          ],
+          "cwd": "/home/sunf/FSB/Final/Amazon4U"
+        },
+        "child": {
+          "command": "/home/sunf/FSB/Final/Amazon4U/.venv/bin/python",
+          "args": [
+            "-B",
+            "-c",
+            "import os,tempfile,unittest,sys; from pathlib import Path; p=Path('/home/sunf/FSB/Final/Amazon4U/.test-output/training-harness-main-integration-integrated-v1'); p.mkdir(parents=True,exist_ok=True); tempfile.tempdir=str(p); os.environ['TMPDIR']=str(p); os.environ['PYTHONDONTWRITEBYTECODE']='1'; suite=unittest.defaultTestLoader.discover('tests'); result=unittest.TextTestRunner(verbosity=2).run(suite); sys.exit(not (result.wasSuccessful() and not result.skipped))"
+          ],
+          "cwd": "/home/sunf/FSB/Final/Amazon4U"
+        },
+        "child_command_change": "Only original isolated scratch literal replaced;full discovery/verbosity/zero-skip success predicate unchanged. CWD explicitly main.",
+        "child_environment_overlay": {
+          "PYTHONDONTWRITEBYTECODE": "1",
+          "TMPDIR": "/home/sunf/FSB/Final/Amazon4U/.test-output/training-harness-main-integration-integrated-v1",
+          "TORCHINDUCTOR_CACHE_DIR": "/home/sunf/FSB/Final/Amazon4U/.test-output/training-harness-main-integration-integrated-v1/inductor-cache"
+        },
+        "fresh_scratch_root": "/home/sunf/FSB/Final/Amazon4U/.test-output/training-harness-main-integration-integrated-v1",
+        "fresh_parent_evidence_directory": "/home/sunf/FSB/Final/Amazon4U/data/reports/training-harness-main-integration-v1/benchmarks/integrated",
+        "source_review_required_before_execution": true,
+        "verifier_implemented_or_executed": false
+      }
+    ],
+    "proposed_not_active_test_policy": {
+      "training_allowed": true,
+      "training_scope": "Existing inherited tiny differentiability/import-order exceptions unchanged;only accepted tiny new H CPU backward/Adam/private restore fixtures. No real-data/research/GPU training.",
+      "source_tests_preexisting_artifacts_and_Git_immutable_during_each_run": true,
+      "fresh_test_generated_paths": [
+        "/home/sunf/FSB/Final/Amazon4U/.test-output/training-harness-main-integration-baseline-v1",
+        "/home/sunf/FSB/Final/Amazon4U/.test-output/training-harness-main-integration-integrated-v1"
+      ],
+      "fresh_parent_generated_paths": [
+        "/home/sunf/FSB/Final/Amazon4U/data/reports/training-harness-main-integration-v1/infrastructure-checks",
+        "/home/sunf/FSB/Final/Amazon4U/data/reports/training-harness-main-integration-v1/benchmarks/baseline",
+        "/home/sunf/FSB/Final/Amazon4U/data/reports/training-harness-main-integration-v1/benchmarks/integrated"
+      ],
+      "prior_phase_and_earlier_stage_receipts_protected": true,
+      "temporary_directories": [
+        "/home/sunf/FSB/Final/Amazon4U/.test-output/training-harness-main-integration-baseline-v1",
+        "/home/sunf/FSB/Final/Amazon4U/.test-output/training-harness-main-integration-integrated-v1"
+      ]
+    },
+    "limits": {
+      "outer_supervisor_deadline_seconds_per_stage": 900,
+      "deadline_seconds_per_full_child": 240,
+      "peak_child_RSS_limit_bytes": 2147483648,
+      "stdout_limit_bytes": 8388608,
+      "stderr_limit_bytes": 8388608,
+      "scratch_limit_bytes": 67108864,
+      "required_scratch_empty_after_child_and_owned_cache_cleanup": true,
+      "parent_metadata_hash_limits": {
+        "max_file_bytes": 134217728,
+        "max_aggregate_bytes": 536870912,
+        "max_file_seconds": 60,
+        "max_snapshot_seconds": 300
+      },
+      "fixture_limits": {
+        "max_users": 8,
+        "max_products": 12,
+        "max_metadata_nodes_per_type": 8,
+        "embedding_dimension": 64,
+        "device": "cpu",
+        "dtype": "float32",
+        "max_file_or_decoded_bytes": 2097152,
+        "max_concurrent_fixture_bytes": 8388608,
+        "max_concurrent_fixture_files": 128,
+        "max_actual_epochs_or_Adam_steps_per_numeric_branch": 4,
+        "new_H_steps_per_full_suite_ceiling": 128,
+        "unchanged_whole_H_phase_steps_ceiling": 256,
+        "current_source_static_successful_H_steps_per_integrated_suite": 36,
+        "previous_successful_H_steps_inferred": 72,
+        "prospective_successful_H_steps_inferred_if_integrated_suite_completes": 108,
+        "step_counts_are_source_branch_inference_not_instrumented_global_counts": true
+      },
+      "RSS_accounting": "Linux wait4 child ru_maxrss;not total process tree,not an OS memory sandbox",
+      "timeouts_stream_scratch_violation": "Fail,settle owned child group,attempt only guarded owned-empty-cache cleanup,preserve evidence;no rerun"
+    },
+    "post_result_status_only_paths": [
+      "docs/training-harness-main-integration.md",
+      "configs/training-harness-main-integration.json",
+      "AGENTS.md",
+      "README.md",
+      "docs/implementation-roadmap.md"
+    ],
+    "status_edits_are_narrow_and_separate_from_byte_identical_API_doc": true,
+    "existing_scientific_or_lifecycle_JSON_modification": false,
+    "required_before_transfer": "Explicit approval,current binding/safety preflight,mock-onlyPASS,complete389baselinePASS",
+    "required_before_accept": "Complete412overallPASS,finalhash/scope/resource/cleanup/history review,allHMI/originalHcriteria/orderedreportdispositions verified",
+    "proposed_acceptance_scope": "task_only_main_H_REF_CPU_reference",
+    "deployment_decision": "NOT_AUTHORIZED",
+    "deployment_policy": null,
+    "acceptance_criteria": [
+      {
+        "id": "HMI1",
+        "criterion": "Preserve exact accepted isolated artifact,26inherited Python modules,frozen science,old reports/native outcomes/budgets,Git/sibling/unrelated user state;isolation stays audit-only with no mutation or execution."
+      },
+      {
+        "id": "HMI2",
+        "criterion": "Fresh unchanged389main baseline PASS before exclusive creation of exactly six absent main targets,each byte-identical to accepted artifact;no merge,overwrite,implementation/test/dependency change or automatic rollback."
+      },
+      {
+        "id": "HMI3",
+        "criterion": "Fresh complete412main regression PASS with0failures/errors/skips,all389inherited IDs/34D3methods/35ledgers3564expanded cases/23Hmethods retained;complete logs and independent actual result parsing,not just static counts or green child."
+      },
+      {
+        "id": "HMI4",
+        "criterion": "Pre-execution full selected code/callers/tests/setup/native and fresh verifier review;one9check mock-only invocation;both full runs meet240s/2GiB/stream/fixture/scratch limits;owner-safe success/failure cache lifecycle,parent receipts and protected scope preservation all PASS."
+      },
+      {
+        "id": "HMI5",
+        "criterion": "Pi independently adjudicates original unchanged H1-H9/current ordered limitations/issues against actual main evidence;assigned duties fulfilled only with evidence,not mislabeled outside scope;separate truthful main status/API-history interpretation;no unresolved assigned gate ACCEPT."
+      },
+      {
+        "id": "HMI6",
+        "criterion": "No Worker/SDK/probes/subsets/compile/runtime retuning/retry/new packages/extension change/research/GPU/O/realdata/deployment/Git writes;no native task reopening,receipt substitution,replacement task or budget reset. Any failure/drift stops for recorded assessment."
+      }
+    ]
+  },
+  "history": {
+    "H_SDK_requests_used": 4,
+    "H_native_invocations_used": 1,
+    "H_native_unused_slot_not_new_authority": 1,
+    "prior_H_full_runs_used": 4,
+    "remaining_original_H_full_budget": 0,
+    "new_main_full_budget_authorized": 0,
+    "new_main_full_budget_proposed": 2,
+    "cumulative_H_associated_full_runs_if_both_new_runs_start": 6,
+    "native_historical_task": "3606687c-beba-4d3f-bd24-03ae5238da37",
+    "native_historical_decision": "ESCALATE",
+    "native_original_failed_verification_preserved": true,
+    "native_reopen_reassessment_new_task_receipt_rewrite": false
+  },
+  "stop_conditions": [
+    "new_code_or_dependency_drift",
+    "target_collision_or_partial_copy",
+    "unsafe_native_or_test_path",
+    "mock_check_failure",
+    "baseline_or_integrated_nonpass",
+    "timeout_RSS_stream_fixture_scratch_violation",
+    "preservation_or_cache_ownership_failure",
+    "incomplete_stale_cancelled_evidence",
+    "unresolved_assigned_requirement"
+  ],
+  "automatic_Worker_SDK_fix_retry_rollback": false,
+  "later_separate_gates": [
+    "O_OFFLINE",
+    "production_initialization_and_physical_deployed_source_collection",
+    "GPU_READY",
+    "Musical_Instruments_then_Toys_and_Games_then_Electronics_profiling",
+    "comparative_training_freeze",
+    "final_test",
+    "deployment"
+  ],
+  "deployment_decision": "NOT_AUTHORIZED"
+}
