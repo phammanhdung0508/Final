@@ -1,5 +1,24 @@
 # Amazon4U dataset exploration
 
+**Main H-REF integration: ACCEPT / task_only. Deployment: NOT_AUTHORIZED.**
+[Current independent main acceptance](docs/training-harness-main-integration-recovery.md):
+strictly scoped Pi-only scratch-monitor recovery,17mock checks PASS and full412PASS,
+0failures/errors/skips;75.717s child/~758MiB RSS,within240s/2GiB. All389inherited/34D3/
+23Hmethods/3564expanded cases,strict empty scratch/cache ownership/preservation pass.
+The six H files and H8 are unchanged. No Worker/SDK or model correction. SDK4/native1,
+7cumulative H-associated fullstarts;all current slots consumed. Old failed evidence/
+residual scratch remain unchanged. CPU-reference task acceptance is not O/GPU/production/
+profiling/experiment readiness;no further execution or Git actions automatically.
+
+**Previous main H-REF integration attempt: ESCALATE / preserved history.**
+[Current integration result and RCA](docs/training-harness-main-integration.md):
+9mock checks and fresh389baseline passed;the exact six H files were transferred,but
+post-transfer verification was interrupted by a Pi scratch-monitor deletion race.
+No complete412result or H test execution;residual empty test directory preserved.
+No fix/rerun/cleanup/rollback automatically. SDK4/native1;6H-associated full invocations,
+0main slots remaining. Isolated H acceptance below is unchanged,not main readiness.
+Deployment NOT_AUTHORIZED. Next proposal:separately approved Pi-only verifier recovery.
+
 **H-REF: ACCEPT / task_only. Deployment: NOT_AUTHORIZED.**
 [Final independent Pi acceptance](docs/h-ref-pi-final-acceptance.md):
 `data/reports/training-harness-h-ref-v1/pi-final-acceptance-v1/review.json`.

@@ -1,5 +1,40 @@
 # Agent instructions — Amazon4U
 
+## Current main H-REF integration — ACCEPT/task_only
+
+User explicitly approved Pi-only live scratch-monitor correction,targeted mock controls,
+safety/cleanup review and ONE additional full412run. Current main integration ACCEPT:
+`data/reports/training-harness-main-integration-recovery-v1/review.json` and
+`docs/training-harness-main-integration-recovery.md`. All six H files/26inherited Python/
+science/H8 unchanged. Only versioned verifier monitor and mock controls changed;
+queued temporary ENOENT handled with same-root checks,genuine IOerrors still propagate.
+17mock checks PASS;full412PASS/0failures/errors/skips,71.295s unittest/75.717s child/
+794771456bytesRSS. All389inherited/34D3/23H/35ledgers3564cases;strict ownedemptycache
+cleanup,emptyfreshscratch and4repository-sentinel preservation PASS. Assigned Pi duties
+fulfilled with actual main evidence,not outside scope;all original criteria preserved.
+Old main/native ESCALATEs,failedrunner/receipts/unknownmetrics/residual empty directory
+unchanged. SDK4/native1,7cumulative H-associated fullstarts;newfull/mock slots consumed,
+no additionalcalls/tests automatically. Scope bounded mainCPUreference only;deployment
+NOT_AUTHORIZED. O/GPU/production initialization/sourcecollection/realdata profiling/
+comparative/finaltest/stage/commit/push remain separate and unapproved.
+
+## Previous main H-REF integration — ESCALATE, stop preserved
+
+User approved the bounded main integration plan. Six exact accepted H files are now
+present in main,but main integration is NOT accepted. Mock9 and fresh389baseline PASS;
+post-transfer412invocation interrupted by Pi verifier scratch-polling FileNotFoundError
+while a temporary Parquet file disappeared. No H methods reached,no complete footer,
+final child resource/exit metrics unavailable;one empty test directory retained.
+See `docs/training-harness-main-integration.md` and
+`data/reports/training-harness-main-integration-v1/review.json`/`root-cause-review.md`.
+No source defect established;Pi owns monitor race. STOP:no fix/rerun/cleanup/rollback,
+extra Worker/SDK or extension changes. Both new full slots consumed;SDK4/native1 and
+6cumulative H-associated full invocations retained. Isolated H ACCEPT and old native
+ESCALATE/failed receipts remain historical and unchanged. A narrowly scoped Pi verifier
+recovery plus one extra412run is proposed only,requires separate approval. Main files
+are not experiment readiness. Deployment NOT_AUTHORIZED;O/GPU/realdata/profiling and
+comparative/final-test execution remain separately gated. No stage/commit/push.
+
 Scope: this directory and all descendants. Amazon4U is independent of Movie4U;
 do not copy MovieLens split rules, candidate rules or ID assumptions here, and do
 not change sibling projects unless explicitly requested.

@@ -1,5 +1,36 @@
 # User-approved implementation sequence and gates
 
+## Current main H-REF integration — ACCEPT/task_only
+
+User-approved Pi-only recovery changed only the live scratch monitor/targeted mock
+controls and versioned verifier routing. All6H/26inherited Python/science/H8 unchanged.
+17mock checks PASS;one complete412PASS/0failures/errors/skips,71.295s unittest/
+75.717s child/794771456bytesRSS;all389baseline/34D3/23Hmethods/35ledgers3564cases,
+strict owner-safe empty-cache cleanup/emptyfreshscratch/4repository preservation PASS.
+Independent Pi originalH/main/recovery criteria and exact ordered limitations/issues
+verified;assigned Pi duties fulfilled,not outside scope. See
+[main acceptance and exact authority](training-harness-main-integration-recovery.md).
+Old main/nativeESCALATEs and all failed receipts/runner/old empty directory preserved.
+SDK4/native1;7H-associated fullstarts,0newfull/mock slots remain. DeploymentNOT_AUTHORIZED;
+O/GPU/production initialization/physicalsourcecollection/profiling/comparative/finaltest
+execution remain separate;no stage/commit/push or automatic next workload.
+
+## Previous main H-REF integration stop
+
+User-approved main integration transferred only the six exact accepted files after
+9mock checks/fresh389baseline overallPASS (99.647s child/762454016bytesRSS). The sole
+post-transfer412invocation was interrupted by Pi's live scratch-size polling race:
+FileNotFoundError on an inherited test's disappearing Parquet file.285methods started,
+284completedOK,no H methods/footer;final child metrics unavailable. Owned empty cache
+removed,but another empty test directory remains preserved;mandatory overallFAIL.
+Main integration ESCALATE/notaccepted;no H defect established,no source fix/rerun/
+cleanup/rollback or extraWorker/SDK. All2main slots consumed;6H-associated fullstarts,
+SDK4/native1 unchanged. Isolated H ACCEPT/native historicalESCALATE remain unchanged.
+See [main integration outcome](training-harness-main-integration.md) and its linked
+RCA/receipts. Proposed next gate ONLY:separately approve Pi verifier-only race correction,
+mock controls and one extra412run;no recovery yet. Deployment NOT_AUTHORIZED and broader
+O/GPU/production initialization/collection/profiling/comparative/final-test gates remain.
+
 **Current Worker governance:** [native agy through the delegation extension is the
 implementation default](worker-delegation-policy.md). Pi plans/scopes/orchestrates,
 independently verifies and decides acceptance. Native recovery maxima are separately
