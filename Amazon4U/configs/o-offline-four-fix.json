@@ -1,0 +1,49 @@
+{
+  "schema": "amazon4u-approved-four-category-source-correction-v1",
+  "approval_record": "/home/sunf/FSB/Final/Amazon4U/data/reports/o-offline-four-fix-v1/approval.txt",
+  "user_execution_approval_verbatim": "Ok, proceed with plan we agree on.",
+  "predecessor_task": "8249eeaf-3ff2-460c-a7a5-d48b65aead6c",
+  "all_prior_artifacts_evidence_decisions_preserved": true,
+  "new_native_invocations_max": 1,
+  "prior_O_native_actual": 8,
+  "cumulative_O_native_ceiling": 9,
+  "worker_timeout_ms": 3600000,
+  "max_revisions": 0,
+  "retries_or_SDK_fallback": false,
+  "O_SDK_API_attempts_preserved": 3,
+  "O_SDK_HTTP_reviews_preserved": 1,
+  "O_full_actual_preserved": 4,
+  "new_O_only_or_full_authorization": false,
+  "automatic_transfer_old_test_allocations": false,
+  "H_updates_authorized": 0,
+  "H_steps_inferred_preserved": 252,
+  "historical_H_cap_preserved": 256,
+  "prior_288_reference_not_authority": true,
+  "patch_scope": [
+    "N8-S01",
+    "N8-S02",
+    "N8-S03",
+    "N8-S04"
+  ],
+  "caller_callee_source_AST_audit": "Method for existing requirements,not added scope;all relevant unchanged/changed callers,wrappers,generated templates,mocks,fixtures,trust/ownership/stages.",
+  "N8_S03_clarification": "Mandatory preflight before filesystem mutations and untrusted/hydrated O/H target imports/execution;necessary stdlib bootstrapping and bounded validation reads permitted without granting side effects. Worker never executes target code.",
+  "OP01_OP18_original_criteria_H_REF_science_unchanged": true,
+  "allowed_paths": [
+    "Amazon4U/multiautoresearch/post-training/scripts/kaggle_job.py",
+    "Amazon4U/multiautoresearch/adapters/__init__.py",
+    "Amazon4U/multiautoresearch/adapters/amazon4u.py",
+    "Amazon4U/multiautoresearch/adapters/amazon4u_kernel.py",
+    "Amazon4U/tests/test_kaggle_orchestration.py",
+    "Amazon4U/tests/test_amazon4u_bundle.py",
+    "Amazon4U/docs/o-offline-orchestration.md"
+  ],
+  "repository_root": "/home/sunf/FSB/Final/Amazon4U/.worktrees/o-offline-four-fix-v1",
+  "project_root": "/home/sunf/FSB/Final/Amazon4U/.worktrees/o-offline-four-fix-v1/Amazon4U",
+  "deployment_decision": "NOT_AUTHORIZED",
+  "hash_limits": {
+    "max_file_bytes": 134217728,
+    "max_total_bytes": 536870912,
+    "file_timeout_ms": 60000,
+    "snapshot_timeout_ms": 300000
+  }
+}

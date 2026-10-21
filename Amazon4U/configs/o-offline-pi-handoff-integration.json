@@ -1,0 +1,85 @@
+{
+  "user_authority_exact": "You can decide best solution when you blocker. No need ESCALATE to me. Decision is your, continue. I only want O-OFFLINE to done",
+  "Pi_decision": "Complete a bounded Pi-owned deterministic metadata integration on a separate derived candidate, reusing the reviewed Worker direct-kernel retention and frozen H exact-type rules. No further native/SDK request or revision of native12. This is an explicitly recorded local recovery choice under the latest delegated O-OFFLINE decision authority, not a default silent implementation-channel switch.",
+  "predecessor_task": "1de84653-a65b-4d26-b86a-03ec61d48dd5",
+  "predecessor_decision_preserved": "ESCALATE",
+  "native12_max_revisions_and_original_SOURCE_receipt_unchanged": true,
+  "original_criteria_reports_sources_and_all_artifacts_preserved": true,
+  "allowed_target_edits": [
+    "Amazon4U/multiautoresearch/adapters/amazon4u.py",
+    "Amazon4U/tests/test_kaggle_orchestration.py",
+    "Amazon4U/docs/o-offline-orchestration.md"
+  ],
+  "scope": [
+    "Move and retain existing generated canonical bootstrap metadata checks before provider callbacks; copy only validated metadata, not opaque data/model objects.",
+    "Align canonical H-owned dict/str input types with actual frozen H check_envelope/validate_run_spec, preserving generic O transport interfaces.",
+    "Extend existing fake controls to prove before-provider refusal and nested-bootstrap callback retention at handoff/publication; no removed/weakened assertions or test IDs."
+  ],
+  "Pi_authorship_disclosure": "The integration changes are Pi-authored, not Worker output. Review must use actual source, preserved pre/post diffs, frozen external H definitions, unchanged inherited tests and fresh actual verification; authorship or source labels are never acceptance evidence.",
+  "new_model_or_native_invocations": 0,
+  "new_O_slots": 0,
+  "carried_O_child_starts_max": 1,
+  "O_gate": "Complete relevant source/caller/dependency/generated-program/two-suite/raw-action safety review, SOURCE PASS, fresh same-artifact receipt and unchanged globally mocked native-provider guard.",
+  "O_limits_unchanged": {
+    "seconds": 60,
+    "actual_child_RSS_bytes": 536870912,
+    "each_complete_stream_bytes": 8388608,
+    "fresh_scratch_bytes": 16777216,
+    "fixture_file_bytes": 2097152,
+    "fixture_concurrent_bytes": 8388608,
+    "files": 128,
+    "pages": 8,
+    "polls": 5,
+    "chunk_bytes": 65536,
+    "owned_empty_after": true
+  },
+  "test_policy": {
+    "training_allowed": false,
+    "generated_paths": [
+      "Amazon4U/data/reports/o-offline-pi-handoff-verification-v1/source-check",
+      "Amazon4U/data/reports/o-offline-pi-handoff-verification-v1/o-only",
+      "Amazon4U/.test-output/o-offline-sdk-correction-oonly-v1"
+    ]
+  },
+  "prospective_integrity_read_amendment": {
+    "prior_snapshot_bytes": 603979776,
+    "new_snapshot_bytes": 671088640,
+    "reason": "Preserving complete predecessor native12 source-check snapshots and raw evidence plus a separate derived candidate exceeds the prior576MiB ceiling. Pi selects only this prospective read-only640MiB ceiling under delegated routine-recovery/resource decisions; no historical policy/evidence rewrite, omission, compression or split to evade old cap.",
+    "file_bytes_unchanged": 134217728,
+    "file_seconds_unchanged": 60,
+    "snapshot_seconds_unchanged": 300,
+    "stream_buffer_bytes_unchanged": 1048576,
+    "test_memory_time_H_and_model_budgets_unchanged": true
+  },
+  "SOURCE_command": [
+    "/home/sunf/FSB/Final/Amazon4U/.venv/bin/python",
+    "-B",
+    "/home/sunf/FSB/Final/Amazon4U/.worktrees/o-offline-pi-handoff-integration-v1/Amazon4U/data/reports/o-offline-pi-handoff-verification-v1/verify_source.py"
+  ],
+  "conditional_O_command": [
+    "/home/sunf/FSB/Final/Amazon4U/.venv/bin/python",
+    "-B",
+    "/home/sunf/FSB/Final/Amazon4U/.worktrees/o-offline-pi-handoff-integration-v1/Amazon4U/data/reports/o-offline-pi-handoff-verification-v1/verify_o_only.py"
+  ],
+  "full_baseline_H_model_training_main_integration_or_deployment_authorized_here": false,
+  "automatic_repair_or_rerun_after_O_starts": false,
+  "original_ten_criteria_OP01_OP18_and_full_verification_still_mandatory": true,
+  "deployment_decision": "NOT_AUTHORIZED",
+  "pre_execution_canonical_device_amendment": {
+    "decision": "Pi includes canonical H device value parity in the same pre-execution metadata integration.",
+    "basis": "Actual frozen scripts/training_harness.py CPUBackend.require compares device=='cpu' and accelerator=='none' exactly. O canonical validate_h_spec and generated context previously lowercased or accepted an empty accelerator;those are not supported canonical H inputs. No backend/device policy is being changed.",
+    "scope": "Same3declared O paths only;reject unsupported canonical H metadata values before callbacks/effects and extend existing negative controls. Generic O transport API and frozen H/source/science remain unchanged.",
+    "execution_so_far": "AST/source/hash only;no project imports/rendering or SOURCE/O child in this Pi phase.",
+    "no_extra_slots_or_calls_or_H_work": true
+  },
+  "current_status": {
+    "SOURCE": "PASS_metadata_only_15851ms_480IDs_31inherited_hashes",
+    "decision": "ESCALATE",
+    "acceptance_scope": "task_only_unaccepted",
+    "deployment_decision": "NOT_AUTHORIZED",
+    "O_slot": "UNUSED_NOT_RELEASED",
+    "remaining_original_source_findings": "data/reports/o-offline-pi-handoff-integration-v1/whole-contract-source-findings.json",
+    "review": "data/reports/o-offline-pi-handoff-integration-v1/review.json",
+    "new_native_SDK_O_full_H_executions": 0
+  }
+}

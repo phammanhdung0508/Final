@@ -1,0 +1,89 @@
+{
+  "requested_amendment_verbatim": "Please approve a **monitoring-only root adjustment to `Amazon4U/` and linked resubmission**, retaining the same seven writable paths and unchanged budgets.",
+  "user_reply_verbatim": "approve",
+  "predecessor_task_id": "363979eb-54ad-43b0-a640-84dc8546e4a6",
+  "predecessor_evidence_ref": "agy-evidence-38a36522-2115-417e-b787-b0c2eb4c4878",
+  "predecessor_evidence_sha256": "3fd933d8bc6115e5d34f683288b669e62de21deede1aaf3fcefef697257d391e",
+  "monitoring_project_root": "/home/sunf/FSB/Final/Amazon4U",
+  "implementation_candidate": "/home/sunf/FSB/Final/Amazon4U/.worktrees/o-offline-implementation-v1/Amazon4U",
+  "allowed_paths": [
+    "Amazon4U/.worktrees/o-offline-implementation-v1/Amazon4U/multiautoresearch/post-training/scripts/kaggle_job.py",
+    "Amazon4U/.worktrees/o-offline-implementation-v1/Amazon4U/multiautoresearch/adapters/__init__.py",
+    "Amazon4U/.worktrees/o-offline-implementation-v1/Amazon4U/multiautoresearch/adapters/amazon4u.py",
+    "Amazon4U/.worktrees/o-offline-implementation-v1/Amazon4U/multiautoresearch/adapters/amazon4u_kernel.py",
+    "Amazon4U/.worktrees/o-offline-implementation-v1/Amazon4U/tests/test_kaggle_orchestration.py",
+    "Amazon4U/.worktrees/o-offline-implementation-v1/Amazon4U/tests/test_amazon4u_bundle.py",
+    "Amazon4U/.worktrees/o-offline-implementation-v1/Amazon4U/docs/o-offline-orchestration.md"
+  ],
+  "original_criteria": [
+    {
+      "id": "OC1",
+      "criterion": "Preserve accepted main/isolated H6,31Python/scientific models/evaluator/D1-D3,all412baseline IDs/35ledgers3564expanded,prior evidence/Git/siblings;modify only seven declared candidate O paths. No H/legacyalgorithm/dependency/instruction edits."
+    },
+    {
+      "id": "OC2",
+      "criterion": "Extend only selected existing runner through explicit Amazon4U profile/spec dispatch before credentials/state/CLI. Pure supplied-input render and fresh owned publication,device/accelerator/private/offline/authority gates;no legacy fallback or new control plane."
+    },
+    {
+      "id": "OC3",
+      "criterion": "Complete independently expected bounded O source/layout/outer manifest and incrementally bounded hydration,with path/type/hash/count/crosslink controls;include H and O/generated runtime without D1/D2/H schema drift or self-authentication claims."
+    },
+    {
+      "id": "OC4",
+      "criterion": "Thin O-owned runtime/callable adapter honors exact H argument/result boundaries and typed argv/stages;all required preflight/work/result/checkpoint errors propagate nonzero. Fake bootstrap/entrypoint testing only;no H direct-script no-op success,realdata loader,modelmath or fake-as-real evidence."
+    },
+    {
+      "id": "OC5",
+      "criterion": "Bounded fake submission/status/log flow includes timeout+accelerator binding,exact owner/slug/version acknowledgment and version-specific refs,ambiguous submission/no automatic repush,exact status tokens,deadline/attempt bounds,redacted capped logs and failure availability distinctions."
+    },
+    {
+      "id": "OC6",
+      "criterion": "Bounded paged/chunked collection counts actual bytes before overlimit writes,with fresh quarantine/no overwrite,independent required source/input/approval/result/checkpoint/log roles/hash/type/version crosslinks;partial/error/unrecoverable never success. No unbounded SDK output/log/decompress helpers as hardcap proof."
+    },
+    {
+      "id": "OC7",
+      "criterion": "Meaningful positive/negative/fake-generated-program and legacy-compatibility controls cover all18OP rows;no new O numeric work/target imports,actual network/credentials/CLI/pip/GPU/unsafeIO/legacy training/tests/probes by Worker. Pi full original approved discovery only,all baseline IDs/cases and limits/scratch/preservation required."
+    },
+    {
+      "id": "OC8",
+      "criterion": "Pi complete source/caller/generatedprogram/test/raw-action review and independent originalbenchmark/criterion/exactorderedlimitation/issue adjudication;no unresolved/stale/unsafe/incomplete gate ACCEPT. Truthful task-only offline scope versus real remote/sourceauth/durability/GPU/study gates,unchanged history/no budgetreset/deployment."
+    }
+  ],
+  "original_matrix": "/home/sunf/FSB/Final/Amazon4U/data/reports/o-offline-preparation-v1/requirements.json",
+  "old_manifest_unchanged": true,
+  "source_162_hashes_unchanged": true,
+  "full_baseline_412_reused_not_rerun": true,
+  "native_actual_before": 0,
+  "SDK_actual_before": 0,
+  "full_actual_before": 1,
+  "candidate_starts_before": 0,
+  "remaining_native_max": 2,
+  "max_revisions": 1,
+  "native_timeout_ms": 1800000,
+  "remaining_candidate_full_max": 2,
+  "verification_command": {
+    "command": "/home/sunf/FSB/Final/Amazon4U/.venv/bin/python",
+    "args": [
+      "-B",
+      "/home/sunf/FSB/Final/Amazon4U/.worktrees/o-offline-implementation-v1/Amazon4U/data/reports/o-offline-verification-v1/verify_full.py",
+      "candidate"
+    ],
+    "cwd": "/home/sunf/FSB/Final/Amazon4U/.worktrees/o-offline-implementation-v1/Amazon4U"
+  },
+  "artifact_policy": {
+    "max_file_bytes": 134217728,
+    "max_total_bytes": 536870912,
+    "file_timeout_ms": 60000,
+    "snapshot_timeout_ms": 300000
+  },
+  "deployment_decision": "NOT_AUTHORIZED",
+  "status": "ESCALATE_CLEAN_WORKSPACE_GATE_NO_WORKER_STARTED",
+  "task_id": "2a2b3d04-ded8-4b99-a04a-50c5581c460e",
+  "monitoring_amendment_discovery_passed": true,
+  "current_review": "data/reports/o-offline-submission-recovery-v1/review.json",
+  "root_cause_review": "data/reports/o-offline-submission-recovery-v1/root-cause-review.md",
+  "candidate_starts_after": 0,
+  "native_actual_after": 0,
+  "full_actual_after": 1,
+  "automatic_continuation_authorized": false
+}

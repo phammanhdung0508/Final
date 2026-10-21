@@ -1,0 +1,99 @@
+{
+  "user_approval_verbatim": "I agree with authorize a new correction round. please proceed",
+  "standing_setup_direction_verbatim": "ok, I approve. these block like this no need me to confirm. you can decide yourself",
+  "deliverable": "same_O_OFFLINE",
+  "round": 2,
+  "original_native_task": "0ea235af-2aa1-47c5-a5e7-120969d03b36",
+  "original_native_decision_unchanged": "ESCALATE",
+  "source_invocations_before": 2,
+  "round2_native_max": 2,
+  "deliverable_native_max_authorized": 4,
+  "max_revisions": 1,
+  "worker_timeout_ms": 1800000,
+  "SDK_authorized": false,
+  "new_baseline_authorized": false,
+  "full_starts_before": 2,
+  "candidate_full_starts_before": 0,
+  "candidate_full_remaining_max": 2,
+  "O_full_max": 4,
+  "H_inferred_steps_before": 180,
+  "H_max": 256,
+  "new_O_modelsteps": 0,
+  "repository_root": "/home/sunf/FSB/Final/Amazon4U/.worktrees/o-offline-round2-v1",
+  "project_root": "/home/sunf/FSB/Final/Amazon4U/.worktrees/o-offline-round2-v1/Amazon4U",
+  "working_directory": "/home/sunf/FSB/Final/Amazon4U/.worktrees/o-offline-round2-v1/Amazon4U",
+  "allowed_paths": [
+    "Amazon4U/multiautoresearch/post-training/scripts/kaggle_job.py",
+    "Amazon4U/multiautoresearch/adapters/__init__.py",
+    "Amazon4U/multiautoresearch/adapters/amazon4u.py",
+    "Amazon4U/multiautoresearch/adapters/amazon4u_kernel.py",
+    "Amazon4U/tests/test_kaggle_orchestration.py",
+    "Amazon4U/tests/test_amazon4u_bundle.py",
+    "Amazon4U/docs/o-offline-orchestration.md"
+  ],
+  "predeclared_benchmark": {
+    "command": "/home/sunf/FSB/Final/Amazon4U/.venv/bin/python",
+    "args": [
+      "-B",
+      "/home/sunf/FSB/Final/Amazon4U/.worktrees/o-offline-round2-v1/Amazon4U/data/reports/o-offline-round2-verification-v1/verify_full.py",
+      "candidate"
+    ]
+  },
+  "original_criteria_unchanged": [
+    {
+      "id": "OC1",
+      "criterion": "Preserve accepted main/isolated H6,31Python/scientific models/evaluator/D1-D3,all412baseline IDs/35ledgers3564expanded,prior evidence/Git/siblings;modify only seven declared candidate O paths. No H/legacyalgorithm/dependency/instruction edits."
+    },
+    {
+      "id": "OC2",
+      "criterion": "Extend only selected existing runner through explicit Amazon4U profile/spec dispatch before credentials/state/CLI. Pure supplied-input render and fresh owned publication,device/accelerator/private/offline/authority gates;no legacy fallback or new control plane."
+    },
+    {
+      "id": "OC3",
+      "criterion": "Complete independently expected bounded O source/layout/outer manifest and incrementally bounded hydration,with path/type/hash/count/crosslink controls;include H and O/generated runtime without D1/D2/H schema drift or self-authentication claims."
+    },
+    {
+      "id": "OC4",
+      "criterion": "Thin O-owned runtime/callable adapter honors exact H argument/result boundaries and typed argv/stages;all required preflight/work/result/checkpoint errors propagate nonzero. Fake bootstrap/entrypoint testing only;no H direct-script no-op success,realdata loader,modelmath or fake-as-real evidence."
+    },
+    {
+      "id": "OC5",
+      "criterion": "Bounded fake submission/status/log flow includes timeout+accelerator binding,exact owner/slug/version acknowledgment and version-specific refs,ambiguous submission/no automatic repush,exact status tokens,deadline/attempt bounds,redacted capped logs and failure availability distinctions."
+    },
+    {
+      "id": "OC6",
+      "criterion": "Bounded paged/chunked collection counts actual bytes before overlimit writes,with fresh quarantine/no overwrite,independent required source/input/approval/result/checkpoint/log roles/hash/type/version crosslinks;partial/error/unrecoverable never success. No unbounded SDK output/log/decompress helpers as hardcap proof."
+    },
+    {
+      "id": "OC7",
+      "criterion": "Meaningful positive/negative/fake-generated-program and legacy-compatibility controls cover all18OP rows;no new O numeric work/target imports,actual network/credentials/CLI/pip/GPU/unsafeIO/legacy training/tests/probes by Worker. Pi full original approved discovery only,all baseline IDs/cases and limits/scratch/preservation required."
+    },
+    {
+      "id": "OC8",
+      "criterion": "Pi complete source/caller/generatedprogram/test/raw-action review and independent originalbenchmark/criterion/exactorderedlimitation/issue adjudication;no unresolved/stale/unsafe/incomplete gate ACCEPT. Truthful task-only offline scope versus real remote/sourceauth/durability/GPU/study gates,unchanged history/no budgetreset/deployment."
+    }
+  ],
+  "original_matrix": "/home/sunf/FSB/Final/Amazon4U/.worktrees/o-offline-round2-v1/Amazon4U/data/reports/o-offline-round2-verification-v1/inputs/original-assignment/requirements.json",
+  "copied_existing_bootstrap_commit_not_newcommit": "beed9ee4538d8e002bf8b2682c4379ace4947e7f",
+  "deployment_decision": "NOT_AUTHORIZED",
+  "root_selection_justification": "Routine clean handoff under standing direction;copyexistingbootstrapmetadata,zero newcommits/remotes,oldroot untouched;newindexstatcache exception disclosed and logicallyverified. Worker restores exactarchivedcandidate7 then corrects. No additional baseline.",
+  "status": "ESCALATE_2_PROCESS_BOUNDARY_TIMEOUT_NOT_BUDGET_EXHAUSTION",
+  "current_review": "data/reports/o-offline-correction-round2-v1/review.json",
+  "final_review_supplement": "data/reports/o-offline-correction-round2-v1/final-review-supplement.json",
+  "new_owned_repo_raw_index_preservation": "UNVERIFIED_DRIFT_FROM_SETUP_SEAL_LOGICAL_INDEX_UNCHANGED",
+  "all_original_five_repositories_raw_Git_metadata": "PASS_UNCHANGED",
+  "root_cause_review": "data/reports/o-offline-correction-round2-v1/root-cause-review.md",
+  "native_task_id": "41d83cbe-4813-45fe-ab36-c549c5fb42ba",
+  "native_invocation_id": "fb20499b-2143-4a71-bb71-f7abd7bcab3a",
+  "native_O_actual_current": 3,
+  "round2_native_actual": 1,
+  "round2_revision_unused": 1,
+  "budget_exhausted": false,
+  "current_Worker_report_available": false,
+  "mandatory_candidate_evaluation_complete": false,
+  "candidate_full_starts_current": 0,
+  "automatic_remaining_revision_or_thirdround_authorized": false,
+  "acceptance_scope_current": "task_only_O_OFFLINE_not_accepted",
+  "documentation": "docs/o-offline-correction-round2.md",
+  "evidence": "data/reports/o-offline-correction-round2-v1"
+}

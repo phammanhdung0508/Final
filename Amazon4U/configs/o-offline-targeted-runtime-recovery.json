@@ -1,0 +1,59 @@
+{
+  "schema": "amazon4u-approved-targeted-runtime-recovery-v1",
+  "approval_record": "/home/sunf/FSB/Final/Amazon4U/data/reports/o-offline-targeted-runtime-recovery-v1/approval.txt",
+  "user_execution_approval_verbatim": "approve",
+  "predecessor_task": "4418b621-7111-45de-bf27-d23d5ab44a08",
+  "all_prior_artifacts_evidence_decisions_preserved": true,
+  "new_native_invocations_max": 1,
+  "prior_O_native_actual": 10,
+  "cumulative_O_native_ceiling": 11,
+  "worker_timeout_ms": 3600000,
+  "max_revisions": 0,
+  "retries_or_SDK_fallback": false,
+  "O_SDK_API_attempts_preserved": 3,
+  "O_SDK_HTTP_reviews_preserved": 1,
+  "O_full_actual_preserved": 4,
+  "new_Pi_O_only_children_max": 1,
+  "new_full_authorization": false,
+  "automatic_transfer_old_test_allocations": false,
+  "H_updates_authorized": 0,
+  "H_steps_inferred_preserved": 252,
+  "historical_H_cap_preserved": 256,
+  "prior_288_reference_not_authority": true,
+  "patch_scope": [
+    "N10-S01 canonical H handoff/direct caller compatibility",
+    "N10-S02 truthful negative stages/direct prerequisites"
+  ],
+  "caller_callee_source_AST_audit": "Actual definitions/values/types/ownership/failure stages and all directly affected callers/fixtures;not a compatible label.",
+  "OP01_OP18_original_criteria_H_REF_science_unchanged": true,
+  "allowed_paths": [
+    "Amazon4U/multiautoresearch/post-training/scripts/kaggle_job.py",
+    "Amazon4U/multiautoresearch/adapters/__init__.py",
+    "Amazon4U/multiautoresearch/adapters/amazon4u.py",
+    "Amazon4U/multiautoresearch/adapters/amazon4u_kernel.py",
+    "Amazon4U/tests/test_kaggle_orchestration.py",
+    "Amazon4U/tests/test_amazon4u_bundle.py",
+    "Amazon4U/docs/o-offline-orchestration.md"
+  ],
+  "repository_root": "/home/sunf/FSB/Final/Amazon4U/.worktrees/o-offline-targeted-runtime-recovery-v1",
+  "project_root": "/home/sunf/FSB/Final/Amazon4U/.worktrees/o-offline-targeted-runtime-recovery-v1/Amazon4U",
+  "deployment_decision": "NOT_AUTHORIZED",
+  "hash_limits": {
+    "max_file_bytes": 134217728,
+    "max_total_bytes": 536870912,
+    "file_timeout_ms": 60000,
+    "snapshot_timeout_ms": 300000
+  },
+  "Pi_O_limits": {
+    "seconds": 60,
+    "RSS_bytes": 536870912,
+    "stream_bytes_each": 8388608,
+    "scratch_bytes": 16777216,
+    "concurrent_fixture_bytes": 8388608,
+    "file_object_bytes": 2097152,
+    "files": 128,
+    "pages": 8,
+    "polls": 5,
+    "chunk_bytes": 65536
+  }
+}

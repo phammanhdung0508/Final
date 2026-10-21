@@ -1,0 +1,75 @@
+{
+  "schema": "O-exceptional-contract-repair-authority-v1",
+  "user_approval_verbatim": "Approve",
+  "approval_request_verbatim": "Approve **one exceptional native agy invocation (\u226430 minutes)** and **one full regression**, prospectively allowing inferred H steps **252 \u2192 288**, above the existing **256 cap**\u2014with **no extra baseline or automatic rerun**?",
+  "prior_repair_plan_approval_verbatim": "ok, reparir plain lgtm! I approve it. please proceed",
+  "same_deliverable": "O_OFFLINE",
+  "exceptional_after_three_normal_rounds": true,
+  "prior_native_actual": 5,
+  "additional_native_max": 1,
+  "cumulative_native_max": 6,
+  "round2_unused_slot_nontransferable": 1,
+  "max_revisions": 0,
+  "worker_ms": 1800000,
+  "additional_SDK": 0,
+  "SDK_API_attempts_preserved": 3,
+  "SDK_HTTP_reviews_preserved": 1,
+  "prior_O_full_starts": 4,
+  "additional_candidate_full_max": 1,
+  "O_full_max": 5,
+  "additional_baseline_or_subset_or_rerun": false,
+  "H_successful_steps_before_inferred": 252,
+  "original_H_cap_historical_unchanged": 256,
+  "prospective_exception_H_cap": 288,
+  "inherited_full_steps_inferred": 36,
+  "new_O_model_Adam_steps": 0,
+  "git_root": "/home/sunf/FSB/Final/Amazon4U/.worktrees/o-offline-contract-repair-v1",
+  "project_root": "/home/sunf/FSB/Final/Amazon4U/.worktrees/o-offline-contract-repair-v1/Amazon4U",
+  "working_directory": "/home/sunf/FSB/Final/Amazon4U/.worktrees/o-offline-contract-repair-v1/Amazon4U",
+  "bootstrap_existing_HEAD": "beed9ee4538d8e002bf8b2682c4379ace4947e7f",
+  "new_commits_remotes": 0,
+  "worker_execution": "source/read/metadata/AST/patch only,no project/framework/model imports/tests/generatedprograms/semantic probes;round3microchecks exception not inherited",
+  "allowed_paths": [
+    "Amazon4U/multiautoresearch/post-training/scripts/kaggle_job.py",
+    "Amazon4U/multiautoresearch/adapters/__init__.py",
+    "Amazon4U/multiautoresearch/adapters/amazon4u.py",
+    "Amazon4U/multiautoresearch/adapters/amazon4u_kernel.py",
+    "Amazon4U/tests/test_kaggle_orchestration.py",
+    "Amazon4U/tests/test_amazon4u_bundle.py",
+    "Amazon4U/docs/o-offline-orchestration.md"
+  ],
+  "deployment_decision": "NOT_AUTHORIZED",
+  "main_source_integration": false,
+  "Pi_role": "scope/contracts/handoff/source+rawtrace+safety review,one independently released original full,exactcriterion/orderedlimitations/issues acceptance",
+  "output_directory": "/home/sunf/FSB/Final/Amazon4U/data/reports/o-offline-contract-repair-v1",
+  "candidate_verifier": "/home/sunf/FSB/Final/Amazon4U/.worktrees/o-offline-contract-repair-v1/Amazon4U/data/reports/o-offline-contract-repair-verification-v1",
+  "hash_limits": {
+    "max_file_bytes": 134217728,
+    "max_total_bytes": 536870912,
+    "file_timeout_ms": 60000,
+    "snapshot_timeout_ms": 300000
+  },
+  "test_limits": {
+    "child_seconds": 240,
+    "peak_RSS_bytes": 2147483648,
+    "each_complete_stream_bytes": 8388608,
+    "fresh_scratch_bytes": 67108864,
+    "strict_empty_after": true,
+    "outer_seconds": 900,
+    "training_allowed": "ONLY inherited approved H tinyCPU36inferredsteps in one full;newO0"
+  },
+  "benchmark": {
+    "command": "/home/sunf/FSB/Final/Amazon4U/.venv/bin/python",
+    "args": [
+      "-B",
+      "/home/sunf/FSB/Final/Amazon4U/.worktrees/o-offline-contract-repair-v1/Amazon4U/data/reports/o-offline-contract-repair-verification-v1/verify_full.py",
+      "candidate"
+    ]
+  },
+  "predecessor_native_task_ids": [
+    "0ea235af-2aa1-47c5-a5e7-120969d03b36",
+    "41d83cbe-4813-45fe-ab36-c549c5fb42ba",
+    "43210e69-369d-4819-9be9-ae1b9f8a84ed"
+  ],
+  "reports_and_original_criteria_unchanged": true
+}

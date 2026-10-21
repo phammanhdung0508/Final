@@ -1,0 +1,62 @@
+{
+  "schema": "amazon4u-approved-new-corrective-task-v1",
+  "approval_verbatim": "APPROVE, please proceed with it",
+  "approval_record": "/home/sunf/FSB/Final/Amazon4U/data/reports/o-offline-corrective-task-v1/approval.txt",
+  "predecessor_task": "85fbd79b-48e7-4557-81ee-c15ada1df7ce",
+  "predecessor_decision_preserved": "ESCALATE",
+  "new_task_explicitly_approved": true,
+  "reopen_or_reassessment": false,
+  "counters_reset": false,
+  "prior_O_native_actual": 6,
+  "additional_native_max": 1,
+  "cumulative_O_native_ceiling": 7,
+  "worker_timeout_ms": 1800000,
+  "max_revisions": 0,
+  "additional_SDK": 0,
+  "O_SDK_API_attempts_preserved": 3,
+  "O_SDK_HTTP_reviews_preserved": 1,
+  "O_full_actual_before": 4,
+  "carried_unused_full_allocation": 1,
+  "additional_full_allocations": 0,
+  "O_full_ceiling_unchanged": 5,
+  "Pi_O_only_preflight_max": 1,
+  "preflight_H_model_Adam_updates": 0,
+  "H_steps_before_inferred": 252,
+  "H_ceiling_carried_unchanged": 288,
+  "historical_H_cap_preserved": 256,
+  "baseline_or_rerun": false,
+  "new_O_updates": 0,
+  "allowed_paths": [
+    "Amazon4U/multiautoresearch/post-training/scripts/kaggle_job.py",
+    "Amazon4U/multiautoresearch/adapters/__init__.py",
+    "Amazon4U/multiautoresearch/adapters/amazon4u.py",
+    "Amazon4U/multiautoresearch/adapters/amazon4u_kernel.py",
+    "Amazon4U/tests/test_kaggle_orchestration.py",
+    "Amazon4U/tests/test_amazon4u_bundle.py",
+    "Amazon4U/docs/o-offline-orchestration.md"
+  ],
+  "repository_root": "/home/sunf/FSB/Final/Amazon4U/.worktrees/o-offline-corrective-task-v1",
+  "project_root": "/home/sunf/FSB/Final/Amazon4U/.worktrees/o-offline-corrective-task-v1/Amazon4U",
+  "worker_actions": "Source/AST/metadata/inline patch only;no runtime imports/tests/semantic probes or explicit helper/artifact writes outside seven paths;ordinary native automatic logs are not implementation scratch.",
+  "deployment_decision": "NOT_AUTHORIZED",
+  "preflight_limits": {
+    "seconds": 60,
+    "RSS_bytes": 536870912,
+    "each_stream_bytes": 8388608,
+    "scratch_bytes": 16777216
+  },
+  "full_limits": {
+    "seconds": 240,
+    "RSS_bytes": 2147483648,
+    "each_stream_bytes": 8388608,
+    "scratch_bytes": 67108864,
+    "outer_seconds": 900
+  },
+  "hash_limits": {
+    "max_file_bytes": 134217728,
+    "max_total_bytes": 536870912,
+    "file_timeout_ms": 60000,
+    "snapshot_timeout_ms": 300000
+  },
+  "no_OS_sandbox_or_complete_mediation_claim": true
+}

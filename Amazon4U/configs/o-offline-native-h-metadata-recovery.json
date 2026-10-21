@@ -1,0 +1,77 @@
+{
+  "status": "APPROVED_BOUNDED_AUTONOMOUS_RECOVERY_PREPARING",
+  "authority": "/home/sunf/FSB/Final/Amazon4U/data/reports/o-offline-native-h-metadata-v1/approval.txt",
+  "project": "Amazon4U",
+  "repository_root": "/home/sunf/FSB/Final/Amazon4U/.worktrees/o-offline-native-h-metadata-v1",
+  "project_root": "/home/sunf/FSB/Final/Amazon4U/.worktrees/o-offline-native-h-metadata-v1/Amazon4U",
+  "source_input": "preserved first SDK three-fix preview over native11 seven-file base",
+  "new_native_invocations_max": 1,
+  "prior_O_native": 11,
+  "prospective_native_count_if_started": 12,
+  "native_timeout_ms": 1800000,
+  "max_revisions": 0,
+  "SDK_requests": 0,
+  "automatic_retries": false,
+  "scope": [
+    "canonical11field H-run-v1 envelope metadata/actual retained handoff/publication",
+    "canonical H-authorization-v1 ownership distinct from transport authority",
+    "dependent source-only fake controls and concrete caller audit"
+  ],
+  "allowed_paths": [
+    "Amazon4U/multiautoresearch/post-training/scripts/kaggle_job.py",
+    "Amazon4U/multiautoresearch/adapters/__init__.py",
+    "Amazon4U/multiautoresearch/adapters/amazon4u.py",
+    "Amazon4U/multiautoresearch/adapters/amazon4u_kernel.py",
+    "Amazon4U/tests/test_kaggle_orchestration.py",
+    "Amazon4U/tests/test_amazon4u_bundle.py",
+    "Amazon4U/docs/o-offline-orchestration.md"
+  ],
+  "restoration_only_paths": [
+    "Amazon4U/multiautoresearch/post-training/scripts/kaggle_job.py",
+    "Amazon4U/multiautoresearch/adapters/__init__.py"
+  ],
+  "same_existing_unused_Pi_O_slot": 1,
+  "new_O_slots": 0,
+  "O_release": "complete relevant source/dependency/caller/generated-program/test/raw-action safety review,SOURCE PASS,fresh same-hash receipt",
+  "O_limits": {
+    "seconds": 60,
+    "actual_child_RSS_bytes": 536870912,
+    "complete_stream_bytes_each": 8388608,
+    "scratch_bytes": 16777216,
+    "fixture_file_bytes": 2097152,
+    "fixture_concurrent_bytes": 8388608,
+    "files": 128,
+    "pages": 8,
+    "polls": 5,
+    "chunk_bytes": 65536,
+    "owned_empty_after": true
+  },
+  "Worker_target_execution": false,
+  "H_or_framework_imports_Adam_updates_authorized": 0,
+  "full_baseline_authorized_this_step": false,
+  "original_criteria_and_OP01_OP18_mandatory": true,
+  "hash_limits": {
+    "max_file_bytes": 134217728,
+    "max_total_bytes": 603979776,
+    "file_timeout_ms": 60000,
+    "snapshot_timeout_ms": 300000
+  },
+  "prior_O_SDK_API": 5,
+  "prior_O_SDK_HTTP": 3,
+  "prior_O_full_starts": 4,
+  "historical_H_steps": {
+    "value": 252,
+    "qualification": "INFERRED_not_instrumented"
+  },
+  "deployment_decision": "NOT_AUTHORIZED",
+  "SOURCE_command": [
+    "/home/sunf/FSB/Final/Amazon4U/.venv/bin/python",
+    "-B",
+    "/home/sunf/FSB/Final/Amazon4U/.worktrees/o-offline-native-h-metadata-v1/Amazon4U/data/reports/o-offline-native-h-metadata-verification-v1/verify_source.py"
+  ],
+  "conditional_O_command": [
+    "/home/sunf/FSB/Final/Amazon4U/.venv/bin/python",
+    "-B",
+    "/home/sunf/FSB/Final/Amazon4U/.worktrees/o-offline-native-h-metadata-v1/Amazon4U/data/reports/o-offline-native-h-metadata-verification-v1/verify_o_only.py"
+  ]
+}

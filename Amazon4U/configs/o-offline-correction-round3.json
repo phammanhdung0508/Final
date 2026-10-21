@@ -1,0 +1,160 @@
+{
+  "schema": "amazon4u-O-OFFLINE-round3-authority-v1",
+  "user_approval_verbatim": "I agree, I think the rule is too strict for Worker ( agy ) get more information when implement",
+  "round": 3,
+  "same_deliverable": "O_OFFLINE",
+  "predecessor_tasks": [
+    "0ea235af-2aa1-47c5-a5e7-120969d03b36",
+    "41d83cbe-4813-45fe-ab36-c549c5fb42ba"
+  ],
+  "predecessor_decisions_unchanged": "ESCALATE",
+  "native_actual_before": 3,
+  "round3_native_max": 2,
+  "cumulative_native_max": 5,
+  "round2_unused_nontransferable": 1,
+  "max_revisions": 1,
+  "worker_ms": 1800000,
+  "SDK_authorized": false,
+  "O_full_starts_before": 2,
+  "candidate_full_starts_before": 0,
+  "candidate_full_remaining_max": 2,
+  "O_full_max": 4,
+  "additional_baseline_authorized": false,
+  "H_inferred_steps_before": 180,
+  "H_max": 256,
+  "new_O_or_microcheck_model_steps": 0,
+  "repository_root": "/home/sunf/FSB/Final/Amazon4U/.worktrees/o-offline-round3-v1",
+  "project_root": "/home/sunf/FSB/Final/Amazon4U/.worktrees/o-offline-round3-v1/Amazon4U",
+  "working_directory": "/home/sunf/FSB/Final/Amazon4U/.worktrees/o-offline-round3-v1/Amazon4U",
+  "allowed_paths": [
+    "Amazon4U/multiautoresearch/post-training/scripts/kaggle_job.py",
+    "Amazon4U/multiautoresearch/adapters/__init__.py",
+    "Amazon4U/multiautoresearch/adapters/amazon4u.py",
+    "Amazon4U/multiautoresearch/adapters/amazon4u_kernel.py",
+    "Amazon4U/tests/test_kaggle_orchestration.py",
+    "Amazon4U/tests/test_amazon4u_bundle.py",
+    "Amazon4U/docs/o-offline-orchestration.md"
+  ],
+  "original_acceptance_criteria_verbatim": [
+    {
+      "id": "OC1",
+      "criterion": "Preserve accepted main/isolated H6,31Python/scientific models/evaluator/D1-D3,all412baseline IDs/35ledgers3564expanded,prior evidence/Git/siblings;modify only seven declared candidate O paths. No H/legacyalgorithm/dependency/instruction edits."
+    },
+    {
+      "id": "OC2",
+      "criterion": "Extend only selected existing runner through explicit Amazon4U profile/spec dispatch before credentials/state/CLI. Pure supplied-input render and fresh owned publication,device/accelerator/private/offline/authority gates;no legacy fallback or new control plane."
+    },
+    {
+      "id": "OC3",
+      "criterion": "Complete independently expected bounded O source/layout/outer manifest and incrementally bounded hydration,with path/type/hash/count/crosslink controls;include H and O/generated runtime without D1/D2/H schema drift or self-authentication claims."
+    },
+    {
+      "id": "OC4",
+      "criterion": "Thin O-owned runtime/callable adapter honors exact H argument/result boundaries and typed argv/stages;all required preflight/work/result/checkpoint errors propagate nonzero. Fake bootstrap/entrypoint testing only;no H direct-script no-op success,realdata loader,modelmath or fake-as-real evidence."
+    },
+    {
+      "id": "OC5",
+      "criterion": "Bounded fake submission/status/log flow includes timeout+accelerator binding,exact owner/slug/version acknowledgment and version-specific refs,ambiguous submission/no automatic repush,exact status tokens,deadline/attempt bounds,redacted capped logs and failure availability distinctions."
+    },
+    {
+      "id": "OC6",
+      "criterion": "Bounded paged/chunked collection counts actual bytes before overlimit writes,with fresh quarantine/no overwrite,independent required source/input/approval/result/checkpoint/log roles/hash/type/version crosslinks;partial/error/unrecoverable never success. No unbounded SDK output/log/decompress helpers as hardcap proof."
+    },
+    {
+      "id": "OC7",
+      "criterion": "Meaningful positive/negative/fake-generated-program and legacy-compatibility controls cover all18OP rows;no new O numeric work/target imports,actual network/credentials/CLI/pip/GPU/unsafeIO/legacy training/tests/probes by Worker. Pi full original approved discovery only,all baseline IDs/cases and limits/scratch/preservation required."
+    },
+    {
+      "id": "OC8",
+      "criterion": "Pi complete source/caller/generatedprogram/test/raw-action review and independent originalbenchmark/criterion/exactorderedlimitation/issue adjudication;no unresolved/stale/unsafe/incomplete gate ACCEPT. Truthful task-only offline scope versus real remote/sourceauth/durability/GPU/study gates,unchanged history/no budgetreset/deployment."
+    }
+  ],
+  "active_acceptance_criteria": [
+    "Preserve accepted main/isolated H6,31Python/scientific models/evaluator/D1-D3,all412baseline IDs/35ledgers3564expanded,prior evidence/Git/siblings;modify only seven declared candidate O paths. No H/legacyalgorithm/dependency/instruction edits.",
+    "Extend only selected existing runner through explicit Amazon4U profile/spec dispatch before credentials/state/CLI. Pure supplied-input render and fresh owned publication,device/accelerator/private/offline/authority gates;no legacy fallback or new control plane.",
+    "Complete independently expected bounded O source/layout/outer manifest and incrementally bounded hydration,with path/type/hash/count/crosslink controls;include H and O/generated runtime without D1/D2/H schema drift or self-authentication claims.",
+    "Thin O-owned runtime/callable adapter honors exact H argument/result boundaries and typed argv/stages;all required preflight/work/result/checkpoint errors propagate nonzero. Fake bootstrap/entrypoint testing only;no H direct-script no-op success,realdata loader,modelmath or fake-as-real evidence.",
+    "Bounded fake submission/status/log flow includes timeout+accelerator binding,exact owner/slug/version acknowledgment and version-specific refs,ambiguous submission/no automatic repush,exact status tokens,deadline/attempt bounds,redacted capped logs and failure availability distinctions.",
+    "Bounded paged/chunked collection counts actual bytes before overlimit writes,with fresh quarantine/no overwrite,independent required source/input/approval/result/checkpoint/log roles/hash/type/version crosslinks;partial/error/unrecoverable never success. No unbounded SDK output/log/decompress helpers as hardcap proof.",
+    "OC7-R3 (explicit user-approved PROSPECTIVE Worker-execution amendment only): Meaningful positive/negative/fake-generated-program and legacy-compatibility controls cover all18OP rows;no new O numeric work/project or model imports,actual network/credentials/Kaggle CLI/pip/GPU/unsafeIO/legacy training/project tests or generated O/legacy program execution by Worker. Worker may execute ONLY the predeclared bounded in-memory standard-library reference microchecks via the protected launcher,at most6per invocation/12per round,5s wall/2sCPU/128MiB address-space/64KiB file ceiling,with immutable audit outputs. Existing source read/metadata-AST/patch remains allowed. Pi full original approved discovery only,all baseline IDs/cases and limits/scratch/preservation required. Original OC7 and all past process failures remain unchanged and unaccepted;this exception applies only to newly authorized round3.",
+    "Pi complete source/caller/generatedprogram/test/raw-action review and independent originalbenchmark/criterion/exactorderedlimitation/issue adjudication;no unresolved/stale/unsafe/incomplete gate ACCEPT. Truthful task-only offline scope versus real remote/sourceauth/durability/GPU/study gates,unchanged history/no budgetreset/deployment."
+  ],
+  "prospective_amendment": {
+    "criterion": "OC7-R3",
+    "original_exact": "Meaningful positive/negative/fake-generated-program and legacy-compatibility controls cover all18OP rows;no new O numeric work/target imports,actual network/credentials/CLI/pip/GPU/unsafeIO/legacy training/tests/probes by Worker. Pi full original approved discovery only,all baseline IDs/cases and limits/scratch/preservation required.",
+    "new_active_exact": "OC7-R3 (explicit user-approved PROSPECTIVE Worker-execution amendment only): Meaningful positive/negative/fake-generated-program and legacy-compatibility controls cover all18OP rows;no new O numeric work/project or model imports,actual network/credentials/Kaggle CLI/pip/GPU/unsafeIO/legacy training/project tests or generated O/legacy program execution by Worker. Worker may execute ONLY the predeclared bounded in-memory standard-library reference microchecks via the protected launcher,at most6per invocation/12per round,5s wall/2sCPU/128MiB address-space/64KiB file ceiling,with immutable audit outputs. Existing source read/metadata-AST/patch remains allowed. Pi full original approved discovery only,all baseline IDs/cases and limits/scratch/preservation required. Original OC7 and all past process failures remain unchanged and unaccepted;this exception applies only to newly authorized round3.",
+    "applies_round": 3,
+    "retroactive_approval": false,
+    "other_criteria_unchanged": true
+  },
+  "benchmark": {
+    "command": "/home/sunf/FSB/Final/Amazon4U/.venv/bin/python",
+    "args": [
+      "-B",
+      "/home/sunf/FSB/Final/Amazon4U/.worktrees/o-offline-round3-v1/Amazon4U/data/reports/o-offline-round3-verification-v1/verify_full.py",
+      "candidate"
+    ]
+  },
+  "microchecks_policy": {
+    "schema": "O-round3-microchecks-v1",
+    "root": "/home/sunf/FSB/Final/Amazon4U/.worktrees/o-offline-round3-v1/Amazon4U/data/reports/o-offline-round3-verification-v1/microcheck-output",
+    "identity": [
+      2050,
+      3415809,
+      1000,
+      16832
+    ],
+    "checks": [
+      "parser-defaults",
+      "path-spelling",
+      "json-types"
+    ],
+    "max_per_worker_slot": 6,
+    "max_total": 12,
+    "max_record_bytes": 4096,
+    "wall_seconds": 5,
+    "CPU_seconds": 2,
+    "virtual_memory_bytes": 134217728,
+    "file_size_bytes": 65536,
+    "reference_only_not_project_tests": true
+  },
+  "microcheck_generated_paths": [
+    "Amazon4U/data/reports/o-offline-round3-verification-v1/microcheck-output"
+  ],
+  "new_commits": 0,
+  "new_remotes": 0,
+  "newroot_cache_initialization": {
+    "command": [
+      "git",
+      "-C",
+      "/home/sunf/FSB/Final/Amazon4U/.worktrees/o-offline-round3-v1",
+      "status",
+      "--porcelain=v1",
+      "--untracked-files=all"
+    ],
+    "stdout": "",
+    "stderr": "",
+    "logical_index_unchanged": true,
+    "old_repositories_not_written": true
+  },
+  "deployment_decision": "NOT_AUTHORIZED",
+  "status": "ESCALATE_3_FINAL479_2FAIL_ORIGINAL_GUARDS_OPEN_NOT_ACCEPTED",
+  "current_review": "data/reports/o-offline-correction-round3-v1/review.json",
+  "root_cause_review": "data/reports/o-offline-correction-round3-v1/root-cause-review.md",
+  "remaining_part_matrix": "data/reports/o-offline-correction-round3-v1/remaining-part-matrix.json",
+  "native_task_id": "43210e69-369d-4819-9be9-ae1b9f8a84ed",
+  "native_revision_current": 1,
+  "O_native_actual_current": 5,
+  "O_SDK_actual_current": 0,
+  "O_full_actual_current": 4,
+  "candidate_full_actual_current": 2,
+  "source_and_full_remaining": 0,
+  "H_successful_steps_inferred_current": 252,
+  "final_suite": {"tests": 479, "failures": 2, "errors": 0, "skips": 0, "all_412_inherited_pass": true},
+  "acceptance_scope_current": "task_only_O_OFFLINE_not_accepted",
+  "normal_native_loop_stop": true,
+  "SDK_review_proposed_only_not_authorized": true,
+  "more_source_fulltests_baselines_numericsteps_mainintegration_or_deployment_authorized": false,
+  "documentation": "docs/o-offline-correction-round3.md",
+  "evidence": "data/reports/o-offline-correction-round3-v1"
+}
