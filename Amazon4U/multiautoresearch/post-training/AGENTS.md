@@ -1,6 +1,16 @@
 # Agent Instructions
 
-> **Amazon4U scope override:** inherit `../AGENTS.md` and
+## Current Amazon4U policy
+
+Inherit `../AGENTS.md` and `../../docs/worker-delegation-policy.md`.
+Direct single-agent ownership is the default. Pi may implement authorized changes
+without agy. Delegation and second-model review are optional. Original review,
+science, safety, and execution gates remain binding. Legacy agent workflows below
+are reference only, not a requirement to delegate or permission to execute.
+
+## Preserved framework instructions
+
+> **Historical Amazon4U governance override, retired:** inherit `../AGENTS.md` and
 > `../../docs/worker-delegation-policy.md`. Native agy through the delegation extension
 > is the default for substantive implementation; SDK is not native agy and requires
 > explicit user approval before EVERY request. Native recovery maxima are separately

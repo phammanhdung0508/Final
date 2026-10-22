@@ -1,6 +1,11 @@
 # Training Harness requirement/evidence matrix
 
-> Historical preparation matrix; all HC/TH requirements and recorded evidence below
+Current workflow follows [direct single-agent ownership](worker-delegation-policy.md).
+Mandatory Pi–agy handoffs and the prospective 2 + 2 + 2 process are retired.
+The routing statements in the historical notice below are no longer current.
+Original requirements, evidence, budgets, and execution gates remain unchanged.
+
+> Historical preparation matrix and retired governance notice; all HC/TH requirements and recorded evidence below
 > are preserved. Current prospective Worker routing/recovery is defined by
 > [worker-delegation-policy.md](worker-delegation-policy.md): native agy default,
 > separately authorized 2 + 2 + 2 maxima, explicit user approval before EVERY SDK

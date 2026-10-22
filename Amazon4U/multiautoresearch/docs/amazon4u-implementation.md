@@ -1,6 +1,11 @@
 # Amazon4U Implementation Control-Plane: Milestone I1
 
-> **Current governance clarification:** [Worker delegation policy](../../docs/worker-delegation-policy.md)
+Current workflow follows [direct single-agent ownership](../../docs/worker-delegation-policy.md).
+Mandatory Pi–agy handoffs and the prospective 2 + 2 + 2 process are retired.
+The role assignments and routing notice below describe historical I1 work.
+Original requirements, evidence, budgets, and execution gates remain unchanged.
+
+> **Retired governance clarification:** [Worker delegation policy](../../docs/worker-delegation-policy.md)
 > governs future assignments: native agy through the delegation extension is default;
 > native recovery maximum is separately authorized 2 + 2 + 2, with cumulative history
 > and root-cause review. SDK text generation is not native agy and requires explicit

@@ -1,5 +1,24 @@
 # Agent instructions — Amazon4U
 
+## Current implementation policy
+
+The user approved removing mandatory Pi–agy delegation from Amazon4U.
+Direct single-agent ownership is the default. The coding agent owns diagnosis,
+implementation, related tests, and local verification. Pi may implement directly
+within authorized scope.
+A separate agy Worker, multi-agent system, or delegation task is not required.
+Optional delegation and second-model review remain available when authorized.
+
+Read `docs/worker-delegation-policy.md`, `configs/worker-delegation-policy.json`,
+and `docs/delegation-and-execution.md`. They supersede older role/channel mandates
+and the prospective 2 + 2 + 2 recovery process throughout this project, including
+`multiautoresearch`. Keep one consolidated list of unresolved requirements.
+Original independent-review requirements, acceptance criteria, science, security,
+execution holds, consumed budgets, and historical evidence remain binding.
+Self-review is not independent review. Optional native delegation still requires
+all original extension gates. This policy approval authorizes no stopped-candidate
+correction, additional test run, experiment, deployment, cleanup, commit, or push.
+
 ## Current main H-REF integration — ACCEPT/task_only
 
 User explicitly approved Pi-only live scratch-monitor correction,targeted mock controls,
@@ -39,7 +58,11 @@ Scope: this directory and all descendants. Amazon4U is independent of Movie4U;
 do not copy MovieLens split rules, candidate rules or ID assumptions here, and do
 not change sibling projects unless explicitly requested.
 
-## Current Worker governance — prospective, no execution authority
+## Retired Worker governance, historical only
+
+This snapshot is preserved for history. Its mandatory role split, native default,
+and recovery structure are superseded by the current implementation policy above.
+It grants no present execution authority.
 
 Read `docs/worker-delegation-policy.md` and `configs/worker-delegation-policy.json`
 with `docs/delegation-and-execution.md`. **Native agy Worker invocation through the
@@ -499,7 +522,12 @@ Keep documentation, configuration, implementation and tests consistent. Do not
 resolve protocol ambiguities silently. Record amendments before new experiments;
 never choose thresholds, features or metrics based on test performance.
 
-## Delegation and execution roles
+## Retired delegation roles, historical only
+
+The following standing role assignments are superseded by direct single-agent
+ownership under `docs/worker-delegation-policy.md`. They do not require future
+implementation to use agy. Historical execution limits and safety rules remain
+binding; no stopped task is reopened.
 
 The current `docs/worker-delegation-policy.md` applies here: native agy is the default,
 2 + 2 + 2 is a prospective maximum with separately authorized rounds, and SDK requires

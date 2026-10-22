@@ -1,6 +1,11 @@
 # Text-only channel: bounded capability verification
 
-> **Historical SDK capability demonstration, not native agy delegation.** Its
+Current workflow follows [direct single-agent ownership](worker-delegation-policy.md).
+Mandatory Pi–agy handoffs and the prospective 2 + 2 + 2 process are retired.
+The routing statements in the historical notice below are no longer current.
+SDK requests still require explicit approval. Historical evidence is unchanged.
+
+> **Historical SDK demonstration and retired governance notice.** Its
 > decision/evidence below remain unchanged and grant no standing fallback permission.
 > The mechanism is retained. Current [Worker policy](worker-delegation-policy.md)
 > makes native agy the default and requires explicit user approval before EVERY SDK

@@ -1,0 +1,75 @@
+{
+  "user_approval_exact": "do so, dont stop ask me again. i want final result",
+  "approved_proposal": "One narrowly scoped native Worker repair pass,<=30minutes,no retry;fix identified calls/fixtures/validation/documentation;investigate Git timestamp mismatch without resetting timestamps/waiving preservation;independent review/SOURCE then existing O slot only if gates pass.",
+  "same_deliverable_history": "Native14actual,SDK5API/3HTTP,O-full4. Old task5c671b00-ffcc-4f95-b2d5-ae84e767237c remains terminalESCALATE with2usedcalls/allreports/criteria/failedcomparisons unchanged. This is a separately user-approved exceptional native15 correction,not reopening/reassessment/budgetreset or substitution for old acceptance.",
+  "native_new_max": 1,
+  "max_revisions": 0,
+  "worker_timeout_ms": 1800000,
+  "SDK_requests": 0,
+  "scope": "Three assigned collection gaps only:repair source-confirmed direct-call/precondition/assertion mismatches,strict independent H metadata/report checks,and truthful documentation;retain genuine no-replace/error handling and cooperative deadline hardcaps. Preserve all501current IDs/all31inherited Python/H6/science/D1-D3 and prior fixes.",
+  "source_delta_paths": [
+    "Amazon4U/multiautoresearch/adapters/amazon4u.py",
+    "Amazon4U/tests/test_amazon4u_bundle.py",
+    "Amazon4U/tests/test_kaggle_orchestration.py",
+    "Amazon4U/docs/o-offline-orchestration.md"
+  ],
+  "restoration_only_paths": [
+    "Amazon4U/multiautoresearch/post-training/scripts/kaggle_job.py",
+    "Amazon4U/multiautoresearch/adapters/__init__.py",
+    "Amazon4U/multiautoresearch/adapters/amazon4u_kernel.py"
+  ],
+  "new_repository": "/home/sunf/FSB/Final/Amazon4U/.worktrees/o-offline-collection-final-repair-v1",
+  "project_root": "/home/sunf/FSB/Final/Amazon4U/.worktrees/o-offline-collection-final-repair-v1/Amazon4U",
+  "predecessor": "/home/sunf/FSB/Final/Amazon4U/.worktrees/o-offline-collection-three-gaps-v1/Amazon4U",
+  "Worker_source_only": "Read/stat/hash/AST/inline edits/real timer only. NO Git commands,tests,project/helper imports,rendering,generators,semantic/codec/parser/path probes,external helper scratch,subagents,network/credentials/packages,H/numeric/Adam/native/race/nonregularFS/bomb work. No instruction/verifier/input/controller/global-framework/main/sibling edits.",
+  "Git_timestamp_investigation": "Read-only current core.ts git/snapshot and discovery.ts dependency shows mandatory tool snapshots invoke Git status without --no-optional-locks. This is a concrete possible index-lock/bookkeeping source,not proof of the historical actor. Do not edit extension/controller or reproduce mutations on old repos. New clone only:initialize before seal,then set its freshly created raw Git tree read-only during bootstrap to prevent optional index-lock writes;retain strict directory timestamps before/after every phase. No old Git chmod/reset/timestamp rollback or observational downgrade. This is not an OSsandbox;sameUID can defeat permissions and is forbidden from doing so.",
+  "read_only_integrity_budget_amendment": {
+    "prior_snapshot_bytes": 671088640,
+    "new_snapshot_bytes": 805306368,
+    "reason": "Include the complete previous two-invocation raw evidence,allbefore/after snapshots and source-check outputs plus the new derived repository without dropping/compressing/splitting evidence. Read-only streamed volume only,selected prospectively under approved routine recovery decisions.",
+    "file_bytes_unchanged": 134217728,
+    "file_seconds_unchanged": 60,
+    "snapshot_seconds_unchanged": 300,
+    "stream_buffer_bytes_unchanged": 1048576,
+    "test_CPU_RAM_IO_scientific_budgets_unchanged": true
+  },
+  "baseline": "CleanHEAD412AST IDs/all31hashes plus exact7restoration source bytes and501priorIDs;no project import/test baseline.",
+  "SOURCE_metadata_runs_max": 2,
+  "SOURCE_command": [
+    "/home/sunf/FSB/Final/Amazon4U/.venv/bin/python",
+    "-B",
+    "/home/sunf/FSB/Final/Amazon4U/.worktrees/o-offline-collection-final-repair-v1/Amazon4U/data/reports/o-offline-collection-final-verification-v1/verify_source.py"
+  ],
+  "conditional_O_command": [
+    "/home/sunf/FSB/Final/Amazon4U/.venv/bin/python",
+    "-B",
+    "/home/sunf/FSB/Final/Amazon4U/.worktrees/o-offline-collection-final-repair-v1/Amazon4U/data/reports/o-offline-collection-final-verification-v1/verify_o_only.py"
+  ],
+  "new_O_slots": 0,
+  "carried_unconsumed_O_children_max": 1,
+  "O_gate": "Complete actual source/caller/dependency/generated-program/both-O-suite/raw-action review;originalSOURCEPASS;fresh exact-code/owned-directory/unchangedglobalNativeProviderGuard receipt. Then ONE60s/512MiBactualchildRSS/8MiBpercompletestream/16MiBfreshownedemptyscratch child. <=2MiBfile/object,8MiBconcurrentfixtures,128files,8pages,5polls,64KiBchunks. Allunsafeconditionsmocked;noactualH/model/frameworkimports/Adamupdates/native/race/foreignIO. Any failed/interruptedstarted child consumes sole slot;noautomaticpost-exposurefix/rerun.",
+  "test_policy": {
+    "training_allowed": false,
+    "generated_paths": [
+      "Amazon4U/data/reports/o-offline-collection-final-verification-v1/source-check-0",
+      "Amazon4U/data/reports/o-offline-collection-final-verification-v1/source-check-1",
+      "Amazon4U/data/reports/o-offline-collection-final-verification-v1/o-only",
+      "Amazon4U/.test-output/o-offline-sdk-correction-oonly-v1"
+    ],
+    "temporary_directories": []
+  },
+  "acceptance_scope": "Focused three collection gaps only,after actual independent verification;wholeO ten criteria/OP01-18/full regression unchanged and stillmandatory globally. No prior terminal task is retroaccepted. Allcurrentlimitations/issues must be independently adjudicated;unresolved assigned duties blockacceptance.",
+  "full_H_model_realdata_remote_GPU_mainintegration_Gitpromotion_cleanup_deployment_authorized": false,
+  "deployment_decision": "NOT_AUTHORIZED",
+  "independent_outcome": {
+    "task_id": "243875d1-062b-4567-a7c0-082c7e279f71",
+    "decision": "ESCALATE",
+    "acceptance_scope": "task_only_unaccepted",
+    "deployment_decision": "NOT_AUTHORIZED",
+    "SOURCE": "PASS19647ms/501staticIDs/31inheritedhashes",
+    "three_collection_gaps_closed": false,
+    "O_child_started": false,
+    "reason": "Required canonicalartifact sourcegatefails;mandatoryOverification remainsunperformed. Singleapprovednative15repairused,noautomaticretry.",
+    "report": "/home/sunf/FSB/Final/Amazon4U/data/reports/o-offline-collection-final-repair-v1/review.json"
+  }
+}

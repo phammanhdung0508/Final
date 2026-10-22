@@ -42,10 +42,11 @@ Counts preserved:SDK4/native1(secondunused),**4actual H full runs**. Main integr
 O-OFFLINE,GPU-READY,profiling,comparative/final-test execution and deployment remain
 separate gates. No new Worker,SDK,regression,experiment or main transfer authorized.
 
-**Current Worker policy:** [native agy delegation is the default](docs/worker-delegation-policy.md).
-The prospective maximum is separately authorized **2 + 2 + 2**, not six automatic calls.
-Every SDK fallback request requires explicit user approval. Historical SDK calls remain
-consumed; the new policy does not reset H budgets or grant new native/SDK requests.
+**Current implementation policy.** [Direct single-agent ownership is the default](docs/worker-delegation-policy.md).
+Pi may implement and fix authorized code directly. Mandatory Pi–agy delegation and
+the prospective **2 + 2 + 2** recovery process are retired. Delegation and second-model
+review are optional. Original review requirements, execution limits, historical
+reports, and consumed budgets remain unchanged. No new Worker or SDK calls follow.
 
 **O-OFFLINE and later experiment gates remain separate.** The [historical preparation
 proposal](docs/training-harness-preparation.md) and [34-part matrix](docs/training-harness-requirements.md)

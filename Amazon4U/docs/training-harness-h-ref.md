@@ -106,7 +106,10 @@ round reset,SDKfallback or experiment authority. Deployment NOT_AUTHORIZED.
 
 ## Preserved earlier governance and phase records
 
-> **Current governance / historical route clarification:**
+> **Retired governance and historical route clarification:**
+> Future work follows [direct single-agent ownership](worker-delegation-policy.md).
+> The former routing and recovery defaults below are historical, not requirements.
+> Original H-REF criteria, evidence, decisions, and budgets remain unchanged.
 > [Worker delegation policy](worker-delegation-policy.md) now governs prospective
 > assignments: native agy is the default; SDK needs explicit user approval before
 > every request; native recovery maximum is separately authorized 2 + 2 + 2.

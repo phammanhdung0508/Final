@@ -1,6 +1,11 @@
 # Review-to-correction preparation
 
-> Current channel/recovery policy: [worker-delegation-policy.md](worker-delegation-policy.md).
+Current workflow follows [direct single-agent ownership](worker-delegation-policy.md).
+Mandatory Pi–agy handoffs and the prospective 2 + 2 + 2 process are retired.
+The routing statements below are historical. Preparation and verification lessons
+still apply to direct work; they do not require new delegation tasks.
+
+> Retired channel/recovery policy: [worker-delegation-policy.md](worker-delegation-policy.md).
 > Native agy is the default for future substantive implementation; SDK is an exception
 > requiring explicit user approval before every request. Native recovery maximum is
 > separately authorized 2 + 2 + 2, with root-cause review after each substantive

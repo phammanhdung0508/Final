@@ -1,260 +1,96 @@
-# Delegation and execution agreement
+# Implementation and execution agreement
 
-## Current prospective channel and recovery policy
+## Current authority
 
-The current user-approved [Worker delegation policy](worker-delegation-policy.md)
-and `../configs/worker-delegation-policy.json` govern all future Amazon4U work,
-including H-REF/O-OFFLINE and multiautoresearch. **Native agy Worker invocation via
-the delegation extension is the default for substantive implementation.** SDK direct
-completion is not native agy and is only an explicitly user-approved fallback.
+The user approved removing mandatory Pi–agy delegation from Amazon4U. The
+[current implementation policy](worker-delegation-policy.md) and
+`../configs/worker-delegation-policy.json` govern this directory and
+`multiautoresearch`.
 
-Use separate `native_agy_worker_invocation`, `sdk_text_only_generation_request` and
-`pi_independent_verification` records. Native recovery maxima are **2 + 2 + 2**:
-initial/correction, targeted continuation/correction, final continuation/correction.
-Each task/round requires prospective authority and budgets; six is not blanket approval.
-After each substantive ESCALATE perform the six-part root-cause/gap/change/justification/
-authorization review in the policy. After ESCALATE #3 present an evidenced stop,
-exceptional-native-continuation or SDK recommendation, never automatic fallback.
-Preserve completed counters and cumulative same-deliverable history; duplicate status
-reports do not increment ESCALATE occurrences. Stop earlier when required.
+The default is one coding agent with end-to-end responsibility for diagnosis,
+implementation, related tests, and local verification. Pi may implement directly.
+Mandatory agy handoffs, a planner/Worker split, and the prospective `2 + 2 + 2`
+recovery process are retired. Delegation and second-model review are optional,
+subject to authorization and any original independent-review requirement.
 
-Before EVERY SDK request obtain explicit user approval identifying why native agy is
-unsuitable, exact task/unresolved criteria, model/channel, source/output paths, request
-ceiling, time/resource/verification limits and independent acceptance procedure. No
-silent switch, budget transfer or inherited SDK approval, including old D2/D3/H choices.
-All extension inspection/verification/review, original criteria and safety gates remain.
-This governance correction grants no task launch, execution or new round and does not
-change the extension, SDK, controller, accepted code/tests or scientific methodology.
+This approval changes work allocation, not scientific scope or execution authority.
+The previous agreement is preserved in
+`../data/reports/mandatory-delegation-retirement-v1/before/delegation-and-execution.md`.
+Historical plans, task reports, decisions, counters, and evidence remain unchanged.
+Earlier role assignments and stage snapshots are not current launch permissions.
 
-## Final Pi H-REF acceptance amendment
+## Direct implementation
 
-User explicitly authorized the governance hierarchy **User authorization → Pi final
-acceptance authority → native agy implementation/execution evidence**,and a separate
-append-only final H-REF review based on existing independent evidence. See
-`h-ref-pi-final-acceptance.md` and
-`../data/reports/training-harness-h-ref-v1/pi-final-acceptance-v1/authority.txt`.
-Current H-REF decision is **ACCEPT/task_only**,deployment **NOT_AUTHORIZED**.
-Assigned Pi review duties/issue deferrals are fulfilled with evidence,not out_of_scope;
-original scope/criteria/reports/text/order/budgets stay intact. Native task3606687c-beba-
-4d3f-bd24-03ae5238da37 remains historical ESCALATE with its original verification failure.
-No native ACCEPT,receipt substitution,reopen/reassessment,extension change or bypass.
-This changes the authorized H-REF deliverable review basis,not native tool state/schema.
-No new Worker/SDK/implementation/regression/main integration/experiment/deployment/Git
-activity follows. Other workflow/security/channel/budget restrictions remain in force.
+1. Identify the authorized deliverable, original requirements, protected artifacts,
+   and applicable verification limits.
+2. Keep one consolidated list of unresolved requirements.
+3. Trace defects to their cause and fix related code and tests together.
+4. Review the actual changed code, relevant callers, dependencies, and tests.
+5. Run the applicable authorized checks and read their complete results.
+6. Report changes, actual verification, unresolved requirements, acceptance scope,
+   and the separate deployment decision.
 
-## Status and scope
+An existing unmet criterion remains unmet until verified. A passing regression
+alone does not prove every requirement. Preserve required independent review and
+label self-review honestly. Direct work does not require a delegation task or a
+native Worker acceptance receipt.
 
-User-agreed operating roles and delegation rules for Amazon4U, recorded from
-our discussion. Applies to Pi and agy, including work under `multiautoresearch/`.
-This document records workflow decisions, not implementation acceptance or
-permission to launch experiments. Preserve the frozen scientific protocol and
-consult `protocol-lifecycle.md` for authorization gates.
+Do not create a new corrective task merely to transfer the same unresolved work
+between agents. This does not permit reopening terminal tasks, evading exhausted
+budgets, changing frozen criteria, or continuing a stopped candidate without the
+required authorization.
 
-## Roles
+## Optional delegated work
 
-- **Pi = planner + orchestrator + independent reviewer.** Pi defines coherent
-  task scope, original acceptance criteria, approved verification commands and
-  revision limits; reviews actual code, callers, dependencies, tests and evidence;
-  independently verifies results; and retains ACCEPT/REVISE/ESCALATE authority.
-- **Native agy = implementation and explicitly authorized execution worker.**
-  Actual native invocations use the delegation extension, not an SDK prompt named agy.
-  Native agy implements code, fixtures/tests and related documentation in the pinned
-  isolated worktree, and fixes consolidated Pi findings within approved round limits.
-  Worker reports are untrusted submissions, not independent acceptance.
-- After explicit execution authorization, agy may submit only the specified
-  Kaggle job, monitor it and collect logs, metrics, checkpoints and provenance.
-  Pi reviews the evidence and decides the next step.
-- agy cannot independently change the protocol, expand scope or budgets, tune
-  on test data, promote models, deploy, launch subagents or start another research
-  cycle. Neither agent stages, commits or pushes without explicit user request.
+When delegation is useful and authorized, define one coherent assignment with
+explicit paths, requirements, commands, outputs, budgets, and review gates.
+Consolidate findings before requesting a correction. A Worker must not expand its
+scope, install undeclared dependencies, or launch other workloads without approval.
 
-## Standing user direction: delegate bounded implementation
+Pi independently inspects actual changed files, relevant dependencies and tests,
+and complete results. Diff-first is not diff-only. The delegation extension's
+original inspection, benchmark, limitation, revision, history, and deployment gates
+remain mandatory for tasks submitted through it. Worker claims do not establish
+correctness, scope, or acceptance. Incomplete mandatory evaluation blocks acceptance.
 
-User reaffirmed: Pi should prioritize planning, assigning work, managing execution,
-receiving results, coordinating corrections and independent verification—not routinely
-spend its context authoring straightforward implementation. Within an authorized
-implementation scope, delegate clear, independently verifiable simple/medium programming
-work to agy: utility functions, unit tests and local bug fixes, with explicit inputs,
-outputs, allowed paths, preservation rules and acceptance criteria. Bundle related
-utilities/fixes with their tests into coherent bounded assignments rather than one
-request per trivial edit. Independent subsystems remain separately assigned.
+SDK generation is not native agy delegation. Every SDK request still needs explicit
+user approval under the [implementation policy](worker-delegation-policy.md).
+Optional delegation creates no new call budget or automatic fallback permission.
 
-Pi retains consequential design/security/protocol decisions, full necessary code review,
-independent verification and final acceptance authority. Worker reports remain untrusted;
-delegation does not reduce review rigor. Pi may handle brief governance records and
-mechanical application/integration of reviewed Worker patches; exceptions involving
-Pi-authored implementation must be explicit, not a default substitute for Worker work.
-Use scoped relevant context without omitting original requirements or necessary callers.
+## Recovery and authorization
 
-This is a work-allocation policy, not new execution authority or a budget reset.
-Native agy is the default; a controller-free SDK channel is only a separately approved
-exception, never an implicit replacement for delegation. Earlier preparation-only
-statements were phase-scoped. H-REF's historical four SDK completions remain SDK calls.
-Later user-approved Pi-only verification first reported24errors. A separately approved
-native correction used1of2calls on exactly3isolated files;all412functionaltests now
-pass,but mandatory verification fails on an empty Torch cache directory left in scratch.
-Pi owns missed framework-cache lifecycle. See
-`../data/reports/training-harness-h-ref-v1/native-correction-v1/review.json`:ESCALATE,
-not accepted at that stop. User subsequently approved Pi-only cache lifecycle and one
-separate full regression:overall412PASS,emptyscratch/preservationPASS,training/H8unchanged.
-Latest `../data/reports/training-harness-h-ref-v1/cache-lifecycle-v1/review.json` technically
-records passing runtime evidence but does NOT record H-REF ACCEPT. The additive
-cache-lifecycle-v1/final-adjudication-v1/acceptance-packet.json corrects earlier full-H8
-verification wording: final adjudication is pending, and assigned Pi duties are not
-outside scope. The tool blocks original unresolved_issues entries and offers no separate
-resolution/fulfilled-assigned disposition. The native task remains terminal ESCALATE and
-needs supported operator acceptance handling for this authorizedverificationamendment,
-not oldreceipt/command rewriting or replacementtask. SDK4/native1/old3full+extra1full=4,
-allreleasedfullbudgetsused. No additionalWorker/SDK/test/rerun/extensionchange/main H
-source transfer is authorized. O-OFFLINE
-remains unassigned. All original review/safety/deployment gates remain.
+Within existing authority, handle noncritical setup and verification issues
+without repeated approval questions. Preserve prior evidence, record the cause and
+remaining requirements, and verify each correction. This discretion does not
+expand paths, resource ceilings, test allocations, or research permissions.
 
-## Worker dependency and scope-change approval
+Stop at exhausted budgets, explicit task holds, critical safety issues, or missing
+execution authority. Explain the actual boundary and the decision needed. The
+retired delegation loop is not a reason to require new administrative tasks, but
+its historical failures and consumed allocations remain recorded.
 
-Standing user direction: if agy proposes a package, framework, architectural structure
-or other change not covered by its assigned task, it must **ask Pi before implementing
-or installing it**. Existing approved dependencies/structures may be used as declared;
-an undeclared dependency, broad refactor, new service or structural expansion is not
-implicitly permitted because it seems useful. Pause the affected work and provide the
-purpose/version or design, affected paths/interfaces, installation/network/resource/
-security impact and proposed verification; do not code first and disclose afterward.
-The native agy Worker must pause the affected work and return the scope request without
-unauthorized actions. A separately approved SDK fallback returns text only and is labeled
-`sdk_text_only_generation_request`, not a native agy invocation.
+Changes to scientific semantics, leakage rules, test use, data integrity, security,
+project scope, or material cost limits still require the applicable approval.
+Neither direct implementation nor optional delegation grants those permissions.
 
-Pi approves, narrows or rejects ordinary implementation choices within the user's
-broader authorized project scope; no repeated user approval is needed for those
-choices. Before affected work resumes, record the decision and prospectively declare
-any approved paths/dependencies/outputs/commands and verification changes. Preserve
-original requirements, reports and history; approval does not silently rewrite criteria,
-reset response/revision budgets or authorize an extra Worker invocation. If the approved
-mechanism cannot resume within current authority/budget, stop and record that boundary.
+## Experiment and deployment boundaries
 
-This discretion does not authorize violating frozen science, security/data safeguards,
-project boundaries or ungranted material resource/real-execution permissions. Current
-Training Harness execution remains subject to its applicable phase-specific approvals.
-No automatic install, remote job, training/profiling, controller redesign, new native
-round or SDK request follows from this discretion.
+The intended research goal remains implementation, regression verification, and
+bounded Musical_Instruments profiling before the other approved categories.
+Profiling still requires its bounded plan, prerequisites, and execution approval.
+No remote job, GPU run, real-data training, credential lookup, or held-out evaluation
+is authorized by this workflow change.
 
-## Delegation principles
+Reuse `multiautoresearch` orchestration where appropriate, not its inherited LM or
+Movie4U methodology. BPR models trained from scratch are not fine-tuning. Legacy
+agent prompts, promotion commands, and autonomous workflows are reference only for
+Amazon4U. They do not authorize agent fan-out or execution.
 
-1. Never lower acceptance criteria solely to save tokens.
-2. Do not delegate tiny few-line changes separately; incorporate small fixes in
-   an existing substantive task's revision cycle.
-3. Do not bundle independently implementable/verifiable subsystems into one task.
+Task acceptance never implies deployment approval. Preserve predeclared held-out
+and deployment gates. Do not retune after held-out exposure. Deployment remains
+`NOT_AUTHORIZED` without the applicable policy and approval.
 
-Use one coherent subsystem with its fixtures and relevant documentation per
-substantive task. Consolidate review findings and correction feedback. Save
-context through targeted evidence navigation, never incomplete review:
-diff-first is not diff-only. Exhausted revisions or incomplete mandatory evidence
-require escalation, not a fabricated completion. The standing authorization below
-permits bounded noncritical recovery after recording ESCALATE; it never permits
-resetting revision limits to keep retuning an exhausted source task.
-
-## Operating loop
-
-1. Pi plans and predeclares scope, criteria, commands, permitted outputs and limits.
-2. agy implements the scoped deliverable in an isolated worktree.
-3. Pi inspects actual changes and independently runs approved original checks.
-4. agy addresses consolidated findings within the declared revision limit.
-5. Pi records acceptance or escalation, with explicit acceptance scope and
-   separate deployment decision.
-6. Only after a separate explicit execution approval, agy runs the authorized
-   Kaggle workload and returns complete artifacts and evidence.
-7. Pi reviews results before proposing any further work.
-
-Task/benchmark ACCEPT never implies deployment approval. Where deployment or
-held-out generalization evaluation matters, predeclare its policy before task
-submission; complete mandatory evaluation before final acceptance. No automatic
-revision or retuning after held-out exposure. Without a predeclared deployment
-policy, deployment is NOT_AUTHORIZED.
-
-## Standing authorization: noncritical recovery without repeated questions
-
-This discretion is constrained by the current prospective Worker policy: it does not
-expand existing task/round budgets or execution permissions. Every substantive ESCALATE
-still requires root-cause review. It never authorizes SDK fallback without explicit
-user approval before each request or bypasses extension continuation/terminal gates.
-
-Status: **user-approved**, following the verification-only scratch-output
-ESCALATE. The user explicitly requested durable recording:
-
-> Again, please take note somewhere incase you keep forget, i only care about final result like 'implementation + regression testing + profiling on Musical_Instruments' if the ESCALATE is not critical. no need to ask me every time. you can decide by yourself as long as follow the rule loop we agree on.
-
-The delivery goal is **implementation + regression testing + profiling on
-Musical_Instruments**, not repeated approval exchanges about administrative issues.
-This supplements the approved implementation sequence in `implementation-roadmap.md`.
-
-- Pi classifies and records findings using their actual impact. A formal ESCALATE
-  does not automatically require interrupting the user. Noncritical infrastructure,
-  scratch/output-layout, setup and verification-evidence issues may be handled by
-  Pi autonomously, including a prospectively scoped fresh verification task.
-- Preserve source and original evidence/decisions first; record the recovery scope,
-  permitted outputs, exact commands, budgets and revision limits before execution.
-  Then follow the same agy implementation / Pi independent inspection, verification
-  and acceptance loop. Never waive an unmet criterion or claim incomplete work is
-  accepted. Fresh recovery does not retroactively authorize previous writes.
-- The current scratch-runtime issue is within this standing noncritical recovery
-  authorization. Pi may preserve its files, separate/predeclare infrastructure
-  outputs and fixture scratch, and arrange fresh verification without asking again.
-  Historical `07318909-7b11-4a46-810a-c11d6c2c8b3a` remains ESCALATE; no
-  evaluator rewrite is justified merely by that infrastructure finding.
-- Keep recoveries bounded by the declared limits. Do not evade exhausted source
-  revisions through replacement tasks or run indefinite retries. If the issue
-  cannot be resolved within the agreed limits, explain the consequential decision
-  that actually requires the user rather than repeatedly asking to rerun checks.
-- Ask for decisions affecting scientific semantics, leakage/test use, data integrity,
-  security, project scope, material resource/cost limits, or execution permission
-  not already granted. Passing tests do not make such issues noncritical.
-- The goal includes Musical_Instruments profiling, but execution still follows the
-  existing prerequisite, bounded-plan and explicit execution-authorization gates.
-  This is not blanket permission for real-data training, optimizer updates,
-  comparative/held-out experiments, deployment, commits or pushes.
-
-This standing authorization supersedes the need for a new user confirmation for
-otherwise in-scope noncritical recovery. It does **not** supersede mandatory
-verification, frozen scientific rules, acceptance authority or historical records.
-
-## Historical Package H authority and two-request stopped result
-
-This paragraph is the earlier two-SDK-request snapshot, not the latest H counter or
-future channel policy. Later recorded H continuations bring that SDK sequence to four
-requests, not native agy invocations; see `training-harness-h-ref.md`. No historical
-counter/decision is reset or converted into a prospective native round.
-
-The user subsequently approved bounded H-REF CPU-reference implementation with device
-interfaces;that specific approval superseded earlier preparation-only statements for
-H only. See `docs/training-harness-h-ref.md`. The two permitted text-only responses are
-now consumed with no files:requested frozen context,thenmissing total-loss return key
-in Pi's fresh context. Fresh389baseline passed,butno Himplementation/newtests/updates
-or candidate verification occurred. Pi records ESCALATE/notaccepted andowns the handoff
-omission;this is not a verified accepted-model defect. No third request,Pi substitute
-implementation,source task replacement orbudgetreset automatically. Originalrequests/
-reports/criteria andD3history remainintact. O/GPU/Kaggle/profiling/maintransfer notapproved.
-
-## Lifecycle structure and execution backend
-
-We intend to adapt `multiautoresearch`'s pre-training, post-training and inference
-separation and Kaggle orchestration rather than duplicate its control plane.
-Kaggle is the intended GPU execution backend; local activity focuses on planning,
-implementation, review and authorized synthetic regression verification.
-
-Exact Amazon-specific stage mappings and runner adaptation remain to be agreed
-and implemented. Optional self-supervised KG pre-training is not part of the
-frozen baseline. BPR models trained from scratch must not be mislabeled as
-fine-tuning. Lifecycle directory names do not grant execution permission.
-
-Existing LM/Movie4U runners, metrics and agent prompts are not authoritative for
-Amazon4U. Verify the actual Kaggle runner and reconcile conflicting instructions
-before using them; preserve the original framework context rather than silently
-claiming it has already been adapted.
-
-## Execution boundaries and historical approvals
-
-The original role agreement alone did not authorize workloads or new Worker tasks.
-Subsequent implementation-sequence approvals and the standing authorization above
-permit their stated scoped delegations and noncritical recovery. They do not grant
-blanket profiling, model training, optimizer updates, real-data experiments,
-deployment or unrelated framework changes. Those retain their respective execution
-approvals and prerequisite verification. Prior escalated tasks remain unaccepted;
-no historical decision is superseded by the new operating authorization.
+No agent stages, commits, pushes, releases, deletes preserved evidence, or changes
+Git history without explicit user authorization. Consult
+[protocol-lifecycle.md](protocol-lifecycle.md) for scientific lifecycle gates and
+[implementation-roadmap.md](implementation-roadmap.md) for milestone evidence.

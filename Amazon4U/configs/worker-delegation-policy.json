@@ -1,122 +1,76 @@
 {
-  "schema_version": "amazon4u-worker-delegation-policy-v1",
-  "status": "USER_APPROVED_PROSPECTIVE_GOVERNANCE_ONLY",
+  "schema_version": "amazon4u-worker-delegation-policy-v2",
+  "status": "USER_APPROVED_MANDATORY_DELEGATION_RETIRED",
   "documentation": "docs/worker-delegation-policy.md",
-  "authority": "data/reports/worker-delegation-governance-v1/authority.txt",
-  "default_implementation_channel": "native_agy_worker_invocation",
-  "native_mechanism": "delegation_extension",
+  "authority": {
+    "source": "user_instruction",
+    "quote": "APPROVE, please remove mandatory Pi–agy delegation out of Amazon4U"
+  },
+  "scope": "Amazon4U_and_all_descendants_including_multiautoresearch",
+  "default_implementation_channel": "direct_single_agent",
+  "mandatory_delegation": false,
+  "mandatory_multi_agent_system": false,
   "roles": {
-    "Pi": ["planning", "orchestration", "task_scoping", "independent_source_and_test_review", "independent_verification", "acceptance_decisions"],
-    "native_agy": ["authorized_implementation", "authorized_corrections", "authorized_tests", "related_documentation"],
-    "sdk_text_only_generation": "separately_user_approved_exception_untrusted_candidate_not_native_agy"
-  },
-  "event_types": ["native_agy_worker_invocation", "sdk_text_only_generation_request", "pi_independent_verification"],
-  "recovery": {
-    "maximum_rounds": 3,
-    "maximum_native_invocations_per_round": 2,
-    "normal_maximum_native_invocations_per_deliverable": 6,
-    "rounds": [
-      {"round": 1, "purpose": "initial_implementation", "attempt_numbers": [1, 2], "actions": ["initial_implementation", "consolidated_correction_after_Pi_independent_review"], "if_unresolved": "ESCALATE_1"},
-      {"round": 2, "purpose": "targeted_recovery_existing_candidate", "attempt_numbers": [3, 4], "actions": ["targeted_continuation", "consolidated_correction_after_independent_review"], "if_unresolved": "ESCALATE_2"},
-      {"round": 3, "purpose": "final_recovery_unresolved_findings", "attempt_numbers": [5, 6], "actions": ["targeted_continuation", "final_consolidated_correction"], "if_unresolved": "ESCALATE_3"}
+    "coding_agent": [
+      "diagnosis",
+      "implementation",
+      "related_tests",
+      "local_verification",
+      "honest_verification_reporting"
     ],
-    "maximum_not_mandatory": true,
-    "blanket_six_call_authorization": false,
-    "prospective_task_and_round_authorization_required": true,
-    "prospective_scope_time_resource_and_verification_limits_required": true,
-    "same_task_candidate_history_and_cumulative_accounting": true,
-    "actual_cumulative_count_counts_started_invocations_not_reserved_slots": true,
-    "unused_round_slots_neither_count_as_calls_nor_transfer": true,
-    "declarative_policy_not_new_runtime_enforcement": true,
-    "reset_or_reopen_completed_round_counter": false,
-    "unused_slots_authorize_future_rounds": false,
-    "started_native_invocations_count_even_if_Pi_orchestration_fails": true,
-    "prelaunch_refusal_is_not_fabricated_native_invocation": true,
-    "replacement_task_or_task_ID_budget_evasion": false,
-    "extension_terminal_revision_reopening_and_heldout_gates_preserved": true,
-    "policy_changes_extension_implementation_or_stored_budgets": false,
-    "stop_conditions": ["accepted", "no_credible_resolution_path", "authorization_boundary", "critical_safety_issue"]
+    "Pi_direct_implementation_permitted_within_authorized_scope": true,
+    "self_review_is_independent_review": false
   },
-  "after_each_substantive_escalate": {
-    "review_required": true,
-    "requirements": ["preserve_candidate_evidence_decisions_consumed_budgets", "substantiate_root_cause", "identify_remaining_acceptance_gaps", "explain_material_next_round_change", "assess_technical_justification_for_further_native_agy_work", "obtain_additional_scope_budget_execution_authority_not_already_granted"],
-    "root_cause_categories": ["Worker_implementation", "Pi_handoff_orchestration", "environment_tooling", "verification", "missing_requirements", "other_substantiated_blocker"],
-    "Pi_failure_not_equivalent_to_Worker_capability_failure": true,
-    "repeated_reports_of_same_decision_increment_escalate_count": false,
-    "standing_noncritical_recovery_cannot_expand_existing_authority": true
+  "recovery": {
+    "mandatory_native_round_structure": false,
+    "new_corrective_delegation_task_required_for_direct_work": false,
+    "consolidated_unresolved_requirements": true,
+    "existing_task_holds_and_budgets_preserved": true,
+    "terminal_task_reopening_or_budget_evasion_authorized": false
   },
-  "after_third_substantive_escalate": {
-    "consolidated_root_cause_assessment_required": true,
-    "recommendation_required": true,
-    "options": ["stop_task", "propose_separately_authorized_exceptional_native_continuation", "recommend_sdk_text_only_fallback"],
-    "recommendation_required_fields": ["evidence", "unresolved_criteria", "justification", "proposed_scope", "proposed_budget", "consequences"],
-    "automatic_fallback_execution": false,
-    "exceptional_native_over_limit_requires_explicit_user_authorization": true,
-    "early_fallback_recommendation_if_native_unavailable_or_serious_safety_issue": true,
-    "early_recommendation_grants_execution": false
+  "optional_delegation": {
+    "enabled": true,
+    "default": false,
+    "new_invocations_authorized_here": false,
+    "original_extension_inspection_verification_limitation_revision_history_and_deployment_gates_required": true,
+    "Pi_retains_independent_review_and_acceptance_authority": true,
+    "Worker_reports_are_untrusted": true
   },
-  "sdk_fallback": {
-    "mechanism_retained": true,
+  "sdk_generation": {
     "default": false,
     "explicit_user_approval_before_every_request": true,
-    "approval_required_fields": ["why_native_agy_unsuitable_or_unsuccessful", "exact_task_and_unresolved_acceptance_criteria", "SDK_model_and_channel", "allowed_source_and_output_paths", "maximum_SDK_requests", "time_resource_and_verification_limits", "independent_review_and_acceptance_procedure"],
-    "request_count_is_ceiling_not_inherited_permission": true,
+    "approval_required_fields": [
+      "exact_task_and_unresolved_acceptance_criteria",
+      "model_and_channel",
+      "allowed_source_and_output_paths",
+      "request_ceiling",
+      "time_resource_and_verification_limits",
+      "independent_review_and_acceptance_procedure"
+    ],
+    "new_requests_authorized_here": false,
     "automatic_fallback": false,
-    "silent_channel_switch": false,
-    "budget_transfer": false,
-    "inherited_SDK_authorization": false,
-    "SDK_completion_is_native_agy_delegation": false,
-    "SDK_generated_code_trusted_without_independent_verification": false,
-    "fabricated_native_task_or_verification_receipts": false
+    "SDK_completion_is_native_agy_delegation": false
   },
   "history": {
-    "recorded_application_verification_counts_scope": "at_governance_policy_adoption_not_live_H_status",
-    "later_H_verification_reference": "data/reports/training-harness-h-ref-v1/verification-v1/review.json",
-    "prospective_only": true,
-    "retroactively_authorizes_rounds": false,
+    "previous_policy_snapshot": "data/reports/mandatory-delegation-retirement-v1/before/worker-delegation-policy.json",
+    "previous_policy_authority": "data/reports/worker-delegation-governance-v1/authority.txt",
     "historical_plans_reports_decisions_counts_evidence_immutable": true,
-    "D2_specific_SDK_exception_not_standing_channel_default": true,
-    "H_REF_recorded_history": {
-      "sdk_text_only_generation_request": 4,
-      "native_agy_worker_invocation_in_that_recorded_sequence": 0,
-      "sdk_requests_remain_consumed": true,
-      "native_rounds_newly_authorized": 0,
-      "additional_SDK_requests_authorized": 0,
-      "pi_independent_verification_full_dependency_baselines": 1,
-      "pi_independent_verification_H_candidate_full_regressions": 0,
-      "evidence": ["data/reports/training-harness-h-ref-v1/initial/execution.json", "data/reports/training-harness-h-ref-v1/revision/execution.json", "data/reports/training-harness-h-ref-v1/continuation-v1/implementation/execution.json", "data/reports/training-harness-h-ref-v1/correction-v1/correction/execution.json"],
-      "old_generic_Worker_fields_unchanged": true,
-      "prior_SDK_decisions_not_mapped_to_native_recovery_rounds": true
-    }
-  },
-  "H_REF_final_Pi_acceptance_amendment": {
-    "authority": "data/reports/training-harness-h-ref-v1/pi-final-acceptance-v1/authority.txt",
-    "governance_hierarchy": ["User authorization", "Pi final deliverable acceptance", "Native agy implementation and execution evidence"],
-    "separate_append_only_Pi_review": "data/reports/training-harness-h-ref-v1/pi-final-acceptance-v1/review.json",
-    "decision": "ACCEPT",
-    "acceptance_scope": "task_only",
-    "assigned_Pi_duties": "fulfilled_only_with_independent_evidence_not_out_of_scope",
-    "native_task_historical_decision_preserved": "ESCALATE",
-    "native_original_verification_failure_reports_and_budgets_preserved": true,
-    "native_ACCEPT_reopen_receipt_substitution_or_extension_modification": false,
-    "native_tool_schema_changed": false,
-    "criteria_waived": false,
-    "new_Worker_SDK_implementation_regression_main_integration_experiment_or_deployment_authorized": false,
-    "deployment_decision": "NOT_AUTHORIZED"
+    "historical_task_acceptance_changed": false,
+    "consumed_budgets_reset": false
   },
   "safeguards": {
     "frozen_methodology_and_evaluation_preserved": true,
     "accepted_models_evaluator_D1_D2_D3_preserved": true,
-    "independent_source_test_review_and_original_mandatory_regression_required": true,
+    "original_independent_review_requirements_preserved": true,
+    "source_test_review_and_original_mandatory_regression_required": true,
     "scope_resource_limits_complete_evidence_preserved": true,
-    "criteria_weakening_to_reduce_calls_or_fit_six_attempts": false,
-    "implementation_experiments_main_integration_deployment_separate_authority": true,
-    "incomplete_mandatory_evaluation_blocks_ACCEPT": true,
-    "extension_SDK_controller_source_and_test_changes_authorized_here": false,
-    "Worker_or_SDK_requests_authorized_here": false,
+    "criteria_weakening_authorized": false,
+    "incomplete_mandatory_evaluation_blocks_acceptance": true,
+    "new_implementation_or_main_integration_authorized_here": false,
+    "extension_SDK_controller_changes_authorized_here": false,
     "regression_or_experiment_execution_authorized_here": false,
     "Kaggle_GPU_training_profiling_deployment_authorized_here": false,
-    "stage_commit_push_authorized_here": false,
+    "cleanup_stage_commit_push_authorized_here": false,
     "deployment_decision": "NOT_AUTHORIZED"
   }
 }

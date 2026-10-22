@@ -1,6 +1,11 @@
 # Training Harness: preparation and bounded implementation proposal
 
-> **Historical preparation proposal, not current channel/launch authority.**
+Current workflow follows [direct single-agent ownership](worker-delegation-policy.md).
+Mandatory Pi–agy handoffs and the prospective 2 + 2 + 2 process are retired.
+The routing statements in the historical notice below are no longer current.
+Original requirements, evidence, budgets, and execution gates remain unchanged.
+
+> **Historical preparation proposal and retired governance notice.**
 > H-REF later received bounded phase-specific approvals; its recorded four SDK
 > completions remain SDK calls, not native agy. O-OFFLINE remains unassigned.
 > [Current Worker governance](worker-delegation-policy.md) supersedes this proposal's
