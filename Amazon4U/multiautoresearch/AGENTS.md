@@ -7,7 +7,7 @@ Inherit `../AGENTS.md`. Read `../docs/worker-delegation-policy.md`,
 `../docs/delegation-and-execution.md`.
 
 Direct single-agent ownership is the default. Pi may diagnose, implement, test,
-and verify authorized Amazon4U changes directly. Mandatory Pi–agy delegation,
+and verify authorized Amazon4U changes directly. Mandatory Pi-agy delegation,
 the planner/Worker split, and the prospective 2 + 2 + 2 recovery process are retired.
 Delegation and second-model review are optional, subject to authorization and
 original independent-review requirements. Self-review is not independent review.

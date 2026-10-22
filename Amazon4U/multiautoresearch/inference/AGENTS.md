@@ -1,4 +1,4 @@
-# Agent Instructions
+# Agent instructions
 
 ## Current Amazon4U policy
 
@@ -58,7 +58,7 @@ keeping benchmark comparisons reproducible.
   Runs repeatable local endpoint benchmarks, records metrics, and reports
   regressions or measurement issues.
 
-## Standard Workflow
+## Standard workflow
 
 1. Inspect the local toolchain:
    - `uv run scripts/inspect_llama_toolchain.py`
@@ -71,7 +71,7 @@ keeping benchmark comparisons reproducible.
 6. Keep the fastest reproducible command and note any quality or latency
    tradeoff.
 
-## Speed Variables
+## Speed variables
 
 Prefer this order unless current evidence says otherwise:
 

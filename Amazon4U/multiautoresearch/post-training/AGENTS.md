@@ -1,4 +1,4 @@
-# Agent Instructions
+# Agent instructions
 
 ## Current Amazon4U policy
 
@@ -59,7 +59,7 @@ free-form post-training work, and a final `final_model/` artifact.
 Use `--limit` on `evaluate.py` and `--eval-limit` on `train.py` for quick
 iteration, then run the full evaluation before reporting a result.
 
-## Managed Runner
+## Managed runner
 
 The managed cloud path is Kaggle Kernels via `kaggle_job.py`:
 
@@ -69,12 +69,12 @@ The managed cloud path is Kaggle Kernels via `kaggle_job.py`:
 - View logs with `python scripts/kaggle_job.py logs`.
 - Download outputs with `python scripts/kaggle_job.py output`.
 - The job runs `train.py` and the fixed `evaluate.py`.
-- Results are persisted under `.runtime/kaggle-logs/` including `final_model/`, `metrics.json`, and logs.
+- The runner saves results under `.runtime/kaggle-logs/`, including `final_model/`, `metrics.json`, and logs.
 
 Use `--train-args` and `--eval-args` for smoke runs or controlled variants, but
 do not bypass the final fixed evaluator before claiming a score.
 
-## Pi Agent Control Plane
+## Pi agent control plane
 
 Project-scoped Pi assets live in `.pi/`.
 
@@ -91,7 +91,7 @@ Project-scoped Pi assets live in `.pi/`.
 Do not use the pre-training `/autolab` prompt or pre-training worker scripts in
 this project.
 
-## Task Sandbox
+## Task sandbox
 
 For PostTrainBench-style operation, create an isolated task directory:
 

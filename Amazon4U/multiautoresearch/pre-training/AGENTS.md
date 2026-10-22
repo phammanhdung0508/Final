@@ -1,4 +1,4 @@
-# Agent Instructions
+# Agent instructions
 
 ## Current Amazon4U policy
 
@@ -26,7 +26,7 @@ This repo is a live Autolab experiment repo with a local promoted master.
 Lower `val_bpb` on the benchmark with disciplined, comparable single-change
 experiments.
 
-## Hard Rules
+## Hard rules
 
 - Edit `train.py` only unless the task explicitly says otherwise.
 - Never modify `prepare.py`.
@@ -43,7 +43,7 @@ experiments.
   master.
 - Keep machine-local compatibility shims out of promoted diffs.
 
-## OpenCode Control Plane
+## OpenCode control plane
 
 - Repo-scoped OpenCode config lives in `opencode.json`.
 - Custom repo agents live in `.opencode/agent/`.
@@ -55,7 +55,7 @@ experiments.
   isolated git worktree created through `uv run scripts/opencode_worker.py create`.
 - Active `experiment-worker` count must never exceed real GPU capacity.
 
-## Secondary Native Integrations
+## Secondary native integrations
 
 - OpenCode remains the canonical implementation in this repo.
 - Optional Claude Code-native assets live in `.claude/` plus `CLAUDE.md`.
@@ -66,7 +66,7 @@ experiments.
 - Do not reintroduce hosted Autolab or Gastown-era control-plane state through
   these secondary integrations.
 
-## Managed Runner
+## Managed runner
 
 The default benchmark path in this repo is Kaggle Kernels, managed via `kaggle_job.py`.
 
@@ -82,7 +82,7 @@ Per experiment:
 - `python scripts/kaggle_job.py output`
 - `python scripts/submit_patch.py --comment "..."`
 
-## Standard Workflow
+## Standard workflow
 
 1. Refresh from the local promoted master:
    - `python scripts/refresh_master.py --fetch-dag`
@@ -96,7 +96,7 @@ Per experiment:
 6. Record the run locally:
    - `python scripts/submit_patch.py --comment "..."`
 
-## Parent Session Workflow
+## Parent session workflow
 
 1. Refresh current local master:
    - `python scripts/refresh_master.py --fetch-dag`
@@ -115,7 +115,7 @@ Per experiment:
    - `uv run scripts/opencode_worker.py run <experiment-id>`
 7. Persist durable notes with `memory-keeper`, then clean up finished worktrees.
 
-## Repo Layout
+## Repo layout
 
 - Root benchmark files are the experiment surface.
 - `program.md` is the upstream-compatible benchmark entrypoint note.
@@ -130,7 +130,7 @@ Per experiment:
   do-not-repeat templates.
 - `.runtime/worktrees/` is the local home for isolated experiment worktrees.
 
-## Literature Scouting
+## Literature scouting
 
 When the task is planner or literature research rather than a timed benchmark
 run:
@@ -143,7 +143,7 @@ run:
 - Record paper-derived ideas in `research/paper-ideas.md`.
 - Do not claim a win or promote locally without a benchmark run.
 
-## Local Skills
+## Local skills
 
 - `autolab-managed-experiment`
   Use for any single planned experiment that should become exactly one managed
@@ -159,7 +159,7 @@ run:
   Use for Hugging Face Hub CLI operations such as jobs, buckets, auth, and
   papers.
 
-## Local Compatibility
+## Local compatibility
 
 `run-local.sh` sets `AUTOLAB_FORCE_FA3_REDIRECT=1`, and `sitecustomize.py`
 redirects the Hopper FA3 kernel lookup for hosts that cannot import the default
