@@ -18,12 +18,12 @@ Metadata-only catalog products are not included. Some held-out items are absent
 from training; evaluation must explicitly decide how to handle cold-start items
 before training. Do not silently remove such targets to improve results.
 
-All training ratings (1–5) remain observations; there is no positive threshold,
+All training ratings (1-5) remain observations; there is no positive threshold,
 negative sampling, rating prediction objective or ranking objective chosen yet.
 A `rated` edge is **not** a claim that the user likes the item. Its rating and
 timestamp are edge properties, not approved node features.
 
-## Node files (Parquet)
+## Node files (parquet)
 
 | File | Node type | Columns | Identity |
 |---|---|---|---|
@@ -45,7 +45,7 @@ Blank and case-insensitive `none`, `null`, `nan`, `n/a`, `unknown` values are
 excluded. `store` and `Manufacturer` are not treated as brand. Brand identities
 are exact trimmed strings, not verified canonical entities; aliases may remain.
 
-## Edge files (Parquet)
+## Edge files (parquet)
 
 | File / relation | Source → target | Extra columns |
 |---|---|---|
@@ -100,7 +100,7 @@ Checks performed:
 - Unique IDs and unique relation pairs; valid typed edge endpoints.
 - Persisted rated edges match training rows exactly, including rating/time.
 - Persisted node tables match the strict column allowlist.
-- Independent split validation: no held-out user–product pairs in rated edges;
+- Independent split validation: no held-out user-product pairs in rated edges;
   source hashes still match the build manifest.
 - Small-fixture regression tests: held-out changes and excluded metadata changes
   cannot change graph tables; duplicates fail; missing attributes remain absent.

@@ -1,4 +1,4 @@
-# D2 matrix-guided correction assignment — proposal, NOT_AUTHORIZED
+# D2 matrix-guided correction assignment, proposal, NOT_AUTHORIZED
 
 ## Status and prerequisites
 
@@ -15,7 +15,7 @@ Inputs:
   failed implementation rows. Each row defines source/test locations, valid controls,
   intended outcomes and closure evidence.
 - `data/reports/d2-part-level-preparation/baseline.json`: source/function/test hashes,
-  exact original C1–C10 strings, historical benchmark and original command.
+  exact original C1-C10 strings, historical benchmark and original command.
 - `data/reports/d2-part-level-preparation/evidence-audit.json`: original byte/hash
   references for failed/repeated runs; not an edited Worker report.
 - Frozen full859-line/59605-byte original specification, SHA256
@@ -26,9 +26,9 @@ this prospective plan, explicitly distinguishing historical authorization paragr
 from the new approval. New tests demonstrate original requirements; this does not
 amend the scientific protocol or replace original requirements with easier ones.
 
-## Proposed authorization envelope — must be granted before execution
+## Proposed authorization envelope, must be granted before execution
 
-- One initial Worker and at most **one consolidated revision,30minutes each**.
+- One initial Worker and at most **one consolidated revision, 30minutes each**.
   This is a proposed60minute maximum, versus the exhausted prior40minute envelope;
   the increase requires explicit prospective approval. Use one uniform per-invocation
   timeout compatible with the task's pinned execution policy, not an assumed different
@@ -48,13 +48,13 @@ amend the scientific protocol or replace original requirements with easier ones.
   reports/reviews and both invocation evidence references under new project's
   `data/reports/checkpoint-payload-matrix-inputs/` as protected ignored read-only inputs.
   Keep historical files at their original locations unchanged. Use project-scoped
-  recursive sentinels and explicit artifact hashing budgets128MiB/file,512MiB/total,
-  60s/file,300s/snapshot. These are monitoring limits, not a sandbox or fixture budget.
+  recursive sentinels and explicit artifact hashing budgets128MiB/file, 512MiB/total,
+  60s/file, 300s/snapshot. These are monitoring limits, not a sandbox or fixture budget.
 - Fresh test output/temp subtree only:
   `Amazon4U/.test-output/checkpoint-payload-matrix-v1/`; empty before/after every run.
   Wrapper/runtime evidence must be separately predeclared in the future task, not
   silently placed in implementation/test paths. Training in new tests is forbidden.
-- Keep fixtures <=8users,12products,8metadata nodes/type,64dimensions; actual/expected
+- Keep fixtures <=8users, 12products, 8metadata nodes/type, 64dimensions; actual/expected
   logical limits2097152bytes/depth32/visits16384. Only original one-at-a-time negative
   exception at most2097152+4096 accounted input or projected output, depth33 or visits16385.
   Smaller explicit runtime-policy test budgets permitted; no production capacity claim.
@@ -124,7 +124,7 @@ No predeclared deployment policy: deployment remains NOT_AUTHORIZED.
 
 ## Concrete technical pins for the known fixes
 
-### A01 — actual named-option control and rejection
+### A01, actual named-option control and rejection
 
 Use a valid E2 payload. Set trusted group `options.param_names` and actual group
 `param_names` to separate copies of the same ordered names. Validate the complete
@@ -141,9 +141,9 @@ This pin clarifies the correction assignment; do not retroactively claim that tu
 behavior has already been executed or that every other field permits tuples.
 
 Do not change packed IDs, partitions, frozen options, lazy states, update/step precision,
-aggregate bounds or selection. Tests for A02–A04 and T01–T03 protect those behaviors.
+aggregate bounds or selection. Tests for A02-A04 and T01-T03 protect those behaviors.
 
-### G01 — actual canonical active-CUDA rejection, not just a spelling test
+### G01, actual canonical active-cuda rejection, not just a spelling test
 
 Noncanonical actual role name `PyTorch_CUDA` must fail the ordered-role guard.
 That alone does not exercise the CPU inactivity requirement.
@@ -157,17 +157,17 @@ other bindings/states remain valid. D1 does not impose this CPU/CUDA cross-check
 The D2 CPU guard must reject the canonical active role. Do not initialize CUDA or edit
 D1 to produce this fixture. Preserve explicit inactive-role rejection and W0/W1/W2.
 
-### D01 — demonstrate the actual failing diagnostic paths
+### D01, demonstrate the actual failing diagnostic paths
 
 Let `H=10**5000`, never decimal-format H in the test itself. Keep all other fields
 valid. Mutate each separately, with intended-field assertions:
 
-- Entire LightGCN state keyset becomes homogeneous integers H,H+1,H+2 with the same
+- Entire LightGCN state keyset becomes homogeneous integers H, H+1, H+2 with the same
   original tensor values. Adding H to existing string keys would be rejected earlier
   by mixed-key preflight and would NOT demonstrate source729's defect.
 - Trusted `rng_generator_bindings[gid].codec=H` reaches source2089.
 - Actual role.name=H, sampler.algorithm=H, runtime_profile.profile_id=H,
-  optimizer group params[0]=H and betas=(H,0.999) exercise distinct raw paths.
+  optimizer group params[0]=H and betas=(H, 0.999) exercise distinct raw paths.
 - Trusted role-binding keyset uses homogeneous H+i keys; trusted runtime-profile
   keyset uses homogeneous tuple keys `(0,)` and `('x',)` to expose unsafe sorting.
 - Long clean strings and many keys check aggregate message size, not just truncation
@@ -179,18 +179,18 @@ is an explicit prospective technical test pin, **not** an integer validity cap o
 rewrite of original criteria. Keep valid arbitrary-size integers where allowed and
 existing D1 exception families. Never modify interpreter digit limits.
 
-### A05/G09 — supported tensor leaves must not trigger native truth conversion
+### A05/G09, supported tensor leaves must not trigger native truth conversion
 
 Generic preflight allows exact CPU tensors because valid model/optimizer/RNG fields
 need them. It does not make a tensor a valid optimizer bool option or seed integer.
 
 For A05 first validate a control with actual AND expected foreach=False, then replace
 only actual foreach by `torch.tensor([0,1])`. Repeat independently for fused=False.
-Current equality-before-type checks938–946 attempt truth conversion of a multielement
+Current equality-before-type checks938-946 attempt truth conversion of a multielement
 Tensor. Reject wrong types BEFORE equality, retaining all supported well-typed options.
 
 For G09 first validate each parent codec's seed42 control, then replace only actual
-seed_material by `torch.tensor([42,43])`. Current parent bound-role comparison1233–1240
+seed_material by `torch.tensor([42,43])`. Current parent bound-role comparison1233-1240
 precedes codec type validation1247+. Move or add codec-specific validation before that
 comparison. Retain worker-derived seed distinctions and intrinsic limits. These are
 static source findings; no new reproductions were executed in preparation.
@@ -245,7 +245,7 @@ These are phases of ONE whole deliverable, not new tasks for each small fix.
    do not consume the deadline writing success prose or silently omit failed runs.
 6. **Pi decision:** inspect diff then actual complete functions/callers/tests, check
    protected hashes/condition changes, run independent approved full benchmark, read
-   full evidence and evaluate unchanged C1–C10. A single consolidated revision, if
+   full evidence and evaluate unchanged C1-C10. A single consolidated revision, if
    needed and unexposed, addresses explicit remaining rows. Any unresolved issue or
    incomplete mandatory evidence still blocks ACCEPT at the final bound.
 
@@ -260,7 +260,7 @@ prior attempt152failure/191interruption/initial timeout, Pi283/26errors and revi
 
 For every matrix row identify preserve/fix/test-only, original and resulting source
 hashes, added tests, observed intended result and remaining gap. `unresolved_issues=[]`
-is justified only when assigned work is actually closed; no broad “all blockers fixed”
+is justified only when assigned work is actually closed; no broad "all blockers fixed"
 claim from aggregate test count. Current limitations are independently adjudicated by
 Pi verbatim/in order against original scope; in-scope defects cannot be reclassified
 outside scope. Supplement partial inventory using bounded raw-record review without

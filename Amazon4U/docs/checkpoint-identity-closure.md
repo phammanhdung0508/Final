@@ -41,7 +41,7 @@ field (plus documented dependencies necessary for a valid ACTIVE-worker fixture)
 Assert specific exception family AND stable guard/field diagnostic with
 assertRaisesRegex/subTest or equivalent. No incidental failure can count as coverage.
 
-### 1. Source: malformed Unicode and numeric error boundaries
+### 1. source: malformed unicode and numeric error boundaries
 
 - Preserve ensure_ascii=False and compact literal-UTF8 CategoryPath spelling at
   BOTH validator and formatter; escaped-ASCII aliases remain rejected.
@@ -83,7 +83,7 @@ assertRaisesRegex/subTest or equivalent. No incidental failure can count as cove
 - Retain ordered-stream sensitivity and tuple/list equivalence. Corrupt a nested
   record in BOTH actual and expected identity validation, not only root settings.
 
-### 3. Worker derivation/settings: valid active base, isolated field changes
+### 3. worker derivation/settings: valid active base, isolated field changes
 
 - Build ONE complete valid positive-worker fixture with consistent runtime_workers,
   worker_settings, worker_derivation and DataLoader_workers record. Never launch it.
@@ -105,7 +105,7 @@ assertRaisesRegex/subTest or equivalent. No incidental failure can count as cove
 - Deep input/output worker_derivation/RNG/worker_settings aliasing and post-mutation
   expected comparison; do not assume shallow frozen dicts are immutable.
 
-### 4. Serialized identities and intended history guards
+### 4. serialized identities and intended history guards
 
 - from_dict wrong/missing schema, unknown string key, mixed keys0+unknown, missing
   retained field(s), malformed retained collection/nested types, and EACH falsified
@@ -118,10 +118,10 @@ assertRaisesRegex/subTest or equivalent. No incidental failure can count as cove
 - Preserve isolated metadata-only, graph-only, validation-only and multi-category
   ordering cases; do not regress them while adding tables.
 
-### 5. Provenance validator roles, preflight, snapshot isolation
+### 5. provenance validator roles, preflight, snapshot isolation
 
 - Maintain missing/unknown top/file/Git/environment keys and entry-path/size/hash/
-  total/bytes cases. Add malformed untracked MEMBERS bool,int,dict/list,blank/padded
+  total/bytes cases. Add malformed untracked MEMBERS bool, int, dict/list, blank/padded
   strings and forbidden/traversal paths in BOTH actual AND expected validator roles.
   Start with dirty=True, otherwise-valid untracked evidence and byte coverage, so
   intended member/path guard is reached. SecurityErrors for forbidden paths;
@@ -134,7 +134,7 @@ assertRaisesRegex/subTest or equivalent. No incidental failure can count as cove
   mutation compared against an independently built trusted expected record. No
   universal tamper-proof claim when caller mutates both actual and expected evidence.
 
-### 6. Documentation/report evidence accuracy
+### 6. documentation/report evidence accuracy
 
 - Preserve correct actual list/tuple shapes, relative links, caller trust boundary,
   shallow frozen nested mutability and ordered stream/fanout exceptions. Record
@@ -184,7 +184,7 @@ Pi read ALL2549source/3057test/265doc lines plus relevant accepted typed-ID and
 reproducibility dependencies. Independent AST literal/JSON/SHA256 review confirmed
 unchanged valid settings/composite preimages/hashes, without candidate import/probe.
 Fresh inspection `agy-evidence-135da011-2bb9-47df-a323-baf745bbd1ad`: exactly3allowed
-paths, unauthorized[],Gitmetadataunchanged,142protectedfiles/86,536,910bytes and
+paths, unauthorized[],Gitmetadataunchanged, 142protectedfiles/86,536,910bytes and
 130outside sentinels. Previous draft/HEAD/index/status independently unchanged;
 fixture scratch empty, runtime artifacts retained. Bounded monitoring is not an OS
 sandbox or complete action audit; captured150action candidates are navigation only.

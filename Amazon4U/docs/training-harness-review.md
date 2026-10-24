@@ -1,4 +1,4 @@
-# Actual training harness — independent review outcome
+# Actual training harness, independent review outcome
 
 Status: **ESCALATE / NOT ACCEPTED**. Lifecycle remains
 `IMPLEMENTATION_REGRESSION_VERIFICATION`. This note does not authorize real-data
@@ -194,7 +194,7 @@ Historical source task `ca73a153` and the original bundled harness remain
 training harness. Remaining recovery: checkpoint/provenance subsystem, training-loop
 and continuation tests, then integrated harness review.
 
-### Checkpoint/provenance attempt — isolated draft not accepted
+### Checkpoint/provenance attempt, isolated draft not accepted
 
 Task `e1f1ea4c-de9a-4a53-ad3a-7b394fb4da1a` received **ESCALATE / task_only /
 NOT_AUTHORIZED**, decision `agy-evidence-267a7fbd-265f-4d48-8e45-76e8999552c6`.

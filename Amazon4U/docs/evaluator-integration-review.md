@@ -75,7 +75,7 @@ waives the report-schema regression or the unresolved scoped review findings.
 
 ## Sequence status
 
-Step 1 is **not accepted or integrated**. Steps 2–4 have not proceeded past this
+Step 1 is **not accepted or integrated**. Steps 2-4 have not proceeded past this
 gate. No training/profiling, deployment, commits, pushes or rollback authorized.
 The standing approval allowed routine setup and scoped revisions, not bypassing
 acceptance gates or automatically replacing an exhausted task.

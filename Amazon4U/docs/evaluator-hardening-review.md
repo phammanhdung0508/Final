@@ -1,4 +1,4 @@
-# Pi review — evaluator candidate-input isolation recovery
+# Pi review, evaluator candidate-input isolation recovery
 
 ## Lead operating decision
 

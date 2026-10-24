@@ -1,6 +1,6 @@
-# Milestone I1: Pure Checkpoint Identity and Provenance Contracts
+# Milestone I1: pure checkpoint identity and provenance contracts
 
-## 1. Scope, Status, and Architectural Boundary
+## 1. scope, status, and architectural boundary
 
 This document defines the pure canonical identity and source/environment provenance contracts for the Amazon4U recommendation benchmarking platform.
 
@@ -11,7 +11,7 @@ Following the project's user-approved architectural decomposition (after exhaust
 2. **Payload and State Validation (Deliverable 2, Unaccepted/Pending)**: Checkpoint payload integrity, PyTorch model weights-only CPU tensor validation, RNG state contracts, and optimizer parameter state consistency.
 3. **Secure I/O and Integration (Deliverable 3, Unaccepted/Pending)**: Exclusive atomic no-clobber publication, secure provenance evidence acquisition adapters, and validation-only integration with the training harness (strictly prohibiting in-place replacement of completed artifacts or unvalidated live restoration).
 
-### Pure Contract Boundary
+### Pure contract boundary
 This module ([`scripts/checkpoint_identity.py`](../scripts/checkpoint_identity.py)) is implemented strictly with the Python standard library. It:
 - **Never** accesses the live filesystem, scans directories, or executes shell commands.
 - **Never** interacts with Git subprocesses directly or reads credentials/datasets.
@@ -22,7 +22,7 @@ This module ([`scripts/checkpoint_identity.py`](../scripts/checkpoint_identity.p
 
 ---
 
-## 2. Trust Boundary and Evidence Model
+## 2. trust boundary and evidence model
 
 The contracts enforce a clear separation between **evidence acquisition** and **contract validation**:
 
@@ -44,10 +44,10 @@ The contracts enforce a clear separation between **evidence acquisition** and **
 +-------------------------------------------------------------+
 ```
 
-### Trust Guarantees and Boundary Scope
+### Trust guarantees and boundary scope
 - **Caller Acquisition Trust Boundary**: The pure contracts **cannot prove the physical origin** of caller-supplied evidence; acquiring authentic source bytes, valid Git metadata, and environment records is the caller's documented responsibility. The contracts do not automatically inspect the filesystem, run Git subprocesses, verify physical execution hardware, or enforce runtime determinism.
 - **Tamper Detection Scope**: Tamper detection is strictly scoped to **deterministic canonical recomputation** from retained content and comparison against an **independent, unchanged, trusted expected object**. There is **no universal guarantee** if a caller aliases or mutates both actual and expected evidence objects, nor can standard-library pure contracts intercept arbitrary, malicious in-memory Python object mutations across unverified references.
-- **Preflighting and Domain Error Translation**: Both actual and expected objects are strictly preflighted: malformed, incomplete, or bypassed objects cannot evade validation. All corrupted objects raise domain errors (`CheckpointValidationError`, `CheckpointIdentityMismatchError`, `CheckpointProvenanceError`, or `CheckpointSecurityError`), preventing incidental `KeyError`, `TypeError`, or `AttributeError` escapes. Specifically, mapping keys for `positive_history` and `all_rated_history` in both actual and expected roles are explicitly preflighted for clean-text properties before any sorting, ensuring precise diagnostics (`actual.positive_history key`, `expected.positive_history key`) and avoiding incidental `TypeError` on mixed key types.
+- **Preflighting and Domain Error Translation**: Both actual and expected objects are strictly preflighted: malformed, incomplete, or bypassed objects cannot evade validation. All corrupted objects raise domain errors (`CheckpointValidationError`, `CheckpointIdentityMismatchError`, `CheckpointProvenanceError`, or `CheckpointSecurityError`), preventing incidental `KeyError`, `TypeError`, or `AttributeError` escapes. Specifically, mapping keys for `positive_history` and `all_rated_history` in both actual and expected roles are explicitly preflighted for clean-text properties before any sorting, making sure precise diagnostics (`actual.positive_history key`, `expected.positive_history key`) and avoiding incidental `TypeError` on mixed key types.
 - **Malformed Unicode and Lone Surrogate Domain Behavior**: Literal lone-surrogate code points (U+D800..U+DFFF) in `CategoryPath` labels, brand labels, header fields, or settings text are strictly rejected in both validators and formatters with `CheckpointValidationError`. All canonical serialization maintains `ensure_ascii=False` without replacing code points or escaping aliases (e.g., `'c:["\u00e9"]'` is rejected in favor of literal compact UTF-8 `'c:["é"]'`). Canonical JSON encoding translates any underlying `UnicodeEncodeError` into `CheckpointValidationError`.
 - **Unsupported Numeric Serialization and Overflow Handling**: Numbers in training records, edge weights, validation ratings, settings, and timestamps are bounded and verified for finite representation. Numbers such as $10^{400}$ (which has 401 decimal digits and overflows finite float conversion, but does not exceed 4300 digits) are checked during float validation to reject non-finite and overflowing values. Very large integers such as $10^{5000}$ (5001 decimal digits) exceed Python 3.11+'s default native 4300-digit string/JSON conversion setting (`sys.get_int_max_str_digits()`); `_safe_repr` truncates diagnostic printing (for values exceeding 14,000 bits) strictly for safe message generation without deciding validity, while canonical JSON serialization translates actual native conversion failures (`ValueError`, `OverflowError`) into `CheckpointValidationError`. There is no arbitrary 14,000-bit validity cap: native-supported exact integers (such as $2^{14000}$, which has 14,001 bits and 4,215 decimal digits, below the 4300-digit conversion limit) are fully retained without float conversion, and unsupported integers fail only when the current native converter cannot encode them, without altering global interpreter limits.
 - **Safe Worker-Seed Mismatch Diagnostics**: In `_validate_resolved_settings_consistency`, cross-section consistency diagnostics between `determinism.worker_derivation.base_seed` and `determinism.seed` format both values using `_safe_repr`. When an oversized integer exceeding native string-conversion limits (such as $10^{5000}$ with 5001 decimal digits) appears in either field in an active positive-worker configuration, the mismatch diagnostic safely formats the value (e.g., `<oversized int (16610 bits)>`) without leaking native `ValueError` prior to constructing `CheckpointValidationError`. Regression coverage in `test_oversized_worker_seed_mismatch_diagnostics` verifies both uncoupled mismatch directions across `compute_settings_fingerprint`, `build_canonical_identity`, `CanonicalResumeIdentity.from_dict` (via in-memory mutated snapshot), and both `actual` and `expected` roles in `validate_canonical_identity`.
@@ -55,9 +55,9 @@ The contracts enforce a clear separation between **evidence acquisition** and **
 
 ---
 
-## 3. Public Canonical Schemas
+## 3. public canonical schemas
 
-### 3.1 Canonical Identity (`amazon4u-checkpoint-identity-v1`)
+### 3.1 Canonical identity (`amazon4u-checkpoint-identity-v1`)
 
 A [`CanonicalResumeIdentity`](../scripts/checkpoint_identity.py) object is the definitive representation of a training run's identity. It binds:
 1. **Method, Category, Feedback Condition, and Seed**:
@@ -82,7 +82,7 @@ A [`CanonicalResumeIdentity`](../scripts/checkpoint_identity.py) object is the d
    - `validation_inputs`: canonical validation inputs `{"targets": {user: list(sorted_items)}, "records": list(sorted_records)}`.
    - `resolved_settings`: mapping of the 6 mandatory resolved semantic sections.
 
-### 3.2 Canonical Data Content (`amazon4u-canonical-data-v1`)
+### 3.2 Canonical data content (`amazon4u-canonical-data-v1`)
 Enforces:
 - Exact record format: `user_id` (str), `parent_asin` (str), `rating` (finite float, not bool), `timestamp` (exact integer, not bool/float).
 - Duplicate `(user_id, parent_asin)` pairs are strictly rejected.
@@ -94,7 +94,7 @@ Enforces:
   - In `"all_ratings"`: `warm_items` equals the set of all observed items in training records.
   - In `"rating_ge_4"`: `warm_items` equals the set of all condition-positive items.
 
-### 3.3 Canonical Graph Content (`amazon4u-canonical-graph-v1`)
+### 3.3 Canonical graph content (`amazon4u-canonical-graph-v1`)
 Enforces:
 - Declared node types must belong to `("User", "Product", "CategoryPath", "Brand")`.
 - `CategoryPath` IDs must use canonical compact UTF-8 JSON prefix `c:[...]` (e.g., `'c:["Electronics","Headphones"]'`). Delimiter-separated strings (such as `'Electronics > Headphones'`) are rejected.
@@ -114,14 +114,14 @@ Enforces:
   - Permitted fields: `"categories"` (sequence of canonical `CategoryPath` IDs) and `"brand"` (canonical `b:...` ID or explicit `None`).
   - Excluded/review-derived metadata fields (`average_rating`, `rating_number`, `bestseller_rank`, `store`, `Manufacturer`, `bought_together`, `details`) and any unknown fields are strictly rejected.
 
-### 3.4 Canonical Validation Selection Inputs (`amazon4u-canonical-validation-v1`)
+### 3.4 Canonical validation selection inputs (`amazon4u-canonical-validation-v1`)
 Enforces a strict complete selection-input schema:
 - `validation_inputs` must contain `"targets"` and/or `"records"` (rejects unknown keys).
 - `"targets"`: mapping of validation `user_id` to a sequence of target `parent_asin` strings. No duplicate target items per user.
 - `"records"`: sequence of validation records. Each record must strictly have 4 fields: `(user_id, parent_asin, rating, timestamp)` as a 4-tuple or dict with those exact keys. No defaulting of rating or timestamp; no tuples with $> 4$ fields. Finite ratings (not bool), exact integer timestamps (not bool/float).
 - **Agreement**: when both `"targets"` and `"records"` are supplied, they must agree completely: the set of users in `"targets"` must match `"records"`, and for every user, the set of target items must match the record items.
 
-### 3.5 Resolved Semantic Settings (`amazon4u-canonical-settings-v1`)
+### 3.5 Resolved semantic settings (`amazon4u-canonical-settings-v1`)
 Requires all **6 mandatory resolved sections**, recording full configuration with strict schemas without freezing real pending execution settings:
 1. `"protocol"`:
    - `candidate_policy`: string (e.g., `"full_candidate_ranking"`)
@@ -178,11 +178,11 @@ Missing sections, unknown sections, missing fields, unknown fields, and invalid 
 
 ---
 
-## 4. Source and Environment Provenance (`amazon4u-provenance-v1`)
+## 4. source and environment provenance (`amazon4u-provenance-v1`)
 
 The provenance builder and validator guarantee exact, reconstructable source and environment capture.
 
-### 4.1 Allowlisted Relative Paths
+### 4.1 Allowlisted relative paths
 Only relative paths in approved top-level directories (`scripts/` and `configs/`) matching the registered allowlist are permitted:
 - Allowlisted scripts: `scripts/checkpoint_identity.py`, `scripts/learned_models.py`, `scripts/recommendation_core.py`, `scripts/recommendation_evaluation.py`, `scripts/differentiable_models.py`, `scripts/build_kg.py`, `scripts/audit_kg_inputs.py`, `scripts/audit_candidates.py`, `scripts/validate_kg_splits.py`, `scripts/visualize_kg.py`, `scripts/inspect_data.py`, `scripts/download_5core.py`.
 - Allowlisted configs: `configs/compute-plan.json`, `configs/dataset-scope.json`, `configs/evaluation-metrics.json`, `configs/kg-v1.json`, `configs/model-suite.json`, `configs/protocol-lifecycle.json`, `configs/reproducibility.json`, `configs/training-semantics.json`.
@@ -193,12 +193,12 @@ Strictly rejected:
 - Disallowed paths (`data/`, `.git/`, `.venv/`, `.test-output/`, `Movie4U`, `multiautoresearch`, `.worktrees`).
 - Credential file patterns (`*.key`, `*.pem`, `*token*`, `*secret*`, `*.env*`, `*credential*`, `*password*`).
 
-### 4.2 Bounded Source Bytes
+### 4.2 Bounded source bytes
 - Total source bytes are capped at **2 MiB** (`MAX_PROVENANCE_SOURCE_BYTES = 2,097,152` bytes).
 - Aggregate size and element types are preflighted **before** any hashing or byte processing to prevent memory or computation exhaustion.
 - Reconstructable `content_bytes` are preserved alongside `size_bytes` and `sha256` for every allowlisted file.
 
-### 4.3 Git Evidence
+### 4.3 Git evidence
 - `commit`: full 40-character hexadecimal Git commit hash.
 - `dirty`: strict boolean (not integer).
 - `tracked_diff`: diff string.
@@ -209,7 +209,7 @@ Strictly rejected:
   - If `dirty == True`: `tracked_diff != ""` or `len(untracked_sources) > 0`.
   - No fabricated clean defaults are permitted.
 
-### 4.4 Environment Records
+### 4.4 Environment records
 Requires complete, typed records:
 - `python_version`, `platform_system`, `platform_release`, `platform_machine`, `torch_version`: non-empty strings.
 - `cpu_count`: positive integer (strictly not boolean).
@@ -217,9 +217,9 @@ Requires complete, typed records:
 
 ---
 
-## 5. Memory Model and Snapshot Isolation
+## 5. memory model and snapshot isolation
 
-### Shallow Freezing vs. Deep Snapshot Isolation
+### Shallow freezing vs. deep snapshot isolation
 - `CanonicalResumeIdentity` is decorated with `@dataclass(frozen=True)`. This provides shallow immutability: top-level attributes cannot be reassigned.
 - However, nested Python containers (`dict`, `list`) remain mutable if directly accessed.
 - To prevent accidental mutation and aliasing:
@@ -227,7 +227,7 @@ Requires complete, typed records:
   - `CanonicalResumeIdentity.to_dict()` returns an isolated snapshot via deep copy.
    - Callers must **never assume unforgeable containers**; any canonical identity object must be verified with `validate_canonical_identity` before use. Post-mutation validation detects tampering even if performed on nested structures.
 
-### Ordering Invariance and Ordered-List Exceptions
+### Ordering invariance and ordered-list exceptions
 Collections of unordered entities are stored and compared in canonical sorted representation:
 - Permuting input lists, tuples, history keys, graph nodes, edges, validation records, or product metadata produces identical canonical representations, identical fingerprints, and equal `CanonicalResumeIdentity` instances (`ident1 == ident2` and `validate_canonical_identity(ident1, ident2)` passes).
 - **Ordered-List Exceptions**:
@@ -237,7 +237,7 @@ Collections of unordered entities are stored and compared in canonical sorted re
 
 ---
 
-## 6. Public API Summary
+## 6. public API summary
 
 | Function / Class | Description |
 | :--- | :--- |
@@ -258,7 +258,7 @@ Collections of unordered entities are stored and compared in canonical sorted re
 
 ---
 
-## 7. Next Steps in Milestone I1 Architectural Decomposition
+## 7. next steps in milestone I1 architectural decomposition
 
 As approved in the architectural decomposition:
 1. **Deliverable 1 (Current Deliverable)**: Pure identity and provenance contracts (implemented, verified with unit and adversarial tests in [`tests/test_checkpoint_identity.py`](../tests/test_checkpoint_identity.py), pending Pi independent review and acceptance).

@@ -9,8 +9,8 @@ No models or embedding encoders were fitted during this audit.
 
 All three categories have:
 
-- No invalid interaction records, within-split duplicate user–item pairs, or
-  user–item pair overlap between train/valid/test.
+- No invalid interaction records, within-split duplicate user-item pairs, or
+  user-item pair overlap between train/valid/test.
 - Exactly one validation and one test interaction for every user, with remaining
   interactions in training; no per-user time inversions. This is consistent
   with leave-last-two-out (last interaction for test, preceding for validation).
@@ -86,5 +86,5 @@ plus category-prefix hierarchy edges. See [schema](kg-schema.md) for semantics.
 The three persisted graphs occupy approximately **284 MiB**.
 
 All structural checks passed, and independent validation found **zero validation
-or test user–product pairs in the training graphs**. No text/numeric node features
+or test user-product pairs in the training graphs**. No text/numeric node features
 or embeddings were created. Evaluation remains blocked pending protocol freeze.

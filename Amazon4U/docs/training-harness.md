@@ -1,4 +1,4 @@
-# Existing H-REF — bounded CPU reference correction
+# Existing H-REF, bounded CPU reference correction
 
 ## Status and authority
 
@@ -95,7 +95,7 @@ nor graph. Private native setters run only after complete unchanged D2 validatio
 Private-RNG CPU fixture policy does not claim to enable global deterministic
 algorithms or prove all-operation/cross-environment determinism.
 
-## B1: narrow H-local CPU Adam compatibility guard
+## B1: narrow h-local CPU Adam compatibility guard
 
 Installed Adam's ordinary step calls its CUDA-graph health hook. On the supplied
 CUDA-built eager framework, the original hook can call CUDA availability, whose

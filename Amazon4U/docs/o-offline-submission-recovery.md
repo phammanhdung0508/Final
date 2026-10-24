@@ -1,6 +1,6 @@
-# O-OFFLINE — approved monitoring-only submission recovery
+# O-OFFLINE, approved monitoring-only submission recovery
 
-## Current stop — clean-workspace execution prerequisite
+## Current stop, clean-workspace execution prerequisite
 
 The approved root correction passed discovery, but linked task
 `2a2b3d04-ded8-4b99-a04a-50c5581c460e` is terminal **ESCALATE before Worker launch**:
@@ -36,14 +36,14 @@ The native canonical **monitoring project_root** becomes
 `/home/sunf/FSB/Final/Amazon4U`. The implementation candidate remains
 `/home/sunf/FSB/Final/Amazon4U/.worktrees/o-offline-implementation-v1/Amazon4U`.
 Only the original seven candidate paths remain writable. Main and sibling source,
-accepted H/science/D1–D3, old reports, Git metadata and all nonallowed files remain
+accepted H/science/D1-D3, old reports, Git metadata and all nonallowed files remain
 protected. Historical protected ignored roots now lie inside the monitoring project.
 Explicitly bind the remaining immutable files from the same 162-file candidate
 manifest as monitored inputs; broadening project_root must not lose their coverage
 because the candidate is ignored by the enclosing repository. This adds no write
 permission, new dataset acquisition or larger hashing budget.
 
-Keep the original OC1–OC8 and OP01–OP18 requirements and original commands verbatim.
+Keep the original OC1-OC8 and OP01-OP18 requirements and original commands verbatim.
 The original task/context is preserved; the linked submission appends this specific
 monitoring amendment rather than rewriting old history. Use native approval/baseline,
 inspection, independent original benchmark verification and exact limitation gates.

@@ -1,7 +1,7 @@
 # Text-only channel: bounded capability verification
 
 Current workflow follows [direct single-agent ownership](worker-delegation-policy.md).
-Mandatory Pi–agy handoffs and the prospective 2 + 2 + 2 process are retired.
+Mandatory Pi-agy handoffs and the prospective 2 + 2 + 2 process are retired.
 The routing statements in the historical notice below are no longer current.
 SDK requests still require explicit approval. Historical evidence is unchanged.
 
@@ -33,7 +33,7 @@ NOT_AUTHORIZED. D2 remains ESCALATE under its unchanged previous review.
 
 ## Actual observed request and result
 
-One generation request, no retries,30second deadline; HTTP200, stop_reason=stop,
+One generation request, no retries, 30second deadline; HTTP200, stop_reason=stop,
 3001ms. Observed actual outgoing request has **no tool definitions** and
 `tool_choice: "none"`; response contains text only. There is no tool dispatcher even
 if a provider unexpectedly returns tool-call content (the check rejects it).
@@ -90,13 +90,13 @@ No actual filesystem application/symlink/parent-race guarantee was demonstrated.
 Full Pi semantic review of implementation, tests, setup and affected dependencies is
 still required; static screening alone does not exclude obfuscation or indirect effects.
 
-## Future D2 boundaries — still require authorization
+## Future D2 boundaries, still require authorization
 
 - Use a bounded text-only request plan, with relevant complete functions, necessary
   callers/dependencies, exact applicable frozen requirement clauses and pertinent test
   results. Do not resend the whole codebase per iteration or silently compress/change
   original requirements. Request missing context rather than guess. Pi retains the
-  complete original C1–C10/specification as authoritative acceptance requirements.
+  complete original C1-C10/specification as authoritative acceptance requirements.
 - Each patch identifies the exact baseline; Pi independently checks whole-file hashes
   and relevant dependency hashes immediately before mechanical application. Drift means
   reject/rebuild context, not fuzzy application to a newer artifact.

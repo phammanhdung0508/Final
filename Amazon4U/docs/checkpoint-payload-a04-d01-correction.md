@@ -12,12 +12,12 @@ protected/numerical/schema rewrites. Missing evidence is test-only work unless a
 implementation defect is independently established and explicitly assessed in scope.
 
 Use the same existing direct text-only model client, no architecture/controller changes.
-One initial response and at most one consolidated revision,30minutes each,one generation
+One initial response and at most one consolidated revision, 30minutes each, one generation
 request each/no retries. Pi independently reviews complete source/tests and scope before
 mechanical application and before every exact full regression (120seconds; at most6per
 round including baseline). No probes/subsets/compileall or Worker execution authority.
 
-Original C1–C10 and frozen specification are authoritative; new tests must map to existing
+Original C1-C10 and frozen specification are authoritative; new tests must map to existing
 clauses. The37-part ledger is navigation, not a growing contract. The later evidence audit
 must distinguish original requirements, already covered/source-verified invariants,
 actual missing evidence and unsupported reviewer requests. Do not turn every possible
@@ -28,22 +28,22 @@ requirements are closed. All original independent review, history, exact ordered
 adjudication and verification gates remain. Source patches are Worker-authored; Pi applies
 only reviewed changes and records actual results locally without invented native receipts.
 
-Acceptance scope **task_only**; deployment **NOT_AUTHORIZED**. No main transfer,D3,
-profiling/training,realdata,remotejobs,heldout work,account/routing changes,commits or pushes.
+Acceptance scope **task_only**; deployment **NOT_AUTHORIZED**. No main transfer, D3,
+profiling/training, realdata, remotejobs, heldout work, account/routing changes, commits or pushes.
 Initial status at submission: authorized preparation; no acceptance claim.
 
 ## Final independent decision
 
-**ACCEPT — whole D2, task_only, pinned isolated artifact only.**
+**ACCEPT, whole D2, task_only, pinned isolated artifact only.**
 Deployment decision: **NOT_AUTHORIZED**. This decision is recorded in
 [`review.json`](../data/reports/checkpoint-payload-a04-d01-correction/review.json),
-with the original C1–C10 verbatim,37-row evidence navigation, six exact ordered
+with the original C1-C10 verbatim, 37-row evidence navigation, six exact ordered
 limitation reviews with original scope quotes, and two resolved submission-time
 questions. No original criterion or Worker report was rewritten.
 
 Final exact full discovery completed **355 tests, zero failures/errors/skips** in
 111.539s unittest / **116.571s process**, under the original120s limit. All337
-inherited test bodies and249 baseline tests/dependencies are preserved;35 expanded
+inherited test bodies and249 baseline tests/dependencies are preserved; 35 expanded
 ledgers contain3564 successful/declared cases and no unresolved entries. Source
 changes remain only the initial Worker-authored A04 exact-step comparison and D01
 bounded diagnostic contexts; no production changes during the consolidated revision.

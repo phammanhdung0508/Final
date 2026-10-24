@@ -1,4 +1,4 @@
-# H-REF main integration — preparation only
+# H-REF main integration, preparation only
 
 ## Decision and present authority
 
@@ -60,7 +60,7 @@ The copied API document retains its historical SDK-proposal status paragraphs. D
 rewrite accepted bytes to present a new result. A separate current-main status document
 must distinguish that provenance from the later accepted/integrated state.
 
-## Proposed future execution sequence — requires separate approval
+## Proposed future execution sequence, requires separate approval
 
 1. Record fresh integration authority and exact permitted paths. Recheck this HEAD,
    artifact, dependency/configuration hashes and destination absence. Unexpected drift
@@ -98,8 +98,8 @@ pending, not disguised as work already completed during preparation.
 - Exactly **two new full main runs**, each <=240 seconds, peak child RSS <=2 GiB,
   complete stdout/stderr <=8 MiB each, fresh scratch <=64 MiB and empty afterward.
 - One separately counted mock-only invocation, <=60 seconds/2 GiB/8 MiB per stream.
-  Only stdlib and the declared cache helper are imported;no target scientific/runtime
-  modules or framework imports,real cache mkdir/rmdir or workload subsets.
+  Only stdlib and the declared cache helper are imported; no target scientific/runtime
+  modules or framework imports, real cache mkdir/rmdir or workload subsets.
 - Original tiny fixture limits remain: <=8 users/12 products/8 metadata nodes per type,
   CPU float32/64 dimensions, <=2 MiB per file/decoded object, <=8 MiB concurrent fixture
   data/128 files, <=4 actual epochs/Adam steps per numeric trajectory, <=128 new H steps
@@ -114,14 +114,14 @@ pending, not disguised as work already completed during preparation.
   never recursive deletion or adoption of an old cache. Apply success/failure cleanup.
 - Preservation hashing: <=128 MiB/file, <=512 MiB aggregate, <=60 seconds/file and
   <=300 seconds/snapshot. Outer supervisor ceiling is 900 seconds per stage to include
-  before/after metadata work;it does not extend the 240-second child deadline.
+  before/after metadata work; it does not extend the 240-second child deadline.
   The proposal explicitly includes root tracked/nonignored files, recursive nested-repo
   HEAD/index/status/content sentinels, accepted/retired ignored artifacts and reports,
   existing output/cache directories and new verifier/control files. Exact roots and
   active-stage-only output exclusions are in the configuration. No sibling writes.
-  Interrupted/unstable/over-budget snapshots block acceptance,not silent exclusions.
+  Interrupted/unstable/over-budget snapshots block acceptance, not silent exclusions.
   Undeclared ignored paths are not exhaustively monitored. Monitoring is not an OS
-  sandbox,exhaustive transient-write record,hostile-sameUID atomic-unlink guarantee or
+  sandbox, exhaustive transient-write record, hostile-sameUID atomic-unlink guarantee or
   total-process-tree RAM accounting.
 
 Historical counters stay **SDK4/native1/full-H4**; original full-run allowance remaining

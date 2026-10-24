@@ -1,7 +1,7 @@
-# Training Harness: preparation and bounded implementation proposal
+# Training harness: preparation and bounded implementation proposal
 
 Current workflow follows [direct single-agent ownership](worker-delegation-policy.md).
-Mandatory Pi–agy handoffs and the prospective 2 + 2 + 2 process are retired.
+Mandatory Pi-agy handoffs and the prospective 2 + 2 + 2 process are retired.
 The routing statements in the historical notice below are no longer current.
 Original requirements, evidence, budgets, and execution gates remain unchanged.
 
@@ -19,7 +19,7 @@ Original requirements, evidence, budgets, and execution gates remain unchanged.
 **PREPARATION ONLY; implementation, Worker requests, tests, training, profiling,
 Kaggle calls and legacy replacement are NOT AUTHORIZED by this document.**
 
-User-agreed principle: **“Reuse orchestration, not inherited training methodology.”**
+User-agreed principle: **"Reuse orchestration, not inherited training methodology."**
 Exact current request: `data/reports/training-harness-preparation-v1/inputs/authority.txt`.
 Planning HEAD: `d2938ba20ccc5cf5281197b2ef08f571dd14eae6`.
 Requirements/evidence matrix: [training-harness-requirements.md](training-harness-requirements.md)
@@ -59,7 +59,7 @@ Adam or manufacture three identical seeded fits. No self-supervised pre-training
 SFT, reward training, LM loss, val_bpb promotion or inherited eval_score definition.
 Physical legacy directory names do not define Amazon4U methodological stages.
 
-## Reuse and targeted adaptation—not another control plane
+## Reuse and targeted adaptation, not another control plane
 
 Use the **existing** `multiautoresearch/post-training/scripts/kaggle_job.py` as the
 single selected managed-runner base. It already has bundle/render, launch, status,
@@ -101,25 +101,25 @@ autonomous loops, credentials machinery, provider routing or the external CLI re
 
 These are not reasons to rewrite both full runners or to execute the legacy programs.
 
-## Device-transition clarification — CPU reference, not permanent CPU architecture
+## Device-transition clarification, CPU reference, not permanent CPU architecture
 
-The user agrees to CPU reference correctness first,not an immediate GPU GNN rewrite.
+The user agrees to CPU reference correctness first, not an immediate GPU GNN rewrite.
 See [the recorded device-transition clarification](training-harness-device-transition.md)
 and `configs/training-harness-device-transition.json`. H-REF/O-OFFLINE are milestones;
 the overall planned GPU experiment harness is **not ready** merely because both pass.
-GPU-READY is a required planned gate before large-scale GPU profiling,not optional
+GPU-READY is a required planned gate before large-scale GPU profiling, not optional
 work discovered after declaring completion. Build explicit device/capability and tensor/
-state-transfer seams in H/O now;initial implementation supports CPU honestly while
+state-transfer seams in H/O now; initial implementation supports CPU honestly while
 orchestration remains device-explicit. No duplicate harness or guard bypass.
-Earlier CPU-only labels below describe the first verification scope,not a prohibition
+Earlier CPU-only labels below describe the first verification scope, not a prohibition
 on a later separately scoped device adaptation. Current D2 CPU runtime/RNG profile
-also needs compatibility assessment for GPU resume;CPU weight copies alone do not
+also needs compatibility assessment for GPU resume; CPU weight copies alone do not
 solve that. Original proposed criteria/budgets and old reports remain unchanged;
 no implementation/Worker/CUDA execution is authorized by this discussion.
 
 ## Authoritative components and implementation seams
 
-**Protected**: every existing `scripts/*.py`, existing tests, accepted D1–D3 docs,
+**Protected**: every existing `scripts/*.py`, existing tests, accepted D1-D3 docs,
 scientific configs/frozen manifests and prior reports. Only the specifically proposed
 managed-runner path may change under later approval; other production additions are
 new adapters/harness files. Never relax CPU guards or edit accepted tests to fit a harness.
@@ -145,11 +145,11 @@ entrypoint contracts are defined, but cannot execute on real held-out data in te
 
 ### One handoff, two substantive work packages
 
-**H — training/state/data integration**: the three new scripts, their additive tests
+**H, training/state/data integration**: the three new scripts, their additive tests
 and harness API documentation. Preserve existing numeric implementations; real tiny
 CPU updates only if the future test policy is explicitly approved.
 
-**O — managed orchestration integration**: targeted selected-runner changes plus
+**O, managed orchestration integration**: targeted selected-runner changes plus
 Amazon4U profile and offline transport/artifact tests. Reuse existing transport,
 not H's model/controller logic. H and O have a frozen run-spec/result interface;
 O follows H acceptance or consumes a frozen fake entrypoint until joint verification.
@@ -180,7 +180,7 @@ Profiling specs are provisional and distinctly labeled, not comparative executio
   propagation after updates; no stale graph/embedding cache or retained-gradient trick.
 - Adam constant0.001, betas0.9/0.999, eps1e-8, weight_decay0; no scheduler, AMP,
   altered loss or transformations. Track actual parameter IDs/state step counts,
-  including lazy state and inactive Hetero parameters—not global_step copied to all36.
+  including lazy state and inactive Hetero parameters, not global_step copied to all36.
 - Use explicit owned RNG streams and recorded derivations, never process hash seeding.
   Worker processes/prefetch remain0 for v1 fixtures; explicit nonapplicability is recorded.
   Fail unsupported deterministic operations. No silently disabled determinism.
@@ -377,26 +377,26 @@ following text-only proposal is retained for provenance, not as a future default
   only after approval; pin then-current HEAD/source hashes and all accepted dependencies.
   Do not reuse retired D3 trees or create a replacement D3 task.
 - H and O: one initial text-only patch response plus at most one consolidated revision
-  each,30min/request,no automatic retry. At most4 new requests total; no Worker tools,
+  each, 30min/request, no automatic retry. At most4 new requests total; no Worker tools,
   source execution/tests, subagents, commits or controller/provider changes.
 - At most6 full discoveries across this proposed implementation:1 fresh389 baseline,
   H initial+optional revision (2), O initial+optional revision (2),1 joint final (1).
   No subsets/smoke/import/native probes/compileall/repeated runs. Each **proposed240s**
   covers entire invocation; D3's240s authority does NOT automatically approve this stage.
   Main transfer is a separate later bounded integration, not a seventh implicit run.
-- Proposed fixture envelope: CPU,float32,<=8users/12products/8metadata nodes per type,
-  exactly64 dimensions; actual fixture file<=2MiB,concurrent<=8MiB/128files,decoded
+- Proposed fixture envelope: CPU, float32,<=8users/12products/8metadata nodes per type,
+  exactly64 dimensions; actual fixture file<=2MiB, concurrent<=8MiB/128files, decoded
   checkpoint storage<=2MiB. Miniature bundle<=8MiB unpacked/128files; use synthetic
   package trees, not live host/source/credential capture by tests.
-- New actual numeric branch<=4epochs/4 Adam updates,all new tests combined<=128
-  Adam steps per full discovery;at most5post-baseline discoveries give a phase ceiling
-  of640 new actual Adam steps. Baseline389 runs no newly added update tests;inherited
+- New actual numeric branch<=4epochs/4 Adam updates, all new tests combined<=128
+  Adam steps per full discovery; at most5post-baseline discoveries give a phase ceiling
+  of640 new actual Adam steps. Baseline389 runs no newly added update tests; inherited
   accepted differentiation exceptions are unchanged. Propose a2GiB peak process-RSS
-  acceptance ceiling,64MiB newly generated
+  acceptance ceiling, 64MiB newly generated
   scratch per full invocation and8MiB per complete stdout/stderr stream. Measure RSS
-  only with a separately reviewed future parent-wrapper OS accounting receipt;this is
-  not a new diagnostic/profiler run,global resource-limit setter or memory sandbox.
-  Missing measurement is an unverified gate,not an invented passing counter;never
+  only with a separately reviewed future parent-wrapper OS accounting receipt; this is
+  not a new diagnostic/profiler run, global resource-limit setter or memory sandbox.
+  Missing measurement is an unverified gate, not an invented passing counter; never
   truncate logs silently or retune accepted tests to fit. These limits are proposals,
   not an amendment to old D3 runtime-investigation/benchmark history.
   Patience/max-epoch controllers use injected traces (up to101 events),
@@ -408,7 +408,7 @@ following text-only proposal is retained for provenance, not as a future default
   invented production2MiB caps. Conditional60GPU-hours/week and20% reserve remain
   unverified planning, not spending authority. Numeric real-job/profile budgets remain
   null until a separate measured plan; failure must not trigger subsampling/tuning.
-- Snapshot proposal:128MiB/file512MiB aggregate,60s/file300s/snapshot; explicit ignored
+- Snapshot proposal:128MiB/file512MiB aggregate, 60s/file300s/snapshot; explicit ignored
   new implementation/scratch/test-output paths, accepted D3 archived trees/reports,
   accepted D1/D2 evidence, Git HEAD/index/status and outside tracked/nonignored sentinels.
   Actual approval must pin paths/budgets; snapshots are not a sandbox/transient-write log.
@@ -423,12 +423,12 @@ import os,tempfile,unittest,sys; from pathlib import Path; p=Path('/home/sunf/FS
 
 Pi reads complete changed functions/callers/dependencies/tests and generated-entrypoint
 source before any execution. Keep generated bootstrap thin and route into shared
-ordinary runtime functions tested with fake process/CLI/clock/file interfaces;do not
+ordinary runtime functions tested with fake process/CLI/clock/file interfaces; do not
 execute embedded arbitrary generated Python or add subprocess smoke probes. Offline
 packaging evidence is not observed successful remote generation/execution traffic.
 AST/static scans supplement, never replace semantic
 review. Independently inspect scope/preserved bytes and complete stdout/stderr/method
-IDs/ledgers,128-step budget,fixture cleanup and full389 inheritance. Use exact positive
+IDs/ledgers, 128-step budget, fixture cleanup and full389 inheritance. Use exact positive
 controls and boundary-specific tripwires, not jointly corrupted expected records.
 Compare actual updates/Adam and restarted trajectories with independent expected
 values, and mock CLI call/exit/status/artifact cases without actual account operations.
@@ -446,7 +446,7 @@ a prospectively declared separate policy/one-shot evaluation; benchmark is not a
 
 Preparation exit: whole matrix, source references/static findings, protected hashes,
 proposed H/O boundaries/criteria/budgets/controls, explicit open decisions and zero
-execution disclosure recorded. This does not resolve G1–G6 or approve implementation.
+execution disclosure recorded. This does not resolve G1-G6 or approve implementation.
 
 After separate authorization: H/O implementation → Pi independent full regression /
 ordered limitation adjudication → separately approved main integration. Only then,

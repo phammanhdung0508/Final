@@ -1,4 +1,4 @@
-# Amazon4U O-OFFLINE Orchestration and Packaging Architecture
+# Amazon4U O-OFFLINE orchestration and packaging architecture
 
 ## Expected O closure preflight correction
 
@@ -81,54 +81,54 @@ or deployment. Deployment remains `NOT_AUTHORIZED`.
 
 The authority and implementation narratives below are preserved historical records.
 
-## Authority and Scope
+## Authority and scope
 
-This document records the targeted contract repair of Package O (Orchestration and Packaging) under the user-approved exceptional native contract repair of the SAME existing Amazon4U O-OFFLINE candidate, the 18 OP requirements, and Pi's independent adjudication of SDK findings F01–F10.
+This document records the targeted contract repair of Package O (Orchestration and Packaging) under the user-approved exceptional native contract repair of the SAME existing Amazon4U O-OFFLINE candidate, the 18 OP requirements, and Pi's independent adjudication of SDK findings F01-F10.
 
 - **Implementation Status**: Source-only contract repair by Worker across the seven allowed Git-relative paths; all project unit tests and full suite regressions remain **STRICTLY UNEXECUTED BY WORKER**. Independent review and candidate benchmark discovery are reserved exclusively for Pi.
 - **Task-Only Offline Scope**: Verified in candidate source against fake transport, simulated clocks (zero real sleeps), and synthetic fixtures only.
 - **Deployment Decision**: `NOT_AUTHORIZED`. Offline fake-transport verification does NOT establish remote Kaggle API readiness, cloud credentials, GPU hardware capability, production bootstrap/data loading, durable storage retention, or deployment permission.
-- **Scope Protection**: Exactly seven candidate paths are modified/created. All accepted H files (6 files), 31 scientific models, evaluator, D1–D3 components, 412 baseline tests (35 ledgers, 3564 expanded cases), and legacy unprofiled runners remain untouched and byte-identical.
+- **Scope Protection**: Exactly seven candidate paths are modified/created. All accepted H files (6 files), 31 scientific models, evaluator, D1-D3 components, 412 baseline tests (35 ledgers, 3564 expanded cases), and legacy unprofiled runners remain untouched and byte-identical.
 
 ---
 
-## Contract Repairs and Adjudicated Decisions
+## Contract repairs and adjudicated decisions
 
-### 1. ApprovedOfflineContext and Role Bindings Before Effects (F01, OP01)
+### 1. ApprovedOfflineContext and role bindings before effects (F01, OP01)
 `ApprovedOfflineContext` binds the operator profile, run spec, authorization receipt, and caller role before any filesystem, network, or transport effects occur. Enforces fail-closed validation: unapproved or mismatched contexts refuse immediately.
 
-### 2. Pi Baseline Checkpoint Applicability Ruling (F03, OP11)
+### 2. Pi baseline checkpoint applicability ruling (F03, OP11)
 - **Canonical Deterministic Baselines** (`CorePopularity`, `KG-only`): Have zero epochs, zero update steps, and `selection=None`. Their checkpoint role is explicitly and logically satisfied by independent expected `not_applicable_deterministic_baseline` metadata. Physical checkpoint files or dummy bytes are neither required nor permitted.
 - **Learned Methods** (`LightGCN`, `Heterogeneous KG+GNN`): Strictly require physical checkpoint files on disk and trusted `expected_checkpoint_sha256` matching caller expectations.
 
-### 3. Canonical H Argument and Provenance Coherence (F02, OP05, OP13)
+### 3. canonical H argument and provenance coherence (F02, OP05, OP13)
 Canonical H spec transformation (`get_canonical_h_spec`) and authorization extraction (`get_canonical_h_authorization`) strictly preserve exact H callable and schema boundaries. Full provenance verification (`verify_h_provenance`) checks all 14 required H record keys, exact acceptance scope (`H-REF_CPU_reference_fixture_only`), and `NOT_AUTHORIZED` deployment decisions.
 
-### 4. Manifest Separation: H28 vs O32 Outer Closure (F04, OP03)
+### 4. manifest separation: H28 vs O32 outer closure (F04, OP03)
 H expects exactly 28 files (`H_BUNDLE_PATHS` / `BUNDLE_PATHS`) in its `expected_bundle`. O outer manifest contains 32 paths (`REQUIRED_CLOSURE_PATHS`) plus `generated_runtime` and `environment`. The kernel runner publishes the O outer manifest to `manifest.json` while maintaining H's `expected_bundle` distinct. In `render_plan`, `verify_source_manifest` evaluates the outer manifest after runtime and environment bindings are attached.
 
-### 5. Attempt Reservation Before Push and No Auto-Repush (F06, OP07, OP12)
+### 5. attempt reservation before push and no auto-repush (F06, OP07, OP12)
 `Amazon4UStateManager.record_attempt` reserves the attempt state with status `"reserved"` before `transport.push` is called. If the push raises `SubmissionUnknownError`, the error is reported and automatic repushing is strictly prohibited to prevent duplicate submissions.
 
-### 6. Bounded Log Reader and Honest Status (F08, OP09)
+### 6. bounded log reader and honest status (F08, OP09)
 `BoundedLogReader` provides incremental, deadline-bounded reading of log chunks with strict byte capping. `consume_kernel_logs` redacts credentials before checking caps, handles `open_log_reader` transport interfaces, and reports honest `"available"`, `"partial"`, or `"unavailable"` statuses.
 
-### 7. Fixed OP05 Test Fixtures (F07, OP05)
+### 7. fixed OP05 test fixtures (F07, OP05)
 `test_op05_staged_failure_propagation` and `test_op05_injected_callable_exception_propagates` use `encode_bytes(b"# test\n")` (base64-encoded gzip with mtime=0) in `bundle_payload`, matching Stage 2 hydration requirements and allowing staged failures to reach callable, checkpoint, and publication stages.
 
 ---
 
-## Architectural Design
+## Architectural design
 
-### 1. Single Facade with Early Profile Dispatch (`kaggle_job.py`)
+### 1. single facade with early profile dispatch (`kaggle_job.py`)
 
-The existing runner (`multiautoresearch/post-training/scripts/kaggle_job.py`) serves as the single facade for both legacy post-training jobs and Amazon4U execution:
+The existing runner (`multiautoresearch/post-training/scripts/kaggle_job.py`) is the single facade for both legacy post-training jobs and Amazon4U execution:
 - **Early profile dispatch**: `kaggle_job.py` inspects `--profile` and configuration flags (`--spec`, `--run-spec`, `--approval`, `--plan`) BEFORE resolving credentials, CLI binaries, or mutable job state.
 - **Subparser Default Handling**: Common profile options on subparsers use `default=argparse.SUPPRESS` so that specifying `--profile amazon4u` before a subcommand (e.g. `kaggle_job.py --profile amazon4u launch`) is not overwritten or erased by subparser defaults.
 - **Fail-Closed Gate**: If Amazon-specific flags are passed without `--profile amazon4u`, execution refuses immediately with exit code 1 to prevent accidental legacy fallback or parameter misinterpretation.
 - **Legacy Preservation**: When no profile is provided, frozen legacy behavior is preserved verbatim.
 
-### 2. Stdlib-Only Orchestration Adapter (`amazon4u.py`)
+### 2. stdlib-only orchestration adapter (`amazon4u.py`)
 
 Implemented exclusively with Python standard library modules (`argparse`, `base64`, `copy`, `ctypes`, `dataclasses`, `errno`, `hashlib`, `json`, `os`, `pathlib`, `re`, `shutil`, `sys`, `time`, `uuid`, `zlib`):
 - **Pure In-Memory Render (`render_plan`)**: Deterministic generation of bundle files, kernel script, and metadata without disk IO, network calls, subprocesses, or credential queries. Requires independently supplied approved spec, authorization, expected sources, and source packets; rejects self-approval or synthesizing expectations.
@@ -136,7 +136,7 @@ Implemented exclusively with Python standard library modules (`argparse`, `base6
 - **Complete Outer Closure Manifest (`build_source_manifest`, `verify_source_manifest`)**: Binds all 32 required closure paths (the 28 canonical H bundle paths plus 4 O runner and adapter modules). Separates source payload hashes from manifest digest to prevent self-referential hashing loops. Caller retains outer closure and environment expectations independently.
 - **Bounded Streaming Hydration (`hydrate_packet`, `hydrate_bundle`, `streaming_hydrate`)**: Uses `zlib.decompressobj(16 + zlib.MAX_WBITS)` to stream-decompress chunks. Bounds allocation incrementally using remaining budget probes (`max_length`), checks strict base64 decoding (`validate=True`), enforces mandatory checksums and sizes, and drains pending buffer strictly via `dobj.decompress(b"", remaining)`. Unbounded `flush()` has been completely removed from the hardcap path. Refuses to overwrite existing files or traverse ancestor symlinks.
 - **Atomic No-Clobber Move (`atomic_move_no_replace`)**: Uses Linux `renameat2` with `RENAME_NOREPLACE` (with `os.link` + `os.unlink` fallback on systems without renameat2), failing closed with `FileExistsError` without clobbering existing target files.
-- **Safe Owned Temporary File Lifecycle**: Tracks explicit `created_temp` creation flags using `O_CREAT | O_EXCL` file creation, ensuring pre-existing foreign temporary files are never unlinked in `finally` blocks.
+- **Safe Owned Temporary File Lifecycle**: Tracks explicit `created_temp` creation flags using `O_CREAT | O_EXCL` file creation, making sure pre-existing foreign temporary files are never unlinked in `finally` blocks.
 - **Exact Status State Machine (`poll_kernel_status`)**: Enforces registered exact status tokens (`queued`, `running`, `complete`, `error`, `cancelacknowledged`, `canceled`, `submission_unknown`, `poll_deadline_exceeded`). Strictly rejects substring matching (such as `"task could not complete"` being misidentified as complete). Injects simulated clocks (`FakeClock`) to avoid real `time.sleep` during tests.
 - **Bounded Log Consumer (`consume_kernel_logs`)**: Redacts secret credentials (`token=`, `bearer `, `password`, `key=`) BEFORE saving or returning logs. Enforces hard byte caps so output never exceeds `max_bytes` even with truncation marker, safely handling tiny caps smaller than the marker text.
 - **Paged Quarantine Collection (`collect_outputs`)**: Downloads outputs into a fresh, newly-owned quarantine directory across paged listings (`exist_ok=False`). Verifies owner UID, device, and inode before any cleanup, detects token cycles, checks per-chunk (64 KiB) and aggregate byte caps, validates required roles, and verifies crosslinks before promotion. Refuses if destination directory already exists.
@@ -144,7 +144,7 @@ Implemented exclusively with Python standard library modules (`argparse`, `base6
 - **Immutable State Management (`Amazon4UStateManager`)**: Stores run/attempt history under `run_id_attempt_id.json` keys using atomic exclusive creation (`O_CREAT | O_EXCL`), refusing collision or overwrite, and leaving legacy `LAST_JOB_PATH` untouched.
 - **Typed Result Wrapping (`build_amazon4u_record`)**: Wraps H result in `amazon4u-O-record-v1` with explicit `evidence_kind: 'simulated_offline_fixture'`, preserving H keys intact and forbidding `eval_score` or `val_bpb` stand-in proxies. Validates crosslinks to plan spec, enforces exact integer types (`type(v) is int and not isinstance(v, bool)`) for epoch and steps, and verifies finite values in all 7 frozen registered metrics. Scientific stopping (`scientific_terminal`) represents legitimate scientific stopping (not error), categorized as `simulated_offline_success`.
 
-### 3. Thin Kernel Runtime Adapter (`amazon4u_kernel.py`)
+### 3. thin kernel runtime adapter (`amazon4u_kernel.py`)
 
 Executes inside the Kaggle environment (or simulated offline runtime):
 - **Preflight Validation (Stage 1)**: Validates spec, authorization, runtime environment (CPU reference, CUDA prohibited), and run envelope crosslinks BEFORE creating directories or writing log files.
@@ -156,7 +156,7 @@ Executes inside the Kaggle environment (or simulated offline runtime):
 
 ---
 
-## OP01–OP18 Requirement and Control Matrix
+## OP01-OP18 requirement and control matrix
 
 | ID | Part / Basis | Implemented Positive Control | Implemented Negative Control | Guard Outcome | Test Location |
 |---|---|---|---|---|---|
@@ -181,20 +181,20 @@ Executes inside the Kaggle environment (or simulated offline runtime):
 
 ---
 
-## Test Execution Safety Rules
+## Test execution safety rules
 
 1. **Zero Numeric Imports**: Neither `test_kaggle_orchestration.py` nor `test_amazon4u_bundle.py` imports `torch`, `numpy`, or model modules.
 2. **File-Based Import for Runner**: `test_kaggle_orchestration.py` loads `kaggle_job.py` dynamically via `importlib.util.spec_from_file_location` to prevent invalid package namespace imports.
-3. **Simulated Clock**: Polling and deadline loops utilize `FakeClock` with zero real `time.sleep` calls.
+3. **Simulated Clock**: Polling and deadline loops use `FakeClock` with zero real `time.sleep` calls.
 4. **Fresh Fixtures**: All file fixtures use `tempfile.TemporaryDirectory` under approved `TMPDIR`.
 5. **Resource Bounds**: All simulated payloads and test fixtures adhere to <= 2 MiB per file, <= 8 MiB concurrent, <= 128 files, <= 8 mock pages, <= 5 fake polls, and <= 64 KiB chunks.
 6. **Preserved Baseline**: The 412 baseline tests remain completely unchanged.
 
 ---
 
-## Worker Implementation Status & Checkpoints (Source-Only Corrective 60m Task)
+## Worker implementation status & checkpoints (source-only corrective 60m task)
 
-### Checkpoint 01: Initial Restoration & Baseline Audit (00m elapsed, ~2026-10-20T09:36:00Z)
+### Checkpoint 01: initial restoration & baseline audit (00m elapsed, ~2026-10-20T09:36:00Z)
 - **Restoration**: Restored exact native7 candidate files into all seven allowed paths from `inputs/current-candidate/Amazon4U/...`; verified SHA-256 digests against `restored-candidate-sha256.json`.
 - **Worker Execution Boundary**: Source-only AST/read/patch operations strictly active. Zero project/H/Torch/NumPy imports, zero test execution, zero runtime probes (no zlib/gzip/base64/parser semantic probes).
 - **Known Remaining Implementation & Control Work**:
@@ -208,7 +208,7 @@ Executes inside the Kaggle environment (or simulated offline runtime):
   - Full suite regression (requires separate authorization; unreleased).
   - Deployment decision remains `NOT_AUTHORIZED`.
 
-### Checkpoint 02: Progress Audit & Defect Root Causes Pinpointed (15m elapsed, ~2026-10-20T09:47:00Z)
+### Checkpoint 02: progress audit & defect root causes pinpointed (15m elapsed, ~2026-10-20T09:47:00Z)
 - **Status & Progress**:
   - Analyzed N7-S01: Output directory collision pinpointed in `amazon4u.py` line 1041 (`outdir.mkdir(...)` in generated script) vs `amazon4u_kernel.py` line 195 (`outdir.mkdir(...)` in `run_kernel_stages` stage 1). Establishing single fresh-owned output lifecycle by having `run_kernel_stages` create `outdir` after stage 1 preflight passes, removing premature creation from generated script.
   - Analyzed N7-S02: Mandatory `ApprovedOfflineContext` / capabilities wiring. In `dispatch_amazon4u`, removing fallback to self-authorizing plan JSON; requiring independent `--context` or context object. Adding `context` parameter to `render_plan` and forwarding `context` and `capability_provider` through generated `main` into `run_kernel_stages`.
@@ -217,7 +217,7 @@ Executes inside the Kaggle environment (or simulated offline runtime):
 - **Worker Execution Boundary**: Source-only AST/read/patch operations strictly maintained. Zero tests, zero imports, zero runtime probes.
 - **Unexecuted Pi Gates**: Unchanged; all verification and execution reserved for Pi.
 
-### Checkpoint 03: Implementation Refactoring Planned & Underway (26m elapsed, ~2026-10-20T09:59:00Z)
+### Checkpoint 03: implementation refactoring planned & underway (26m elapsed, ~2026-10-20T09:59:00Z)
 - **Status & Progress**:
   - `amazon4u.py`:
     1. Fixed N7-S01: Removed premature `outdir.mkdir` from generated script `main()`. `run_kernel_stages` owns `outdir` creation in stage 1 preflight.
@@ -235,7 +235,7 @@ Executes inside the Kaggle environment (or simulated offline runtime):
 - **Worker Execution Boundary**: Strict source-only mode. Zero test execution or probes.
 - **Unexecuted Pi Gates**: Unchanged; all verification and execution reserved for Pi.
 
-### Checkpoint 04: Implementation Complete & Static Verification Audited (41m elapsed, ~2026-10-20T10:14:00Z)
+### Checkpoint 04: implementation complete & static verification audited (41m elapsed, ~2026-10-20T10:14:00Z)
 - **Status & Completed Corrections**:
   - **N7-S01 (Output Ownership Conflict)**: Resolved. In `amazon4u.py`, removed premature `outdir.mkdir` call from generated kernel script `main()`. Single fresh-owned lifecycle is maintained: `run_kernel_stages` in `amazon4u_kernel.py` performs preflight validation and exclusively creates `outdir` (with `exist_ok=False`) before any output writing.
   - **N7-S02 (Independent Context & Capabilities Wiring)**: Resolved.
@@ -245,7 +245,7 @@ Executes inside the Kaggle environment (or simulated offline runtime):
     - In `validate_collected_artifacts`, enforced mandatory `expected_manifest` and `expected_output_inventory` (fail closed if missing).
     - Enforced mandatory `expected_checkpoint_sha256` matching physical file SHA-256 for learned methods (`LightGCN`, `HeteroGNN`).
     - Enforced explicit `not_applicable_deterministic_baseline` declaration in `expected_output_inventory` for canonical baselines (`CorePopularity`, `KGOnlyScorer`), refusing bare-token shortcuts or unverified missing files.
-    - Removed catch-all exception bypass around canonical H spec verification, ensuring that full canonical H schemas are strictly enforced.
+    - Removed catch-all exception bypass around canonical H spec verification, making sure that full canonical H schemas are strictly enforced.
   - **N7-S04 (Test Suite & Independent Oracle Updates)**: Resolved.
     - Added independent stdlib oracle encoder `_oracle_encode_bytes` (gzip + base64) to `test_kaggle_orchestration.py` without production encoder self-assertions (addressing N7-P01).
     - Added call-count tracking to `test_op05_staged_failure_propagation` verifying 0 calls after preflight, hydration, and callable failure, and sequential calls on checkpoint/publish stages.
@@ -273,9 +273,9 @@ Executes inside the Kaggle environment (or simulated offline runtime):
 
 
 
-## Native9 Bounded Four-Category Correction (N8-S01..N8-S04)
+## Native9 bounded four-category correction (N8-S01..N8-S04)
 
-### Checkpoint 01: Candidate Restored & Initial Audit (0m elapsed, ~2026-10-20T12:45:20Z)
+### Checkpoint 01: candidate restored & initial audit (0m elapsed, ~2026-10-20T12:45:20Z)
 - **Status & Restored Baseline**:
   - Restored candidate files from inputs/current-candidate/Amazon4U/ to the seven allowed paths.
   - Verified SHA-256 for all 7 candidate files against restored-candidate-sha256.json (all matched).
@@ -290,7 +290,7 @@ Executes inside the Kaggle environment (or simulated offline runtime):
   - N8-S04: Fix missing-plan negative test to supply valid context and assert intended missing-plan failure stage.
   - Caller-callee compatibility audit: Verify and record compatibility across all definitions, callers, templates, mocks, and fixtures.
 
-### Checkpoint 02: Design Finalized & Core Edits Prepared (12m elapsed, ~2026-10-20T12:56:30Z)
+### Checkpoint 02: design finalized & core edits prepared (12m elapsed, ~2026-10-20T12:56:30Z)
 - **Status & Progress**:
   - Detailed root-cause analysis completed for all four approved categories (N8-S01..N8-S04) and caller-callee compatibility.
   - N8-S01: validate_approved_offline_context updated to deep-copy context, enforce distinct H28 (H_BUNDLE_PATHS) vs O32 (REQUIRED_CLOSURE_PATHS) manifests, complete 10-key capabilities, and full schemas; render_plan strictly requires non-None context and unconditionally verifies generated_runtime and environment expectations.
@@ -300,7 +300,7 @@ Executes inside the Kaggle environment (or simulated offline runtime):
 - **Worker Execution Boundary**:
   - Strict source-only mode honored. Zero test executions or runtime probes.
 
-### Checkpoint 03: Implementation Applied & Test Fixtures Aligned (30m elapsed, ~2026-10-20T13:14:00Z)
+### Checkpoint 03: implementation applied & test fixtures aligned (30m elapsed, ~2026-10-20T13:14:00Z)
 - **Status & Completed Source Changes**:
   - `multiautoresearch/adapters/amazon4u.py`:
     - `validate_approved_offline_context`: Fails closed on `None`; deepcopies context to prevent caller mutation; verifies distinct H28 vs O32 closures; enforces `expected_h_envelope`, `expected_input_identity`, `expected_o_environment` (10 required capability keys), `submission_binding`, non-empty `expected_output_inventory`, and `limits`.
@@ -324,7 +324,7 @@ Executes inside the Kaggle environment (or simulated offline runtime):
 - **Worker Execution Boundary**:
   - Strict source-only mode honored. Zero test executions or runtime probes.
 
-### Checkpoint 04: Source & AST Audit Verified (45m elapsed, ~2026-10-20T13:25:00Z)
+### Checkpoint 04: source & AST audit verified (45m elapsed, ~2026-10-20T13:25:00Z)
 - **Status & Verification Benchmark**:
   - Code freeze achieved prior to 50m ceiling.
   - Candidate AST validation: All 6 Python candidate files parse with zero syntax errors via `ast.parse`.
@@ -340,7 +340,7 @@ Executes inside the Kaggle environment (or simulated offline runtime):
 
 ---
 
-## Mandatory Caller–Callee Source/AST Compatibility Audit Matrix
+## Mandatory caller-callee source/AST compatibility audit matrix
 
 | Contract / Interface | Definition Location | Relevant Callers & Call Sites | Fixture Prerequisites & Provenance | Source / AST Verification Evidence | Status |
 | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -354,9 +354,9 @@ Executes inside the Kaggle environment (or simulated offline runtime):
 
 
 
-## Native10 Bounded Four-Category Correction (N8-S01..N8-S04)
+## Native10 bounded four-category correction (N8-S01..N8-S04)
 
-### Checkpoint 01: Candidate Restored & Baseline Integrity Verified (0m elapsed, ~2026-10-20T14:14:24Z)
+### Checkpoint 01: candidate restored & baseline integrity verified (0m elapsed, ~2026-10-20T14:14:24Z)
 - **Status & Restored Baseline**:
   - Restored all 7 candidate files from `data/reports/o-offline-compat-verification-v1/inputs/current-candidate/Amazon4U/` to the seven authorized allowed paths.
   - Verified SHA-256 for all 7 candidate files against `restored-candidate-sha256.json` (all 7 matched exactly).
@@ -366,7 +366,7 @@ Executes inside the Kaggle environment (or simulated offline runtime):
   - Strict source-only mode: zero runtime probes, no imports or execution of repository/project Python modules (including Pi verification infrastructure / `data.reports`), no test execution.
   - Work bounded strictly to the four approved categories: N8-S01, N8-S02, N8-S03, N8-S04, and verified caller-callee compatibility audit.
 
-### Checkpoint 02: Implementation Applied & Aligned Across Candidate Files (14m elapsed, ~2026-10-20T14:28:00Z)
+### Checkpoint 02: implementation applied & aligned across candidate files (14m elapsed, ~2026-10-20T14:28:00Z)
 - **Status & Completed Source Changes**:
   - **1/N8-S01 (Canonical H Bundle Manifest Schema & Oracle)**:
     - In `multiautoresearch/adapters/amazon4u.py` (`validate_approved_offline_context`), removed `size` demand from H manifest validation; strictly validated `schema_version == "amazon4u-H-bundle-v1"`, exactly 28 `H_BUNDLE_PATHS`, file entries `{bytes: int >= 0, sha256: 64-hex}`, and overall `sha256` 64-hex string. Supported reconstructed class identity across module reloads.
@@ -386,7 +386,7 @@ Executes inside the Kaggle environment (or simulated offline runtime):
   - **4/N8-S04 (Preserved Missing-Plan Negative Prerequisite Validity)**:
     - In `tests/test_kaggle_orchestration.py` (`test_op01_launch_without_plan_refused`), supplied valid `ApprovedOfflineContext` with canonical capabilities and H bundle manifest, while cleanly omitting plan file from bundle to isolate missing-plan rejection before forbidden filesystem effects.
 
-### Checkpoint 03: Static Verification, Test ID Preservation & Audit Matrix (27m elapsed, ~2026-10-20T14:41:00Z)
+### Checkpoint 03: static verification, test ID preservation & audit matrix (27m elapsed, ~2026-10-20T14:41:00Z)
 - **Status & Verification Benchmark**:
   - Code freeze achieved at 27m, well before 50m ceiling.
   - Candidate AST validation: All 6 Python candidate files parse with zero syntax errors via `ast.parse`.
@@ -405,7 +405,7 @@ Executes inside the Kaggle environment (or simulated offline runtime):
 
 ---
 
-## Mandatory Caller–Callee Source/AST Compatibility Audit Matrix (Native10 Corrected)
+## Mandatory caller-callee source/AST compatibility audit matrix (Native10 corrected)
 
 | Contract / Interface | Definition Location | Signature & Return Type | Relevant Callers & Call Sites | Fixture Prerequisites & Provenance | Source / AST Verification Evidence | Status |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -422,9 +422,9 @@ Executes inside the Kaggle environment (or simulated offline runtime):
 
 ---
 
-## Native11 Bounded Targeted Recovery (N10-S01 and N10-S02)
+## Native11 bounded targeted recovery (N10-S01 and N10-S02)
 
-### Checkpoint 01: Candidate Restored & Root Causes Pinpointed (00m elapsed, ~2026-10-20T15:28:00Z)
+### Checkpoint 01: candidate restored & root causes pinpointed (00m elapsed, ~2026-10-20T15:28:00Z)
 - **Status & Restored Baseline**:
   - Restored all 7 candidate files from `data/reports/o-offline-targeted-verification-v1/inputs/current-candidate/Amazon4U/` to the seven authorized allowed paths.
   - Verified SHA-256 for all 7 candidate files against `restored-candidate-sha256.json` (all 7 matched bit-for-bit).
@@ -434,7 +434,7 @@ Executes inside the Kaggle environment (or simulated offline runtime):
   - Strict source-only mode: zero runtime probes, no imports or execution of repository/project Python modules (including Pi verification infrastructure / `data.reports`), no test execution (`tests_executed=[]`).
   - Work bounded strictly to the two approved root-cause categories: N10-S01, N10-S02, and directly affected caller/fixture prerequisites.
 
-### Checkpoint 02: Implementation Applied & Aligned Across Candidate Files (15m elapsed, ~2026-10-20T15:43:00Z)
+### Checkpoint 02: implementation applied & aligned across candidate files (15m elapsed, ~2026-10-20T15:43:00Z)
 - **Status & Completed Source Changes**:
   - **1/N10-S01 (Canonical H Expectation Handoff & Coherence Guard)**:
     - In `multiautoresearch/adapters/amazon4u_kernel.py`:
@@ -456,7 +456,7 @@ Executes inside the Kaggle environment (or simulated offline runtime):
       - Updated all earlier-stage fixtures in `test_op05_staged_failure_propagation`, `test_op05_injected_callable_exception_propagates`, and `test_op06_preflight_refuses_gpu_expected_runtime` with valid canonical context (`context=ctx`), version, and canonical bundle expectations.
       - Preserved valid missing-plan negative (`test_op01_launch_without_plan_refused`) with exact error message check.
 
-### Checkpoint 03: Source/AST Verification & Test ID Audit (25m elapsed, ~2026-10-20T15:53:00Z)
+### Checkpoint 03: source/AST verification & test ID audit (25m elapsed, ~2026-10-20T15:53:00Z)
 - **Status & Verification Benchmark**:
   - Code freeze achieved well before the 50m ceiling.
   - Candidate AST validation: All 6 Python candidate files parse with zero syntax errors via `ast.parse`.
@@ -473,7 +473,7 @@ Executes inside the Kaggle environment (or simulated offline runtime):
 
 ---
 
-## Mandatory Caller–Callee Source/AST Compatibility Audit Matrix (Native11 Corrected)
+## Mandatory caller-callee source/AST compatibility audit matrix (Native11 corrected)
 
 | Contract / Interface | Definition Location | Signature & Return Type | Relevant Callers & Call Sites | Fixture Prerequisites & Provenance | Source / AST Verification Evidence | Status |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -488,15 +488,15 @@ Executes inside the Kaggle environment (or simulated offline runtime):
 
 ---
 
-## Native12 Exceptional Native Correction: H01 & H02 Canonical Metadata Contracts & Fixture Alignment
+## Native12 exceptional native correction: H01 & H02 canonical metadata contracts & fixture alignment
 
-### 1. Root Cause & Problem Resolution Summary
+### 1. root cause & problem resolution summary
 Under latest user direction and Pi management, Native12 addresses the two source-confirmed metadata contract gaps identified in `Pi-H-boundary-review.json`:
 - **H01**: Replaced the invented 3-field `amazon4u-H-envelope-v1` schema with the canonical 11-field `amazon4u-H-run-v1` run envelope required by frozen `scripts/training_harness.py check_envelope` and `execute_fixture`. All 11 keys (`schema_version`, `run_id`, `approval_id`, `profile_id`, `method`, `identity_hash`, `device`, `accelerator`, `bundle_sha256`, `initial_state_sha256`, `determinism_policy`) are strictly validated against non-empty string bounds (<= 256 chars), 64-character lowercase hexadecimal digests (`identity_hash`, `bundle_sha256`, `initial_state_sha256`), frozen profile (`H-REF-synthetic-cpu-v1`), and frozen determinism policy (`private_rng_bounded_cpu_no_global_setters`). Crosslinks against approved spec and semantic H28 manifest digest are enforced before any hydration, directory creation, or target module import.
 - **H02**: Separated generic O transport authorization from independent canonical H authorization. In both host (`validate_approved_offline_context`) and generated preflight (`_retain_generated_context` inside `build_amazon4u_kernel_script`), `h_authorization` strictly requires `amazon4u-H-authorization-v1` with exact 5 keys (`schema_version`, `run_id`, `approval_id`, `scope`, `max_adam_steps`). Generic O authorization tags (`amazon4u-O-authorization-v1`) are refused at the H-owned context and handoff, and `get_canonical_h_authorization` refuses to silently relabel or manufacture H approval from O transport tags.
-- **Metadata Retention**: `run_kernel_stages` and generated `main()` preflight snapshot and deeply copy the validated actual run envelope, expected envelope, H authorization, and H28 sources before provider callbacks. Stage 3 callable handoff and Stage 5 artifact publication use these retained values, ensuring protection against callback mutation.
+- **Metadata Retention**: `run_kernel_stages` and generated `main()` preflight snapshot and deeply copy the validated actual run envelope, expected envelope, H authorization, and H28 sources before provider callbacks. Stage 3 callable handoff and Stage 5 artifact publication use these retained values, making sure protection against callback mutation.
 
-### 2. Caller–Callee Audit Matrix (Native12)
+### 2. caller-callee audit matrix (Native12)
 
 | Contract / Interface | Definition Location | Signature & Return Type | Relevant Callers & Call Sites | Fixture Prerequisites & Provenance | Source / AST Verification Evidence | Status |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -509,7 +509,7 @@ Under latest user direction and Pi management, Native12 addresses the two source
 | Callback Mutation Test Control | `tests/test_kaggle_orchestration.py:1076` | inline in `test_op05_h_sources_preflight_and_retained_handoff` | Test suite runner | Valid context, bootstrap with provider mutating sources, envelope, and authorization | Asserts callable receives retained envelope, authority, and sources; publication writes retained envelope to `run_envelope.json`. | COMPATIBLE / IMPLEMENTED |
 | OP16 Negative Controls Matrix | `tests/test_kaggle_orchestration.py:1580` | inline in `test_op16_generated_fake_program_execution_and_tripwires` | Test suite runner | Contexts and bootstraps with legacy envelope schema, missing envelope field, malformed digest, O authorization tag | Asserts `kernel_main` returns 1 in preflight before mkdir, write, log, hydration, target module import, or callable entry. | COMPATIBLE / IMPLEMENTED |
 
-### 3. Static Test ID & File Integrity Verification
+### 3. static test ID & file integrity verification
 - **Test ID Count**: Exactly 480 test IDs retained (68 in O test files: 43 in `test_kaggle_orchestration.py`, 25 in `test_amazon4u_bundle.py`; 412 inherited baseline). Exactly 0 missing, 0 dropped, 0 renamed.
 - **Inherited Baseline Integrity**: All 31 inherited Python files retain byte-identical SHA-256 hashes matching HEAD baseline.
 - **Allowed Scope**: Only allowed candidate paths modified (`amazon4u.py`, `amazon4u_kernel.py`, `test_kaggle_orchestration.py`, `o-offline-orchestration.md`). `kaggle_job.py` and `adapters/__init__.py` restored byte-identically and preserved.
@@ -519,17 +519,17 @@ Under latest user direction and Pi management, Native12 addresses the two source
 
 ### Pi deterministic integration after native12 source review
 
-Native12's generated caller was still late for actual bootstrap envelope checks and only shallow-copied nested bootstrap metadata;its source report and terminal review remain unchanged in the predecessor archive. This derived Pi-authored integration compares canonical spec,H authorization,actual/expected11-field envelopes,and H28 expectation against the independently retained context,then snapshots the presented metadata **before** any provider callback. Opaque data/expectations are not deep-copied or initialized. Existing post-provider CPU/runtime checks remain before hydration/imports. Canonical H spec/envelope/authorization ownership now matches frozen H's exact plain-dict/plain-string input types;generic O transport schemas remain distinct and unchanged.
+Native12's generated caller was still late for actual bootstrap envelope checks and only shallow-copied nested bootstrap metadata; its source report and terminal review remain unchanged in the predecessor archive. This derived Pi-authored integration compares canonical spec, H authorization, actual/expected11-field envelopes, and H28 expectation against the independently retained context, then snapshots the presented metadata **before** any provider callback. Opaque data/expectations are not deep-copied or initialized. Existing post-provider CPU/runtime checks remain before hydration/imports. Canonical H spec/envelope/authorization ownership now matches frozen H's exact plain-dict/plain-string input types; generic O transport schemas remain distinct and unchanged.
 
-Existing fake controls now prove malformed actual metadata never calls the provider/H entry/hydrator or creates/writes targets. The positive callback empties the original nested bootstrap spec/authority/envelopes/H28/source mappings and mutates the caller context;the H argument assertions and published envelope still have the original independent canonical values. These source changes are not a measured PASS. Fresh same-artifact SOURCE and the one carried globally guarded O-only child remain required;all ten original criteria/OP01–OP18/full verification remain mandatory. No H imports/updates,model calls,main promotion or deployment follows from this integration.
+Existing fake controls now prove malformed actual metadata never calls the provider/H entry/hydrator or creates/writes targets. The positive callback empties the original nested bootstrap spec/authority/envelopes/H28/source mappings and mutates the caller context; the H argument assertions and published envelope still have the original independent canonical values. These source changes are not a measured PASS. Fresh same-artifact SOURCE and the one carried globally guarded O-only child remain required; all ten original criteria/OP01-OP18/full verification remain mandatory. No H imports/updates, model calls, main promotion or deployment follows from this integration.
 
-Canonical H CPU device metadata is exact `cpu`/`none`,matching read-only frozen `CPUBackend.require`;no normalization or empty-accelerator fallback. Existing generated fixture finally restores every original affected module object/key,includingNone sentinels. Fresh Pi source/O preservation also records strict Git/input-directory timestamps;the initial derived-repository baseline retains its original current-new-Git timestamp qualification. No old evidence/verifier changes.
+Canonical H CPU device metadata is exact `cpu`/`none`,matching read-only frozen `CPUBackend.require`;no normalization or empty-accelerator fallback. Existing generated fixture finally restores every original affected module object/key, includingNone sentinels. Fresh Pi source/O preservation also records strict Git/input-directory timestamps; the initial derived-repository baseline retains its original current-new-Git timestamp qualification. No old evidence/verifier changes.
 
 ---
 
-## O-OFFLINE Collection Three Gaps Repair: Deadlines, Typed Artifacts, and No-Overwrite Promotion
+## O-OFFLINE collection three gaps repair: deadlines, typed artifacts, and no-overwrite promotion
 
-### 1. Authority, Scope, and Worker Discipline
+### 1. authority, scope, and worker discipline
 
 Under the latest user authorization ("Ok focus handle three collection gaps. When you finish handle 3 gaps report back to me. decision is your no need ESCALATE to me"), this phase implements exclusively the three assigned collection gaps in Package O:
 1. **OP10 Deadlines**: Active deadline validation, safe clock sampling, parameter bounds with hard security ceilings, and multi-point cooperative checks across provider/iterator operations, between chunks/files/pages, and before promotion/completion.
@@ -542,7 +542,7 @@ Worker discipline remains strictly source-only:
 - **Byte-identical preservation**: Runner (`kaggle_job.py`), exports (`__init__.py`), kernel adapter (`amazon4u_kernel.py`), and Kaggle orchestration tests (`test_kaggle_orchestration.py`) remain byte-identical to the pinned restoration base (`inputs/restoration-base-sha256.json`).
 - **Deployment Status**: Strictly `NOT_AUTHORIZED`.
 
-### 2. Gap 1 Implementation: Deadlines, Safe Clock Sampling, and Bounded Parameters (OP10)
+### 2. gap 1 implementation: deadlines, safe clock sampling, and bounded parameters (OP10)
 
 In `multiautoresearch/adapters/amazon4u.py` (`collect_outputs`):
 - **Pre-Mutation Parameter Validation & Hard Ceilings**:
@@ -578,7 +578,7 @@ In `multiautoresearch/adapters/amazon4u.py` (`collect_outputs`):
   - When a timeout or error occurs, owned quarantine directory cleanup is strictly guarded by UID, device, inode, and symlink checks in `finally`.
   - Pre-existing or already-promoted destination directories are NEVER deleted or rolled back to hide a failure.
 
-### 3. Gap 2 Implementation: Typed Artifacts and Independent Expectations (OP11)
+### 3. gap 2 implementation: typed artifacts and independent expectations (OP11)
 
 In `multiautoresearch/adapters/amazon4u.py` (`validate_collected_artifacts`):
 - **Complete Frozen 15-Field H Result**:
@@ -610,7 +610,7 @@ In `multiautoresearch/adapters/amazon4u.py` (`validate_collected_artifacts`):
   - Deterministic baselines (`CorePopularity`, `KG-only`): Checkpoint role is satisfied by `not_applicable_deterministic_baseline` without physical file requirement.
   - Learned methods (`LightGCN`, `Heterogeneous KG+GNN`): Require valid physical checkpoint file and matching physical SHA-256.
 
-### 4. Gap 3 Implementation: Fail-Closed No-Overwrite Promotion Seam (OP10, OP12)
+### 4. gap 3 implementation: fail-closed no-overwrite promotion seam (OP10, OP12)
 
 In `multiautoresearch/adapters/amazon4u.py` (`collect_outputs`):
 - **Elimination of Rename Fallback in Production**:
@@ -620,7 +620,7 @@ In `multiautoresearch/adapters/amazon4u.py` (`collect_outputs`):
   - If the native provider is unavailable or returns `False`, `collect_outputs` returns `{"status": "error", "reason": f"Native directory no-replace is unsupported on this platform; ordinary rename fallback is forbidden: {destination_dir}"}`.
   - If collision occurs (`FileExistsError` or `errno.EEXIST`), `collect_outputs` catches the error and returns `{"status": "error", "reason": f"Destination directory appeared concurrently: {destination_dir}"}` without modifying, deleting, or adopting the existing destination.
   - If another `OSError` occurs during promotion, `collect_outputs` returns `{"status": "error", "reason": f"Native directory no-replace failed: {exc}"}`.
-  - `_rename_no_replace_linux` isolates `ctypes.CDLL` loading from syscall invocation, ensuring genuine `FileExistsError` and `OSError` propagate cleanly instead of being swallowed.
+  - `_rename_no_replace_linux` isolates `ctypes.CDLL` loading from syscall invocation, making sure genuine `FileExistsError` and `OSError` propagate cleanly instead of being swallowed.
 - **Safe Test Promotion Seam (`fake_directory_promotion_seam`)**:
   - Defined locally in `tests/test_amazon4u_bundle.py` as an explicit test fixture helper (not shipped in production).
   - Models supported success in tests by mocking `_rename_no_replace_linux` via `unittest.mock.patch(..., side_effect=fake_directory_promotion_seam)`.
@@ -628,7 +628,7 @@ In `multiautoresearch/adapters/amazon4u.py` (`collect_outputs`):
   - Raises `FileExistsError` if destination exists.
   - Operates safely under test tripwires and Pi's `NativeProviderGuard`.
 
-### 5. Caller–Callee Audit Matrix (Three Gaps Correction)
+### 5. caller-callee audit matrix (three gaps correction)
 
 | Contract / Interface | Definition Location | Signature & Return Type | Relevant Callers & Call Sites | Fixture Prerequisites & Provenance | Source / AST Verification Evidence | Status |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -638,7 +638,7 @@ In `multiautoresearch/adapters/amazon4u.py` (`collect_outputs`):
 | `_rename_no_replace_linux(src, dst)` | `multiautoresearch/adapters/amazon4u.py:2145` | `(src: Path, dst: Path) -> bool` | `collect_outputs` promotion seam | Fresh quarantine source directory, destination directory path | Invokes Linux `renameat2` with `RENAME_NOREPLACE` via libc ctypes; propagates `FileExistsError` and `OSError` cleanly; returns `False` if libc unavailable or function absent. | COMPATIBLE / IMPLEMENTED |
 | `fake_directory_promotion_seam(src, dst)` | `tests/test_amazon4u_bundle.py:82` | `(src: Path, dst: Path) -> bool` | `tests/test_amazon4u_bundle.py` test fixtures | Fresh owned source directory, non-existent destination directory | Test-only fixture helper modeling supported promotion success under `_rename_no_replace_linux` patch. Checks source existence, dir type, no symlink, owner UID; checks destination non-existence; raises `FileExistsError` on collision; returns `True`. | TEST FIXTURE ONLY |
 
-### 6. Static Test Inventory & Integrity Verification
+### 6. static test inventory & integrity verification
 
 - **Prior Test ID Inventory Preserved**: All 480 test IDs from `prior480-test-ids.json` are retained with unchanged identifiers (43 in `test_kaggle_orchestration.py`, 25 original in `test_amazon4u_bundle.py`, 412 inherited baseline). Total test methods across suites: 501 (412 baseline, 46 in `test_amazon4u_bundle.py`, 43 in `test_kaggle_orchestration.py`).
 - **Test Fixture Enhancements**: All test methods in `test_amazon4u_bundle.py` retained and adapted to use canonical test fixtures (`_canonical_test_spec`, `_canonical_test_auth`, `_canonical_test_env`, `_canonical_test_manifest`, `_canonical_test_inventory`).

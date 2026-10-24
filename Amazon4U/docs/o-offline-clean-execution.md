@@ -1,9 +1,9 @@
-# O-OFFLINE — approved clean execution repository
+# O-OFFLINE, approved clean execution repository
 
-## Current result — ESCALATE, implementation not accepted
+## Current result, ESCALATE, implementation not accepted
 
 Clean setup succeeded and the extra baseline passed412tests (60.912s unittest,
-67.654s child,815030272bytes peakRSS,complete logs/empty scratch/cleanup/preservation).
+67.654s child, 815030272bytes peakRSS, complete logs/empty scratch/cleanup/preservation).
 Two actual native source invocations and the sole consolidated revision were used.
 Independent complete review found unsafe generated-test execution before fakepath/
 tripwire injection, prohibited real symlink creation in a new negative, parser option
@@ -16,7 +16,7 @@ current delivery is **not accepted**, deployment NOT_AUTHORIZED. See
 `../data/reports/o-offline-clean-execution-v1/review.json`, `root-cause-review.md` and
 `remaining-part-matrix.json`. All18 O closures remain open; preserved scope alone passes.
 All seven initial/revised candidate files and both exact reports are archived. Both
-Worker external main/sibling/old-evidence guards PASS; accepted science/H/D1–D3 unchanged.
+Worker external main/sibling/old-evidence guards PASS; accepted science/H/D1-D3 unchanged.
 No real data/Kaggle/GPU/study/held-out/main-integration/deployment work occurred.
 
 Source round1 has0remaining invocations; two candidate-full maxima are unused but
@@ -90,7 +90,7 @@ comparison does not prove transient-write absence or an OS sandbox.
 New versioned verifier under P/data/reports/o-offline-verification-v1 reuses the reviewed
 OwnedCache and disappearing-descendant monitor byte-for-byte. Only new paths, original
 workspace/new repository HEAD bindings and the optional external-only snapshot switch
-are adapted. Original consumed verifier/receipts stay frozen. Full snapshots additionally
+are adapted. Original consumed verifier/receipts stay frozen. Full snapshots also
 monitor B's HEAD/index/config/status and tracked/nonignored source. Required IDs,
 ledgers, scientific behavior, resource/fixture/native safety and empty-scratch rules
 remain unchanged. Original full discovery code is relocated, not replaced by a subset.
@@ -99,13 +99,13 @@ Pi creates and hash-binds safety receipts before any selected workload.
 One additional unchanged baseline is now authorized, then at most two original remaining
 candidate full suites. Each <=240s child / 2GiB peak child RSS / 8MiB complete stream each /
 64MiB fresh scratch, required empty; outer parent <=900s. Hash reads <=128MiB/file,
-512MiB/snapshot,60s/file,300s/snapshot. No extra mocks/smokes/probes/compileall/diagnostics.
+512MiB/snapshot, 60s/file, 300s/snapshot. No extra mocks/smokes/probes/compileall/diagnostics.
 O new tests add zero model/Adam work. Inferred successful H steps: current144 plus at most
 3*36=108 =>252 <= unchanged whole-H256 cap. O full-start ceiling becomes FOUR cumulative
 (old baseline + new baseline + two candidates); native first-round ceiling stays TWO
-actual source-only invocations,30min each,max_revisions1. Reserved slots are not spent.
+actual source-only invocations, 30min each, max_revisions1. Reserved slots are not spent.
 
-Original OC1–OC8 and OP01–OP18 remain binding verbatim. Native approval/baseline/inspection/
+Original OC1-OC8 and OP01-OP18 remain binding verbatim. Native approval/baseline/inspection/
 original benchmark/history/revision/exact limitation gates remain mandatory. No test
 execution by Worker; no production bootstrap, real Kaggle/CLI/credentials/network/GPU/
 data/profiling/comparative/final-test work, main integration or deployment. Deployment

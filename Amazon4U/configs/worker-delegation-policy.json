@@ -72,5 +72,28 @@
     "Kaggle_GPU_training_profiling_deployment_authorized_here": false,
     "cleanup_stage_commit_push_authorized_here": false,
     "deployment_decision": "NOT_AUTHORIZED"
+  },
+  "standing_minor_issue_autonomy": {
+    "status": "USER_APPROVED",
+    "recorded": "2026-10-24",
+    "quote": "I want agents to have the autonomy to resolve minor issues, provided they can do so safely and within pre-approved parameters.",
+    "documentation": "docs/worker-delegation-policy.md#standing-autonomy-for-minor-issues",
+    "priority": "implementation_and_regression_testing_then_Musical_Instruments_profiling_once_planned",
+    "allowed_without_asking": [
+      "in_scope_noncritical_setup_and_verification_recoveries",
+      "small_fixes_inside_an_approved_task",
+      "rerun_an_already_approved_check_within_existing_limits",
+      "documentation_corrections_that_do_not_change_a_decision"
+    ],
+    "requires_explicit_approval": [
+      "new_budgets_or_higher_limits",
+      "frozen_science_protocol_or_acceptance_changes",
+      "real_data_GPU_Kaggle_profiling_or_held_out_work",
+      "deleting_or_rewriting_evidence",
+      "new_packages_frameworks_or_dependencies",
+      "cross_project_or_shared_root_changes",
+      "stage_commit_push_or_deployment"
+    ],
+    "record_each_autonomous_fix": true
   }
 }

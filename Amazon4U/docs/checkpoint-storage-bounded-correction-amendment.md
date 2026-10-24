@@ -1,6 +1,6 @@
 # D3 bounded correction amendment v1
 
-Status: **user-approved**, following the final D3 ESCALATE. Same substantive D3 deliverable and original IO1–IO8; no task replacement, budget reset, controller or race-condition research project.
+Status: **user-approved**, following the final D3 ESCALATE. Same substantive D3 deliverable and original IO1-IO8; no task replacement, budget reset, controller or race-condition research project.
 
 Exact authority: `data/reports/checkpoint-storage-implementation/bounded-correction-amendment-v1/authority.txt`. Operative plan and Pi-verified baseline hashes are in that directory.
 
@@ -14,7 +14,7 @@ Exact authority: `data/reports/checkpoint-storage-implementation/bounded-correct
 
 ## Required result and verification
 
-The Worker must supply a concrete IO2 mechanism, its actual guarantees and evidence, or identify precisely which original clause cannot be met. No silent weakening or invented universal controller/sandbox requirement. Pi reviews the original IO1–IO8, particularly IO2/IO3/IO5/IO6/IO7, against complete source, native dependencies, callers, fixtures and actual results. Worker scope labels alone prove nothing.
+The Worker must supply a concrete IO2 mechanism, its actual guarantees and evidence, or identify precisely which original clause cannot be met. No silent weakening or invented universal controller/sandbox requirement. Pi reviews the original IO1-IO8, particularly IO2/IO3/IO5/IO6/IO7, against complete source, native dependencies, callers, fixtures and actual results. Worker scope labels alone prove nothing.
 
 Only **one full discovery** is permitted after complete semantic/safety review. Same interpreter and unchanged discovery/result/no-skip body, with only the isolated cwd and declared scratch path relocated as pinned in the amendment plan. The approved240s ceiling and all existing physical/CPU/storage fixture bounds remain unchanged. Conservatively retain the prior five full-suite-associated runs; this run, if authorized by review, is sixth, not a reset. No subset, smoke/native probe, unsafe filesystem experiment, thread/environment change, profiling or controller work.
 
@@ -22,10 +22,10 @@ If IO2 is unresolved, the patch binding is invalid, mandatory review is unsafe/i
 
 Any acceptance is **task_only**, never main transfer or research execution. Deployment **NOT_AUTHORIZED**; no training/profiling, held-out evaluation, commit/push/release/rollback.
 
-## Execution outcome — incomplete completion, no patch
+## Execution outcome, incomplete completion, no patch
 
 The one additional request was submitted with Pi-verified exact baseline hashes and
-the frozen original IO1–IO8. The observed request hash/context, absent tools and
+the frozen original IO1-IO8. The observed request hash/context, absent tools and
 `tool_choice:none` were independently checked. HTTP200 was recorded, but the SDK
 finished with `stop_reason:error`, `INCOMPLETE_OR_BLOCKED`, and **0 response bytes**
 after371.113s. No implementation patch or technical feasibility report was returned.

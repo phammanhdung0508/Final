@@ -1,4 +1,4 @@
-# Checkpoint recovery — approved three-deliverable boundary
+# Checkpoint recovery, approved three-deliverable boundary
 
 Status: **user-approved decomposition, implementation/review pending**.
 Acceptance remains task-only; deployment NOT_AUTHORIZED.
@@ -101,7 +101,7 @@ using the previously authorized checkpoint monitoring budgets (128MiB/file,
 NOT larger synthetic source/checkpoint fixture limits (still 2MiB).
 No acceptance or deployment approval is implied by the correction.
 
-### First deliverable — final independent outcome
+### First deliverable, final independent outcome
 
 Corrected whole-deliverable task: `2b5b2471-9f30-4e24-aaa6-b7653d359449`.
 Final decision: **ESCALATE**, `agy-evidence-5a5f3a35-ea45-4f1f-8eff-dc6565a54cd0`.

@@ -34,10 +34,10 @@ No old report or criterion is rewritten to manufacture acceptance.
 
 MI1 preserve retired artifacts, Git, dependencies, protocol and sibling sentinels.
 MI2 verify355 baseline and exact three-file transfer with archived main documentation.
-MI3 prior semantic/safety review;full355/389 zero failures/errors/skips under240s,
-all355 IDs/3564 expanded cases/34D3 methods,complete logs,stable snapshots,empty scratch.
-MI4 review whole original IO1–IO8 and all eight current Worker limitations exactly
-in order, with independently verified original scope quotes;no unresolved requirements.
+MI3 prior semantic/safety review; full355/389 zero failures/errors/skips under240s,
+all355 IDs/3564 expanded cases/34D3 methods, complete logs, stable snapshots, empty scratch.
+MI4 review whole original IO1-IO8 and all eight current Worker limitations exactly
+in order, with independently verified original scope quotes; no unresolved requirements.
 MI5 no Worker, implementation/test rewrite, extra cycle, research or deployment work.
 
 Physical IO retains independently approved `scripts`/`configs` directory-inode FDs,
@@ -61,30 +61,30 @@ complete transient-write history.
 
 | Gate | Full discovery | Unittest | Complete process | Result |
 |---|---:|---:|---:|---|
-| Fresh unchanged main baseline |355|52.855s|56.293s|OK;0failures/errors/skips|
-| Exact D3 main integration |389|54.543s|57.452s|OK;0failures/errors/skips|
+| Fresh unchanged main baseline |355|52.855s|56.293s|OK; 0failures/errors/skips|
+| Exact D3 main integration |389|54.543s|57.452s|OK; 0failures/errors/skips|
 
-Both satisfy240s. All355 baseline IDs/bytes,34D3 methods and35ledgers/3564expanded
-cases preserved;stdout is byte-identical to the accepted isolated reference. Main's
-three target hashes match accepted source exactly;no production/test revision or
+Both satisfy240s. All355 baseline IDs/bytes, 34D3 methods and35ledgers/3564expanded
+cases preserved; stdout is byte-identical to the accepted isolated reference. Main's
+three target hashes match accepted source exactly; no production/test revision or
 new Worker request occurred. Pi read actual main files and relevant callers/native
-boundaries,processed complete actual streams and verified everyMI1–MI5/IO1–IO8 and
+boundaries, processed complete actual streams and verified everyMI1-MI5/IO1-IO8 and
 all eight current Worker limitations exactly/in order against original scope quotes.
 No assigned requirement waived or current issue left unresolved. The prior source
-acceptance,failed389variant,ESCALATEs and historical report wording remain unchanged.
+acceptance, failed389variant, ESCALATEs and historical report wording remain unchanged.
 
 Both retired D3 trees remain at original paths with unchanged contents. Complete
 scope/Git/sibling/ignored-evidence snapshots were stable and scratch empty. Four old
-Worker attempts/seven old full runs remain consumed;the two separate main runs are
+Worker attempts/seven old full runs remain consumed; the two separate main runs are
 complete (nine associated runs total),with no retry or reset. No further automatic
 execution or correction is authorized by completion.
 
 Current Main D3 API document remains exactly the accepted588-line artifact. Its
-submission-time pending-status paragraphs are historical;this independent receipt
+submission-time pending-status paragraphs are historical; this independent receipt
 is current authority. Earlier main D3 governance/history is archived byte-for-byte at
 `data/reports/checkpoint-storage-main-integration/inputs/main-before/docs/checkpoint-storage.md`.
 The old source-only main-transfer prohibition was fulfilled by this specific later
-user authorization,not retroactively removed from the original reports.
+user authorization, not retroactively removed from the original reports.
 
 `acceptance_scope: task_only`; `deployment_decision: NOT_AUTHORIZED`.
 No profiling/training, real-data/held-out/remote work, staging, commit, push, release

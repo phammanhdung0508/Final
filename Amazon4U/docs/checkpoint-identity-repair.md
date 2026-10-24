@@ -28,7 +28,7 @@ unchanged. Fresh runtime and fixture dirs are separate outside the clone.
 
 ## Exact repair checklist: contract first, coverage, docs, benchmark/report
 
-### A. Source correctness and representational configuration schema
+### A. source correctness and representational configuration schema
 
 1. Restore `ensure_ascii=False` in BOTH category validator canonical spelling and
    category formatter. Preserve the established producer/model compact literal-UTF-8
@@ -80,7 +80,7 @@ version if necessary and document compatibility rejection; do not alter the froz
 scientific protocol. Every supported recorded semantic change must affect identity
 and reject against trusted expected content. No RNG-state/optimizer/payload APIs.
 
-### B. Mandatory meaningful coverage, not inflated wrappers
+### B. mandatory meaningful coverage, not inflated wrappers
 
 Keep existing tests; add small table-driven cases starting with otherwise-valid
 complete fixtures, with message/guard assertions where meaningful:
@@ -112,7 +112,7 @@ Preserve unchanged data/graph/validation literal oracles. Legitimate settings/ha
 changes require independent exact canonical-content preimages and literal hashes,
 not values computed by the candidate API or empty/nonempty assertions.
 
-### C. Documentation and report accuracy
+### C. documentation and report accuracy
 
 Fix section3.1 categories/validation target items/validation records to actual LIST
 shapes; preserve correct tuple shapes for training records/graph edges/node IDs.
@@ -123,7 +123,7 @@ guarantees. Label pending Pi acceptance and state only actual verification evide
 Do not assign restoration/training-loop implementation to later deliverables:
 they are payload VALIDATION and exclusive no-clobber IO/validation-only integration.
 
-### D. Sole full-suite command and truthful complete report
+### D. sole full-suite command and truthful complete report
 
 Record scratch-literal relocation prospectively under standing noncritical recovery
 permission. Preserve exact original and approved command records; executable,
@@ -158,7 +158,7 @@ Task `9617ef2b-5a76-4376-8aee-aa36a3e08a74`, revision0/max_revisions0;
 invocation `caf4b67a-cb58-43f6-90e1-a477a023bb71`, completed normally in
 2,110,512 ms under explicit long_running policy. Worker reported one full-suite
 243-test passing run in14.113s. Pi independently reran the exact predeclared
-command:243tests, zero failures/errors,8.744s unittest/12,602ms process, all204
+command:243tests, zero failures/errors, 8.744s unittest/12,602ms process, all204
 baseline preserved. Benchmark `agy-evidence-42eabb37-03b0-4200-9a3a-07ea7a336004`.
 
 Pi read complete2520source/2070test/262doc lines plus relevant accepted typed-ID
@@ -166,7 +166,7 @@ and reproducibility dependencies, and independently verified new literal setting
 and composite hashes using static AST literals and independent JSON/SHA256 without
 candidate import/execution. Fresh inspection
 `agy-evidence-0265e833-0303-47c6-8aa6-358e1eebe660`: exactly3allowedfiles,
-unauthorized[],Gitunchanged,139protectedfiles/86,476,445bytes and130outside
+unauthorized[],Gitunchanged, 139protectedfiles/86,476,445bytes and130outside
 sentinels. Previous correction draft/HEAD/index/status unchanged. Runtime artifacts
 retained; fixture scratch empty. Monitoring is not an OS sandbox/complete action
 audit; captured163action candidates remain untrusted navigation.

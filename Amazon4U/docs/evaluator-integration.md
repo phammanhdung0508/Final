@@ -1,6 +1,6 @@
-# Evaluator Integration (Milestone I1 / Step 1)
+# Evaluator integration (milestone I1 / step 1)
 
-## Context and Decision
+## Context and decision
 
 Under the user-approved implementation sequence recorded in `docs/implementation-roadmap.md`, the integration of the independently accepted recommendation evaluator (`scripts/recommendation_evaluation.py`) into the primary recommendation core (`scripts/recommendation_core.py`) is executed as Step 1:
 1. Step 1: Integrate the independently accepted evaluator into `recommendation_core.py`, eliminating divergent candidate/ranking/evaluation logic while preserving public core APIs, KG metadata fallback, and candidate-hardening invariants.
@@ -8,7 +8,7 @@ Under the user-approved implementation sequence recorded in `docs/implementation
 3. Step 3: Implementation and independent verification of learned models and training harness.
 4. Step 4: Preparation of bounded Musical_Instruments profiling plan for separate execution authorization.
 
-### Historical Provenance and Preserved Boundaries
+### Historical provenance and preserved boundaries
 - Main HEAD: `ed60be08f3d1f22a9d76eecbee282415f95a6a5c` (229 tracked files, 6,349,614 bytes, archive SHA256 `76508021f4d9383c723073b7126dcbd3027bf59ed76d297bfad8d60fb0bf2ece`).
 - Historical task `303fdf53-8c5b-4013-86be-4fec983c809a` remains historical ESCALATE (acceptance_scope: task_only, deployment_decision: NOT_AUTHORIZED).
 - Sparse preflight task `d0a8d369-f283-4a35-8ad7-b27f30370e4d` remains preserved as historical ESCALATE; monitor requirements resolved under standing setup approval by materializing tracked clone baseline sentinels (outside-project tracked files in the isolated clone are monitored sentinels).
@@ -19,16 +19,16 @@ Under the user-approved implementation sequence recorded in `docs/implementation
 - During the isolated Worker tasks, sibling projects (Movie4U) and main checkout were read-only baseline sentinels; no Worker modifications or Git metadata edits were permitted. Subsequent Pi mechanical integration into main is recorded below; sibling sources remain untouched.
 - Worker implements integration, focused recovery fixes, and regression fixtures only; Pi retains sole verification and acceptance authority. Deployment is **NOT_AUTHORIZED**.
 
-## Architecture and Integration Design
+## Architecture and integration design
 
-### 1. Unified Evaluation Engine
-`scripts/recommendation_evaluation.py` serves as the authoritative evaluation engine across the project:
+### 1. unified evaluation engine
+`scripts/recommendation_evaluation.py` is the authoritative evaluation engine across the project:
 - `TrainingContext`: Validated training-only context enforcing feedback conditions (`all_ratings` vs `rating_ge_4`), warm pool derivation, distinct positive vs all-rated history, and duplicate/invalid input failures.
 - `ScoringFailureError`: Shared exception raised for non-finite scores, missing candidate scores, invalid routes, corrupt profiles, or spoofed fallbacks. (Note: Candidate shortages are counted in candidate_shortages audit without padding and do not raise scoring errors).
 - `BaseEvaluator`: Enforces candidate isolation, validation vs test history filtering, exact tie-breaking (`score desc, parent_asin asc`), shortage accounting without padding, macro-averaged ranking metrics (NDCG and HitRate @ 5, 10, 20), CatalogCoverage@10 over the full condition-warm pool, and route/fallback subgroup auditing. By default, rejects all provider fallback claims; evaluator strictly owns empty-positive-history fallback.
-- `DEFAULT_FALLBACK_REASONS`: Configured as `("empty_positive_history",)` on `BaseEvaluator`, ensuring standalone reports default to `empty_positive_history` only.
+- `DEFAULT_FALLBACK_REASONS`: Configured as `("empty_positive_history",)` on `BaseEvaluator`, making sure standalone reports default to `empty_positive_history` only.
 
-### 2. Core Evaluator Subclass and Guarded Metadata Fallback
+### 2. core evaluator subclass and guarded metadata fallback
 In `scripts/recommendation_core.py`, the legacy whole-class `Evaluator` duplicate is replaced with a clean subclass of `BaseEvaluator`:
 - `DEFAULT_FALLBACK_REASONS`: Overridden on core `Evaluator` to `("empty_positive_history", "unusable_metadata_profile")`. The inherited evaluation engine ensures both reasons are always emitted under `report['subgroups']['fallback']['by_reason']`, populating count 0 and all-None registered metrics when absent.
 - `Evaluator(BaseEvaluator)` overrides `_validate_provider_result` to delegate ordinary routes (`personalized`, `non_personalized`) directly to `super()._validate_provider_result`, and implements a narrow, strictly guarded hook for legitimate KG metadata fallback (`unusable_metadata_profile`).
@@ -41,11 +41,11 @@ In `scripts/recommendation_core.py`, the legacy whole-class `Evaluator` duplicat
   - Provider scores for all authoritative candidates must exactly equal condition-positive training popularity.
 - All spoofed reasons, wrong contexts, corrupt profiles, and scorer failures are rejected with `ScoringFailureError` without fallback.
 
-### 3. Import Canonicalization
+### 3. import canonicalization
 Both `scripts/recommendation_evaluation.py` and `scripts/recommendation_core.py` implement canonical module aliasing:
 - Supports both package imports (`from scripts.recommendation_core import ...`) and top-level directory imports (`from recommendation_core import ...`).
 - Relative package import `if __package__:` cleanly avoids masking underlying dependency errors.
-- Both import modes resolve to identical module instances in `sys.modules`, ensuring `TrainingContext`, `ScoringFailureError`, `Evaluator`, and `KGOnlyScorer` share exact object identity in the same interpreter.
+- Both import modes resolve to identical module instances in `sys.modules`, making sure `TrainingContext`, `ScoringFailureError`, `Evaluator`, and `KGOnlyScorer` share exact object identity in the same interpreter.
 
 ## Verification
 
@@ -55,7 +55,7 @@ The full test suite executes under the exact pre-declared runner:
 3. `tests/test_evaluator_integration.py` (29 tests): 13 preserved prior unaccepted integration fixtures plus 16 focused recovery fixtures verifying:
    - Core fallback reason schema with absent reasons emitting count 0 and all-None metrics across empty targets, zero eligible users, and no-fallback populations.
    - Standalone evaluator default `empty_positive_history` reason retention and provider fallback rejection.
-   - Adversarial validator override regression ensuring non-finite values in unused channels cannot bypass interface validation.
+   - Adversarial validator override regression making sure non-finite values in unused channels cannot bypass interface validation.
    - Authoritative outer profile container validation and missing user/candidate profile state rejection as `ScoringFailureError` (rather than `AttributeError`, `TypeError`, or `KeyError`).
    - Route validation super-delegation for ordinary routes (`personalized`, `non_personalized`).
    - Hand-calculated mixed routes, both fallback reasons, and coverage oracles across feedback conditions (`rating_ge_4` and `all_ratings`) and splits (`validation` and `test` with validation history).
@@ -69,7 +69,7 @@ Baseline partition accounting:
 - Current suite total: 113 discovered tests (97 integration-draft suite + 16 focused recovery fixtures; or 63 clean baseline + 21 shared + 29 integration = 113).
 All 113 tests pass with 0 failures, 0 errors, and 0 skips.
 
-## Original Worker submission status (historical)
+## Original worker submission status (historical)
 
 - Step 1 implementation: **Completed by Worker, pending independent Pi verification, review, and recorded decision**.
 - Deployment: **NOT_AUTHORIZED**.

@@ -1,4 +1,4 @@
-# Training harness recovery — checkpoint/provenance subsystem
+# Training harness recovery, checkpoint/provenance subsystem
 
 Status: **final ESCALATE / not accepted**, task `e1f1ea4c-de9a-4a53-ad3a-7b394fb4da1a`.
 Final decision: `agy-evidence-411171fa-c296-40bc-9346-667b9d7c5b97`.

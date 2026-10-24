@@ -1,4 +1,4 @@
-# Identity/provenance: bounded review–fix continuation
+# Identity/provenance: bounded review-fix continuation
 
 ## Prospective authorization
 
@@ -10,7 +10,7 @@ FINAL ESCALATEs, evidence, drafts and exhausted budgets, including task
 `agy-evidence-29cd9f02-617d-4637-8169-a35d78f5c163`.
 
 This is ONE newly authorized whole identity/provenance continuation with an
-explicit bounded review–fix cycle: initial Worker plus at most TWO consolidated
+explicit bounded review-fix cycle: initial Worker plus at most TWO consolidated
 Pi-directed corrective revisions, declared BEFORE submission. It does not reopen
 or reset an old task, create checkpoint micro-deliverables, allow endless retries
 or reduce acceptance requirements. Pi's earlier choice of zero revisions caused
@@ -39,7 +39,7 @@ Acceptance task_only; deployment NOT_AUTHORIZED, no held-out policy/evaluation.
 
 ## Exact consolidated remaining fixes
 
-### A. Preserve the previously supported integer domain
+### A. preserve the previously supported integer domain
 
 Remove the NEW `bit_length()>14000` checks from actual identity/header/timestamp/
 settings validation. Do NOT replace them with another invented cap. The check in
@@ -52,7 +52,7 @@ retention and all component schemas. Do not change interpreter int limits/RNGs/
 thread settings, normalize Unicode, use ASCII escaping or fabricate values.
 
 Add full valid identity/roundtrip/actual-vs-expected regression cases using
-`2**14000` (14001bits,4215decimal digits, supported under native4300digit limit)
+`2**14000` (14001bits, 4215decimal digits, supported under native4300digit limit)
 and neighboring supported integers. Exercise each removed validation location:
 header seed; training and validation timestamp; a general integer settings field;
 positive-worker prefetch; neighbor fanout; active RNG seed; bound worker base_seed
@@ -70,7 +70,7 @@ cap or claim unbounded support. Tests may inspect the existing interpreter conve
 limit without changing it if required for portability; never skip actual error
 translation coverage or simulate acceptance. No ad-hoc candidate probe is allowed.
 
-### B. Intended error guard assertions, not just labels
+### B. intended error guard assertions, not just labels
 
 Retain all204baseline+44current contract methods and all precise prior worksheet
 cases. Strengthen the FIVE new matrix methods and corrected history negatives:
@@ -97,7 +97,7 @@ unchanged literal oracles, full nonASCII positive roundtrip, nested snapshot tes
 and serialized ALLfingerprint corruption. Do not weaken source guards, catch arbitrary
 exceptions in tests or merely add headings to get passing counts.
 
-### C. Accurate docs and required report
+### C. accurate docs and required report
 
 Correct numeric explanation:10**400 has401decimal digits, overflows finite float
 conversion, but does NOT exceed4300decimal digits.10**5000 has5001digits and exceeds
@@ -155,7 +155,7 @@ ESCALATE rather than silently resetting budgets.
 Task `1df92bbc-9a7a-4c17-b199-6f1794b7b84b`, revision0/max_revisions2;
 Worker invocation `34e5f474-5bbd-4a15-8dd7-e4a8c99dd06c` completed normally.
 Worker reports248OK/9.789s. Pi independently verified the exact submitted fullsuite:
-248tests,0failures/errors,9.604s unittest/12,924ms process, all204baseline+44contract
+248tests, 0failures/errors, 9.604s unittest/12,924ms process, all204baseline+44contract
 methods. Benchmark `agy-evidence-7d35b187-ca6e-41b9-97d8-0d81d7c04ee5`.
 Full45567character stderr materialized with verified raw section SHA256
 `f0f3e56582eae1f96229225d740680d87a81ffe351b2732436ac5a51ca9fe302`.
@@ -175,7 +175,7 @@ and predecessor draft/HEAD/index/status checked unchanged. No candidate probes/i
 new source edits, main transfer, training or deployment.
 
 Fresh inspection `agy-evidence-f6911e49-3426-4f2c-b22f-4a5d38668203` reports3allowed
-changed paths, unchanged Gitmetadata,142protectedfiles/86,594,433bytes complete hashing,
+changed paths, unchanged Gitmetadata, 142protectedfiles/86,594,433bytes complete hashing,
 130outside sentinels. Diff is empty because source files are untracked; ALL actual
 content was read. Monitoring remains bounded, not an OS sandbox/action audit. A lookup
 of a nonexistent `unauthorized` evidence section failed; do not invent that field or
@@ -224,7 +224,7 @@ Status: content review finished with consolidated small corrections identified;
 Acceptance scope remains task_only; deployment NOT_AUTHORIZED; no later deliverables
 or automatic main transfer launched. Evidence: `data/reports/checkpoint-identity-finalization-setup/`.
 
-## Final review after operator-confirmed SAME-task reopening
+## Final review after operator-confirmed same-task reopening
 
 The operator reopened the SAME task; original criteria, commands, paths and
 max_revisions2 were unchanged. Both consolidated revisions were used; no replacement
@@ -242,7 +242,7 @@ or budget reset. Earlier interrupted-review and exhausted-task decisions remain 
 - Full original content and complete changed functions/callers/helpers/tests/docs/report
   reviewed. All6 original content criteria verified; no remaining known implementation
   or benchmark failure found. All204baseline+44boundedstdlibCPUcontract methods retained.
-  Exact original command, synchronous Pi process,120s ceiling; full final stderr differs
+  Exact original command, synchronous Pi process, 120s ceiling; full final stderr differs
   from fully read prior stderr ONLY elapsed-time line; stdout identical expected positive/
   negative audit-fixture outputs, not suite failure.
 - Independent AST literal settings preimage/settings/composite SHA unchanged. Own streamed
@@ -251,12 +251,12 @@ or budget reset. Earlier interrupted-review and exhausted-task decisions remain 
   empty. Fresh actual scope evidence exactly3allowed modified, unauthorized[], Git false;
   benchmark side effects empty, training false. No sibling/main-transfer/source changes
   outside declared implementation scope. Monitoring is bounded, not OS sandbox/action audit.
-- Worker CLI used non-daemon/nonpersistent owned foreground command;10s transport handle
+- Worker CLI used non-daemon/nonpersistent owned foreground command; 10s transport handle
   then status-only waits until completion, no interleaved edits/detached shell workload.
   Repeated raw response representations are not additional executions. Captured navigation
   remains incomplete as an action-audit interpretation.
 
-### Final decision: ESCALATE — acceptance-tool/report gate
+### Final decision: ESCALATE, acceptance-tool/report gate
 
 Pi attempted ACCEPT after completing independent review. Tool rejected it:
 `Worker limitations/issues require resolution before acceptance`.

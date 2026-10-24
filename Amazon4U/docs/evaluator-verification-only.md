@@ -1,6 +1,6 @@
 # Clean verification-only authorization
 
-User approval: “oke please do so”, responding to the proposal for clean
+User approval: "oke please do so", responding to the proposal for clean
 verification-only review of preserved source with all outputs predeclared.
 This permits a new scoped agy **read-only** task, not rewriting prior decisions
 or implementation. Pi independently verifies/reviews and retains acceptance.
@@ -81,7 +81,7 @@ Acceptance scope: **task_only**; deployment decision: **NOT_AUTHORIZED**.
 Decision evidence: `agy-evidence-dd88fe97-5124-4ba3-abd1-d5f729a27133`.
 No ACCEPT, main integration, deployment, training or profiling occurred.
 
-- Criteria 1–4 verified by Pi's actual source/dependency/test review and original
+- Criteria 1-4 verified by Pi's actual source/dependency/test review and original
   approved benchmark: **113 tests, zero failures/errors/skips**, 1.316 seconds.
   Full benchmark: `agy-evidence-45c75dd2-4e51-4220-a25b-4938d2f40750`.
 - Fresh inspection `agy-evidence-830460f1-94ac-48f9-82ce-9d9373e04c9c`:

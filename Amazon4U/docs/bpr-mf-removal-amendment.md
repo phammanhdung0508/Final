@@ -1,8 +1,8 @@
 # User-approved removal of BPR-MF
 
-Status: **ACCEPT — task_only, user-authorized Pi-direct metadata cleanup**.
+Status: **ACCEPT, task_only, user-authorized Pi-direct metadata cleanup**.
 Deployment: **NOT_AUTHORIZED**. No agy task was launched.
-User explicitly confirmed: “remove BPR-MF entirely.” This follows discussion of
+User explicitly confirmed: "remove BPR-MF entirely." This follows discussion of
 removal versus retaining it as an optional baseline. It authorizes removal from
 the active study, including BPR-MF + metadata; it does not authorize deleting
 historical evidence or rewriting the v1.0.0 frozen baseline.

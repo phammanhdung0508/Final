@@ -1,20 +1,20 @@
 # Proposed D3 execution-budget amendment v1
 
-**Current status: APPROVED — prospective D3-only240-second ceiling.**
-The user's subsequent **“Approve. please procced”** explicitly approves the proposal
+**Current status: APPROVED, prospective D3-only240-second ceiling.**
+The user's subsequent **"Approve. please procced"** explicitly approves the proposal
 below. Approval is frozen in
 `data/reports/checkpoint-storage-implementation/budget-amendment-v1/approval.json`;
 operative derived plan: `effective-plan-240.json` in that report directory.
-Original proposal bytes,120s plan/verifier/results and all budgets are preserved.
+Original proposal bytes, 120s plan/verifier/results and all budgets are preserved.
 No retrospective acceptance: first run one fresh unchanged uninstrumented355-test
 baseline, then proceed Worker-led only if it passes.
 
 The proposal-time statements below are retained as history, superseded only by this
-explicit execution-limit approval—not by any substantive criterion or safety waiver.
+explicit execution-limit approval, not by any substantive criterion or safety waiver.
 
 The user recommended closing the runtime investigation, proposing a larger D3
 execution ceiling, establishing an unchanged uninstrumented355-test baseline under
-the approved new ceiling, then proceeding with Worker-led D3 under IO1–IO8 if it passes.
+the approved new ceiling, then proceeding with Worker-led D3 under IO1-IO8 if it passes.
 The user explicitly described240seconds as a **proposed upper limit**, not expected
 runtime, and required formal approval/documentation before an increase is used.
 This record requests that approval; it does not infer it from the recommendation.
@@ -46,14 +46,14 @@ Closing investigation is not D3 acceptance or proof of an exact root cause.
 
 240seconds is a hard execution **ceiling**, not a target, runtime prediction or
 promise the suite will finish. It applies to the entire selected suite, including
-interpreter startup, discovery and the additional D3 tests—not240s per test or only
+interpreter startup, discovery and the additional D3 tests, not240s per test or only
 the original355. Ordinary before/after evidence snapshots are separate bookkeeping,
 not extra time granted to an executing test process. Termination/cleanup is recorded,
 not permission to continue executing tests beyond the deadline.
 
 The amendment is **D3-only and prospective**. It changes the execution-budget portion
 of IO8 and the corresponding prospective planned-evidence limit, not the semantic
-requirements of IO1–IO8. Preserve original criterion/plan texts and append the approved
+requirements of IO1-IO8. Preserve original criterion/plan texts and append the approved
 amendment as explicit authority for future versioned commands/receipts. No historical
 run exceeding120s becomes compliant with its original120s contract. D2's accepted
 original criterion, prior timeouts/ESCALATEs and the non-acceptance diagnostic remain
@@ -77,7 +77,7 @@ execution history and bounded verification-run limits; no resets or indefinite r
    status, elapsed time, identities and stable before/after snapshots. A pass requires
    completion, exit0 and zero failures/errors/skips; this gate is preparation only.
 3. If it passes, proceed with the already authorized **Worker-led D3 implementation**
-   within IO1–IO8, unchanged text-only channel and bounded response/revision budget.
+   within IO1-IO8, unchanged text-only channel and bounded response/revision budget.
    Worker may propose technical solutions; Pi independently reviews complete source,
    callers/dependencies/tests and actual guarantees before executing safe fixtures.
 4. Run the entire suite with added D3 tests under the same240s ceiling. Preserve
@@ -92,11 +92,11 @@ operative until explicit approval. Fresh baseline and Worker launch remain pendi
 
 ## Requested formal approval
 
-> Approve D3 execution-budget amendment v1: a240-second wall-clock ceiling per full-suite invocation, covering the fresh unchanged355-test baseline and subsequent full D3 suites including added tests. Keep implementation/tests/assertions, IO1–IO8 substantive requirements and all other safety/review/fixture/response-budget boundaries unchanged. Preserve original120-second evidence without retroactive acceptance. After a passing fresh baseline, proceed with the already authorized Worker-led D3 process.
+> Approve D3 execution-budget amendment v1: a240-second wall-clock ceiling per full-suite invocation, covering the fresh unchanged355-test baseline and subsequent full D3 suites including added tests. Keep implementation/tests/assertions, IO1-IO8 substantive requirements and all other safety/review/fixture/response-budget boundaries unchanged. Preserve original120-second evidence without retroactive acceptance. After a passing fresh baseline, proceed with the already authorized Worker-led D3 process.
 
 Acceptance scope remains **task_only** if later earned; deployment **NOT_AUTHORIZED**.
 
-## Subsequent execution receipt — not D3 acceptance
+## Subsequent execution receipt, not D3 acceptance
 
 Under the explicit approval above, fresh unchanged355 baseline passed55.645s process.
 The initial full suite with added D3 tests completed379tests in55.993s process, with

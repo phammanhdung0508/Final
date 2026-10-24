@@ -1,4 +1,4 @@
-# Deliverable 3 — secure checkpoint storage/retrieval and D1/D2 integration
+# Deliverable 3, secure checkpoint storage/retrieval and D1/D2 integration
 
 ## Current authority and D2 conclusion
 
@@ -30,9 +30,9 @@ not new micro-tasks. Historical task decisions and revision budgets remain intac
 
 | Component | Owns | Does not establish |
 |---|---|---|
-| D1 — accepted identity/provenance | Canonical identities, supplied source bytes and explicit Git/environment evidence, actual/expected compatibility | Physical acquisition of bytes merely because a record is internally consistent |
-| D2 — accepted payload validation | Already-decoded state schemas, models/Adam/RNG/sampler/progress/selection, per-object logical resource preflight, independently owned validated output | Safety of decoding, file/path security, live restoration, historical origin or exact continuation |
-| D3 — this deliverable | Approved-root physical IO and source acquisition, bounded serialization/decoding, atomic exclusive checkpoint publication, corruption/race refusal, owned temporary cleanup, D1/D2 pipeline integration | A model training loop, restoring live models/optimizers/RNG, a process-memory sandbox, or a general agent security controller |
+| D1, accepted identity/provenance | Canonical identities, supplied source bytes and explicit Git/environment evidence, actual/expected compatibility | Physical acquisition of bytes merely because a record is internally consistent |
+| D2, accepted payload validation | Already-decoded state schemas, models/Adam/RNG/sampler/progress/selection, per-object logical resource preflight, independently owned validated output | Safety of decoding, file/path security, live restoration, historical origin or exact continuation |
+| D3, this deliverable | Approved-root physical IO and source acquisition, bounded serialization/decoding, atomic exclusive checkpoint publication, corruption/race refusal, owned temporary cleanup, D1/D2 pipeline integration | A model training loop, restoring live models/optimizers/RNG, a process-memory sandbox, or a general agent security controller |
 
 The important ordering is:
 
@@ -56,7 +56,7 @@ Proposed implementation paths, to be frozen before submission:
 
 1. `scripts/checkpoint_storage.py`
 2. `tests/test_checkpoint_storage.py`
-3. `docs/checkpoint-storage.md` — extend this record without erasing authority/history.
+3. `docs/checkpoint-storage.md`, extend this record without erasing authority/history.
 
 Three public operations are proposed; exact signatures remain to be specified:
 
@@ -84,7 +84,7 @@ They are not a new D2 contract or an excuse to widen checkpoint scope.
 
 | ID | D3 requirement | Planned independent evidence |
 |---|---|---|
-| IO1 | Preserve accepted D1/D2, models,355 baseline tests, protocols, historical reports, Git metadata and siblings; only declared D3 files/outputs change | Pinned dependency references and before/after scope evidence; no D2 re-audit or source rewrite |
+| IO1 | Preserve accepted D1/D2, models, 355 baseline tests, protocols, historical reports, Git metadata and siblings; only declared D3 files/outputs change | Pinned dependency references and before/after scope evidence; no D2 re-audit or source rewrite |
 | IO2 | Narrow independently approved roots; reject escapes, unapproved paths/types, symlinks and unsupported objects; descriptor-anchored traversal and explicit parent-race refusal | Valid paths plus absolute/traversal/symlink/nonregular and deterministic parent-swap cases; no check-then-reopen pathname shortcut |
 | IO3 | Enforce file bounds before decoding, and reconstructed-storage/allocation bounds during decoding; corrupt/truncated/unsupported formats fail closed | Literal small valid controls; independently crafted malformed files/storage declarations; exact and one-over small-policy limits; evidence that forbidden allocation/decoder paths are not reached |
 | IO4 | Restricted loading with `weights_only=True` for the existing Torch-loading contract; no unsafe fallback, arbitrary globals/allowlist expansion, shell/eval or attacker hook execution | Unsupported/corrupt object and decoder refusal cases; complete decoder/caller/dependency review; weights-only is not treated as a storage/RAM bound by itself |
@@ -134,10 +134,10 @@ Do not let a Worker silently choose them while implementing:
    dependency hashes and bounded response/revision/execution budgets before any Worker
    or candidate execution. No stale HEAD or old benchmark is a fresh D3 baseline.
 
-## Prospective execution boundaries — not execution permission
+## Prospective execution boundaries, not execution permission
 
 Retain the existing correctness-fixture envelope: CPU only, at most8 users,
-12 products,8 metadata nodes/type,64 dimensions; new fixture files≤2MiB. Synthetic
+12 products, 8 metadata nodes/type, 64 dimensions; new fixture files≤2MiB. Synthetic
 Adam mappings/private RNG states only, **no optimizer steps/backward/training**, live
 restoration, worker processes, CUDA, real datasets, remote jobs or held-out evaluation.
 The existing accepted baseline's differentiability/import-order tests remain unchanged.
@@ -170,24 +170,24 @@ record the exact part-level source/evidence/test plan, then obtain implementatio
 and execution authorization. This draft does not grant that later authority.
 Acceptance, if later earned, is **task_only**; deployment **NOT_AUTHORIZED**.
 
-## Subsequent user approval — implementation-first, evidence-driven correction
+## Subsequent user approval, implementation-first, evidence-driven correction
 
 The user subsequently agreed to this plan and explicitly directed execution within
-**IO1–IO8**, allowing the Worker to propose and implement technical solutions.
+**IO1-IO8**, allowing the Worker to propose and implement technical solutions.
 Pi verifies actual guarantees through source review and testing; specific evidenced
 obstacles receive targeted correction, not expansion of the whole design. Unsupported
 safety claims and unsafe testing remain forbidden.
 
 This supersedes the earlier preparation-only implementation hold and the suggestion
 that Pi must settle every technical choice before a Worker proposal. The earlier
-scope, IO1–IO8 and history remain unchanged. Worker discretion covers exact APIs,
+scope, IO1-IO8 and history remain unchanged. Worker discretion covers exact APIs,
 format, explicit IO policy and technical mechanisms **within** those criteria, not
 unsafe fallbacks, silent weakening, new scientific defaults or dependency rewrites.
 
 Prospective plan, complete exact user approval, original preparation text, pinned
 HEAD, three patch paths, command/cwd/scratch and fixture/response/execution bounds:
 `data/reports/checkpoint-storage-implementation/plan.json` and its `inputs/`.
-One initial text-only response and at most one consolidated revision,30minutes each,
+One initial text-only response and at most one consolidated revision, 30minutes each,
 one generation request each/no retries; no architecture or controller changes.
 Pi alone screens before each original full discovery (120s, at most6per round,
 including the initial355-test dependency baseline). This is a fresh D3 dependency
@@ -208,7 +208,7 @@ supports it. If safe mandatory evaluation is blocked, report that concrete obsta
 and use the bounded correction process; never run an unsafe test merely to get red.
 Acceptance remains task_only; deployment NOT_AUTHORIZED.
 
-## D3 implementation proposal — current API, format and limits
+## D3 implementation proposal, current API, format and limits
 
 This section records the implementation-first technical choices; it does not change
 any preceding requirement or historical result. The approved prospective D3 full-suite
@@ -217,7 +217,7 @@ fresh unchanged 355-test baseline receipt: zero failures/errors/skips, 52.493s u
 55.645s process, and 3564/3564 expanded cases across 35 ledgers. That receipt is a
 dependency gate, not D3 acceptance. Worker executions/tests: **0**.
 
-### Public APIs and trust inputs
+### Public apis and trust inputs
 
 All three operations live in `scripts/checkpoint_storage.py`; canonical and top-level
 imports share the module and accepted exception classes.
@@ -323,7 +323,7 @@ limits, each at most signed-64-bit maximum:
 | `max_source_bytes` | Aggregate approved source bytes, no greater than D1's 2MiB invariant |
 | `max_source_files` | Source request count, no greater than D1's registered set size |
 
-Equality is permitted. V1 additionally restricts wire depth to 128, rank to 32 and
+Equality is permitted. V1 also restricts wire depth to 128, rank to 32 and
 node count to uint32 representation. These are format/parser bounds, not selected
 production byte budgets. Runtime byte capacities require independently authorized
 explicit profiles; no free-RAM sizing or default profile exists. D2's separate
@@ -408,17 +408,17 @@ wording must be reconciled explicitly with the proposed no-pickle/no-native-arch
 format. Neither is silently marked satisfied. No D3 ACCEPT is claimed. Acceptance
 scope remains task_only; deployment NOT_AUTHORIZED.
 
-## User-approved prefix-root correction — fourth request overall
+## User-approved prefix-root correction, fourth request overall
 
 This appended section supersedes the earlier proposal's current root API, leaf-open,
 publication, byte-profile and unresolved-adjudication descriptions, not their history
-or the original IO1–IO8. The user explicitly approved these conditions:
+or the original IO1-IO8. The user explicitly approved these conditions:
 
 > Each D1 prefix must have an independently approved directory FD; D3 shall only expose direct-child basenames while preserving logical identifiers. No claims of continuous ancestry regarding the project-root pathname are permitted.
 
 > Scope changes to collecting terminal-error metadata and validating request/context bounds; do not unilaterally alter models, controllers, or routing.
 
-> Proceed from the existing candidate, conduct a comprehensive review against criteria IO1–IO8, and ensure no history is reset—nor should any additional, unrequested correction cycles be initiated.
+> Proceed from the existing candidate, conduct a comprehensive review against criteria IO1-IO8, and ensure no history is reset, nor should any additional, unrequested correction cycles be initiated.
 
 The second condition concerns the separately bounded SDK wrapper, which these product
 patches do not modify. This is the same OriginalD3 deliverable. Three prior request

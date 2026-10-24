@@ -2,7 +2,7 @@
 
 ## Current authority
 
-The user approved removing mandatory Pi–agy delegation from Amazon4U. The
+The user approved removing mandatory Pi-agy delegation from Amazon4U. The
 [current implementation policy](worker-delegation-policy.md) and
 `../configs/worker-delegation-policy.json` govern this directory and
 `multiautoresearch`.

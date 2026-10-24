@@ -1,4 +1,4 @@
-# Evaluator execution audit — Track A
+# Evaluator execution audit, track A
 
 ## Status
 
@@ -84,7 +84,7 @@ The final worker revision timed out after source changes, before required
 regression fixtures and matching documentation were completed. Dedicated tests
 for same-size input mutations, hard-ceiling limits and lying cumulative budgets
 remain absent; documentation's format rule contradicts the final source.
-Pi therefore recorded **ESCALATE — task_only, unaccepted**;
+Pi therefore recorded **ESCALATE, task_only, unaccepted**;
 **deployment NOT_AUTHORIZED**, review evidence
 `agy-evidence-3964e413-ba61-4ab8-b859-3666fbe4cdee`.
 Both revision slots are exhausted. No automatic replacement task or acceptance.

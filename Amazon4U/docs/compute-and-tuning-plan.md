@@ -1,4 +1,4 @@
-# Compute and tuning plan — agreed approach, numerical budget pending
+# Compute and tuning plan, agreed approach, numerical budget pending
 
 ## Conditional Kaggle capacity
 
@@ -19,7 +19,7 @@ GPU is the initial platform recommendation; TPU compatibility is not established
   bootstrap framework are agreed in [reproducibility](reproducibility-and-uncertainty.md).
   The bootstrap contrast list is now frozen: KG + GNN minus each of three core
   baselines for NDCG@10/HitRate@10, separately within all six experiment groups.
-- Use a small, profiling-informed hyperparameter search. **2–3 configurations per
+- Use a small, profiling-informed hyperparameter search. **2-3 configurations per
   learned method per category × condition** is the planning range, not a frozen
   numerical trial budget or permission to pick its size after observing results.
 - Freeze search spaces, tuning seed, trial counts and stopping/budget rules after
@@ -68,7 +68,7 @@ The previously agreed validation-profiling decision is now recorded in Amazon4U:
 3. Keep the per-epoch schedule if practical; do not predesign a workaround.
 4. Recheck feasibility on Toys_and_Games and Electronics. Musical_Instruments
    feasibility does not establish Electronics feasibility.
-5. Batch/stream full ranking rather than materializing the entire user–item score
+5. Batch/stream full ranking rather than materializing the entire user-item score
    matrix. This is an execution strategy, not a smaller candidate universe.
 6. Any necessary frequency change requires an agreed, documented amendment before
    comparative experiments. Early-stopping patience is measured in validation

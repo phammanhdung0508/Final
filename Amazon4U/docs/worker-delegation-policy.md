@@ -4,7 +4,7 @@
 
 The user approved this change with the exact instruction:
 
-> APPROVE, please remove mandatory Pi–agy delegation out of Amazon4U
+> APPROVE, please remove mandatory Pi-agy delegation out of Amazon4U
 
 One coding agent owns diagnosis, implementation, related tests, and local
 verification by default. Pi may write and fix code directly within authorized
@@ -65,6 +65,22 @@ direct implementation. SDK approval is not inherited from historical requests.
 
 Keep actual native invocations, SDK requests, and verification runs separate in
 historical accounting. A prompt role name does not establish an execution channel.
+
+## Standing autonomy for minor issues
+
+User-approved on 2026-10-24: "I want agents to have the autonomy to resolve minor
+issues, provided they can do so safely and within pre-approved parameters."
+
+- Do without asking: in-scope noncritical setup and verification recoveries, small
+  fixes inside an approved task, re-running an already approved check within its
+  existing limits, and documentation corrections that do not change a decision.
+- Ask first: new budgets or higher limits; frozen science, protocol or acceptance
+  changes; real-data, GPU, Kaggle, profiling or held-out work; deleting or rewriting
+  evidence; new packages, frameworks or dependencies; cross-project or shared-root
+  changes; and stage, commit, push or deployment.
+- Record each autonomous fix in the relevant document or report.
+- Priority: implementation and regression testing, then Musical_Instruments profiling
+  once its plan is approved.
 
 ## Unchanged boundaries
 

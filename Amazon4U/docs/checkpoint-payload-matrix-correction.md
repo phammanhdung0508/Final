@@ -18,7 +18,7 @@ Operative technical inputs are the exact approved versions of
 and `data/reports/d2-part-level-preparation/proposal.json`, frozen and hashed under
 `data/reports/checkpoint-payload-matrix-correction/`. Their earlier proposal-only
 labels are historical; this approval supersedes those authorization labels, not their
-technical requirements or original C1–C10. Approved technical pins include matching
+technical requirements or original C1-C10. Approved technical pins include matching
 supported concrete list/tuple type/value for optional actual/trusted Adam param_names
 and a4096-character D2 diagnostic regression limit, with no integer validity cap.
 
@@ -28,7 +28,7 @@ project/cwd its `Amazon4U/`; dependency HEAD
 Only Worker-writable implementation files: `Amazon4U/scripts/checkpoint_payload.py`,
 `Amazon4U/tests/test_checkpoint_payload.py`, `Amazon4U/docs/checkpoint-payload.md`.
 
-Use the exact future command in the frozen approved proposal,120s per synchronous
+Use the exact future command in the frozen approved proposal, 120s per synchronous
 full discovery, at most6Worker attempts per invocation. Declare only the fresh
 `Amazon4U/.test-output/checkpoint-payload-matrix-v1/` test/temp output subtree; keep it
 empty before/after. Disable bytecode. Preserve all249 accepted test bytes and34starting
@@ -46,7 +46,7 @@ Kaggle/remote jobs, held-out evaluation, staging/commit/push or deployment. Exis
 accepted baseline differentiability tests are retained unchanged.
 
 Pi independently inspects actual source/functions/callers/tests, runs approved original
-benchmark commands and reviews all C1–C10 and exact ordered limitations. Passing tests
+benchmark commands and reviews all C1-C10 and exact ordered limitations. Passing tests
 or Worker completion claims alone are not acceptance. Do not retune after held-out
 exposure or bypass an exhausted new budget. Logging remains supplementary evidence,
 with bounded raw-record checks for known decoder gaps; no shared tooling work.
@@ -61,7 +61,7 @@ deployment NOT_AUTHORIZED. This is **not revision-budget exhaustion**.
 The clean dependency baseline passed249cases; exact candidate bootstrap passed283.
 Worker added37methods and timed out at1801061ms without a completed report, before
 making any implementation fix. Pi's approved full suite ran320cases in10.220s/13077ms:
-**6failures,14errors,0skips**. Original283cases remained green. Nineteen negative
+**6failures, 14errors, 0skips**. Original283cases remained green. Nineteen negative
 failures/errors reproduce all6implementation blocker groups; one additional failure
 is the coverage ledger. These are useful test-first reds, not finished corrections.
 Implementation/doc bytes and all34old payload method bodies remain unchanged. New
@@ -94,6 +94,6 @@ One earlier submission `9ef36650-5e96-4f9d-b034-02f2afdee4b8` failed preflight b
 any Worker because an internal generated scratch path was duplicated in the external
 `temporary_directories` API field. Its ESCALATE is preserved; metadata-only correction
 under standing authority consumed zero implementation invocations. Full approvals,
-raw369-step records,130distinct observed command steps, artifacts, complete results,
+raw369-step records, 130distinct observed command steps, artifacts, complete results,
 preservation checks and independent criterion review:
 `data/reports/checkpoint-payload-matrix-correction/review.json`.

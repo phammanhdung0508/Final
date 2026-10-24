@@ -1,4 +1,4 @@
-# Amazon4U resumption — explicitly bounded D2 correction
+# Amazon4U resumption, explicitly bounded D2 correction
 
 Status: **ESCALATE after the authorized initial invocation and final revision1/1;
 D2 remains unaccepted.** Latest independent suite283tests OK does not satisfy every
@@ -6,12 +6,12 @@ original criterion. Acceptance scope task_only; deployment NOT_AUTHORIZED.
 
 ## Latest operator authority
 
-> Ok, Return to Amazon4U.  Resume the existing sequence:
->  1. Resolve D2 payload validation using the verified reproductions and original full criteria.
->  2. Complete D3 checkpoint IO/integration and independent regressions.
->  3. Proceed through the approved profiling/training/evaluation gates: Musical_Instruments → Toys_and_Games → Electronics, retaining full downloaded splits.
+> Ok, Return to Amazon4U. Resume the existing sequence:
+> 1. Resolve D2 payload validation using the verified reproductions and original full criteria.
+> 2. Complete D3 checkpoint IO/integration and independent regressions.
+> 3. Proceed through the approved profiling/training/evaluation gates: Musical_Instruments → Toys_and_Games → Electronics, retaining full downloaded splits.
 >
->  Any new D2 correction must have explicit bounded authority; exhausted tasks stay preserved.
+> Any new D2 correction must have explicit bounded authority; exhausted tasks stay preserved.
 > Decision is your. provide me final result.
 
 Pi uses this new consequential authorization for ONE whole-D2 correction assignment,
@@ -27,7 +27,7 @@ acceptance of the earlier diagnostic phase's execution/disclosure violations.
 - One initial agy implementation, at most ONE consolidated corrective revision, at most
   20 minutes per invocation (40 minutes total Worker time). At exhaustion or a mandatory
   incomplete gate: ESCALATE, no automatic replacement/micro-task/budget reset.
-- All original frozen full contracts and C1–C10 verbatim remain mandatory. Freeze the
+- All original frozen full contracts and C1-C10 verbatim remain mandatory. Freeze the
   original 59,605-byte specification/config, prior artifacts/reviews and verified oracle
   source in protected ignored references before the one249-test baseline. No D1 redo.
 - Worker authors only `scripts/checkpoint_payload.py`, `tests/test_checkpoint_payload.py`,
@@ -87,7 +87,7 @@ Task `6efb0ae5-6a62-4376-91e9-7b358c51013f` is **ESCALATE**, decision
 `agy-evidence-c812e07c-e7b2-4c63-a591-5808e9b6c08c`. The initial Worker timed out;
 Pi's initial full suite ran283cases with26fixture errors. One consolidated corrective
 revision completed within its20minute bound; Pi's exact original full suite now passes
-**283cases/0failures/errors/skips,7.302s/9592ms**, retaining all249baseline IDs. The four
+**283cases/0failures/errors/skips, 7.302s/9592ms**, retaining all249baseline IDs. The four
 verified red reproductions and genuine domain/graph oracles now pass. This progress does
 not waive the remaining original contracts.
 
@@ -97,7 +97,7 @@ instead of canonical `PyTorch_CUDA_if_applicable`, and raw huge-integer formatti
 in malformed LightGCN keys/expected RNG codec diagnostics. Mandatory model/expected-input/
 RNG/full NumPy-state/selection/ownership matrices remain incomplete. Worker report says
 complete/no unresolved issues and gives only the final pass; raw records show revision
-runs250/1error,283/2errors,283OK,283OK plus initial failure/interruption/timeout.
+runs250/1error, 283/2errors, 283OK, 283OK plus initial failure/interruption/timeout.
 
 The new inventory retained both invocations and explicitly flagged partial interpretation.
 Its global decoder budget exhausted mid-trace; Pi independently recovered83additional
@@ -105,7 +105,7 @@ records from immutable raw315-step evidence with bounded per-step navigation. Al
 candidate commands were the exact approved full discoveries; literal discrepancy flags
 were not mistaken for proven violations. No further Worker/model call or shared-tool
 retuning was used for that evidence analysis. Thus the remaining block is **D2 correctness,
-coverage and truthful disclosure—not a routine logging/setup problem**.
+coverage and truthful disclosure, not a routine logging/setup problem**.
 
 All six current limitations were adjudicated verbatim/in order; excluded decoding,
 restoration and large-capacity workloads waive no assigned validation requirement. All old

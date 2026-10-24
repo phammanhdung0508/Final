@@ -1,4 +1,4 @@
-# Differentiable PyTorch Models Recovery — Subsystem 1
+# Differentiable PyTorch models recovery, subsystem 1
 
 - Status: `frozen_verification_accepted_main_integration_regression_verified`
 - Frozen verification task: `f709d062-ae0e-4eb6-960c-f94728180d1b`, **ACCEPT / task_only / NOT_AUTHORIZED**.
@@ -15,11 +15,11 @@
 
 ---
 
-## 1. Context and Architectural Boundaries
+## 1. context and architectural boundaries
 
 Following user approval of a smaller-scale recovery plan (addressing the rejected bundled harness), this subsystem implements exclusively the differentiable CPU PyTorch model architectures, training-only graphs, mathematical operators, and gradient propagation tests.
 
-### Strict Scope Limits
+### Strict scope limits
 - **NO optimizer execution**: No `optimizer.step()`, parameter updates, or gradient clipping (the BPR loss helper is provided for tensor loss calculation only).
 - **NO training loops**: No epoch iteration, validation cadence, or early stopping checks.
 - **NO checkpoints or run manifests**: Checkpoint serialization and provenance logging remain in future subtasks.
@@ -28,9 +28,9 @@ Following user approval of a smaller-scale recovery plan (addressing the rejecte
 
 ---
 
-## 2. Component Specifications and Contracts
+## 2. component specifications and contracts
 
-### 2.1 Metadata Validation and Canonical Identities
+### 2.1 Metadata validation and canonical identities
 Per KG-v1 schema (`scripts/build_kg.py` and `docs/kg-schema.md`):
 - **CategoryPath IDs**: Canonical `c:` prefix followed by compact UTF-8 JSON array of path components (e.g. `c:["Electronics","Audio"]`).
   - Delimiter splitting (such as ` > `) is strictly forbidden; labels may contain ` > ` characters as valid text.
@@ -59,7 +59,7 @@ Self-contained, training-only bipartite/heterogeneous graph:
 - **Warm-Product Reachability**: Only warm products in `context.sorted_warm_items` and metadata reachable from those warm products enter `self.categories` and `self.brands`. Cold products and their associated metadata are strictly excluded.
 - **Rating Invariance**: Rating mutations that preserve condition-positive membership produce identical graphs.
 
-### 2.3 DifferentiableLightGCN (Option B)
+### 2.3 DifferentiableLightGCN (option B)
 Option B fixed-graph training-edge reuse baseline:
 - **Configuration**: Strictly 64-dimensional base embeddings, 3 propagation layers, symmetric degree normalization $\tilde{A} = D^{-1/2} A D^{-1/2}$. Revalidates `config == graph.config` on initialization and re-checks `self.config == self.graph.config` in `forward()`.
 - **Caller-Supplied Embeddings**: Base embeddings must be explicitly supplied by the caller as a float32 CPU tensor or mapping. Dictionary rows are strictly validated via `validate_embedding_row` (non-boolean, numeric, length 64, finite). Supplied tensors are detached and cloned (`detach().clone()`) to prevent external storage aliasing.
@@ -102,7 +102,7 @@ Two-layer 64d transductive heterogeneous GraphSAGE-style recommender:
 
 ---
 
-## 3. Verification and Regression Parity
+## 3. verification and regression parity
 
 - **Command**:
   ```bash
@@ -120,7 +120,7 @@ Two-layer 64d transductive heterogeneous GraphSAGE-style recommender:
 
 ---
 
-## 4. Pending Lifecycle Gates
+## 4. pending lifecycle gates
 
 This subsystem satisfies the requirements for Subsystem 1 only.
 The following remains pending and NOT authorized:

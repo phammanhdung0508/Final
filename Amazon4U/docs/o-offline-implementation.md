@@ -1,4 +1,4 @@
-# O-OFFLINE — bounded implementation, round 1
+# O-OFFLINE, bounded implementation, round 1
 
 ## Authority and status
 
@@ -13,7 +13,7 @@ immutable, including their then-unreleased permission flags and preparation-only
 Effective phase record: `../configs/o-offline-implementation.json`.
 Evidence: `../data/reports/o-offline-implementation-v1/`.
 
-Current status: **ESCALATE — native submission baseline unavailable; no Worker started.**
+Current status: **ESCALATE, native submission baseline unavailable; no Worker started.**
 Task `363979eb-54ad-43b0-a640-84dc8546e4a6` rejected protected ignored roots outside
 the narrower copied project_root. Pi owns this declaration mismatch. Actual native
 inspection/benchmark/review calls are blocked by missing baseline/terminal state.
@@ -48,14 +48,14 @@ round ceilings, not permission to bypass the current terminal-task gate.
 - Unchanged inherited tiny CPU numerical work is authorized ONLY inside those full
   discoveries. O adds zero real model/Adam work; its generated programs use fake
   runtime/preflight/entrypoint/transport only. Prospective inferred H steps <=216/256.
-- Preserve original OC1–OC8 and all OP01–OP18 controls verbatim. No unresolved assigned
+- Preserve original OC1-OC8 and all OP01-OP18 controls verbatim. No unresolved assigned
   requirement, unsafe/stale/incomplete mandatory evaluation or scope violation ACCEPT.
   Native approval/baseline/inspection/benchmark/history/limitation gates remain mandatory.
 
 ## Verification routing clarification
 
 The approved fixed parent benchmark command selects the next unused candidate slot;
-slot 2 additionally requires a changed, independently reviewed native revision. Pi's
+slot 2 also requires a changed, independently reviewed native revision. Pi's
 stage-specific source/safety/expected-test-ID receipt is written first into that fresh
 stage's declared parent-evidence directory, before fresh inspection and verification.
 The wrapper accepts only that exact Pi-created review directory before starting, refuses

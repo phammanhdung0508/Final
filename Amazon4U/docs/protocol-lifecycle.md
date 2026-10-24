@@ -1,6 +1,6 @@
 # Protocol version, lifecycle and authorization
 
-## Current record — implementation and regression verification
+## Current record, implementation and regression verification
 
 - Protocol: **`amazon4u-protocol-v2.0.0`**, following the user-approved
   [model-suite removal](bpr-mf-removal-amendment.md); v1.0.0 remains preserved.
@@ -77,10 +77,10 @@ Block 3 reproducibility/bootstrap decisions. It **does not** freeze unresolved
 LightGCN initialization, execution/sampling/fanout/inference, batch sizes,
 validation frequency or tuning budgets. Filling these declared pending slots
 requires approval and a frozen execution revision before comparative training;
-changing an already frozen scientific rule additionally requires a protocol bump.
+changing an already frozen scientific rule also requires a protocol bump.
 The remaining choices are listed in the lifecycle and training configurations.
 
-## Bounded profiling — authorization still pending
+## Bounded profiling, authorization still pending
 
 Start on Musical_Instruments only after a separate approval records:
 
@@ -160,7 +160,7 @@ All new changes are inside Amazon4U; unrelated pre-existing workspace changes ar
 preserved. **Deployment decision: NOT_AUTHORIZED.** No profiling, model training,
 optimizer updates, staging, commits or pushes were performed.
 
-### Historical milestone I1 Worker submission (not independent acceptance)
+### Historical milestone I1 worker submission (not independent acceptance)
 
 Milestone I1 implementation complete: reusable shared evaluator, deterministic Popularity
 and KG-only scorers, on-demand uniform negative sampling, stable BPR loss, and endpoint
@@ -260,7 +260,7 @@ bounded Musical_Instruments profiling-plan preparation, both still requiring the
 separate gates. Profiling and training execution remain unauthorized; no model
 training, optimizer updates or Musical_Instruments profiling has run.
 
-### Current Step 3a LightGCN foundation acceptance
+### Current step 3a LightGCN foundation acceptance
 
 Pi independently accepted the learned-model foundation and core LightGCN reference
 implementation under Task `8153df65-e2e2-4571-a4ce-340d0ffeb1c2`, revision 0;
@@ -281,7 +281,7 @@ implementation/recovery ESCALATEs remain preserved as noncritical recovery histo
 This acceptance does not authorize real-data training, optimizer updates,
 profiling, Kaggle execution, comparative training or deployment.
 
-### Current Step 3b Heterogeneous KG+GNN foundation acceptance
+### Current step 3b heterogeneous KG+GNN foundation acceptance
 
 Pi independently accepted the synthetic Heterogeneous KG+GNN reference encoder
 foundation under Task `d35b3d7c-3cd6-4f8e-8ecf-adcb963f4b93`, revision 0;

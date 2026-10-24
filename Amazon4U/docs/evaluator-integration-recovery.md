@@ -1,6 +1,6 @@
 # Evaluator integration recovery authorization
 
-## Agreed scope (user: “ok, i agree. Please continue”)
+## Agreed scope (user: "ok, i agree. please continue")
 
 Pi may delegate a focused recovery of evaluator integration, correcting the
 always-present core fallback reason schema, adding exact regression coverage,

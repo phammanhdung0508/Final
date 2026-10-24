@@ -11,7 +11,7 @@ and37-part matrix. Use a fresh **project-only archive**, not main or an old chec
 only3D2 implementation paths are eligible for controlled mechanical patch application.
 No native agy run, controller project, tooling/agent-system changes or new routing.
 
-One initial text-only round and at most one consolidated revision,30minutes each,
+One initial text-only round and at most one consolidated revision, 30minutes each,
 one generation request per round/no retries. The existing verified SDK model interface
 has zero tools and no dispatcher. Workers return only baseline-bound text replacements
 and an honest report. Pi screens and reviews complete changed functions, callers,
@@ -23,8 +23,8 @@ prohibited global seeding using reviewed Worker-proposed private-generator fixtu
 then only the pinned120second full discovery may run. All attempts are retained,
 at most6full discoveries per round, no probes/imports/subsets/compileall.
 
-All original C1–C10 and37matrix rows remain mandatory, including missing evidence outside
-the six reproduced defect groups. Preserve249accepted test bytes,34old payload methods,
+All original C1-C10 and37matrix rows remain mandatory, including missing evidence outside
+the six reproduced defect groups. Preserve249accepted test bytes, 34old payload methods,
 protected source functions/Adam aggregate and frozen59605byte spec prefix. Verified logic
 needs protective coverage, not unsolicited rewriting. Reports are untrusted; limitations
 must be adjudicated verbatim/in order and unresolved work blocks ACCEPT.
@@ -37,7 +37,7 @@ No gate is waived because the implementation channel differs. The user-approved 
 change supersedes agy's implementation role only for this bounded correction; Pi retains
 orchestration and independent review/acceptance authority.
 
-## Independent result — ESCALATE, not D2 acceptance
+## Independent result, ESCALATE, not D2 acceptance
 
 Recorded in `data/reports/checkpoint-payload-text-correction/review.json`, with full
 37-part adjudication in `part-review.json` and residual source/reproduction findings
@@ -72,7 +72,7 @@ were reviewed/applied independently. The newerP5/K2/T3control passes; retained g
 source alignment remains unverified. Both actual Worker reports contain37normal JSON
 row objects; compact tool presentation is not evidence of a report-format violation.
 
-One initial response and one consolidated revision were used,346341ms and301078ms,
+One initial response and one consolidated revision were used, 346341ms and301078ms,
 no retries/timeouts. No native agy or Worker command/filesystem authority was granted;
 Pi ran the approved checks after full semantic/static fixture review. Request/revision
 count is used, not30minute timeout exhaustion. Stop: no automatic third response,
@@ -80,8 +80,8 @@ replacement task, source fix or numerical self-implementation by Pi.
 
 Fresh project-only archive is at
 `Amazon4U/.worktrees/checkpoint-payload-text-correction/Amazon4U/`; the old candidate,
-37-part preparation matrix, original reports/decisions, accepted dependencies,249test
-bytes/IDs,34old payload method ASTs,nine protected function texts,Adamaggregate and
+37-part preparation matrix, original reports/decisions, accepted dependencies, 249test
+bytes/IDs, 34old payload method ASTs, nine protected function texts, Adamaggregate and
 59605byte specification prefix are preserved. Only3implementation paths changed in
 the isolated project. MainHEADaf1a3d5f56f16283fcdc058a25e222390bf1160aand index were
 preserved; accepted dependency3a9efa41e02c82e422d8eb15fbc0a0c4622a4c48was archived.
@@ -89,19 +89,19 @@ The initial setup assertion assuming those HEADs equal failed before candidate
 execution and is retained as `setup-attempt0.json`; it did not repin dependencies.
 
 Worker appendix text is the unmodified submission-time record; this document and
-independent review give the subsequent actual results. All4full discoveries,2text
-responses,patch/schema checks,source reads,snapshots and failures remain retained.
+independent review give the subsequent actual results. All4full discoveries, 2text
+responses, patch/schema checks, source reads, snapshots and failures remain retained.
 No candidate execution other than the prospectively pinned full command occurred.
 Monitoring is bounded, not a complete outside ignored-path/transient-write or OS
 sandbox claim. Existing native controller NO-GO and old task histories are unchanged.
 
 Acceptance_scope: **task_only**; decision **ESCALATE**, not ACCEPT. Deployment:
-**NOT_AUTHORIZED**. No main transfer,D3,profiling/training/optimizer execution,real data,
-remote jobs,held-out evaluation,new accounts/auth scopes,staging,commits or pushes.
+**NOT_AUTHORIZED**. No main transfer, D3, profiling/training/optimizer execution, real data,
+remote jobs, held-out evaluation, new accounts/auth scopes, staging, commits or pushes.
 Further source work requires a consequential bounded plan and authorization, not a
 silent budget reset.
 
-## User-agreed next-round direction — not execution authorization
+## User-agreed next-round direction, not execution authorization
 
 The user confirmed that the text-only channel served its purpose. No further Worker
 architecture/controller changes are needed. Reuse the same patch-only mechanism only
@@ -121,7 +121,7 @@ finished round, reset its budget or authorize a Worker, source edit or test exec
    evidence to protect existing behavior; lack of supporting evidence does not itself
    justify changing source. Any newly demonstrated defect must be identified as such
    and assessed within the new round's authority, not silently folded into a rewrite.
-4. **Do not expand acceptance requirements.** Original C1–C10 and the frozen D2
+4. **Do not expand acceptance requirements.** Original C1-C10 and the frozen D2
    specification remain authoritative. New tests may only demonstrate those existing
    requirements. The37-part matrix/ledger is a mapping and evidence aid, not a second,
    independently growing contract. Do not add technical demands, validity caps or new

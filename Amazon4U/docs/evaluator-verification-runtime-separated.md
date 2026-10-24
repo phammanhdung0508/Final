@@ -1,7 +1,7 @@
 # Runtime-separated evaluator verification
 
 Status: prospectively authorized under the standing user approval in
-`delegation-and-execution.md`; user subsequently said “ok, please proceed”.
+`delegation-and-execution.md`; user subsequently said "ok, please proceed".
 This is bounded, read-only verification of the preserved evaluator artifact,
 not a source revision, retroactive waiver or profiling/training permission.
 Historical task `07318909-7b11-4a46-810a-c11d6c2c8b3a` remains ESCALATE.
@@ -37,7 +37,7 @@ review evidence in `data/reports/evaluator-runtime-separated-provenance/` and up
 main review documents; these are not Worker writable paths. Preserve original
 source, historical caches and scratch artifacts. No commits or pushes.
 
-## Exact approved benchmark/Worker command
+## Exact approved benchmark/worker command
 
 ```sh
 cd /home/sunf/FSB/Final/Amazon4U/.worktrees/evaluator-verification-only/Amazon4U/.verification-snapshot && /home/sunf/FSB/Final/Amazon4U/.venv/bin/python -B -c "import os,tempfile,unittest,sys; os.environ['PYTHONDONTWRITEBYTECODE']='1'; os.environ['TMPDIR']='/home/sunf/FSB/Final/Amazon4U/.verification-temp/evaluator-runtime-separated-v1/fixtures'; tempfile.tempdir=None; suite=unittest.defaultTestLoader.discover('tests',pattern='test_*.py'); r=unittest.TextTestRunner(verbosity=2).run(suite); sys.exit(0 if r.wasSuccessful() and not r.skipped else 1)"

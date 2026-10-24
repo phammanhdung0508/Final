@@ -1,5 +1,21 @@
 # Amazon4U dataset exploration
 
+**Main O-OFFLINE integration: ACCEPT / task_only (2026-10-24). Deployment: NOT_AUTHORIZED.**
+Main now contains the accepted offline Kaggle adapter (`multiautoresearch/adapters/`,
+updated `post-training/scripts/kaggle_job.py`, two O test modules). All seven files match
+the accepted isolated artifact byte for byte; the previous runner is archived. Main
+verification: 17 mock infrastructure checks, 103 O-only tests and the full 515-test
+regression all passed with 0 failures/errors/skips (68.2s child, ~784 MiB peak RSS,
+within 240s/2 GiB). All original 412 test IDs, 34 D3 methods and 3,564 expanded cases
+still pass; the 31 inherited Python files and H28 bundle are unchanged. No unresolved
+integration issue remains. Native15 stays historical ESCALATE.
+Scope: offline packaging and fake-provider behavior only. Live Kaggle jobs, GPU-READY,
+production LightGCN initialization, real-data training, profiling, comparative and
+final-test runs each still need their own plan and approval.
+Decision: `data/reports/o-offline-main-integration-v1/review.json`;
+plan: `docs/o-offline-main-integration-plan.md`;
+design: `docs/o-offline-orchestration.md`.
+
 **Main H-REF integration: ACCEPT / task_only. Deployment: NOT_AUTHORIZED.**
 [Current independent main acceptance](docs/training-harness-main-integration-recovery.md):
 strictly scoped Pi-only scratch-monitor recovery,17mock checks PASS and full412PASS,
@@ -51,7 +67,7 @@ reports, and consumed budgets remain unchanged. No new Worker or SDK calls follo
 **O-OFFLINE and later experiment gates remain separate.** The [historical preparation
 proposal](docs/training-harness-preparation.md) and [34-part matrix](docs/training-harness-requirements.md)
 remain evidence/scope references, not the latest H implementation state or launch authority.
-O-OFFLINE is unassigned. Reuse `multiautoresearch` orchestration,not Movie/LM methodology.
+O-OFFLINE is now main-integrated (see the top entry). Reuse `multiautoresearch` orchestration,not Movie/LM methodology.
 GPU-READY,production initialization/environment/provenance/durability,main integration
 and Musical_Instruments profiling still require their applicable approvals and evidence.
 Accepted models/evaluator/D1–D3 and the frozen scientific protocol remain unchanged.

@@ -1,6 +1,6 @@
-# D2 main integration — separately authorized
+# D2 main integration, separately authorized
 
-The user explicitly requested **“please proceed with D2 main integration”** after
+The user explicitly requested **"please proceed with D2 main integration"** after
 whole-D2 task-only acceptance. This authorizes Pi's mechanical byte-identical transfer
 of the accepted source, tests and documentation, a fresh main baseline and full
 integration regression, and scoped status/evidence updates. No implementation rewrite,
@@ -44,12 +44,12 @@ Acceptance scope is **task_only** for main integration; deployment **NOT_AUTHORI
 
 ## Final independent integration decision
 
-**ACCEPT — D2 main integration, task_only.**
+**ACCEPT, D2 main integration, task_only.**
 Deployment decision: **NOT_AUTHORIZED**. Separate recorded decision:
 [`review.json`](../data/reports/checkpoint-payload-main-integration/review.json).
 The submission status above is preserved as historical, not current status.
 
-- Main baseline:249 tests, zero failures/errors/skips,10.705s unittest/18.409s process.
+- Main baseline:249 tests, zero failures/errors/skips, 10.705s unittest/18.409s process.
 - Main integration:355 tests, zero failures/errors/skips,**54.139s unittest/56.643s
   process**, within the unchanged120-second ceiling. One baseline and one integration
   full discovery; no failures, retries, source changes, subsets or extra executions.
@@ -72,7 +72,7 @@ Integrated artifact SHA256s:
 - `docs/checkpoint-payload.md`: `f8c5f2b03b6afb9e3e55fc524abb3980792d90283fdfd747840f3f3ba92080ba`
 
 The original six source-report limitations remain verbatim historical statements.
-The source-stage “main transfer not supplied” statement is **not** used to waive the
+The source-stage "main transfer not supplied" statement is **not** used to waive the
 new assignment: main transfer and main verification are now completed separately.
 Decoded-memory/CPU/quiescent validation, mutable owned results, trusted acquisition,
 initialization archival, consistency-not-origin proof, and no production memory or

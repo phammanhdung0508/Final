@@ -1,4 +1,4 @@
-# Checkpoint recovery — final revision exhausted, not accepted
+# Checkpoint recovery, final revision exhausted, not accepted
 
 Decision: **ESCALATE / not accepted**.
 Acceptance scope: **task_only (not accepted)**.

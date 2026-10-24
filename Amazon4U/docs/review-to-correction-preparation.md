@@ -1,7 +1,7 @@
 # Review-to-correction preparation
 
 Current workflow follows [direct single-agent ownership](worker-delegation-policy.md).
-Mandatory Pi–agy handoffs and the prospective 2 + 2 + 2 process are retired.
+Mandatory Pi-agy handoffs and the prospective 2 + 2 + 2 process are retired.
 The routing statements below are historical. Preparation and verification lessons
 still apply to direct work; they do not require new delegation tasks.
 
@@ -39,7 +39,7 @@ Track individual relevant functions, guards and invariants, not only criterion-l
 labels. Each part needs its verified/failed/unverified status, supporting evidence and
 baseline reference, intended implementation disposition, separate test/evidence gaps,
 and explicit closure conditions. Preserve original criteria,
-reports, decisions and exhausted budgets unchanged. D2's C1–C10 remain D2-specific;
+reports, decisions and exhausted budgets unchanged. D2's C1-C10 remain D2-specific;
 do not transplant its schemas or criteria into a different stage.
 
 Each row must include:
@@ -129,7 +129,7 @@ recorded and supported by fresh evidence. The same distinction applies at every 
 ## Correction sequencing and evidence
 
 Use the matrix to prepare dependency-ordered, bounded implementation or correction
-with explicit closure checks, not a generic instruction to “fix everything.” Plan valid
+with explicit closure checks, not a generic instruction to "fix everything." Plan valid
 controls and independent positive/negative oracles before spending implementation/revision
 budget. Each finding must map to a correction and verifiable closure evidence; Worker
 claims and green regression alone do not close it. Review complete relevant code and
@@ -186,12 +186,12 @@ and all mandatory independent inspection, verification and acceptance gates with
 silently bypassing them. Do not alter old task reports, decisions, criteria or budgets,
 and do not turn this into a tooling project or automatic D2 relaunch.
 
-## Bounded text-only D2 follow-up — result, not new authority
+## Bounded text-only D2 follow-up, result, not new authority
 
 Subsequent separate user `procced` authorized the pinned text-only correction in
 `checkpoint-payload-text-correction.md`. That round stopped ESCALATE at1/1, with no
 native Worker tools/commands and no new controller. All320inherited tests pass, but
-final337tests retain2valid fractional-Adam-step failures;3140expanded assertions pass
+final337tests retain2valid fractional-Adam-step failures; 3140expanded assertions pass
 without closing all37rows. D01raw identifier bounds and coverage remain incomplete.
 Preserve the useful fixes/tests and exact current reports; do not manufacture green,
 change acceptance criteria, extend budgets or automatically replace the round.
@@ -211,7 +211,7 @@ well-defined A04/D01implementation defects under new authorization. Use ledger-b
 coverage additions without confusing missing evidence with a demonstrated source bug.
 Do not regenerate the suite or rewrite unrelated protected guards to gain coverage.
 
-C1–C10 and the original frozen specification are the acceptance authority, not an
+C1-C10 and the original frozen specification are the acceptance authority, not an
 expanding reviewer wish list. Every proposed test must demonstrate an existing contract
 clause. A matrix/ledger item is evidence navigation, not independent authority to add
 technical requirements. If a request lacks an original-contract basis, identify the
@@ -227,7 +227,7 @@ see `checkpoint-payload-matrix-correction.md`. The matrix's six implementation b
 groups were reproduced and protected code stayed unchanged, but the Worker timed out
 before fixes and used prohibited probes/subsets/external helper scripts. One revision
 was deliberately left unused because source changes cannot undo historical process
-violations. Thus the third practical outcome—compliant correction execution—was not
+violations. Thus the third practical outcome, compliant correction execution, was not
 achieved; a detailed assignment alone is not proof of effective Worker follow-through.
 Pi's benchmark also ran new global-seeding fixture operations before they were noticed;
 the screening-order mistake is explicitly recorded. Do not respond with another generic
