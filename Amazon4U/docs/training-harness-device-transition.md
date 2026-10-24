@@ -90,6 +90,10 @@ unchanged and still unapproved. Define the later device milestone's exact paths,
 resource/time limits, approvals and evidence before execution; no budget borrowing,
 automatic retries or changes to old criteria/reports.
 
+Update 2026-10-24: steps 1 and 2 are now accepted in main (H-REF and O-OFFLINE,
+`task_only`). Step 3 preparation is in [`gpu-ready-preparation.md`](gpu-ready-preparation.md).
+The status line below records this clarification as originally written.
+
 Status: **preparation clarification recorded; implementation on HOLD**.
 `acceptance_scope: preparation_only_no_implementation_ACCEPT`.
 `deployment_decision: NOT_AUTHORIZED`.

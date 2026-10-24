@@ -1,5 +1,16 @@
 # User-approved implementation sequence and gates
 
+## Execution Readiness, phase 1 GPU-READY preparation, PROPOSED 2026-10-24
+
+User-agreed scope: GPU-READY plus the profiling prerequisite gates G2 to G5, ending
+with an approved Musical_Instruments profiling plan, not a run. Phase 1 is preparation
+only; phase 2 is bounded tiny GPU runs on Kaggle after approval. Use the accepted
+`multiautoresearch` runner and adapters, not their LM/Movie4U methodology. Both
+`READINESS_GATES` copies and the `v1` schemas stay frozen; GPU-READY gets its own
+versioned profile and gate list. This machine has no GPU, so all GPU evidence needs
+remote Kaggle execution (G4), which is not granted. No code change, test, credential
+access or run is authorized by this plan. See [the plan](gpu-ready-preparation.md).
+
 ## Agent instructions and worktree housekeeping, implemented 2026-10-24
 
 User-approved decisions, recorded with their status:
@@ -18,11 +29,11 @@ User-approved decisions, recorded with their status:
 - **Worktrees without `AGENTS.md` copies (implemented).** `../scripts/new_worktree.sh`
   uses sparse checkout. The copies stay tracked and pushable. A personal
   `claudeMdExcludes: ["**/.worktrees/**"]` setting was also added outside the project.
-- **Git-based worktree archive (implemented, removal pending).** 42 finished worktrees
-  are archived and verified in `refs/archive/worktrees/*` plus
-  `~/FSB-archive/amazon4u-worktrees/`. See `worktree-archive.md`.
-  `o-offline-collection-final-repair-v1` stays live. Deleting the archived folders is
-  left to the user, because the agent's safety check blocks irreversible deletion.
+- **Git-based worktree archive (implemented).** 42 finished worktrees are archived
+  and verified in `refs/archive/worktrees/*` plus `~/FSB-archive/amazon4u-worktrees/`.
+  See `worktree-archive.md`. The user then removed the worktree folders and kept a zip
+  copy. `o-offline-collection-final-repair-v1` is not yet in the Git archive; the user
+  moved it back for archiving, which is still pending.
 
 ## Current main O-OFFLINE integration, ACCEPT/task_only
 
@@ -72,8 +83,9 @@ RCA/receipts. Proposed next gate ONLY: separately approve Pi verifier-only race 
 mock controls and one extra 412 run; no recovery yet. Deployment NOT_AUTHORIZED and broader
 O/GPU/production initialization/collection/profiling/comparative/final-test gates remain.
 
-**Current Worker governance:** [native agy through the delegation extension is the
-implementation default](worker-delegation-policy.md). Pi plans/scopes/orchestrates,
+**Historical Worker governance (retired 2026-10-23; direct single-agent ownership now
+applies, see [the current policy](worker-delegation-policy.md)):** native agy through
+the delegation extension was the implementation default. Pi plans/scopes/orchestrates,
 independently verifies and decides acceptance. Native recovery maxima are separately
 authorized **2 + 2 + 2**, with cumulative history and root-cause review after each
 substantive ESCALATE; #3 requires a recommendation, not automatic fallback. Every SDK

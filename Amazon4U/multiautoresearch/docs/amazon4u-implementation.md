@@ -1,5 +1,11 @@
 # Amazon4U Implementation Control-Plane: Milestone I1
 
+> **Current status (2026-10-24):** this page is a historical I1 record. I1, H-REF and
+> O-OFFLINE are accepted in main (`task_only`); the "native agy is default" and
+> "O-OFFLINE remains unassigned" notes below are out of date. Current state is in
+> `../../AGENTS.md` and `../../docs/implementation-roadmap.md`; the next step is
+> `../../docs/gpu-ready-preparation.md`.
+
 Current workflow follows [direct single-agent ownership](../../docs/worker-delegation-policy.md).
 Mandatory Pi–agy handoffs and the prospective 2 + 2 + 2 process are retired.
 The role assignments and routing notice below describe historical I1 work.

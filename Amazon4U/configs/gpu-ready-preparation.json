@@ -1,0 +1,65 @@
+{
+  "schema_version": "amazon4u-gpu-ready-preparation-v1",
+  "status": "PROPOSED_PREPARATION_ONLY",
+  "recorded": "2026-10-24",
+  "documentation": "docs/gpu-ready-preparation.md",
+  "user_decisions": {
+    "scope": "GPU-READY plus profiling prerequisite gates G2-G5; ends with an approved Musical_Instruments profiling plan, not a run",
+    "phases": ["phase1_preparation_only", "phase2_bounded_tiny_gpu_kaggle_runs_after_approval"],
+    "orchestration": "accepted multiautoresearch Kaggle runner and Amazon4U adapters; no LM/Movie4U methodology; no second runner",
+    "readiness_gates_constant": "frozen; GPU-READY uses a separate versioned profile and gate list"
+  },
+  "environment_findings": {
+    "local_gpu": false,
+    "torch": "2.10.0+cu128",
+    "cuda_available_locally": false,
+    "consequence": "all GPU evidence requires remote Kaggle execution (G4)"
+  },
+  "frozen_artifacts": [
+    "H28 harness bundle",
+    "multiautoresearch/adapters/amazon4u.py",
+    "multiautoresearch/adapters/amazon4u_kernel.py",
+    "multiautoresearch/adapters/__init__.py",
+    "tests/test_kaggle_orchestration.py",
+    "tests/test_amazon4u_bundle.py",
+    "accepted models, evaluator, D1-D3",
+    "all v1 schemas and READINESS_GATES"
+  ],
+  "requirements": [
+    {"id": "GR01", "topic": "device_seam_gpu_backend", "status": "open"},
+    {"id": "GR02", "topic": "device_aware_tensor_and_buffer_construction", "status": "open"},
+    {"id": "GR03", "topic": "cpu_gpu_numerical_parity_tiny_fixtures", "status": "decision", "decision": "tolerances"},
+    {"id": "GR04", "topic": "determinism_fail_loudly", "status": "open"},
+    {"id": "GR05", "topic": "recorded_gpu_environment", "status": "open"},
+    {"id": "GR06", "topic": "versioned_gpu_checkpoint_profile", "status": "decision", "decision": "profile_design"},
+    {"id": "GR07", "topic": "versioned_gpu_result_and_record_schema", "status": "open"},
+    {"id": "GR08", "topic": "real_kaggle_transport", "status": "decision", "decision": "G4"},
+    {"id": "GR09", "topic": "real_kaggle_environment_compatibility", "status": "open"},
+    {"id": "GR10", "topic": "enforced_budgets_no_automatic_retry", "status": "decision", "decision": "budget"}
+  ],
+  "prerequisite_gates": {
+    "G2": {"topic": "LightGCN_ID_initialization_distribution", "decision_owner": "user"},
+    "G3": {"topic": "provisional_profiling_execution_settings", "decision_owner": "user"},
+    "G4": {"topic": "remote_kaggle_execution_and_credentials", "decision_owner": "user"},
+    "G5": {"topic": "complete_run_provenance_binding", "decision_owner": "user_approves_agent_proposal"}
+  },
+  "phase2_budget_proposal": {
+    "approved": false,
+    "max_kaggle_gpu_runs": 3,
+    "max_wall_minutes_per_run": 30,
+    "max_total_gpu_hours": 1.5,
+    "gpu": "one T4",
+    "automatic_retries": false,
+    "real_or_held_out_data": false,
+    "local_full_suite_limits": {"seconds": 240, "peak_rss_bytes": 2147483648}
+  },
+  "authorizations": {
+    "code_changes": false,
+    "test_execution": false,
+    "credential_access": false,
+    "kaggle_or_gpu_runs": false,
+    "profiling_or_training": false,
+    "stage_commit_push": false,
+    "deployment_decision": "NOT_AUTHORIZED"
+  }
+}
