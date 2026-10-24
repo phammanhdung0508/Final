@@ -724,11 +724,35 @@ def output_command(args: argparse.Namespace) -> int:
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="Manage post-training runs on Kaggle Kernels.")
     parser.add_argument("--username", help="Kaggle username (defaults to KAGGLE_USERNAME or ~/.kaggle/kaggle.json)")
+    parser.add_argument("--profile", default=None, help="Execution profile: 'amazon4u' or omitted for legacy")
+    parser.add_argument("--spec", default=None, help="Run specification JSON file for profile")
+    parser.add_argument("--run-spec", dest="spec", default=None, help="Alias for --spec")
+    parser.add_argument("--approval", default=None, help="Authorization JSON file for profile")
+    parser.add_argument("--plan", default=None, help="Execution plan JSON file")
+    parser.add_argument("--context", default=None, help="Retained independent ApprovedOfflineContext JSON file")
+    parser.add_argument("--bundle-dir", type=Path, default=None, help="Local directory to render kernel bundle")
+    parser.add_argument("--dry-run", action="store_true", default=False, help="Render bundle locally without pushing to Kaggle")
+    parser.add_argument("--version", type=int, default=None, help="Specific kernel version number")
 
     subparsers = parser.add_subparsers(dest="command", required=True)
 
+    # Common profile arguments for subcommands
+    common_profile_args = [
+        ("--profile", {"default": argparse.SUPPRESS, "help": "Execution profile: 'amazon4u' or omitted for legacy"}),
+        ("--spec", {"default": argparse.SUPPRESS, "help": "Run specification JSON file for profile"}),
+        ("--run-spec", {"dest": "spec", "default": argparse.SUPPRESS, "help": "Alias for --spec"}),
+        ("--approval", {"default": argparse.SUPPRESS, "help": "Authorization JSON file for profile"}),
+        ("--plan", {"default": argparse.SUPPRESS, "help": "Execution plan JSON file"}),
+        ("--context", {"default": argparse.SUPPRESS, "help": "Retained independent ApprovedOfflineContext JSON file"}),
+        ("--bundle-dir", {"type": Path, "default": argparse.SUPPRESS, "help": "Local directory to render kernel bundle"}),
+        ("--dry-run", {"action": "store_true", "default": argparse.SUPPRESS, "help": "Render bundle locally without pushing to Kaggle"}),
+        ("--version", {"type": int, "default": argparse.SUPPRESS, "help": "Specific kernel version number"}),
+    ]
+
     # launch
     p_launch = subparsers.add_parser("launch", help="Package and push a Kaggle kernel")
+    for opt, kwargs in common_profile_args:
+        p_launch.add_argument(opt, **kwargs)
     p_launch.add_argument("--mode", choices=["experiment", "prepare"], default="experiment", help="Run mode")
     p_launch.add_argument("--slug", help="Custom kernel slug")
     p_launch.add_argument("--accelerator", default=None, help="Accelerator: gpu, tpu, none (default: gpu for experiment, none for prepare)")
@@ -739,31 +763,78 @@ def build_parser() -> argparse.ArgumentParser:
     p_launch.add_argument("--pip-dependencies", help="Comma-separated extra PyPI packages to install")
     p_launch.add_argument("--train-args", help="Arguments to pass to train.py")
     p_launch.add_argument("--eval-args", help="Arguments to pass to evaluate.py")
-    p_launch.add_argument("--bundle-dir", type=Path, help="Local directory to render kernel bundle")
-    p_launch.add_argument("--dry-run", action="store_true", help="Render bundle locally without pushing to Kaggle")
     p_launch.add_argument("--detach", action="store_true", help="Push and exit without polling for completion")
     p_launch.add_argument("--poll-interval", type=int, default=DEFAULT_POLL_INTERVAL, help="Status polling interval in seconds")
 
     # status
     p_status = subparsers.add_parser("status", help="Check status of a Kaggle kernel")
+    for opt, kwargs in common_profile_args:
+        p_status.add_argument(opt, **kwargs)
     p_status.add_argument("kernel", nargs="?", help="Kernel slug or owner/slug")
 
     # logs
     p_logs = subparsers.add_parser("logs", help="Fetch logs of a Kaggle kernel")
+    for opt, kwargs in common_profile_args:
+        p_logs.add_argument(opt, **kwargs)
     p_logs.add_argument("kernel", nargs="?", help="Kernel slug or owner/slug")
 
     # output
     p_output = subparsers.add_parser("output", help="Download output files and metrics of a Kaggle kernel")
+    for opt, kwargs in common_profile_args:
+        p_output.add_argument(opt, **kwargs)
     p_output.add_argument("kernel", nargs="?", help="Kernel slug or owner/slug")
     p_output.add_argument("--output-dir", type=Path, help="Local directory to save downloaded output")
 
     return parser
 
 
-def main() -> int:
+def main(argv: list[str] | None = None) -> int:
     parser = build_parser()
-    args = parser.parse_args()
+    args = parser.parse_args(argv)
 
+    # Check if Amazon-specific flags were passed without --profile amazon4u
+    amazon_flag_names = ("spec", "approval", "plan", "context")
+    has_amazon_flags = any(getattr(args, name, None) is not None for name in amazon_flag_names)
+    profile = getattr(args, "profile", None)
+
+    if has_amazon_flags and profile != "amazon4u":
+        print(
+            "Error: Amazon4U configuration flags require explicit '--profile amazon4u'",
+            file=sys.stderr,
+        )
+        return 1
+
+    if profile is not None:
+        if profile != "amazon4u":
+            print(
+                f"Error: Unknown profile '{profile}'. Only 'amazon4u' or legacy (unprofiled) supported.",
+                file=sys.stderr,
+            )
+            return 1
+        # Early profile dispatch BEFORE credentials, CLI, or mutable-state resolution
+        try:
+            from multiautoresearch.adapters.amazon4u import dispatch_amazon4u, validate_approved_offline_context
+        except ImportError:
+            project_root = Path(__file__).resolve().parents[3]
+            if str(project_root) not in sys.path:
+                sys.path.insert(0, str(project_root))
+            from multiautoresearch.adapters.amazon4u import dispatch_amazon4u, validate_approved_offline_context
+        ctx = None
+        context_path_str = getattr(args, "context", None)
+        if context_path_str:
+            p_ctx = Path(context_path_str)
+            if not p_ctx.exists():
+                print(f"Error: Context file not found: {context_path_str}", file=sys.stderr)
+                return 1
+            try:
+                raw_ctx = json.loads(p_ctx.read_text(encoding="utf-8"))
+                ctx = validate_approved_offline_context(raw_ctx)
+            except Exception as exc:
+                print(f"Error validating approved offline context: {exc}", file=sys.stderr)
+                return 1
+        return dispatch_amazon4u(args, context=ctx)
+
+    # Legacy unprofiled execution paths
     if args.command == "launch":
         return launch_job(args)
     if args.command == "status":
@@ -779,3 +850,4 @@ def main() -> int:
 
 if __name__ == "__main__":
     sys.exit(main())
+
