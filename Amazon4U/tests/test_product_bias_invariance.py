@@ -5,6 +5,7 @@ Exact claims are checked in float64 on the vectorized model, which matches the a
 model in float32 (tests/test_vectorized_execution.py).
 """
 
+import math
 import unittest
 
 import torch
@@ -88,19 +89,42 @@ class RankingInvarianceTests(unittest.TestCase):
             self.assertTrue(torch.equal(order(after), order(before)), (seed, condition))
 
 
+def adam_ratio_bound(t, b1=0.9, b2=0.999):
+    """R_t from the proof: the largest |m_hat_t| / sqrt(v_hat_t) over gradient histories."""
+    s = sum(((1 - b1) * b1 ** k) ** 2 / ((1 - b2) * b2 ** k) for k in range(t))
+    return math.sqrt(s) * math.sqrt(1 - b2 ** t) / (1 - b1 ** t)
+
+
 class AdamDriftTests(unittest.TestCase):
-    def test_float32_noise_driven_drift_stays_within_lr_per_step(self):
+    def test_bound_is_attained_by_the_extremal_gradient_sequence(self):
+        b1, b2 = 0.9, 0.999
+        for t in range(1, 6):
+            # Cauchy-Schwarz equality: g_(t-k) proportional to a_k / b_k.
+            grads = [((1 - b1) * b1 ** k) / ((1 - b2) * b2 ** k) for k in range(t)][::-1]
+            p = torch.zeros(1, dtype=torch.float64, requires_grad=True)
+            opt = torch.optim.Adam([p], lr=1.0, betas=(b1, b2), eps=0.0)
+            for g in grads:
+                before = p.detach().clone()
+                p.grad = torch.tensor([g], dtype=torch.float64)
+                opt.step()
+            step = abs(float(p.detach() - before))
+            self.assertAlmostEqual(step, adam_ratio_bound(t), places=9)
+            self.assertGreaterEqual(adam_ratio_bound(t), 1.0)
+
+    def test_float32_noise_driven_drift_stays_within_the_bound(self):
         context, cats, brands, _ = synthetic(3407, 'all_ratings')
         _, model = model_pair('Heterogeneous KG+GNN', context, cats, brands, 3407, CPU)
         idx = as_index(batch(context, 3407), model.graph.users, model.graph.products)
         opt = torch.optim.Adam(model.parameters(), lr=0.001)
         start = param(model, BIAS).detach().clone()
+        bound = 0.0
         for step in range(1, 6):
             opt.zero_grad(set_to_none=True)
             model.compute_batch_loss(*idx)['total_loss'].backward()
             opt.step()
+            bound += 0.001 * adam_ratio_bound(step)
             drift = (param(model, BIAS).detach() - start).abs().max().item()
-            self.assertLessEqual(drift, 0.001 * step * 1.01)
+            self.assertLessEqual(drift, bound * (1 + 1e-6))
 
 
 if __name__ == '__main__':

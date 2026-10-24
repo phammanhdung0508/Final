@@ -91,11 +91,27 @@ the second (identity) layer for Product nodes.
    functions of those rankings, so selection is unaffected.
 5. **Why it still moves in float32.** Autograd computes `dL/db` as a sum of `+h_u` and
    `-h_u` contributions, which leaves a rounding residual (about 1e-9 in float32, 1e-18 in
-   float64). Adam's update is `lr * m_hat / (sqrt(v_hat) + eps)`. With a gradient below
-   `eps = 1e-8` the ratio stays at or below about 1, so `b` moves by at most about `lr`
-   per step in a noise-driven direction. Two correct implementations can therefore
-   differ by up to `2 * lr * steps`, which is 1e-2 after 5 steps. The 1e-4 parameter
-   tolerance cannot hold for `b`.
+   float64). Adam rescales that residual into a full-size step in a noise-driven
+   direction. The 1e-4 parameter tolerance cannot hold for `b`.
+
+   **Bound on the drift (corrected 2026-10-24 after user review).** An earlier version
+   said "at most `lr` per step". That holds at step 1 only. Per coordinate, Adam's step
+   is `lr * m_hat_t / (sqrt(v_hat_t) + eps)` with
+   `m_t = (1 - b1) * sum_k b1^k g_(t-k)` and `v_t = (1 - b2) * sum_k b2^k g_(t-k)^2`.
+   Cauchy-Schwarz over the gradient history gives `|m_hat_t| / sqrt(v_hat_t) <= R_t`,
+   where `R_t = sqrt(sum_(k<t) (1 - b1)^2 b1^(2k) / ((1 - b2) b2^k)) * sqrt(1 - b2^t) / (1 - b1^t)`.
+   Adding `eps` only makes the step smaller. With `b1 = 0.9` and `b2 = 0.999`:
+
+   | Step t | 1 | 2 | 3 | 4 | 5 |
+   |---|---|---|---|---|---|
+   | `R_t` | 1.0000 | 1.0014 | 1.0036 | 1.0068 | 1.0108 |
+   | Sum up to t | 1.0000 | 2.0014 | 3.0050 | 4.0117 | 5.0225 |
+
+   One implementation moves `b` by at most `lr * sum R_t`. Both start from the same
+   value, so by the triangle inequality two implementations differ by at most
+   `2 * lr * sum R_t`. After 5 steps that is `10.045 * lr`, about 1.0e-2. `R_t` keeps
+   growing, toward about 7.27 for long runs, so `lr` per step is not a bound for
+   training in general.
 6. **No other parameter behaves this way.** In LightGCN, every parameter is a base
    embedding that the loss uses directly. In the heterogeneous model, the User layer-1
    bias does not cancel: `(g_u + b_U) . (h_n - h_p)` depends on `b_U`. The layer-1
@@ -118,7 +134,8 @@ which matches the accepted model in float32):
   the other zero-gradient parameters are exactly the CategoryPath and Brand outputs and
   receive no gradient at all;
 - the User layer-1 bias, as a control, does change the loss;
-- in float32, Adam drift of `b` stays within `lr` per step.
+- the closed-form `R_t` equals the worst case found by Adam itself on the Cauchy-Schwarz
+  extremal gradient sequence, and float32 drift of `b` stays within `lr * sum R_t`.
 
 ## Key finding: the accepted models are correctness references, not scale executors
 
