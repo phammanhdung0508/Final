@@ -104,6 +104,21 @@ def _driver_version():
         return f'unavailable: {type(exc).__name__}'
 
 
+GLOBAL_RNG_SEED = 0
+
+
+def pin_global_generators():
+    """Seed the global generators to one fixed value at process start.
+
+    PyTorch seeds the global CPU generator randomly in every new process. Training never
+    consumes the global generators, so after this call every run process holds the same
+    states, and a checkpoint written in one process can be resumed in another. Call it
+    before building the trainer in any process that writes or resumes a checkpoint.
+    """
+    torch.manual_seed(GLOBAL_RNG_SEED)
+    return GLOBAL_RNG_SEED
+
+
 def global_rng_states(device):
     """Global generators that the run must never consume: CPU, and CUDA if used."""
     states = {'torch_cpu': torch.get_rng_state().clone()}

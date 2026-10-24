@@ -1,0 +1,26 @@
+{
+  "schema_version": "amazon4u-o-offline-frozen-pins-v1",
+  "recorded": "2026-10-24",
+  "decision": "user-requested regression protection: O-OFFLINE files pinned like H28 and D1-D3",
+  "accepted_source": "data/reports/o-offline-main-integration-v1/release-review.json (all six accepted hashes match HEAD 32d9ebc)",
+  "sha256": {
+    "multiautoresearch/adapters/amazon4u.py": "d5ff0e3d9b0d6fa56d561be2a15761f644c8d528b0dda156c3cce587e0e9dc89",
+    "multiautoresearch/adapters/amazon4u_kernel.py": "2bd17b0fea6892a5ac6510f225937fcf914623339929334bcea231dbfb01b437",
+    "multiautoresearch/adapters/__init__.py": "ddd60f39815dbcd73ef6abc798ba70eaf87066dbdc7665c6e32a939f417e5fd7",
+    "multiautoresearch/post-training/scripts/kaggle_job.py": "b7b3f46063878c2cdc23c649521585c4820de93d0c7f183577a9cce003b94766",
+    "tests/test_kaggle_orchestration.py": "67dda5983f220d3003c66758eaabd952a0db6b2ff73a2f0b3cbfe3836d5a18cc",
+    "tests/test_amazon4u_bundle.py": "fb22f0f7b58d6477d193154e5f08a1c4aa4c87e66ad914cc668c3becf3e10726"
+  },
+  "amendments": [
+    {
+      "path": "multiautoresearch/adapters/amazon4u.py",
+      "recorded": "2026-10-24",
+      "approved_by": "user",
+      "previous_sha256": "d7d6249c77ffbdbb84196206a52487591a2b5e64c2cdd2d9ddb30119d9a4fb1b",
+      "new_sha256": "d5ff0e3d9b0d6fa56d561be2a15761f644c8d528b0dda156c3cce587e0e9dc89",
+      "change": "consume_kernel_logs redaction: two replacement strings r\"\\\\1...\" -> r\"\\1...\""
+    }
+  ],
+  "enforced_by": "tests/test_o_offline_frozen.py",
+  "change_rule": "a change needs explicit user approval and a new amendments entry"
+}

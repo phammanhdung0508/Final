@@ -715,7 +715,7 @@ def _make_valid_hetero_payload(empty_metadata: bool = False) -> Tuple[Dict[str, 
         row_order = {
             "User": ["u1", "u2"],
             "Product": ["p1", "p2", "p3"],
-            "CategoryPath": ['c:["Electronics"]', 'c:["Electronics","Audio"]'],
+            "CategoryPath": ['c:["Electronics","Audio"]', 'c:["Electronics"]'],
             "Brand": ["b:Sony"],
         }
     expected_model = {

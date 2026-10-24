@@ -19,7 +19,7 @@ from scripts.learned_models import LightGCNGraph
 from scripts.recommendation_core import NegativeSampler
 from scripts.recommendation_evaluation import TrainingContext
 from scripts.training_harness import ADAM_OPTIONS, CPUBackend, HCPUAdam
-from scripts.vector_trainer import VectorTrainer
+from scripts.vector_trainer import VectorTrainer, fixture_rng
 from scripts.vectorized_models import VectorLightGCN
 
 CPU = torch.device('cpu')
@@ -33,7 +33,7 @@ def items_of(graph):
 
 
 def trainer_for(model, seed, batch_size=8):
-    return VectorTrainer(model, [], seed=seed, batch_size=batch_size, validation_frequency=100,
+    return VectorTrainer(model, [], rng=fixture_rng(seed), batch_size=batch_size, validation_frequency=100,
                          fingerprint=FINGERPRINT)
 
 
@@ -55,7 +55,7 @@ class StepEquivalenceTests(unittest.TestCase):
                     skip = RANKING_INVARIANT.get(method)
                     steps = 0
                     for _ in range(2):
-                        u, p, n, _ = trainer.sample_epoch()
+                        u, p, n, _, _ = trainer.sample_epoch()
                         for start in range(0, len(u), trainer.batch_size):
                             sl = slice(start, start + trainer.batch_size)
                             triples = [(users[a], items[b], items[c]) for a, b, c in
@@ -98,6 +98,30 @@ def sampler_fixture(condition='rating_ge_4'):
     return TrainingContext(records, condition=condition)
 
 
+class SameRandomStreamTests(unittest.TestCase):
+    def test_triples_equal_the_accepted_sampler_driven_by_the_same_generators(self):
+        for seed in (42, 2026, 3407):
+            for condition in ('all_ratings', 'rating_ge_4'):
+                context = synthetic(seed, condition)[0]
+                graph = LightGCNGraph(context)
+                model = VectorLightGCN(graph, torch.zeros(len(graph.users), 64),
+                                       torch.zeros(len(graph.warm_items), 64), CPU)
+                trainer = trainer_for(model, seed)
+                accepted_rng = fixture_rng(seed)
+                for _ in range(3):
+                    u, p, n, skips, order = trainer.sample_epoch()
+                    pairs = sorted((a, b) for a in context.users
+                                   for b in context.positive_history.get(a, ()))
+                    accepted_rng.shuffle(pairs)
+                    triples, accepted_skips = NegativeSampler(context).prepare_batch(
+                        pairs, accepted_rng.choice_adapter('negative_sampler'))
+                    ours = [(graph.users[a], graph.warm_items[b], graph.warm_items[c])
+                            for a, b, c in zip(u.tolist(), p.tolist(), n.tolist())]
+                    self.assertEqual(ours, triples, (seed, condition))
+                    self.assertEqual(skips, accepted_skips)
+                    self.assertEqual([(graph.users[a], graph.warm_items[b]) for a, b in order], pairs)
+
+
 class SamplerDistributionTests(unittest.TestCase):
     def setUp(self):
         self.contexts = {c: sampler_fixture(c) for c in ('all_ratings', 'rating_ge_4')}
@@ -108,8 +132,7 @@ class SamplerDistributionTests(unittest.TestCase):
                                torch.zeros(len(graph.warm_items), 64), CPU)
         trainer = trainer_for(model, seed)
         row = graph.users.index(user)
-        drawn = trainer._negatives(torch.full((n,), row, dtype=torch.long)).tolist()
-        return [graph.warm_items[i] for i in drawn]
+        return [graph.warm_items[trainer._negative(row)] for _ in range(n)]
 
     def test_support_equals_the_accepted_eligible_pool(self):
         for condition, context in self.contexts.items():
@@ -149,7 +172,7 @@ class SamplerDistributionTests(unittest.TestCase):
         trainer = trainer_for(model, 3)
         a, b = graph.users.index('u_small'), graph.users.index('u_bg0')
         users = torch.tensor([a, b] * 4000)
-        drawn = trainer._negatives(users)
+        drawn = torch.tensor([trainer._negative(u) for u in users.tolist()])
         pool = [graph.warm_items.index(i) for i in NegativeSampler(context).get_negative_pool('u_small')]
         counts = [int((drawn[users == a] == i).sum()) for i in pool]
         self.assertEqual(int((~torch.isin(drawn[users == a], torch.tensor(pool))).sum()), 0)
@@ -160,7 +183,7 @@ class SamplerDistributionTests(unittest.TestCase):
             graph = LightGCNGraph(context)
             model = VectorLightGCN(graph, torch.zeros(len(graph.users), 64),
                                    torch.zeros(len(graph.warm_items), 64), CPU)
-            users, _, negatives, skips = trainer_for(model, 1).sample_epoch()
+            users, _, negatives, skips, _ = trainer_for(model, 1).sample_epoch()
             pairs = sorted((u, p) for u in context.users for p in context.positive_history.get(u, ()))
             triples, accepted_skips = NegativeSampler(context).prepare_batch(pairs, random.Random(0))
             self.assertEqual(skips, accepted_skips, condition)

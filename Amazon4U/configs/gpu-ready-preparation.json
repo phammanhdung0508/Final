@@ -1,6 +1,6 @@
 {
   "schema_version": "amazon4u-gpu-ready-preparation-v1",
-  "status": "PHASE2_LOCAL_IMPLEMENTATION_IN_PROGRESS",
+  "status": "GPU_READY_ACCEPTED",
   "recorded": "2026-10-24",
   "documentation": "docs/gpu-ready-preparation.md",
   "user_decisions": {
@@ -10,7 +10,46 @@
       "phase2_bounded_tiny_gpu_kaggle_runs_after_approval"
     ],
     "orchestration": "accepted multiautoresearch Kaggle runner and Amazon4U adapters; no LM/Movie4U methodology; no second runner",
-    "readiness_gates_constant": "frozen; GPU-READY uses a separate versioned profile and gate list"
+    "readiness_gates_constant": "frozen; GPU-READY uses a separate versioned profile and gate list",
+    "gr08_placement": {
+      "recorded": "2026-10-24",
+      "decision": "option_A_separate_module_multiautoresearch/adapters/amazon4u_gpu.py; O-OFFLINE adapter unchanged",
+      "conditions": [
+        "reuse only components that are truly device-independent; no indiscriminate copying",
+        "security and refusal checks must not be bypassed"
+      ]
+    },
+    "gpu_ready_reviewer": {
+      "recorded": "2026-10-24",
+      "reviewer": "user",
+      "mode": "user and agent review the GR01-GR10 evidence together; no other model is invoked",
+      "agent_self_review_counts_as_acceptance": false
+    },
+    "gr06_integration": {
+      "recorded": "2026-10-24",
+      "decision": "the gr06-cuda-checkpoint worktree is ignored by the main checkout; the user commits it only when it is integrated into main",
+      "consequence": "GR08 continues in the same worktree, stacked on the uncommitted GR06 changes"
+    },
+    "g5_provenance": {
+      "recorded": "2026-10-24",
+      "decision": "approved as built (bundle.json and run binding)"
+    },
+    "run_1": {
+      "recorded": "2026-10-24",
+      "decision": "approved",
+      "statement": "approve, start when you ready."
+    },
+    "runs_2_and_3": {
+      "recorded": "2026-10-24",
+      "decision": "not needed as planned; run 1 covered their purposes (user and agent agree)"
+    },
+    "after_run_1_review": {
+      "recorded": "2026-10-24",
+      "o_offline_hash_pins": "approved: \"O-OFFLINE lacks a hash pin ... a deficiency regarding regression protection that should be addressed.\"",
+      "gr06_fresh_process_restart": "approved, with run 2: \"GR06 fresh-process restart\" I recommend performing this test. It is an essential requirement for training resilience, not a redundant test.",
+      "gr04_negative_tests": "approved: controlled negative tests that run separately and catch the expected exceptions",
+      "gr10_ledger": "optional, left to the agent; agent added the ledger"
+    }
   },
   "environment_findings": {
     "local_gpu": false,
@@ -32,52 +71,63 @@
     {
       "id": "GR01",
       "topic": "device_seam_gpu_backend",
-      "status": "open"
+      "status": "accepted",
+      "accepted": "2026-10-25 by the user: \"LGTM!! Accept GR01 - 10.\""
     },
     {
       "id": "GR02",
       "topic": "device_aware_tensor_and_buffer_construction",
-      "status": "open"
+      "status": "accepted",
+      "accepted": "2026-10-25 by the user: \"LGTM!! Accept GR01 - 10.\""
     },
     {
       "id": "GR03",
       "topic": "cpu_gpu_numerical_parity_tiny_fixtures",
-      "status": "open"
+      "status": "accepted",
+      "accepted": "2026-10-25 by the user: \"LGTM!! Accept GR01 - 10.\""
     },
     {
       "id": "GR04",
       "topic": "determinism_fail_loudly",
-      "status": "open"
+      "status": "accepted",
+      "decided": "2026-10-25 by the user: \"I agree skip run 3 and mark GR04 complete.\" Evidence: run 2 probes max_unpool1d, histc_cuda, adaptive_avg_pool2d_backward_cuda and put_accumulate_cuda raised with the policy on and their controls succeeded; the CUBLAS_WORKSPACE_CONFIG requirement is enforced by gpu_runtime.configure_determinism",
+      "accepted": "2026-10-25 by the user: \"LGTM!! Accept GR01 - 10.\""
     },
     {
       "id": "GR05",
       "topic": "recorded_gpu_environment",
-      "status": "open"
+      "status": "accepted",
+      "accepted": "2026-10-25 by the user: \"LGTM!! Accept GR01 - 10.\""
     },
     {
       "id": "GR06",
       "topic": "versioned_gpu_checkpoint_profile",
-      "status": "open"
+      "status": "accepted",
+      "accepted": "2026-10-25 by the user: \"LGTM!! Accept GR01 - 10.\""
     },
     {
       "id": "GR07",
       "topic": "versioned_gpu_result_and_record_schema",
-      "status": "open"
+      "status": "accepted",
+      "accepted": "2026-10-25 by the user: \"LGTM!! Accept GR01 - 10.\""
     },
     {
       "id": "GR08",
       "topic": "real_kaggle_transport",
-      "status": "open"
+      "status": "accepted",
+      "accepted": "2026-10-25 by the user: \"LGTM!! Accept GR01 - 10.\""
     },
     {
       "id": "GR09",
       "topic": "real_kaggle_environment_compatibility",
-      "status": "open"
+      "status": "accepted",
+      "accepted": "2026-10-25 by the user: \"LGTM!! Accept GR01 - 10.\""
     },
     {
       "id": "GR10",
       "topic": "enforced_budgets_no_automatic_retry",
-      "status": "open"
+      "status": "accepted",
+      "accepted": "2026-10-25 by the user: \"LGTM!! Accept GR01 - 10.\""
     },
     {
       "id": "EX01",
@@ -124,7 +174,7 @@
     "credential_access": "Kaggle_CLI_reads_its_own_credentials_agent_never_reads_or_prints_keys",
     "kaggle_or_gpu_runs": false,
     "profiling_or_training": false,
-    "stage_commit_push": false,
+    "stage_commit_push": "commit_and_integrate_gr06_worktree_into_master_user_go_2026-10-25; no push",
     "deployment_decision": "NOT_AUTHORIZED",
     "kaggle_access_check": true
   },
@@ -191,19 +241,24 @@
       "EX01 validation evaluation",
       "EX01 trainer with exact epoch restart",
       "GR01/GR04/GR05 runtime",
-      "GR03/GR07 parity runner and cuda-v1 result"
+      "GR03/GR07 parity runner and cuda-v1 result",
+      "GR06 cuda-v1 checkpoint payload and storage (worktree gr06-cuda-checkpoint)",
+      "GR08 Kaggle CLI transport, GPU bundle, approval-bound launch, collection and amazon4u-O-record-cuda-v1 (worktree gr06-cuda-checkpoint; fake CLI only)"
     ],
     "next": [
-      "GR06 cuda-v1 checkpoint payload via D2/D3",
-      "GR08 real transport and O-side cuda-v1 record",
-      "Kaggle runs 1 to 3"
+      "integrate the gr06-cuda-checkpoint worktree into master (user go 2026-10-25)",
+      "draft the Musical_Instruments profiling plan for the user's approval (no run)"
     ],
-    "frozen_files_changed": false,
+    "frozen_files_changed": "multiautoresearch/adapters/amazon4u.py redaction strings only (user-approved 2026-10-24)",
     "full_suite": {
-      "tests": 555,
+      "tests": 598,
       "failures": 0,
-      "seconds": 81,
-      "peak_rss_kib": 938408
+      "seconds": 136,
+      "peak_rss_kib": 944384,
+      "checkout": "worktree gr06-cuda-checkpoint",
+      "process_seconds": 144,
+      "recorded": "2026-10-25",
+      "note": "earlier runs on 2026-10-25 took 251 s and 520 s while the machine was swapping (8 GB swap full); re-timed after the user freed RAM, with no code change between runs"
     },
     "frozen_documents_restored": {
       "recorded": "2026-10-24",
@@ -223,6 +278,168 @@
     "correction": {
       "worktree_default": "AGENTS.md Worktrees + corrections table",
       "frozen_docs": "scripts/scan_unslop.py refuses frozen documents; tests/test_scan_unslop.py"
+    },
+    "finding_h_ref_fixture_row_order": {
+      "status": "corrected_user_approved_2026-10-24",
+      "file": "tests/test_checkpoint_payload.py _make_valid_hetero_payload (used by tests/test_checkpoint_storage._fixture)",
+      "effect": "checkpoint CategoryPath row_order label differs from model row order; D2 checks membership only; restore unaffected",
+      "previous_sha256": "41f704422ad639cbbd0552bb02569fa64417f2aadef9332c1d6357d587b6074b",
+      "new_sha256": "1c28cbdd0801c42bdf423650ce0ddf8ecd0fd5fe72e9c22ddad57547f214de97",
+      "change": "non-empty row_order CategoryPath order in _make_valid_hetero_payload only"
+    },
+    "gr08": {
+      "recorded": "2026-10-24",
+      "kaggle_calls_made": 0,
+      "o_offline_reused_unchanged": [
+        "validate_submission_receipt",
+        "poll_kernel_status",
+        "consume_kernel_logs",
+        "BoundedLogReader",
+        "atomic_move_no_replace"
+      ],
+      "replaced": [
+        "collect_outputs (H-REF bound)",
+        "render_plan/build_amazon4u_kernel_script/write_bundle (H-REF bound)"
+      ],
+      "kernel_script_bytes": 500204,
+      "kaggle_script_size_limit_verified": false,
+      "local_cpu_kernel_execution": {
+        "seconds": 17,
+        "run_binding_matches_manifest": true
+      },
+      "mutation_check": "9 refusals disabled one at a time; each made a test fail",
+      "cli_version": {
+        "pinned": "Kaggle CLI 2.2.5",
+        "upgraded_by": "user",
+        "recorded": "2026-10-24",
+        "reason": "2.2.4 status/output ignored a version suffix; 2.2.5 sends version_label",
+        "queries": "<owner>/<slug>/<acknowledged version>"
+      },
+      "o_offline_redaction_fix": {
+        "status": "fixed_user_approved_2026-10-24",
+        "file": "multiautoresearch/adapters/amazon4u.py",
+        "change": "consume_kernel_logs: two replacement strings r\"\\\\1...\" -> r\"\\1...\"",
+        "effect": "cosmetic; secrets were always removed",
+        "test": "tests/test_amazon4u_gpu.py LaunchTests (fails on old code)",
+        "recorded_hash_pins": "none found"
+      },
+      "kaggle_size_limits_user_reported": {
+        "py_script": "1 MB",
+        "notebook": "20 MB",
+        "dataset": "20 GB"
+      }
+    },
+    "run_1": {
+      "recorded": "2026-10-24",
+      "kernel": "dungsunf/amazon4u-gpu-ready-run-1-c9c8a316/v1",
+      "terminal_status": "complete",
+      "result_status": "parity_complete",
+      "all_checks_passed": true,
+      "kernel_session_seconds_approx": 30,
+      "launch_to_collection_minutes_approx": 2,
+      "environment": {
+        "gpu": "Tesla T4",
+        "compute_capability": [
+          7,
+          5
+        ],
+        "visible_devices": 1,
+        "torch": "2.11.0+cu128",
+        "cuda": "12.8",
+        "cudnn": 91900,
+        "driver": "580.178.04",
+        "python": "3.13.15",
+        "numpy": "2.1.3"
+      },
+      "max_abs_diff": {
+        "forward_scores": 1.8e-07,
+        "gradients": 1.7e-08,
+        "parameters_after_5_adam_steps": 2e-05,
+        "loss": 1.2e-07
+      },
+      "restart_bit_for_bit": {
+        "LightGCN": true,
+        "Heterogeneous KG+GNN": true
+      },
+      "evidence": "data/reports/gpu-ready-v1/run-1/ (result.json, kernel-log.txt, record.json)",
+      "acceptance": "accepted 2026-10-25 by the user: \"LGTM!! Accept GR01 - 10.\""
+    },
+    "traceability": {
+      "recorded": "2026-10-24",
+      "document": "docs/gpu-ready-traceability.md",
+      "status": "accepted 2026-10-25 by the user: \"LGTM!! Accept GR01 - 10.\"",
+      "evidence_complete": [
+        "GR01",
+        "GR02",
+        "GR03",
+        "GR04",
+        "GR05",
+        "GR06",
+        "GR07",
+        "GR08",
+        "GR09",
+        "GR10"
+      ],
+      "partial": [],
+      "missing": [],
+      "gr06_gap": "closed by run 2 fresh-process restart",
+      "accepted_caveats": [
+        "GR01: a missing GPU is refused inside the kernel, after launch",
+        "GR10: output size is checked after download"
+      ]
+    },
+    "after_run_1": {
+      "recorded": "2026-10-24",
+      "o_offline_pins": {
+        "config": "configs/o-offline-frozen-pins.json",
+        "test": "tests/test_o_offline_frozen.py",
+        "accepted_source": "data/reports/o-offline-main-integration-v1/release-review.json",
+        "proved": "fails on the pre-fix amazon4u.py"
+      },
+      "gr06_finding": "fresh-process resume impossible: PyTorch seeds the global CPU generator randomly per process; fixed by gpu_runtime.pin_global_generators() (seed 0), refusal kept",
+      "gr06_fresh_process_restart": "scripts/gpu_ready_child.py roles straight/first/resume; passes on CPU for both models",
+      "gr04_probes": [
+        "max_unpool1d",
+        "histc_cuda",
+        "adaptive_avg_pool2d_backward_cuda",
+        "put_accumulate_cuda",
+        "cublas_matmul_without_workspace_config"
+      ],
+      "gr10_ledger": "amazon4u_gpu.gpu_ledger; each reservation books its session timeout; launch refused before any CLI call above 1.5 h",
+      "gr10_remote_timeout": "Kaggle enforces the pushed -t session timeout; CLI 2.2.5 has no cancel verb, so a local poll deadline cannot stop a remote kernel; its booking stays charged",
+      "full_suite": {
+        "tests": 598,
+        "failures": 0,
+        "seconds": 155,
+        "peak_rss_kib": 857188
+      }
+    },
+    "run_2": {
+      "recorded": "2026-10-24",
+      "kernel": "dungsunf/amazon4u-gpu-ready-run-2-485e06d6/v1",
+      "terminal_status": "complete",
+      "result_status": "parity_failed",
+      "all_checks_passed": false,
+      "environment_same_as_run_1": true,
+      "parity": "12/12 passed; max Adam diff 1.98e-05",
+      "restart_same_process": "both models bit for bit",
+      "restart_fresh_process": "both models bit for bit, three distinct processes",
+      "probes_passed": [
+        "max_unpool1d",
+        "histc_cuda",
+        "adaptive_avg_pool2d_backward_cuda",
+        "put_accumulate_cuda"
+      ],
+      "probe_failed": {
+        "name": "cublas_matmul_without_workspace_config",
+        "observed": "no exception: a 16x16 CUDA matmul succeeded with use_deterministic_algorithms(True) and CUBLAS_WORKSPACE_CONFIG unset (torch 2.11.0+cu128, CUDA 12.8, T4); control succeeded",
+        "cause": "established 2026-10-25: PyTorch removed the cuBLAS workspace check in pytorch/pytorch#161749 (merged 2025-10-03, f7082e9), before 2.10; the local 2.10.0+cu128 binaries hold no such alert. The probe expectation was out of date; the recorded run-2 result is unchanged",
+        "mitigation_in_place": "gpu_runtime.configure_determinism refuses to start without CUBLAS_WORKSPACE_CONFIG=:4096:8 (tests/test_gpu_ready_parity.py)",
+        "user_decision": "2026-10-25: run 3 skipped; GR04 complete"
+      },
+      "gpu_seconds_booked_total": 3600,
+      "evidence": "data/reports/gpu-ready-v1/run-2/",
+      "acceptance": "accepted 2026-10-25 by the user: \"LGTM!! Accept GR01 - 10.\""
     }
   }
 }

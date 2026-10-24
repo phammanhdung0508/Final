@@ -1,6 +1,7 @@
 # GPU-READY design note (phase 1, deliverable 2)
 
-Status: **AGREED (user, 2026-10-24), not yet implemented.** EX01, option C, the new
+Status: **AGREED (user, 2026-10-24); implemented, and GPU-READY accepted by the user on
+2026-10-25** (see [`gpu-ready-traceability.md`](gpu-ready-traceability.md)). EX01, option C, the new
 names and the GR06 checkpoint design are agreed. Heterogeneous aggregation uses full
 neighborhoods for Musical_Instruments. No code is written or run by
 this note. It covers
@@ -19,8 +20,8 @@ Amazon data. Each new module has CPU tests; frozen files are unchanged.
 | EX01 trainer | `scripts/vector_trainer.py` | `tests/test_vector_trainer.py` | Done. Block 2 recipe, private CPU generators, epoch-boundary capture and restore. Restart is bit for bit identical on CPU |
 | GR01, GR04, GR05 runtime | `scripts/gpu_runtime.py` | `tests/test_gpu_ready_parity.py` | Done: explicit device refusal, determinism policy, environment fingerprint, global RNG guard |
 | GR03, GR07 parity run and result | `scripts/gpu_ready_parity.py` | same | Done on CPU: `amazon4u-H-result-cuda-v1` with `GPU_READINESS_GATES` |
-| GR06 checkpoint profile with D2 and D3 | not started | | Next |
-| GR08 real transport and O-side cuda-v1 record | not started | | After GR06 |
+| GR06 checkpoint profile with D2 and D3 | `scripts/checkpoint_payload_cuda.py`, `scripts/checkpoint_storage_cuda.py` | `tests/test_checkpoint_cuda.py` | Done on CPU (worktree `gr06-cuda-checkpoint`). Restart through publish, retrieve and restore is bit for bit identical for both models. CUDA parts are faked; real CUDA restore is run 3 |
+| GR08 real transport and O-side cuda-v1 record | `multiautoresearch/adapters/amazon4u_kaggle.py`, `multiautoresearch/adapters/amazon4u_gpu.py` | `tests/test_amazon4u_gpu.py` | Done locally against a fake Kaggle CLI (same worktree). The bundle runs end to end on CPU and reports the expected run binding. No Kaggle call made; see [Kaggle execution](gpu-ready-kaggle-execution.md#gr08-real-transport) |
 
 User decisions on 2026-10-24, after this implementation:
 
@@ -53,11 +54,15 @@ Deviations from this note, recorded for review:
   payloads, so a GPU backend cannot run through them without editing H28 files.
   `vector_trainer.py` reuses `Selection`, `validation_score` and `ADAM_OPTIONS` from
   `training_harness.py` instead. H28 stays unchanged.
-- **Vectorized negative sampling.** `NegativeSampler.get_negative_pool` builds each
-  user's pool in Python for every positive, which is too slow at full scale. The trainer
-  draws uniformly from the warm pool with a private CPU generator and rejects observed
-  items. This gives the same uniform distribution over eligible negatives, but not the
-  same random stream as H-REF.
+- **Negative sampling (revised for GR06, 2026-10-24).** `NegativeSampler.get_negative_pool`
+  builds each user's pool in Python for every positive, which is too slow at full scale.
+  The trainer now draws through H-REF's own `PrivateRNG` with the generators
+  `expected_runtime` declares, and finds the drawn pool position by binary search instead
+  of building the pool. With the same generators it produces exactly the triples
+  `NegativeSampler.prepare_batch` produces (`tests/test_vector_trainer_equivalence.py`).
+  The earlier version used its own torch generators and matched only in distribution.
+  That version is replaced, because a D2-valid checkpoint must hold the declared
+  generators.
 - **Aggregation without sparse matrix products.** Both models use `index_select` and
   `index_add`. PyTorch documents deterministic CUDA kernels for these under
   `use_deterministic_algorithms(True)`; it does not list sparse-dense products.
@@ -292,6 +297,48 @@ adjacency. The masked adjacency is rebuilt from the fixed graph, whose hash is v
   - Alternative: add schema dispatch inside D3. That edits frozen accepted code and is
     not recommended now.
 
+### As implemented (2026-10-24)
+
+The implementation is simpler than the plan above in two places, and stricter in one.
+
+- **D2 is reused through its public validator, not its private helpers.** A cuda-v1
+  payload is the v1 payload with three changed fields (`schema_version`, `capability`,
+  `amp.reason`) and one added `device` section. `validate_cuda_checkpoint_payload`
+  checks `device` against an independent expectation, then calls D2's
+  `validate_checkpoint_payload` on the core view: the payload without `device` and with
+  the three fields set to their v1 values. Nothing else is altered.
+- **The CUDA generator is not an active D1 stream.** Training never consumes it (your
+  rule), so `PyTorch_CUDA_if_applicable` stays inactive and D2's CPU-profile rule is
+  satisfied truthfully. Its state is recorded in `device.global_rng`. Restore sets no
+  global generator. It refuses unless the process already holds the recorded CPU and
+  CUDA states, which a fresh process in the same environment does.
+- **D3 is reused through its private helpers.** `checkpoint_storage_cuda.py` is D3's
+  publish and retrieve with only the validator swapped. A test pins the recorded
+  SHA-256 of D1, D2, D3 and H files (`configs/o-offline-implementation.json`).
+- **D1 records `execution_device = cuda:0`** for CUDA runs. D1 accepts it.
+- A cuda-v1 payload may also record `device = cpu`, with no CUDA states, so the same code
+  path runs in local tests.
+
+Mutation check: disabling any one of four device-section checks makes a test fail.
+
+**Finding in accepted H-REF fixtures.** For the heterogeneous model, the accepted D2/D3
+test fixture (`tests/test_checkpoint_storage._fixture`) declares `CategoryPath` rows as
+`["Electronics"]`, `["Electronics","Audio"]`. The accepted graph builds them in sorted
+order, `["Electronics","Audio"]` first. D2 checks row membership, not order, so an H-REF
+heterogeneous checkpoint built from this fixture labels its category rows in the wrong
+order. Restore is unaffected, because the same graph is rebuilt. The user approved a scoped correction on 2026-10-24:
+
+- In `tests/test_checkpoint_payload.py`, only the non-empty `row_order` in
+  `_make_valid_hetero_payload` changed, to the graph order. The D1 identity
+  (`graph_nodes`) is a membership record and is unchanged.
+- The file's SHA-256 changes from `41f70442...` (recorded in
+  `configs/o-offline-implementation.json`, kept as history) to `1c28cbdd...`.
+  `tests/test_checkpoint_cuda.py` pins the new value and names this correction.
+- A regression test compares the fixture's row order with the accepted graph's order.
+  It fails on the old fixture and passes on the corrected one.
+- `checkpoint_fixture` now refuses any row-order difference instead of correcting it.
+- Full suite: 574 tests, 0 failures.
+
 ### Resume scope
 
 - **Epoch boundaries only.** A checkpoint is written after the epoch's validation and
@@ -307,6 +354,22 @@ adjacency. The masked adjacency is rebuilt from the fixed graph, whose hash is v
   no tolerance is added.
 - **No other conversions.** No CPU-to-GPU or GPU-to-CPU restore, and no conversion
   between v1 and cuda-v1.
+
+**Finding: fresh-process resume was impossible (found 2026-10-24, after run 1).** Test 11
+below asks for restore in a new process. `restart_case()` restored in the same process,
+so run 1 did not test it; the user's review of run 1 caught the gap. The new
+`fresh_process_restart_case()` runs `straight`, `first` and `resume` as three processes
+(`scripts/gpu_ready_child.py`). Its first CPU run refused the resume with "process global
+generators differ from the checkpoint". Cause: PyTorch seeds the global CPU generator
+randomly in every new process. The checkpoint records the global states, and
+`restore_cuda` refuses unless the process holds exactly those states, so no new process
+could ever resume. Fix, keeping the refusal: `gpu_runtime.pin_global_generators()` seeds
+the global generators to `GLOBAL_RNG_SEED = 0` at the start of every process that writes
+or resumes a checkpoint. Training never consumes them (checked every epoch), so every
+such process holds the same states, and the refusal still catches anything that does.
+After the fix, both models resume bit for bit across processes on CPU.
+`tests/test_gpu_ready_parity.py` shows that two new processes differ without the pin and
+match with it. Kaggle run 2 tests the fix on the GPU.
 
 ### Tests
 

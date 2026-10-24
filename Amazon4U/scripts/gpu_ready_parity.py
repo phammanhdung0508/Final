@@ -12,10 +12,14 @@ Usage: CUBLAS_WORKSPACE_CONFIG=:4096:8 python -m scripts.gpu_ready_parity \
 
 import argparse
 import copy
+import hashlib
 import json
 import os
 import random
+import subprocess
 import sys
+import tempfile
+from pathlib import Path
 
 import torch
 
@@ -26,7 +30,12 @@ from scripts.gpu_runtime import (
     PROFILE_ID, configure_determinism, environment_fingerprint, require_determinism,
     require_device,
 )
+from scripts.checkpoint_identity import build_canonical_identity
+from scripts.checkpoint_storage_cuda import publish_cuda_checkpoint, retrieve_cuda_checkpoint
+from scripts.gpu_runtime import RuntimeRefusal
 from scripts.learned_models import LightGCNGraph
+from scripts.training_data import TrainingData
+from scripts.training_harness import D2_KEYS, PrivateRNG, owned_digest
 from scripts.recommendation_core import Evaluator, NegativeSampler
 from scripts.recommendation_evaluation import TrainingContext
 from scripts.training_harness import ADAM_OPTIONS, READINESS_GATES
@@ -35,6 +44,27 @@ from scripts.vectorized_evaluation import evaluate_model
 from scripts.vectorized_models import VectorHeteroGNN, VectorLightGCN
 
 RESULT_SCHEMA = 'amazon4u-H-result-cuda-v1'
+IDENTITY_FIELDS = ('method', 'category', 'feedback_condition', 'seed', 'training_records',
+                   'positive_history', 'all_rated_history', 'warm_items', 'graph_nodes',
+                   'graph_edges', 'product_metadata', 'validation_inputs', 'resolved_settings')
+ROOT = Path(__file__).resolve().parents[1]
+
+
+def bundle_digest(root=ROOT):
+    """SHA-256 over the path and bytes of every scripts/ and tests/ Python file."""
+    h = hashlib.sha256()
+    for path in sorted([*root.glob('scripts/*.py'), *root.glob('tests/*.py')]):
+        rel = path.relative_to(root).as_posix().encode()
+        data = path.read_bytes()
+        h.update(len(rel).to_bytes(8, 'big') + rel + len(data).to_bytes(8, 'big') + data)
+    return h.hexdigest()
+
+
+def plan_digest(plan):
+    """SHA-256 of the run plan as canonical JSON (sorted keys)."""
+    return hashlib.sha256(json.dumps(plan, sort_keys=True).encode()).hexdigest()
+
+
 # Same five gates as the frozen v1 list, except that the first names how GPU-READY is
 # closed: by review of attached evidence, never by the run itself.
 GPU_READINESS_GATES = [
@@ -180,51 +210,182 @@ def parity_case(method, seed, condition, device, tol):
     return out
 
 
-def restart_case(method, seed, device, fingerprint, determinism, epochs=4, split=2):
-    """Uninterrupted versus checkpoint-and-restore on the same device; must be exact."""
-    def run():
-        context, cats, brands, targets = synthetic(seed)
-        _, vec = model_pair(method, context, cats, brands, seed, device)
-        return VectorTrainer(vec, targets, seed=seed, batch_size=8, validation_frequency=1,
-                             fingerprint=fingerprint, determinism=determinism)
-    straight = run()
+def checkpoint_fixture(method, device, fingerprint, determinism):
+    """A trainer on the accepted D2 fixture, with every expectation D2 and D3 require.
+
+    The fixtures live in the accepted D2/D3 test modules and are imported unchanged. For a
+    CUDA run, the D1 identity records `execution_device = cuda:0`.
+    """
+    tests_dir = str(Path(__file__).resolve().parents[1] / 'tests')
+    if tests_dir not in sys.path:
+        sys.path.insert(0, tests_dir)
+    from test_checkpoint_storage import _fixture
+    _, expectations = _fixture(hetero=method != 'LightGCN', initial=True)
+    expectations = copy.deepcopy(expectations)
+    identity = expectations['expected_identity']
+    if str(device) != identity['resolved_settings']['execution']['execution_device']:
+        fields = {k: copy.deepcopy(identity[k]) for k in IDENTITY_FIELDS}
+        fields['resolved_settings']['execution']['execution_device'] = str(device)
+        identity = build_canonical_identity(**fields).to_dict()
+        expectations['expected_identity'] = identity
+    data = TrainingData(copy.deepcopy(identity), expected_identity=identity,
+                        resource_policy=expectations['resource_policy'])
+    seed = data.identity.seed
+    if method == 'LightGCN':
+        graph = LightGCNGraph(data.context)
+        gen = torch.Generator().manual_seed(seed)
+        model = VectorLightGCN(graph, torch.normal(0.0, 0.1, (len(graph.users), 64), generator=gen),
+                               torch.normal(0.0, 0.1, (len(graph.warm_items), 64), generator=gen),
+                               device)
+        orders = {'User': graph.users, 'Product': graph.warm_items}
+    else:
+        graph = build_hetero_graph(data.context, data.product_categories, data.product_brands)
+        model = VectorHeteroGNN(graph, seed, device)
+        orders = graph.node_ids
+    if {k: list(v) for k, v in orders.items()} != expectations['expected_model']['row_order']:
+        raise RuntimeRefusal('fixture row order differs from the model row order')
+    training = data.identity.resolved_settings['training']
+    trainer = VectorTrainer(model, data.validation_records,
+                            rng=PrivateRNG(data.identity, expectations['expected_runtime']),
+                            batch_size=training['batch_size'],
+                            validation_frequency=training['validation_frequency'],
+                            fingerprint=fingerprint, determinism=determinism)
+    return trainer, expectations, identity
+
+
+def restart_case(method, device, fingerprint, determinism, run_binding, epochs=4, split=2):
+    """Uninterrupted versus publish, retrieve and restore at an epoch boundary; exact."""
+    def fresh():
+        return checkpoint_fixture(method, device, fingerprint, determinism)
+    straight, expectations, identity = fresh()
+    d2 = {k: expectations[k] for k in D2_KEYS}
+    expected_device = {'fingerprint': fingerprint, 'determinism': determinism,
+                       'run_binding': run_binding}
     logs = [straight.train_epoch() for _ in range(epochs)]
-    first = run()
+    first, _, _ = fresh()
     part = [first.train_epoch() for _ in range(split)]
-    saved = first.capture_state()
-    resumed = run()
-    resumed.load_state(saved)
+    with tempfile.TemporaryDirectory() as tmp:
+        os.chmod(tmp, 0o700)
+        root = os.open(tmp, os.O_RDONLY | os.O_DIRECTORY | os.O_CLOEXEC)
+        try:
+            name = publish_cuda_checkpoint(
+                root, 'restart.a4ucp', first.cuda_payload(expectations, identity, run_binding),
+                expected_device=expected_device, **d2, io_policy=expectations['io_policy'])
+            owned = retrieve_cuda_checkpoint(root, name, expected_device=expected_device, **d2,
+                                             io_policy=expectations['io_policy'])
+        finally:
+            os.close(root)
+    resumed, _, _ = fresh()
+    resumed.restore_cuda(owned)
     part += [resumed.train_epoch() for _ in range(epochs - split)]
-    a, b = straight.capture_state(), resumed.capture_state()
-    return {'method': method, 'seed': seed, 'epochs': epochs, 'restored_after_epoch': split,
-            'logs_identical': logs == part, 'state_identical': states_equal(a, b),
-            'validation_identical': straight.validation_report == resumed.validation_report,
-            'passed': logs == part and states_equal(a, b)
-            and straight.validation_report == resumed.validation_report}
+    on_device = all(p.device == torch.device(device) for p in resumed.model.parameters())
+    a = straight.cuda_payload(expectations, identity, run_binding)
+    b = resumed.cuda_payload(expectations, identity, run_binding)
+    result = {'method': method, 'epochs': epochs, 'restored_after_epoch': split,
+              'path': 'cuda-v1 payload, D2 core validation, D3 publish and retrieve',
+              'logs_identical': logs == part, 'state_identical': states_equal(a, b),
+              'validation_identical': straight.validation_report == resumed.validation_report,
+              'parameters_on_device_after_restore': on_device}
+    result['passed'] = all(result[k] for k in ('logs_identical', 'state_identical',
+                                               'validation_identical',
+                                               'parameters_on_device_after_restore'))
+    return result
+
+
+def _child(*args, env=None):
+    """Run scripts.gpu_ready_child in a new process; its JSON output, or the failure."""
+    with tempfile.TemporaryDirectory() as tmp:
+        out = os.path.join(tmp, 'out.json')
+        proc = subprocess.run([sys.executable, '-m', 'scripts.gpu_ready_child', *args, '--out', out],
+                              cwd=ROOT, env=env, capture_output=True, text=True, timeout=900)
+        if proc.returncode != 0 or not os.path.exists(out):
+            return {'child_error': f'exit {proc.returncode}: {proc.stderr[-1000:]}'}
+        with open(out) as f:
+            return json.load(f)
+
+
+def fresh_process_restart_case(method, device_name, determinism, run_binding, epochs=4, split=2):
+    """Restart across processes: the resuming process shares only the checkpoint bytes.
+
+    `straight`, `first` and `resume` each run in a new Python process. `first` publishes a
+    cuda-v1 checkpoint through D3 and exits; `resume` retrieves it, restores and finishes.
+    """
+    common = ['--device', device_name, '--method', method, '--run-binding', json.dumps(run_binding),
+              '--determinism', 'off' if determinism is None else 'on',
+              '--epochs', str(epochs), '--split', str(split)]
+    with tempfile.TemporaryDirectory() as straight_dir, tempfile.TemporaryDirectory() as shared:
+        for d in (straight_dir, shared):
+            os.chmod(d, 0o700)
+        straight = _child('--role', 'straight', '--dir', straight_dir, *common)
+        first = _child('--role', 'first', '--dir', shared, *common)
+        resumed = (_child('--role', 'resume', '--dir', shared, *common)
+                   if 'child_error' not in first else {'child_error': 'first process failed'})
+    result = {'method': method, 'epochs': epochs, 'restored_after_epoch': split,
+              'mode': 'fresh_process',
+              'path': 'cuda-v1 payload, D2 core validation, D3 publish and retrieve across processes'}
+    errors = {k: v['child_error'] for k, v in (('straight', straight), ('first', first),
+                                               ('resume', resumed)) if 'child_error' in v}
+    if errors:
+        return {**result, 'child_errors': errors, 'passed': False}
+    result.update(
+        distinct_processes=len({straight['pid'], first['pid'], resumed['pid']}) == 3,
+        logs_identical=straight['logs'] == first['logs'] + resumed['logs'],
+        state_identical=straight['state_digest'] == resumed['state_digest'],
+        validation_identical=straight['validation_report'] == resumed['validation_report'],
+        parameters_on_device_after_restore=resumed['on_device'])
+    result['passed'] = all(result[k] for k in ('distinct_processes', 'logs_identical',
+                                               'state_identical', 'validation_identical',
+                                               'parameters_on_device_after_restore'))
+    return result
+
+
+def determinism_probes(device_name):
+    """GR04 negative tests, each in its own process: the policy must make a documented
+    nondeterministic operation raise, and the control must show the operation itself works.
+    For cuBLAS the control keeps the policy on and sets CUBLAS_WORKSPACE_CONFIG."""
+    from scripts.gpu_ready_child import PROBES
+    on_cuda = device_name.startswith('cuda')
+    without_config = {k: v for k, v in os.environ.items() if k != 'CUBLAS_WORKSPACE_CONFIG'}
+    with_config = {**os.environ, 'CUBLAS_WORKSPACE_CONFIG': ':4096:8'}
+    results = []
+    for name, scope in PROBES.items():
+        if scope == 'cuda' and not on_cuda:
+            continue
+        base = ['--device', device_name, '--probe', name]
+        if name == 'cublas_matmul_without_workspace_config':
+            policy = _child(*base, '--policy', 'on', env=without_config)
+            control = _child(*base, '--policy', 'on', env=with_config)
+        else:
+            policy = _child(*base, '--policy', 'on')
+            control = _child(*base, '--policy', 'off')
+        caught = (policy.get('raised') is True and policy.get('type') == 'RuntimeError'
+                  and 'deterministic' in policy.get('message', '').lower())
+        results.append({'probe': name, 'policy': policy, 'control': control,
+                        'expected_exception_caught': caught,
+                        'control_succeeded': control.get('raised') is False,
+                        'passed': caught and control.get('raised') is False})
+    return results
 
 
 def states_equal(a, b):
-    if type(a) is not type(b):
-        return False
-    if isinstance(a, torch.Tensor):
-        return a.dtype == b.dtype and a.shape == b.shape and torch.equal(a, b)
-    if isinstance(a, dict):
-        return a.keys() == b.keys() and all(states_equal(a[k], b[k]) for k in a)
-    if isinstance(a, (list, tuple)):
-        return len(a) == len(b) and all(states_equal(x, y) for x, y in zip(a, b))
-    return a == b
+    """Exact equality via H-REF's semantic digest (dtype, layout, shape and bytes)."""
+    return owned_digest(a) == owned_digest(b)
 
 
-def run(device_name, accelerator, plan, *, determinism=None):
+def run(device_name, accelerator, plan, *, determinism=None, run_binding=None):
     device = require_device(device_name, accelerator)
     fingerprint = environment_fingerprint(device)
+    run_binding = run_binding or {'bundle_sha256': bundle_digest(),
+                                  'run_spec_sha256': plan_digest(plan)}
     tol = plan['tolerances_float32']
     seeds = plan['fixtures']['seeds']
     parity = [parity_case(m, s, c, device, tol) for m in METHODS for s in seeds for c in CONDITIONS]
-    restart = [restart_case(m, s, device, fingerprint, determinism) for m in METHODS for s in seeds]
+    restart = [restart_case(m, device, fingerprint, determinism, run_binding) for m in METHODS]
+    restart += [fresh_process_restart_case(m, device_name, determinism, run_binding) for m in METHODS]
+    probes = determinism_probes(device_name)
     if determinism is not None:
         require_determinism()
-    passed = all(x['passed'] for x in parity + restart)
+    passed = all(x['passed'] for x in parity + restart + probes)
     return {
         'schema_version': RESULT_SCHEMA, 'profile_id': PROFILE_ID,
         'status': 'parity_complete' if passed else 'parity_failed',
@@ -233,7 +394,8 @@ def run(device_name, accelerator, plan, *, determinism=None):
         'device': device_name, 'accelerator': accelerator,
         'environment': fingerprint, 'determinism': determinism,
         'tolerances_float32': copy.deepcopy(tol), 'all_checks_passed': passed,
-        'parity': parity, 'restart': restart,
+        'parity': parity, 'restart': restart, 'determinism_probes': probes,
+        'run_binding': run_binding,
         'remaining_readiness_gates': list(GPU_READINESS_GATES),
         'data': 'owned_synthetic_fixtures_only', 'test_execution': 'not_authorized',
     }
@@ -242,8 +404,8 @@ def run(device_name, accelerator, plan, *, determinism=None):
 RESULT_KEYS = {
     'schema_version', 'profile_id', 'status', 'acceptance_scope', 'deployment_decision',
     'device', 'accelerator', 'environment', 'determinism', 'tolerances_float32',
-    'all_checks_passed', 'parity', 'restart', 'remaining_readiness_gates', 'data',
-    'test_execution',
+    'all_checks_passed', 'parity', 'restart', 'determinism_probes', 'run_binding',
+    'remaining_readiness_gates', 'data', 'test_execution',
 }
 
 
@@ -257,7 +419,8 @@ def validate_result(result):
         raise ValueError('remaining readiness gates differ from the GPU-READY list')
     if result['deployment_decision'] != 'NOT_AUTHORIZED':
         raise ValueError('deployment decision must stay NOT_AUTHORIZED')
-    passed = all(x['passed'] for x in result['parity'] + result['restart'])
+    passed = all(x['passed'] for x in
+                 result['parity'] + result['restart'] + result['determinism_probes'])
     if result['all_checks_passed'] is not passed:
         raise ValueError('summary verdict disagrees with the individual checks')
     if result['status'] != ('parity_complete' if passed else 'parity_failed'):

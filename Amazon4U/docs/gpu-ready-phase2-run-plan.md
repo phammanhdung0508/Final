@@ -17,6 +17,24 @@ Machine-readable: [`../configs/gpu-ready-phase2-run-plan.json`](../configs/gpu-r
 4. **Kaggle run 3, restart:** uninterrupted versus checkpoint-and-restore on the same GPU
    in the same session. Covers GR06.
 
+**Revised after run 1 (user, 2026-10-24).** Run 1 executed the whole runner: full
+parity, which covers steps 3's purpose, and same-process restart. Runs 2 and 3 are not run
+as planned. The user's review of run 1 found that the restart was same-process only. The
+user said: "GR06 fresh-process restart I recommend performing this test. It is an
+essential requirement for training resilience, not a redundant test." The user also asked
+for controlled GR04 negative tests that run separately.
+
+- **Kaggle run 2, fresh-process restart and determinism probes.** It re-runs the whole
+  runner and adds:
+  - for each model, `straight`, `first` and `resume` in three separate processes, sharing
+    only the checkpoint bytes, compared bit for bit;
+  - five GR04 probes, each in its own process. Each probe runs a documented
+    nondeterministic operation with the policy on, which must raise, and a control,
+    which must succeed.
+- Run 3 is not planned. On 2026-10-25 the user confirmed it is skipped. The failed cuBLAS
+  probe in run 2 tested a check PyTorch removed before 2.10 (see
+  [`gpu-ready-traceability.md`](gpu-ready-traceability.md#run-2-2026-10-24)).
+
 Each run starts only after the previous run's report is reviewed. A failed run is
 recorded and diagnosed; any further run needs a recorded reason and stays inside the
 budget.
@@ -69,6 +87,7 @@ backward passes are the expected risk points, to be verified in run 2.
 | GPU | One T4 of the Kaggle T4 x2 pair (`CUDA_VISIBLE_DEVICES=0`) |
 | Collected output per run | 64 MiB |
 | Automatic retries | None |
+| GPU-hour ledger | Each reserved run books its full session timeout. A launch is refused before any Kaggle call if the booked total plus the new run would exceed 1.5 hours (added 2026-10-24) |
 
 ## Outputs
 

@@ -21,19 +21,22 @@
     },
     {
       "n": 2,
-      "purpose": "cpu_gpu_parity_same_session",
+      "purpose": "fresh_process_restart_and_determinism_probes",
       "covers": [
-        "GR03",
         "GR04",
-        "GR05"
-      ]
+        "GR06",
+        "GR10"
+      ],
+      "replaces": "cpu_gpu_parity_same_session (covered by run 1)",
+      "decided": "2026-10-24 by the user: \"GR06 fresh-process restart I recommend performing this test. It is an essential requirement for training resilience, not a redundant test.\" and GR04 controlled negative tests in separate processes"
     },
     {
       "n": 3,
       "purpose": "restart_vs_uninterrupted_same_gpu",
       "covers": [
         "GR06"
-      ]
+      ],
+      "status": "not_planned_run_1_covered_its_purpose (user, 2026-10-24)"
     }
   ],
   "fixtures": {
@@ -79,7 +82,8 @@
     "local_full_suite": {
       "seconds": 240,
       "peak_rss_bytes": 2147483648
-    }
+    },
+    "gpu_hour_ledger": "each reserved run books its full session timeout; launch refused if booked + this run > max_total_gpu_hours"
   },
   "outputs": "data/reports/gpu-ready-v1/run-<n>/ (fresh, no overwrite); review at data/reports/gpu-ready-v1/review.json",
   "acceptance_scope": "task_only_GPU_READY",

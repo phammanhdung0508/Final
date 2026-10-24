@@ -1,6 +1,9 @@
 # Execution Readiness, phase 1: GPU-READY preparation plan
 
-Status: **Phase 1 decisions agreed (2026-10-24).** Next: local CPU implementation. Nothing in this
+Status: **GPU-READY accepted by the user (2026-10-25): "LGTM!! Accept GR01 - 10."** The
+evidence is in [`gpu-ready-traceability.md`](gpu-ready-traceability.md). The requirement
+table below keeps its phase-1 status column as written. Phase 1 decisions were agreed on
+2026-10-24. Nothing in this
 plan changes code or launches a job. Each later step needs the approval named in the
 gate table below. Deployment remains `NOT_AUTHORIZED`.
 Machine-readable companion: [`../configs/gpu-ready-preparation.json`](../configs/gpu-ready-preparation.json).
@@ -142,5 +145,5 @@ Reviewed by the user on 2026-10-24; decisions are in the table at the top.
 | Writing GPU-profile code beside accepted code | User approval of the design notes |
 | Any change to a frozen accepted file | Separate explicit scope and preservation review |
 | First Kaggle run or credential access | G4 and the budget are agreed; a run also needs the local CPU work and full suite passing first |
-| GPU-READY acceptance | Independent review of GR01 to GR10 evidence |
+| GPU-READY acceptance | Independent review of GR01 to GR10 evidence. The reviewer is the user, working through the evidence with the agent; no other model is invoked (user, 2026-10-24). The agent's own review does not count as acceptance |
 | Musical_Instruments profiling plan, then its run | Separate approvals after GPU-READY |

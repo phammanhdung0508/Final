@@ -2234,8 +2234,8 @@ def consume_kernel_logs(
     deadline = start_time + deadline_seconds
 
     def redact_text(text: str) -> str:
-        r = re.sub(r"(bearer\s+)[A-Za-z0-9_\.-]+", r"\\1[REDACTED]", text, flags=re.I)
-        r = re.sub(r"(token|key|password|credential|secret|bearer)\s*[:=]\s*[A-Za-z0-9_\.-]+", r"\\1=[REDACTED]", r, flags=re.I)
+        r = re.sub(r"(bearer\s+)[A-Za-z0-9_\.-]+", r"\1[REDACTED]", text, flags=re.I)
+        r = re.sub(r"(token|key|password|credential|secret|bearer)\s*[:=]\s*[A-Za-z0-9_\.-]+", r"\1=[REDACTED]", r, flags=re.I)
         return r
 
     def cap_utf8(text: str) -> str:
