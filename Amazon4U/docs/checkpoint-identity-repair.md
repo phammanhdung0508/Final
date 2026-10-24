@@ -114,7 +114,7 @@ not values computed by the candidate API or empty/nonempty assertions.
 
 ### C. documentation and report accuracy
 
-Fix section3.1 categories/validation target items/validation records to actual LIST
+Fix section 3.1 categories/validation target items/validation records to actual LIST
 shapes; preserve correct tuple shapes for training records/graph edges/node IDs.
 Document all new fields, applicability, caller evidence, domain errors, bounds,
 mutable nested state and ordered-list exceptions. Use relative source links, not
@@ -135,7 +135,7 @@ execution. No subset unittest, smoke import, candidate oracle probes, ad-hoc Pyt
 compileall, detached/background runs or modified wrappers. Read-only navigation
 and copying the declared protected draft into allowed source paths are permitted;
 use optional-lock-free Git reads. Independent literal-preimage SHA calculation
-using printf/sha256sum is explicitly allowed as source-authoring arithmetic, NOT a
+using printf/sha 256 sum is explicitly allowed as source-authoring arithmetic, NOT a
 candidate test or benchmark; record those commands honestly in report limitations.
 Do not scan real data/credentials or the entire workspace to find evidence.
 
@@ -154,30 +154,30 @@ acceptance, implicit deployment or automatic source tuning after final review.
 
 ## Recorded result: FINAL ESCALATE
 
-Task `9617ef2b-5a76-4376-8aee-aa36a3e08a74`, revision0/max_revisions0;
+Task `9617ef2b-5a76-4376-8aee-aa36a3e08a74`, revision 0/max_revisions0;
 invocation `caf4b67a-cb58-43f6-90e1-a477a023bb71`, completed normally in
 2,110,512 ms under explicit long_running policy. Worker reported one full-suite
 243-test passing run in14.113s. Pi independently reran the exact predeclared
-command:243tests, zero failures/errors, 8.744s unittest/12,602ms process, all204
+command: 243 tests, zero failures/errors, 8.744s unittest/12,602ms process, all 204
 baseline preserved. Benchmark `agy-evidence-42eabb37-03b0-4200-9a3a-07ea7a336004`.
 
-Pi read complete2520source/2070test/262doc lines plus relevant accepted typed-ID
+Pi read complete 2520 source/2070 test/262 doc lines plus relevant accepted typed-ID
 and reproducibility dependencies, and independently verified new literal settings
 and composite hashes using static AST literals and independent JSON/SHA256 without
 candidate import/execution. Fresh inspection
-`agy-evidence-0265e833-0303-47c6-8aa6-358e1eebe660`: exactly3allowedfiles,
-unauthorized[],Gitunchanged, 139protectedfiles/86,476,445bytes and130outside
+`agy-evidence-0265e833-0303-47c6-8aa6-358e1eebe660`: exactly 3 allowedfiles,
+unauthorized[], Gitunchanged, 139 protectedfiles/86,476,445bytes and 130 outside
 sentinels. Previous correction draft/HEAD/index/status unchanged. Runtime artifacts
 retained; fixture scratch empty. Monitoring is not an OS sandbox/complete action
-audit; captured163action candidates remain untrusted navigation.
+audit; captured 163 action candidates remain untrusted navigation.
 
 Final decision `agy-evidence-7f432a65-0de4-4111-a7de-334e7af5ef42`:
 **ESCALATE**, acceptance_scope **task_only**, deployment **NOT_AUTHORIZED**.
 No accepted code transferred to main, no automatic revision or new invocation.
 
-Substantial fixes verified: literalUTF8 compatibility restored at both sites,
-from_dict mixed-key sorting guarded, full structured10component RNG/worker/thread
-recording schema implemented, isolated metadata and multi-category cases, retained-u2
+Substantial fixes verified: literalUTF 8 compatibility restored at both sites,
+from_dict mixed-key sorting guarded, full structured 10 component RNG/worker/thread
+recording schema implemented, isolated metadata and multi-category cases, retained-u 2
 history guards and actual/expected late-file zero-hash bounds added, list/tuple docs
 and ordered exceptions corrected. These improvements are not whole-deliverable
 acceptance.
@@ -190,13 +190,13 @@ Remaining mandatory gates, identified from actual code/tests (not Worker claims)
   are not covered by direct-constructor tampering tests; numeric-overflow coverage
   is absent. Provenance malformed untracked MEMBERS and forbidden paths in both
   validator roles remain absent. Most cases lack intended-guard diagnostics.
-- Statically identified malformed-UTF8 public error: literal lone-surrogate labels
+- Statically identified malformed-UTF 8 public error: literal lone-surrogate labels
   can pass scalar/category string checks, then canonical JSON UTF8 encoding raises
   incidental UnicodeEncodeError. Preserve ensure_ascii=False; reject invalid scalar
-  evidence or translate serialization errors clearly, rather than regress validUTF8.
+  evidence or translate serialization errors clearly, rather than regress validUTF 8.
   No unauthorized candidate probe was run to reach this conclusion.
 - Worker report's 'strictly satisfying all checklist items'/unresolved[] claim is
-  unsupported by actual mandatory coverage. Passing243tests cannot waive it.
+  unsupported by actual mandatory coverage. Passing 243 tests cannot waive it.
 
 Evidence lives in `data/reports/checkpoint-identity-repair-setup/`, including original
 and approved command/spec, baseline, checksum-verified materialized report/full

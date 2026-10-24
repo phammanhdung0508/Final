@@ -25,7 +25,7 @@ integration is ACCEPT, with **249 passing tests**, recorded in
 [the integration record](checkpoint-identity-main-integration.md). That decision
 supersedes older progress notes' 204-test count, not their preserved historical results.
 
-Frozen dependency SHA256s:
+Frozen dependency SHA 256s:
 
 - `scripts/checkpoint_identity.py`: `6c91bab8229be89453e9b485f3f8df758bfa91e2611296b68c61c5cbe5bb5b2c`
 - `tests/test_checkpoint_identity.py`: `72c874a40f8686e5ab1a914cb9427ec0f9470c127221960195cf8d465532c468`
@@ -385,7 +385,7 @@ this clarification waives none of their assigned safety requirements.
 
 No identity/provenance redo, source/schema change, broader device/model support,
 hardware-capacity verification, Worker launch, tests, training, main transfer or
-deployment is authorized. Exactly three checkpoint deliverables remain; Deliverable2
+deployment is authorized. Exactly three checkpoint deliverables remain; Deliverable 2
 is still unimplemented and requires separate implementation authorization.
 
 ## Finalized preparation contract, runtime policy and state boundaries
@@ -561,7 +561,7 @@ references. Callers must prevent concurrent mutation of actual/expected inputs d
 the call; this is not a concurrent-memory sandbox. After return, input mutations cannot
 change the owned result, but a recipient modifying that result must revalidate it.
 
-### 4. Adam boundary contract
+### 4. adam boundary contract
 
 `optimizer` has exactly `algorithm`, `state_dict`, `parameter_bindings`;
 `algorithm` is `Adam`. `state_dict` has exactly `state` and `param_groups`, matching
@@ -644,7 +644,7 @@ Supported codecs (all other engine/format IDs fail):
 |---|---|
 | `python.random.MT19937.v3` | tuple `(3, internal, gauss)`; internal is a tuple of 625 exact ints: 624 uint32 words, then index 0..624; gauss is None or finite float. No version-2 signed-word coercion. Parse only on private `random.Random(0)`. |
 | `numpy.random.RandomState.MT19937.v1` | tuple `("MT19937", keys, position, has_gauss, cached_gauss)`; keys is a list of 624 uint32 exact ints, position 0..624, has_gauss exact int 0/1, cached_gauss finite float. A cached value need not be zero when its flag is zero. Build only the bounded private uint32 key array for `RandomState(0).set_state`. Raw ndarrays are not payload leaves. |
-| `numpy.random.PCG64.v1` | exact dict `bit_generator="PCG64"`, `state={state,inc}`, `has_uint32`, `uinteger`; state/inc are uint128 exact ints, inc odd; flag exact int 0/1 and uinteger uint32. Inactive cached uint32 may remain nonzero. Validate with a private `PCG64(0)` state setter, not the process-global RNG. PCG64DXSM and Generator-MT19937 dict formats are not aliases of this codec. |
+| `numpy.random.PCG64.v1` | exact dict `bit_generator="PCG64"`, `state={state,inc}`, `has_uint32`, `uinteger`; state/inc are uint128 exact ints, inc odd; flag exact int 0/1 and uinteger uint32. Inactive cached uint32 may remain nonzero. Validate with a private `PCG64(0)` state setter, not the process-global RNG. PCG64DXSM and Generator-MT 19937 dict formats are not aliases of this codec. |
 | `torch.cpu.Generator.native.v1` | detached contiguous 1-D CPU uint8 tensor; require the current native state length supported by the matching pinned framework profile, then native `set_state` on a private CPU Generator. Test invalid internal engine controls as well as wrong dtype/length; length alone is insufficient. Native `initial_seed()` must agree with declared Torch seed material. No raw ABI-offset decoder, legacy byte-format conversion, CUDA state or global `torch.set_rng_state`. |
 
 Seed material is an exact nonnegative int for Python/Torch; Torch also obeys
@@ -834,12 +834,12 @@ command as independently hashed references. The two uncommitted planning records
 not silently represented as committed HEAD content.
 
 P3. Execute only the declared full-suite command, in its declared cwd and scratch,
-within120seconds; retain complete untruncated streams/status/hashes, including any
+within 120 seconds; retain complete untruncated streams/status/hashes, including any
 failure or interruption. No subset tests, smoke imports, compileall or ad-hoc probes.
 
-P4. Reproduce all249 accepted test IDs, exit0 with zero failures/errors/skips. Read all
+P4. Reproduce all 249 accepted test IDs, exit 0 with zero failures/errors/skips. Read all
 actual results and compare with the earlier accepted main integration evidence, not
-only a test-count summary. Green tests alone do not accept Deliverable2.
+only a test-count summary. Green tests alone do not accept Deliverable 2.
 
 P5. Capture stable before/after streamed hashes of tracked/nonignored clone files and
 all explicitly protected input references, outside-project tracked/nonignored sentinels
@@ -853,7 +853,7 @@ sandbox, comprehensive action audit or coverage of undeclared ignored contents/r
 transient writes. No sibling edits or semantic dataset inspection.
 
 P6. Record a separate Pi preparation ACCEPT or ESCALATE with evidence for P1-P6.
-Its acceptance_scope is task_only **for preparation/baseline only**, not Deliverable2
+Its acceptance_scope is task_only **for preparation/baseline only**, not Deliverable 2
 implementation acceptance; deployment_decision NOT_AUTHORIZED. Implementation remains
 separately unauthorized even after a successful baseline. Future source/spec changes
 require fresh synchronization/relevant verification rather than reuse of stale evidence.
@@ -895,7 +895,7 @@ The implementation resolves all 6 confirmed blockers identified in historical re
 - Enforced that NumPy worker seed words are restricted strictly to NumPy codecs (`numpy.random.PCG64.v1` and `numpy.random.RandomState.v1`).
 - Verified by `test_r3_torch_worker_seed_integer`, `test_r4_python_worker_seed_integer`, and `test_rng_and_codecs_validation`.
 
-#### Blocker 4: Adam betas exact tuple validation
+#### Blocker 4: adam betas exact tuple validation
 - Enforced that `betas` in both actual optimizer `param_groups` and `expected_runtime['optimizer_groups'][g]['options']` must be an exact 2-tuple: `type(betas) is tuple and len(betas) == 2`. Lists, singletons, or tuples of other lengths fail closed.
 - Verified by `test_adam_optimizer_validation` and `test_strict_schemas_and_types`.
 

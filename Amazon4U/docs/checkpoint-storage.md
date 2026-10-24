@@ -7,8 +7,8 @@ The user directed Pi to conclude D2 and prepare D3, with this explicit boundary:
 > D2 validates checkpoint data after it has been decoded, while D3 is responsible for the secure storage/retrieval of checkpoints and their integration with D1/D2.
 
 **D2 is concluded:** implementation and separate main integration are ACCEPT,
-`task_only`. Main integration verified355 tests, zero failures/errors/skips,
-54.139s unittest /56.643s process, within120s. The authoritative decision remains
+`task_only`. Main integration verified 355 tests, zero failures/errors/skips,
+54.139s unittest /56.643s process, within 120s. The authoritative decision remains
 `data/reports/checkpoint-payload-main-integration/review.json`.
 No new D2 error has been identified in this preparation. Do not initiate another
 D2 correction, re-audit, Worker round or security-controller investigation. D1/D2
@@ -130,13 +130,13 @@ Do not let a Worker silently choose them while implementing:
    check followed by an overwriting rename.
 5. **Exact APIs and test setup.** Pin signatures, exception family, format/policy schema,
    path limits, synthetic controls, fault-injection hooks and resource oracles. Select
-   an isolated checkout, baseline355, exact executable/argv/cwd/scratch, output paths,
+   an isolated checkout, baseline 355, exact executable/argv/cwd/scratch, output paths,
    dependency hashes and bounded response/revision/execution budgets before any Worker
    or candidate execution. No stale HEAD or old benchmark is a fresh D3 baseline.
 
 ## Prospective execution boundaries, not execution permission
 
-Retain the existing correctness-fixture envelope: CPU only, at most8 users,
+Retain the existing correctness-fixture envelope: CPU only, at most 8 users,
 12 products, 8 metadata nodes/type, 64 dimensions; new fixture files≤2MiB. Synthetic
 Adam mappings/private RNG states only, **no optimizer steps/backward/training**, live
 restoration, worker processes, CUDA, real datasets, remote jobs or held-out evaluation.
@@ -187,17 +187,17 @@ unsafe fallbacks, silent weakening, new scientific defaults or dependency rewrit
 Prospective plan, complete exact user approval, original preparation text, pinned
 HEAD, three patch paths, command/cwd/scratch and fixture/response/execution bounds:
 `data/reports/checkpoint-storage-implementation/plan.json` and its `inputs/`.
-One initial text-only response and at most one consolidated revision, 30minutes each,
+One initial text-only response and at most one consolidated revision, 30 minutes each,
 one generation request each/no retries; no architecture or controller changes.
-Pi alone screens before each original full discovery (120s, at most6per round,
-including the initial355-test dependency baseline). This is a fresh D3 dependency
+Pi alone screens before each original full discovery (120s, at most 6 per round,
+including the initial 355-test dependency baseline). This is a fresh D3 dependency
 baseline, not reopening or auditing D2.
 
 Only fresh owned synthetic scratch IO may run after source/test semantic review.
 No unsafe pickle/loader fallback, attacker-hook execution, giant allocation or
 bomb-decompression test, live host/source/credential/data target, restoration,
 training, CUDA, worker process, remote/heldout work, main transfer or commit/push.
-New files≤2MiB; concurrent new fixtures≤8MiB/128files and decoded tensor storage≤2MiB;
+New files≤2MiB; concurrent new fixtures≤8MiB/128 files and decoded tensor storage≤2MiB;
 D2's synthetic logical bounds remain unchanged. Small explicit IO-policy negatives
 and nonexecuting boundary tripwires must replace dangerous test workloads.
 These are verification budgets, not universal production-capacity guarantees.
@@ -264,8 +264,8 @@ length, and SHA-256 of the body. Length must match exactly, with no trailing byt
 The digest detects accidental corruption; it is not independent authenticity evidence.
 
 The body uses one-byte tags: `n/t/f` for None/booleans; `i` for sign byte plus
-uint64-length minimal unsigned big-endian magnitude; `r` for finite IEEE binary64;
-`s/b` for uint64-length strict UTF8/raw bytes; `m/l/u` for uint32-count insertion-ordered
+uint 64-length minimal unsigned big-endian magnitude; `r` for finite IEEE binary 64;
+`s/b` for uint 64-length strict UTF8/raw bytes; `m/l/u` for uint 32-count insertion-ordered
 plain dict/list/tuple. Dict keys are supported primitive keys or recursively primitive
 tuples; duplicate/equality-colliding keys are refused. Large exact integers, integer
 optimizer keys, bytes and list/tuple distinctions survive without JSON coercion.
@@ -273,7 +273,7 @@ D2 retains authority over its stricter semantic/container rules.
 
 `D` is a dense tensor: dtype byte, uint32 rank, uint64 dimensions, uint64 byte count,
 and the complete raw compact storage. Dtype codes are 1 uint8, 2 int64, 3 float32,
-4 float64, 5 int32, 6 int16, 7 int8, 8 bool, 9 float16 and 10 bfloat16. Raw tensor
+4 float64, 5 int32, 6 int 16, 7 int8, 8 bool, 9 float 16 and 10 bfloat16. Raw tensor
 bytes currently use native endianness; **cross-endian interchange is unsupported**.
 This is a concrete format limitation, not a portable interchange claim. The format
 implicitly requires canonical contiguous strides and offset zero; arbitrary strided
@@ -421,7 +421,7 @@ or the original IO1-IO8. The user explicitly approved these conditions:
 > Proceed from the existing candidate, conduct a comprehensive review against criteria IO1-IO8, and ensure no history is reset, nor should any additional, unrequested correction cycles be initiated.
 
 The second condition concerns the separately bounded SDK wrapper, which these product
-patches do not modify. This is the same OriginalD3 deliverable. Three prior request
+patches do not modify. This is the same Original D3 deliverable. Three prior request
 attempts, two prior technical responses, the incomplete completion, unapplied reference,
 old ESCALATE reports and five prior full-suite-associated runs remain history. This is
 one additional response, fourth overall, with no retry, follow-up or revision requested.
@@ -521,7 +521,7 @@ fsync and crash durability remain unpromised.
 
 The 48-byte envelope now starts with the eight literal bytes `A4UCP\x00\x02L`.
 `L` explicitly selects little-endian dense numeric storage. Envelope lengths, structural
-fields, integer metadata and scalar IEEE binary64 encoding retain their previous
+fields, integer metadata and scalar IEEE binary 64 encoding retain their previous
 big-endian definitions. Dense numeric bytes are little-endian; opaque uint8 native
 RNG bytes are preserved unchanged and are not byte-swapped or reinterpreted by D3.
 Both encoding and decoding refuse a non-little-endian native platform. Old ambiguous

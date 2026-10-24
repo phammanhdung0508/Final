@@ -51,7 +51,7 @@ focused fixes only. Allowed Git-root-relative files:
 Required: one shared engine/context/error/import identity; exact candidate/history,
 finite-score and ranking/metric semantics; guarded same-context legitimate KG
 fallback with exact popularity; core always emits both protocol fallback reasons
-with count0/all-None metrics when absent, while strict standalone defaults and
+with count 0/all-None metrics when absent, while strict standalone defaults and
 provider fallback rejection remain unchanged. Exact empty/no-fallback/empty-positive-
 only and mixed three-route/by-reason macro/coverage fixtures are mandatory.
 Profile finiteness validation must not trust a provider-overridden validator;

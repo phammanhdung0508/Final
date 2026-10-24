@@ -121,10 +121,10 @@ pending, not disguised as work already completed during preparation.
   active-stage-only output exclusions are in the configuration. No sibling writes.
   Interrupted/unstable/over-budget snapshots block acceptance, not silent exclusions.
   Undeclared ignored paths are not exhaustively monitored. Monitoring is not an OS
-  sandbox, exhaustive transient-write record, hostile-sameUID atomic-unlink guarantee or
+  sandbox, exhaustive transient-write record, hostile-same UID atomic-unlink guarantee or
   total-process-tree RAM accounting.
 
-Historical counters stay **SDK4/native1/full-H4**; original full-run allowance remaining
+Historical counters stay **SDK 4/native 1/full-H4**; original full-run allowance remaining
 is zero. Proposed main runs are a separately authorized addition, not a reset. If both
 start, cumulative H-associated full discoveries become six. Reserved slots are not
 consumed runs. Any failure, timeout, unsafe path or stale evidence stops the sequence;

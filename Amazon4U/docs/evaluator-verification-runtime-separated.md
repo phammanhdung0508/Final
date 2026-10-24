@@ -179,7 +179,7 @@ is separate from the initially byte-identical five-file transfer and is not a
 source-code change. Accepted isolated snapshot and historical decisions untouched.
 Remaining-I1 verification is next; no learned training/profiling/deployment run.
 
-### User-requested telemetry Git exclusion
+### User-requested telemetry git exclusion
 
 User requested ignoring `datacloud_telemetry`. Main `Amazon4U/.gitignore` now
 excludes `datacloud_telemetry/` directories at any depth within Amazon4U. This is

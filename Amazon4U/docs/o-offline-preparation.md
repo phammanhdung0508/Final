@@ -10,17 +10,17 @@ Machine proposal: `../configs/o-offline-preparation.json`.
 Requirement/evidence matrix: [o-offline-requirements.md](o-offline-requirements.md).
 All future budgets/commands below are PROPOSED, not released by this preparation.
 
-Main H-REF is accepted/task_only; its current six files and26inherited Python modules
+Main H-REF is accepted/task_only; its current six files and 26 inherited Python modules
 still match accepted hashes. The last existing full result is412PASS/75.717s/794771456
-bytes RSS. No tests were rerun here. H history remains SDK4/native1/7full invocations,
-108successful Hsteps inferred, with0remaining released full/mock slots. O starts with
-0invocations/0tests, not a reset or transfer of H/D3 budgets. Deployment NOT_AUTHORIZED.
+bytes RSS. No tests were rerun here. H history remains SDK 4/native 1/7 full invocations,
+108 successful Hsteps inferred, with 0 remaining released full/mock slots. O starts with
+0 invocations/0 tests, not a reset or transfer of H/D3 budgets. Deployment NOT_AUTHORIZED.
 
 ## Start point and actual static findings
 
 Main HEAD: `9071b9bfdfeda2b65074b24c7add545f9c3d8c45`.
 Selected existing runner:
-`multiautoresearch/post-training/scripts/kaggle_job.py` (781lines, completely read).
+`multiautoresearch/post-training/scripts/kaggle_job.py` (781 lines, completely read).
 Read its CLI dispatch/render/generated-program/launch/status/log/output callees,
 actual kickoff/program instructions and dependencies. Legacy LM/Movie instructions
 are reference only; none was executed. No pre-training/inference runner is selected.
@@ -35,7 +35,7 @@ L1-L9 remain present in current source, with precise qualifications:
 | L4 | `launch_job` resolves user/credentials, renders files and mutates last/job state BEFORE checking dry_run. It is not pure offline rendering. |
 | L5 | `collect_project_files` collects legacy root/src/models, not explicit Amazon4U scripts/configs/outer closure; no source byte/count/type policy and is_file follows symlinks. |
 | L6 | Generated pip failure warns and continues; requirements are not pinned; no approved environment/input/capability gate. Metadata internet defaults true. |
-| L7 | Log-regex eval_score and optional metrics do not establish typed complete Amazon4U results/artifacts. Fetch can return success without metrics. Unsupported logs can return0 but are not availability proof. |
+| L7 | Log-regex eval_score and optional metrics do not establish typed complete Amazon4U results/artifacts. Fetch can return success without metrics. Unsupported logs can return 0 but are not availability proof. |
 | L8 | Fixed prepare slug, second-resolution experiment slug, mutable last/slug state, render overwrite and forced output download allow collisions/cross-run reuse. |
 | L9 | `.split()` loses typed argument boundaries. Current subprocess calls use argv lists, NOT shell=True; do not invent a shell-execution finding. |
 
@@ -47,13 +47,13 @@ Additional O integration findings:
 - Accepted H exposes `execute_fixture(...)` with independently supplied owned objects,
   expectations, authorization/envelope and bundle arguments. Its `main()` deliberately
   refuses host/CLI acquisition; the module has NO __main__ guard. Running the file directly
-  can exit0 without doing any work. O needs an explicit callable adapter, not an H edit or
+  can exit 0 without doing any work. O needs an explicit callable adapter, not an H edit or
   a success claim from `python scripts/training_entrypoint.py`.
-- Main scripts is a namespace package:there is NO scripts/__init__.py. Preserve actual
+- Main scripts is a namespace package: there is NO scripts/__init__.py. Preserve actual
   import layout; do not add a protected H file to satisfy an old illustrative fixture.
-- H's fixed28-path supplied-byte manifest is NOT the full O runtime closure. An O outer
+- H's fixed 28-path supplied-byte manifest is NOT the full O runtime closure. An O outer
   manifest must also bind the runner, profile/kernel adapter, generated code and relevant
-  dependency/config/source snapshots without changing D1's20paths, D2 schemas or H's28.
+  dependency/config/source snapshots without changing D1's 20 paths, D2 schemas or H's28.
 
 Full locations, hashes and evidence are in `source-audit.json`/`inspection.json`.
 These are source-level findings, not observed deployed failures or new H defects.
@@ -118,7 +118,7 @@ O-OFFLINE must not silently claim that capability.
 
 ## Proposed contracts and failure rules
 
-Strict versioned O plan fields:profile/mode, run+attempt IDs, explicit fake/live evidence
+Strict versioned O plan fields: profile/mode, run+attempt IDs, explicit fake/live evidence
 kind, protocol/execution-profile/approval references, Hspec/envelope references, device+
 accelerator, input/source/bundle expectations, required stages, limits, transport capabilities
 and owner/slug/version binding. Private=true/internet=false by default. No credential,
@@ -176,9 +176,9 @@ pre-training/inference, requirements/dependencies, external CLI or extension edi
 No new source files/packages outside this list without a prospective scope decision.
 Main integration of accepted O is a later separate gate, not automatic from isolation.
 
-Proposed first native round:at most2actual invocations (initial+one consolidated revision),
-30minutes each, max_revisions1 through supported delegate/inspect/benchmark/review workflow.
-Worker is source/AST/patch only:no tests, target imports, CLI, network, packages, credentials,
+Proposed first native round: at most 2 actual invocations (initial+one consolidated revision),
+30 minutes each, max_revisions1 through supported delegate/inspect/benchmark/review workflow.
+Worker is source/AST/patch only: no tests, target imports, CLI, network, packages, credentials,
 Git writes or runtime probes. Pi reviews complete changes/callers/generated programs/tests
 before original full verification. Reports remain untrusted/truthful; no limitation/issue
 wording is removed or scope label invented to force ACCEPT. All native workflow approval,
@@ -186,23 +186,23 @@ baseline, inspection, history, terminal and limitation gates remain mandatory. I
 cannot represent a needed disposition, stop for supported handling, not replacement tasks.
 No SDK fallback or second recovery round is approved by this preparation.
 
-Proposed maximum3fresh full discoveries:one unchanged412baseline, one initial O-augmented
+Proposed maximum 3 fresh full discoveries: one unchanged 412 baseline, one initial O-augmented
 suite, and at mostone after an authorized consolidated revision. Exact child discovery
 and supervisor command proposals/generated paths are in the configuration. Do not run
 subsets/smokes/import probes/compileall or execute generated real kernels. O tests may
 execute only bounded generated FAKE programs with injected fake entrypoint/preflight,
 no target H/model execution. The old412suite's inherited tiny CPU work must be explicitly
-approved as part of those full commands; O adds0numerical updates. Static H bound36/suite
-would add at most108 to prior108=216, within unchanged whole-H256cap. This is an upper
+approved as part of those full commands; O adds 0 numerical updates. Static H bound 36/suite
+would add at most 108 to prior108=216, within unchanged whole-H256cap. This is an upper
 bound/inference, not observed O execution or permission to spend remaining steps later.
 
-Each proposed full child <=240s/2GiB child peakRSS/8MiB complete stream each/64MiB scratch.
+Each proposed full child <=240s/2GiB child peak RSS/8MiB complete stream each/64MiB scratch.
 Tiny O fixtures <=2MiB per file/decoded,<=8MiB concurrent/128files,<=8mock pages,
-<=5fake polls,<=64KiB chunks (smaller limits for boundary negatives). Zero actual network,
+<=5 fake polls,<=64KiB chunks (smaller limits for boundary negatives). Zero actual network,
 credentials, pip, CUDA, process workers/threads or new RNG/dtype/security setters.
 Use the accepted race-tolerant monitor and exact OwnedCache cleanup semantics in a new
 versioned parameterized wrapper, with declared fresh source/output paths; do not rerun
-frozen consumed H verifiers. Hashing <=128MiB/file, 512MiBaggregate, 60s/file, 300s/snapshot;
+frozen consumed H verifiers. Hashing <=128MiB/file, 512 MiB aggregate, 60s/file, 300s/snapshot;
 include recursive Git/outside-project sentinels and protected ignored source/evidence.
 Monitoring is not an OS sandbox or total-process-tree/transient-write guarantee.
 

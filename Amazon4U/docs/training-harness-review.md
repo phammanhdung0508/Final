@@ -51,7 +51,7 @@ small CPU synthetic fixtures only (8 users, 12 products, 8 metadata nodes/type, 
 
 ## Preserved state and next decision
 
-Existing main staged Step3b work remains intact. No new staging, commits or pushes
+Existing main staged Step 3b work remains intact. No new staging, commits or pushes
 were performed in this harness attempt. Movie4U source was not changed. Prior setup
 ESCALATEs (`a36fc1dd-9249-4f62-8770-7dc7530ae532`,
 `f8d3819a-19be-408e-b2d3-90d5bdb4bb9c`,
@@ -81,8 +81,8 @@ predeclared. No real-data training/profiling/Kaggle/deployment/commits/staging/p
 First recovery implementation uses a fresh clean clone under
 `Amazon4U/.worktrees/harness-model-recovery/`, preserving the rejected draft. It adds
 only `scripts/differentiable_models.py`, `tests/test_differentiable_models.py`, and
-`docs/differentiable-models-recovery.md`. The clone is at committed Step3a baseline;
-main staged Step3b files are not changed or copied over. The first benchmark therefore
+`docs/differentiable-models-recovery.md`. The clone is at committed Step 3 a baseline;
+main staged Step 3b files are not changed or copied over. The first benchmark therefore
 must preserve its 140 baseline tests; main integration later must preserve all 163.
 No optimizer steps or checkpoint serialization in this first subsystem. Required
 model tests use at most 8 users/12 products/8 metadata nodes per type, 64 dimensions,
@@ -143,7 +143,7 @@ Passing tests do not override the incomplete mandatory execution/report gate. Pr
 this tested snapshot; a future explicitly bounded evidence-completion plan should
 finish independent final review and completion evidence without rewriting/retuning
 models or retroactively accepting the interrupted task. Checkpoint/provenance and
-loop subtasks remain pending. Main staged Step3b work and Movie4U remain unchanged.
+loop subtasks remain pending. Main staged Step 3b work and Movie4U remain unchanged.
 
 ## User-approved frozen verification-only recovery
 

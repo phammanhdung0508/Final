@@ -10,7 +10,7 @@ fixes are Pi's responsibility; do not ask the user to choose error messages or
 fixtures. No new scientific choice or execution default is selected.
 
 ONE whole-deliverable correction invocation, max_revisions=0, explicit long_running
-Worker, finite120s full-suite verification. Preserve task
+Worker, finite 120s full-suite verification. Preserve task
 `9617ef2b-5a76-4376-8aee-aa36a3e08a74` FINAL ESCALATE and all older decisions,
 exhausted budgets, drafts, commands and runtime artifacts. No reopen/reset or
 partial acceptance. Exactlythree substantive deliverables remain; this is still
@@ -28,13 +28,13 @@ for all previously valid inputs. No protocol freeze or invented actual settings.
 No real data/source capture, profiling, training, optimizer steps, tensors in NEW
 tests, CUDA/GPU/Kaggle/heldout, subagents, staging/commits/pushes, sibling writes,
 payload validation, secureIO or live restoration/training-loop work. New tests are
-standard-library CPU memory fixtures <=8users/12products/8metadata nodes/type;
-source/provenance bound2MiB unchanged (small boundary-negative excess allowed).
+standard-library CPU memory fixtures <=8 users/12 products/8 metadata nodes/type;
+source/provenance bound 2MiB unchanged (small boundary-negative excess allowed).
 Task-only acceptance; deployment NOT_AUTHORIZED, no deployment_policy.
 
 ## Consolidated correction worksheet
 
-Retain all204baseline and39existing contract test methods and all earlier mandatory
+Retain all 204 baseline and 39 existing contract test methods and all earlier mandatory
 requirements. The following are EXACT missing groups, not optional examples. Use
 otherwise-valid COMPLETE fixtures; each invalid case changes only the intended
 field (plus documented dependencies necessary for a valid ACTIVE-worker fixture).
@@ -43,7 +43,7 @@ assertRaisesRegex/subTest or equivalent. No incidental failure can count as cove
 
 ### 1. source: malformed unicode and numeric error boundaries
 
-- Preserve ensure_ascii=False and compact literal-UTF8 CategoryPath spelling at
+- Preserve ensure_ascii=False and compact literal-UTF 8 CategoryPath spelling at
   BOTH validator and formatter; escaped-ASCII aliases remain rejected.
 - Reject literal lone surrogate labels (e.g. Python string chr(0xD800) or chr(0xDFFF))
   clearly with CheckpointValidationError in category validator AND formatter.
@@ -65,7 +65,7 @@ assertRaisesRegex/subTest or equivalent. No incidental failure can count as cove
 ### 2. RNG RECORD schema, both applicability branches, semantic sensitivity
 
 - Independently validate registered name/duplicate/missing/unknown component cases,
-  preserving all other valid components. For EACH6record keys
+  preserving all other valid components. For EAC H6 record keys
   name/applicable/algorithm/seed/derivation/reason: omission; unknown and mixed-type
   extra record keys; wrong record container and strict applicable bool.
 - Valid ACTIVE record: nonempty unpadded algorithm/derivation, nonnegative int seed
@@ -87,14 +87,14 @@ assertRaisesRegex/subTest or equivalent. No incidental failure can count as cove
 
 - Build ONE complete valid positive-worker fixture with consistent runtime_workers,
   worker_settings, worker_derivation and DataLoader_workers record. Never launch it.
-- worker_derivation EXACT5keys: each missing key, unknown/mixed key, wrong container,
+- worker_derivation EXACT 5 keys: each missing key, unknown/mixed key, wrong container,
   applicable strict bool, active algorithm/base_seed/derivation/reason type/shape,
   inactive None fields/reason. Base seed mismatch and applicability mismatches must
   reach their respective consistency guards.
 - Active algorithm and derivation isolated valid changes; inactive reason sensitivity.
   Active base_seed==determinism.seed is a real dependency: a valid base-seed change
   changes BOTH bound fields, explicitly distinguish from independent field testing.
-- worker_settings EXACT4keys: missing/unknown/mixed/wrong container; zero-worker
+- worker_settings EXACT 4 keys: missing/unknown/mixed/wrong container; zero-worker
   constraints; positive-worker bool/nonpositive/nonint prefetch, nonbool persistent,
   empty/padded/nonstring context/init identifiers. Every invalid case begins from
   the complete positive-worker fixture, not an already inconsistent zero-worker one.
@@ -109,7 +109,7 @@ assertRaisesRegex/subTest or equivalent. No incidental failure can count as cove
 
 - from_dict wrong/missing schema, unknown string key, mixed keys0+unknown, missing
   retained field(s), malformed retained collection/nested types, and EACH falsified
-  stored fingerprint/hash (valid64hexwrongvalue). Direct constructor mutation alone
+  stored fingerprint/hash (valid 64 hexwrongvalue). Direct constructor mutation alone
   does NOT cover serialization. Require schema/key/type/content diagnostic intended.
 - Preserve equivalent roundtrips and actual/expected corrupt nested config cases.
 - Keep BOTH u1/u2 history keys and every unrelated valid item; replace only one u1
@@ -129,7 +129,7 @@ assertRaisesRegex/subTest or equivalent. No incidental failure can count as cove
 - Builder and BOTH validator roles: valid small first file plus oversized later
   file; validator declared total within limit. Assert aggregate-content diagnostic
   AND ZERO hashlib.sha256 calls (not just any broad exception). Source bytes remain
-  in memory; no conversion/acquisition. Preserve early declared-total and exact2MiB.
+  in memory; no conversion/acquisition. Preserve early declared-total and exact 2MiB.
 - Deeply isolate nested library_versions and untracked lists, including output
   mutation compared against an independently built trusted expected record. No
   universal tamper-proof claim when caller mutates both actual and expected evidence.
@@ -153,13 +153,13 @@ assertRaisesRegex/subTest or equivalent. No incidental failure can count as cove
 
 Original and amended command records are preserved. Only the scratch path literal
 changes prospectively under standing noncritical layout authorization; executable,
--B/-c program, discovery('tests'), verbosity, safeguards, exit semantics and120s
+-B/-c program, discovery('tests'), verbosity, safeguards, exit semantics and 120s
 ceiling stay unchanged. This is NOT byte-for-byte reuse of old absolute-path command.
 Only submitted verification_commands[0] may execute code/tests, synchronously.
 No subset unittest, smoke import, candidate oracle probe, ad-hoc Python, compileall,
 detached/background tests, source acquisition or alternate wrapper. Read-only
 navigation/copying protected starting files allowed; Git reads optional-lock-free.
-Independent literal printf/sha256sum authoring arithmetic remains permitted if needed
+Independent literal printf/sha 256 sum authoring arithmetic remains permitted if needed
 and must be reported; no hash should change for existing valid fixtures in this fix.
 
 Separate fresh external worker-runtime and fixture-scratch dirs; preserve every
@@ -171,23 +171,23 @@ No partial acceptance, automatic followup after final review or deployment appro
 
 ## Final independently reviewed result
 
-Task `5eab9071-04ab-427f-a920-fe420f5972ee`, revision0/max_revisions0;
+Task `5eab9071-04ab-427f-a920-fe420f5972ee`, revision 0/max_revisions0;
 invocation `6fc77521-5235-4c74-8591-662396bdf262`, completed normally in
 1,725,209ms under explicit long_running. Worker reported TWO exact full-suite runs:
-248tests/1error/12.215s (test subTest formatting of10**5000), then248OK/8.591s.
-Pi independently ran the EXACT submitted full suite:248tests/0failures/errors,
-7.108s unittest/9,542ms process. All204baseline and39prior contract methods remain;
-5new named matrix methods were added. Benchmark
+248 tests/1 error/12.215s (test subTest formatting of10**5000), then 248 OK/8.591s.
+Pi independently ran the EXACT submitted full suite: 248 tests/0 failures/errors,
+7.108s unittest/9,542ms process. All 204 baseline and 39 prior contract methods remain;
+5 new named matrix methods were added. Benchmark
 `agy-evidence-698f05db-0bd1-4db9-bc9a-e60c1175713c`.
 
-Pi read ALL2549source/3057test/265doc lines plus relevant accepted typed-ID and
+Pi read ALL 2549 source/3057 test/265 doc lines plus relevant accepted typed-ID and
 reproducibility dependencies. Independent AST literal/JSON/SHA256 review confirmed
 unchanged valid settings/composite preimages/hashes, without candidate import/probe.
-Fresh inspection `agy-evidence-135da011-2bb9-47df-a323-baf745bbd1ad`: exactly3allowed
-paths, unauthorized[],Gitmetadataunchanged, 142protectedfiles/86,536,910bytes and
-130outside sentinels. Previous draft/HEAD/index/status independently unchanged;
+Fresh inspection `agy-evidence-135da011-2bb9-47df-a323-baf745bbd1ad`: exactly 3 allowed
+paths, unauthorized[], Git metadata unchanged, 142 protectedfiles/86,536,910bytes and
+130 outside sentinels. Previous draft/HEAD/index/status independently unchanged;
 fixture scratch empty, runtime artifacts retained. Bounded monitoring is not an OS
-sandbox or complete action audit; captured150action candidates are navigation only.
+sandbox or complete action audit; captured 150 action candidates are navigation only.
 
 Final review `agy-evidence-29cd9f02-617d-4637-8169-a35d78f5c163`: **ESCALATE**,
 acceptance_scope **task_only**, deployment **NOT_AUTHORIZED**. No main transfer,
@@ -212,9 +212,9 @@ Actual new test method map (Pi independently verified, absent from Worker report
 ### Specific remaining blockers
 
 1. New validation introduces an undocumented/arbitrary `bit_length()>14000` cutoff
-   for headerseed/timestamps/settings, inaccurately labeled maximumJSONconversion.
-   Static counterexample:2**14000 has14001bits but4215decimal digits, BELOW the
-   normal4300digit serializer limit; previous JSON path supports it, new guard
+   for headerseed/timestamps/settings, inaccurately labeled maximum JSON conversion.
+   Static counterexample: 2**14000 has 14001 bits but 4215 decimal digits, BELOW the
+   normal 4300 digit serializer limit; previous JSON path supports it, new guard
    rejects it. Preserve safe diagnostic truncation, but translate ACTUAL serializer
    failures without silently narrowing previously valid exactinteger evidence.
    This conclusion is static code/math review, not an unauthorized candidate probe.
@@ -223,9 +223,9 @@ Actual new test method map (Pi independently verified, absent from Worker report
    guard/field diagnostic. Only stored-fingerprint cases and THREE lateaggregate
    cases check diagnostic content. The predeclared intended-guard requirement is
    not satisfied by headings or passing counts.
-3. Docs52 wrongly describes10**400 as exceeding4300digits: it has401digits and
-   overflows finite float conversion, not that integer-string limit. Actual14000bit
-   cutoff is not documented. Worker summary claims all6groups complete with no
+3. Docs 52 wrongly describes10**400 as exceeding 4300 digits: it has 401 digits and
+   overflows finite float conversion, not that integer-string limit. Actual 14000 bit
+   cutoff is not documented. Worker summary claims all 6 groups complete with no
    unresolved issues and omits requested group-to-method mapping; that claim is not
    supported by remaining conformance evidence.
 
@@ -238,6 +238,6 @@ needs a prospectively authorized scope/budget preserving this final evidence.
 Evidence directory: `data/reports/checkpoint-identity-closure-setup/` (original/current
 commands/spec, baseline, checksum-verified Worker report/full benchmark stderr,
 independent literal preimages and preservation manifests). Exactlythree substantive
-checkpoint deliverables remain; first unaccepted, later payloadvalidation and
+checkpoint deliverables remain; first unaccepted, later payload validation and
 secureIO/validation-only integration still blocked. No profiling/training/heldout/
 GPU/Kaggle/deployment permission was created.

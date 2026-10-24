@@ -1,6 +1,6 @@
 # Compute and tuning plan, agreed approach, numerical budget pending
 
-## Conditional Kaggle capacity
+## Conditional kaggle capacity
 
 **Decision:** plan around approximately **60 GPU-hours per week only if** the
 available account/session usage is permitted under Kaggle's current rules. Verify

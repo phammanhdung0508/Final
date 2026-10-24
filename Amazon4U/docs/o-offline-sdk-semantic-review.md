@@ -10,62 +10,62 @@ record's unsupported verbatim label is corrected append-only in
 
 This approves ONE `sdk_text_only_generation_request` for the existing unaccepted
 O-OFFLINE candidate, not another native Worker round or implementation. Original
-native tasks/criteria/18matrix/reports/violations/regressions/ESCALATE#1-3 remain
-immutable. Pi remains independent reviewer and acceptance authority. O native5,
-SDK0beforethisrequest, full4, two candidate fulls used, HsuccessfulstepsINFERRED252/cap256.
+native tasks/criteria/18 matrix/reports/violations/regressions/ESCALATE#1-3 remain
+immutable. Pi remains independent reviewer and acceptance authority. O native 5,
+SDK 0 beforethisrequest, full 4, two candidate fulls used, HsuccessfulstepsINFERRED 252/cap 256.
 No new source application, patch/test rewrite, project imports/probes/regression/model/
-Adam/GPU/realdata/Kaggle/credentialsCLI/networkjobs/profiling/heldout/mainintegration/
+Adam/GPU/real data/Kaggle/credentialsCLI/networkjobs/profiling/heldout/main integration/
 Gitwrites/commits/push/cleanup/rollback/deployment. Deployment NOT_AUTHORIZED.
 Provider credential USE through the configured SDK is authorized for this request;
 no secrets/header/token/account values are printed or sent as review context.
 
 ## Current evidence, actual SDK review received and pi-adjudicated
 
-`submission-3-v1/response.md`:actual completed text-only SDKreview, HTTP200/stop,
-420067ms/54104UTF8bytes; all894lines read by Pi with actualsource/callers/dependencies/
-tests/original18matrix. CumulativeSDK_APIattempts3, actualHTTPsends1/completedreviews1;
-prior2localfailures remainimmutable. No clientretry/tools/dispatcher/projecttests/Hsteps.
+`submission-3-v1/response.md`:actual completed text-only SDKreview, HTTP 200/stop,
+420067ms/54104 UTF 8 bytes; all 894 lines read by Pi with actualsource/callers/dependencies/
+tests/original 18 matrix. CumulativeSDK_APIattempts3, actual HTTPsends 1/completedreviews 1;
+prior 2 localfailures remainimmutable. No clientretry/tools/dispatcher/projecttests/Hsteps.
 All original native tasks/criteria/reports/budgets remain unchanged; OstillESCALATE#3.
 
 Headroomfalse protection VERIFIED FOR THIS REQUEST, not merely configuration inference:
-wirezstd63897bytes decodes toexact272935JSONbytes/SHAmatchingonPayload originalcontext;
-actual correlatedgateway outboundbody_mutatedfalse/sourcepassthrough/272935bytes,
-57754tokensbefore=after/0saved/transformsnone. Pi read actual byte-selector/caller code.
-No globalschanged, noremotesignedreceipt/generalfutureconfiguration/OSsandbox guarantee.
+wirezstd 63897 bytes decodes toexact 272935 JSONbytes/SHAmatchingonPayload originalcontext;
+actual correlatedgateway outboundbody_mutatedfalse/sourcepassthrough/272935 bytes,
+57754tokensbefore=after/0 saved/transformsnone. Pi read actual byte-selector/caller code.
+No globalschanged, noremotesignedreceipt/generalfutureconfiguration/OS sandbox guarantee.
 Zstd wirecompression is not LLMtoken saving. Source evidence in
 submission-3-v1/gateway-preservation-verification.json and gateway-safe-request-trace.txt.
 
-SDKconfirms6assignedguardgroups and actual2fixturefailures, adds substantiated timeout/
+SDKconfirms 6 assignedguardgroups and actual 2 fixturefailures, adds substantiated timeout/
 version/attempt-history and generated/legacy-control gaps. Pi independently corroborates
 these, qualifiesABI/hostile-provider/hostileSameUID claims, keepsbaselinecheckpoint-role
 applicability and exact dependent-schema closure OPEN. No SDKcodeorplanwasapplied.
-Full independentadjudication:submission-3-v1/pi-independent-review.md. Formalreview.json
-retainsall10EXACTorderedreportlimitations/issues asunresolved, noneoutofscope-to-force
-ACCEPT; original18part/OCclosure remainsunaccepted. OutcomeESCALATE,
-acceptance_scope technical_review_only_not_accepted, deploymentNOT_AUTHORIZED; this is
+Full independentadjudication: submission-3-v1/pi-independent-review.md. Formalreview.json
+retainsall 10 EXACTorderedreportlimitations/issues asunresolved, noneoutofscope-to-force
+ACCEPT; original 18 part/OCclosure remainsunaccepted. OutcomeESCALATE,
+acceptance_scope technical_review_only_not_accepted, deployment NOT_AUTHORIZED; this is
 NOT a failedSDKdelivery or a fourth native Oimplementation escalation.
 
-Paired preservation4089files/7repos/404884565byteseach exact, all priorSDKfailures/code/
+Paired preservation 4089 files/7 repos/404884565 byteseach exact, all priorSDKfailures/code/
 criteria/privatehistory included. Only newapprovedSDKrecord/doc/configoutputs changed.
-Pi auditmetadata oversight:initialgatewaylogextract printedopaqueaccountID(already
-redactedauthtoken),not a credential. Originalcaptureprivate0600; laterexports omit ALL
+Pi auditmetadata oversight: initialgatewaylogextract printedopaqueaccountID(already
+redactedauthtoken), not a credential. Originalcaptureprivate 0600; laterexports omit ALL
 header/accountlines, no ownershipclaim and no assertionpastoutputwasundone. See own
 submission-3-v1/gateway-capture-data-handling.json; no identifiers repeated here.
 
 Transportblockisresolved. Standingautonomy forboundedLOCALpresend blockers is recorded;
-1actualHTTPrequest allowance is nowconsumed, unusedlocalrecoveries doNOTcreateanother
-remote request. Native5/full4/Hinferred252cap256/source0 unchanged. Futureimplementation
+1 actual HTTPrequest allowance is nowconsumed, unusedlocalrecoveries doNOTcreateanother
+remote request. Native 5/full 4/Hinferred252cap256/source 0 unchanged. Futureimplementation
 requiresseparateexplicitexception/source/channel authority and originalfull/Hbudget
-amendment(another36stepswouldinfer288>256). No newbaseline/subset/full/GPU/realdata/
-Kaggle/sourceapplication/mainintegration/study/deployment follows from this review.
+amendment(another36stepswouldinfer288>256). No newbaseline/subset/full/GPU/real data/
+Kaggle/sourceapplication/main integration/study/deployment follows from this review.
 
 ## Preserved approval of codec-validated submission
 
 User explicitly approved one further text-only submission with the codec-validated
 wrapper and standing discretion for this kind of local blocker without repeated
 permission questions. Exact authority in `submission-3-v1/authority-and-plan.json`.
-PriorSDK_APIattempts2/HTTPsends0 remain consumed/immutable; initialnewattempt is3.
-One actual gateway HTTPsend maximum, no automatic remote retry. At most2bounded local
+PriorSDK_APIattempts2/HTTPsends 0 remain consumed/immutable; initialnewattempt is3.
+One actual gateway HTTPsend maximum, no automatic remote retry. At most 2 bounded local
 pre-send recoveries are permitted ONLY while no gateway request has been sent, with
 all versions/attempts/receipts retained and critical context/model/security unchanged.
 This does not authorize more remote generations, new source/full/Hbudgets, global config/
@@ -74,34 +74,34 @@ credentials/model changes or weakening original criteria. Existing native tasks 
 Use exact already16control-verified codec helper; bounded decoded clone validation and
 ORIGINAL zstd wirebody/header forwarding, falsebypass. Verify decoded JSON byteSHA equals
 SDK's previously validated onPayload JSON byteSHA, not just field-level assertions.
-Same260943-byte context and30min/no-tools/131072-byte response limits. Fresh preservation
+Same 260943-byte context and 30 min/no-tools/131072-byte response limits. Fresh preservation
 also monitors all priorSDKfiles. Actual full response/source/criteria/limitations and
 routing/preservation evidence remain mandatory before any review-only acceptance.
 No task/implementation/deployment approval is implied. No additional test or modelprobe.
 
 ## Preserved additional result, local zstd-wire guard failure, no review
 
-Additional SDK_API_attempt2 failed locally in104ms with `SDK_JSON_INVALID`;0HTTPsends,
-0responsebytes. SDK's actual SSE encoder uses lossless zstd Uint8Array+Content-Encoding,
+Additional SDK_API_attempt2 failed locally in 104ms with `SDK_JSON_INVALID`;0 H TTPsends,
+0 responsebytes. SDK's actual SSE encoder uses lossless zstd Uint8Array+Content-Encoding,
 which Pi's normalized-body validator still wrongly parsed directly as JSON. Pi owns
 this missing encoder-contract review; not Headroom/model failure or a fourth native O
 escalation. Exact SDK caller/encoder source and error hashes are archived in
 `resubmission-v1/SDK-encoding-evidence.json`/root-cause-review.md/review.json.
 
-Paired snapshot4059files/7repos/402567139byteseach exact, including ALL prior SDK artifacts.
+Paired snapshot 4059 files/7 repos/402567139 byteseach exact, including ALL prior SDK artifacts.
 AllsevenO/mainH/science/D1-D3/oldreports/sibling unchanged. Both consumedAPIattempts
-remain immutable, SDKHTTPsends0/completedreviews0; no measured token/cost claim from SDK
+remain immutable, SDKHTTPsends 0/completedreviews 0; no measured token/cost claim from SDK
 zero defaults. Decision ESCALATE/technical_review_only_not_accepted, deployment
-NOT_AUTHORIZED. Native5/full4/Hinferred252cap256 unchanged. AdditionalSDKslots0, no retry.
+NOT_AUTHORIZED. Native 5/full 4/Hinferred252cap256 unchanged. AdditionalSDKslots 0, no retry.
 
 Pi then finished the already approved wrapper correction OFFLINE in a NEW unused codec
-helper:bounded clone zstd decode with native maxOutputLength, validate exact decoded
+helper: bounded clone zstd decode with native maxOutputLength, validate exact decoded
 prompt, forward ORIGINAL compressedbytes+encodingheader, falsebypass. Four further tiny
-codec controls prospectively declared/allPASS (29wire/20decodedbyte fixtures),added to
-original12=16total, not resetting either model/control history.0SDK/network/projectimports/
+codec controls prospectively declared/allPASS (29 wire/20 decodedbyte fixtures), added to
+original12=16total, not resetting either model/control history. 0 SDK/network/projectimports/
 Hsteps. See resubmission-v1/offline-codec-correction-supplement.md and codec-correction/.
 This corrects the known local failure but is not end-to-end validation or a new submission.
-One further text-only submission requires explicit approval, cumulativeSDKattempt3ifstarted.
+One further text-only submission requires explicit approval, cumulativeSDKattempt 3 ifstarted.
 No project source/tests/global Headroom changes or extra numerical budgets follow.
 
 ## Preserved separately approved corrected SDK submission
@@ -109,18 +109,18 @@ No project source/tests/global Headroom changes or extra numerical budgets follo
 Exact new approval: "Ok, you can correct the wrapper and make one additional text-only
 submission". Versioned authority/helpers/evidence under
 `data/reports/o-offline-sdk-semantic-review-v1/resubmission-v1/`. Additional SDK API
-attempt max1, cumulative attempt2 if started; prior attempt1/0HTTPsend failure remains
-immutable. SAME original protected context260943bytes, provider/model/endpoint, false
-bypass, no-tools, 30min/no-retry/response131072byte limits. No global Headroom change,
+attempt max 1, cumulative attempt 2 if started; prior attempt 1/0 H TTPsend failure remains
+immutable. SAME original protected context 260943 bytes, provider/model/endpoint, false
+bypass, no-tools, 30 min/no-retry/response 131072 byte limits. No global Headroom change,
 source application, new native/full/H/GPU/data jobs or deployment. No original criteria
-or old reports rewritten. Native5/full4/Hinferred252cap256 unchanged.
+or old reports rewritten. Native 5/full 4/Hinferred252cap256 unchanged.
 
 Pi corrected ONLY the SDK transport helper to normalize standard Request/RequestInit,
 inspect a bounded clone, and forward the original body/method/headers without JSON
-reserialization. Twelve tiny offline Node built-in controls passed, largest fakebody23
-bytes, 0fetch/SDK/network/projectimports/Hsteps. These are SDK-wrapper checks, NOT project
+reserialization. Twelve tiny offline Node built-in controls passed, largest fakebody 23
+bytes, 0 fetch/SDK/network/projectimports/Hsteps. These are SDK-wrapper checks, NOT project
 regressions or release of source/test budgets. Fresh preservation uses the existing
-streamed128MiB/file/512MiB/snapshot/60s/300s function and also monitors ALL prior
+streamed 128MiB/file/512MiB/snapshot/60s/300s function and also monitors ALL prior
 SDK report files, excluding only the new child and the two authorized SDK doc/config.
 Actual response/equality/independent review gates remain mandatory; no automatic retry.
 
@@ -128,16 +128,16 @@ Actual response/equality/independent review gates remain mandatory; no automatic
 
 Recorded `ESCALATE/technical_review_only_not_accepted`,deployment NOT_AUTHORIZED:
 `data/reports/o-offline-sdk-semantic-review-v1/review.json` and root-cause-review.md.
-One SDK API attempt is consumed; 0SDK HTTP sends/0responsebytes in131ms. Pi's custom
+One SDK API attempt is consumed; 0 SDK HTTP sends/0 responsebytes in 131ms. Pi's custom
 fetch guard wrongly required string init.body instead of honoring standard fetch's
 Request/optional-init/BodyInit contract. Exact internal error hash independently
 identified. This is Pi-owned, not demonstrated Headroom/model/auth/Osource failure.
 No successful routing/prompt preservation or review completion claimed. Bypass remains
-false, no global config changed. All4018monitoredfiles/7repositories exact in paired
-399354783-byte snapshots. Original O native ESCALATE#3 unchanged, native5/SDKattempt1/
-full4/Hinferred252cap256. No source/test/Adam/application changes. Current SDK attempt
-slots0; no automatic retry. One corrected text-only resubmission needs explicit approval,
-retains failedattempt1 and becomes cumulativeattempt2ifstarted; not a new native round
+false, no global config changed. All 4018 monitoredfiles/7 repositories exact in paired
+399354783-byte snapshots. Original O native ESCALATE#3 unchanged, native 5/SDKattempt 1/
+full 4/Hinferred252cap256. No source/test/Adam/application changes. Current SDK attempt
+slots 0; no automatic retry. One corrected text-only resubmission needs explicit approval,
+retains failedattempt 1 and becomes cumulativeattempt 2 ifstarted; not a new native round
 or source/full/H-budget grant. Initial oversize and client-error receipts remain exact.
 
 ## Subsequent protected-input approval, consumed authority
@@ -158,10 +158,10 @@ strings must remain exact. Other API formatting/eligible data may still be optim
 do NOT claim whole-request passthrough or measured token savings from this design.
 
 Two oversized context preparations (284410,263222combinedUTF8bytes) were preserved and
-NEVER sent. Version3=260943bytes fits the unchanged262144ceiling. It retains complete
-original O assignment task/context/criteria, full18OPmatrix, current exact active criteria,
-full3adaptermodules and complete relevant functions/tests/frozen H reference ranges.
-The duplicate historical round3 Worker-only handoff mechanics and repeated Odoc table
+NEVER sent. Version3=260943bytes fits the unchanged 262144 ceiling. It retains complete
+original O assignment task/context/criteria, full 18 OPmatrix, current exact active criteria,
+full 3 adaptermodules and complete relevant functions/tests/frozen H reference ranges.
+The duplicate historical round 3 Worker-only handoff mechanics and repeated Odoc table
 are archived unchanged but not sent; coverage exclusions are explicit, no original
 requirement/report is rewritten or semantically compressed. Relevant Odoc paragraphs
 are supplied exactly. No test/import/model work or SDKgeneration was done in preparation.
@@ -180,7 +180,7 @@ configured credential exist, but the actual configured endpoint is
 `http://127.0.0.1:8787/backend-api`. No generation/probe was sent. Existing SDK-review
 approval does not infer the separately required loopback proxy opt-in. Do not change
 model/endpoint or route credentials/context before that authority. Routing remains
-UNVERIFIED, no review response or acceptance exists. Native5/SDK0/full4 unchanged.
+UNVERIFIED, no review response or acceptance exists. Native 5/SDK 0/full 4 unchanged.
 All seven final candidate hashes remain exact; this is not a full paired repository
 snapshot or an O implementation acceptance. See the new report's preflight receipts
 and root-cause note. Old terminal decisions/evidence remain untouched.
@@ -188,7 +188,7 @@ and root-cause note. Old terminal decisions/evidence remain untouched.
 ## Pinned channel and one-shot limits
 
 Exception justified by three substantive native stops, five actual invocations and
-current complete479 regression with2newO failures plus repeated assigned stream/
+current complete 479 regression with 2 newO failures plus repeated assigned stream/
 artifact/runtime/schema gaps. Source correction remains credible but no further native
 call or full is authorized. This review seeks a contract-level completion design,
 not a claim the two fixture fixes alone finish the task. No automatic channel switch.
@@ -198,9 +198,9 @@ not a claim the two fixture fixes alone finish the task. No automatic channel sw
 - Verify catalog/API and configured credential presence locally WITHOUT generation,
   catalog network refresh or model substitution. Availability is not proven by metadata;
   report actual generation outcome separately. Fail closed if pinned route unavailable.
-- One generation attempt, 30min deadline, no automatic retry/revision/fallback. Failed/
+- One generation attempt, 30 min deadline, no automatic retry/revision/fallback. Failed/
   no-code issued requests remain consumed. Metadata/preflight is not generation.
-- Context≤262144UTF8bytes (system+user);serializedbody≤393216bytes AND provider limit;
+- Context≤262144UTF8bytes (system+user); serializedbody≤393216bytes AND provider limit;
   visible response≤131072UTF8bytes. Output token setting is requested, not falsely claimed
   server-enforced if absent on wire. Conservative context heuristic/headroom recorded.
 - No tools, tool dispatcher, agent session, extensions, skills, MCP, subagents or filesystem
@@ -216,9 +216,9 @@ not a claim the two fixture fixes alone finish the task. No automatic channel sw
 
 Only NEW Pi-owned records/scripts/request/response/review under
 `Amazon4U/data/reports/o-offline-sdk-semantic-review-v1/`,plus this new documentation
-and `configs/o-offline-sdk-semantic-review.json`. Existing candidate7source read-only:
-`Amazon4U/.worktrees/o-offline-round3-v1/Amazon4U/` (runner, 3adapters, 2Otests, Odoc).
-Necessary frozen H/evaluator/config source and original18requirements/actualrawfailure
+and `configs/o-offline-sdk-semantic-review.json`. Existing candidate 7 source read-only:
+`Amazon4U/.worktrees/o-offline-round3-v1/Amazon4U/` (runner, 3 adapters, 2 Otests, Odoc).
+Necessary frozen H/evaluator/config source and original 18 requirements/actualrawfailure
 logs are read-only reference. Preserve all old evidence and sibling Movie4U. No code
 application even if response includes a patch. Generated response is UNTRUSTED.
 
@@ -230,7 +230,7 @@ doesn't fit, stop before issue rather than truncate or silently increase budgets
 
 One review request asks for: independent verification/disagreement with Pi's remaining
 findings, source-cited static counterexamples, dependency-ordered minimal correction
-plan/trust contracts/noncooperative positive+negative controls, all18part disposition,
+plan/trust contracts/noncooperative positive+negative controls, all 18 part disposition,
 preserved sound logic and exact currentH boundary. No full-file implementations/diffs,
 source mutations, runtime claims or approval/deployment decisions. Missing context and
 real uncertainties must be explicit, not invented. SDK labels alone do not establish
@@ -239,7 +239,7 @@ and original requirements before recording technical-review-only disposition.
 
 Before/after bounded preservation snapshots include main/old candidates/science/Git/
 sibling/ignored evidence and current candidate, excluding only the NEW output directory.
-Hash limits128MiB/file, 512MiB/snapshot, 60s/file, 300s/snapshot; no OSsandbox/transient-write
+Hash limits 128MiB/file, 512MiB/snapshot, 60s/file, 300s/snapshot; no OS sandbox/transient-write
 mediation/total-processRAM claim. Original content/identity guards remain; metadata
 qualifications must be disclosed, not rewriting historical receipts. No benchmark is
 run for a text-only review or retroactive native ACCEPT/reassessment fabricated.
@@ -247,7 +247,7 @@ run for a text-only review or retroactive native ACCEPT/reassessment fabricated.
 Review-only acceptance criteria:
 1. Exact authorized request/model/channel/count/size/deadline/no-tools/no-retries and
    immutable supplied-context/output evidence; no source application/runtime claims.
-2. Original18parts/activecriteria, actualcurrent479failure evidence and relevant source
+2. Original 18 parts/activecriteria, actualcurrent 479 failure evidence and relevant source
    contracts accurately represented with verifiable citations and explicit coverage.
 3. Technically sound requirement-grounded design/guard/test plan for fixture and six
    security/completeness groups, preserving H/D1-D3/science/validOlogic; flag unsupported
@@ -256,4 +256,4 @@ Review-only acceptance criteria:
    review obligation labelled outside scope. Incomplete/unsafe evidence cannot ACCEPT.
 5. Truthful `technical_review_only` outcome, NEVER O implementation/test/deployment
    acceptance. Any future implementation or full requires separate authority and
-   numeric/full budget amendment (another36steps would infer288>256).
+   numeric/full budget amendment (another 36 steps would infer288>256).

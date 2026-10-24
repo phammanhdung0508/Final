@@ -30,9 +30,9 @@ remain: identity/provenance, payload/state validation, exclusive no-clobber secu
 plus validation-only integration. No main transfer before recorded independent
 acceptance; no automatic transfer is authorized by this continuation itself.
 
-Explicit long_running Worker; full-suite benchmark120s ceiling; source/provenance
-bytes2MiB; fixtures<=8users/12products/8metadata nodes/type. Stdlib CPU in-memory
-newtests only. No new tensors/optimizer steps, real data/source acquisition,
+Explicit long_running Worker; full-suite benchmark 120s ceiling; source/provenance
+bytes 2MiB; fixtures<=8users/12 products/8 metadata nodes/type. Stdlib CPU in-memory
+new tests only. No new tensors/optimizer steps, real data/source acquisition,
 profiling/training, GPU/CUDA/Kaggle/heldout, payload/IO/live restoration/training-loop
 implementation, subagents, sibling writes, staging/commits/pushes or deployment.
 Acceptance task_only; deployment NOT_AUTHORIZED, no held-out policy/evaluation.
@@ -52,7 +52,7 @@ retention and all component schemas. Do not change interpreter int limits/RNGs/
 thread settings, normalize Unicode, use ASCII escaping or fabricate values.
 
 Add full valid identity/roundtrip/actual-vs-expected regression cases using
-`2**14000` (14001bits, 4215decimal digits, supported under native4300digit limit)
+`2**14000` (14001 bits, 4215 decimal digits, supported under native 4300 digit limit)
 and neighboring supported integers. Exercise each removed validation location:
 header seed; training and validation timestamp; a general integer settings field;
 positive-worker prefetch; neighbor fanout; active RNG seed; bound worker base_seed
@@ -64,7 +64,7 @@ requires coupled changes. Do not round integers into floats.
 
 Keep 10**400 and10**5000 finite-float overflow tests. For integer JSON serialization,
 reject only what the CURRENT native serializer actually cannot encode. On the
-approved runtime the ordinary4300digit conversion limit makes10**5000 unsupported;
+approved runtime the ordinary 4300 digit conversion limit makes10**5000 unsupported;
 do not turn a runtime-dependent serialization property into a new scientific/schema
 cap or claim unbounded support. Tests may inspect the existing interpreter conversion
 limit without changing it if required for portability; never skip actual error
@@ -92,16 +92,16 @@ Do not demand unnecessarily brittle whole-string equality/line numbers.
 Start with otherwise-valid complete fixtures. Preserve u1/u2 and unrelated valid
 history items. Keep the consistent positive-worker fixture and genuinely isolated
 valid prefetch/persistent/context/init/count/thread mutations. Keep BOTH validator
-roles, source-size actualaggregate checks before hashing, exact2MiB boundary,
+roles, source-size actual aggregate checks before hashing, exact 2MiB boundary,
 unchanged literal oracles, full nonASCII positive roundtrip, nested snapshot tests
 and serialized ALLfingerprint corruption. Do not weaken source guards, catch arbitrary
 exceptions in tests or merely add headings to get passing counts.
 
 ### C. accurate docs and required report
 
-Correct numeric explanation:10**400 has401decimal digits, overflows finite float
-conversion, but does NOT exceed4300decimal digits.10**5000 has5001digits and exceeds
-the ordinary native4300digit conversion setting. Native serialization failure
+Correct numeric explanation: 10**400 has 401 decimal digits, overflows finite float
+conversion, but does NOT exceed 4300 decimal digits. 10**5000 has 5001 digits and exceeds
+the ordinary native 4300 digit conversion setting. Native serialization failure
 translation is distinct from safe diagnostic repr truncation. No14000bit validity
 cap remains; document native-supported exact integers and runtime-dependent JSON
 serialization limits without promising arbitrary Python object behavior.
@@ -115,7 +115,7 @@ The REQUIRED Worker JSON summary must map inherited worksheet groups1..5 to ACTU
 test method names, state this continuation's integer-domain regressions/guard checks,
 and report every failed/repeated exact full-suite execution with counts/results and
 all within-invocation fixes. Required limitations must be honest; do not assert
-all6groups complete/no unresolved issues if cases or diagnostic assertions are absent.
+all 6 groups complete/no unresolved issues if cases or diagnostic assertions are absent.
 No claim of Pi acceptance. This is not permission to create extra report files in
 protected source paths; use the required returned JSON and allowed documentation.
 
@@ -123,21 +123,21 @@ protected source paths; use the required returned JSON and allowed documentation
 
 Preserve original/previous/current exact command records. Prospectively relocate
 ONLY scratch-path literal under standing noncritical layout authority; executable,
--B/-c, discover('tests'), verbosity, environment/exit logic and120s ceiling unchanged.
+-B/-c, discover('tests'), verbosity, environment/exit logic and 120s ceiling unchanged.
 This is NOT byte-for-byte reuse of the old absolute-path command.
 
 The SINGLE submitted full-suite verification command is the ONLY code/test execution
 allowed, synchronously, for Worker and revisions. No subset unittest, smoke import,
 ad-hoc Python/candidate oracle/compileall/probes, detached/background tests or altered
 wrappers. Navigation/copying protected starting files allowed; optional-lock-free
-Git reads. Literal printf/sha256sum authoring arithmetic remains permitted if actually
+Git reads. Literal printf/sha 256 sum authoring arithmetic remains permitted if actually
 needed and honestly reported; no existing valid hash should change. Pi may perform
 static AST/literal/hash review without importing or executing the candidate.
 
 Fresh external worker-runtime and fixture-scratch directories are separate and
 predeclared; retain all older runtime/artifacts. Only fresh declared test outputs
 may mutate during verification; source, preexisting artifacts and Git stay protected.
-Protected artifact hashing budgets128MiB/file512MiBtotal unchanged, separate from
+Protected artifact hashing budgets 128MiB/file 512 MiB total unchanged, separate from
 2MiB source-provenance contract limit. Monitoring is not an OS sandbox/action audit.
 
 Pi follows diff-first NOT diff-only, reads complete actual changed functions plus
@@ -152,12 +152,12 @@ ESCALATE rather than silently resetting budgets.
 
 ## Review continuation after interruption (not acceptance)
 
-Task `1df92bbc-9a7a-4c17-b199-6f1794b7b84b`, revision0/max_revisions2;
+Task `1df92bbc-9a7a-4c17-b199-6f1794b7b84b`, revision 0/max_revisions2;
 Worker invocation `34e5f474-5bbd-4a15-8dd7-e4a8c99dd06c` completed normally.
-Worker reports248OK/9.789s. Pi independently verified the exact submitted fullsuite:
-248tests, 0failures/errors, 9.604s unittest/12,924ms process, all204baseline+44contract
+Worker reports 248 OK/9.789s. Pi independently verified the exact submitted fullsuite:
+248 tests, 0 failures/errors, 9.604s unittest/12,924ms process, all204baseline+44contract
 methods. Benchmark `agy-evidence-7d35b187-ca6e-41b9-97d8-0d81d7c04ee5`.
-Full45567character stderr materialized with verified raw section SHA256
+Full 45567 character stderr materialized with verified raw section SHA256
 `f0f3e56582eae1f96229225d740680d87a81ffe351b2732436ac5a51ca9fe302`.
 Initial administrative check mistakenly compared the JSON wrapper hash; failed
 check retained in session, corrected raw-string checksum matches immutable evidence.
@@ -166,17 +166,17 @@ This was not candidate execution or another benchmark.
 The user then explicitly recorded ESCALATE because independent review was incomplete.
 That finalization is preserved. User subsequently authorized continuing/completing
 review. Pi resumed actual-file review WITHOUT another implementation invocation.
-Complete actual2519source/3414tests/265doc lines plus relevant existing dependencies
-have now been read. The arbitrary numeric validity caps are gone; supported4215digit
-integers and neighbors are retained/roundtripped at all8sites. Numeric docs corrected,
+Complete actual 2519 source/3414 tests/265 doc lines plus relevant existing dependencies
+have now been read. The arbitrary numeric validity caps are gone; supported 4215 digit
+integers and neighbors are retained/roundtripped at all 8 sites. Numeric docs corrected,
 most targeted diagnostic assertions strengthened, valid literal settings/composite
 preimages/hashes independently verified unchanged using AST literals/JSON/SHA256,
 and predecessor draft/HEAD/index/status checked unchanged. No candidate probes/imports,
 new source edits, main transfer, training or deployment.
 
-Fresh inspection `agy-evidence-f6911e49-3426-4f2c-b22f-4a5d38668203` reports3allowed
-changed paths, unchanged Gitmetadata, 142protectedfiles/86,594,433bytes complete hashing,
-130outside sentinels. Diff is empty because source files are untracked; ALL actual
+Fresh inspection `agy-evidence-f6911e49-3426-4f2c-b22f-4a5d38668203` reports 3 allowed
+changed paths, unchanged Git metadata, 142 protectedfiles/86,594,433bytes complete hashing,
+130 outside sentinels. Diff is empty because source files are untracked; ALL actual
 content was read. Monitoring remains bounded, not an OS sandbox/action audit. A lookup
 of a nonexistent `unauthorized` evidence section failed; do not invent that field or
 claim a full formal scope decision from compact summaries. Fresh full evidence/scope
@@ -184,7 +184,7 @@ review remains required before acceptance.
 
 ### Consolidated remaining corrective feedback for SAME task
 
-1. In the new Unicode matrix, mixed positive_history keys123 and'u2' in actual/
+1. In the new Unicode matrix, mixed positive_history keys 123 and'u2' in actual/
    expected objects still hit `sorted(obj.positive_history.keys())` BEFORE a key
    type/clean-text guard. The generic catch turns incidental TypeError into
    `Malformed retained structure`; test permits that catch-all alternative. This
@@ -205,7 +205,7 @@ whole-subsystem rewrite or checkpoint deliverable.
 
 ### Operator lifecycle gate
 
-Current delegation_status is ESCALATE at revision0 with budget2 unchanged. Attempted
+Current delegation_status is ESCALATE at revision 0 with budget 2 unchanged. Attempted
 fresh delegation_verify was rejected with `Task is not pending review`; no benchmark
 ran. There is NO model-callable reopen tool. The registered operator command requires
 UI confirmation and preserves snapshot/history/budget:
@@ -230,25 +230,25 @@ The operator reopened the SAME task; original criteria, commands, paths and
 max_revisions2 were unchanged. Both consolidated revisions were used; no replacement
 or budget reset. Earlier interrupted-review and exhausted-task decisions remain history.
 
-- Revision1 `9f23005a-de07-4961-afe6-34fed2af80b1`: key clean-text preflight in BOTH
-  actual/expected positive/all-rated histories BEFORE sorting; mixed123/u2 fixtures
+- Revision 1 `9f23005a-de07-4961-afe6-34fed2af80b1`: key clean-text preflight in BOTH
+  actual/expected positive/all-rated histories BEFORE sorting; mixed 123/u2 fixtures
   assert role/field diagnostics, report map and held-out authorization clarified.
   Worker248OK13.600s; Pi248OK12.159s/16,595ms.
-- Final criterion audit caught15 additional valid-mutation mismatch assertions that
-  Pi's preceding review had missed. Revision2 `56ac69b9-1c2d-4160-aeab-11c47abd52f6`
-  strengthened14settings_fingerprint mismatch checks plus1actual internal recomputation
+- Final criterion audit caught 15 additional valid-mutation mismatch assertions that
+  Pi's preceding review had missed. Revision 2 `56ac69b9-1c2d-4160-aeab-11c47abd52f6`
+  strengthened14settings_fingerprint mismatch checks plus 1 actual internal recomputation
   diagnostic. Report correctly names supplemental history method. Source/docs unchanged
-  from revision1. Worker248OK12.797s; Pi248OK12.871s/17,324ms.
+  from revision 1. Worker248OK12.797s; Pi248OK12.871s/17,324ms.
 - Full original content and complete changed functions/callers/helpers/tests/docs/report
-  reviewed. All6 original content criteria verified; no remaining known implementation
+  reviewed. All 6 original content criteria verified; no remaining known implementation
   or benchmark failure found. All204baseline+44boundedstdlibCPUcontract methods retained.
   Exact original command, synchronous Pi process, 120s ceiling; full final stderr differs
   from fully read prior stderr ONLY elapsed-time line; stdout identical expected positive/
   negative audit-fixture outputs, not suite failure.
 - Independent AST literal settings preimage/settings/composite SHA unchanged. Own streamed
-  SHA checks of142authorized protected/sentinel files86,594,433bytes match baseline,
+  SHA checks of 142 authorized protected/sentinel files86,594,433bytes match baseline,
   within pinned byte/time budgets; prior draft/HEAD/index/status unchanged. Fixture scratch
-  empty. Fresh actual scope evidence exactly3allowed modified, unauthorized[], Git false;
+  empty. Fresh actual scope evidence exactly 3 allowed modified, unauthorized[], Git false;
   benchmark side effects empty, training false. No sibling/main-transfer/source changes
   outside declared implementation scope. Monitoring is bounded, not OS sandbox/action audit.
 - Worker CLI used non-daemon/nonpersistent owned foreground command; 10s transport handle
@@ -262,7 +262,7 @@ Pi attempted ACCEPT after completing independent review. Tool rejected it:
 `Worker limitations/issues require resolution before acceptance`.
 Independent read of shared `core.ts:438` confirms ANY nonempty report.known_limitations
 array blocks ACCEPT, with no reviewer scope-boundary override. This report's four entries
-are truthful required by-design boundaries: pure deliverable1 only; stdlib/noML/data;
+are truthful required by-design boundaries: pure deliverable 1 only; stdlib/noML/data;
 caller-acquired provenance not physical-origin proof; deployment/heldout NOT_AUTHORIZED.
 They are NOT newly confirmed code defects; unresolved_issues is empty. Nevertheless the
 current tool cannot record acceptance for this report. Pi did NOT rewrite the report,
@@ -274,7 +274,7 @@ Benchmark: `agy-evidence-4319a0a5-6e54-4c83-9ed8-d6dc0303dfb1`.
 Fresh inspection: `agy-evidence-c24b8cb9-1b60-4bf8-8184-3d15c15ba545`.
 Full immutable materialization/root+child SHA verified under
 `data/reports/checkpoint-identity-finalization-setup/revision2-independent-review/`;
-revision0/1 drafts/evidence retained separately there. Selected source/test/doc SHA:
+revision 0/1 drafts/evidence retained separately there. Selected source/test/doc SHA:
 
 - `7cea738bd7ddd0f48e75f03589f29887082b577d372f335f652be4b4ddfdf6ad`
 - `539db265f54736de59b580566865f27b9f3e8f8b0898cd7556e28e3f8f2d84c3`

@@ -28,9 +28,9 @@ Machine-readable proposal: `configs/training-harness-preparation.json`.
 
 D1 identity/provenance, D2 decoded-payload validation, D3 secure IO, model/reference
 and evaluator implementations remain authoritative, unchanged dependencies. D3 main
-integration has task-only ACCEPT with389 tests; source decision:
+integration has task-only ACCEPT with 389 tests; source decision:
 `data/reports/checkpoint-storage-main-integration/review.json`. That is inherited
-benchmark evidence, **not a fresh harness baseline**. Old4 Worker attempts/9 D3-associated
+benchmark evidence, **not a fresh harness baseline**. Old 4 Worker attempts/9 D3-associated
 full runs, failed variants and ESCALATEs remain history, not a new budget pool.
 The two D3 isolated trees remain retired/audit-only; do not execute or repurpose them.
 
@@ -46,7 +46,7 @@ credentials lookup, network call, profiling or training. Source findings below a
 2. **Recommendation training from scratch**: LightGCN and Heterogeneous KG+GNN,
    each per category × feedback condition × registered seed. No pretrained model.
 3. **Validation-only checkpoint selection**: frozen evaluator, strict NDCG@10
-   improvement, earliest exact tie, patience10 checks, maximum100 epochs.
+   improvement, earliest exact tie, patience 10 checks, maximum 100 epochs.
 4. **Frozen-model final test evaluation**: separately authorized after execution/tuning
    freeze; no train+validation refit or test-based selection.
 5. **Post-selection aggregation/uncertainty**: fixed per-user outputs, three-seed
@@ -178,11 +178,11 @@ Profiling specs are provisional and distinctly labeled, not comparative executio
 - Each valid update: zero grads, accepted fresh model loss/forward, backward, Adam
   step. No step/regularization-only update on an empty batch. Recompute differentiable
   propagation after updates; no stale graph/embedding cache or retained-gradient trick.
-- Adam constant0.001, betas0.9/0.999, eps1e-8, weight_decay0; no scheduler, AMP,
+- Adam constant 0.001, betas 0.9/0.999, eps1e-8, weight_decay0; no scheduler, AMP,
   altered loss or transformations. Track actual parameter IDs/state step counts,
-  including lazy state and inactive Hetero parameters, not global_step copied to all36.
+  including lazy state and inactive Hetero parameters, not global_step copied to all 36.
 - Use explicit owned RNG streams and recorded derivations, never process hash seeding.
-  Worker processes/prefetch remain0 for v1 fixtures; explicit nonapplicability is recorded.
+  Worker processes/prefetch remain 0 for v1 fixtures; explicit nonapplicability is recorded.
   Fail unsupported deterministic operations. No silently disabled determinism.
 - Validate using the accepted evaluator, full warm candidates and frozen populations.
   An additive frozen-scoring adapter may cache ONE no-grad unmasked forward result
@@ -191,10 +191,10 @@ Profiling specs are provisional and distinctly labeled, not comparative executio
   restore or graph change. Never reuse validation representations for training.
   Existing per-user score_candidates recomputes forward: do not assume it scales.
 - Validation failure/nonfinite/absent eligible score is an error, not a patience check
-  or score0. Exact ties retain earliest best snapshot. Best and current state remain
+  or score 0. Exact ties retain earliest best snapshot. Best and current state remain
   distinct; terminal counters/status match unchanged D2.
 
-## Packaging, Kaggle entrypoint and failures
+## Packaging, kaggle entrypoint and failures
 
 Manifest-only bundling preserves `scripts/` import layout plus explicit required
 configs/protocol snapshots/adapter entrypoints; it does not bundle `.git`, `.venv`,
@@ -224,7 +224,7 @@ preparation evidence (HEAD6894864ff4095cf98e9e36d3a694ff5fc9ba3818). Reviewed
 - push supports `-t/--timeout`, `--accelerator`, and `--no-run`; **even --no-run is a
   remote upload and is not authorized now**. Account quota/hardware are unverified.
 - parse successful owner/slug/**version** receipt; reference API can print a push error,
-  so subprocess exit0 alone is not sufficient acknowledgment. Missing/ambiguous receipt
+  so subprocess exit 0 alone is not sufficient acknowledgment. Missing/ambiguous receipt
   yields submission_unknown, never automatic re-push or a guessed latest job.
 - status/output/logs can address a version; current reference includes kernels logs.
   Installed CLI version/capabilities remain unknown, so explicitly validate/record
@@ -354,11 +354,11 @@ checkpoints to a new service is authorized. Keep failures explicit if output una
 | Gate | Current evidence / decision still needed |
 |---|---|
 | G1 CPU vs GPU | accepted check_cpu_tensor/model parameters/LightGCN COO explicitly reject CUDA; Hetero uses CPU temporaries and full Python-neighbor loops. First harness acceptance is CPU-only/offline orchestration, NOT GPU readiness. A GPU execution adapter/backend needs separate scope, mathematical parity/determinism evidence and approval; never bypass guards or select CPU silently for the planned GPU study |
-| G2 initialization | LightGCN requires caller-supplied base embeddings; scientific initialization distribution remains unresolved. Tests use explicit tiny archived tensors only; real run fails missing approved initialization. Hetero Normal0/0.1, Xavier gain1, zero biases already frozen |
-| G3 execution choices | batch policy, batch sizes, RNG derivation, threads/determinism, fanouts/sampling and final validation frequency require explicit recorded profile.1024/fanout10 are suggestions, not defaults. No sampled core LightGCN; new Hetero sampler is outside first CPU-reference harness |
+| G2 initialization | LightGCN requires caller-supplied base embeddings; scientific initialization distribution remains unresolved. Tests use explicit tiny archived tensors only; real run fails missing approved initialization. Hetero Normal 0/0.1, Xavier gain 1, zero biases already frozen |
+| G3 execution choices | batch policy, batch sizes, RNG derivation, threads/determinism, fanouts/sampling and final validation frequency require explicit recorded profile. 1024/fanout 10 are suggestions, not defaults. No sampled core LightGCN; new Hetero sampler is outside first CPU-reference harness |
 | G4 Kaggle environment/data | allowed account/quota, accelerator, CLI/dependency/native-IO compatibility, immutable full-data mounts and durable sink unverified. No live preflight now |
 | G5 provenance | external complete bundle/run envelope proposal above must be approved and independently tested; D1/D2 untouched. Resume source/runtime mismatch fails before live mutation |
-| G6 execution authority | future synthetic optimizer/backward/restore tests, implementation/Worker budgets, exact roots/commands and240s proposal require explicit implementation approval. Real profiling/training/test remain separate |
+| G6 execution authority | future synthetic optimizer/backward/restore tests, implementation/Worker budgets, exact roots/commands and 240s proposal require explicit implementation approval. Real profiling/training/test remain separate |
 
 Thus preparation can be ready for a **bounded CPU harness/offline orchestration**
 implementation decision without pretending the full GPU research runner is complete.
@@ -377,38 +377,38 @@ following text-only proposal is retained for provenance, not as a future default
   only after approval; pin then-current HEAD/source hashes and all accepted dependencies.
   Do not reuse retired D3 trees or create a replacement D3 task.
 - H and O: one initial text-only patch response plus at most one consolidated revision
-  each, 30min/request, no automatic retry. At most4 new requests total; no Worker tools,
+  each, 30 min/request, no automatic retry. At most 4 new requests total; no Worker tools,
   source execution/tests, subagents, commits or controller/provider changes.
-- At most6 full discoveries across this proposed implementation:1 fresh389 baseline,
-  H initial+optional revision (2), O initial+optional revision (2),1 joint final (1).
-  No subsets/smoke/import/native probes/compileall/repeated runs. Each **proposed240s**
+- At most 6 full discoveries across this proposed implementation: 1 fresh 389 baseline,
+  H initial+optional revision (2), O initial+optional revision (2), 1 joint final (1).
+  No subsets/smoke/import/native probes/compileall/repeated runs. Each **proposed 240s**
   covers entire invocation; D3's240s authority does NOT automatically approve this stage.
   Main transfer is a separate later bounded integration, not a seventh implicit run.
-- Proposed fixture envelope: CPU, float32,<=8users/12products/8metadata nodes per type,
-  exactly64 dimensions; actual fixture file<=2MiB, concurrent<=8MiB/128files, decoded
-  checkpoint storage<=2MiB. Miniature bundle<=8MiB unpacked/128files; use synthetic
+- Proposed fixture envelope: CPU, float32,<=8users/12 products/8 metadata nodes per type,
+  exactly 64 dimensions; actual fixture file<=2MiB, concurrent<=8MiB/128 files, decoded
+  checkpoint storage<=2MiB. Miniature bundle<=8MiB unpacked/128 files; use synthetic
   package trees, not live host/source/credential capture by tests.
 - New actual numeric branch<=4epochs/4 Adam updates, all new tests combined<=128
   Adam steps per full discovery; at most5post-baseline discoveries give a phase ceiling
-  of640 new actual Adam steps. Baseline389 runs no newly added update tests; inherited
+  of 640 new actual Adam steps. Baseline 389 runs no newly added update tests; inherited
   accepted differentiation exceptions are unchanged. Propose a2GiB peak process-RSS
   acceptance ceiling, 64MiB newly generated
-  scratch per full invocation and8MiB per complete stdout/stderr stream. Measure RSS
+  scratch per full invocation and 8MiB per complete stdout/stderr stream. Measure RSS
   only with a separately reviewed future parent-wrapper OS accounting receipt; this is
   not a new diagnostic/profiler run, global resource-limit setter or memory sandbox.
   Missing measurement is an unverified gate, not an invented passing counter; never
   truncate logs silently or retune accepted tests to fit. These limits are proposals,
   not an amendment to old D3 runtime-investigation/benchmark history.
   Patience/max-epoch controllers use injected traces (up to101 events),
-  not100 real epochs; keep max_epochs100 semantic tests without expensive training.
+  not 100 real epochs; keep max_epochs100 semantic tests without expensive training.
   No new CUDA, worker threads/processes, network, remote CLI, optimizer on real data,
-  global RNG/dtype/umask/security setters or unsafe decoding. Existing389 exceptions
+  global RNG/dtype/umask/security setters or unsafe decoding. Existing 389 exceptions
   unchanged; the tiny new backward/Adam/private restore operations need explicit approval.
 - Runtime time/RAM/VRAM/disk/checkpoint budgets are REQUIRED run-spec inputs, not
-  invented production2MiB caps. Conditional60GPU-hours/week and20% reserve remain
+  invented production 2MiB caps. Conditional60GPU-hours/week and 20% reserve remain
   unverified planning, not spending authority. Numeric real-job/profile budgets remain
   null until a separate measured plan; failure must not trigger subsampling/tuning.
-- Snapshot proposal:128MiB/file512MiB aggregate, 60s/file300s/snapshot; explicit ignored
+- Snapshot proposal: 128MiB/file 512MiB aggregate, 60s/file 300s/snapshot; explicit ignored
   new implementation/scratch/test-output paths, accepted D3 archived trees/reports,
   accepted D1/D2 evidence, Git HEAD/index/status and outside tracked/nonignored sentinels.
   Actual approval must pin paths/budgets; snapshots are not a sandbox/transient-write log.
@@ -428,7 +428,7 @@ execute embedded arbitrary generated Python or add subprocess smoke probes. Offl
 packaging evidence is not observed successful remote generation/execution traffic.
 AST/static scans supplement, never replace semantic
 review. Independently inspect scope/preserved bytes and complete stdout/stderr/method
-IDs/ledgers, 128-step budget, fixture cleanup and full389 inheritance. Use exact positive
+IDs/ledgers, 128-step budget, fixture cleanup and full 389 inheritance. Use exact positive
 controls and boundary-specific tripwires, not jointly corrupted expected records.
 Compare actual updates/Adam and restarted trajectories with independent expected
 values, and mock CLI call/exit/status/artifact cases without actual account operations.

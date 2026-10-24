@@ -33,7 +33,7 @@ verification: 17 mock infrastructure checks, 103 O-only tests and the full 515-t
 regression all passed with 0 failures/errors/skips (68.2s child, ~784 MiB peak RSS,
 within 240s/2 GiB). All original 412 test IDs, 34 D3 methods and 3,564 expanded cases
 still pass; the 31 inherited Python files and H28 bundle are unchanged. No unresolved
-integration issue remains. Native15 stays historical ESCALATE.
+integration issue remains. Native 15 stays historical ESCALATE.
 Scope: offline packaging and fake-provider behavior only. Live Kaggle jobs, GPU-READY,
 production LightGCN initialization, real-data training, profiling, comparative and
 final-test runs each still need their own plan and approval.
@@ -44,32 +44,32 @@ design: `docs/o-offline-orchestration.md`.
 ## Current main H-REF integration, ACCEPT/task_only
 
 User-approved Pi-only recovery changed only the live scratch monitor/targeted mock
-controls and versioned verifier routing. All6H/26inherited Python/science/H8 unchanged.
-17mock checks PASS; one complete412PASS/0failures/errors/skips, 71.295s unittest/
-75.717s child/794771456bytesRSS; all389baseline/34D3/23Hmethods/35ledgers3564cases,
-strict owner-safe empty-cache cleanup/emptyfreshscratch/4repository preservation PASS.
-Independent Pi originalH/main/recovery criteria and exact ordered limitations/issues
+controls and versioned verifier routing. All 6 H/26 inherited Python/science/H8 unchanged.
+17 mock checks PASS; one complete 412 PASS/0 failures/errors/skips, 71.295s unittest/
+75.717s child/794771456 bytes RSS; all 389 baseline/34 D3/23 H methods/35 ledgers 3564 cases,
+strict owner-safe empty-cache cleanup/empty fresh scratch/4 repository preservation PASS.
+Independent Pi original H/main/recovery criteria and exact ordered limitations/issues
 verified; assigned Pi duties fulfilled, not outside scope. See
 [main acceptance and exact authority](training-harness-main-integration-recovery.md).
-Old main/nativeESCALATEs and all failed receipts/runner/old empty directory preserved.
-SDK4/native1; 7H-associated fullstarts, 0newfull/mock slots remain. DeploymentNOT_AUTHORIZED;
-O/GPU/production initialization/physicalsourcecollection/profiling/comparative/finaltest
+Old main/native ESCALATEs and all failed receipts/runner/old empty directory preserved.
+SDK 4/native 1; 7 H-associated full starts, 0 new full/mock slots remain. Deployment NOT_AUTHORIZED;
+O/GPU/production initialization/physical source collection/profiling/comparative/final-test
 execution remain separate; no stage/commit/push or automatic next workload.
 
 ## Previous main H-REF integration stop
 
 User-approved main integration transferred only the six exact accepted files after
-9mock checks/fresh389baseline overallPASS (99.647s child/762454016bytesRSS). The sole
-post-transfer412invocation was interrupted by Pi's live scratch-size polling race:
-FileNotFoundError on an inherited test's disappearing Parquet file.285methods started,
-284completedOK, no H methods/footer; final child metrics unavailable. Owned empty cache
-removed, but another empty test directory remains preserved; mandatory overallFAIL.
-Main integration ESCALATE/notaccepted; no H defect established, no source fix/rerun/
-cleanup/rollback or extraWorker/SDK. All2main slots consumed; 6H-associated fullstarts,
-SDK4/native1 unchanged. Isolated H ACCEPT/native historicalESCALATE remain unchanged.
+9 mock checks/fresh 389 baseline overall PASS (99.647s child/762454016 bytes RSS). The sole
+post-transfer 412 invocation was interrupted by Pi's live scratch-size polling race:
+FileNotFoundError on an inherited test's disappearing Parquet file. 285 methods started,
+284 completed OK, no H methods/footer; final child metrics unavailable. Owned empty cache
+removed, but another empty test directory remains preserved; mandatory overall FAIL.
+Main integration ESCALATE/not accepted; no H defect established, no source fix/rerun/
+cleanup/rollback or extra Worker/SDK. All 2 main slots consumed; 6 H-associated full starts,
+SDK 4/native 1 unchanged. Isolated H ACCEPT/native historical ESCALATE remain unchanged.
 See [main integration outcome](training-harness-main-integration.md) and its linked
-RCA/receipts. Proposed next gate ONLY:separately approve Pi verifier-only race correction,
-mock controls and one extra412run; no recovery yet. Deployment NOT_AUTHORIZED and broader
+RCA/receipts. Proposed next gate ONLY: separately approve Pi verifier-only race correction,
+mock controls and one extra 412 run; no recovery yet. Deployment NOT_AUTHORIZED and broader
 O/GPU/production initialization/collection/profiling/comparative/final-test gates remain.
 
 **Current Worker governance:** [native agy through the delegation extension is the
@@ -167,95 +167,95 @@ User explicitly authorized append-only final Pi acceptance using existing verifi
 results. `data/reports/training-harness-h-ref-v1/pi-final-acceptance-v1/review.json`
 records **ACCEPT/task_only** for the pinned isolated bounded CPU-reference H-REF/H-side
 interfaces. All original H1-H9 verified; assigned Pi review duties and original deferred
-issue fulfilled with independent evidence, not mislabeled outside scope. All322isolated
+issue fulfilled with independent evidence, not mislabeled outside scope. All 322 isolated
 files, accepted components, Adam/BPR/science and H8 unchanged.
 
-Existing overall412PASS/0failures/errors/skips, 81.938s child/870412288bytesRSS,
-389inherited/34D3/3564expanded preserved; complete logs, empty fresh scratch, owner-safe
+Existing overall 412 PASS/0 failures/errors/skips, 81.938s child/870412288 bytes RSS,
+389 inherited/34 D3/3564 expanded preserved; complete logs, empty fresh scratch, owner-safe
 cache cleanup and preservation PASS. No new implementation or regression for acceptance.
 Native task3606687c-beba-4d3f-bd24-03ae5238da37 remains historical ESCALATE with original
 failed verification/report/budgets intact. No native ACCEPT or extension bypass.
-Hierarchy:User→Pi final deliverable authority→native Worker/execution evidence.
+Hierarchy: User→Pi final deliverable authority→native Worker/execution evidence.
 
-SDK4/native1/4actualHfullruns retained. Main integration is a separate next approval,
+SDK 4/native 1/4 actual H full runs retained. Main integration is a separate next approval,
 not authorized here. O-OFFLINE, GPU-READY, production initialization/collection/full-data
 feasibility, Musical_Instruments→Toys→Electronics profiling, comparative/final-test and
 deployment remain separate gates. **Deployment NOT_AUTHORIZED.**
 [Final authority/scope](h-ref-pi-final-acceptance.md). Older holds remain preserved.
 
-### Previous cache lifecycle review, overall412PASS, formalacceptancehold
+### Previous cache lifecycle review, overall 412 PASS, formal acceptance hold
 
-User approved Pi-only cache path/cleanup infrastructure and one separatelyallocated
-full regression, not training/H8 changes. All322isolated files exact. ParentPID1363626
-creates/manages the fresh private cache, child1363657 consumes its configured path;
-finallycleanup rmdir's only that inode-checked EMPTY ownedcache after childsettlement.
-Freshscratch empty, oldunownedcache3413649/history/source/Git untouched. Nine mock-only
-infrastructure checks PASS(success/failure/refusal);one complete regression OVERALLPASS:
-**412tests/0failures/errors/skips, 74.875s unittest/81.938s child, 870412288bytesRSS**,
-all389inherited/34D3/3564expanded preserved within original240s/2GiB/log/fixture limits.
+User approved Pi-only cache path/cleanup infrastructure and one separately allocated
+full regression, not training/H8 changes. All 322 isolated files exact. Parent PID 1363626
+creates/manages the fresh private cache, child 1363657 consumes its configured path;
+finally cleanup rmdir's only that inode-checked EMPTY owned cache after child settlement.
+Fresh scratch empty, oldunowned cache 3413649/history/source/Git untouched. Nine mock-only
+infrastructure checks PASS (success/failure/refusal); one complete regression OVERALL PASS:
+**412 tests/0 failures/errors/skips, 74.875s unittest/81.938s child, 870412288 bytes RSS**,
+all 389 inherited/34 D3/3564 expanded preserved within original 240s/2GiB/log/fixture limits.
 
 Latest additive review:`data/reports/training-harness-h-ref-v1/cache-lifecycle-v1/final-adjudication-v1/acceptance-packet.json`.
-Earlier all-H1-H9-verified wording overstated H8: runtime PASS, full final adjudication
+Earlier all H1-H9 verified wording overstated H8: runtime PASS, full final adjudication
 pending. Two external boundaries have scope quotes; two assigned Pi duties are NOT
 outside scope. The tool blocks a nonempty original unresolved_issues array and has no
 independent resolution/fulfilled-assigned disposition. No existing operator command
 can bind this amendment without new authority. See final-adjudication-v1/operator-decision-required.md.
 No new Worker or tests are recommended.
-HREFACCEPTNOTrecorded. Existingnative task3606687c-beba-4d3f-bd24-
-03ae5238da37 is terminalESCALATE andhasitsoriginalfailedstoredbenchmark. No silent
-rebinding, oldverifier/receipt rewrite, automaticreassessment orreplacementtask. Operator-
-supported handling of the explicitlyapproved amended verification is required; see
+H-REF ACCEPT NOT recorded. Existingnative task3606687c-beba-4d3f-bd24-
+03ae5238da37 is terminal ESCALATE and has its original failed stored benchmark. No silent
+rebinding, oldverifier/receipt rewrite, automatic reassessment or replacement task. Operator-
+supported handling of the explicitly approved amended verification is required; see
 acceptance-gate-review.json. No new source defect or extra Worker recommendation.
-SDK4/native1unchanged(secondunused),fullH old3/3+extra1/1=4. No further test/Worker/SDK/
-maintransfer/extensionchange authorized. HCPUreference NOTaccepted; deploymentNOT_AUTHORIZED.
+SDK 4/native1unchanged(second unused), full H old 3/3+extra1/1=4. No further test/Worker/SDK/
+main transfer/extension change authorized. H CPU reference NOT accepted; deployment NOT_AUTHORIZED.
 [Scope/ownership/result](training-harness-cache-lifecycle.md). Older phases below remain
 immutable chronological evidence, not current counts or launch permission.
 
-### Previous native correction , 412functionalPASS; mandatorycleanupFAIL/ESCALATE
+### Previous native correction , 412 functional PASS; mandatory cleanup FAIL/ESCALATE
 
-User authorized at most2native agy invocations for canonical D1 dictionary adaptation/
+User authorized at most 2 native agy invocations for canonical D1 dictionary adaptation/
 related fixtures and NaN exception ordering, with Pi-only regression. **One native call**
-corrected exactly isolated training_data.py and the two H test modules. All316accepted
-files/other3Hfiles/D1-D3/models/BPR/Adam math/protocol/main/siblings/Git/history preserved.
+corrected exactly isolated training_data.py and the two H test modules. All 316 accepted
+files/other 3 Hfiles/D1-D3/models/BPR/Adam math/protocol/main/siblings/Git/history preserved.
 Native task `3606687c-beba-4d3f-bd24-03ae5238da37` is **ESCALATE/task_only, not accepted**.
 Latest `data/reports/training-harness-h-ref-v1/native-correction-v1/review.json` and
 `root-cause-review.md`;raw source/action/verification evidence is preserved there.
 
 Pi independently reviewed complete actual functions/callers/tests/native boundaries
-and ran ONE full original discovery. **412testsPASS, 0failures/errors/skips**;72.582s
-unittest/**79.580s child**,**863043584bytes peakRSS (~823.1MiB)** within240s/2GiB.
-All389inherited/34D3methods/35ledgers/3564expanded cases pass; complete stdout is
+and ran ONE full original discovery. **412 testsPASS, 0 failures/errors/skips**; 72.582s
+unittest/**79.580s child**,**863043584bytes peak RSS (~823.1MiB)** within 240s/2GiB.
+All 389 inherited/34 D 3 methods/35 ledgers/3564 expanded cases pass; complete stdout is
 baseline-byte-identical. Both-model independent Adam oracles and uninterrupted/private
 D2-D3 restart trajectories, closure/device/selection/entrypoint controls now pass.
-36successful Hsteps are inferred from completed test branches, not an instrumented
+36 successful Hsteps are inferred from completed test branches, not an instrumented
 counter. No new numerical/model or accepted-dependency defect was observed.
 
-But the predeclared verification supervisor **exits1**:one EMPTY torchinductor_sunf
+But the predeclared verification supervisor **exits 1**: one EMPTY torchinductor_sunf
 framework directory remains in required-empty scratch. Native optimizer initialization
 lazily imports Dynamo; package module-global cache initialization calls Inductor
 cache_dir/os.makedirs under tempfile's owned scratch. Pi missed this framework-cache
 ownership/cleanup lifecycle. Required empty scratch/native benchmark is FAILED, not
-waived despite412green. Source/Git file maps are unchanged; directory-aware assertion
+waived despite 412 green. Source/Git file maps are unchanged; directory-aware assertion
 correctly detects what file-only hashes miss. No passing preservation receipt is
 fabricated; the directory, failed wrapper and complete child logs remain untouched.
 
-Counts preserved:SDK4/native1of2(secondunused),Hfull3of3used(1baseline+2candidates).
-The earlier24-error candidate suite/SDK proposals remain historical, not retroaccepted.
-**STOP:no extra Worker/SDK, cleanup, fix or rerun.** Proposed next gate only:separately
+Counts preserved: SDK 4/native1of2(second unused), Hfull3of3used(1baseline+2candidates).
+The earlier 24-error candidate suite/SDK proposals remain historical, not retroaccepted.
+**STOP: no extra Worker/SDK, cleanup, fix or rerun.** Proposed next gate only: separately
 approve Pi-only cache-lifecycle/fresh-scratch verification infrastructure and an explicit
 additional full-suite budget; respect native terminal/operator/original-command gates,
 not replacement-task resets or edits to old evidence. No new implementation round is
-recommended for passing adapter/math code. HCPUreference **not accepted**;deployment
+recommended for passing adapter/math code. H CPU reference **not accepted**; deployment
 **NOT_AUTHORIZED**. Main integration, O-OFFLINE, GPU-READY and experiments remain separate.
 [Authority/history](training-harness-h-ref.md).
 
 ### Historical first two-sdk-request H result, ESCALATE/no files, not latest
 
-User approved H only withdevice interfaces. Fresh389baselineOK64.917s process,
-57.732s unittest/661983232bytespeakRSS, 3564expanded pass. The two SDK responses returned
-no files:missingfrozencontracts, thenloss-returnkeyabsentfromPi's freshAPI excerpt.
-Pi owns contextomission; no modelbug/CPUharnessinfeasibility established. At that stop,
-no newtests, updates/restore or candidatefullsuite; isolated316-filebaseline unchanged.
+User approved H only withdevice interfaces. Fresh 389 baseline OK64.917s process,
+57.732s unittest/661983232 bytes peak RSS, 3564 expanded pass. The two SDK responses returned
+no files: missingfrozencontracts, thenloss-return key absent from Pi's fresh API excerpt.
+Pi owns context omission; no model bug/CPU harness infeasibility established. At that stop,
+no new tests, updates/restore or candidate full suite; isolated 316-filebaseline unchanged.
 `data/reports/training-harness-h-ref-v1/review.json` retains that ESCALATE and two used
 requests. Later separately bounded continuations delivered the proposal above, without
 rewriting this original decision/plan or reclassifying SDK requests as native agy.
@@ -284,7 +284,7 @@ are proposals only. No production/legacy replacement or execution now.
 
 First implementation scope proposed: authoritative CPU models plus state/data/evaluator
 integration, and offline packaging/entrypoint/failure/status/artifact orchestration.
-CPU/GPU readiness, LightGCN initialization, full source closure outside D1's20paths,
+CPU/GPU readiness, LightGCN initialization, full source closure outside D1's 20 paths,
 Kaggle compatibility/durable checkpoint storage and remaining execution choices are
 explicit gates, not solved by selecting Kaggle GPU metadata. Stage names are recommender
 training from scratch, validation selection, frozen final test andpost-selection reporting;
@@ -297,24 +297,24 @@ execution/tuning freeze and separately authorized comparative/final-test work.
 
 The user separately authorized decommissioning isolated D3 implementation and bounded
 main integration. Both original D3 trees/evidence remain unchanged, audit-only; no delete,
-move, chmod, Gitmetadata change or additional isolated execution. Pi copied only the
-exact3accepted D3files after355main baselineOK56.293s; fullmain389OK57.452s process,
-0failures/errors/skips, under240s each. All355IDs/bytes/3564expanded/34D3methods preserved.
-Complete MI1-MI5/IO1-IO8/current8orderedlimitation adjudication: **ACCEPT/task_only** in
+move, chmod, Git metadata change or additional isolated execution. Pi copied only the
+exact 3 accepted D3files after 355 main baseline OK56.293s; fullmain389OK57.452s process,
+0 failures/errors/skips, under 240s each. All 355 IDs/bytes/3564 expanded/34 D 3 methods preserved.
+Complete MI1-MI5/IO1-IO8/current 8 ordered limitation adjudication: **ACCEPT/task_only** in
 `data/reports/checkpoint-storage-main-integration/review.json`;see
-`docs/checkpoint-storage-main-integration.md`. Old mainD3doc archived; transferred API
-artifact exact, with Worker submission-status history preserved andthisreceipt current.
-FourWorker attempts/sevenoldfullruns plus2mainruns retained, nine total, no reset/retry.
+`docs/checkpoint-storage-main-integration.md`. Old main D3 doc archived; transferred API
+artifact exact, with Worker submission-status history preserved and this receipt current.
+Four Worker attempts/seven old full runs plus 2 main runs retained, nine total, no reset/retry.
 Deployment NOT_AUTHORIZED; no further automatic tests/Worker/corrections, profiling/training,
-heldout/remote, stage/commit/push/release/rollback. Researchexecution still separate gates.
+heldout/remote, stage/commit/push/release/rollback. Research execution still separate gates.
 
 Previous isolated independent D3 decision is **ACCEPT/task_only** after the explicitly authorized
-Pi-only sourceFIFO oracle correction:389OK, 0failures/errors/skips, 53.292s unittest/
-55.890s process under240s. All355 accepted dependencies/IDs and3564expanded cases
-preserved; production andcandidateAPI docs unchanged. FullIO1-IO8 and8exactordered
+Pi-only source FIFO oracle correction: 389 OK, 0 failures/errors/skips, 53.292s unittest/
+55.890s process under 240s. All 355 accepted dependencies/IDs and 3564 expanded cases
+preserved; production and candidate API docs unchanged. Full IO1-IO8 and 8 exact ordered
 limitation reviews completed. See
 `data/reports/checkpoint-storage-implementation/oracle-only-correction-v1/review.json`.
-AllpriorESCALATEs/failed389 and4Worker/7conservativefullrun history remainunchanged.
+All prior ESCALATEs/failed 389 and 4 Worker/7 conservative full run history remain unchanged.
 Deployment NOT_AUTHORIZED; D3 main source/test integration/regression requires separate
 approval. No profiling/training, heldout, stage/commit/push or additional cycles. The
 following entries preserve the implementation authority and earlier gate history.
@@ -325,15 +325,15 @@ and implement scoped technical choices; Pi verifies source and tests, targets co
 obstacles and never claims unproved guarantees or executes unsafe IO tests. The bounded
 plan is `data/reports/checkpoint-storage-implementation/plan.json`. D1/D2 remain closed
 and protected; no controller investigation, main transfer or research authorization.
-The historical pre-Worker ESCALATE after two120s timeouts remains in
+The historical pre-Worker ESCALATE after two 120s timeouts remains in
 `data/reports/checkpoint-storage-implementation/review.json`; no D2 defect was shown.
 Runtime investigation is closed: no profiler, diagnostics, sudo, C++ trace, thread
-experiment or accepted-test edit. User subsequently approved the D3-only240s ceiling
-in `checkpoint-storage-execution-budget-amendment.md`; fresh unchanged355 baseline
-passed55.645s process. Original120s outcomes remain unchanged.
+experiment or accepted-test edit. User subsequently approved the D3-only 240s ceiling
+in `checkpoint-storage-execution-budget-amendment.md`; fresh unchanged 355 baseline
+passed 55.645s process. Original 120s outcomes remain unchanged.
 
-Initial full D3 regression:379tests, 1failure/2errors/0skips, 55.993s process; all355
-inherited tests and3564 expanded cases pass. New source fixture modes caused early
+Initial full D3 regression: 379 tests, 1 failure/2 errors/0 skips, 55.993s process; all 355
+inherited tests and 3564 expanded cases pass. New source fixture modes caused early
 refusals. One consolidated revision proposed targeted permission, inode-publication,
 O_PATH-classification and byte-order corrections, but remains **unapplied/unexecuted**:
 its source baseline hash is malformed, and the assigned IO2 parent-race guarantee is
@@ -346,7 +346,7 @@ Earlier preparation status below is retained as history, not an active prohibiti
 D1 identity/provenance and D2 payload validation are accepted and integrated in main.
 D2's separate integration decision is
 `data/reports/checkpoint-payload-main-integration/review.json`:355 passing tests,
-zero failures/errors/skips, 56.643s complete process within120s, task_only and
+zero failures/errors/skips, 56.643s complete process within 120s, task_only and
 NOT_AUTHORIZED for deployment. Later historical entries below remain historical
 records; their exhausted tasks are not reopened or reset.
 

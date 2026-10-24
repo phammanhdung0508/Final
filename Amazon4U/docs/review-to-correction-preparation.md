@@ -176,7 +176,7 @@ Pi checks exact allowed paths, patch contents, protected implementation and test
 before mechanical application. For D2 only its three approved files are eligible; no
 undeclared helpers, path escapes, renames/deletions or assertion weakening/skips. Review
 all selected test/setup execution paths, including inherited fixtures, for prohibited
-actions such as global `torch.manual_seed`; do not reexecute the unsafe320-case artifact
+actions such as global `torch.manual_seed`; do not reexecute the unsafe 320-case artifact
 just to bootstrap. Static screening supplements full semantic review, not a universal
 unsafe-code detector or sandbox. No actual patch or tests ran in the synthetic demo.
 
@@ -189,10 +189,10 @@ and do not turn this into a tooling project or automatic D2 relaunch.
 ## Bounded text-only D2 follow-up, result, not new authority
 
 Subsequent separate user `procced` authorized the pinned text-only correction in
-`checkpoint-payload-text-correction.md`. That round stopped ESCALATE at1/1, with no
-native Worker tools/commands and no new controller. All320inherited tests pass, but
-final337tests retain2valid fractional-Adam-step failures; 3140expanded assertions pass
-without closing all37rows. D01raw identifier bounds and coverage remain incomplete.
+`checkpoint-payload-text-correction.md`. That round stopped ESCALATE at 1/1, with no
+native Worker tools/commands and no new controller. All 320 inherited tests pass, but
+final 337 tests retain 2 valid fractional-Adam-step failures; 3140 expanded assertions pass
+without closing all 37 rows. D01raw identifier bounds and coverage remain incomplete.
 Preserve the useful fixes/tests and exact current reports; do not manufacture green,
 change acceptance criteria, extend budgets or automatically replace the round.
 
@@ -206,7 +206,7 @@ appropriate bounded authority; no D3/main transfer/training/deployment follows.
 ## Frozen-contract evidence, not expanding requirements
 
 The user explicitly reaffirmed this for the next D2round: no additional Worker
-architecture work; preserve the337-test candidate and verified fixes; prioritize the
+architecture work; preserve the 337-test candidate and verified fixes; prioritize the
 well-defined A04/D01implementation defects under new authorization. Use ledger-backed
 coverage additions without confusing missing evidence with a demonstrated source bug.
 Do not regenerate the suite or rewrite unrelated protected guards to gain coverage.

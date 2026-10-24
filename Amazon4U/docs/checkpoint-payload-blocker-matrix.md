@@ -1,10 +1,10 @@
 # D2 detailed part-level blocker matrix
 
-**Preparation artifact, not implementation acceptance or execution authority.** Current task `6efb0ae5-6a62-4376-91e9-7b358c51013f` remains ESCALATE at1/1. No Worker or candidate tests were run for this preparation. All proposed reproductions below are **unexecuted** unless explicitly marked historical.
+**Preparation artifact, not implementation acceptance or execution authority.** Current task `6efb0ae5-6a62-4376-91e9-7b358c51013f` remains ESCALATE at 1/1. No Worker or candidate tests were run for this preparation. All proposed reproductions below are **unexecuted** unless explicitly marked historical.
 
 ## Pinned inputs and interpretation
 
-Candidate root: `/home/sunf/FSB/Final/Amazon4U/.worktrees/checkpoint-payload-authorized-correction/Amazon4U`. Historical Pi benchmark283/283 (including249 unchanged baseline IDs),7.302s/9592ms, evidence `agy-evidence-bb5368ef-3750-4924-b99f-be9856c0bbbd`. This is not a fresh run or D2 ACCEPT. Exact file/function/test hashes, original criterion strings and command are in `data/reports/d2-part-level-preparation/baseline.json`.
+Candidate root: `/home/sunf/FSB/Final/Amazon4U/.worktrees/checkpoint-payload-authorized-correction/Amazon4U`. Historical Pi benchmark 283/283 (including 249 unchanged baseline IDs), 7.302s/9592ms, evidence `agy-evidence-bb5368ef-3750-4924-b99f-be9856c0bbbd`. This is not a fresh run or D2 ACCEPT. Exact file/function/test hashes, original criterion strings and command are in `data/reports/d2-part-level-preparation/baseline.json`.
 
 | File | SHA256 |
 |---|---|
@@ -12,7 +12,7 @@ Candidate root: `/home/sunf/FSB/Final/Amazon4U/.worktrees/checkpoint-payload-aut
 | `tests/test_checkpoint_payload.py` | `c4b9fe4c224c4cecdcd1d19d2f62aa484d207ac11d9ca770c9cc093a3b97a2d5` |
 | `docs/checkpoint-payload.md` | `66202875e2d98d7a68b8bad8ad3c0c9e26900980bb5cf9b16b07d952eef52554` |
 
-The original859-line/59605-byte specification is pinned as SHA256 `a648d97f73e1213eb37f1a87fe56e76f1171f59baedcce6cd62b2c66f7dd64c4`. C1-C10 are unchanged, with detailed contracts at spec402-786. Candidate docs append is an untrusted prior claim, not acceptance evidence.
+The original 859-line/59605-byte specification is pinned as SHA256 `a648d97f73e1213eb37f1a87fe56e76f1171f59baedcce6cd62b2c66f7dd64c4`. C1-C10 are unchanged, with detailed contracts at spec 402-786. Candidate docs append is an untrusted prior claim, not acceptance evidence.
 
 **Status is part-specific.** Verified means the cited invariant has source/historical evidence, with the basis stated; it does not mean all adversarial cases are covered. Unverified identifies missing evidence, not an established implementation defect. Failed static findings are not newly executed failures. Implementation preservation and additional tests are separate columns.
 
@@ -22,7 +22,7 @@ The original859-line/59605-byte specification is pinned as SHA256 `a648d97f73e12
 |---|---|---|---|
 | P01 | Accepted dependencies, baseline and import aliases | C1, C9 | verified | `preserve_dependency` |
 | F01 | Valid fixture construction and guard reachability | C2, C6, C9 | failed | `add_tests_and_boundary_helper_only` |
-| E01 | Public API, exact14-root envelope and applicability records | C2, C8 | verified | `preserve_logic_add_tests` |
+| E01 | Public API, exact 14-root envelope and applicability records | C2, C8 | verified | `preserve_logic_add_tests` |
 | E02 | Actual/expected identity and source provenance binding | C1, C2, C9 | verified | `preserve_logic_add_tests` |
 | E03 | Trusted descriptor list schemas | C2, C4, C5, C8 | failed | `targeted_declared_schema_fix` |
 | E04 | Runtime/provenance/default-step-policy coherence | C2, C4, C5, C8 | verified | `preserve_logic_add_tests` |
@@ -30,7 +30,7 @@ The original859-line/59605-byte specification is pinned as SHA256 `a648d97f73e12
 | R02 | Exact M/S/C metadata/storage/structure accounting | C3, C8, C9 | verified | `preserve_logic_add_tests` |
 | R03 | Preflight/raw-validation/copy/revalidation ordering | C3, C7, C8 | verified | `preserve_logic_add_tests` |
 | M01 | LightGCN complete current/best dense recipe | C3, C9 | verified | `preserve_logic_add_tests` |
-| M02 | Hetero complete36-parameter current/best recipe | C3, C9 | verified | `preserve_logic_add_tests` |
+| M02 | Hetero complete 36-parameter current/best recipe | C3, C9 | verified | `preserve_logic_add_tests` |
 | M03 | Sparse COO canonicality and trusted graph contents | C3, C9 | verified | `preserve_logic_add_tests` |
 | A01 | Optional Adam param_names type/value binding | C2, C4, C8 | failed | `targeted_named_option_fix` |
 | A02 | Adam packed IDs, groups/options and complete parameter binding | C2, C4, C9 | verified | `preserve_logic_add_tests` |
@@ -71,7 +71,7 @@ Ranges below refer to the pinned candidate; complete function ranges remain in e
 | G01 | `scripts/checkpoint_payload.py:1133-1144`; accepted D1 `checkpoint_identity.py:224-235`: canonical name mismatch in CPU guard. |
 | G09 | `scripts/checkpoint_payload.py:1233-1240,1247-1310`: parent seed comparison precedes type validation. |
 | D01 | `scripts/checkpoint_payload.py:729,893,901,922,1137,1527,1982-1984,2065-2067,2089,2256`: raw collection/value diagnostics; use the recipes below to reach them. |
-| V02 | Candidate `docs/checkpoint-payload.md:872-1004`; original `independent-review/revision1/worker-report.json` fields summary/test_results/unresolved_issues versus raw steps272/282/300/310 and initial review. **No runtime unit test proves disclosure**: compare the report with actual records. |
+| V02 | Candidate `docs/checkpoint-payload.md:872-1004`; original `independent-review/revision1/worker-report.json` fields summary/test_results/unresolved_issues versus raw steps 272/282/300/310 and initial review. **No runtime unit test proves disclosure**: compare the report with actual records. |
 
 ## Detailed cases and mandatory closure evidence
 
@@ -85,11 +85,11 @@ Common rule: build a valid complete public control first, independently detach e
 
 **Existing tests:** `test_dual_import_canonicalization` at 953-957.
 
-**Current evidence:** Historical283-suite retains249 IDs; current hashes match archived candidate.
+**Current evidence:** Historical 283-suite retains 249 IDs; current hashes match archived candidate.
 
-**Valid control:** Existing249 baseline + dual-import case.
+**Valid control:** Existing 249 baseline + dual-import case.
 
-**Required cases / gaps:** Freeze D1/model/all249 test bytes, original criteria/protocols, source HEAD/index; future bootstrap must reproduce283 before edits. Preserve all34 existing payload method ASTs; additive tests are allowed.
+**Required cases / gaps:** Freeze D1/model/all 249 test bytes, original criteria/protocols, source HEAD/index; future bootstrap must reproduce 283 before edits. Preserve all 34 existing payload method ASTs; additive tests are allowed.
 
 **Expected outcome / mandatory evidence for ACCEPT:** Fresh original full discovery after setup; no skips/deleted assertions/unexpected scope or Git mutation. No D1/model edits. Subsystem acceptance remains pending.
 
@@ -101,15 +101,15 @@ Common rule: build a valid complete public control first, independently detach e
 
 **Existing tests:** `_make_synthetic_identity_and_provenance` at 99-393; `_make_valid_lightgcn_payload` at 410-697; `_make_valid_hetero_payload` at 700-943; `test_positive_lightgcn_payload` at 959-977; `test_positive_heterognn_payload` at 979-995; `test_fixture_alignment_and_normalization` at 997-1023.
 
-**Current evidence:** E0/E2 controls pass historically. Static helper defect: E4 constant scores select2 but best_model.epoch is4; existing patience test overwrites it.
+**Current evidence:** E0/E2 controls pass historically. Static helper defect: E4 constant scores select 2 but best_model.epoch is4; existing patience test overwrites it.
 
 **Valid control:** Retain original E0/E2 helper behavior; add a separate coherent-boundary builder using accepted D1 build_canonical_identity and build_source_provenance(source_files, git_evidence, environment_records).
 
 **Required cases / gaps:** Before each mutation validate a detached full control. For new E/F/history contexts rebuild fingerprints through D1; set sampler hash, epochs, G/history, Adam updates/steps, selected epoch/best weights coherently. Keep expectations detached from payload; no regenerated whole test file.
 
-**Expected outcome / mandatory evidence for ACCEPT:** Control succeeds before mutation. A malformed fixture is corrected, never used to justify weakening guards. E4 tie must have best epoch2, not4.
+**Expected outcome / mandatory evidence for ACCEPT:** Control succeeds before mutation. A malformed fixture is corrected, never used to justify weakening guards. E4 tie must have best epoch 2, not 4.
 
-### E01, public API, exact14-root envelope and applicability records
+### E01, public API, exact 14-root envelope and applicability records
 
 **Criteria:** C2, C8. **Implementation:** verified; `preserve_logic_add_tests`. **Tests:** additional_evidence_required.
 
@@ -183,11 +183,11 @@ Common rule: build a valid complete public control first, independently detach e
 
 **Current evidence:** Current schema/explicit smaller runtime profile controls pass; all-field matrix incomplete.
 
-**Valid control:** Exact synthetic2097152/2097152/32/16384 and explicit smaller runtime profile.
+**Valid control:** Exact synthetic 2097152/2097152/32/16384 and explicit smaller runtime profile.
 
 **Required cases / gaps:** Each policy key missing/extra/wrong type; bool/0/negative for each four limits; invalid schema/kind/profile; synthetic constants changed; payload-carried policy cannot override trusted argument.
 
-**Expected outcome / mandatory evidence for ACCEPT:** Domain refusal before unsafe processing; no universal production2MiB ceiling, hardware auto-sizing or larger profile selected.
+**Expected outcome / mandatory evidence for ACCEPT:** Domain refusal before unsafe processing; no universal production 2MiB ceiling, hardware auto-sizing or larger profile selected.
 
 ### R02, exact M/S/C metadata/storage/structure accounting
 
@@ -197,7 +197,7 @@ Common rule: build a valid complete public control first, independently detach e
 
 **Existing tests:** `test_exact_resource_boundaries_and_accounting` at 1117-1172; `test_exact_independent_projected_output_oracle` at 1747-1765; `test_exact_visit_limits_under_synthetic_profile` at 1767-1779; `test_storage_deduplication_same_address_different_capacity` at 2151-2164.
 
-**Current evidence:** Historical exactB/B+1, M174/S1048576/C2096978, visits16384/16385, depth32/33, distinct StorageImpl same-address cases; static raw backing/copy accounting read.
+**Current evidence:** Historical exactB/B+1, M174/S1048576/C2096978, visits 16384/16385, depth 32/33, distinct StorageImpl same-address cases; static raw backing/copy accounting read.
 
 **Valid control:** Keep existing literal independent oracles, not recomputed solely by candidate helper.
 
@@ -213,7 +213,7 @@ Common rule: build a valid complete public control first, independently detach e
 
 **Existing tests:** `test_raw_tensor_detachment_and_sparse_forgery_rejection` at 1671-1745.
 
-**Current evidence:** Static7-phase ordering and raw grad/forged COO refusals historically pass; no complete tripwire evidence.
+**Current evidence:** Static 7-phase ordering and raw grad/forged COO refusals historically pass; no complete tripwire evidence.
 
 **Valid control:** Unpatched complete public controls for both models.
 
@@ -235,9 +235,9 @@ Common rule: build a valid complete public control first, independently detach e
 
 **Required cases / gaps:** For EACH user_embeddings/item_embeddings in EACH current_model/best_model independently missing/extra/shape/float64/sparse-layout/meta-device/NaN/+Inf/-Inf/requires_grad; model epoch/row-order/schema corruptions separate. Use intended role/name/guard assertions.
 
-**Expected outcome / mandatory evidence for ACCEPT:** Full named coverage manifest; property/recipe guard not unrelated best-weight equality. Keep numerical predicates and exact2-param recipe unchanged; key rendering D01 only.
+**Expected outcome / mandatory evidence for ACCEPT:** Full named coverage manifest; property/recipe guard not unrelated best-weight equality. Keep numerical predicates and exact 2-param recipe unchanged; key rendering D01 only.
 
-### M02, hetero complete36-parameter current/best recipe
+### M02, hetero complete 36-parameter current/best recipe
 
 **Criteria:** C3, C9. **Implementation:** verified; `preserve_logic_add_tests`. **Tests:** additional_evidence_required.
 
@@ -245,11 +245,11 @@ Common rule: build a valid complete public control first, independently detach e
 
 **Existing tests:** `test_heterognn_model_parameter_mutations` at 1356-1385; `test_valid_empty_hetero_metadata_tables` at 2063-2092; `test_positive_heterognn_payload` at 979-995.
 
-**Current evidence:** Recipe matches accepted registration; current tests have only5shape categories, not complete negative matrix.
+**Current evidence:** Recipe matches accepted registration; current tests have only 5 shape categories, not complete negative matrix.
 
-**Valid control:** All36 slots; User/Product nonempty; both metadata tables empty is another valid control.
+**Valid control:** All 36 slots; User/Product nonempty; both metadata tables empty is another valid control.
 
-**Required cases / gaps:** Expand all36 names from pinned model recipe, each current/best role: missing/extra/shape/dtype/layout/meta/finiteness/detachment; include all4 base tables, both layers of8relations and4node self weights/biases. Empty tables test applicable shape/type/layout cases; use nonempty metadata control for element-finiteness mutations.
+**Required cases / gaps:** Expand all 36 names from pinned model recipe, each current/best role: missing/extra/shape/dtype/layout/meta/finiteness/detachment; include all 4 base tables, both layers of 8 relations and 4 node self weights/biases. Empty tables test applicable shape/type/layout cases; use nonempty metadata control for element-finiteness mutations.
 
 **Expected outcome / mandatory evidence for ACCEPT:** No invented element access on empty tensors; parameter/name-specific CVE; no change to model, 36 count, registration order, or valid empty metadata.
 
@@ -269,7 +269,7 @@ Common rule: build a valid complete public control first, independently detach e
 
 **Expected outcome / mandatory evidence for ACCEPT:** Intended canonical/range/trusted-content refusal. Valid current+expected agreeing on a different physically supplied graph is NOT an origin-proof oracle; do not invent that claim. Preserve numerical exact-bit comparisons.
 
-### A01, optional Adam param_names type/value binding
+### A01, optional adam param_names type/value binding
 
 **Criteria:** C2, C4, C8. **Implementation:** failed; `targeted_named_option_fix`. **Tests:** additional_evidence_required.
 
@@ -277,15 +277,15 @@ Common rule: build a valid complete public control first, independently detach e
 
 **Existing tests:** `test_adam_optimizer_validation` at 1387-1504.
 
-**Current evidence:** Static source898-901 calls list(act_pnames) without type check or exact comparison with optional trusted value. Same-key dict passes, scalar raises TypeError. No current named-group test.
+**Current evidence:** Static source 898-901 calls list(act_pnames) without type check or exact comparison with optional trusted value. Same-key dict passes, scalar raises TypeError. No current named-group test.
 
-**Valid control:** Enable names in BOTH actual group and trusted options; same ordered clean name list; validate public control first. Include2-group partition and both model families.
+**Valid control:** Enable names in BOTH actual group and trusted options; same ordered clean name list; validate public control first. Include 2-group partition and both model families.
 
-**Required cases / gaps:** Actual-only dict.fromkeys(valid_names, None),7, None, string, bytes, bool; missing/unexpected optional field; reordered/duplicate/wrong element names; malformed trusted named option; both-corrupt mapping. Match the explicitly supported trusted sequence type/value rather than coerce arbitrary iterable. Proposed handoff pins list/list and tuple/tuple (existing trusted sequence support), rejects cross-container mismatch; no blanket tuple policy outside declared fields.
+**Required cases / gaps:** Actual-only dict.fromkeys(valid_names, None), 7, None, string, bytes, bool; missing/unexpected optional field; reordered/duplicate/wrong element names; malformed trusted named option; both-corrupt mapping. Match the explicitly supported trusted sequence type/value rather than coerce arbitrary iterable. Proposed handoff pins list/list and tuple/tuple (existing trusted sequence support), rejects cross-container mismatch; no blanket tuple policy outside declared fields.
 
 **Expected outcome / mandatory evidence for ACCEPT:** Named-option CVE, not native conversion or acceptance. Full controls stay valid. Protect all other Adam conditions; do not rewrite selection. Compatibility detail is explicit in proposed assignment, not asserted as a newly executed result.
 
-### A02, Adam packed IDs, groups/options and complete parameter binding
+### A02, adam packed ids, groups/options and complete parameter binding
 
 **Criteria:** C2, C4, C9. **Implementation:** verified; `preserve_logic_add_tests`. **Tests:** additional_evidence_required.
 
@@ -295,13 +295,13 @@ Common rule: build a valid complete public control first, independently detach e
 
 **Current evidence:** Static checks plus selected moment/orphan/type tests; group/name/options matrices absent.
 
-**Valid control:** 1-group and2-group controls with independent trusted options and native packed IDs0..P-1; model buffer never an optimizer parameter.
+**Valid control:** 1-group and 2-group controls with independent trusted options and native packed IDs0..P-1; model buffer never an optimizer parameter.
 
 **Required cases / gaps:** Each binding/state/group field missing/extra/wrong type, bool IDs/updates, duplicate/orphan/unknown IDs/names, actual group swaps/param order, omitted parameter, buffer as parameter; each lr/betas/eps/weight_decay and supported flags wrong type/value in actual/expected/both; betas list/length/wrong values, foreach None/False/True positives, fused None/False positives.
 
 **Expected outcome / mandatory evidence for ACCEPT:** Guard-specific CVE; unchanged frozen hyperparameters and supported flags. Preserve unrelated condition ASTs; A01/A05 permit their explicitly identified fixes, and D01 bounded diagnostic expression changes.
 
-### A03, Adam lazy states and aggregate update lower bound
+### A03, adam lazy states and aggregate update lower bound
 
 **Criteria:** C4, C9. **Implementation:** verified; `preserve_guard_add_tests`. **Tests:** additional_evidence_required.
 
@@ -309,15 +309,15 @@ Common rule: build a valid complete public control first, independently detach e
 
 **Existing tests:** `test_adam_mixed_lazy_and_updated_parameters` at 1781-1803; `test_adam_optimizer_validation` at 1387-1504.
 
-**Current evidence:** Mixed lazy and initialized-zero controls pass; final aggregate restored versus initial regression, source guard1078-1087 pinned separately.
+**Current evidence:** Mixed lazy and initialized-zero controls pass; final aggregate restored versus initial regression, source guard 1078-1087 pinned separately.
 
-**Valid control:** G0 omitted/{}/complete-zero states; G4 mix one updated4 and others zero/omitted for both models.
+**Valid control:** G0 omitted/{}/complete-zero states; G4 mix one updated 4 and others zero/omitted for both models.
 
-**Required cases / gaps:** G>0 all updates0/omitted; all individual updates<=G but sum=G-1 with matching scalar steps; individual updates>G; missing/{}/None state with updates>0; partial/nonzero initialized zero-state. Also accept sum>G and heterogeneous per-parameter updates.
+**Required cases / gaps:** G>0 all updates 0/omitted; all individual updates<=G but sum=G-1 with matching scalar steps; individual updates>G; missing/{}/None state with updates>0; partial/nonzero initialized zero-state. Also accept sum>G and heterogeneous per-parameter updates.
 
 **Expected outcome / mandatory evidence for ACCEPT:** Exact aggregate or lazy-state guard CVE as intended; valid mixed states pass. NO total-updates==G or all-updates==G rule. Aggregate block byte hash must remain unchanged.
 
-### A04, Adam moment and native scalar step/precision
+### A04, adam moment and native scalar step/precision
 
 **Criteria:** C4, C9. **Implementation:** verified; `preserve_logic_add_tests`. **Tests:** additional_evidence_required.
 
@@ -341,15 +341,15 @@ Common rule: build a valid complete public control first, independently detach e
 
 **Existing tests:** `test_rng_comprehensive_matrix_and_worker_w2` at 2094-2149.
 
-**Current evidence:** Static wrong literal PyTorch_CUDA at1143 cannot match canonical PyTorch_CUDA_if_applicable; existing test only adds IDs to an inactive role. D1 consistency has no CPU/CUDA cross-check.
+**Current evidence:** Static wrong literal PyTorch_CUDA at 1143 cannot match canonical PyTorch_CUDA_if_applicable; existing test only adds IDs to an inactive role. D1 consistency has no CPU/CUDA cross-check.
 
 **Valid control:** Original canonical inactive role, empty IDs, original explicit reason, passes.
 
-**Required cases / gaps:** Noncanonical actual name PyTorch_CUDA rejects ordered-name guard. Separately rebuild valid D1 identity with canonical CUDA role active(seed42, clean algorithm/derivation, reasonNone), update actual+expected identity and sampler hash, matching actual role and trusted role bindings=[gen_torch] with existing same-seed parent CPU generator; all other fields valid. This consistent metadata must fail explicit CPU inactivity, not identity mismatch.
+**Required cases / gaps:** Noncanonical actual name PyTorch_CUDA rejects ordered-name guard. Separately rebuild valid D1 identity with canonical CUDA role active(seed42, clean algorithm/derivation, reason None), update actual+expected identity and sampler hash, matching actual role and trusted role bindings=[gen_torch] with existing same-seed parent CPU generator; all other fields valid. This consistent metadata must fail explicit CPU inactivity, not identity mismatch.
 
 **Expected outcome / mandatory evidence for ACCEPT:** CVE identifies canonical CUDA role/CPU unsupported. No CUDA tensor/allocation/init or D1 edits. Test construction through public builder, not editing fingerprint text.
 
-### G02, RNG registry, shared IDs, families and W0/W1/W2
+### G02, RNG registry, shared ids, families and W0/W1/W2
 
 **Criteria:** C5, C9. **Implementation:** verified; `preserve_logic_add_tests`. **Tests:** additional_evidence_required.
 
@@ -361,7 +361,7 @@ Common rule: build a valid complete public control first, independently detach e
 
 **Valid control:** W0, W1, W2 and same generator ID intentionally shared across parent roles, one registry record.
 
-**Required cases / gaps:** Each10role missing/extra/order/type/applicability/algorithm/derivation/reason/IDs; missing/duplicate/orphan generator; wrong codec/family/cardinality/parent worker context; W0 any worker; W1/W2 bool/negative/out-of-range/duplicate IDs and each missing family, keeping other bindings coherent to reach intended guard.
+**Required cases / gaps:** Each 10 role missing/extra/order/type/applicability/algorithm/derivation/reason/IDs; missing/duplicate/orphan generator; wrong codec/family/cardinality/parent worker context; W0 any worker; W1/W2 bool/negative/out-of-range/duplicate IDs and each missing family, keeping other bindings coherent to reach intended guard.
 
 **Expected outcome / mandatory evidence for ACCEPT:** Missing state never silently dropped; shared IDs not forced to independent streams. Use only staged private contexts, no worker processes. G01/G09 and D01 are the identified implementation changes here.
 
@@ -373,7 +373,7 @@ Common rule: build a valid complete public control first, independently detach e
 
 **Existing tests:** `test_rng_and_codecs_validation` at 1506-1553.
 
-**Current evidence:** Valid codec and version2 refusal historically pass; structural/internal component cases missing.
+**Current evidence:** Valid codec and version 2 refusal historically pass; structural/internal component cases missing.
 
 **Valid control:** Private Random(42).getstate(), finite Gaussian cache and None cache.
 
@@ -391,7 +391,7 @@ Common rule: build a valid complete public control first, independently detach e
 
 **Current evidence:** Valid codec and wrong engine-name refusal pass; word/cursor/cache/type coverage missing.
 
-**Valid control:** 624 uint32 word list, positions0/624, flags0/1; finite cached value may be nonzero when flag0.
+**Valid control:** 624 uint32 word list, positions 0/624, flags 0/1; finite cached value may be nonzero when flag 0.
 
 **Required cases / gaps:** Tuple arity/engine; ndarray vs list; word count/range/bool; position -1/625/bool; flag -1/2/bool; cache int/nonfinite.
 
@@ -453,9 +453,9 @@ Common rule: build a valid complete public control first, independently detach e
 
 **Existing tests:** `test_rng_and_codecs_validation` at 1506-1553.
 
-**Current evidence:** Existing NumPy assertion at1520 compares only engine name, omits keys/cursor/cache; failure path omits NumPy entirely. Source uses private generators.
+**Current evidence:** Existing NumPy assertion at 1520 compares only engine name, omits keys/cursor/cache; failure path omits NumPy entirely. Source uses private generators.
 
-**Valid control:** Create all fixtures/mutations BEFORE snapshots; capture Python entire tuple, NumPy all5components with copied keys, Torch state bytes, default dtype.
+**Valid control:** Create all fixtures/mutations BEFORE snapshots; capture Python entire tuple, NumPy all 5 components with copied keys, Torch state bytes, default dtype.
 
 **Required cases / gaps:** Compare immediately before/after successful both-model calls and late Adam/native-RNG/owned-revalidation failures. Use complete NumPy array/position/flag/cache equality, not engine string alone.
 
@@ -469,11 +469,11 @@ Common rule: build a valid complete public control first, independently detach e
 
 **Existing tests:** `test_r5a_old_empty_pool_fixture_independent_derivation` at 2391-2427; `test_r5b_genuine_untrainable_t0_domain_refusal` at 2429-2622; `test_batch_then_filter_empty_chunk_and_partial_batch` at 1823-2061.
 
-**Current evidence:** Historical independentP5/K2/T3, genuineP4/K4/T0 refusal and corrected BTF5edge controls pass.
+**Current evidence:** Historical independentP 5/K2/T3, genuineP 4/K4/T0 refusal and corrected BTF 5 edge controls pass.
 
 **Valid control:** Keep independent literal pair sets/degrees, not only call candidate derivation.
 
-**Required cases / gaps:** Retain T0 domain error and old6edge negative witness. Clearing order with P5/K2/T3 must be order failure, NOT mislabeled T0. Add changed low-rated all-rated exclusion case while retaining positive warm domain.
+**Required cases / gaps:** Retain T0 domain error and old 6 edge negative witness. Clearing order with P5/K2/T3 must be order failure, NOT mislabeled T0. Add changed low-rated all-rated exclusion case while retaining positive warm domain.
 
 **Expected outcome / mandatory evidence for ACCEPT:** No domain algorithm or graph semantics rewrite; no real dataset or sampled negative execution.
 
@@ -489,7 +489,7 @@ Common rule: build a valid complete public control first, independently detach e
 
 **Valid control:** E0 initial and completed controls for both policies; P5/K2/T3 B2 order has empty middle chunk and retained partial final chunk.
 
-**Required cases / gaps:** Each sampler/progress key/type; algorithm/hash, source tuple element shape/type/duplicates/missing/extra, cursor, next_epoch, worker_ids and each4quiescent counters; E0 invalid histories/G/order; E>0 history length/sum/skips. Filter-before exact ceil; batch-then last exact count and earlier lower/upper bounds with last order unchanged.
+**Required cases / gaps:** Each sampler/progress key/type; algorithm/hash, source tuple element shape/type/duplicates/missing/extra, cursor, next_epoch, worker_ids and each 4 quiescent counters; E0 invalid histories/G/order; E>0 history length/sum/skips. Filter-before exact ceil; batch-then last exact count and earlier lower/upper bounds with last order unchanged.
 
 **Expected outcome / mandatory evidence for ACCEPT:** Intended field/policy CVE. No float ceil, extra empty/regularization update, production batch-policy default or sampler/worker execution. D01 rendering only.
 
@@ -501,9 +501,9 @@ Common rule: build a valid complete public control first, independently detach e
 
 **Existing tests:** `test_selection_history_and_patience_boundary` at 1575-1632; `test_best_model_snapshot_semantics` at 1634-1669.
 
-**Current evidence:** First0.0, terminal22/10bad and epoch23 refusal, signed-zero inequality pass; function restored and pinned.
+**Current evidence:** First 0.0, terminal 22/10 bad and epoch 23 refusal, signed-zero inequality pass; function restored and pinned.
 
-**Valid control:** E0 initial; E1 ready beforeF2; E2 first0.0; E4 strict improvement and exact tie; E22 patience.
+**Valid control:** E0 initial; E1 ready beforeF 2; E2 first 0.0; E4 strict improvement and exact tie; E22 patience.
 
 **Required cases / gaps:** Independent all selection/history fields wrong type/missing/extra, finite range0..1/NaN/Inf, duplicate/missing/unscheduled/future checks, wrong summary/bad_checks9vs10/11, post-stop epoch/check including later apparent improvement, unsupported completed status.
 
@@ -517,9 +517,9 @@ Common rule: build a valid complete public control first, independently detach e
 
 **Existing tests:** `test_selection_history_and_patience_boundary` at 1575-1632.
 
-**Current evidence:** All3stop reasons present in source; no dedicated max-only/combined tests currently.
+**Current evidence:** All 3 stop reasons present in source; no dedicated max-only/combined tests currently.
 
-**Valid control:** E100/F3: increasing scores at3..99 selects99, max_epochs stop, no invented100check. E100/F2: strictly improve through80 then10ties82..100, selects80 and patience_and_max_epochs.
+**Valid control:** E100/F3: increasing scores at3..99 selects 99, max_epochs stop, no invented 100 check. E100/F2: strictly improve through 80 then10ties82..100, selects 80 and patience_and_max_epochs.
 
 **Required cases / gaps:** Reject ready/initial/wrong reason at terminal; missing/extra final check; wrong selected/bad_checks; use valid progress histories, G=2*E, matching Adam scalar steps and best_model epoch.
 
@@ -533,9 +533,9 @@ Common rule: build a valid complete public control first, independently detach e
 
 **Existing tests:** `test_best_model_snapshot_semantics` at 1634-1669.
 
-**Current evidence:** Before-checkNone and equal-epoch signed-zero refusal pass; all best fields and both recipes not covered.
+**Current evidence:** Before-check None and equal-epoch signed-zero refusal pass; all best fields and both recipes not covered.
 
-**Valid control:** No-check bestNone; equal-epoch bit-identical; older best epoch with either coincidentally equal or different finite weights valid.
+**Valid control:** No-check best None; equal-epoch bit-identical; older best epoch with either coincidentally equal or different finite weights valid.
 
 **Required cases / gaps:** Missing best after check/present before; best epoch future or wrong selection; row order/schema/tensor cases; same-epoch dense/sparse content difference including +/-0; ensure current-resume weights not replaced by earlier-best snapshot.
 
@@ -603,7 +603,7 @@ Common rule: build a valid complete public control first, independently detach e
 
 **Required cases / gaps:** Actual payload and EACH expected input plus policy: hostile hash/eq/repr/str/getattribute/getattr, dict/list/int/str/Tensor subclasses, ndarray/Parameter, cycles. Do not let snapshot/test rendering invoke hooks and then blame validator.
 
-**Expected outcome / mandatory evidence for ACCEPT:** Existing exception family and exactly0hook events; reject before caller hooks/native parser/copy. Preserve _safe_type_name identity dispatch and no arbitrary object coercion.
+**Expected outcome / mandatory evidence for ACCEPT:** Existing exception family and exactly 0 hook events; reject before caller hooks/native parser/copy. Preserve _safe_type_name identity dispatch and no arbitrary object coercion.
 
 ### V01, full regression evidence and per-case closure coverage
 
@@ -613,11 +613,11 @@ Common rule: build a valid complete public control first, independently detach e
 
 **Existing tests:** `test_positive_lightgcn_payload` at 959-977; `test_positive_heterognn_payload` at 979-995.
 
-**Current evidence:** Historical283green is real but does not certify missing cases. No new tests executed in preparation.
+**Current evidence:** Historical 283 green is real but does not certify missing cases. No new tests executed in preparation.
 
-**Valid control:** Fresh protected dependency baseline249, then exact starting candidate283 bootstrap before new edits.
+**Valid control:** Fresh protected dependency baseline 249, then exact starting candidate 283 bootstrap before new edits.
 
-**Required cases / gaps:** Add new labeled test class/helpers; keep all34 existing method ASTs and249 tests unchanged. Every planned case ID must map to actual execution/pass/failure and source/test hash; emit compact coverage ledger only after assertions succeed INSIDE subTest blocks, never outside swallowed failures. Final Pi full suite uses exact predeclared command, 120s, no skips or truncated mandatory results.
+**Required cases / gaps:** Add new labeled test class/helpers; keep all 34 existing method ASTs and 249 tests unchanged. Every planned case ID must map to actual execution/pass/failure and source/test hash; emit compact coverage ledger only after assertions succeed INSIDE subTest blocks, never outside swallowed failures. Final Pi full suite uses exact predeclared command, 120s, no skips or truncated mandatory results.
 
 **Expected outcome / mandatory evidence for ACCEPT:** Complete original C1-C10 review plus case manifest; method count alone not closure. All failures/repeats retained, no alternative candidate execution. No training or held-out policy authorized.
 
@@ -629,15 +629,15 @@ Common rule: build a valid complete public control first, independently detach e
 
 **Existing tests:** `test_positive_lightgcn_payload` at 959-977.
 
-**Current evidence:** Worker report says completed/no issues, only310pass; raw272failed250/1,282failed283/2,300pass283,310pass283; initial152failure/191interrupted/timeout omitted. Doc872-1004 overclaims complete matrices.
+**Current evidence:** Worker report says completed/no issues, only 310 pass; raw272failed250/1,282failed283/2,300pass283,310pass283; initial 152 failure/191 interrupted/timeout omitted. Doc 872-1004 overclaims complete matrices.
 
-**Valid control:** Frozen59605byte specification and all historical reports/artifacts retained unchanged.
+**Valid control:** Frozen 59605 byte specification and all historical reports/artifacts retained unchanged.
 
-**Required cases / gaps:** New active appended docs must distinguish source review, executed tests, pending gaps and unsupported capabilities; include all attempts from this history and future invocations with exact commands/results/status refs. Reconcile partial inventory with raw steps (315hashes checked; 83previously recovered), dedup mirrors by step. Each new report limitation adjudicated verbatim/in order by Pi; unresolved items block ACCEPT.
+**Required cases / gaps:** New active appended docs must distinguish source review, executed tests, pending gaps and unsupported capabilities; include all attempts from this history and future invocations with exact commands/results/status refs. Reconcile partial inventory with raw steps (315 hashes checked; 83 previously recovered), dedup mirrors by step. Each new report limitation adjudicated verbatim/in order by Pi; unresolved items block ACCEPT.
 
 **Expected outcome / mandatory evidence for ACCEPT:** No retroactive editing of original reports/criteria/decisions; no future-success prose before evidence. Same-UID partial records are not complete protected syscall history. Task-only acceptance separate from deployment NOT_AUTHORIZED.
 
-### A05, Adam foreach/fused type checks before equality
+### A05, adam foreach/fused type checks before equality
 
 **Criteria:** C2, C4, C8. **Implementation:** failed; `targeted_type_before_comparison_fix`. **Tests:** additional_evidence_required.
 
@@ -645,11 +645,11 @@ Common rule: build a valid complete public control first, independently detach e
 
 **Existing tests:** `test_adam_optimizer_validation` at 1387-1504.
 
-**Current evidence:** New static finding: source938-946 compares act_foreach/act_fused with trustedFalse BEFORE checking type. A multielement exact Tensor reaches ambiguous Tensor truth conversion. No new runtime probe executed.
+**Current evidence:** New static finding: source 938-946 compares act_foreach/act_fused with trusted False BEFORE checking type. A multielement exact Tensor reaches ambiguous Tensor truth conversion. No new runtime probe executed.
 
 **Valid control:** Set foreach=False or fused=False in BOTH actual and expected options, validate full control; also retain None/True foreach controls.
 
-**Required cases / gaps:** Replace only actual flag with torch.tensor([0,1]) under the validFalse profile; independently test foreach/fused, plus scalar/bool-like integer and other wrong types. The generic preflight accepts this exact CPU tensor, so intended option type guard must handle it.
+**Required cases / gaps:** Replace only actual flag with torch.tensor([0,1]) under the valid False profile; independently test foreach/fused, plus scalar/bool-like integer and other wrong types. The generic preflight accepts this exact CPU tensor, so intended option type guard must handle it.
 
 **Expected outcome / mandatory evidence for ACCEPT:** Field-specific CheckpointValidationError, not native ambiguous-bool RuntimeError. Type-check None/bool alternatives BEFORE equality; preserve all well-typed option semantics, lazy/aggregate/selection guards.
 
@@ -661,11 +661,11 @@ Common rule: build a valid complete public control first, independently detach e
 
 **Existing tests:** `test_rng_and_codecs_validation` at 1506-1553; `test_r3_torch_worker_seed_integer` at 2303-2345; `test_r4_python_worker_seed_integer` at 2347-2389.
 
-**Current evidence:** New static finding: parent/local branch at1233-1240 compares r_seed with g.seed_material before codec-specific seed checks at1247+. A multielement exact Tensor causes native ambiguous truth conversion. Existing worker tests bypass this parent branch.
+**Current evidence:** New static finding: parent/local branch at1233-1240 compares r_seed with g.seed_material before codec-specific seed checks at 1247+. A multielement exact Tensor causes native ambiguous truth conversion. Existing worker tests bypass this parent branch.
 
-**Valid control:** Existing valid parent Python/NumPy/Torch seed42 controls; worker controls retain independent derived material.
+**Valid control:** Existing valid parent Python/NumPy/Torch seed 42 controls; worker controls retain independent derived material.
 
-**Required cases / gaps:** For EACH parent codec, change only actual seed_material to torch.tensor([42,43]); preserve trusted42 and valid states. Also test other malformed supported leaves, actual/expected/both where applicable.
+**Required cases / gaps:** For EACH parent codec, change only actual seed_material to torch.tensor([42,43]); preserve trusted 42 and valid states. Also test other malformed supported leaves, actual/expected/both where applicable.
 
 **Expected outcome / mandatory evidence for ACCEPT:** Seed-field CheckpointValidationError before equality/native parser, no RuntimeError. Validate codec-specific seed type/range before parent equality; retain Python arbitrary-size support, intrinsic NumPy/Torch limits and distinct worker derivation semantics.
 
@@ -686,7 +686,7 @@ Common rule: build a valid complete public control first, independently detach e
 
 ## Preservation and handoff
 
-All original249 tests and34 payload method bodies are pinned; add tests instead of rewriting verified implementation. Exact source/function/block fingerprints and protected boundaries are specified in the companion [correction assignment](checkpoint-payload-correction-assignment.md). In particular, Adam aggregate and the entire selection function are protected. Any justified change to a protected part needs explicit Pi impact review before that edit; do not silently broaden the work.
+All original 249 tests and 34 payload method bodies are pinned; add tests instead of rewriting verified implementation. Exact source/function/block fingerprints and protected boundaries are specified in the companion [correction assignment](checkpoint-payload-correction-assignment.md). In particular, Adam aggregate and the entire selection function are protected. Any justified change to a protected part needs explicit Pi impact review before that edit; do not silently broaden the work.
 
 The machine-readable counterpart is `data/reports/d2-part-level-preparation/matrix.json`. Raw-evidence reconciliation is in `evidence-audit.json`; the failed first metadata-helper attempt is preserved in `preparation-attempts.json` (not a candidate test). Source and histories remained unchanged.
 

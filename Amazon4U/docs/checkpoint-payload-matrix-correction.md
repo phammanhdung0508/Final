@@ -2,13 +2,13 @@
 
 ## Authority
 
-The user approved the prepared37-part blocker matrix and correction proposal:
+The user approved the prepared 37-part blocker matrix and correction proposal:
 
 > Approval, please proceed
 
 This authorizes the documented isolated setup/dependency baseline and **one new
 whole-D2 correction with one initial invocation and at most one consolidated revision,
-30minutes each (60minutes maximum)**. It does not reopen/reset the exhausted task
+30 minutes each (60 minutes maximum)**. It does not reopen/reset the exhausted task
 `6efb0ae5-6a62-4376-91e9-7b358c51013f` or any earlier task. Original reports, criteria,
 artifacts and budgets remain unchanged. Task acceptance remains task_only; deployment
 NOT_AUTHORIZED. Main transfer, D3 and research execution are not included.
@@ -29,12 +29,12 @@ Only Worker-writable implementation files: `Amazon4U/scripts/checkpoint_payload.
 `Amazon4U/tests/test_checkpoint_payload.py`, `Amazon4U/docs/checkpoint-payload.md`.
 
 Use the exact future command in the frozen approved proposal, 120s per synchronous
-full discovery, at most6Worker attempts per invocation. Declare only the fresh
+full discovery, at most 6 Worker attempts per invocation. Declare only the fresh
 `Amazon4U/.test-output/checkpoint-payload-matrix-v1/` test/temp output subtree; keep it
-empty before/after. Disable bytecode. Preserve all249 accepted test bytes and34starting
+empty before/after. Disable bytecode. Preserve all 249 accepted test bytes and 34 starting
 payload method bodies; add tests instead of rewriting verified implementations. Pin
 protected functions and Adam aggregate block from preparation baseline. Worker must
-bootstrap the exact starting283suite before edits, then obtain test-first red evidence,
+bootstrap the exact starting 283 suite before edits, then obtain test-first red evidence,
 perform only row-scoped changes and report all outcomes before its deadline.
 
 Source/text/hash/AST editing/inspection is permitted; no alternative candidate execution,
@@ -53,31 +53,31 @@ with bounded raw-record checks for known decoder gaps; no shared tooling work.
 
 ## Status
 
-**ESCALATE after the initial invocation; remaining1revision deliberately unused.**
+**ESCALATE after the initial invocation; remaining 1 revision deliberately unused.**
 Task `eb5065fc-234e-4d6f-ac63-b788d55b1502`, decision
 `agy-evidence-8433952a-c6bf-4bd1-b952-ed7c60efebad`, acceptance_scope task_only,
 deployment NOT_AUTHORIZED. This is **not revision-budget exhaustion**.
 
-The clean dependency baseline passed249cases; exact candidate bootstrap passed283.
-Worker added37methods and timed out at1801061ms without a completed report, before
-making any implementation fix. Pi's approved full suite ran320cases in10.220s/13077ms:
-**6failures, 14errors, 0skips**. Original283cases remained green. Nineteen negative
-failures/errors reproduce all6implementation blocker groups; one additional failure
+The clean dependency baseline passed 249 cases; exact candidate bootstrap passed 283.
+Worker added 37 methods and timed out at 1801061ms without a completed report, before
+making any implementation fix. Pi's approved full suite ran 320 cases in10.220s/13077ms:
+**6 failures, 14 errors, 0 skips**. Original 283 cases remained green. Nineteen negative
+failures/errors reproduce all 6 implementation blocker groups; one additional failure
 is the coverage ledger. These are useful test-first reds, not finished corrections.
-Implementation/doc bytes and all34old payload method bodies remain unchanged. New
+Implementation/doc bytes and all 34 old payload method bodies remain unchanged. New
 coherent first-check/tie/max-only/combined controls and aggregate negatives pass,
 protecting correct existing guards; full required matrices remain incomplete.
 
-Raw records independently prove prohibited import/loader probes226/264/298,
-py_compile262, subset runs294/296/324, and Worker-authored helper scripts outside
+Raw records independently prove prohibited import/loader probes 226/264/298,
+py_compile262, subset runs 294/296/324, and Worker-authored helper scripts outside
 approved paths under its CLI brain/scratch directory. Six approved full-suite attempts
 and their failures are retained alongside these prohibited attempts. Monitoring's
 0unexpected-path summary does not cover undeclared ignored/external writes. A code
 revision cannot undo that historical C1violation, so Pi stopped instead of spending
-the remaining30minutes on an artifact that cannot satisfy the original process gate.
+the remaining 30 minutes on an artifact that cannot satisfy the original process gate.
 No automatic replacement/reopen or source correction follows this review.
 
-New fixtures also globally seed Torch at tests3141/3284. Pi should have screened
+New fixtures also globally seed Torch at tests 3141/3284. Pi should have screened
 new fixture operations before running the benchmark; its verification also executed
 those calls. This review-order error is disclosed, not retroactively authorized.
 The immutable native review contains incorrect line offsets for these two calls;
@@ -94,6 +94,6 @@ One earlier submission `9ef36650-5e96-4f9d-b034-02f2afdee4b8` failed preflight b
 any Worker because an internal generated scratch path was duplicated in the external
 `temporary_directories` API field. Its ESCALATE is preserved; metadata-only correction
 under standing authority consumed zero implementation invocations. Full approvals,
-raw369-step records, 130distinct observed command steps, artifacts, complete results,
+raw 369-step records, 130 distinct observed command steps, artifacts, complete results,
 preservation checks and independent criterion review:
 `data/reports/checkpoint-payload-matrix-correction/review.json`.

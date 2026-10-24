@@ -3,7 +3,7 @@
 ## Current deliverable disposition
 
 The user subsequently authorized a separate append-only final Pi H-REF acceptance
-review. **ACCEPT/task_only**,deployment **NOT_AUTHORIZED**,is recorded in
+review. **ACCEPT/task_only**, deployment **NOT_AUTHORIZED**, is recorded in
 `../data/reports/training-harness-h-ref-v1/pi-final-acceptance-v1/review.json`.
 All H1-H9 and every exact ordered Worker limitation/issue were adjudicated; assigned
 Pi duties are fulfilled with evidence, not outside scope. No new run/code/Worker/SDK
@@ -17,8 +17,8 @@ remain unapproved. See `h-ref-pi-final-acceptance.md` for current scope and auth
 User approved ONLY verification-infrastructure path/cleanup correction and ONE additional
 full regression. Exact authority/plan: `../data/reports/training-harness-h-ref-v1/cache-lifecycle-v1/`.
 No training/model/D1-D3/BPR/Adam/protocol/H8 change. Preserve the original failed native
-benchmark/verifier/reports and old empty cache; SDK4/native1/old3full runs remain consumed.
-This allocates one separate full discovery(total at most4),not a reset or rerun loop.
+benchmark/verifier/reports and old empty cache; SDK 4/native 1/old 3 full runs remain consumed.
+This allocates one separate full discovery(total at most 4), not a reset or rerun loop.
 
 ## Component and process ownership
 
@@ -44,12 +44,12 @@ exact inode/dev/UID/private-mode checked EMPTY cache under held directory FDs.
 No recursive deletion, adoption of pre-existing roots, symlink following or deletion of
 foreign/replaced/nonempty/unknown directories. Any such condition preserves evidence
 and FAILS. The fresh scratch root remains and must be empty; all other leftover entries
-fail H8. Ownership guards are not an OS sandbox or hostile-sameUID atomic-unlink proof.
+fail H8. Ownership guards are not an OS sandbox or hostile-same UID atomic-unlink proof.
 
 One mock-only verifier unit-check invocation verifies success/failure and refusal paths
 without real filesystem mutation, target imports or workload/subset/probe execution.
 Pi reviews actual infrastructure and unchanged candidate/native dependencies before the
-single full run. Keep240s/2GiB child, complete8MiB streams, 64MiB scratch, unchanged fixtures/
+single full run. Keep 240s/2GiB child, complete 8MiB streams, 64MiB scratch, unchanged fixtures/
 Adam caps and all original preservation checks. No automatic rerun on any failure.
 
 The original native task3606687c-beba-4d3f-bd24-03ae5238da37 remains terminal ESCALATE;
@@ -61,29 +61,29 @@ Deployment NOT_AUTHORIZED. Record actual results, ownership/cleanup and remainin
 
 ## Actual result and acceptance boundary
 
-Nine mock-only lifecycle checks PASS. Exactlyone separatelyallocated full discovery
-OVERALLPASS:412tests/0failures/errors/skips, 74.875s unittest/81.938s child, 870412288bytes
-peakRSS. All389inherited/34D3/3564expanded and originalH1-H9 technicallyverified.
-Actual creator/manager PiPID1363626, consumer childPID1363657; freshcacheinode3413682,
-UID1000/mode0700, empty atcleanup, removed onlyafterchildsettlement. Freshscratchempty.
-Historicalunownedcacheinode3413649 anditsUID/mode/times/contents unchanged. All322isolated
+Nine mock-only lifecycle checks PASS. Exactlyone separately allocated full discovery
+OVERALL PASS: 412 tests/0 failures/errors/skips, 74.875s unittest/81.938s child, 870412288 bytes
+peak RSS. All 389 inherited/34 D3/3564 expanded and original H1-H9 technicallyverified.
+Actual creator/manager PiPID 1363626, consumer childPID 1363657; freshcacheinode 3413682,
+UID 1000/mode 0700, empty atcleanup, removed onlyafterchild settlement. Fresh scratchempty.
+Historicalunowned cacheinode 3413649 anditsUID/mode/times/contents unchanged. All 322 isolated
 files/acceptedscience/H8/Git/history untouched. No trainingimplementation change.
 
 Latest `../data/reports/training-harness-h-ref-v1/cache-lifecycle-v1/review.json` is
-ESCALATE/taskonlyHREFCPUreference NOTaccepted, despitepassingtechnicalverification.
-Existingnative task is alreadyterminalESCALATE; itsoldbenchmarkreceipt cannot be silently
+ESCALATE/taskonlyHREFCPUreference NOT accepted, despitepassingtechnicalverification.
+Existingnative task is alreadyterminal ESCALATE; itsoldbenchmarkreceipt cannot be silently
 replaced by this explicitlyamended verification. Operator-supported acceptance handling
 is required; no implicit reassessment, oldcommand rewrite, taskreplacement or extensionedit.
-See acceptance-gate-review.json. SDK4/native1, oldfull3+separate1=4, allreleasedbudgetsused.
-No new Worker/SDK/test/rerun/maintransfer/deployment authority. Preserve alloldfailures,
+See acceptance-gate-review.json. SDK 4/native 1, oldfull3+separate1=4, allreleasedbudgetsused.
+No new Worker/SDK/test/rerun/main transfer/deployment authority. Preserve alloldfailures,
 oldcache and newpassingproof. This is now an acceptance-record gate, not a cache/testbug.
 
 ## Additive final adjudication clarification
 
 Latest final-adjudication-v1/acceptance-packet.json preserves original reports and
-corrects the earlier all-H1-H9-verified overstatement: H8's runtime/resource/cleanup/
-preservation checks pass, but final acceptance adjudication remains pending. Items0/2
-are verified external boundaries with original-scope quotes; items1/3 concern assigned
+corrects the earlier all H1-H9 verified overstatement: H8's runtime/resource/cleanup/
+preservation checks pass, but final acceptance adjudication remains pending. Items 0/2
+are verified external boundaries with original-scope quotes; items 1/3 concern assigned
 Pi review duties and are NOT classified outside scope. No original criterion is waived.
 The native tool blocks a nonempty original unresolved_issues array, has no separate Pi
 issue-resolution field or fulfilled-assigned limitation disposition, and cannot review

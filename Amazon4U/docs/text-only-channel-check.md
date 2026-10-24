@@ -33,7 +33,7 @@ NOT_AUTHORIZED. D2 remains ESCALATE under its unchanged previous review.
 
 ## Actual observed request and result
 
-One generation request, no retries, 30second deadline; HTTP200, stop_reason=stop,
+One generation request, no retries, 30 second deadline; HTTP 200, stop_reason=stop,
 3001ms. Observed actual outgoing request has **no tool definitions** and
 `tool_choice: "none"`; response contains text only. There is no tool dispatcher even
 if a provider unexpectedly returns tool-call content (the check rejects it).
@@ -44,8 +44,8 @@ of all provider-internal infrastructure or an OS sandbox for generated code.
 
 The prompt was632UTF8bytes: a synthetic constant-assignment excerpt, virtual path and
 whole-virtual-file SHA256. Actual D2 source/specification bytes sent: **zero**.
-Response:184bytes, a JSON replacement patch tied to that synthetic baseline. SDK
-reported188input/75output tokens; these are not audited billing or a production D2
+Response: 184 bytes, a JSON replacement patch tied to that synthetic baseline. SDK
+reported 188 input/75 output tokens; these are not audited billing or a production D2
 cost-saving measurement. The requested1024output-token option is not represented as
 an enforced server cap by the inspected Codex adapter; the time bound/no-retry policy
 and the actual small response are recorded without claiming otherwise.
@@ -70,7 +70,7 @@ Submitted format:
 Before any real publication or execution the demonstration checks exact schema/path
 allowlist, current baseline hash, unique replacement context, protected-function AST,
 retained test assertions and forbidden test syntax. It accepts the valid model patch
-**in memory only** and rejects12negative cases:
+**in memory only** and rejects 12 negative cases:
 
 - wrong project/path, traversal and absolute path;
 - stale baseline and nonunique replacement;
@@ -107,7 +107,7 @@ still required; static screening alone does not exclude obfuscation or indirect 
 - Inspect test changes for deleted/weakened assertions, skips, invalid controls, hidden
   helper scripts, imports/process/filesystem operations and global RNG setters. Review
   the **entire selected execution path, including inherited fixtures**, not merely
-  changed lines. The current320-test artifact contains global seed calls3141/3284:
+  changed lines. The current 320-test artifact contains global seed calls 3141/3284:
   do NOT execute it as a bootstrap just because it exists or a command was once approved.
 - Generated patches remain untrusted text. Pi reviews and mechanically applies
   Worker-authored changes; substantive Pi-authored corrections must be identified, not

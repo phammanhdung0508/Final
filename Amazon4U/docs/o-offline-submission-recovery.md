@@ -51,11 +51,11 @@ No implementation or acceptance claim follows from successful submission alone.
 
 Counts carried forward: zero O native invocations and zero SDK requests; one full
 412 baseline PASS, zero candidate starts. At most two actual native invocations
-(initial plus one consolidated revision, 30min each), and two remaining candidate
+(initial plus one consolidated revision, 30 min each), and two remaining candidate
 full starts, each <=240s/2GiB child RSS/8MiB per stream/64MiB fresh empty-after scratch.
 The existing baseline must be hash-bound and reused, not rerun. Historical H counts
-remain SDK4/native1/eight associated full starts and inferred144 successful steps;
-whole-H cap256 unchanged. No extra mocks/subsets/probes/compileall/diagnostics.
+remain SDK 4/native 1/eight associated full starts and inferred 144 successful steps;
+whole-H cap 256 unchanged. No extra mocks/subsets/probes/compileall/diagnostics.
 
 Worker remains source-only. Pi reviews complete implementation/callers/generated
 programs/tests/raw actions and test safety before the original benchmark. New O tests

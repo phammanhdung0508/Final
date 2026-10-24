@@ -2,8 +2,8 @@
 
 ## Current result, ESCALATE, implementation not accepted
 
-Clean setup succeeded and the extra baseline passed412tests (60.912s unittest,
-67.654s child, 815030272bytes peakRSS, complete logs/empty scratch/cleanup/preservation).
+Clean setup succeeded and the extra baseline passed 412 tests (60.912s unittest,
+67.654s child, 815030272 bytes peak RSS, complete logs/empty scratch/cleanup/preservation).
 Two actual native source invocations and the sole consolidated revision were used.
 Independent complete review found unsafe generated-test execution before fakepath/
 tripwire injection, prohibited real symlink creation in a new negative, parser option
@@ -14,14 +14,14 @@ suite/scratch/started marker exists. Unsafe embedded behavior was NOT executed.
 Native task `0ea235af-2aa1-47c5-a5e7-120969d03b36` is terminal ESCALATE/task_only;
 current delivery is **not accepted**, deployment NOT_AUTHORIZED. See
 `../data/reports/o-offline-clean-execution-v1/review.json`, `root-cause-review.md` and
-`remaining-part-matrix.json`. All18 O closures remain open; preserved scope alone passes.
+`remaining-part-matrix.json`. All 18 O closures remain open; preserved scope alone passes.
 All seven initial/revised candidate files and both exact reports are archived. Both
 Worker external main/sibling/old-evidence guards PASS; accepted science/H/D1-D3 unchanged.
 No real data/Kaggle/GPU/study/held-out/main-integration/deployment work occurred.
 
-Source round1 has0remaining invocations; two candidate-full maxima are unused but
-cannot release unsafe tests. Whole-H inferredsteps180/cap256 and9associatedfullstarts,
-O SDK0/native2/full2baseline/candidate0. Setup autonomy does not reset source budgets
+Source round 1 has 0 remaining invocations; two candidate-full maxima are unused but
+cannot release unsafe tests. Whole-H inferredsteps 180/cap 256 and 9 associatedfull starts,
+O SDK 0/native 2/full 2 baseline/candidate 0. Setup autonomy does not reset source budgets
 or waive security/scientific/verification gates. Next requires a separately scoped,
 prospectively authorized second native recovery round through a supported same-
 deliverable continuation, preserving original criteria/history/remaining full slots;
@@ -42,7 +42,7 @@ fallback, destructive cleanup, main commits or deployment. A consequential bound
 still requires an explicit decision. Both prior pre-Worker terminal tasks remain
 unchanged and linked; no native invocation has yet started.
 
-## Exact setup and Git exception
+## Exact setup and git exception
 
 New, initially absent repository root:
 `/home/sunf/FSB/Final/Amazon4U/.worktrees/o-offline-clean-v1` (B).
@@ -100,10 +100,10 @@ One additional unchanged baseline is now authorized, then at most two original r
 candidate full suites. Each <=240s child / 2GiB peak child RSS / 8MiB complete stream each /
 64MiB fresh scratch, required empty; outer parent <=900s. Hash reads <=128MiB/file,
 512MiB/snapshot, 60s/file, 300s/snapshot. No extra mocks/smokes/probes/compileall/diagnostics.
-O new tests add zero model/Adam work. Inferred successful H steps: current144 plus at most
+O new tests add zero model/Adam work. Inferred successful H steps: current 144 plus at most
 3*36=108 =>252 <= unchanged whole-H256 cap. O full-start ceiling becomes FOUR cumulative
 (old baseline + new baseline + two candidates); native first-round ceiling stays TWO
-actual source-only invocations, 30min each, max_revisions1. Reserved slots are not spent.
+actual source-only invocations, 30 min each, max_revisions1. Reserved slots are not spent.
 
 Original OC1-OC8 and OP01-OP18 remain binding verbatim. Native approval/baseline/inspection/
 original benchmark/history/revision/exact limitation gates remain mandatory. No test

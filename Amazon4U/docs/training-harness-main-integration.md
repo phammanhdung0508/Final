@@ -13,23 +13,23 @@ The approved preparation plan is retained unchanged, not rewritten to match this
 
 ## What passed
 
-- Fresh bindings:all322accepted isolated files and26main inherited Python modules exact;
+- Fresh bindings: all 322 accepted isolated files and 26 main inherited Python modules exact;
   the intervening user commit added only the approved preparation document/configuration.
-- One mock-only invocation:9checks PASS, no target imports or real cache mkdir/rmdir.
-- Full unchanged main baseline:389PASS/0failures/errors/skips, 93.561s unittest,
-  99.647s child, 762454016bytes peakRSS; 34D3methods/35ledgers3564expanded cases.
+- One mock-only invocation: 9 checks PASS, no target imports or real cache mkdir/rmdir.
+- Full unchanged main baseline: 389 PASS/0 failures/errors/skips, 93.561s unittest,
+  99.647s child, 762454016 bytes peak RSS; 34 D 3 methods/35 ledgers 3564 expanded cases.
   Overall resources, scope, owned-empty-cache cleanup and empty scratch PASS.
 - Exact six-file exclusive transfer; no implementation/test/dependency edits or overwrite.
 
 ## Why main acceptance stopped
 
-The sole post-transfer412invocation was interrupted by Pi's verifier, not a reported
+The sole post-transfer 412 invocation was interrupted by Pi's verifier, not a reported
 model assertion. Live scratch-size polling raced normal temporary-file deletion:
 `FileNotFoundError` from `rglob('*')` followed by `lstat()` on a deleted Parquet file.
-The child was settled by the supervisor's finally path. Actual logs contain285started
-methods/284completed OK, 34D3methods and3564successful expanded cases, but no footer and
+The child was settled by the supervisor's finally path. Actual logs contain 285 started
+methods/284 completed OK, 34 D 3 methods and 3564 successful expanded cases, but no footer and
 no H test method reached. Final child time/RSS/exit receipt was not written; unknown,
-not inferred passing. There is no completed412result.
+not inferred passing. There is no completed 412 result.
 
 The owned empty cache was removed correctly; one other EMPTY temporary test directory
 remained after interruption. It is preserved, not adopted or recursively deleted.
@@ -43,10 +43,10 @@ the separate isolated H-REF ACCEPT and native task3606687c-beba-4d3f-bd24-03ae52
 historical ESCALATE/failed verification, remain unchanged. No native reopening, replacement
 task, receipt substitution or extension change. No automatic fix, rerun, cleanup or rollback.
 
-HistoricalSDK4/native1/fullH4 plus2new main invocations =6H-associated full invocations;
-all2main slots consumed, 0remaining. The interrupted run adds0successful Hsteps; prior
-inferred72remain unchanged. A new Pi-only verifier correction, targeted mock controls
-and one separately allocated412run are recommended ONLY for separate approval. No new
+HistoricalSDK 4/native 1/full H4 plus 2 new main invocations =6 H-associated full invocations;
+all 2 main slots consumed, 0 remaining. The interrupted run adds 0 successful Hsteps; prior
+inferred 72 remain unchanged. A new Pi-only verifier correction, targeted mock controls
+and one separately allocated 412 run are recommended ONLY for separate approval. No new
 Worker/model change is presently justified. Detailed evidence/material recovery changes
 and authorization requirements are in the RCA; no recovery has been implemented.
 

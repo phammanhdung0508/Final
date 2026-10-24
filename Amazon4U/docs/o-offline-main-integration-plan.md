@@ -15,7 +15,7 @@ The source is the isolated candidate under
 Its current technical acceptance is recorded in
 `data/reports/o-offline-authorization-final-v7/operator-adjudication-v1/review.json`
 relative to that candidate. The operator adjudication does not accept the old
-native15 process. Its historical ESCALATE and unverified policy reads remain unchanged.
+native 15 process. Its historical ESCALATE and unverified policy reads remain unchanged.
 
 The destination is `/home/sunf/FSB/Final/Amazon4U`.
 The enclosing Git root is `/home/sunf/FSB/Final`.
@@ -150,7 +150,7 @@ Only the exact parent-created, identity-checked empty cache may be removed after
 child settles. Retain empty scratch. Unknown or pre-existing entries are never deleted.
 No cleanup of old reports, worktrees, caches or user files is authorized.
 
-These are reviewed cooperative controls, not an OS sandbox or hostile-sameUID guarantee.
+These are reviewed cooperative controls, not an OS sandbox or hostile-same UID guarantee.
 No network, credentials, Kaggle CLI, pip, GPU, real-data work, native capability/race
 experiments or real legacy training is proposed. The inherited full fixture behavior
 remains bounded and separately reviewed.
@@ -169,7 +169,7 @@ remains bounded and separately reviewed.
 - MI5. Scope, protected artifacts, Git and sibling sentinels remain preserved.
   All unexpected drift, incomplete evidence or unsafe evaluation blocks acceptance.
 - MI6. Reconcile original O criteria, OP rows, ordered limitations, operator amendment
-  and actual main evidence. Preserve historical native15 ESCALATE and unverified reads.
+  and actual main evidence. Preserve historical native 15 ESCALATE and unverified reads.
   Do not revive the retired coordination hold as a current technical blocker.
 - MI7. Record main integration acceptance separately from isolated acceptance.
   Deployment remains NOT_AUTHORIZED. Research execution and production readiness

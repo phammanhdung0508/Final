@@ -25,7 +25,7 @@ verification: 17 mock infrastructure checks, 103 O-only tests and the full 515-t
 regression all passed with 0 failures/errors/skips (68.2s child, ~784 MiB peak RSS,
 within 240s/2 GiB). All original 412 test IDs, 34 D3 methods and 3,564 expanded cases
 still pass; the 31 inherited Python files and H28 bundle are unchanged. No unresolved
-integration issue remains. Native15 stays historical ESCALATE.
+integration issue remains. Native 15 stays historical ESCALATE.
 Scope: offline packaging and fake-provider behavior only. Live Kaggle jobs, GPU-READY,
 production LightGCN initialization, real-data training, profiling, comparative and
 final-test runs each still need their own plan and approval.
@@ -92,9 +92,9 @@ exact task/unresolved criteria, model/channel, source/output paths, request ceil
 time/resource/verification limits and independent acceptance procedure. No automatic
 fallback, silent switch, budget transfer or inherited SDK permission.
 
-Prospective native recovery maximum is **2 + 2 + 2**: round1 attempts1/2 initial and
-consolidated correction; round2 attempts3/4 targeted continuation and correction;
-round3 attempts5/6 final continuation and correction. Maximum two per round/six per
+Prospective native recovery maximum is **2 + 2 + 2**: round 1 attempts 1/2 initial and
+consolidated correction; round 2 attempts 3/4 targeted continuation and correction;
+round 3 attempts 5/6 final continuation and correction. Maximum two per round/six per
 deliverable, not blanket permission. Authorize each task/round prospectively; stop on
 acceptance, no credible resolution path, an authorization boundary or critical safety.
 After every substantive ESCALATE preserve evidence/counts, identify actual root cause
@@ -133,10 +133,10 @@ separate Pi deliverable record, not a native-tool schema or status change. Four 
 along with 3 old full runs and 1 separate full run (4 total), are retained. Main H integration, O, GPU, profiling, experiments, and deployment
 remain unapproved; deployment is NOT_AUTHORIZED. No stage/commit/push authority.
 
-## Previous cache lifecycle review, overallPASS, formal acceptance hold
+## Previous cache lifecycle review, overall PASS, formal acceptance hold
 
 User approved Pi-only cache path/cleanup infrastructure and ONE separately allocated
-full run. No training/H8 change. Fresh owned cache:creator and manager Pi PID 1363626,
+full run. No training/H8 change. Fresh owned cache: creator and manager Pi PID 1363626,
 consumer child PID 1363657; private held file descriptor, inode, device, UID, and mode checks, followed by an empty-only rmdir
 after the child process settled. Nine mock-only checks cover failure and refusal paths; no real
 foreign, pre-existing, or non-empty directory was deleted. Old cache 3413649 remains unchanged.
@@ -157,11 +157,11 @@ H-REF ACCEPT is not recorded: existing native task
 This approved amended Pi verification does not reopen/reassess/retroaccept it or permit
 rewriting old verifier scripts, receipts, or replacement tasks. See acceptance-gate-review.json:operator-
 supported handling is needed; original-command-only reassessment is not permission to
-substitute newcommand. No furtherWorker/SDK/run/extensionedit or maintransfer authority.
+substitute newcommand. No further Worker/SDK/run/extensionedit or main transfer authority.
 Counters: 4 SDK calls and 1 native call (the second unused), 3 old full runs plus 1 separate full run (4 total), all consumed. H is still not accepted;
 deployment is NOT_AUTHORIZED. Preserve all old reports, failures, cache, and current passing proof.
 
-## Previous native correction , 412functionalPASS, cleanupESCALATE
+## Previous native correction , 412 functional PASS, cleanup ESCALATE
 
 The user separately approved at most 2 native invocations on canonical dictionary adaptation,
 related fixtures, and NaN exception ordering, plus Pi's one full regression. One actual
@@ -172,7 +172,7 @@ Latest `data/reports/training-harness-h-ref-v1/native-correction-v1/review.json`
 
 All 412 functional tests, 389 inherited tests, 34 D3 methods, and 3,564 expanded cases passed with zero failures, zero errors, and zero
 skips, taking 72.582 seconds for unittest, 79.580 seconds for child process, and 863,043,584 bytes peak RSS. Numerical/private D3 restart/
-device/closure/entrypoint controls now pass. Mandatory supervisor nevertheless exits1:
+device/closure/entrypoint controls now pass. Mandatory supervisor nevertheless exits 1:
 an empty `torchinductor_sunf` directory remained in the required-empty scratch space. Source-only root cause analysis
 traced native optimizer's lazy Dynamo import to module-global cache directory creation; Pi
 missed framework-cache lifecycle, which was not a model, math, or native-correction defect. Preserve
@@ -194,7 +194,7 @@ generation, not native agy. D2/D3 SDK exceptions never establish a future defaul
 Original task criteria, counts and decisions remain unchanged; the policy above governs
 new channel/recovery decisions without reopening or resetting any old task.
 
-**Subsequent user direction permits one limited same-H continuation**,not a newproject
+**Subsequent user direction permits one limited same-H continuation**, not a new project
 or history reset. See `data/reports/training-harness-h-ref-v1/continuation-v1/plan.json`.
 Pi must finish the source and API handoff audit before one additional 30-minute text-only response, with no
 retry or revision; 2 H requests were used out of a ceiling of 3. The same 316-file baseline root and six new paths remain; one reviewed
@@ -202,8 +202,8 @@ candidate full suite ran in the original unused initial slot under unchanged 240
 The original two-response ESCALATE remains historical; no O, GPU, remote, or main transfer authority is granted.
 
 **Subsequent user direction/Pi approval grants one targeted same-H correction:**see
-`data/reports/training-harness-h-ref-v1/correction-v1/decision.json`. Prior3 requests,
-candidate and ESCALATEs remain unchanged; one fourth30mintext-onlyresponse, no retry or
+`data/reports/training-harness-h-ref-v1/correction-v1/decision.json`. Prior 3 requests,
+candidate and ESCALATEs remain unchanged; one fourth 30-min text-only response, no retry or
 revision. B1 is a library compatibility/capability-check boundary, not a model defect;
 Pi prospectively approves only an H-local CPU Adam health-check adapter that preserves
 native math and state, not driver probes, global patches, or new packages. One F2 to F5 brief,
@@ -223,7 +223,7 @@ basenames, wrong checkpoint-exception assertions, unknown-user and fallback orac
 and omitted D2 source closure. Installed Torch CPU Adam can enter a CUDA-driver
 availability path; Pi missed this native dependency in the pre-request audit and owns
 that preparation omission. No candidate import, test, update, or driver probe was run.
-See `data/reports/training-harness-h-ref-v1/continuation-v1/review.json`. All316 baseline
+See `data/reports/training-harness-h-ref-v1/continuation-v1/review.json`. All 316 baseline
 files/main accepted code/Git/siblings/old reports remain exact. Three Hrequests used,
 with none remaining; one old baseline and zero candidate suites were recorded. No fourth request, Pi source
 fix, extra test, CUDA permission, or history reset occurs automatically. Deployment is NOT_AUTHORIZED.
@@ -233,16 +233,16 @@ The fresh 389 baseline passed in 57.732 seconds unittest and 64.917 seconds proc
 expanded cases pass. The first Worker requested frozen contracts; the final Worker refused to guess
 loss return keys omitted by Pi in fresh context. No H code, new tests, updates, restore operations, or candidate suites were produced.
 Pi responsibility and the exact complete API supplement were recorded in
-`data/reports/training-harness-h-ref-v1/review.json`. Selected316-filebaseline, accepted
-code/history/Git/siblings preserved. No thirdrequest, Pi sourcefix, extra test/replacement
-orbudgetreset automatically. H1preservation/H9process verified; assignedH2-H8incomplete.
+`data/reports/training-harness-h-ref-v1/review.json`. Selected 316-file baseline, accepted
+code/history/Git/siblings preserved. No third request, Pi source fix, extra test/replacement
+or budget reset automatically. H1 preservation/H9 process verified; assigned H2-H8 incomplete.
 Scope task_only_H_REF_CPU_reference_not_accepted; deployment is NOT_AUTHORIZED.
 
-**Historical latest authority: Package H (H-REF) bounded implementation approved**,including
+**Historical latest authority: Package H (H-REF) bounded implementation approved**, including
 CPU-reference device-capability interfaces. See `docs/training-harness-h-ref.md` and
 `data/reports/training-harness-h-ref-v1/plan.json`. Pi delegates six new H files to agy
 through existing tool-free text-only channel, one initial+one consolidated revision max,
-30min each, no retries. Pi-only pre-reviewed389baseline/Hinitial/optionalHrevision full
+30 min each, no retries. Pi-only pre-reviewed 389 baseline/H initial/optional H revision full
 suites under 240 seconds and 2 GiB peak RSS with bounded tiny CPU updates and private staged restore were permitted
 only under that plan. All accepted code, tests, and history remain protected; old D3 archives are retired.
 Out-of-task packages, frameworks, or structures must ask Pi first. No Package O, GPU, Kaggle, real-data,
@@ -352,11 +352,11 @@ The user has now **concluded the runtime investigation**: no more diagnostics,
 profilers, C++ traces, sudo operations, thread experiments or accepted-test edits.
 A D3-only **120s→240s full-suite ceiling** is formally proposed in
 `docs/checkpoint-storage-execution-budget-amendment.md` and its companion JSON.
-It covers the fresh uninstrumented355 baseline and later suites with added D3 tests;
+It covers the fresh uninstrumented 355 baseline and later suites with added D3 tests;
 240s is an upper limit, not expected runtime. The user's subsequent **"Approve.
 please procced"** now explicitly approves it; see the frozen approval and
-`effective-plan-240.json` in the D3 report directory. Preserve original120s criteria,
-plan/verifier/results and all used budgets. Run one fresh unchanged uninstrumented355
+`effective-plan-240.json` in the D3 report directory. Preserve original 120s criteria,
+plan/verifier/results and all used budgets. Run one fresh unchanged uninstrumented 355
 baseline under 240 seconds; only a pass permits bounded Worker-led IO1 to IO8 continuation.
 No further runtime investigation or environment/thread experiments.
 **Latest implementation result: ESCALATE, task_only/not accepted.** Approved fresh
@@ -377,12 +377,12 @@ response**, not a reset of the two used responses or either ESCALATE. See
 Preserve the initial candidate unchanged; use its byte-identical isolated copy.
 Worker must resolve original IO2 with clear guarantees or identify the exact infeasible
 clause. Preserve verified logic; no D3 rewrite, scope weakening, unsafe experiment or
-controller. At most one additional30minute text request, no revisions/retries; one
+controller. At most one additional 30 minute text request, no revisions/retries; one
 reviewed 240-second full suite maximum, retaining prior five runs. Stop on unresolved IO2.
 Pi reviews original IO1 to IO8, especially IO2/3/5/6/7, before any acceptance. Old candidate,
 reports, budget and baseline hashes remain preserved; no research/main-transfer authority.
-**That additional request is now used and ended INCOMPLETE_OR_BLOCKED**: HTTP200,
-SDK stop_reason:error, 0response bytes, no patch or feasibility report. Exact cause
+**That additional request is now used and ended INCOMPLETE_OR_BLOCKED**: HTTP 200,
+SDK stop_reason: error, 0 response bytes, no patch or feasibility report. Exact cause
 not retained by credential-safe logger. No new code/tests ran; both candidates and
 all prior history remain unchanged. Current ESCALATE is
 `data/reports/checkpoint-storage-implementation/bounded-correction-amendment-v1/review.json`.
@@ -392,21 +392,21 @@ no infeasibility conclusion can be drawn from a failed model completion.
 **Latest user direction is focused technical assessment only, before more execution
 privileges.** See `docs/checkpoint-storage-io2-technical-decision.md` and its JSON.
 Recommend direct-child physical acquisition from independently approved per-prefix
-root inodes, retaining all20 D1 logical scripts/configs identifiers. A basename-only
+root inodes, retaining all 20 D1 logical scripts/configs identifiers. A basename-only
 logical namespace would violate D1/IO6. Exact root model must be agreed, not silently
 substituted for mandatory single-project-root ancestry if that is intended.
 Static SDK review found no prompt truncation evidence, no wire max-output-token cap,
 and terminal error metadata discarded by our wrapper; cause of old failure unknown.
 A minimal wrapper correction and one further bounded correction are PROPOSED ONLY.
 No Worker/candidate test/product change/retry authority is granted by this assessment;
-all3 used request attempts, old candidates and ESCALATE history remain preserved.
+all 3 used request attempts, old candidates and ESCALATE history remain preserved.
 IO2 is not implemented by a design note; IO3/IO5 unverified, IO6/IO7 unpassed; full
 IO1 to IO8 review remains required before any task_only ACCEPT. Deployment NOT_AUTHORIZED.
 **Subsequent user approval now finalizes per-prefix approved directory FDs/direct-child
 physical acquisition with unchanged D1 logical identifiers; no continuous project-root
 pathname ancestry claim.** See `docs/checkpoint-storage-prefix-root-correction.md`.
 One specific bounded phase is authorized: existing candidate, fresh Pi hashes, one fourth
-request30minutes/no retry or revision, then comprehensive IO1 to IO8 source/fixture review
+request 30 minutes/no retry or revision, then comprehensive IO1 to IO8 source/fixture review
 before at most one pinned 240-second full suite. Three used requests and history stay preserved.
 SDK changes only safe terminal-error metadata and request/context bounds; same model,
 controller-free channel and routing. No additional unrequested correction cycle,
@@ -415,32 +415,32 @@ Root decision does not satisfy IO3/IO5/IO6/IO7 or grant implementation acceptanc
 **Latest prefix-root phase is ESCALATE solely on a new test oracle in the full suite**:
 389 tests, 1 failure, 0 errors, and 0 skips in 62.611 seconds process time; all 355 inherited tests and 3,564 expanded
 cases pass. Reviewed Worker source (785 lines) and test code (815 lines) applied to only 3 candidate files;
-9 specified nodes remain unchanged. Root mechanism, IO3/IO5 controls andIO6/7positive pipeline
-now have actual passing evidence; no overallACCEPT because IO8requires zero failures.
-New sourceFIFO testglobally blocks _readable for a valid configs file before its later
-scripts FIFO target. Pi missed that oracle ordering before execution; no FIFOdata-open
+9 specified nodes remain unchanged. Root mechanism, IO3/IO5 controls and IO6/7 positive pipeline
+now have actual passing evidence; no overall ACCEPT because IO8 requires zero failures.
+New source FIFO test globally blocks _readable for a valid configs file before its later
+scripts FIFO target. Pi missed that oracle ordering before execution; no FIFO data-open
 observed. No fix or rerun is permitted automatically; four requests and six conservative full runs were
-used. Currentreview: `data/reports/checkpoint-storage-implementation/prefix-root-correction-v1/review.json`.
-Retain code/failing test/allrawresults; no extra cycle, maintransfer or researchauthority.
+used. Current review: `data/reports/checkpoint-storage-implementation/prefix-root-correction-v1/review.json`.
+Retain code/failing test/all raw results; no extra cycle, main transfer or research authority.
 **Subsequent user direction now authorizes a Pi-authored test-oracle-only correction
-and one full regression**,not a Worker/production cycle. See
+and one full regression**, not a Worker/production cycle. See
 `docs/checkpoint-storage-oracle-only-correction.md` and its frozen plan/diff. Only the
-named sourceFIFO test method may change; singleton zero-byte regular-file positive
-then same-size FIFO ensures target-specific type refusal. Allproduction, othermethods,
-355dependencies andfailed389history retained. Four Worker attempts and six full runs stay used;
+named source FIFO test method may change; singleton zero-byte regular-file positive
+then same-size FIFO ensures target-specific type refusal. All production, other methods,
+355 dependencies and failed 389 history retained. Four Worker attempts and six full runs stay used;
 one seventh full 240-second run only, after fresh complete review. No extra Worker is permitted unless a new
-productiondefect is identified and appropriate consequential authority is settled.
-No automatic furtherfix/repeat; allIO1 to IO8/orderedlimitations stillgateACCEPT.
+production defect is identified and appropriate consequential authority is settled.
+No automatic further fix/repeat; all IO1 to IO8/ordered limitations still gate ACCEPT.
 **D3 now has ACCEPT/task_only in the isolated candidate after that authorized Pi-only
 oracle correction:**389 tests passed with zero failures, zero errors, and zero skips, taking 53.292 seconds for unittest and 55.890 seconds process time under 240 seconds.
 All 355 baseline IDs and bytes, and 3,564 expanded cases are preserved; production 4be67c43 and candidate
 API documentation are unchanged; only the named test method was altered. Pi reviewed all IO1 to IO8 requirements and all 8
 current Worker limitations exactly in order with original scope quotes; submission evidence
-issues resolved without rewriting reports. Currentdecision:
+issues resolved without rewriting reports. Current decision:
 `data/reports/checkpoint-storage-implementation/oracle-only-correction-v1/review.json`.
 Four Worker attempts and seven conservative full runs are retained; no new Worker or budget reset is authorized.
 All old ESCALATE records and failed 389 runs are preserved, not retroactively accepted. D1 and D2 remain closed and protected.
-Deployment NOT_AUTHORIZED. D3 main source/test transfer/regression needsseparateapproval;
+Deployment NOT_AUTHORIZED. D3 main source/test transfer/regression needs separate approval;
 no automatic profiling/training, heldout, stage/commit/push/release/rollback or extra cycles.
 No unsupported safety claim, unsafe testing, controller investigation,
 accepted-dependency rewrite, main transfer or new research authority.
@@ -455,22 +455,22 @@ superseded by the latest implementation-first approval above, not by scope expan
 All candidate executions still require Pi's prior semantic/safety review and exact
 pinned command, scratch and bounds. Production execution remains unauthorized.
 All earlier ESCALATE decisions/budgets and failed attempts remain preserved.
-Historical explicitly bounded D2 correction `6efb0ae5-6a62-4376-91e9-7b358c51013f` remains **ESCALATE at1/1**:
-its isolated283-test suite passes, but required schema/applicability/diagnostic/coverage/
+Historical explicitly bounded D2 correction `6efb0ae5-6a62-4376-91e9-7b358c51013f` remains **ESCALATE at 1/1**:
+its isolated 283-test suite passes, but required schema/applicability/diagnostic/coverage/
 disclosure contracts remain unmet. No rejected payload source transferred to main;
 D3/profiling/training remain blocked. See `docs/checkpoint-payload-authorized-correction.md`.
-The Worker-free37-part preparation matrix and correction assignment are recorded in
+The Worker-free 37-part preparation matrix and correction assignment are recorded in
 `docs/checkpoint-payload-blocker-matrix.md` and `docs/checkpoint-payload-correction-assignment.md`.
 The subsequently approved matrix-guided task `eb5065fc-234e-4d6f-ac63-b788d55b1502`
-is now **ESCALATE after its initial30minute timeout**:320tests/6failures/14errors,
+is now **ESCALATE after its initial 30 minute timeout**: 320 tests/6 failures/14 errors,
 with all 283 old cases preserved and no implementation fixes. Raw records prove forbidden
 probes/subsets and external helper writes. **One revision remains unused; not budget
 exhaustion.** Do not automatically spend it/reopen/replace a task whose historical
 process violations block acceptance. See `docs/checkpoint-payload-matrix-correction.md`.
-The subsequently authorized text-only correction is also **ESCALATE at1/1**. Two
+The subsequently authorized text-only correction is also **ESCALATE at 1/1**. Two
 completed no-tool SDK responses produced real fixes/coverage without Worker commands;
-Pi screened private fixture RNG changes before execution. Final337tests/2failures/
-0errors/0skips in46.429s: both new negatives expose pre-existing Adam step4.5 accepted
+Pi screened private fixture RNG changes before execution. Final 337 tests/2 failures/
+0 errors/0 skips in46.429s: both new negatives expose pre-existing Adam step 4.5 accepted
 with updates 4. All 320 inherited cases pass and 3,140 expanded assertions succeed, but raw
 identifier diagnostics and full 37-row evidence remain incomplete. Preserve this useful
 isolated artifact; no automatic third response, numerical Pi fix, task replacement or
