@@ -1,6 +1,6 @@
 # Pre-training evaluation protocol
 
-Status: **BASELINE_PROTOCOL_FROZEN, `amazon4u-protocol-v2.0.0`.**
+Status: **BASELINE_PROTOCOL_FROZEN — `amazon4u-protocol-v2.0.0`.**
 The user-approved [suite amendment](bpr-mf-removal-amendment.md) removes BPR-MF
 entirely; the preceding v1.0.0 snapshot and historical decisions are preserved.
 Implementation/regression verification and execution settings remain pending;
@@ -37,7 +37,7 @@ The metric/ranking/reporting section is now frozen in
 - Any development subset needs a reproducible selection rule, seed, counts,
   degree checks and preserved split assignments, fixed before training.
 
-## Dataset scope, agreed before model training
+## Dataset scope — agreed before model training
 
 **Decision:** use the complete downloaded benchmark splits for Electronics,
 Toys_and_Games and Musical_Instruments, evaluated independently per category.
@@ -161,7 +161,7 @@ and review-derived-content/timing audits before use.
    included in the active study.
    See [models and baselines](models-and-baselines.md). Learned-ID GraphSAGE-style
    implementations are transductive, with no cold-start claim. **Block 1 is now
-   agreed:** 64d LightGCN, 3 layers, mean 0-3/dot product;
+   agreed:** 64d LightGCN, 3 layers, mean 0–3/dot product;
    2-layer 64d learned-ID heterogeneous GraphSAGE-style/dot product; KG-only
    training-warm IDF/cosine without rating weighting or popularity bonus.
    KG-only uses ordered mixtures 1/0, 0.75/0.25, 0.5/0.5 selected by validation
@@ -199,7 +199,7 @@ and review-derived-content/timing audits before use.
    optional methods require a pre-experiment amendment. No total-uncertainty or
    multiplicity-controlled significance claim.
    The [compute and tuning plan](compute-and-tuning-plan.md) records conditional
-   Kaggle capacity, a 20% reserve and a 2-3-configuration planning range. Profile
+   Kaggle capacity, a 20% reserve and a 2–3-configuration planning range. Profile
    Musical_Instruments before freezing trial counts/search spaces; no comparative
    results may be used to choose the budget. No profiling or model runs yet.
 9. **Cold-item policy finalized:** exclude from primary warm metrics with
@@ -215,7 +215,7 @@ and review-derived-content/timing audits before use.
     different protocol. No cross-category fitted representations are currently
     allowed because category-specific train timestamps can exceed other targets.
 
-## Deferred future experiments, not primary-protocol blockers
+## Deferred future experiments — not primary-protocol blockers
 
 Cross-category recommendation/history is **out of the current scope**. The
 approved dataset and KG configurations retain `cross_category_history=false`;
@@ -229,7 +229,7 @@ feature provenance, candidate/evaluation rules and leakage tests. Published
 category-specific training splits must not be assumed safe to merge. Deferral
 preserves the current scope; it does not authorize future cross-category runs.
 
-## Metrics, ranking and reporting, frozen before training
+## Metrics, ranking and reporting — frozen before training
 
 **Status:** user-approved decision, documented but not yet implemented in an
 Amazon4U evaluator. Configuration: `configs/evaluation-metrics.json`. This replaces

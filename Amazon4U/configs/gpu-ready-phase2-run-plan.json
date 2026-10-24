@@ -1,0 +1,99 @@
+{
+  "schema_version": "amazon4u-gpu-ready-run-plan-v1",
+  "status": "AGREED_NOT_STARTED",
+  "recorded": "2026-10-24",
+  "documentation": "docs/gpu-ready-phase2-run-plan.md",
+  "prerequisites": [
+    "design agreed 2026-10-24 (docs/gpu-ready-design.md)",
+    "G4 agreed; access verified for dungsunf; weekly quota 30h available (user-reported 2026-10-24)",
+    "phase-2 budget agreed 2026-10-24",
+    "local CPU full suite passes with GPU-profile code added"
+  ],
+  "runs": [
+    {
+      "n": 1,
+      "purpose": "smoke",
+      "covers": [
+        "GR05",
+        "GR08",
+        "GR09"
+      ]
+    },
+    {
+      "n": 2,
+      "purpose": "cpu_gpu_parity_same_session",
+      "covers": [
+        "GR03",
+        "GR04",
+        "GR05"
+      ]
+    },
+    {
+      "n": 3,
+      "purpose": "restart_vs_uninterrupted_same_gpu",
+      "covers": [
+        "GR06"
+      ]
+    }
+  ],
+  "fixtures": {
+    "kind": "owned_synthetic_generated_in_bundle",
+    "seeds": [
+      42,
+      2026,
+      3407
+    ],
+    "real_or_held_out_data": false
+  },
+  "tolerances_float32": {
+    "scores": {
+      "max_abs": 1e-05,
+      "rel": 0.0001
+    },
+    "loss": {
+      "rel": 1e-05
+    },
+    "gradients": {
+      "max_abs": 1e-05,
+      "rel": 0.0001
+    },
+    "parameters_after_5_adam_steps": {
+      "max_abs": 0.0001
+    },
+    "restart_vs_uninterrupted_same_gpu": "exact_bit_for_bit_user_required",
+    "top10_fixture_ranking": "exact",
+    "adjust_after_results": false
+  },
+  "determinism": {
+    "use_deterministic_algorithms": true,
+    "CUBLAS_WORKSPACE_CONFIG": ":4096:8",
+    "unsupported_op": "raise"
+  },
+  "limits": {
+    "max_kaggle_gpu_runs": 3,
+    "max_wall_minutes_per_run": 30,
+    "max_total_gpu_hours": 1.5,
+    "gpu": "one T4 of the Kaggle T4 x2 accelerator (CUDA_VISIBLE_DEVICES=0)",
+    "max_collected_output_bytes_per_run": 67108864,
+    "automatic_retries": false,
+    "local_full_suite": {
+      "seconds": 240,
+      "peak_rss_bytes": 2147483648
+    }
+  },
+  "outputs": "data/reports/gpu-ready-v1/run-<n>/ (fresh, no overwrite); review at data/reports/gpu-ready-v1/review.json",
+  "acceptance_scope": "task_only_GPU_READY",
+  "deployment_decision": "NOT_AUTHORIZED",
+  "cuda_rng_unchanged_within_epoch": "user_required_violation_fails_run",
+  "tolerance_clarification_proposed": {
+    "status": "agreed_in_principle_proof_and_targeted_tests_awaiting_review",
+    "recorded": "2026-10-24",
+    "found_before_any_gpu_run": true,
+    "parameter": "Heterogeneous KG+GNN self_biases_l1.Product",
+    "reason": "exact BPR gradient is zero (uniform per-user score shift); Adam moves it by rounding noise",
+    "check": "excluded_from_parameters_after_5_adam_steps; reference gradient reported; ranking invariance tested",
+    "proof": "docs/gpu-ready-design.md",
+    "tests": "tests/test_product_bias_invariance.py"
+  },
+  "runner": "scripts/gpu_ready_parity.py"
+}

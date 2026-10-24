@@ -1,8 +1,8 @@
 # Execution Readiness, phase 1: GPU-READY preparation plan
 
-Status: **PROPOSED, preparation only.** Nothing in this plan changes code, runs a test,
-reads Kaggle credentials or launches a job. Each later step needs the approval named
-in the gate table below. Deployment remains `NOT_AUTHORIZED`.
+Status: **Phase 1 decisions agreed (2026-10-24).** Next: local CPU implementation. Nothing in this
+plan changes code or launches a job. Each later step needs the approval named in the
+gate table below. Deployment remains `NOT_AUTHORIZED`.
 Machine-readable companion: [`../configs/gpu-ready-preparation.json`](../configs/gpu-ready-preparation.json).
 
 ## User decisions recorded on 2026-10-24
@@ -19,6 +19,23 @@ Machine-readable companion: [`../configs/gpu-ready-preparation.json`](../configs
   `scripts/training_harness.py` and `multiautoresearch/adapters/amazon4u.py`, and the
   `v1` result format stay byte-identical. They are the honest scope label of CPU and
   offline results. GPU-READY adds a separate, versioned profile with its own gate list.
+
+## User decisions on the phase-1 deliverables, 2026-10-24
+
+| Item | Decision |
+|---|---|
+| EX01 | Agreed as a profiling prerequisite |
+| Heterogeneous aggregation | Agreed: full neighborhoods for Musical_Instruments profiling. Electronics is decided from measured step time before comparative training; sampling only through a recorded amendment |
+| GR02 | Agreed: option C, GPU support built into EX01 |
+| Names and checkpoints | Agreed: the new profile and schema names and a GPU checkpoint profile beside the CPU one. The detailed GR06 design in `gpu-ready-design.md` is approved, with two user-required rules: the GPU RNG state must not change during an epoch, and resumed training must be bit-for-bit identical |
+| G2 | Agreed: LightGCN IDs use Normal(0, std 0.1) (option A). The formal protocol amendment is written with the other pre-comparative settings |
+| G3 | Agreed as provisional starting values for profiling |
+| G4 | Agreed: "you can check access using kaggle-cli and create kernel-metadata.json to start training if need." The agent's check was refused by the local permission classifier. The user ran it instead, so access is verified for account `dungsunf`. Weekly quota: the full 30 GPU-hours are available (user-reported) |
+| Phase-2 budget | Agreed as proposed |
+
+Kaggle offers T4 GPUs as a pair (T4 x2). "One T4" in the budget means one of the pair,
+selected with `CUDA_VISIBLE_DEVICES=0`. The run records both the visible and the used
+device counts.
 
 ## Why this is needed
 
@@ -91,7 +108,7 @@ Status values: `open` (not started), `decision` (needs a recorded choice first).
 G6 (approval for each new execution) applies throughout: every phase-2 run is pinned
 in advance with exact commands, limits and outputs.
 
-## Phase-2 budget (proposal, requires approval)
+## Phase-2 budget (agreed 2026-10-24)
 
 The weekly 60 GPU-hours in `../configs/compute-plan.json` is unverified (`quota_verified:
 false`). GPU-READY uses tiny synthetic fixtures only, so the proposed ceiling is small:
@@ -104,12 +121,18 @@ false`). GPU-READY uses tiny synthetic fixtures only, so the proposed ceiling is
 
 ## Phase-1 deliverables
 
-1. This plan and its JSON companion (done).
-2. Design notes for GR01, GR02, GR06 and GR07: exact new modules, function signatures
-   and schema versions, with the list of frozen files each one must not touch.
-3. A G2 and G3 options note with recommendations, clearly marked as proposals.
-4. A G4 Kaggle execution note: credential handling, quota check and transport design.
-5. The pinned phase-2 run plan: fixtures, commands, tolerances, limits and outputs.
+All five are written and await review (2026-10-24):
+
+Reviewed by the user on 2026-10-24; decisions are in the table at the top.
+
+1. This plan and its JSON companion.
+2. [Design note](gpu-ready-design.md) for GR01, GR02, GR06 and GR07. It also records
+   that the accepted models cannot run full-scale profiling and proposes **EX01**, a
+   vectorized execution path.
+3. [G2 and G3 options](gpu-ready-g2-g3-options.md), with recommendations.
+4. [Kaggle execution and provenance](gpu-ready-kaggle-execution.md) for G4, G5 and GR08.
+5. [Phase-2 run plan](gpu-ready-phase2-run-plan.md), with fixtures, tolerances, limits
+   and outputs ([JSON](../configs/gpu-ready-phase2-run-plan.json)).
 
 ## Approval gates
 
@@ -118,6 +141,6 @@ false`). GPU-READY uses tiny synthetic fixtures only, so the proposed ceiling is
 | Phase-1 notes (deliverables 2 to 5) | Nothing new; preparation only |
 | Writing GPU-profile code beside accepted code | User approval of the design notes |
 | Any change to a frozen accepted file | Separate explicit scope and preservation review |
-| First Kaggle run or credential access | User approval of G4 and the phase-2 budget |
+| First Kaggle run or credential access | G4 and the budget are agreed; a run also needs the local CPU work and full suite passing first |
 | GPU-READY acceptance | Independent review of GR01 to GR10 evidence |
 | Musical_Instruments profiling plan, then its run | Separate approvals after GPU-READY |

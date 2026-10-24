@@ -1,4 +1,4 @@
-# Training semantics, approved recipe, execution and implementation pending
+# Training semantics — approved recipe, execution and implementation pending
 
 Training remains blocked until the remaining choices in
 [evaluation-protocol.md](evaluation-protocol.md) are finalized. This document
@@ -156,7 +156,7 @@ neighbor-sampling strategy and fanouts remain pending profiling/specification.
 5. Training masks are batch-scoped: they do not permanently erase permitted
    training history used by subsequent batches or evaluation.
 
-## Agreed: endpoint-only base-id embedding regularization
+## Agreed: endpoint-only base-ID embedding regularization
 
 For core LightGCN and heterogeneous KG + GNN, define sets from the valid
 supervised batch actually used in the update:
@@ -191,7 +191,7 @@ mean squared row norm, not a mean over individual scalar embedding entries.
   affected positives and fail if no trainable examples remain.
 
 **Status:** user-approved coefficient, scope and normalization; not implemented.
-This supersedes the ambiguous proposed "unique participating rows" definition.
+This supersedes the ambiguous proposed “unique participating rows” definition.
 Its scope is independent of fanout/graph degree, although ranking-loss gradients
 and regularization effects can still vary with batching, data and sampling.
 Future tuning of transformation regularization requires an explicit registered
@@ -215,7 +215,7 @@ Required tests before implementation acceptance:
 without making regularization scope depend on sampled neighborhoods or the full
 propagation graph. Configuration: `configs/training-semantics.json`.
 
-## Block 2, approved learned-model training recipe
+## Block 2 — approved learned-model training recipe
 
 **Status:** user-approved before training, documented but not implemented. This
 supersedes the earlier proposed numerical recipe and empty-negative-pool action.
@@ -275,4 +275,4 @@ training seeds 42/2026/3407 and the reproducibility/uncertainty framework in
 contrast list: KG + GNN minus each core baseline, for NDCG@10/HitRate@10 in each
 category/condition. No test-based contrast/metric selection is allowed. The conditional Kaggle
 capacity plan and 20% contingency reserve are documented in the compute plan;
-2-3 tuning configurations is a planning range, not a frozen trial budget.
+2–3 tuning configurations is a planning range, not a frozen trial budget.

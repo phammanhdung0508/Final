@@ -69,12 +69,23 @@ pre-approved parameters."
 - Priority: implementation and regression testing, then Musical_Instruments profiling
   once its plan is approved.
 
-**Worktrees.** Create isolated checkouts with `scripts/new_worktree.sh <name>`. It
+**Worktrees.** New or changed code and tests go in an isolated worktree by default,
+not in the main checkout (user correction, 2026-10-24). Docs and configs that only
+record decisions may stay in main. Create isolated checkouts with
+`scripts/new_worktree.sh <name>`. It
 leaves `AGENTS.md` copies off disk while keeping them tracked, so agents in a worktree
 load this file. Any nested `AGENTS.md` inside `.worktrees/` is a historical snapshot with
 no authority. Edit agent instructions only in the main checkout. Archive finished
 worktrees with `scripts/archive_worktree.py`; see `docs/worktree-archive.md` for
 archived content and how to restore it.
+
+**Corrections and what enforces them.** When the user corrects a repeated mistake,
+add a row and enforce it at the highest level that works.
+
+| Rule | Enforced by |
+|---|---|
+| Never edit byte-frozen documents (protocol baselines, checkpoint-payload prefix), including prose cleanup | `scripts/scan_unslop.py` refuses them; `tests/test_protocol_lifecycle.py` and `tests/test_checkpoint_payload.py` (V02) fail on any byte change |
+| Implementation work happens in a worktree, not in main | This file only; no check can see where an agent writes before commit |
 
 ## Glossary
 

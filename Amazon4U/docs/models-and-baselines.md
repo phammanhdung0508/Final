@@ -1,4 +1,4 @@
-# Models and baselines, design discussion
+# Models and baselines — design discussion
 
 No Amazon4U learned model or learned embeddings have been implemented/trained. This
 record distinguishes agreed interpretation from proposed implementation choices.
@@ -37,7 +37,7 @@ makes no cold-start performance claims. See
 **Rationale:** distinguish the inductive capacity of an aggregation architecture
 from the actual recommender's inputs, training scope and inference capability.
 
-## Core comparison suite, user-approved membership
+## Core comparison suite — user-approved membership
 
 1. **Popularity:** non-personalized reference using permitted training feedback.
 2. **LightGCN:** core interaction-graph baseline. It tests embedding propagation
@@ -52,7 +52,7 @@ its metadata variant; the old five-method suite is preserved in the v1.0.0
 snapshot. LightGCN is core because an interaction-graph
 baseline is needed before attributing improvements to KGs or metadata.
 
-## Block 1, frozen architecture and scoring, implementation pending
+## Block 1 — frozen architecture and scoring, implementation pending
 
 **Status:** user-approved before training; documented, not implemented. This
 supersedes the earlier status in which dimensions, layers and learned-ID inputs
@@ -62,7 +62,7 @@ profiling or comparative training, or claim implementation readiness.
 | Core method | Agreed specification |
 |---|---|
 | Popularity | Count permitted positive training interactions per item; all ratings in the primary condition, >=4 in the sensitivity condition |
-| LightGCN | 64-dimensional embeddings, 3 propagation layers, arithmetic mean of layers 0-3; dot-product score |
+| LightGCN | 64-dimensional embeddings, 3 propagation layers, arithmetic mean of layers 0–3; dot-product score |
 | KG-only | Training-warm IDF-weighted category-path/brand profiles; cosine similarity; no rating weighting or popularity bonus |
 | Heterogeneous KG + GNN | Two-layer heterogeneous GraphSAGE-style encoder, 64-dimensional learned node-ID embeddings, relation-aware aggregation; dot-product score |
 

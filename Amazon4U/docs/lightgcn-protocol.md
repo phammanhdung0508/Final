@@ -1,4 +1,4 @@
-# Core LightGCN, explicit option B amendment
+# Core LightGCN — explicit Option B amendment
 
 **Status:** user-approved methodology before implementation/model results.
 Implementation, resource profiling and training hyperparameters remain pending.
@@ -21,10 +21,10 @@ belong to the negative-sampling exclusion/history-filter sets.
 ## Retained architecture
 
 - 64-dimensional learned user/item ID embeddings.
-- Three propagation layers over the user-item bipartite training graph.
+- Three propagation layers over the user–item bipartite training graph.
 - Standard symmetric degree-normalized interaction propagation, with binary edges:
   `H^(l+1) = D^(-1/2) A D^(-1/2) H^(l)`.
-- Final representation is the arithmetic mean of layers 0-3.
+- Final representation is the arithmetic mean of layers 0–3.
 - Raw user/item dot-product scoring; no Brand/Category nodes, feature transforms,
   nonlinear layer activations or added self-loop edges. Layer 0 supplies the ID
   representation in the final mean.
@@ -69,7 +69,7 @@ provided its masking and other settings remain matched.
 - Condition-positive edge selection, binary adjacency and degree normalization
   are correct; low-rated training pairs are absent in >=4 propagation.
 - A tiny hand-calculated graph reproduces exact three-layer normalized propagation,
-  layer 0-3 averaging and dot-product decoding.
+  layer 0–3 averaging and dot-product decoding.
 - No hidden relation/feature transformations, target masks, extra self loops,
   sampled propagation or stale-gradient caching change the declared method.
 - Shared candidate/filtering/negative-exclusion rules remain unchanged.

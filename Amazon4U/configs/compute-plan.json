@@ -31,5 +31,13 @@
   "profiling_status": "not_performed",
   "profiling_authorized": false,
   "lifecycle_reference": "configs/protocol-lifecycle.json",
-  "training_authorized": false
+  "training_authorized": false,
+  "quota_observation_2026_10_24": {
+    "source": "user_reported",
+    "account": "dungsunf",
+    "weekly_gpu_hours_available": 30,
+    "status": "full_30h_unused",
+    "note": "weekly_gpu_hours_assumption 60 assumed a second permitted allocation; only one account's 30h is verified; quota_verified stays false for the 60h assumption",
+    "planning_change_decided": false
+  }
 }

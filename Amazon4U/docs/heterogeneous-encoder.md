@@ -1,10 +1,10 @@
-# Heterogeneous KG + GNN, agreed encoder specification
+# Heterogeneous KG + GNN — agreed encoder specification
 
 **Status:** user-approved mathematical architecture and initialization;
 implementation/profiling/tests pending. No model or embeddings have been trained.
 The baseline protocol is frozen as v1.0.0; execution and authorization remain
 separate gates in [protocol lifecycle](protocol-lifecycle.md). This resolves Block 1's previously generic
-"relation-aware aggregation"; it does not finalize training hyperparameters.
+“relation-aware aggregation”; it does not finalize training hyperparameters.
 
 ## Inputs and dimensions
 

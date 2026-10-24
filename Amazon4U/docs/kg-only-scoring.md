@@ -1,4 +1,4 @@
-# KG-only scoring, agreed mathematical specification
+# KG-only scoring — agreed mathematical specification
 
 **Status:** user-approved before implementation. No scorer or ranking tests have
 been implemented/run by this documentation update. This completes the previously
@@ -32,7 +32,7 @@ channel, not only products with metadata. Compute vocabulary/df separately for
 category-path and brand identities. Each product contributes at most once to each
 attribute's df. No held-out or full-metadata-catalog counts are used.
 
-## 2. product channel vectors
+## 2. Product channel vectors
 
 For channel q in {category, brand}, the unnormalized vector for product i is:
 
@@ -42,7 +42,7 @@ L2-normalize each channel independently to obtain v_q(i). If its norm is zero,
 keep the zero vector. Categories use every observed KG-v1 path prefix; brands use
 only explicit approved Brand identities. Do not fabricate an unknown attribute.
 
-## 3. user channel vectors
+## 3. User channel vectors
 
 For each channel, sum normalized product vectors over distinct positive-history
 products:
@@ -53,9 +53,9 @@ L2-normalize z_q(u) to obtain v_q(u), keeping zero if the norm is zero. A produc
 without a channel contributes zero to that sum. There are no rating weights,
 recency weights, held-out history or popularity terms in these profiles.
 
-## 4. similarity, missing channels and mixture
+## 4. Similarity, missing channels and mixture
 
-Define c_q(u, i) as cosine similarity between the user and product channel vectors,
+Define c_q(u,i) as cosine similarity between the user and product channel vectors,
 or **zero if either vector is zero**. For the normalized nonzero vectors, cosine
 is their dot product. The final ordinary KG-only score is:
 
@@ -76,7 +76,7 @@ exact metric ties select the first grid entry. All trials use the same IDF,
 profile, missing-channel and candidate rules. Freeze the chosen mixture before
 final test evaluation. Never use test results/bootstrap intervals to select it.
 
-## 5. whole-user fallback and failures
+## 5. Whole-user fallback and failures
 
 For the mixture being evaluated, a user has a usable channel only when that
 channel's weight is strictly positive and the user channel vector is nonzero.
@@ -103,7 +103,7 @@ Scoring exceptions, non-finite outputs and corrupted profiles are failures, not
 fallback triggers. Valid zero vectors and absent metadata are expected cases;
 NaN vectors are not valid missing metadata. Never silently drop failed users.
 
-## 6. required checks before scorer acceptance
+## 6. Required checks before scorer acceptance
 
 Add small hand-calculated tests for:
 

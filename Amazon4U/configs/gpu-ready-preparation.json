@@ -1,11 +1,14 @@
 {
   "schema_version": "amazon4u-gpu-ready-preparation-v1",
-  "status": "PROPOSED_PREPARATION_ONLY",
+  "status": "PHASE2_LOCAL_IMPLEMENTATION_IN_PROGRESS",
   "recorded": "2026-10-24",
   "documentation": "docs/gpu-ready-preparation.md",
   "user_decisions": {
     "scope": "GPU-READY plus profiling prerequisite gates G2-G5; ends with an approved Musical_Instruments profiling plan, not a run",
-    "phases": ["phase1_preparation_only", "phase2_bounded_tiny_gpu_kaggle_runs_after_approval"],
+    "phases": [
+      "phase1_preparation_only",
+      "phase2_bounded_tiny_gpu_kaggle_runs_after_approval"
+    ],
     "orchestration": "accepted multiautoresearch Kaggle runner and Amazon4U adapters; no LM/Movie4U methodology; no second runner",
     "readiness_gates_constant": "frozen; GPU-READY uses a separate versioned profile and gate list"
   },
@@ -26,40 +29,200 @@
     "all v1 schemas and READINESS_GATES"
   ],
   "requirements": [
-    {"id": "GR01", "topic": "device_seam_gpu_backend", "status": "open"},
-    {"id": "GR02", "topic": "device_aware_tensor_and_buffer_construction", "status": "open"},
-    {"id": "GR03", "topic": "cpu_gpu_numerical_parity_tiny_fixtures", "status": "decision", "decision": "tolerances"},
-    {"id": "GR04", "topic": "determinism_fail_loudly", "status": "open"},
-    {"id": "GR05", "topic": "recorded_gpu_environment", "status": "open"},
-    {"id": "GR06", "topic": "versioned_gpu_checkpoint_profile", "status": "decision", "decision": "profile_design"},
-    {"id": "GR07", "topic": "versioned_gpu_result_and_record_schema", "status": "open"},
-    {"id": "GR08", "topic": "real_kaggle_transport", "status": "decision", "decision": "G4"},
-    {"id": "GR09", "topic": "real_kaggle_environment_compatibility", "status": "open"},
-    {"id": "GR10", "topic": "enforced_budgets_no_automatic_retry", "status": "decision", "decision": "budget"}
+    {
+      "id": "GR01",
+      "topic": "device_seam_gpu_backend",
+      "status": "open"
+    },
+    {
+      "id": "GR02",
+      "topic": "device_aware_tensor_and_buffer_construction",
+      "status": "open"
+    },
+    {
+      "id": "GR03",
+      "topic": "cpu_gpu_numerical_parity_tiny_fixtures",
+      "status": "open"
+    },
+    {
+      "id": "GR04",
+      "topic": "determinism_fail_loudly",
+      "status": "open"
+    },
+    {
+      "id": "GR05",
+      "topic": "recorded_gpu_environment",
+      "status": "open"
+    },
+    {
+      "id": "GR06",
+      "topic": "versioned_gpu_checkpoint_profile",
+      "status": "open"
+    },
+    {
+      "id": "GR07",
+      "topic": "versioned_gpu_result_and_record_schema",
+      "status": "open"
+    },
+    {
+      "id": "GR08",
+      "topic": "real_kaggle_transport",
+      "status": "open"
+    },
+    {
+      "id": "GR09",
+      "topic": "real_kaggle_environment_compatibility",
+      "status": "open"
+    },
+    {
+      "id": "GR10",
+      "topic": "enforced_budgets_no_automatic_retry",
+      "status": "open"
+    },
+    {
+      "id": "EX01",
+      "topic": "vectorized_execution_path_for_full_scale_profiling",
+      "status": "open",
+      "decision": "agreed",
+      "owner_gate": "G3"
+    }
   ],
   "prerequisite_gates": {
-    "G2": {"topic": "LightGCN_ID_initialization_distribution", "decision_owner": "user"},
-    "G3": {"topic": "provisional_profiling_execution_settings", "decision_owner": "user"},
-    "G4": {"topic": "remote_kaggle_execution_and_credentials", "decision_owner": "user"},
-    "G5": {"topic": "complete_run_provenance_binding", "decision_owner": "user_approves_agent_proposal"}
+    "G2": {
+      "topic": "LightGCN_ID_initialization_distribution",
+      "decision_owner": "user"
+    },
+    "G3": {
+      "topic": "provisional_profiling_execution_settings",
+      "decision_owner": "user"
+    },
+    "G4": {
+      "topic": "remote_kaggle_execution_and_credentials",
+      "decision_owner": "user"
+    },
+    "G5": {
+      "topic": "complete_run_provenance_binding",
+      "decision_owner": "user_approves_agent_proposal"
+    }
   },
   "phase2_budget_proposal": {
-    "approved": false,
+    "approved": true,
     "max_kaggle_gpu_runs": 3,
     "max_wall_minutes_per_run": 30,
     "max_total_gpu_hours": 1.5,
     "gpu": "one T4",
     "automatic_retries": false,
     "real_or_held_out_data": false,
-    "local_full_suite_limits": {"seconds": 240, "peak_rss_bytes": 2147483648}
+    "local_full_suite_limits": {
+      "seconds": 240,
+      "peak_rss_bytes": 2147483648
+    }
   },
   "authorizations": {
-    "code_changes": false,
-    "test_execution": false,
-    "credential_access": false,
+    "code_changes": "local_GPU_READY_implementation_user_go_2026-10-24",
+    "test_execution": "local_CPU_suite_within_existing_limits",
+    "credential_access": "Kaggle_CLI_reads_its_own_credentials_agent_never_reads_or_prints_keys",
     "kaggle_or_gpu_runs": false,
     "profiling_or_training": false,
     "stage_commit_push": false,
-    "deployment_decision": "NOT_AUTHORIZED"
+    "deployment_decision": "NOT_AUTHORIZED",
+    "kaggle_access_check": true
+  },
+  "phase1_deliverables": {
+    "status": "REVIEWED_2026-10-24",
+    "recorded": "2026-10-24",
+    "files": [
+      "docs/gpu-ready-design.md",
+      "docs/gpu-ready-g2-g3-options.md",
+      "docs/gpu-ready-kaggle-execution.md",
+      "docs/gpu-ready-phase2-run-plan.md",
+      "configs/gpu-ready-phase2-run-plan.json"
+    ]
+  },
+  "phase1_review_decisions": {
+    "recorded": "2026-10-24",
+    "decision_owner": "user",
+    "EX01": "agreed_profiling_prerequisite_full_neighborhood_for_Musical_Instruments",
+    "heterogeneous_aggregation": {
+      "status": "agreed",
+      "recorded": "2026-10-24",
+      "Musical_Instruments_profiling": "full_neighborhood_exact_masked",
+      "Electronics": "decide_from_measured_step_time_before_comparative_training",
+      "neighbor_sampling": "only_through_recorded_amendment_if_needed"
+    },
+    "GR02": "agreed_option_C",
+    "names_and_checkpoint_profile": {
+      "status": "agreed",
+      "design": "docs/gpu-ready-design.md#gr06-gpu-checkpoint-profile",
+      "user_required_invariants": [
+        "cuda_rng_state_unchanged_within_each_epoch_violation_fails_run",
+        "resume_bit_for_bit_identical_to_uninterrupted_same_environment_no_tolerance"
+      ]
+    },
+    "G2": {
+      "status": "agreed",
+      "LightGCN_ID_initialization": {
+        "distribution": "normal",
+        "mean": 0,
+        "std": 0.1
+      },
+      "formal_amendment": "pending_single_minor_amendment_with_other_pre_comparative_settings"
+    },
+    "G3": "agreed_provisional_starting_values_profiling_only",
+    "G4": {
+      "status": "agreed",
+      "user_words": "you can check access using kaggle-cli and create kernel-metadata.json to start training if need.",
+      "cli_present": "Kaggle CLI 2.2.4",
+      "credential_file_present": true,
+      "access_check": "refused_for_agent_by_local_permission_classifier; run_by_user_2026-10-24_kaggle_kernels_list_mine_succeeded",
+      "quota_verified": true,
+      "account": "dungsunf",
+      "access_verified": true,
+      "weekly_gpu_hours_available": 30,
+      "quota_source": "user_reported_2026-10-24"
+    },
+    "phase2_budget": "agreed",
+    "gpu_note": "Kaggle T4 x2 accelerator; GPU-READY uses one device via CUDA_VISIBLE_DEVICES=0 and records visible and used device counts"
+  },
+  "implementation_progress": {
+    "recorded": "2026-10-24",
+    "done": [
+      "EX01 vectorized models",
+      "EX01 validation evaluation",
+      "EX01 trainer with exact epoch restart",
+      "GR01/GR04/GR05 runtime",
+      "GR03/GR07 parity runner and cuda-v1 result"
+    ],
+    "next": [
+      "GR06 cuda-v1 checkpoint payload via D2/D3",
+      "GR08 real transport and O-side cuda-v1 record",
+      "Kaggle runs 1 to 3"
+    ],
+    "frozen_files_changed": false,
+    "full_suite": {
+      "tests": 555,
+      "failures": 0,
+      "seconds": 81,
+      "peak_rss_kib": 938408
+    },
+    "frozen_documents_restored": {
+      "recorded": "2026-10-24",
+      "user_approved": true,
+      "files": 10,
+      "source": "configs/protocols/v2.0.0 snapshot and 08fc438~1 checkpoint-payload.md"
+    },
+    "separate_trainer": {
+      "status": "user_accepted_conditionally_conditions_tested",
+      "tests": "tests/test_vector_trainer_equivalence.py"
+    },
+    "product_bias_tolerance": {
+      "status": "agreed_in_principle_proof_and_tests_awaiting_review",
+      "proof": "docs/gpu-ready-design.md",
+      "tests": "tests/test_product_bias_invariance.py"
+    },
+    "correction": {
+      "worktree_default": "AGENTS.md Worktrees + corrections table",
+      "frozen_docs": "scripts/scan_unslop.py refuses frozen documents; tests/test_scan_unslop.py"
+    }
   }
 }

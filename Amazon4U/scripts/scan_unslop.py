@@ -13,9 +13,23 @@ Checks against patterns defined in the unslop skill:
 - Title case headings (rule 17)
 """
 
+import json
 import re
 import sys
 from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+# Byte-frozen outside the protocol manifests: tests/test_checkpoint_payload.py (V02)
+# hashes its first 59605 bytes.
+FROZEN_PREFIX_DOCS = {"docs/checkpoint-payload.md"}
+
+
+def frozen_documents():
+    """Paths whose bytes are pinned by a frozen protocol baseline or a prefix hash."""
+    frozen = set(FROZEN_PREFIX_DOCS)
+    for manifest in sorted((ROOT / "configs" / "protocols").glob("*/baseline-manifest.json")):
+        frozen.update(e["source_path"] for e in json.loads(manifest.read_text())["files"])
+    return frozen
 
 AI_VOCAB = [
     r"\badditionally\b",
@@ -147,10 +161,17 @@ def main():
         sys.exit(1)
 
     total_violations = 0
+    frozen = frozen_documents()
     for p_str in paths:
         p = Path(p_str)
         if not p.exists():
             print(f"File not found: {p}")
+            continue
+        rel = p.resolve().relative_to(ROOT).as_posix() if p.resolve().is_relative_to(ROOT) else None
+        if rel in frozen:
+            print(f"{p}: FROZEN, not scanned. Its bytes are pinned by configs/protocols/*/"
+                  "baseline-manifest.json or a prefix-hash test; editing it breaks the frozen "
+                  "baseline. Record wording changes as a protocol amendment instead.")
             continue
         v = scan_file(p)
         total_violations += len(v)

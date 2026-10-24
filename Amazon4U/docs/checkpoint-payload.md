@@ -1,4 +1,4 @@
-# Deliverable 2, payload validation: scope and acceptance proposal
+# Deliverable 2 — Payload Validation: scope and acceptance proposal
 
 ## Status and authority
 
@@ -14,7 +14,7 @@ whole deliverable. Historical ESCALATE decisions and exhausted budgets are prese
 No Worker, worktree preparation, candidate execution or tests are authorized by this
 planning record. No stage/commit/push.
 
-## Accepted dependency, do not redo deliverable 1
+## Accepted dependency — do not redo Deliverable 1
 
 Use the existing public identity/provenance APIs and validation exception family,
 without modifying or reimplementing their schemas, fingerprints or canonicalization.
@@ -25,7 +25,7 @@ integration is ACCEPT, with **249 passing tests**, recorded in
 [the integration record](checkpoint-identity-main-integration.md). That decision
 supersedes older progress notes' 204-test count, not their preserved historical results.
 
-Frozen dependency SHA 256s:
+Frozen dependency SHA256s:
 
 - `scripts/checkpoint_identity.py`: `6c91bab8229be89453e9b485f3f8df758bfa91e2611296b68c61c5cbe5bb5b2c`
 - `tests/test_checkpoint_identity.py`: `72c874a40f8686e5ab1a914cb9427ec0f9470c127221960195cf8d465532c468`
@@ -40,9 +40,9 @@ silently edit these files.
 
 Proposed implementation files, relative to Amazon4U:
 
-1. `scripts/checkpoint_payload.py`, in-memory CPU payload/state validation.
-2. `tests/test_checkpoint_payload.py`, complete positive/adversarial contract tests.
-3. `docs/checkpoint-payload.md`, this specification, extended with truthful API,
+1. `scripts/checkpoint_payload.py` — in-memory CPU payload/state validation.
+2. `tests/test_checkpoint_payload.py` — complete positive/adversarial contract tests.
+3. `docs/checkpoint-payload.md` — this specification, extended with truthful API,
    schema, limitations and verification documentation while preserving authorization
    and criterion history.
 
@@ -125,14 +125,14 @@ choose unresolved scientific execution settings. Batch size, fanout, validation
 frequency and other pending settings must be explicitly supplied as synthetic
 fixture values; never install them as production defaults or amend frozen protocols.
 
-## Acceptance criteria, all mandatory
+## Acceptance criteria — all mandatory
 
-**C1, Scope and dependency preservation.** Only the three proposed implementation
+**C1 — Scope and dependency preservation.** Only the three proposed implementation
 files change during Worker implementation. The accepted identity/provenance files,
 model/graph implementations, frozen protocols, histories, Git metadata and sibling
 projects remain unchanged. No prohibited execution or acquisition occurs.
 
-**C2, Strict envelope and trusted binding.** Exact versioned schemas and explicit
+**C2 — Strict envelope and trusted binding.** Exact versioned schemas and explicit
 applicability are enforced. Missing/extra fields, wrong types (including bool-as-int),
 unsupported versions, changed identity/provenance/settings and missing mandatory
 expectations fail closed. Both malformed actual and malformed expected inputs are
@@ -140,7 +140,7 @@ covered. Delegate identity/provenance validation to the existing accepted APIs. 
 API must not manufacture expectations from the payload; independently trusted
 acquisition remains a caller boundary, not something matching records can prove.
 
-**C3, Complete model/tensor validation.** Both accepted learned model families pass
+**C3 — Complete model/tensor validation.** Both accepted learned model families pass
 complete positive controls; every parameter/buffer category has independently
 mutated negative coverage for names/shapes/dtypes/layout/device/finiteness. LightGCN's
 sparse adjacency buffer must match trusted graph contents, with independent invalid
@@ -148,31 +148,31 @@ index/order/duplicate/weight and same-count graph-mutation cases. Resource
 preflight precedes cloning or materialization, counts full backing storage rather
 than only visible tensor elements, and refuses oversized/unsupported storage.
 
-**C4, Complete Adam validation.** Positive initial, lazily initialized and synthetic
+**C4 — Complete Adam validation.** Positive initial, lazily initialized and synthetic
 post-update mappings pass without any optimizer execution. State/group/name/order,
 hyperparameter, moment and per-parameter/global-step inconsistencies independently
 fail. No blanket empty-state acceptance and no false requirement for uniform updates.
 
-**C5, Complete RNG/sampler validation.** Every applicable role has real state
+**C5 — Complete RNG/sampler validation.** Every applicable role has real state
 validation and independent negative coverage; missing/extra roles, malformed engine
 states, inconsistent seeds/algorithms/worker IDs, invalid domain/order/cursors and
 nonquiescent or mid-epoch states fail. Inapplicable state is explicit. Global RNG,
 worker and sampler execution state remains untouched on success and failure.
 
-**C6, Progress and selection consistency.** Initial, first-check, improvement,
+**C6 — Progress and selection consistency.** Initial, first-check, improvement,
 exact-tie, non-improvement, patience-boundary and terminal cases are coherent.
 Nonfinite/out-of-range scores, future or unscheduled selected epochs, inconsistent
 history/counters and current/best state confusion fail. Fix fixtures, never weaken
 selection guards to make them pass. No evaluation/selection engine or test-set input.
 
-**C7, No mutation or partial restoration.** No model/optimizer load, live/global RNG
+**C7 — No mutation or partial restoration.** No model/optimizer load, live/global RNG
 restoration, gradient computation or optimizer step occurs. Success returns owned
 container/tensor copies; later mutations of inputs, expectations or returned data
 cannot silently alter the other objects. Failure leaves inputs and live/global state
 unchanged, including late failures. Do not describe mutable tensors/containers or
 caller-supplied evidence as immutable, unforgeable or proof of origin.
 
-**C8, Fail-closed error/resource behavior.** Malformed supported input types produce
+**C8 — Fail-closed error/resource behavior.** Malformed supported input types produce
 the documented domain exception, not native formatting/conversion/shape errors.
 Diagnostics identify the field/role and remain bounded for oversized integers,
 invalid Unicode and pathological representations. Do not change interpreter integer
@@ -181,7 +181,7 @@ and unsupported structures without executing caller hooks. Document the payload
 content/storage accounting and reject excess before copying; no claim of a total
 process-memory sandbox or safe decoder follows from validating an existing mapping.
 
-**C9, Meaningful complete regression.** Preserve all 249 current baseline tests and
+**C9 — Meaningful complete regression.** Preserve all 249 current baseline tests and
 all accepted identity tests unchanged. New tests use valid full controls, isolate each
 mutation, assert the intended guard/domain error and cover both supported models and
 both actual/expected roles where applicable. The prospectively pinned full unittest
@@ -189,7 +189,7 @@ suite must complete within 120 seconds, exit zero, with no failures/errors/skips
 removed assertions. Pi independently reads complete results and implementation,
 callers, relevant framework dependencies and tests; green tests alone are insufficient.
 
-**C10, Evidence and truthful completion.** Complete schema/API/limits documentation,
+**C10 — Evidence and truthful completion.** Complete schema/API/limits documentation,
 Worker report and independently verified criterion-by-criterion review are required.
 Disclose every known limitation/issue; Pi must assess all current limitations in exact
 order/text against original scope, without waiving an assigned requirement. Any
@@ -197,7 +197,7 @@ unresolved in-scope issue or incomplete mandatory evidence blocks ACCEPT. Accept
 is task_only; deployment NOT_AUTHORIZED. Do not claim exact continuation, complete
 checkpoint security or full harness completion.
 
-## Proposed verification and execution limits, not execution authorization
+## Proposed verification and execution limits — not execution authorization
 
 - One clean pinned isolated repository/project root, containing the exact accepted
   dependency as explicitly monitored read-only input. Preserve main's uncommitted
@@ -248,11 +248,11 @@ submission-time accounting/setup details, and predeclare exact commands/paths/bu
 before any Worker starts. Later main integration needs its own authorization.
 There is no deployment policy; deployment/generalization remains NOT_AUTHORIZED.
 
-## Recommended execution specification, awaiting separate authorization
+## Recommended execution specification — awaiting separate authorization
 
 The user asked for Pi's recommendation, not implementation. The following selects
 concrete proposed setup, command and accounting rules; it authorizes none of their
-execution. Existing C1-C10 remain unchanged.
+execution. Existing C1–C10 remain unchanged.
 
 ### Setup and command
 
@@ -345,7 +345,7 @@ whole deliverable with this fixed specification and at most two corrective revis
 Any material specification change requires approval before delegation; no scope
 changes, extra tasks or execution are inferred from this recommendation.
 
-## User-agreed clarification, fixture budget versus runtime policy
+## User-agreed clarification — fixture budget versus runtime policy
 
 The user approved Pi's recommendation to separate the synthetic verification budget
 from runtime validation limits and requested that agreement be recorded. This is a
@@ -353,7 +353,7 @@ scope/policy agreement only, **not implementation or execution authorization**.
 
 1. **Synthetic verification retains the 2MiB budget.** It bounds small correctness
    fixtures; it was inherited from `checkpoint-recovery-plan.md:157` and
-   `checkpoint-three-part-recovery.md:74,100-101`, not derived from production model
+   `checkpoint-three-part-recovery.md:74,100–101`, not derived from production model
    size or hardware capacity. Narrow oversized rejection fixtures remain subject to
    the separately specified test policy.
 2. **Runtime validation has no universal hardcoded 2MiB architectural ceiling.**
@@ -380,26 +380,26 @@ rejection rule could be read as a universal runtime limit**. The earlier formula
 numeric structural bounds remain preserved as a proposed small-fixture profile,
 not newly approved production defaults. Exact runtime policy fields, selected larger
 limits (none selected here) and detailed accounting still require specification
-before delegation. Original C1-C10 remain unchanged and apply to the approved profile;
+before delegation. Original C1–C10 remain unchanged and apply to the approved profile;
 this clarification waives none of their assigned safety requirements.
 
 No identity/provenance redo, source/schema change, broader device/model support,
 hardware-capacity verification, Worker launch, tests, training, main transfer or
-deployment is authorized. Exactly three checkpoint deliverables remain; Deliverable 2
+deployment is authorized. Exactly three checkpoint deliverables remain; Deliverable2
 is still unimplemented and requires separate implementation authorization.
 
-## Finalized preparation contract, runtime policy and state boundaries
+## Finalized preparation contract — runtime policy and state boundaries
 
 The user authorized a **bounded specification pass for items 1 and 2 only**.
 This section resolves their technical contracts for later implementation; it does
-not authorize that implementation. Existing C1-C10 and historical recommendations
+not authorize that implementation. Existing C1–C10 and historical recommendations
 above are preserved. Where an earlier paragraph calls these particular details
 pending, this section is the current specification. Step 3 (checkout/HEAD/command
 synchronization and the 249-test baseline) is explicitly deferred until implementation
 is authorized and ready to start. The earlier checkout HEAD/command remain historical
 proposals, not current setup verification receipts or authority to use a stale HEAD.
 
-### 1. required trusted resource-policy argument
+### 1. Required trusted resource-policy argument
 
 The validator's public entry point must require keyword arguments for serialized
 `expected_identity`, `expected_provenance`, `expected_model`, `expected_runtime`
@@ -474,7 +474,7 @@ limits; all counters must also be tested immediately above their limit. Test the
 configurable runtime-policy path with explicit smaller unit-test budgets within the
 same synthetic envelope; this selects no production RAM profile or larger allocation.
 
-### 2. payload envelope and trusted descriptors
+### 2. Payload envelope and trusted descriptors
 
 Component schema version: `amazon4u-checkpoint-payload-v1`; capability string:
 `epoch_boundary_validation_only`. This is not an experiment protocol bump or an exact
@@ -522,7 +522,7 @@ trusted profile. RNG binding formats and sampler semantics are specified below.
 Profiles are independently resolved caller inputs, not proof of physical acquisition
 or permission to run a new scientific configuration.
 
-### 3. current and best model snapshots
+### 3. Current and best model snapshots
 
 `current_model` has exactly `epoch`, `row_order`, `state_dict`; its epoch equals
 `progress.epoch`. `state_dict` is a plain dict (callers explicitly snapshot a native
@@ -536,8 +536,8 @@ trusted graph has none; matrices/biases are still mandatory.
 
 Complete recipes, in accepted registration order:
 
-- LightGCN: parameters `user_embeddings` (U, 64), `item_embeddings` (I, 64), plus buffer
-  `adj_user_item` (U, I), coalesced sparse COO with CPU int64 indices and float32 values.
+- LightGCN: parameters `user_embeddings` (U,64), `item_embeddings` (I,64), plus buffer
+  `adj_user_item` (U,I), coalesced sparse COO with CPU int64 indices and float32 values.
   Independently check canonical unique lexicographic indices, ranges and exact trusted
   normalized graph contents; a coalesced flag alone is not evidence. No dense substitute.
 - HeteroGNN: four parameters `user_embeddings`, `product_embeddings`,
@@ -561,7 +561,7 @@ references. Callers must prevent concurrent mutation of actual/expected inputs d
 the call; this is not a concurrent-memory sandbox. After return, input mutations cannot
 change the owned result, but a recipient modifying that result must revalidate it.
 
-### 4. adam boundary contract
+### 4. Adam boundary contract
 
 `optimizer` has exactly `algorithm`, `state_dict`, `parameter_bindings`;
 `algorithm` is `Adam`. `state_dict` has exactly `state` and `param_groups`, matching
@@ -644,10 +644,10 @@ Supported codecs (all other engine/format IDs fail):
 |---|---|
 | `python.random.MT19937.v3` | tuple `(3, internal, gauss)`; internal is a tuple of 625 exact ints: 624 uint32 words, then index 0..624; gauss is None or finite float. No version-2 signed-word coercion. Parse only on private `random.Random(0)`. |
 | `numpy.random.RandomState.MT19937.v1` | tuple `("MT19937", keys, position, has_gauss, cached_gauss)`; keys is a list of 624 uint32 exact ints, position 0..624, has_gauss exact int 0/1, cached_gauss finite float. A cached value need not be zero when its flag is zero. Build only the bounded private uint32 key array for `RandomState(0).set_state`. Raw ndarrays are not payload leaves. |
-| `numpy.random.PCG64.v1` | exact dict `bit_generator="PCG64"`, `state={state,inc}`, `has_uint32`, `uinteger`; state/inc are uint128 exact ints, inc odd; flag exact int 0/1 and uinteger uint32. Inactive cached uint32 may remain nonzero. Validate with a private `PCG64(0)` state setter, not the process-global RNG. PCG64DXSM and Generator-MT 19937 dict formats are not aliases of this codec. |
+| `numpy.random.PCG64.v1` | exact dict `bit_generator="PCG64"`, `state={state,inc}`, `has_uint32`, `uinteger`; state/inc are uint128 exact ints, inc odd; flag exact int 0/1 and uinteger uint32. Inactive cached uint32 may remain nonzero. Validate with a private `PCG64(0)` state setter, not the process-global RNG. PCG64DXSM and Generator-MT19937 dict formats are not aliases of this codec. |
 | `torch.cpu.Generator.native.v1` | detached contiguous 1-D CPU uint8 tensor; require the current native state length supported by the matching pinned framework profile, then native `set_state` on a private CPU Generator. Test invalid internal engine controls as well as wrong dtype/length; length alone is insufficient. Native `initial_seed()` must agree with declared Torch seed material. No raw ABI-offset decoder, legacy byte-format conversion, CUDA state or global `torch.set_rng_state`. |
 
-Seed material is an exact nonnegative int for Python/Torch; Torch also obeys
+Seed material is an exact nonnegative int for Python/Torch; Torch additionally obeys
 its intrinsic uint64 seed range. NumPy accepts an exact nonnegative seed int or an
 explicit nonempty list of uint32 words, as specified by the trusted derivation context;
 legacy RandomState integer seeds obey its uint32 range. For a parent/local generator,
@@ -675,7 +675,7 @@ Capturing that state is not implemented here and gives no permission to edit acc
 models or rewrite identity applicability merely to make a fixture pass. Archival init
 state is not automatically an instruction to reinitialize weights during restoration.
 
-### 6. sampler and epoch-boundary progress
+### 6. Sampler and epoch-boundary progress
 
 Use IDs `(user_id, product_id)` as two-string tuples. From the validated identity,
 P is the complete set of condition-positive pairs; K is the subset whose user has
@@ -720,7 +720,7 @@ production default, drop a partial batch, turn empty batches into updates, or in
 schedule from an untrusted cursor. Sampling randomness/negative outcomes are not
 replayed. Source-order permutations and integer counters alone do not prove a run.
 
-### 7. selection history, current/best weights and terminal cases
+### 7. Selection history, current/best weights and terminal cases
 
 `selection` has exactly `metric`, `history`, `best_score`, `selected_epoch`,
 `bad_checks`, `status`, `stop_reason`; metric is `validation_NDCG@10`.
@@ -751,7 +751,7 @@ post-failure boundaries. An older valid checkpoint may remain usable, but D2 per
 no rollback or recovery action. Earlier best weights remain distinct from current
 resume weights at later epochs, even if both tensors coincidentally compare equal.
 
-### 8. required boundary verification and source alignment
+### 8. Required boundary verification and source alignment
 
 Implementation tests must cover the complete positive state plus independent corruptions
 for every table row/field above, both model recipes, sparse graph contents, both batch
@@ -763,8 +763,8 @@ All original 249 tests remain unchanged; no tests have run in this specification
 
 Static alignment references read for this pass:
 
-- `scripts/differentiable_models.py`: HeteroGNN constructor/registration (462-550),
-  LightGCN constructor/state and registered sparse buffer (906-1019); existing model
+- `scripts/differentiable_models.py`: HeteroGNN constructor/registration (462–550),
+  LightGCN constructor/state and registered sparse buffer (906–1019); existing model
   tests verify CPU state/parameter reproducibility and sparse buffer rejection.
 - `scripts/checkpoint_identity.py`: required settings/RNG role constants, retained
   identity and public serialization/revalidation, source provenance dict and public
@@ -785,7 +785,7 @@ Before implementation submission, step 3 must synchronize the then-approved comp
 specification and actual checkout/command inputs and independently reproduce the 249
 baseline tests. No stale proposed HEAD or earlier result substitutes for that gate.
 
-## Separately authorized step 3, prospective setup/baseline plan
+## Separately authorized step 3 — prospective setup/baseline plan
 
 The user subsequently said **"please start step 3 also"**. This authorizes isolated
 setup/specification synchronization and baseline verification only. It supersedes
@@ -826,7 +826,7 @@ mutate during baseline; they must be cleaned. Disable bytecode with the pinned c
 ### Mandatory preparation criteria
 
 P1. Respect this step-3-only authorization; preserve accepted identity/model/test bytes,
-all original C1-C10, historical decisions and unrelated user changes. No implementation.
+all original C1–C10, historical decisions and unrelated user changes. No implementation.
 
 P2. Record clean isolated HEAD/index/status and verify all tracked clone bytes match
 that HEAD. Freeze complete current scope doc/config plus dependency hashes and exact
@@ -834,12 +834,12 @@ command as independently hashed references. The two uncommitted planning records
 not silently represented as committed HEAD content.
 
 P3. Execute only the declared full-suite command, in its declared cwd and scratch,
-within 120 seconds; retain complete untruncated streams/status/hashes, including any
+within120seconds; retain complete untruncated streams/status/hashes, including any
 failure or interruption. No subset tests, smoke imports, compileall or ad-hoc probes.
 
-P4. Reproduce all 249 accepted test IDs, exit 0 with zero failures/errors/skips. Read all
+P4. Reproduce all249 accepted test IDs, exit0 with zero failures/errors/skips. Read all
 actual results and compare with the earlier accepted main integration evidence, not
-only a test-count summary. Green tests alone do not accept Deliverable 2.
+only a test-count summary. Green tests alone do not accept Deliverable2.
 
 P5. Capture stable before/after streamed hashes of tracked/nonignored clone files and
 all explicitly protected input references, outside-project tracked/nonignored sentinels
@@ -847,22 +847,22 @@ and Git metadata. Check main tracked/nonignored files and selected accepted/reje
 artifacts as well. Existing main nested repositories receive HEAD/index/status checks,
 not a claim of full recursive content coverage. Only the approved fresh clone/records
 and scoped main metadata may be added/changed during preparation. For each snapshot:
-128MiB/file, 512MiB aggregate, 60s/file, 300s total hashing limits. Unexpected mutation or
+128MiB/file,512MiB aggregate,60s/file,300s total hashing limits. Unexpected mutation or
 incomplete/unstable hashing blocks acceptance. This is bounded monitoring, not an OS
 sandbox, comprehensive action audit or coverage of undeclared ignored contents/reverted
 transient writes. No sibling edits or semantic dataset inspection.
 
-P6. Record a separate Pi preparation ACCEPT or ESCALATE with evidence for P1-P6.
-Its acceptance_scope is task_only **for preparation/baseline only**, not Deliverable 2
+P6. Record a separate Pi preparation ACCEPT or ESCALATE with evidence for P1–P6.
+Its acceptance_scope is task_only **for preparation/baseline only**, not Deliverable2
 implementation acceptance; deployment_decision NOT_AUTHORIZED. Implementation remains
 separately unauthorized even after a successful baseline. Future source/spec changes
 require fresh synchronization/relevant verification rather than reuse of stale evidence.
 
 ---
 
-## Authorized Whole-Deliverable-2 correction implementation and verification record
+## Authorized Whole-Deliverable-2 Correction Implementation and Verification Record
 
-### 1. authority, recovery boundaries, and scope
+### 1. Authority, Recovery Boundaries, and Scope
 
 This section documents the explicitly authorized whole-Deliverable-2 Payload Validation correction for Amazon4U, executing under a fresh consequential authorization (`data/reports/checkpoint-payload-authorized-correction-inputs/authorization.md` and `plan.json`) to resume the research path D2 -> D3 -> approved research gates. This implementation operates in the clean worktree (`.worktrees/checkpoint-payload-authorized-correction`) with one initial implementation and at most one consolidated revision under strict 20-minute worker and 120-second test suite ceilings.
 
@@ -873,44 +873,44 @@ Implementation scope is strictly confined to three allowed paths:
 
 All accepted Deliverable 1 dependencies, model source, historical task records, Git metadata, and sibling projects remain unchanged.
 
-### 2. resolution of all confirmed review blockers and diagnostic oracles
+### 2. Resolution of All Confirmed Review Blockers and Diagnostic Oracles
 
 The implementation resolves all 6 confirmed blockers identified in historical review feedback and diagnostic reproductions:
 
-#### Blocker 1: metaclass hooks defense
+#### Blocker 1: Metaclass Hooks Defense
 - Replaced dictionary/set lookups and tuple membership dispatches (`type(x) in (list, tuple)`) with safe, direct type identity checks (`x is list or x is tuple`, `t is int`, `t is float`, etc.) across `_safe_type_name`, `_safe_repr`, `preflight_resource_accounting`, and all schema checkers.
 - Unsupported custom objects or hostile metaclasses never trigger `__hash__`, `__eq__`, `__repr__`, `__str__`, or metaclass `__getattribute__`/`__getattr__` hooks. They are immediately identified as `<unsupported object>` without calling any user-controlled code.
 - Verified by `test_r1_metaclass_hash_hook` and `test_custom_objects_and_type_safety_without_hooks`.
 
-#### Blocker 2: bounded huge-int and unicode diagnostics
+#### Blocker 2: Bounded Huge-Int and Unicode Diagnostics
 - In Python 3.11+, formatting arbitrarily large integers (e.g. 10**5000) directly in f-strings raises a native `ValueError: Exceeds the limit (4300 digits) for integer string conversion`.
 - Replaced raw integer formatting across all diagnostic error paths with `{_safe_repr(val)}`, which checks `val.bit_length() > 4000` and outputs `<oversized int (N bits)>` without attempting base-10 string conversion.
 - Bounded `math.isfinite` invocations exclusively to floats, preventing `OverflowError` on huge integers.
 - Large native integers remain valid supported values where mathematically permitted, without imposing an invented integer validity cap or modifying interpreter limits. All diagnostics remain bounded `CheckpointValidationError` domain exceptions.
 - Verified by `test_r2_huge_update_domain_error` and `test_fail_closed_error_handling`.
 
-#### Blocker 3: seed material validation
+#### Blocker 3: Seed Material Validation
 - Enforced that PyTorch worker seeds in `runtime_workers > 0` contexts must be exact scalar non-negative integers bounded by uint64 ($0 \le \text{seed} \le 2^{64}-1$). Lists or sequences of integers are strictly rejected. Actual generator seeds are verified against `dummy_gen.initial_seed()`.
 - Enforced that Python random seeds must be exact non-negative scalar integers without an invented uint64 cap, matching Python's native arbitrary-precision integer support.
 - Enforced that NumPy worker seed words are restricted strictly to NumPy codecs (`numpy.random.PCG64.v1` and `numpy.random.RandomState.v1`).
 - Verified by `test_r3_torch_worker_seed_integer`, `test_r4_python_worker_seed_integer`, and `test_rng_and_codecs_validation`.
 
-#### Blocker 4: adam betas exact tuple validation
+#### Blocker 4: Adam Betas Exact Tuple Validation
 - Enforced that `betas` in both actual optimizer `param_groups` and `expected_runtime['optimizer_groups'][g]['options']` must be an exact 2-tuple: `type(betas) is tuple and len(betas) == 2`. Lists, singletons, or tuples of other lengths fail closed.
 - Verified by `test_adam_optimizer_validation` and `test_strict_schemas_and_types`.
 
-#### Blocker 5: genuine P5/K2/T3 vs T0 oracle and corrected BTF fixture
+#### Blocker 5: Genuine P5/K2/T3 vs T0 Oracle and Corrected BTF Fixture
 - Reconstructed the `batch_then_filter` fixture to use the genuine 5 condition-positive training edges `[[0, 0, 1, 2, 2], [0, 1, 2, 0, 1]]` with LightGCN degree-normalized weights `[0.5, 0.5, 1.0, 0.5, 0.5]`.
 - Preserved the old 6-edge graph as an explicit negative witness in `test_r6_btf_fixture_adjacency_mismatch_oracle`, proving that declared adjacency mismatch is caught and rejected.
 - Retained the genuine P=5, K=2, T=3 oracle asserting that clearing order does not make T=0, and verified genuine domain refusal on untrainable T=0 (T <= 0) datasets.
 - Verified by `test_r5a_old_empty_pool_fixture_independent_derivation`, `test_r5b_genuine_untrainable_t0_domain_refusal`, `test_r6_btf_fixture_adjacency_mismatch_oracle`, and `test_batch_then_filter_empty_chunk_and_partial_batch`.
 
-#### Blocker 6: complete strict schemas, resource accounting, and model matrices
+#### Blocker 6: Complete Strict Schemas, Resource Accounting, and Model Matrices
 - Complete schemas and exact types for both LightGCN (sparse adjacency buffer matching graph topology, coalesced, lexicographic ordering) and HeteroGNN (all 36 parameters required, non-empty User and Product tables, valid empty CategoryPath and Brand tables when metadata is absent).
 - Strict preflight resource accounting checking raw inputs and expected descriptors prior to copying, deduplicating `StorageImpl` identity via `_cdata` while accounting distinct storages over the same address buffer.
 - Complete 10-role RNG validation with quiescence enforcement, global RNG state preservation across success and failure, and exact output copy isolation.
 
-### 3. public API specification
+### 3. Public API Specification
 
 Module: `scripts/checkpoint_payload.py` (also directly importable as `checkpoint_payload`)
 
@@ -935,7 +935,7 @@ The function executes a 7-phase fail-closed validation pipeline:
 6. **Owned Snapshot Revalidation**: Re-runs complete semantic checks and preflight resource accounting on the constructed snapshot.
 7. **Return Snapshot**: Returns the verified, isolated snapshot.
 
-### 4. verification test suite and diagnostic oracles
+### 4. Verification Test Suite and Diagnostic Oracles
 
 Test module: `tests/test_checkpoint_payload.py`
 
@@ -979,7 +979,7 @@ The test module contains 34 self-contained test methods:
 
 Together with the 249 unchanged baseline tests across the test suite, the project full test suite contains 283 tests.
 
-### 5. acceptance criteria compliance map (C1-C10)
+### 5. Acceptance Criteria Compliance Map (C1–C10)
 
 | Criterion | Contract Scope | Implementation & Verification Evidence |
 |:---|:---|:---|
@@ -994,7 +994,7 @@ Together with the 249 unchanged baseline tests across the test suite, the projec
 | **C9** | Complete Regression Suite | All 249 baseline tests preserved; 34 payload tests (27 recovery + 7 diagnostic); 283 total tests pass within 120s with 0 failures, 0 errors, 0 skips via the approved benchmark command. |
 | **C10** | Truthful Disclosures | Complete documentation with exact 59,605-byte specification prefix preserved; truthful execution logs; all 6 limitations disclosed in exact text and order. |
 
-### 6. known limitations and honest disclosures (C10)
+### 6. Known Limitations and Honest Disclosures (C10)
 
 1. **In-Memory Validation Only**: Validating an already decoded in-memory mapping does not prove that initial deserialization or decoding was safe. Safe weights-only deserialization and file-level pre-load bounds belong to Deliverable 3.
 2. **Epoch Boundary Quiescence Only**: Only quiescent epoch-boundary checkpoint states are supported (`batch_cursor=0`, `pending_batches=0`, `prefetch_pending=0`, `inflight_workers=0`). In-flight worker, mid-batch, or streaming prefetch states are unsupported and rejected.

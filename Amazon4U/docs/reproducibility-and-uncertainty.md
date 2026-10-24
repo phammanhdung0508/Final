@@ -1,4 +1,4 @@
-# Block 3, reproducibility and uncertainty
+# Block 3 — reproducibility and uncertainty
 
 **Status:** user-approved protocol and clarifications before comparative training.
 Implementation/tests pending; no models have been run. This resolves the earlier

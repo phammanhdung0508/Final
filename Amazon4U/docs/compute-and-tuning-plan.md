@@ -89,3 +89,9 @@ verified, profiling not performed, and exact tuning budgets/search seed not froz
 Final training seeds are frozen in `configs/reproducibility.json`.
 No models have been trained. Configuration: `configs/compute-plan.json`.
 This decision does not remove the overall pre-training protocol gate.
+
+**Quota observation, 2026-10-24 (user-reported).** The Kaggle account `dungsunf` has
+its full weekly 30 GPU-hours available. The 60-hour assumption above relies on a second
+permitted allocation, which is still unverified. No planning change has been decided.
+If only 30 hours per week are available, planned run time is about 24 hours per week
+after the 20% reserve.
