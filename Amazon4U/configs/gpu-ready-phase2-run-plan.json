@@ -86,7 +86,7 @@
   "deployment_decision": "NOT_AUTHORIZED",
   "cuda_rng_unchanged_within_epoch": "user_required_violation_fails_run",
   "tolerance_clarification_proposed": {
-    "status": "agreed_in_principle_proof_and_targeted_tests_awaiting_review",
+    "status": "agreed_2026-10-24",
     "recorded": "2026-10-24",
     "found_before_any_gpu_run": true,
     "parameter": "Heterogeneous KG+GNN self_biases_l1.Product",

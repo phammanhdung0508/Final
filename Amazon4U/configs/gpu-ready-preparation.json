@@ -216,7 +216,7 @@
       "tests": "tests/test_vector_trainer_equivalence.py"
     },
     "product_bias_tolerance": {
-      "status": "agreed_in_principle_proof_and_tests_awaiting_review",
+      "status": "agreed_2026-10-24",
       "proof": "docs/gpu-ready-design.md",
       "tests": "tests/test_product_bias_invariance.py"
     },

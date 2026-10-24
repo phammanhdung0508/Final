@@ -41,7 +41,7 @@ Seeds: 42, 2026, 3407.
 Tolerances are justified in the run report from float32 error growth and are fixed
 before the run. They are never adjusted after seeing results.
 
-**Proposed clarification, awaiting user approval (2026-10-24, before any GPU run).** The
+**Agreed clarification (user, 2026-10-24, before any GPU run).** The
 heterogeneous `self_biases_l1.Product` parameter has an exactly zero BPR gradient, so
 Adam moves it by rounding noise. It is excluded from the parameter tolerance and checked
 by ranking invariance instead. Its reference gradient is reported in every run. See

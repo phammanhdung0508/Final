@@ -43,7 +43,8 @@ User decisions on 2026-10-24, after this implementation:
   These tests found and fixed one bug: the heterogeneous parameter groups were
   registered in sorted order, not the accepted order, which misaligns optimizer state.
 - Product-bias tolerance: agreed in principle, subject to a mathematical proof and
-  targeted tests. Both are below and await review.
+  targeted tests. After the corrected Adam bound the user replied "now it should lgtm"
+  (2026-10-24). The clarification is agreed.
 
 Deviations from this note, recorded for review:
 
@@ -63,8 +64,8 @@ Deviations from this note, recorded for review:
 
 **Finding: one heterogeneous parameter has an exactly zero BPR gradient.** User
 decision, 2026-10-24: "Agree in principle, but I will need subject to mathematical proof
-and targeted tests." Proof and tests follow. Until accepted, this stays a proposed
-clarification of the agreed tolerance. No science changes.
+and targeted tests." Proof and tests follow. Agreed by the user on 2026-10-24 after
+review. No science changes.
 
 ### Proof: the layer-1 Product self bias cannot affect loss or rankings
 
