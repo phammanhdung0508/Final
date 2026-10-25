@@ -266,3 +266,10 @@ Local publish, all ratings (`d3-step2`):
 The 60 s target is still not met. The remaining cost is about 60 s for three identity
 builds, about 27 s for resource walks and about 25 s for the save. Retrieve is to be
 measured on Kaggle in C4 (user decision).
+
+### User decisions after option A (2026-10-25)
+
+| Decision | User's words |
+|---|---|
+| Build the C4 Kaggle proof bundle; the launch still needs approval of that built bundle | "Go ahead with the Kaggle proof run. Yes." |
+| Commit the work: code on branch `checkpoint-real-data` (commit `817108f`, not pushed), plan updates on `master` | "Save the work to git. Yes" |
