@@ -158,3 +158,49 @@ small next to the data copy.
 |---|---|
 | Plan approved, v1 kept unchanged beside v2 | "APPROVE, I agree with your plan." |
 | Run 3 booked in the profiling ledger | "Yes use run 3 profiling budget for this plan implement ok too me" |
+
+## Progress (2026-10-25)
+
+The code is on branch `checkpoint-v2`, commit `af15553`, not pushed. Evidence is in
+`data/reports/checkpoint-v2/`.
+
+### Steps 1 to 3 done
+
+- **New module.** `scripts/checkpoint_v2.py` holds the identity reference, its validation
+  against a trusted identity, and the v2 payload, cuda-v2, publish and retrieve. The
+  semantic checks are derived from v1's by the listed substitutions
+  (`tests/checkpoint_v2_derivation.py`), and a test keeps them in step.
+- **v1 untouched.** All v1 D1/D2/D3 files are unchanged.
+- **Mutation sweep.** All 10,860 applicable leaf mutations of the v1 fixtures were run.
+  v1 and v2 gave the same outcome, class and message, for every one; 8,225 of them were
+  refusals. Log: `full-sweep.log`. The suite runs a fixed sample.
+- **Identity tests.** These pass:
+  - each kind of changed data is refused through its fingerprint;
+  - a tampered reference is refused with the expected message;
+  - an untrusted expected identity is refused;
+  - a v1 file under v2, and a v2 file under v1, are both refused;
+  - the identity hash equals v1's;
+  - CPU resume is exact for 4 cases.
+- **Deliberate breaks.** All 7 breaks are detected (`deliberate-breaks.jsonl`). The first
+  pass missed 5: 4 were test gaps, now closed with message-level assertions; 1 was a
+  redundant settings comparison, now removed, because the settings fingerprint binds the
+  settings.
+- **Full suite.** 665 tests pass.
+- **Local real data** (LightGCN, all ratings; `local/`):
+
+  | | v2 | v1 |
+  |---|---|---|
+  | Publish | 7.7 s | 125 s |
+  | Retrieve | 7.5 s | not measured locally |
+  | File | 32 MB | 369 MB |
+  | Peak RSS | 2.4 GB | |
+
+### Step 4: run 3 bundle built, awaiting the user's approval of this bundle
+
+| Item | Value |
+|---|---|
+| Bundle | `data/reports/profiling-mi-v1/bundle-run-3/`, from clean commit `af15553`, checkpoint version 2 |
+| Kernel | `dungsunf/amazon4u-ckpt-proof-mi-run-3-36419bbb`: private, GPU, offline |
+| Bundle manifest SHA-256 | `b6ebf8a4fd11ed8e645a2ef3fbef10085bf090c77de97621d651b4da8b2a8796` |
+| Cases and comparison | As run 2: 4 cases, 4 epochs straight against 2 + resume + 2, in three processes |
+| Ledger | Profiling ledger, run 3. Books the last 7,200 s of the 21,600 s cap |
