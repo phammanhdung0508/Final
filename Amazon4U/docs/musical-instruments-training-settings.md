@@ -93,3 +93,36 @@ frozen seed. Selection uses validation only, so reusing the run adds no test exp
 | Final: seeds 2026 and 3407 × 2 methods × 2 conditions | 8 | 8.1 |
 | Checkpoints | — | about 0.3 |
 | **Total** | 20 | **about 20.6**, under the 24 h cap |
+
+## Build progress (2026-10-26)
+
+All on branch `training-mi`, not pushed. The full suite passes (688 tests).
+
+1. **Learning rates in the code.** Checkpoint v2 and the trainer accept exactly 0.0005,
+   0.001 and 0.002, and v1 still accepts 0.001 only. There are tests for resume at each
+   rate and refusal of others, and 3 deliberate breaks, all caught.
+2. **Protocol `amazon4u-protocol-v2.1.0` frozen.**
+   - The snapshot is under `configs/protocols/v2.1.0/`, made with
+     `scripts/protocol_snapshot.py`; v2.0.0 is unchanged.
+   - It also freezes the three execution choices the user confirmed ("1, 2, 3 OK"):
+     LightGCN initialization Normal(0, 0.1), full KG + GNN neighborhoods, and exact
+     LightGCN propagation.
+3. **Training run.** `scripts/training_run.py` trains one run to early stopping or 100
+   epochs, with validation every epoch. It checkpoints at the agreed spacing, keeps
+   `final.a4ucp` (with the best model) and resumes exactly from the latest checkpoint.
+4. **Campaign.** `multiautoresearch/adapters/amazon4u_training.py` holds:
+   - the frozen 12-run tuning plan and the final rule;
+   - bundles for planned runs only, with final runs unlocked once their group is collected;
+   - per-run or campaign approval;
+   - the 24 GPU-hour ledger, counting actual use once a run is collected.
+5. **Real-data smoke check (local CPU).** One LightGCN epoch, at learning rate 0.002 and
+   seed 42, ran end to end:
+   - 194 steps, then validation over 57,377 eligible users;
+   - a 129 MB checkpoint, saved in 23 s.
+
+   Its validation score was computed, because validation runs every epoch, but it is not a
+   tuning result and is used for nothing.
+
+Still to build: fast KG-only and Popularity evaluation, equal to the reference scorers.
+The reference code scores one user and one product at a time and is too slow for the full
+data. These baselines run on CPU, independently of the GPU campaign.
