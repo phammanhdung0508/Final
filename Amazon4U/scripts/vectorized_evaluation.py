@@ -71,11 +71,13 @@ def _group_metrics(results, warm_pool_size):
 
 
 def evaluate_validation(context, users, items, user_table, item_table, targets, *,
-                        chunk_users=1024):
+                        chunk_users=1024, tick=None):
     """Validation report equal to `Evaluator(context).evaluate(targets, model)`.
 
     `users` and `items` give the row order of `user_table` and `item_table`; `items` must
-    equal `context.sorted_warm_items`.
+    equal `context.sorted_warm_items`. `tick`, if given, is called with `'ranking'` after
+    each chunk is ranked and `'metrics'` after its per-user metrics; profiling uses it to
+    time the two stages and to check its deadlines between chunks.
     """
     if list(items) != list(context.sorted_warm_items):
         raise ValueError('item rows must follow context.sorted_warm_items')
@@ -142,6 +144,8 @@ def evaluate_validation(context, users, items, user_table, item_table, targets, 
             order = torch.sort(masked, dim=1, descending=True, stable=True).indices[:, :max(CUTOFFS)]
             n_candidates = candidate.sum(dim=1).tolist()
             order = order.tolist()
+        if tick is not None:
+            tick('ranking')
         for j, (u, target) in enumerate(chunk):
             n_cand = n_candidates[j]
             for k in CUTOFFS:
@@ -167,6 +171,8 @@ def evaluate_validation(context, users, items, user_table, item_table, targets, 
                 'top_5': top_5, 'top_10': top_10, 'top_20': top_20,
                 'top_k': {5: top_5, 10: top_10, 20: top_20},
             })
+        if tick is not None:
+            tick('metrics')
 
     warm_pool_size = len(warm_pool)
     total = len(records)
