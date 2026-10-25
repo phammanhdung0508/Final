@@ -337,3 +337,11 @@ on Kaggle's CPU against a 60 s target, which is slower than locally (125 s). A c
 costs about 3 to 10 epochs. Following the plan, the agent stops and reports. The
 remaining lever is to stop storing the full data copy (option C), which is a user decision.
 How often to checkpoint is a training-budget decision.
+
+### User decision after run 2 (2026-10-25)
+
+Store fingerprints instead of the full data copy, as a new checkpoint version (v2): "Ok,
+let's start with 'Store hashes instead of the full data copy'. I agree on this one, it ok
+to modify older checkpoint design if it's no longer work effectively (note as new
+version) - write me the plan." The plan is in
+[`checkpoint-identity-v2-plan.md`](checkpoint-identity-v2-plan.md) (proposed).

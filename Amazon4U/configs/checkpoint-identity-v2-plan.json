@@ -1,0 +1,79 @@
+{
+  "schema_version": "amazon4u-checkpoint-identity-v2-plan-v1",
+  "status": "AGREED_by_user_2026-10-25",
+  "recorded": "2026-10-25",
+  "documentation": "docs/checkpoint-identity-v2-plan.md",
+  "user_inputs": {
+    "direction": "Ok, let's start with \"Store hashes instead of the full data copy\". I agree on this one, it ok to modify older checkpoint design if it's no longer work effectively (note as new version) - write me the plan.",
+    "approval": "Approve the plan? APPROVE, I agree with your plan. Book Kaggle run 3 in the profiling budget? Yes use run 3 profiling budget for this plan implement ok too me"
+  },
+  "evidence": {
+    "kaggle_run_2": "data/reports/profiling-mi-v1/runs/run-2/result.json",
+    "publish_seconds": [
+      154.5,
+      181.7
+    ],
+    "retrieve_seconds": [
+      141.0,
+      169.6
+    ],
+    "file_mb": [
+      428,
+      467
+    ]
+  },
+  "versions": {
+    "identity": "amazon4u-checkpoint-identity-v2",
+    "payload": "amazon4u-checkpoint-payload-v2",
+    "v1": "unchanged_frozen_kept_beside_v2"
+  },
+  "stored_identity_v2": [
+    "header",
+    "data_fingerprint",
+    "graph_fingerprint",
+    "validation_fingerprint",
+    "settings_fingerprint",
+    "identity_hash",
+    "resolved_settings"
+  ],
+  "content_source_at_resume": "trusted_in_memory_identity_built_from_hash_verified_dataset",
+  "losses": [
+    "no_self_verification_without_dataset",
+    "mismatch_names_fingerprint_not_field",
+    "integrity_rests_on_d3_sha256_and_fingerprint_equality"
+  ],
+  "work": {
+    "V1": "d1_v2_identity",
+    "V2": "d2_v2_payload_validation",
+    "V3": "cuda_v2_profile_and_d3_wiring",
+    "V4": "real_data_builders_and_trainer_emit_v2",
+    "V5": "local_timing_then_kaggle_run_3_own_approval"
+  },
+  "proof": [
+    "v1_frozen_tests_unchanged",
+    "v1_non_identity_rejections_replayed_same_outcome",
+    "identity_mutations_refused_by_fingerprint",
+    "cross_version_files_refused",
+    "identity_hash_equal_v1_v2",
+    "cpu_and_kaggle_resume_equality",
+    "deliberate_breaks"
+  ],
+  "targets": {
+    "publish_seconds_max": 60,
+    "retrieve_seconds_max": 60,
+    "peak_host_gib_max": 8,
+    "source": "agreed_readiness_plan"
+  },
+  "out_of_scope": [
+    "science_training_metrics",
+    "sampler_source_order_encoding",
+    "toys_and_electronics"
+  ],
+  "approvals": {
+    "direction": "agreed_by_user",
+    "plan": "agreed_by_user",
+    "kaggle_run_3": "own_approval",
+    "ledger": "profiling_ledger_agreed"
+  },
+  "open_questions": []
+}
