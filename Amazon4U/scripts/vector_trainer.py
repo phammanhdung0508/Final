@@ -24,7 +24,7 @@ from types import SimpleNamespace
 import torch
 
 from scripts.checkpoint_payload_cuda import build_cuda_payload
-from scripts.checkpoint_v2 import PAYLOAD_SCHEMA_VERSION_V2, build_cuda_payload_v2
+from scripts.checkpoint_v2 import APPROVED_LEARNING_RATES, PAYLOAD_SCHEMA_VERSION_V2, build_cuda_payload_v2
 from scripts.gpu_runtime import RuntimeRefusal, global_rng_states, require_rng_unchanged
 from scripts.training_harness import ADAM_OPTIONS, PrivateRNG, Selection, validation_score
 from scripts.vectorized_evaluation import evaluate_model
@@ -64,7 +64,7 @@ def fixture_rng(seed):
 
 class VectorTrainer:
     def __init__(self, model, targets, *, rng, batch_size, validation_frequency,
-                 fingerprint, determinism=None, chunk_users=1024):
+                 fingerprint, determinism=None, chunk_users=1024, learning_rate=None):
         if type(batch_size) is not int or batch_size < 1:
             raise ValueError('batch_size must be a positive integer')
         self.model, self.targets, self.rng = model, targets, rng
@@ -85,7 +85,13 @@ class VectorTrainer:
                          for u in self.users]
         self.shuffle_id = rng.role_id('epoch_shuffle')
         self.negative_id = rng.role_id('negative_sampler')
-        self.optimizer = torch.optim.Adam(list(model.parameters()), **copy.deepcopy(ADAM_OPTIONS))
+        options = copy.deepcopy(ADAM_OPTIONS)
+        if learning_rate is not None:
+            # docs/learning-rate-tuning-amendment.md: one of the approved tuned rates.
+            if learning_rate not in APPROVED_LEARNING_RATES or type(learning_rate) is not float:
+                raise ValueError(f'learning_rate must be one of {APPROVED_LEARNING_RATES}')
+            options['lr'] = learning_rate
+        self.optimizer = torch.optim.Adam(list(model.parameters()), **options)
         self.selection = Selection(validation_frequency)
         self.progress = {'epoch': 0, 'global_step': 0, 'epoch_optimizer_steps': [],
                          'empty_pool_skips': []}

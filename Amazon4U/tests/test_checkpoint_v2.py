@@ -103,7 +103,8 @@ def set_path(root, path, value):
 class DerivationTests(unittest.TestCase):
     def test_v2_semantic_checks_are_v1_with_only_the_listed_substitutions(self):
         source = (ROOT / 'scripts/checkpoint_v2.py').read_text()
-        start = source.index('# DERIVED from checkpoint_payload._validate_semantic_payload')
+        start = source.index('# DERIVED from checkpoint_payload._validate_adam_optimizer')
+        start = source.index('\n', start) + 1
         derived = source[source.index('\n', start) + 1:source.index('# END DERIVED')]
         v1 = (ROOT / 'scripts/checkpoint_payload.py').read_text()
         self.assertEqual(derived.strip(), derive(v1).strip())
@@ -290,6 +291,85 @@ class RealDataV2Tests(RealDataCheckpointTests):
             self.retrieve('v1.a4ucp', e2)
         with self.assertRaises(CheckpointError):
             self.retrieve('v2.a4ucp', e1)
+
+
+class LearningRateTests(RealDataV2Tests):
+    """docs/learning-rate-tuning-amendment.md: v2 accepts exactly the three approved rates."""
+
+    def fresh(self, method, condition, version=2, learning_rate=0.001):
+        return build(self.data, method, condition, batch_size=8, fingerprint=FP, version=version,
+                     learning_rate=learning_rate)
+
+    def test_each_approved_rate_trains_with_that_rate_and_resumes_exactly(self):
+        for lr in v2.APPROVED_LEARNING_RATES:
+            with self.subTest(lr=lr):
+                straight, expectations, identity = self.fresh(HETERO, 'all_ratings', learning_rate=lr)
+                self.assertEqual(straight.optimizer.param_groups[0]['lr'], lr)
+                logs = [straight.train_epoch() for _ in range(2)]
+                first, _, _ = self.fresh(HETERO, 'all_ratings', learning_rate=lr)
+                part = [first.train_epoch()]
+                name = self.publish(f'lr-{int(lr * 1e4)}.a4ucp', first, expectations, identity)
+                resumed, again, _ = self.fresh(HETERO, 'all_ratings', learning_rate=lr)
+                resumed.restore_cuda(self.retrieve(name, again))
+                part.append(resumed.train_epoch())
+                self.assertEqual(part, logs)
+        a = self.fresh(LIGHTGCN, 'all_ratings', learning_rate=0.0005)[2]
+        b = self.fresh(LIGHTGCN, 'all_ratings', learning_rate=0.002)[2]
+        self.assertNotEqual(a['settings_fingerprint'], b['settings_fingerprint'])
+
+    def test_unapproved_rates_are_refused_everywhere(self):
+        for lr in (0.003, 0.0001, 1e-3 + 1e-12):
+            with self.subTest(lr=lr), self.assertRaises(ValueError):
+                self.fresh(LIGHTGCN, 'all_ratings', learning_rate=lr)
+        with self.assertRaisesRegex(ValueError, 'version 2'):
+            self.fresh(LIGHTGCN, 'all_ratings', version=1, learning_rate=0.002)
+
+    def test_a_checkpoint_whose_rate_differs_from_the_run_is_refused(self):
+        trainer, expectations, identity = self.fresh(LIGHTGCN, 'all_ratings', learning_rate=0.002)
+        trainer.train_epoch()
+        name = self.publish('fast.a4ucp', trainer, expectations, identity)
+        _, slow, _ = self.fresh(LIGHTGCN, 'all_ratings', learning_rate=0.0005)
+        with self.assertRaisesRegex(CheckpointError, 'differs from the trusted data'):
+            self.retrieve(name, slow)
+        for group in trainer.optimizer.param_groups:
+            group['lr'] = 0.001
+        with self.assertRaisesRegex(CheckpointError, r'param_groups\[0\]\.lr'):
+            self.publish('mixed.a4ucp', trainer, expectations, identity)
+
+    def _v2_fixture_with_rates(self, identity_lr, optimizer_lr):
+        payload, arguments = _fixture(hetero=False, initial=False)
+        fields = {k: copy.deepcopy(payload['identity'][k]) for k in FIELDS}
+        fields['resolved_settings']['training']['learning_rate'] = identity_lr
+        trusted = build_canonical_identity(**fields)
+        p, a = as_v2(payload, arguments)
+        p['identity'] = v2.identity_reference(trusted)
+        a['expected_identity'] = trusted
+        p['sampler']['identity_hash'] = trusted.identity_hash
+        for group in a['expected_runtime']['optimizer_groups']:
+            group['options']['lr'] = optimizer_lr
+        for group in p['optimizer']['state_dict']['param_groups']:
+            group['lr'] = optimizer_lr
+        return p, a
+
+    def test_rates_are_checked_by_behavior_not_only_by_derivation(self):
+        self.assertEqual(v2_call(*self._v2_fixture_with_rates(0.002, 0.002))[0], 'ok')
+        result = v2_call(*self._v2_fixture_with_rates(0.003, 0.003))
+        self.assertEqual(result[:2], ('raised', 'CheckpointValidationError'))
+        self.assertIn('Identity resolved lr 0.003 not in', result[2])
+        result = v2_call(*self._v2_fixture_with_rates(0.002, 0.0005))
+        self.assertEqual(result[:2], ('raised', 'CheckpointValidationError'))
+        self.assertIn('param_groups[0].lr 0.0005', result[2])
+
+    def test_v1_still_accepts_only_0001(self):
+        payload, arguments = _fixture(hetero=False, initial=False)
+        p, a = copy.deepcopy(payload), copy.deepcopy(arguments)
+        fields = {k: copy.deepcopy(p['identity'][k]) for k in FIELDS}
+        fields['resolved_settings']['training']['learning_rate'] = 0.002
+        p['identity'] = build_canonical_identity(**fields).to_dict()
+        a['expected_identity'] = copy.deepcopy(p['identity'])
+        result = v1_call(p, a)
+        self.assertEqual(result[:2], ('raised', 'CheckpointValidationError'))
+        self.assertIn('Identity resolved lr 0.002 != 0.001', result[2])
 
 
 if __name__ == '__main__':

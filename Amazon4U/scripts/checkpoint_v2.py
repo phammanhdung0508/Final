@@ -19,8 +19,9 @@ v1 are unchanged; v2 sits beside them, and each version refuses the other's file
 
 import copy
 import hashlib
+import math
 import os
-from typing import Any, Dict, Tuple
+from typing import Any, Dict, List, Tuple
 
 import torch
 
@@ -34,7 +35,8 @@ from scripts.checkpoint_payload import (
     ADAM_EXPECTED_BETAS, ADAM_EXPECTED_EPS, ADAM_EXPECTED_LR, ADAM_EXPECTED_WEIGHT_DECAY,
     MAX_EPOCHS_LIMIT, MAX_PATIENCE_CHECKS, NODE_TYPES, PAYLOAD_CAPABILITY, PAYLOAD_REQUIRED_KEYS,
     RELATION_SCHEMAS, SUPPORTED_BATCH_POLICIES, SUPPORTED_STEP_DTYPES, _check_strict_int, _safe_repr,
-    _make_owned_output_copy, _safe_sort_keys, _validate_adam_optimizer,
+    _check_clean_text, _check_strict_bool, _check_strict_number, _make_owned_output_copy,
+    _safe_sort_keys,
     _validate_expected_model_schema, _validate_expected_runtime_schema,
     _validate_model_state_dict, _validate_rng_state_dict, _validate_sampler_and_progress,
     _validate_selection_and_best_model, preflight_resource_accounting, validate_resource_policy,
@@ -49,6 +51,8 @@ HEADER = ('method', 'category', 'feedback_condition', 'seed')
 FINGERPRINTS = ('data_fingerprint', 'graph_fingerprint', 'validation_fingerprint',
                 'settings_fingerprint', 'identity_hash')
 REFERENCE_KEYS = frozenset({'schema_version', *HEADER, *FINGERPRINTS, 'resolved_settings'})
+# docs/learning-rate-tuning-amendment.md: the only Adam learning rates v2 accepts.
+APPROVED_LEARNING_RATES = (0.0005, 0.001, 0.002)
 
 
 def identity_reference(identity):
@@ -98,7 +102,335 @@ def validate_identity_reference(raw, trusted):
     return trusted
 
 
-# DERIVED from checkpoint_payload._validate_semantic_payload; see tests/checkpoint_v2_derivation.py
+# DERIVED from checkpoint_payload._validate_adam_optimizer and _validate_semantic_payload;
+# see tests/checkpoint_v2_derivation.py
+def _validate_adam_optimizer_v2(
+    optimizer: Any,
+    expected_groups: List[Dict[str, Any]],
+    learning_rate: float,
+    adam_step_dtype: str,
+    global_step: int,
+    model_method: str,
+    validated_param_shapes: Dict[str, Tuple[int, ...]],
+) -> None:
+    """Validate Adam optimizer groups, bindings, options, moments, step precision, and lazy updates."""
+    if type(optimizer) is not dict:
+        raise CheckpointValidationError(f"optimizer must be an exact dict, got {_safe_repr(optimizer)}")
+    expected_opt_keys = {"algorithm", "state_dict", "parameter_bindings"}
+    if set(optimizer.keys()) != expected_opt_keys:
+        missing_k = _safe_sort_keys(expected_opt_keys - set(optimizer.keys()))
+        extra_k = _safe_sort_keys(set(optimizer.keys()) - expected_opt_keys)
+        raise CheckpointValidationError(f"optimizer keys mismatch. Missing: {missing_k}, Extra: {extra_k}")
+
+    if optimizer["algorithm"] != "Adam":
+        raise CheckpointValidationError(f"optimizer.algorithm must be 'Adam', got {_safe_repr(optimizer['algorithm'])}")
+
+    state_dict = optimizer["state_dict"]
+    if type(state_dict) is not dict or set(state_dict.keys()) != {"state", "param_groups"}:
+        raise CheckpointValidationError("optimizer.state_dict must be an exact dict with keys 'state' and 'param_groups'")
+
+    state = state_dict["state"]
+    param_groups = state_dict["param_groups"]
+    if type(state) is not dict:
+        raise CheckpointValidationError(f"optimizer.state_dict.state must be a dict, got {_safe_repr(state)}")
+    if type(param_groups) is not list:
+        raise CheckpointValidationError(f"optimizer.state_dict.param_groups must be a list, got {_safe_repr(param_groups)}")
+
+    if len(param_groups) != len(expected_groups):
+        raise CheckpointValidationError(
+            f"optimizer.state_dict.param_groups length {len(param_groups)} != expected {len(expected_groups)}"
+        )
+
+    expected_all_params: List[str] = []
+    for eg in expected_groups:
+        expected_all_params.extend(eg["parameter_names"])
+
+    num_total_params = len(expected_all_params)
+    if model_method == "LightGCN" and num_total_params != 2:
+        raise CheckpointValidationError(f"LightGCN must have exactly 2 optimizer parameters, got {_safe_repr(num_total_params)}")
+    elif model_method == "Heterogeneous KG+GNN" and num_total_params != 36:
+        raise CheckpointValidationError(f"HeteroGNN must have exactly 36 optimizer parameters, got {_safe_repr(num_total_params)}")
+
+    # Validate state keys: every key must be an integer in 0..num_total_params - 1
+    for k in state.keys():
+        if type(k) is not int or type(k) is bool or k < 0 or k >= num_total_params:
+            raise CheckpointValidationError(f"optimizer.state_dict.state contains invalid or orphan ID {_safe_repr(k)}")
+
+    # Validate parameter_bindings
+    bindings = optimizer["parameter_bindings"]
+    if type(bindings) is not list or len(bindings) != num_total_params:
+        raise CheckpointValidationError(
+            f"optimizer.parameter_bindings must be an exact list of length {_safe_repr(num_total_params)}, got {_safe_repr(bindings)}"
+        )
+
+    binding_by_id: Dict[int, Dict[str, Any]] = {}
+    for idx, b in enumerate(bindings):
+        if type(b) is not dict or set(b.keys()) != {"id", "name", "updates"}:
+            raise CheckpointValidationError(f"parameter_bindings[{idx}] keys must be exactly id, name, updates")
+        p_id = b["id"]
+        p_name = b["name"]
+        p_updates = b["updates"]
+
+        _check_strict_int(p_id, f"parameter_bindings[{idx}].id", min_val=0, max_val=num_total_params - 1)
+        _check_clean_text(p_name, f"parameter_bindings[{idx}].name")
+        _check_strict_int(p_updates, f"parameter_bindings[{idx}].updates", min_val=0)
+
+        if p_id != idx:
+            raise CheckpointValidationError(f"parameter_bindings[{idx}].id must be packed in order {idx}, got {_safe_repr(p_id)}")
+        if p_name != expected_all_params[idx]:
+            raise CheckpointValidationError(
+                f"parameter_bindings[{idx}].name {_safe_repr(p_name)} does not match expected {_safe_repr(expected_all_params[idx])}"
+            )
+        binding_by_id[p_id] = b
+
+    # Validate param_groups
+    current_packed_id = 0
+    for g_idx, (pg, eg) in enumerate(zip(param_groups, expected_groups)):
+        if type(pg) is not dict:
+            raise CheckpointValidationError(f"param_groups[{g_idx}] must be an exact dict")
+        for k in pg.keys():
+            if type(k) is not str:
+                raise CheckpointValidationError(f"param_groups[{g_idx}] keys must be strings, got {_safe_repr(k)}")
+
+        expected_opts = eg.get("options")
+        if type(expected_opts) is not dict:
+            raise CheckpointValidationError(f"expected_runtime.optimizer_groups[{g_idx}].options must be a dict")
+
+        has_param_names = "param_names" in expected_opts
+        required_pg_keys = {
+            "params", "lr", "betas", "eps", "weight_decay", "amsgrad",
+            "maximize", "foreach", "capturable", "differentiable", "fused",
+            "decoupled_weight_decay",
+        }
+        if has_param_names:
+            required_pg_keys.add("param_names")
+
+        if set(pg.keys()) != required_pg_keys:
+            missing_k = _safe_sort_keys(required_pg_keys - set(pg.keys()))
+            extra_k = _safe_sort_keys(set(pg.keys()) - required_pg_keys)
+            raise CheckpointValidationError(f"param_groups[{g_idx}] keys mismatch. Missing: {missing_k}, Extra: {extra_k}")
+
+        p_list = pg["params"]
+        if type(p_list) is not list:
+            raise CheckpointValidationError(f"param_groups[{g_idx}].params must be an exact list, got {_safe_repr(p_list)}")
+        for pid in p_list:
+            if type(pid) is not int or type(pid) is bool:
+                raise CheckpointValidationError(f"param_groups[{g_idx}].params must contain exact ints (bool excluded), got {_safe_repr(pid)}")
+
+        expected_group_pnames = eg["parameter_names"]
+        expected_group_ids = list(range(current_packed_id, current_packed_id + len(expected_group_pnames)))
+        if list(p_list) != expected_group_ids:
+            raise CheckpointValidationError(
+                f"param_groups[{g_idx}].params IDs {_safe_sort_keys(p_list)} do not match expected {_safe_sort_keys(expected_group_ids)}"
+            )
+        current_packed_id += len(expected_group_pnames)
+
+        if has_param_names:
+            act_pnames = pg["param_names"]
+            trusted_pnames = expected_opts["param_names"]
+            if (type(trusted_pnames) is not list and type(trusted_pnames) is not tuple):
+                raise CheckpointValidationError(
+                    f"expected_runtime.optimizer_groups[{g_idx}].options.param_names must be an exact list or tuple"
+                )
+            if type(act_pnames) is not type(trusted_pnames):
+                raise CheckpointValidationError(
+                    f"param_groups[{g_idx}].param_names must have the same concrete list or tuple type as trusted options"
+                )
+            for name_index, name in enumerate(act_pnames):
+                _check_clean_text(name, f"param_groups[{g_idx}].param_names[{name_index}]")
+            for name_index, name in enumerate(trusted_pnames):
+                _check_clean_text(name, f"expected_runtime.optimizer_groups[{g_idx}].options.param_names[{name_index}]")
+            if act_pnames != trusted_pnames:
+                raise CheckpointValidationError(
+                    f"param_groups[{g_idx}].param_names does not match the ordered trusted optional names"
+                )
+
+        # Compare exact options
+        lr = _check_strict_number(pg["lr"], f"param_groups[{g_idx}].lr")
+        if lr != expected_opts.get("lr") or lr != learning_rate:
+            raise CheckpointValidationError(f"param_groups[{g_idx}].lr {_safe_repr(lr)} != expected {_safe_repr(expected_opts.get('lr'))}")
+
+        betas = pg["betas"]
+        if type(betas) is not tuple or len(betas) != 2:
+            raise CheckpointValidationError(f"param_groups[{g_idx}].betas must be an exact 2-element tuple, got {_safe_repr(betas)}")
+        b1 = _check_strict_number(betas[0], f"param_groups[{g_idx}].betas[0]")
+        b2 = _check_strict_number(betas[1], f"param_groups[{g_idx}].betas[1]")
+
+        exp_betas = expected_opts.get("betas")
+        if type(exp_betas) is not tuple or len(exp_betas) != 2:
+            raise CheckpointValidationError(f"expected_runtime.optimizer_groups[{g_idx}].options['betas'] must be an exact 2-element tuple, got {_safe_repr(exp_betas)}")
+        exp_b1 = _check_strict_number(exp_betas[0], f"expected_runtime.optimizer_groups[{g_idx}].options.betas[0]")
+        exp_b2 = _check_strict_number(exp_betas[1], f"expected_runtime.optimizer_groups[{g_idx}].options.betas[1]")
+
+        if (b1, b2) != ADAM_EXPECTED_BETAS or (b1, b2) != (exp_b1, exp_b2):
+            raise CheckpointValidationError(f"param_groups[{g_idx}].betas ({_safe_repr(b1)}, {_safe_repr(b2)}) != {ADAM_EXPECTED_BETAS}")
+
+        eps = _check_strict_number(pg["eps"], f"param_groups[{g_idx}].eps")
+        if eps != ADAM_EXPECTED_EPS or eps != expected_opts.get("eps"):
+            raise CheckpointValidationError(f"param_groups[{g_idx}].eps {_safe_repr(eps)} != {ADAM_EXPECTED_EPS}")
+
+        wd = _check_strict_number(pg["weight_decay"], f"param_groups[{g_idx}].weight_decay")
+        if wd != ADAM_EXPECTED_WEIGHT_DECAY or wd != expected_opts.get("weight_decay"):
+            raise CheckpointValidationError(f"param_groups[{g_idx}].weight_decay {_safe_repr(wd)} != {ADAM_EXPECTED_WEIGHT_DECAY}")
+
+        for flag_name in ("amsgrad", "maximize", "capturable", "differentiable", "decoupled_weight_decay"):
+            flag_val = _check_strict_bool(pg[flag_name], f"param_groups[{g_idx}].{flag_name}")
+            exp_flag = expected_opts.get(flag_name)
+            if flag_val is not False or flag_val != exp_flag:
+                raise CheckpointValidationError(f"param_groups[{g_idx}].{flag_name} must be False in this CPU profile")
+
+        act_foreach = pg["foreach"]
+        exp_foreach = expected_opts.get("foreach")
+        if (act_foreach is not None and type(act_foreach) is not bool) or act_foreach != exp_foreach:
+            raise CheckpointValidationError(f"param_groups[{g_idx}].foreach {_safe_repr(act_foreach)} != expected {_safe_repr(exp_foreach)}")
+
+        act_fused = pg["fused"]
+        exp_fused = expected_opts.get("fused")
+        if (act_fused is not None and type(act_fused) is not bool) or act_fused != exp_fused or (act_fused is not None and act_fused is not False):
+            raise CheckpointValidationError(f"param_groups[{g_idx}].fused {_safe_repr(act_fused)} != expected {_safe_repr(exp_fused)}")
+
+    # Validate state per parameter
+    target_step_dtype = torch.float32 if adam_step_dtype == "torch.float32" else torch.float64
+
+    total_updates_sum = 0
+    for p_id, b in binding_by_id.items():
+        updates = b["updates"]
+        p_name = b["name"]
+        if p_name not in validated_param_shapes:
+            raise CheckpointValidationError(f"Unknown parameter name {_safe_repr(p_name)} in optimizer parameter_bindings")
+        exp_shape = validated_param_shapes[p_name]
+        total_updates_sum += updates
+
+        if updates > global_step:
+            raise CheckpointValidationError(
+                f"Parameter {p_name!r} updates ({_safe_repr(updates)}) exceeds global_step ({_safe_repr(global_step)})"
+            )
+
+        if p_id not in state:
+            if updates == 0:
+                continue
+            raise CheckpointValidationError(
+                f"Parameter {p_name!r} has updates={_safe_repr(updates)} > 0 but state is omitted"
+            )
+
+        p_state = state[p_id]
+        if type(p_state) is not dict:
+            raise CheckpointValidationError(
+                f"Parameter {p_name!r} state must be an exact dict, got {_safe_repr(p_state)}"
+            )
+
+        if updates == 0:
+            if p_state == {}:
+                continue
+            # Complete initialized zero state
+            if set(p_state.keys()) != {"step", "exp_avg", "exp_avg_sq"}:
+                raise CheckpointValidationError(
+                    f"Parameter {p_name!r} has updates=0 but non-empty state does not match complete zero state keys"
+                )
+            step_t = p_state["step"]
+            if type(step_t) is not torch.Tensor or step_t.dim() != 0:
+                raise CheckpointValidationError(f"Parameter {p_name!r} step must be 0-D tensor")
+            if step_t.device.type != "cpu" or step_t.dtype != target_step_dtype:
+                raise CheckpointValidationError(f"Parameter {p_name!r} zero step must be CPU {target_step_dtype}")
+            if step_t.requires_grad or step_t.grad_fn is not None:
+                raise CheckpointValidationError(f"Parameter {p_name!r} step must be detached")
+            if step_t.item() != 0:
+                raise CheckpointValidationError(f"Parameter {p_name!r} step must be 0 for updates=0")
+
+            for m_name in ("exp_avg", "exp_avg_sq"):
+                m_t = p_state[m_name]
+                if type(m_t) is not torch.Tensor:
+                    raise CheckpointValidationError(f"Parameter {p_name!r} {m_name} must be exact torch.Tensor")
+                if m_t.device.type != "cpu" or m_t.dtype != torch.float32 or m_t.layout != torch.strided:
+                    raise CheckpointValidationError(f"Parameter {p_name!r} {m_name} must be CPU strided float32")
+                if tuple(m_t.shape) != exp_shape:
+                    raise CheckpointValidationError(f"Parameter {p_name!r} {m_name} shape mismatch: {tuple(m_t.shape)} != {exp_shape}")
+                if m_t.requires_grad or m_t.grad_fn is not None:
+                    raise CheckpointValidationError(f"Parameter {p_name!r} {m_name} must be detached")
+                if (m_t != 0).any():
+                    raise CheckpointValidationError(f"Parameter {p_name!r} {m_name} must be identically zero for zero state")
+
+        else:
+            # updates > 0: must have step, exp_avg, exp_avg_sq
+            if p_state is None or type(p_state) is not dict or set(p_state.keys()) != {"step", "exp_avg", "exp_avg_sq"}:
+                raise CheckpointValidationError(
+                    f"Parameter {p_name!r} has updates={_safe_repr(updates)} > 0 but missing or malformed state fields"
+                )
+
+            step_t = p_state["step"]
+            if type(step_t) is not torch.Tensor:
+                raise CheckpointValidationError(f"Parameter {p_name!r} step must be exact torch.Tensor")
+            if step_t.device.type != "cpu":
+                raise CheckpointValidationError(f"Parameter {p_name!r} step must be on CPU")
+            if step_t.dim() != 0:
+                raise CheckpointValidationError(f"Parameter {p_name!r} step must be 0-D tensor, got dim {step_t.dim()}")
+            if step_t.dtype != target_step_dtype:
+                raise CheckpointValidationError(
+                    f"Parameter {p_name!r} step dtype {step_t.dtype} != expected {target_step_dtype}"
+                )
+            if step_t.requires_grad or step_t.grad_fn is not None:
+                raise CheckpointValidationError(f"Parameter {p_name!r} step must be detached")
+
+            # Check precision: float32 exact integer representability
+            # int(float(updates)) == updates
+            step_val = step_t.item()
+            if not math.isfinite(step_val) or step_val < 0:
+                raise CheckpointValidationError(f"Parameter {p_name!r} step value must be finite non-negative")
+
+            # Validate that step integer value can be represented exactly in target_step_dtype
+            if target_step_dtype == torch.float32:
+                # Float32 has 24 bits of mantissa: values where int(float(updates)) != updates cannot be represented
+                try:
+                    f_val = float(updates)
+                    roundtrip = int(torch.tensor(f_val, dtype=torch.float32).item())
+                    if roundtrip != updates:
+                        raise CheckpointValidationError(
+                            f"Parameter {p_name!r} updates ({_safe_repr(updates)}) cannot be represented exactly in float32"
+                        )
+                except OverflowError:
+                    raise CheckpointValidationError(
+                        f"Parameter {p_name!r} updates ({_safe_repr(updates)}) overflows float32"
+                    )
+
+            if step_val != updates:
+                raise CheckpointValidationError(
+                    f"Parameter {p_name!r} step value ({_safe_repr(step_val)}) != updates ({_safe_repr(updates)})"
+                )
+
+            # Validate exp_avg and exp_avg_sq
+            for m_name in ("exp_avg", "exp_avg_sq"):
+                m_t = p_state[m_name]
+                if type(m_t) is not torch.Tensor:
+                    raise CheckpointValidationError(f"Parameter {p_name!r} {m_name} must be exact torch.Tensor")
+                if m_t.device.type != "cpu":
+                    raise CheckpointValidationError(f"Parameter {p_name!r} {m_name} must be on CPU")
+                if m_t.layout != torch.strided:
+                    raise CheckpointValidationError(f"Parameter {p_name!r} {m_name} layout must be strided, got {m_t.layout}")
+                if m_t.dtype != torch.float32:
+                    raise CheckpointValidationError(f"Parameter {p_name!r} {m_name} dtype must be float32, got {m_t.dtype}")
+                if tuple(m_t.shape) != exp_shape:
+                    raise CheckpointValidationError(f"Parameter {p_name!r} {m_name} shape mismatch: {tuple(m_t.shape)} != {exp_shape}")
+                if m_t.requires_grad or m_t.grad_fn is not None:
+                    raise CheckpointValidationError(f"Parameter {p_name!r} {m_name} must be detached")
+                if not torch.isfinite(m_t).all():
+                    raise CheckpointValidationError(f"Parameter {p_name!r} {m_name} contains non-finite values (NaN or Inf)")
+
+            # Second moment must be strictly non-negative
+            if (p_state["exp_avg_sq"] < 0).any():
+                raise CheckpointValidationError(f"Parameter {p_name!r} exp_avg_sq contains negative values")
+
+    if global_step == 0:
+        if total_updates_sum != 0:
+            raise CheckpointValidationError(
+                f"global_step=0 but total parameter updates={_safe_repr(total_updates_sum)} > 0"
+            )
+    else:
+        if total_updates_sum < global_step:
+            raise CheckpointValidationError(
+                f"Sum of parameter updates ({_safe_repr(total_updates_sum)}) < global_step ({_safe_repr(global_step)})"
+            )
+
+
 def _validate_semantic_payload_v2(
     payload: Dict[str, Any],
     *,
@@ -167,8 +499,8 @@ def _validate_semantic_payload_v2(
     res_train = actual_identity.resolved_settings.get("training", {})
     if res_train.get("optimizer") != "Adam":
         raise CheckpointValidationError("Identity resolved optimizer must be Adam")
-    if res_train.get("learning_rate") != ADAM_EXPECTED_LR:
-        raise CheckpointValidationError(f"Identity resolved lr {res_train.get('learning_rate')} != {ADAM_EXPECTED_LR}")
+    if type(res_train.get("learning_rate")) is not float or res_train.get("learning_rate") not in APPROVED_LEARNING_RATES:
+        raise CheckpointValidationError(f"Identity resolved lr {res_train.get('learning_rate')} not in {APPROVED_LEARNING_RATES}")
     if res_train.get("weight_decay") != ADAM_EXPECTED_WEIGHT_DECAY:
         raise CheckpointValidationError("Identity resolved weight_decay must be 0.0")
     if tuple(res_train.get("adam_betas", ())) != ADAM_EXPECTED_BETAS:
@@ -297,9 +629,10 @@ def _validate_semantic_payload_v2(
     )
 
     # Adam optimizer validation with exact parameter shapes
-    _validate_adam_optimizer(
+    _validate_adam_optimizer_v2(
         payload["optimizer"],
         expected_runtime["optimizer_groups"],
+        res_train["learning_rate"],
         adam_step_dtype,
         payload["progress"]["global_step"],
         exp_method,
@@ -308,6 +641,8 @@ def _validate_semantic_payload_v2(
 
     # RNG roles and codecs validation
     _validate_rng_state_dict(payload["rng"], actual_identity, expected_runtime)
+
+
 # END DERIVED
 
 

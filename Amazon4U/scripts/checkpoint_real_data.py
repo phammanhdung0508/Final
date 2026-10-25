@@ -82,7 +82,7 @@ def identity_fields(data, method, condition, context, kg, settings):
         resolved_settings=settings)
 
 
-def _settings(expectations, *, seed, batch_size, device):
+def _settings(expectations, *, seed, batch_size, device, learning_rate):
     settings = expectations['expected_identity']['resolved_settings']
     for stream in settings['determinism']['rng_streams']:
         if stream['seed'] is not None:
@@ -90,6 +90,9 @@ def _settings(expectations, *, seed, batch_size, device):
     settings['determinism']['seed'] = seed
     settings['training']['batch_size'] = batch_size
     settings['training']['validation_frequency'] = 1
+    settings['training']['learning_rate'] = learning_rate
+    for group in expectations['expected_runtime']['optimizer_groups']:
+        group['options']['lr'] = learning_rate
     settings['execution']['execution_device'] = str(device)
     for generator in expectations['expected_runtime']['rng_generator_bindings'].values():
         generator['seed_material'] = seed
@@ -107,7 +110,7 @@ def lightgcn_adjacency(graph):
 
 
 def build(data, method, condition, *, seed=42, batch_size=2048, device=torch.device('cpu'),
-          fingerprint, determinism=None, version=1):
+          fingerprint, determinism=None, version=1, learning_rate=0.001):
     """(trainer, expectations, identity) for one method and condition on real data.
 
     `expectations` holds every D2/D3 keyword (`D2_KEYS` plus `io_policy`). The trainer is a
@@ -118,10 +121,13 @@ def build(data, method, condition, *, seed=42, batch_size=2048, device=torch.dev
     """
     if version not in (1, 2):
         raise ValueError(f'unknown checkpoint version {version!r}')
+    if learning_rate != 0.001 and version != 2:
+        raise ValueError('only checkpoint version 2 accepts a tuned learning rate')
     if method not in METHODS:
         raise ValueError(f'unknown method {method!r}')
     expectations = _fixture(method)
-    settings = _settings(expectations, seed=seed, batch_size=batch_size, device=device)
+    settings = _settings(expectations, seed=seed, batch_size=batch_size, device=device,
+                         learning_rate=learning_rate)
     context = data.context(condition)
     kg = build_hetero_graph(context, data.product_categories, data.product_brands)
     identity_obj = build_canonical_identity(**identity_fields(data, method, condition, context, kg, settings))
@@ -148,5 +154,6 @@ def build(data, method, condition, *, seed=42, batch_size=2048, device=torch.dev
     trainer = VectorTrainer(model, data.validation_targets(),
                             rng=PrivateRNG(identity_obj, expectations['expected_runtime']),
                             batch_size=batch_size, validation_frequency=1,
-                            fingerprint=fingerprint, determinism=determinism)
+                            fingerprint=fingerprint, determinism=determinism,
+                            learning_rate=learning_rate)
     return trainer, expectations, identity
