@@ -273,3 +273,36 @@ measured on Kaggle in C4 (user decision).
 |---|---|
 | Build the C4 Kaggle proof bundle; the launch still needs approval of that built bundle | "Go ahead with the Kaggle proof run. Yes." |
 | Commit the work: code on branch `checkpoint-real-data` (commit `817108f`, not pushed), plan updates on `master` | "Save the work to git. Yes" |
+
+### C4 bundle built (2026-10-25), awaiting the user's run approval
+
+The C4 code is on branch `checkpoint-real-data` (commit `5350512`, not pushed):
+
+- `scripts/checkpoint_proof.py` is the runner.
+- `multiautoresearch/adapters/amazon4u_checkpoint_proof.py` is the bundle and launch path,
+  reusing the profiling adapter's approval, ledger, privacy check and push.
+
+The full suite passes (649 tests). A CPU run of the kernel, on synthetic data, resumed
+exactly in all 4 cases.
+
+| Item | Value |
+|---|---|
+| Bundle | `data/reports/profiling-mi-v1/bundle-run-2/`, built from clean commit `5350512` |
+| Kernel | `dungsunf/amazon4u-ckpt-proof-mi-run-2-7894898f`: private, GPU, offline |
+| Bundle manifest SHA-256 | `9b9346acb36ac54015aebd4ced2f149815a9e6f3247fcfa67459571451a42d8e` |
+| Dataset | `dungsunf/amazon4u-mi-profiling`, manifest `1066146b…a7bc`, no test split |
+| Ledger | Profiling ledger, run 2. Books 7,200 s; 7,200 s already booked; cap 21,600 s |
+
+What the run does:
+
+- **Cases.** LightGCN 2048 and KG + GNN 1024, under both conditions.
+- **Each case**, in three new processes:
+  1. 4 epochs straight;
+  2. 2 epochs, then publish;
+  3. retrieve, restore and 2 more epochs.
+- **Pass condition.** A case passes when the logs, the final state and the validation
+  report hash match the straight run.
+- **Measured per case.** Publish and retrieve time, file size and peak memory, against the
+  60 s / 60 s / 8 GiB targets.
+- **Limits.** The runner deadline is 6,600 s. A case starts only if 900 s remain.
+- **What is kept.** No weights. Validation metric values are hashed, never reported.
