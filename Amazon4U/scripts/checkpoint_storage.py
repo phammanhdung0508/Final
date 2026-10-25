@@ -266,6 +266,16 @@ class _Meter:
             _fail("projected independent tensor copy limit exceeded")
 
 
+_PACK_Q = struct.Struct(">Q").pack
+_PACK_I = struct.Struct(">I").pack
+_PACK_D = struct.Struct(">d").pack
+_CONTAINER_TAGS = {dict: b"m", list: b"l", tuple: b"u"}
+_UNPACK_Q = struct.Struct(">Q").unpack_from
+_UNPACK_I = struct.Struct(">I").unpack_from
+_UNPACK_D = struct.Struct(">d").unpack_from
+_TAGS = tuple(bytes([b]) for b in range(256))
+
+
 def _key(value):
     t = type(value)
     return t in (str, bytes, int, float, bool) or (t is tuple and all(_key(v) for v in value))
@@ -295,6 +305,22 @@ class _Encoder:
         self.put(struct.pack(">Q", len(data)))
         self.put(data)
 
+    def _tagged_scalar(self, tag, data):
+        """put(tag) then scalar(data), with the same checks in the same order."""
+        p = self.p
+        self.size += len(tag)
+        if self.size > p["max_file_bytes"]:
+            _fail("serialized file exceeds IO policy")
+        if len(data) > p["max_scalar_bytes"]:
+            _fail("scalar byte limit exceeded")
+        self.size += 8 + len(data)
+        if self.size > p["max_file_bytes"]:
+            _fail("serialized file exceeds IO policy")
+        if self.buffer is not None:
+            self.buffer += tag
+            self.buffer += _PACK_Q(len(data))
+            self.buffer += data
+
     def shape(self, shape):
         _shape(shape, self.p)
         self.put(struct.pack(">I", len(shape)))
@@ -302,50 +328,68 @@ class _Encoder:
             self.put(struct.pack(">Q", dim))
 
     def node(self, value, depth=1):
-        self.meter.node(depth)
+        # Readiness C2/D3: the meter, reserve and scalar checks are inlined, in their
+        # original order and with their messages. Consecutive reservations with no check
+        # between them are added at once; the size only grows, so the same one fails.
+        p = self.p
+        meter = self.meter
+        meter.nodes += 1
+        if meter.nodes > p["max_nodes"] or depth > p["max_depth"]:
+            _fail("wire node/depth limit exceeded")
         t = type(value)
-        if value is None:
-            self.put(b"n")
-        elif t is bool:
-            self.put(b"t" if value else b"f")
-        elif t is int:
-            count = max(1, (value.bit_length() + 7) // 8)
-            if count > self.p["max_scalar_bytes"]:
-                _fail("integer magnitude limit exceeded")
-            self.put(b"i" + bytes([int(value < 0)]))
-            self.scalar(abs(value).to_bytes(count, "big"))
-        elif t is float:
-            if not math.isfinite(value):
-                _fail("nonfinite scalar float")
-            self.put(b"r" + struct.pack(">d", value))
+        buffer = self.buffer
+        if value is None or t is bool:
+            self.size += 1
+            if self.size > p["max_file_bytes"]:
+                _fail("serialized file exceeds IO policy")
+            if buffer is not None:
+                buffer += b"n" if value is None else (b"t" if value else b"f")
         elif t is str:
-            if len(value) > self.p["max_scalar_bytes"]:
+            if len(value) > p["max_scalar_bytes"]:
                 _fail("text character limit exceeded")
             try:
                 encoded = value.encode("utf-8")
             except UnicodeEncodeError as exc:
                 raise CheckpointValidationError("invalid UTF8 text") from exc
-            self.put(b"s")
-            self.scalar(encoded)
+            self._tagged_scalar(b"s", encoded)
+        elif t is float:
+            if not math.isfinite(value):
+                _fail("nonfinite scalar float")
+            self.size += 9
+            if self.size > p["max_file_bytes"]:
+                _fail("serialized file exceeds IO policy")
+            if buffer is not None:
+                buffer += b"r"
+                buffer += _PACK_D(value)
+        elif t is int:
+            count = max(1, (value.bit_length() + 7) // 8)
+            if count > p["max_scalar_bytes"]:
+                _fail("integer magnitude limit exceeded")
+            self._tagged_scalar(b"i\x01" if value < 0 else b"i\x00", abs(value).to_bytes(count, "big"))
         elif t is bytes:
-            self.put(b"b")
-            self.scalar(value)
-        elif t in (dict, list, tuple):
-            if id(value) in self.active or len(value) > self.p["max_nodes"]:
+            self._tagged_scalar(b"b", value)
+        elif t is dict or t is list or t is tuple:
+            if id(value) in self.active or len(value) > p["max_nodes"]:
                 _fail("cycle or oversized wire container")
             self.active.add(id(value))
             try:
-                self.put({dict: b"m", list: b"l", tuple: b"u"}[t])
-                self.put(struct.pack(">I", len(value)))
+                self.size += 5
+                if self.size > p["max_file_bytes"]:
+                    _fail("serialized file exceeds IO policy")
+                if buffer is not None:
+                    buffer += _CONTAINER_TAGS[t]
+                    buffer += _PACK_I(len(value))
+                node = self.node
+                child = depth + 1
                 if t is dict:
                     for k, v in value.items():
-                        if not _key(k):
+                        if type(k) is not str and not _key(k):
                             _fail("unsupported dictionary key")
-                        self.node(k, depth + 1)
-                        self.node(v, depth + 1)
+                        node(k, child)
+                        node(v, child)
                 else:
                     for item in value:
-                        self.node(item, depth + 1)
+                        node(item, child)
             finally:
                 self.active.remove(id(value))
         elif t is torch.Tensor:
@@ -439,14 +483,31 @@ class _Parser:
         return result
 
     def node(self, depth=1):
-        self.meter.node(depth)
-        tag = bytes(self.take(1))
+        # Readiness C2/D3: take, number and scalar are inlined for the scalar and container
+        # tags, with the original bounds checks and messages; tensors use the methods.
+        p = self.p
+        meter = self.meter
+        meter.nodes += 1
+        if meter.nodes > p["max_nodes"] or depth > p["max_depth"]:
+            _fail("wire node/depth limit exceeded")
+        body = self.body
+        end = len(body)
+        position = self.position
+        if position + 1 > end:
+            _fail("truncated wire record")
+        tag = _TAGS[body[position]]
+        position += 1
         if tag == b"n":
+            self.position = position
             return None
-        if tag in (b"t", b"f"):
+        if tag == b"t" or tag == b"f":
+            self.position = position
             return tag == b"t"
         if tag == b"i":
-            sign = self.number(">B")
+            if position + 1 > end:
+                _fail("truncated wire record")
+            sign = body[position]
+            self.position = position + 1
             raw = self.scalar()
             if sign > 1 or not raw or (len(raw) > 1 and raw[0] == 0):
                 _fail("noncanonical integer")
@@ -455,34 +516,50 @@ class _Parser:
                 _fail("negative zero integer")
             return -value if sign else value
         if tag == b"r":
-            value = self.number(">d")
+            if position + 8 > end:
+                _fail("truncated wire record")
+            value = _UNPACK_D(body, position)[0]
+            self.position = position + 8
             if not math.isfinite(value):
                 _fail("nonfinite wire float")
             return value
-        if tag in (b"s", b"b"):
-            raw = bytes(self.scalar())
+        if tag == b"s" or tag == b"b":
+            if position + 8 > end:
+                _fail("truncated wire record")
+            count = _UNPACK_Q(body, position)[0]
+            position += 8
+            if count > p["max_scalar_bytes"]:
+                _fail("declared scalar bytes exceed IO policy")
+            if count > end - position:
+                _fail("truncated wire record")
+            self.position = position + count
+            raw = body[position:position + count]
             if tag == b"b":
-                return raw
+                return bytes(raw)
             try:
-                return raw.decode("utf-8")
+                return str(raw, "utf-8")
             except UnicodeDecodeError as exc:
                 raise CheckpointValidationError("invalid wire UTF8") from exc
-        if tag in (b"m", b"l", b"u"):
-            count = self.number(">I")
-            if count > self.p["max_nodes"]:
+        if tag == b"m" or tag == b"l" or tag == b"u":
+            if position + 4 > end:
+                _fail("truncated wire record")
+            count = _UNPACK_I(body, position)[0]
+            self.position = position + 4
+            if count > p["max_nodes"]:
                 _fail("declared container count exceeds IO policy")
+            node = self.node
+            child = depth + 1
             if tag == b"m":
                 result = {}
                 for _ in range(count):
-                    key = self.node(depth + 1)
-                    if not _key(key) or key in result:
+                    key = node(child)
+                    if (type(key) is not str and not _key(key)) or key in result:
                         _fail("unsupported or duplicate wire dictionary key")
-                    result[key] = self.node(depth + 1)
+                    result[key] = node(child)
                 return result
-            result = []
-            for _ in range(count):
-                result.append(self.node(depth + 1))
+            result = [node(child) for _ in range(count)]
             return tuple(result) if tag == b"u" else result
+        self.position = position
         if tag == b"D":
             code = self.number(">B")
             if code not in _DTYPES:
@@ -509,6 +586,34 @@ class _Parser:
         _fail("unsupported wire tag; native archives/pickles are not accepted")
 
 
+def _check_coo_coordinates(indices, shape):
+    """Each column in bounds and strictly after the previous one, lexicographically.
+
+    Readiness C2/D3: the accepted per-column Python loop, vectorized. The first column
+    that fails either test decides the message, bounds before order, as in the loop.
+    """
+    rows, cols = indices.shape
+    if cols == 0:
+        return
+    limits = torch.tensor(shape[:rows], dtype=torch.int64).reshape(rows, 1)
+    out_of_bounds = ((indices < 0) | (indices >= limits)).any(dim=0)
+    bad = out_of_bounds.clone()
+    if cols > 1:
+        later, earlier = indices[:, 1:], indices[:, :-1]
+        decided = torch.zeros(cols - 1, dtype=torch.bool)
+        increasing = torch.zeros(cols - 1, dtype=torch.bool)
+        for row in range(rows):
+            greater, less = later[row] > earlier[row], later[row] < earlier[row]
+            increasing |= greater & ~decided
+            decided |= greater | less
+        bad[1:] |= ~increasing
+    failing = torch.nonzero(bad)
+    if failing.numel():
+        if out_of_bounds[int(failing[0, 0])]:
+            _fail("COO index out of bounds")
+        _fail("COO coordinates are not strictly canonical/coalesced")
+
+
 def _materialize(value):
     t = type(value)
     if t is _Dense:
@@ -520,14 +625,7 @@ def _materialize(value):
     if t is _Sparse:
         indices = _materialize(value.indices)
         values = _materialize(value.values)
-        previous = None
-        for col in range(indices.shape[1]):
-            coordinate = tuple(int(indices[row, col]) for row in range(indices.shape[0]))
-            if any(not 0 <= index < value.shape[row] for row, index in enumerate(coordinate)):
-                _fail("COO index out of bounds")
-            if previous is not None and coordinate <= previous:
-                _fail("COO coordinates are not strictly canonical/coalesced")
-            previous = coordinate
+        _check_coo_coordinates(indices, value.shape)
         return torch.sparse_coo_tensor(indices, values, value.shape, device="cpu",
                                        is_coalesced=True, check_invariants=True)
     if t is dict:

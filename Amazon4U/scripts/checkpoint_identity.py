@@ -301,6 +301,9 @@ def _safe_repr(val: Any) -> str:
         return f"<{type(val).__name__} repr failed>"
 
 
+_SURROGATES = re.compile("[\\ud800-\\udfff]")
+
+
 def _validate_clean_text(val: Any, name: str, allow_empty: bool = False) -> str:
     """Validate string type, absence of lone surrogates/invalid Unicode, and whitespace padding."""
     if not isinstance(val, str):
@@ -309,7 +312,10 @@ def _validate_clean_text(val: Any, name: str, allow_empty: bool = False) -> str:
         val.encode("utf-8")
     except UnicodeEncodeError as exc:
         raise CheckpointValidationError(f"{name} contains invalid Unicode / lone surrogates: {exc}") from exc
-    if any(0xD800 <= ord(c) <= 0xDFFF for c in val):
+    # Readiness C2: one regex search replaces the per-character loop for exact str. A str
+    # subclass may override iteration, so it keeps the loop.
+    if (_SURROGATES.search(val) is not None if type(val) is str
+            else any(0xD800 <= ord(c) <= 0xDFFF for c in val)):
         raise CheckpointValidationError(f"{name} contains lone surrogates: {_safe_repr(val)}")
     if not allow_empty:
         if not val.strip() or val.strip() != val:
@@ -769,6 +775,9 @@ def compute_graph_fingerprint(
             raise CheckpointValidationError(f"Invalid node type in graph_nodes: {ntype!r}. Must be one of {NODE_TYPES}")
 
     node_sets: Dict[str, Set[str]] = {}
+    # Readiness C2: validate_category_id depends only on the value of an exact str, so a
+    # value that passed once in this call is not parsed again.
+    valid_categories: Set[str] = set()
     for ntype in sorted(graph_nodes.keys()):
         nids = graph_nodes[ntype]
         if not isinstance(nids, (list, tuple, set, frozenset)):
@@ -781,6 +790,8 @@ def compute_graph_fingerprint(
                 raise CheckpointValidationError(f"Duplicate node ID in type {ntype!r}: {_safe_repr(nid)}")
             if ntype == "CategoryPath":
                 validate_category_id(nid)
+                if type(nid) is str:
+                    valid_categories.add(nid)
             elif ntype == "Brand":
                 validate_brand_id(nid)
             seen_in_type.add(nid)
@@ -919,7 +930,10 @@ def compute_graph_fingerprint(
                 raise CheckpointValidationError(
                     f"Category in product_metadata for item {pid!r} must be canonical CategoryPath ID string ('c:[...]'), got {type(c).__name__}: {_safe_repr(c)}"
                 )
-            validate_category_id(c)
+            if type(c) is not str or c not in valid_categories:
+                validate_category_id(c)
+                if type(c) is str:
+                    valid_categories.add(c)
             if c in seen_item_cats:
                 raise CheckpointValidationError(f"Duplicate category {c!r} for item {pid!r}")
             seen_item_cats.add(c)
@@ -1898,6 +1912,25 @@ def validate_canonical_identity(
     from retained actual content to detect tampering, and verifies exact match
     against trusted caller expectations.
     """
+    _validate_identity_pair(actual, expected, content_verified=False)
+
+
+def _validate_identity_pair(
+    actual: CanonicalResumeIdentity,
+    expected: CanonicalResumeIdentity,
+    *,
+    content_verified: bool,
+) -> None:
+    """validate_canonical_identity; with content_verified, minus three repeated recomputes.
+
+    Readiness C2. CanonicalResumeIdentity.from_dict recomputes the data, graph and
+    validation fingerprints from the serialized content and refuses any that differ from
+    the stored ones. The identity it returns holds that content as build_canonical_identity
+    normalizes it (sorted, deduplicated, ratings float, timestamps int), which none of the
+    three fingerprints distinguishes, so recomputing them from the retained content cannot
+    fail for a from_dict result that nothing has changed since. D2 passes
+    content_verified=True only for such a pair; every other check here still runs.
+    """
     if not isinstance(actual, CanonicalResumeIdentity):
         raise CheckpointValidationError(f"actual must be CanonicalResumeIdentity, got {type(actual).__name__}")
     if not isinstance(expected, CanonicalResumeIdentity):
@@ -1944,35 +1977,36 @@ def validate_canonical_identity(
                 raise CheckpointValidationError(f"{role}.resolved_settings must be a mapping, got {type(obj.resolved_settings).__name__}")
 
         # 1. Preflight and recompute actual fingerprints
-        actual_users = sorted(actual.positive_history.keys())
-        recomputed_dfp = compute_data_fingerprint(
-            feedback_condition=actual.feedback_condition,
-            users=actual_users,
-            training_records=actual.training_records,
-            positive_history=actual.positive_history,
-            all_rated_history=actual.all_rated_history,
-            warm_items=actual.warm_items,
-        )
-        if actual.data_fingerprint != recomputed_dfp:
-            raise CheckpointIdentityMismatchError(
-                f"Falsified or corrupt data_fingerprint in actual identity: {actual.data_fingerprint} != {recomputed_dfp}"
+        if not content_verified:
+            actual_users = sorted(actual.positive_history.keys())
+            recomputed_dfp = compute_data_fingerprint(
+                feedback_condition=actual.feedback_condition,
+                users=actual_users,
+                training_records=actual.training_records,
+                positive_history=actual.positive_history,
+                all_rated_history=actual.all_rated_history,
+                warm_items=actual.warm_items,
             )
+            if actual.data_fingerprint != recomputed_dfp:
+                raise CheckpointIdentityMismatchError(
+                    f"Falsified or corrupt data_fingerprint in actual identity: {actual.data_fingerprint} != {recomputed_dfp}"
+                )
 
-        recomputed_gfp = compute_graph_fingerprint(
-            graph_nodes=actual.graph_nodes,
-            graph_edges=actual.graph_edges,
-            product_metadata=actual.product_metadata,
-        )
-        if actual.graph_fingerprint != recomputed_gfp:
-            raise CheckpointIdentityMismatchError(
-                f"Falsified or corrupt graph_fingerprint in actual identity: {actual.graph_fingerprint} != {recomputed_gfp}"
+            recomputed_gfp = compute_graph_fingerprint(
+                graph_nodes=actual.graph_nodes,
+                graph_edges=actual.graph_edges,
+                product_metadata=actual.product_metadata,
             )
+            if actual.graph_fingerprint != recomputed_gfp:
+                raise CheckpointIdentityMismatchError(
+                    f"Falsified or corrupt graph_fingerprint in actual identity: {actual.graph_fingerprint} != {recomputed_gfp}"
+                )
 
-        recomputed_vfp = compute_validation_fingerprint(actual.validation_inputs)
-        if actual.validation_fingerprint != recomputed_vfp:
-            raise CheckpointIdentityMismatchError(
-                f"Falsified or corrupt validation_fingerprint in actual identity: {actual.validation_fingerprint} != {recomputed_vfp}"
-            )
+            recomputed_vfp = compute_validation_fingerprint(actual.validation_inputs)
+            if actual.validation_fingerprint != recomputed_vfp:
+                raise CheckpointIdentityMismatchError(
+                    f"Falsified or corrupt validation_fingerprint in actual identity: {actual.validation_fingerprint} != {recomputed_vfp}"
+                )
 
         recomputed_sfp = compute_settings_fingerprint(actual.resolved_settings)
         if actual.settings_fingerprint != recomputed_sfp:
@@ -1999,35 +2033,36 @@ def validate_canonical_identity(
             )
 
         # 2. Preflight and recompute expected fingerprints
-        exp_users = sorted(expected.positive_history.keys())
-        exp_dfp = compute_data_fingerprint(
-            feedback_condition=expected.feedback_condition,
-            users=exp_users,
-            training_records=expected.training_records,
-            positive_history=expected.positive_history,
-            all_rated_history=expected.all_rated_history,
-            warm_items=expected.warm_items,
-        )
-        if expected.data_fingerprint != exp_dfp:
-            raise CheckpointIdentityMismatchError(
-                f"Corrupt or malformed expected identity: data_fingerprint {expected.data_fingerprint} != {exp_dfp}"
+        if not content_verified:
+            exp_users = sorted(expected.positive_history.keys())
+            exp_dfp = compute_data_fingerprint(
+                feedback_condition=expected.feedback_condition,
+                users=exp_users,
+                training_records=expected.training_records,
+                positive_history=expected.positive_history,
+                all_rated_history=expected.all_rated_history,
+                warm_items=expected.warm_items,
             )
+            if expected.data_fingerprint != exp_dfp:
+                raise CheckpointIdentityMismatchError(
+                    f"Corrupt or malformed expected identity: data_fingerprint {expected.data_fingerprint} != {exp_dfp}"
+                )
 
-        exp_gfp = compute_graph_fingerprint(
-            graph_nodes=expected.graph_nodes,
-            graph_edges=expected.graph_edges,
-            product_metadata=expected.product_metadata,
-        )
-        if expected.graph_fingerprint != exp_gfp:
-            raise CheckpointIdentityMismatchError(
-                f"Corrupt or malformed expected identity: graph_fingerprint {expected.graph_fingerprint} != {exp_gfp}"
+            exp_gfp = compute_graph_fingerprint(
+                graph_nodes=expected.graph_nodes,
+                graph_edges=expected.graph_edges,
+                product_metadata=expected.product_metadata,
             )
+            if expected.graph_fingerprint != exp_gfp:
+                raise CheckpointIdentityMismatchError(
+                    f"Corrupt or malformed expected identity: graph_fingerprint {expected.graph_fingerprint} != {exp_gfp}"
+                )
 
-        exp_vfp = compute_validation_fingerprint(expected.validation_inputs)
-        if expected.validation_fingerprint != exp_vfp:
-            raise CheckpointIdentityMismatchError(
-                f"Corrupt or malformed expected identity: validation_fingerprint {expected.validation_fingerprint} != {exp_vfp}"
-            )
+            exp_vfp = compute_validation_fingerprint(expected.validation_inputs)
+            if expected.validation_fingerprint != exp_vfp:
+                raise CheckpointIdentityMismatchError(
+                    f"Corrupt or malformed expected identity: validation_fingerprint {expected.validation_fingerprint} != {exp_vfp}"
+                )
 
         exp_sfp = compute_settings_fingerprint(expected.resolved_settings)
         if expected.settings_fingerprint != exp_sfp:

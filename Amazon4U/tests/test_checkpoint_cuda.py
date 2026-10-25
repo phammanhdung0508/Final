@@ -263,7 +263,13 @@ class FixtureRowOrderTests(unittest.TestCase):
 # Scoped user-approved correction (2026-10-24): CategoryPath row order in
 # _make_valid_hetero_payload now equals the accepted graph order. The recorded O-OFFLINE
 # hash is historical; this file is pinned to its corrected bytes instead.
-AMENDED = {'tests/test_checkpoint_payload.py': '1c28cbdd0801c42bdf423650ce0ddf8ecd0fd5fe72e9c22ddad57547f214de97'}
+# Checkpoint readiness C2 (user approval 2026-10-25, "Approve the checkpoint plan", and
+# "ok pick A then" for D3): behavior-preserving speed changes to D1, D2 and D3. The
+# previous hashes stay recorded in configs/o-offline-implementation.json.
+AMENDED = {'tests/test_checkpoint_payload.py': '1c28cbdd0801c42bdf423650ce0ddf8ecd0fd5fe72e9c22ddad57547f214de97',
+           'scripts/checkpoint_identity.py': 'e699a770449d313ae47b5a937a61917df9bb1607e6a2eed1107f08bb206fd1c5',
+           'scripts/checkpoint_payload.py': '3cf065bf67e295a512668172d4dcfcb899993a0aab661c1fe9e6f008c3df3b8e',
+           'scripts/checkpoint_storage.py': '35cebc79e4c07b3b81bd5186ee5f05e689fbea885dca470ca7bb0ce58ff88aa9'}
 
 
 class FrozenFileTests(unittest.TestCase):

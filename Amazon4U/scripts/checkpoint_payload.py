@@ -52,6 +52,7 @@ try:
         CheckpointProvenanceError,
         CheckpointSecurityError,
         CheckpointValidationError,
+        _validate_identity_pair,
         validate_canonical_identity,
         validate_source_provenance,
     )
@@ -67,6 +68,7 @@ except ModuleNotFoundError:
         CheckpointProvenanceError,
         CheckpointSecurityError,
         CheckpointValidationError,
+        _validate_identity_pair,
         validate_canonical_identity,
         validate_source_provenance,
     )
@@ -400,6 +402,30 @@ def preflight_resource_accounting(
     kept_storages: List[Any] = []
     active_cycle_ids: Set[int] = set()
 
+    def _text(node: str) -> None:
+        """_traverse for an exact str: the same checks, messages and order (readiness C2)."""
+        nonlocal visited_count, metadata_bytes
+        visited_count += 1
+        if visited_count > max_visits:
+            raise CheckpointValidationError(
+                f"{role} exceeded max_visited_values ({max_visits}): reached {visited_count}"
+            )
+        if len(node) > max_in:
+            raise CheckpointValidationError(f"{role} contains oversized string exceeding input limit")
+        try:
+            encoded_bytes = len(node.encode("utf-8"))
+        except UnicodeEncodeError as exc:
+            raise CheckpointValidationError(f"{role} contains invalid Unicode (surrogate characters): {exc}") from exc
+        metadata_bytes += 8 + encoded_bytes
+        if metadata_bytes + input_storage_bytes > max_in:
+            raise CheckpointValidationError(
+                f"{role} input accounted bytes ({metadata_bytes + input_storage_bytes}) exceeded limit ({max_in})"
+            )
+        if metadata_bytes + output_storage_bytes > max_out:
+            raise CheckpointValidationError(
+                f"{role} projected output bytes ({metadata_bytes + output_storage_bytes}) exceeded limit ({max_out})"
+            )
+
     def _traverse(node: Any, container_depth: int) -> None:
         nonlocal visited_count, metadata_bytes, input_storage_bytes, output_storage_bytes
 
@@ -480,9 +506,15 @@ def preflight_resource_accounting(
                         )
                 for k, v in node.items():
                     k_t = type(k)
-                    _traverse(k, container_depth + 1 if (k_t is dict or k_t is list or k_t is tuple) else container_depth)
+                    if k_t is str:
+                        _text(k)
+                    else:
+                        _traverse(k, container_depth + 1 if (k_t is dict or k_t is list or k_t is tuple) else container_depth)
                     v_t = type(v)
-                    _traverse(v, container_depth + 1 if (v_t is dict or v_t is list or v_t is tuple) else container_depth)
+                    if v_t is str:
+                        _text(v)
+                    else:
+                        _traverse(v, container_depth + 1 if (v_t is dict or v_t is list or v_t is tuple) else container_depth)
             finally:
                 active_cycle_ids.remove(node_id)
 
@@ -496,7 +528,10 @@ def preflight_resource_accounting(
                 metadata_bytes += 8
                 for item in node:
                     item_t = type(item)
-                    _traverse(item, container_depth + 1 if (item_t is dict or item_t is list or item_t is tuple) else container_depth)
+                    if item_t is str:
+                        _text(item)
+                    else:
+                        _traverse(item, container_depth + 1 if (item_t is dict or item_t is list or item_t is tuple) else container_depth)
             finally:
                 active_cycle_ids.remove(node_id)
 
@@ -1517,8 +1552,9 @@ def _compute_condition_positive_and_empty_pool_pairs(
 
     for u in identity.positive_history:
         all_rated = set(identity.all_rated_history.get(u, ()))
-        eligible_negatives = warm_items_set - all_rated
-        if len(eligible_negatives) == 0:
+        # Readiness C2: the pool warm - rated is empty exactly when warm <= rated; the
+        # subset test needs no difference set per user.
+        if warm_items_set <= all_rated:
             for item in identity.positive_history[u]:
                 K.add((u, item))
 
@@ -2158,8 +2194,13 @@ def _validate_semantic_payload(
     expected_provenance: Dict[str, Any],
     expected_model: Dict[str, Any],
     expected_runtime: Dict[str, Any],
+    built_expected: Optional[Dict[str, CanonicalResumeIdentity]] = None,
 ) -> None:
-    """Validate all payload envelope, identity, provenance, model, optimizer, rng, sampler, progress, and selection fields."""
+    """Validate all payload envelope, identity, provenance, model, optimizer, rng, sampler, progress, and selection fields.
+
+    Readiness C2: `built_expected`, when given, keeps the expected identity from_dict built
+    in the first pass, so the second pass over the owned copy reuses it unchanged.
+    """
     if type(payload) is not dict:
         raise CheckpointValidationError(f"payload must be an exact dict, got {_safe_repr(payload)}")
     if set(payload.keys()) != set(PAYLOAD_REQUIRED_KEYS):
@@ -2201,9 +2242,15 @@ def _validate_semantic_payload(
     if type(raw_actual_id) is not dict:
         raise CheckpointValidationError("payload.identity must be a dict")
     actual_identity = CanonicalResumeIdentity.from_dict(raw_actual_id)
-    exp_identity = CanonicalResumeIdentity.from_dict(expected_identity)
+    if built_expected is not None and "identity" in built_expected:
+        exp_identity = built_expected["identity"]
+    else:
+        exp_identity = CanonicalResumeIdentity.from_dict(expected_identity)
+        if built_expected is not None:
+            built_expected["identity"] = exp_identity
 
-    validate_canonical_identity(actual_identity, exp_identity)
+    # Both identities were just returned by from_dict and are unchanged (readiness C2).
+    _validate_identity_pair(actual_identity, exp_identity, content_verified=True)
     validate_source_provenance(payload["provenance"], expected_provenance)
 
     if exp_method != actual_identity.method:
@@ -2410,12 +2457,14 @@ def validate_checkpoint_payload(
     _validate_expected_runtime_schema(expected_runtime)
 
     # 4. Complete RAW semantic validation on raw payload
+    built_expected: Dict[str, CanonicalResumeIdentity] = {}
     _validate_semantic_payload(
         payload,
         expected_identity=expected_identity,
         expected_provenance=expected_provenance,
         expected_model=expected_model,
         expected_runtime=expected_runtime,
+        built_expected=built_expected,
     )
 
     # 5. Make owned output copy
@@ -2429,6 +2478,7 @@ def validate_checkpoint_payload(
         expected_provenance=expected_provenance,
         expected_model=expected_model,
         expected_runtime=expected_runtime,
+        built_expected=built_expected,
     )
 
     # 7. Return independently owned validated snapshot
