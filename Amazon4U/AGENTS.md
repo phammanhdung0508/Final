@@ -32,7 +32,8 @@ Keep this section short and edit it in place. Record phase results in
 - GPU-READY accepted by the user on 2026-10-25 (`docs/gpu-ready-traceability.md`).
   Musical_Instruments profiling run 1 completed; its report was accepted on 2026-10-25
   (`docs/musical-instruments-profiling-report.md`). Next gate: real-data checkpoint
-  readiness (`docs/checkpoint-real-data-readiness-plan.md`, a proposal). Then frozen
+  readiness (`docs/checkpoint-real-data-readiness-plan.md`, agreed by the user
+  on 2026-10-25). Then frozen
   settings and explicit training approval.
 - Still requires explicit approval: live Kaggle or GPU jobs, real-data training,
   profiling, comparative or final-test runs, held-out evaluation, production

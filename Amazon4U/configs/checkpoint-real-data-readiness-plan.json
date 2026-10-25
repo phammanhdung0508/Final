@@ -1,0 +1,136 @@
+{
+  "schema_version": "amazon4u-checkpoint-readiness-plan-v1",
+  "status": "AGREED_by_user_2026-10-25",
+  "recorded": "2026-10-25",
+  "documentation": "docs/checkpoint-real-data-readiness-plan.md",
+  "user_inputs": {
+    "write_plan": "yes please write the plan for fixing checkpoints.",
+    "stored_content": "Agree, keep the full copy for now and try the speed fix first. Then come back if loading still fails.",
+    "approval": "Approve the checkpoint plan; targets 60 s / 60 s / 8 GiB; use the profiling ledger.",
+    "after_c2": {
+      "option": "A_d3_save_load_speedup_behavior_preserving",
+      "words": "ok pick A then",
+      "retrieve_measurement": "kaggle_in_C4",
+      "retrieve_words": "Kaggle please"
+    }
+  },
+  "stored_content": "full_copy_unchanged",
+  "baseline_evidence": "data/reports/profiling-mi-v1/checkpoint-scale-probe.txt",
+  "baseline_seconds": {
+    "identity_build": [
+      30,
+      35
+    ],
+    "payload_build": [
+      19,
+      25
+    ],
+    "d2_validate_profiled": 1180,
+    "d3_publish": 437,
+    "d3_retrieve": null
+  },
+  "work": {
+    "C1": "real_data_identity_provenance_runtime_and_io_policy_builders_new_module",
+    "C2": "behavior_preserving_speed_fix_in_frozen_d1_d2_regex_surrogate_check_build_once_fingerprint_once_single_resource_walk",
+    "C3": "measure_retrieve_reduce_peak_copies_if_needed_behavior_preserving",
+    "C4": "local_cpu_publish_retrieve_both_models_conditions_then_one_kaggle_resume_equality_run_own_approval"
+  },
+  "proof": [
+    "frozen_tests_unchanged_and_passing",
+    "differential_test_accepted_vs_changed_same_outcome_class_message",
+    "real_data_same_acceptance_and_byte_identical_published_files",
+    "deliberate_breaks_fail_tests"
+  ],
+  "frozen_pins": {
+    "enforced_by": "tests/test_checkpoint_cuda.py::FrozenFileTests",
+    "recorded_hashes": "configs/o-offline-implementation.json",
+    "amendment": "new AMENDED entries with previous and new sha256 and user approval words"
+  },
+  "proposed_targets_musical_instruments_kaggle": {
+    "publish_seconds_max": 60,
+    "retrieve_seconds_max": 60,
+    "peak_host_gib_max": 8,
+    "decision": "agreed_by_user"
+  },
+  "out_of_scope": [
+    "changing_stored_content",
+    "science_training_selection_metrics",
+    "toys_and_electronics"
+  ],
+  "approvals": {
+    "plan": "agreed_by_user",
+    "frozen_file_changes": "agreed_by_user_scoped_to_behavior_preserving_C2_C3",
+    "kaggle_c4_run": "own_approval",
+    "c4_ledger": "profiling_ledger",
+    "d3_speed_changes": "agreed_by_user_behavior_preserving_only"
+  },
+  "open_questions": [],
+  "progress": {
+    "recorded": "2026-10-25",
+    "worktree_branch": "checkpoint-real-data",
+    "committed": false,
+    "evidence": "data/reports/checkpoint-readiness-v1/",
+    "C1": "implemented_and_tested",
+    "C2": "implemented_behavior_preserving_target_not_met",
+    "baseline_accepted_lightgcn_all_ratings": {
+      "publish_seconds": 468.4,
+      "peak_rss_mib": 3322,
+      "file_bytes": 368964132,
+      "file_sha256": "0287358e6864dc4505594c16f5fb94126a5d655bd18cc37d106839c05215b919",
+      "retrieve_seconds": null,
+      "retrieve_note": "not_run_swap_7_of_8_gb_used_user_asked_before_freeing_ram"
+    },
+    "c2_lightgcn_all_ratings": {
+      "publish_seconds": 167.6,
+      "peak_rss_mib": 3223,
+      "file_sha256_identical_to_baseline": true
+    },
+    "amended_hashes": {
+      "scripts/checkpoint_identity.py": {
+        "previous": "6c91bab8229be89453e9b485f3f8df758bfa91e2611296b68c61c5cbe5bb5b2c",
+        "new": "da31e17855766b8fee70b568ec94540ee94d79eb23fc09b7e7b04f8b43735c5a"
+      },
+      "scripts/checkpoint_payload.py": {
+        "previous": "6bc4d2f0456553982c94238a17d4af7cdcc7d5646ed6cb609a73aa9804863844",
+        "new": "1f2a385e0214208d7c985c109623b02fb171fe3554b189c2273b6956c66a08da"
+      }
+    },
+    "proof": {
+      "dual_run_frozen_tests": 207,
+      "real_mismatches": 0,
+      "equivalence_tests": 7,
+      "deliberate_breaks_detected": "5_of_6_sixth_unreachable_check",
+      "full_suite": "636_ok"
+    },
+    "remaining_publish_cost_seconds": {
+      "d3_encode": 60,
+      "identity_builds_3": 72,
+      "resource_walks_6": 47
+    },
+    "stopped_reason": "target_60s_not_met_after_option_A_publish_about_120s_locally",
+    "option_A": {
+      "status": "implemented_behavior_preserving_target_not_met",
+      "hashes": {
+        "scripts/checkpoint_identity.py": "e699a770449d313ae47b5a937a61917df9bb1607e6a2eed1107f08bb206fd1c5",
+        "scripts/checkpoint_payload.py": "3cf065bf67e295a512668172d4dcfcb899993a0aab661c1fe9e6f008c3df3b8e",
+        "scripts/checkpoint_storage.py": "35cebc79e4c07b3b81bd5186ee5f05e689fbea885dca470ca7bb0ce58ff88aa9"
+      },
+      "publish_seconds_local": {
+        "LightGCN_all_ratings": 125.1,
+        "Heterogeneous_KG_GNN_all_ratings": 118.2
+      },
+      "peak_rss_mib": {
+        "LightGCN_all_ratings": 3734,
+        "Heterogeneous_KG_GNN_all_ratings": 3785
+      },
+      "lightgcn_file_identical_to_accepted": true,
+      "proof": {
+        "dual_run_tests": 210,
+        "real_mismatches": 0,
+        "deliberate_breaks_detected": "9_of_9_after_two_test_gaps_closed",
+        "full_suite": "642_ok"
+      },
+      "retrieve": "to_measure_on_kaggle_in_C4"
+    }
+  }
+}
