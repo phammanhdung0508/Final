@@ -61,7 +61,7 @@ class TrainingRunTests(unittest.TestCase):
                 last = result['epochs'][-1]['epoch']
                 self.assertTrue(last == 100 or last - result['selected_epoch'] == 10)
                 self.assertIn('NDCG@10', result['selected_validation']['overall_metrics'])
-                self.assertTrue((out / 'checkpoints' / 'final.a4ucp').exists())
+                self.assertTrue((out / 'final.a4ucp').exists())
                 self.assertEqual(result['test_execution'], 'not_run_test_split_not_loaded')
                 self.assertEqual(validate_result(json.loads((out / RESULT_NAME).read_text()), out),
                                  json.loads((out / RESULT_NAME).read_text()))
@@ -78,6 +78,13 @@ class TrainingRunTests(unittest.TestCase):
         self.assertEqual(resumed['status'], 'run_complete')
         self.assertEqual(len(resumed['attempts']), 3)
         self.assertEqual(_comparable(resumed), _comparable(straight))
+
+    def test_a_separate_checkpoint_directory_leaves_only_flat_outputs(self):
+        out, scratch = self.out(), self.out()
+        result = self.train(out, HETERO, checkpoint_dir=scratch)
+        self.assertEqual(result['status'], 'run_complete')
+        self.assertEqual(sorted(p.name for p in out.iterdir()), ['final.a4ucp', 'progress-1.jsonl', RESULT_NAME])
+        self.assertEqual((out / 'final.a4ucp').read_bytes(), (scratch / 'final.a4ucp').read_bytes())
 
     def test_learning_rates_change_the_trajectory(self):
         slow = self.train(self.out(), learning_rate=0.0005)

@@ -6,11 +6,13 @@ without a strictly better validation NDCG@10) or 100 epochs, validating with ful
 ranking every epoch. Settings: docs/musical-instruments-training-settings.md and
 docs/learning-rate-tuning-amendment.md.
 
-Checkpoints are identity v2, published through D3 into `<out>/checkpoints/`: one every
-`CHECKPOINT_EVERY[method]` epochs and `final.a4ucp` at the end, which also holds the
-best-model snapshot that the test stage will use. If the directory already holds
-checkpoints, the run resumes from the latest one, exactly (proof runs 2 and 3), so a
-crashed or timed-out attempt continues instead of restarting.
+Checkpoints are identity v2, published through D3 into the checkpoint directory
+(`<out>/checkpoints/` by default; on Kaggle a scratch directory outside the collected
+output): one every `CHECKPOINT_EVERY[method]` epochs and `final.a4ucp` at the end, which
+also holds the best-model snapshot the test stage will use. `final.a4ucp` is then copied
+to `<out>/final.a4ucp`. If the checkpoint directory already holds checkpoints, the run
+resumes from the latest one, exactly (proof runs 2 and 3), so a crashed attempt in the
+same session continues instead of restarting.
 
 Each attempt writes its own hash-chained `progress-<n>.jsonl`, with one line per epoch
 (losses, timings, peak memory, validation metrics and audit counts). `result.json` is
@@ -28,6 +30,7 @@ import json
 import os
 import re
 import resource
+import shutil
 import statistics
 import sys
 import time
@@ -97,7 +100,7 @@ def _epoch_record(log, report, seconds, device):
 
 def run(data_dir, manifest_sha256, device, out_dir, *, method, condition, learning_rate, seed, stage,
         determinism=None, runner_seconds=6600.0, clock=time.monotonic, stream=sys.stdout,
-        max_epochs=None):
+        max_epochs=None, checkpoint_dir=None):
     """Train (or resume) the run in `out_dir`; return the result once it is complete.
 
     Stops cleanly with status `runner_timeout` at the deadline, after publishing a
@@ -106,8 +109,8 @@ def run(data_dir, manifest_sha256, device, out_dir, *, method, condition, learni
     from scripts.gpu_runtime import environment_fingerprint, pin_global_generators
     out_dir = Path(out_dir)
     out_dir.mkdir(mode=0o700, exist_ok=True)
-    checkpoints = out_dir / CHECKPOINT_DIR
-    checkpoints.mkdir(mode=0o700, exist_ok=True)
+    checkpoints = Path(checkpoint_dir) if checkpoint_dir is not None else out_dir / CHECKPOINT_DIR
+    checkpoints.mkdir(mode=0o700, parents=True, exist_ok=True)
     os.chmod(checkpoints, 0o700)
     if (out_dir / RESULT_NAME).exists():
         raise FileExistsError('run already complete; result.json exists')
@@ -162,11 +165,13 @@ def run(data_dir, manifest_sha256, device, out_dir, *, method, condition, learni
                 publish(f'epoch-{epoch:03d}.a4ucp')
         if status == 'run_complete':
             publish(FINAL_NAME)
+            with open(checkpoints / FINAL_NAME, 'rb') as src, open(out_dir / FINAL_NAME, 'xb') as dst:
+                shutil.copyfileobj(src, dst, 1 << 20)
     except Exception as exc:
         status, reason = 'failed', f'{type(exc).__name__}: {exc}'
     finally:
         os.close(root)
-    journal.write('end', status=status, stop_reason=reason)
+    journal.write('end', status=status, stop_reason=reason, elapsed_seconds=clock() - start)
     journal.close()
     if status != 'run_complete':
         return {'status': status, 'stop_reason': reason, 'attempt': attempt}
@@ -187,7 +192,7 @@ def _write_result(out_dir, run_spec, binding, selection, environment, determinis
         for r in records:
             if r['event'] == 'epoch':
                 epochs[r['record']['epoch']] = r['record']
-    final = out_dir / CHECKPOINT_DIR / FINAL_NAME
+    final = out_dir / FINAL_NAME
     with open(final, 'rb') as f:
         final_sha = hashlib.file_digest(f, 'sha256').hexdigest()
     ordered = [epochs[e] for e in sorted(epochs)]
@@ -252,7 +257,7 @@ def validate_result(result, out_dir):
         raise ValueError('run ended before patience or the 100-epoch maximum')
     if result['selected_validation'] != epochs[best['epoch']].get('validation'):
         raise ValueError('selected validation differs from the selected epoch')
-    final = out_dir / CHECKPOINT_DIR / FINAL_NAME
+    final = out_dir / FINAL_NAME
     with open(final, 'rb') as f:
         if hashlib.file_digest(f, 'sha256').hexdigest() != result['final_checkpoint']['sha256']:
             raise ValueError('final checkpoint differs from the result')
@@ -269,13 +274,15 @@ def main(argv=None):
     ap.add_argument('--learning-rate', type=float, required=True)
     ap.add_argument('--seed', type=int, required=True)
     ap.add_argument('--runner-seconds', type=float, default=6600.0)
+    ap.add_argument('--checkpoint-dir')
     args = ap.parse_args(argv)
     from scripts.gpu_runtime import configure_determinism, require_device
     device = require_device(args.device, args.accelerator)
     determinism = configure_determinism() if device.type == 'cuda' else None
     result = run(args.data, args.manifest_sha256, device, args.out_dir, method=args.method,
                  condition=args.condition, learning_rate=args.learning_rate, seed=args.seed,
-                 stage=args.stage, determinism=determinism, runner_seconds=args.runner_seconds)
+                 stage=args.stage, determinism=determinism, runner_seconds=args.runner_seconds,
+                 checkpoint_dir=args.checkpoint_dir)
     print(json.dumps({'status': result['status'], 'stop_reason': result.get('stop_reason')}))
     return 0 if result['status'] == 'run_complete' else 1
 

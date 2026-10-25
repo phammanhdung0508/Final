@@ -350,22 +350,26 @@ def collect_profile_outputs(download_dir, dest, *, manifest, record_fields, log,
 
 
 def launch(bundle_dir, approval_path, transport, datasets, *, reports=REPORTS,
-           clock=time.monotonic, sleep=time.sleep, collect=None):
+           clock=time.monotonic, sleep=time.sleep, collect=None, approve=None, ledger=None):
     """Approved push, bounded wait, collection and record for one run; never retried.
 
     `collect` checks and files the downloaded outputs; it defaults to the profiling
-    result's `collect_profile_outputs` (the checkpoint proof passes its own)."""
+    result's `collect_profile_outputs` (the checkpoint proof passes its own). `approve`
+    and `ledger` default to the profiling approval and full-timeout booking; the
+    training adapter passes its campaign approval and actual-use ledger."""
     collect = collect or collect_profile_outputs
+    approve = approve or validate_approval
+    ledger = ledger or gpu_ledger
     manifest, manifest_sha = load_bundle(bundle_dir)
     approval_raw = _read_regular(Path(approval_path), 65536)
-    validate_approval(json.loads(approval_raw), manifest, manifest_sha)
+    approve(json.loads(approval_raw), manifest, manifest_sha)
     run, ref = manifest['run'], manifest['kernel_ref']
     owner, slug = ref.split('/')
     if not 1 <= run <= manifest['max_runs']:
         raise Amazon4UError(f'run {run} is outside the budget of {manifest["max_runs"]} runs')
     reports = Path(reports)
     reports.mkdir(parents=True, exist_ok=True)
-    booked = gpu_ledger(reports)
+    booked = ledger(reports)
     if booked + manifest['timeout_seconds'] > manifest['max_total_gpu_seconds']:
         raise Amazon4UError(f'GPU budget: {booked} s booked plus {manifest["timeout_seconds"]} s '
                             f'exceeds {manifest["max_total_gpu_seconds"]} s; launch refused')
