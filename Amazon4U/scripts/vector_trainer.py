@@ -24,6 +24,7 @@ from types import SimpleNamespace
 import torch
 
 from scripts.checkpoint_payload_cuda import build_cuda_payload
+from scripts.checkpoint_v2 import PAYLOAD_SCHEMA_VERSION_V2, build_cuda_payload_v2
 from scripts.gpu_runtime import RuntimeRefusal, global_rng_states, require_rng_unchanged
 from scripts.training_harness import ADAM_OPTIONS, PrivateRNG, Selection, validation_score
 from scripts.vectorized_evaluation import evaluate_model
@@ -245,13 +246,23 @@ class VectorTrainer:
             'epoch': best['epoch'],
             'parameters': {n: best['state_dict'][n].clone() for n in names}}
 
+    def _device_record(self, run_binding):
+        return {'fingerprint': copy.deepcopy(self.fingerprint),
+                'determinism': copy.deepcopy(self.determinism),
+                'global_rng': _cpu_copy(global_rng_states(self.device)),
+                'run_binding': copy.deepcopy(run_binding)}
+
     def cuda_payload(self, expectations, identity, run_binding):
         """The cuda-v1 checkpoint of this epoch boundary (validate before publishing)."""
-        record = {'fingerprint': copy.deepcopy(self.fingerprint),
-                  'determinism': copy.deepcopy(self.determinism),
-                  'global_rng': _cpu_copy(global_rng_states(self.device)),
-                  'run_binding': copy.deepcopy(run_binding)}
-        return build_cuda_payload(self.payload_core(expectations, identity), device_record=record)
+        return build_cuda_payload(self.payload_core(expectations, identity),
+                                  device_record=self._device_record(run_binding))
+
+    def cuda_payload_v2(self, expectations, reference, run_binding):
+        """The cuda-v2 checkpoint: the v1 core with the identity reference in place of the
+        identity (docs/checkpoint-identity-v2-plan.md)."""
+        core = self.payload_core(expectations, reference)
+        core['schema_version'] = PAYLOAD_SCHEMA_VERSION_V2
+        return build_cuda_payload_v2(core, device_record=self._device_record(run_binding))
 
     def restore_cuda(self, owned):
         """Restore a validated cuda-v1 payload into this fresh trainer.
