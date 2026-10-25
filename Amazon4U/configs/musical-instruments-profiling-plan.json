@@ -1,0 +1,211 @@
+{
+  "schema_version": "amazon4u-profiling-plan-v1",
+  "status": "AGREED_2026-10-25_implementation_started",
+  "recorded": "2026-10-25",
+  "documentation": "docs/musical-instruments-profiling-plan.md",
+  "purpose": "measure training epoch time, end-to-end validation time and peak memory on full Musical_Instruments; no hyperparameter selection, no method comparison, no test split",
+  "agreed_inputs": {
+    "category": "Musical_Instruments",
+    "split": "5core/last_out",
+    "lightgcn_initialization": "normal_std_0.1",
+    "lightgcn_batch_sizes": [2048, 4096],
+    "hetero_batch_size": 1024,
+    "hetero_aggregation": "full_neighborhood",
+    "batch_policy": "filter_before_batch",
+    "validation": "full_ranking_every_epoch_ex01",
+    "execution": "kaggle_one_t4_gpu_ready_launcher"
+  },
+  "data_counts": {
+    "users": 57439,
+    "products": 24556,
+    "categories": 633,
+    "brands": 3316,
+    "training_ratings": 396958,
+    "training_ratings_ge_4": 340862,
+    "validation_rows": 57439
+  },
+  "proposed": {
+    "cases": [
+      {"model": "LightGCN", "batch_size": 2048, "condition": "all_rating"},
+      {"model": "LightGCN", "batch_size": 4096, "condition": "all_rating"},
+      {"model": "LightGCN", "batch_size": 2048, "condition": "rating_ge_4"},
+      {"model": "LightGCN", "batch_size": 4096, "condition": "rating_ge_4"},
+      {"model": "Heterogeneous KG+GNN", "batch_size": 1024, "condition": "all_rating"},
+      {"model": "Heterogeneous KG+GNN", "batch_size": 1024, "condition": "rating_ge_4"}
+    ],
+    "epochs_per_case": 3,
+    "profiling_seed": 7,
+    "measurements": [
+      "negative_sampling_seconds",
+      "training_step_seconds",
+      "validation_inference_seconds",
+      "ranking_and_metrics_seconds",
+      "steps_per_epoch",
+      "empty_pool_skips",
+      "examples_per_second",
+      "peak_gpu_allocated_bytes",
+      "peak_gpu_reserved_bytes",
+      "peak_host_rss_bytes"
+    ],
+    "checkpoint_step": "none"
+  },
+  "decisions_for_user": {
+    "1_feedback_conditions": {
+      "recommendation": "both",
+      "alternative": "all_rating_only",
+      "decision": "accepted_by_user_2026-10-25"
+    },
+    "2_validation_metric_values": {
+      "recommendation": "compute_in_full_record_checks_and_sha256_only",
+      "alternative": "report_labeled_profiling_only",
+      "decision": "accepted_by_user_2026-10-25"
+    },
+    "3_trained_weights": {"recommendation": "discard_keep_digests_only", "decision": "accepted_by_user_2026-10-25"},
+    "4_profiling_seed": {
+      "recommendation": 7,
+      "constraint": "not_in_final_seeds_42_2026_3407",
+      "decision": "accepted_by_user_2026-10-25"
+    },
+    "5_budget": {
+      "recommendation": {
+        "planned_runs": 1,
+        "max_additional_runs": 2,
+        "additional_run_condition": "recorded_reason_and_own_approval",
+        "session_timeout_seconds": 7200,
+        "runner_timeout_seconds": 6600,
+        "max_total_gpu_hours": 6,
+        "max_output_bytes": 67108864,
+        "automatic_retries": false
+      },
+      "estimate": "guess_from_graph_sizes_six_cases_under_one_hour_on_one_t4",
+      "decision": "accepted_by_user_2026-10-25"
+    },
+    "6_local_real_data_smoke_test": {
+      "recommendation": "one_loader_run_one_step_and_one_validation_pass_per_model_on_cpu",
+      "limits": {"seconds": 600, "peak_rss_bytes": 3221225472},
+      "weights_kept": false,
+      "decision": "accepted_by_user_2026-10-25"
+    },
+    "7_data_upload": {
+      "recommendation": "private_kaggle_dataset",
+      "contents": [
+        "kg-v1/Musical_Instruments/*.parquet",
+        "Musical_Instruments.train.csv",
+        "Musical_Instruments.valid.csv",
+        "hash_manifest"
+      ],
+      "test_split_uploaded": false,
+      "kernel_refuses": ["missing_extra_or_changed_file", "file_name_containing_test"],
+      "user_confirms_data_terms": "not_checked_by_agent; user approved on condition the dataset stays private",
+      "decision": "accepted_by_user_2026-10-25",
+      "condition": "private_only_verified_before_first_run",
+      "internet": "disabled by user preference: downloads slow the run (2026-10-25); Kaggle allows enable_internet"
+    },
+    "5_1_preflight": {
+      "requested_by": "user_2026-10-25",
+      "design_status": "agent_proposal",
+      "steps": [
+        "data_load",
+        "per_case_build",
+        "one_full_epoch_negative_sampling",
+        "5_warm_up_steps_excluded",
+        "50_timed_steps_cuda_synchronized",
+        "one_full_validation_pass",
+        "one_checkpoint_publish_and_retrieve"
+      ],
+      "projection": "per estimator: data_load + sum_cases(build + 3*(sampling + steps_per_epoch*step_stat + validation) + checkpoint) + time_used; recorded for mean, median and p90",
+      "threshold": {
+        "value": "gate projection <= 0.8 * runner_timeout_seconds (5280 of 6600)",
+        "status": "accepted_by_user_2026-10-25",
+        "user_words": "The threshold. ACCEPT, I would like to add the `mean`, mean is a more direct estimator for the total epoch time."
+      },
+      "on_exceed": "status preflight_exceeded before first case; no budget increase, no smaller run",
+      "user_review_2026-10-25": [
+        "conservative_step_estimate_p90_and_max",
+        "preflight_own_time_and_memory_limits_with_early_stop",
+        "evidence_preserved_on_timeout"
+      ],
+      "step_statistics": ["mean", "median", "p90", "max"],
+      "early_stop": "after each case, lower-bound projection (measured costs; unmeasured cases at cheapest measured case of same model); stop once over threshold",
+      "gate_projection": "max(mean projection, p90 projection)",
+      "own_limits": {
+        "seconds": 900,
+        "peak_gpu_allocated_bytes": 12884901888,
+        "peak_host_rss_bytes": 12884901888,
+        "checks": "deadline between steps and between 1024-user validation chunks; memory after each phase",
+        "on_exceed": "status preflight_limit_exceeded with measurements so far",
+        "status": "accepted_by_user_2026-10-25"
+      }
+    },
+    "5_2_timing_records": {
+      "requested_by": "user_2026-10-25",
+      "design_status": "agent_proposal",
+      "per_case": [
+        "build",
+        "epochs[1..3]: sampling, training_steps, validation(inference, ranking, metrics), step_count, peak_gpu_memory",
+        "checkpoint: publish, retrieve",
+        "peak_host_rss"
+      ],
+      "labels": {"epoch_1": "warm_up", "epochs_2_3": "steady_state"},
+      "naming_note": "warm_up, not cold start; cold start means users or items without training history in this project"
+    }
+  },
+  "work_before_run": {
+    "P1": "real_data_loader_with_manifest_hash_checks_new_real_data_policy_h_ref_policy_unchanged",
+    "P2": "rating_ge_4_condition_in_memory_no_new_on_disk_graph",
+    "P3": "profiling_runner_with_preflight_threshold_stop_and_per_epoch_timing_result_schema_amazon4u-profile-result-v1",
+    "P4": "dataset_manifest_kernel_hash_check_dataset_sources_profiling_approval_and_ledger",
+    "P5": "scale_check_in_local_smoke_test"
+  },
+  "implementation_status": {
+    "P1_P2": "done_in_worktree_profiling-mi_uncommitted",
+    "P3": "done_in_worktree_profiling-mi_uncommitted",
+    "P4": "done_in_worktree_profiling-mi_uncommitted",
+    "dataset_layout": "flat_kg.<table>.parquet",
+    "staged_dataset": "data/reports/profiling-mi-v1/dataset-flat",
+    "dataset_manifest_sha256": "1066146b398cad130f1f27c420f705495cb3a6f3213a4ad708b447e92163a7bc",
+    "profiling_ledger": "data/reports/profiling-mi-v1/runs",
+    "full_suite": {"tests": 625, "seconds": 156, "peak_rss_kib": 920928},
+    "commit": "1d7f739_on_profiling-mi_not_merged_not_pushed",
+    "kaggle_dataset": {"ref": "dungsunf/amazon4u-mi-profiling", "license": "unknown",
+                       "source": "https://huggingface.co/datasets/McAuley-Lab/Amazon-Reviews-2023",
+                       "verified": {"status": "ready", "isPrivate": true}, "created": "2026-10-25"},
+    "run_1_bundle": {"dir": "data/reports/profiling-mi-v1/bundle-run-1",
+                     "kernel_ref": "dungsunf/amazon4u-profile-mi-run-1-cee20ba8",
+                     "bundle_manifest_sha256": "506ce58ef64c60d5b7e9d17449a2c3d82c82b3ab5fb4d2655db1c5070b2388df",
+                     "status": "launched_2026-10-25_user_approved", "result_status": "profile_complete", "gate_projection_seconds": 655, "kaggle_log_end_seconds": 698, "peak_gpu_allocated_gib": 1.16, "peak_host_rss_gib": 2.14, "evidence": "data/reports/profiling-mi-v1/runs/run-1"}
+  },
+  "frozen_files_changed": false,
+  "authorizations": {
+    "implementation": "P1_to_P4_in_a_worktree_covered_by_agreed_plan",
+    "local_real_data_smoke_test": "agreed_2026-10-25_within_600s_3GiB",
+    "dataset_upload": "agreed_2026-10-25_private_only",
+    "kaggle_profiling_runs": false,
+    "comparative_training": false,
+    "test_split_access": false,
+    "deployment_decision": "NOT_AUTHORIZED"
+  },
+  "timeout_evidence": {
+    "requested_by": "user_2026-10-25",
+    "design_status": "agent_proposal",
+    "journal": "progress.jsonl, one line per finished measurement, sequence number and sha256 of previous line, flush and fsync before next phase; truncated last line reported not repaired; chain checked at collection",
+    "stdout_copy": true,
+    "runner_deadline_seconds": 6600,
+    "on_runner_deadline": "final journal line and result.json status runner_timeout, clean exit",
+    "verified": "launcher downloads outputs and log on error status into a private .download directory and keeps them unpromoted",
+    "not_verified": "whether Kaggle keeps /kaggle/working files after killing a session at its timeout"
+  },
+  "user_go": {
+    "recorded": "2026-10-25",
+    "words": "Preflight limits. ACCEPT, 80%, 900 seconds, 12 GiB of GPU memory, and 12 GiB of host memory are all limits that I consider reasonable for starting the profiling process. You may start"
+  },
+  "checkpoint_decision": {
+    "decision": "profile_without_checkpoint_step",
+    "status": "agreed_by_user_2026-10-25",
+    "user_words": "Ok, please proceed with your recommend",
+    "supersedes": "one_checkpoint_boundary_after_epoch_1_per_case",
+    "reason": "training and validation do not call checkpoint code; weights are discarded; resume proven by GPU-READY",
+    "follow_up": "separate scoped-approval task to speed up frozen D1/D2 without behavior change; re-measure checkpoint cost before freezing the comparative-training budget",
+    "evidence": "data/reports/profiling-mi-v1/checkpoint-scale-probe.txt"
+  }
+}

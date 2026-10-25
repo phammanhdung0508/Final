@@ -29,8 +29,11 @@ Keep this section short and edit it in place. Record phase results in
   O-OFFLINE. The main suite has 515 tests. Full 5-core `last_out` splits and Parquet
   metadata are downloaded and the all-rating training KGs are built and validated.
   No model training or learned embeddings have been run.
-- Next gate: GPU-READY. It needs its own plan and approval, followed by bounded
-  Musical_Instruments profiling, then frozen settings and explicit training approval.
+- GPU-READY accepted by the user on 2026-10-25 (`docs/gpu-ready-traceability.md`).
+  Musical_Instruments profiling run 1 completed; its report was accepted on 2026-10-25
+  (`docs/musical-instruments-profiling-report.md`). Next gate: real-data checkpoint
+  readiness (`docs/checkpoint-real-data-readiness-plan.md`, a proposal). Then frozen
+  settings and explicit training approval.
 - Still requires explicit approval: live Kaggle or GPU jobs, real-data training,
   profiling, comparative or final-test runs, held-out evaluation, production
   initialization, new execution budgets, and any change to frozen science or criteria.
