@@ -107,7 +107,7 @@
       "identity_builds_3": 72,
       "resource_walks_6": 47
     },
-    "stopped_reason": "target_60s_not_met_after_option_A_publish_about_120s_locally",
+    "stopped_reason": "time_targets_not_met_on_kaggle_next_lever_option_C_user_decision",
     "option_A": {
       "status": "implemented_behavior_preserving_target_not_met",
       "hashes": {
@@ -131,6 +131,31 @@
         "full_suite": "642_ok"
       },
       "retrieve": "to_measure_on_kaggle_in_C4"
+    },
+    "C4_run_2": {
+      "status": "proof_complete",
+      "approval": "Yes",
+      "resume_exact_all_4_cases": true,
+      "result_sha256_prefix": "b66701bb",
+      "publish_seconds": {
+        "LightGCN_all": 181.7,
+        "Hetero_all": 166.4,
+        "LightGCN_ge4": 165.0,
+        "Hetero_ge4": 154.5
+      },
+      "retrieve_seconds": {
+        "LightGCN_all": 169.6,
+        "Hetero_all": 152.9,
+        "LightGCN_ge4": 154.3,
+        "Hetero_ge4": 141.0
+      },
+      "peak_host_gib_max": 5.36,
+      "targets_met": {
+        "publish_60s": false,
+        "retrieve_60s": false,
+        "host_8gib": true
+      },
+      "ledger_booked_seconds_after": 14400
     }
   }
 }

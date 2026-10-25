@@ -306,3 +306,34 @@ What the run does:
   60 s / 60 s / 8 GiB targets.
 - **Limits.** The runner deadline is 6,600 s. A case starts only if 900 s remain.
 - **What is kept.** No weights. Validation metric values are hashed, never reported.
+
+### C4 run 2 result (2026-10-25): resume exact; time targets not met
+
+User approval: "Yes", in reply to "Approve the launch of this bundle?"
+(`data/reports/profiling-mi-v1/approval-run-2.json`).
+
+| Item | Value |
+|---|---|
+| Kernel | `dungsunf/amazon4u-ckpt-proof-mi-run-2-7894898f`, one Tesla T4, torch 2.11.0+cu128, determinism policy on |
+| Status | `proof_complete` |
+| Result | `runs/run-2/result.json`, SHA-256 `b66701bb…`; collection checks passed |
+| Ledger | 14,400 s booked of 21,600 s. The run used about 57 min of child-process time |
+
+Every case resumed exactly, with identical logs, final state and validation report, across
+three separate processes.
+
+| Case | Publish | Retrieve | File | Peak host (publish / retrieve) | Epoch |
+|---|---|---|---|---|---|
+| LightGCN 2048, all ratings | 182 s | 170 s | 467 MB | 4.8 / 5.3 GiB | 21 s |
+| KG + GNN 1024, all ratings | 166 s | 153 s | 457 MB | 5.2 / 5.4 GiB | 61 s |
+| LightGCN 2048, ≥4 | 165 s | 154 s | 436 MB | 4.5 / 4.9 GiB | 17 s |
+| KG + GNN 1024, ≥4 | 155 s | 141 s | 428 MB | 4.6 / 5.0 GiB | 50 s |
+
+Each checkpoint also needs about 22 s to build the payload. A resume first rebuilds the
+expectations, about 46 to 49 s.
+
+The memory target of 8 GiB is met. Publish and retrieve each take about 2.5 to 3 minutes
+on Kaggle's CPU against a 60 s target, which is slower than locally (125 s). A checkpoint
+costs about 3 to 10 epochs. Following the plan, the agent stops and reports. The
+remaining lever is to stop storing the full data copy (option C), which is a user decision.
+How often to checkpoint is a training-budget decision.
