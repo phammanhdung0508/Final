@@ -204,3 +204,35 @@ The code is on branch `checkpoint-v2`, commit `af15553`, not pushed. Evidence is
 | Bundle manifest SHA-256 | `b6ebf8a4fd11ed8e645a2ef3fbef10085bf090c77de97621d651b4da8b2a8796` |
 | Cases and comparison | As run 2: 4 cases, 4 epochs straight against 2 + resume + 2, in three processes |
 | Ledger | Profiling ledger, run 3. Books the last 7,200 s of the 21,600 s cap |
+
+### Step 5: Kaggle run 3 result (2026-10-25): resume exact, all targets met
+
+User approval: "ok please launch of run 3" (`data/reports/profiling-mi-v1/approval-run-3.json`).
+
+| Item | Value |
+|---|---|
+| Kernel | `dungsunf/amazon4u-ckpt-proof-mi-run-3-36419bbb`, one Tesla T4, determinism policy on, checkpoint version 2 |
+| Status | `proof_complete` |
+| Result | `runs/run-3/result.json`, SHA-256 `91c16120…`; collection checks passed |
+| Ledger | 21,600 s booked of 21,600 s: the profiling budget is used up. The run used about 29 min of child-process time |
+
+All four cases resumed exactly, with identical logs, final state and validation report,
+across three processes.
+
+| Case | Publish | Retrieve | File | Peak host (publish / retrieve) | Run 2 (v1) publish / retrieve |
+|---|---|---|---|---|---|
+| LightGCN 2048, all ratings | 22.2 s | 20.5 s | 129 MB | 2.9 / 2.5 GiB | 182 / 170 s |
+| KG + GNN 1024, all ratings | 8.5 s | 6.9 s | 119 MB | 2.9 / 2.5 GiB | 166 / 153 s |
+| LightGCN 2048, ≥4 | 19.3 s | 17.3 s | 124 MB | 2.9 / 2.3 GiB | 165 / 154 s |
+| KG + GNN 1024, ≥4 | 7.5 s | 6.1 s | 116 MB | 2.9 / 2.3 GiB | 155 / 141 s |
+
+All three targets (60 s, 60 s and 8 GiB) are met in every case. Building the payload now
+takes about 1 s. A resume first builds the trusted identity from the dataset, about 31 to
+35 s per process, once per process and not per checkpoint.
+
+The files are larger than the local epoch-0 file (32 MB), because at epoch 2 they also
+hold the Adam state, the best model and the epoch order. LightGCN is slower than KG + GNN,
+probably because of its sparse-adjacency checks (guess).
+
+Status: identity v2 meets the readiness plan's targets on Kaggle. This is evidence for
+the user's review, not an acceptance.

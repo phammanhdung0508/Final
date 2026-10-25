@@ -114,3 +114,18 @@ the worst case. Early stopping should help, but that is not yet measured.
 | Commit the plan and report documents; merge `profiling-mi` into `master` | "Saving the work. Agree." |
 
 The plan: [`checkpoint-real-data-readiness-plan.md`](checkpoint-real-data-readiness-plan.md).
+
+## Addendum (2026-10-25): measured checkpoint cost
+
+The report's projection left out checkpoint cost. Kaggle proof run 3 measured it with
+checkpoint identity v2 (`checkpoint-identity-v2-plan.md`), on the same T4:
+
+- **One checkpoint costs 7 to 22 s.** That is publish, plus about 1 s to build the payload.
+- **Resuming costs about 6 to 21 s to retrieve**, plus about 31 to 35 s once to rebuild the
+  trusted identity.
+
+Checkpointing every epoch would add at most about 23 s per epoch. That is about 109 % of
+a LightGCN 2048 all-ratings epoch (21 s) and about 15 % of a KG + GNN epoch (61 s) (agent
+arithmetic). How often to checkpoint is a training-budget decision, not made here. At
+every 10 epochs the cost is about 1 to 11 % of a run. Agent estimate, before settings are
+frozen.
