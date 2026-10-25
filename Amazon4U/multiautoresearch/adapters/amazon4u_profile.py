@@ -300,8 +300,13 @@ def _check_result(result, journal_path, manifest):
         raise Amazon4UError('result limits or cases differ from the agreed plan')
 
 
-def collect_profile_outputs(download_dir, dest, *, manifest, record_fields, log):
-    """Check one downloaded output directory, add the record and move it to `dest`."""
+def collect_profile_outputs(download_dir, dest, *, manifest, record_fields, log,
+                            check=None, gates=REMAINING_GATES):
+    """Check one downloaded output directory, add the record and move it to `dest`.
+
+    `check(result, journal_path, manifest)` refuses a bad result; it defaults to the
+    profiling result's checks."""
+    check = check or _check_result
     download_dir, dest = Path(download_dir), Path(dest)
     if dest.exists():
         raise Amazon4UError(f'{dest} already exists; overwrite refused')
@@ -321,7 +326,7 @@ def collect_profile_outputs(download_dir, dest, *, manifest, record_fields, log)
     raw_result = _read_regular(download_dir / RESULT_NAME, MAX_RESULT_BYTES)
     raw_journal = _read_regular(download_dir / JOURNAL_NAME, MAX_RESULT_BYTES)
     result = json.loads(raw_result)
-    _check_result(result, download_dir / JOURNAL_NAME, manifest)
+    check(result, download_dir / JOURNAL_NAME, manifest)
     if raw_log in names:
         os.unlink(download_dir / raw_log)
     log_bytes = log['logs'].encode()
@@ -336,7 +341,7 @@ def collect_profile_outputs(download_dir, dest, *, manifest, record_fields, log)
         'run_binding': manifest['run_binding'], 'environment': result['environment'],
         'result_status': result['status'], 'stop_reason': result['stop_reason'],
         'acceptance': 'requires_user_review', 'deployment_decision': 'NOT_AUTHORIZED',
-        'remaining_gates': list(REMAINING_GATES),
+        'remaining_gates': list(gates),
     }
     with open(download_dir / 'record.json', 'xb') as f:
         f.write(_canonical(record))
@@ -345,8 +350,12 @@ def collect_profile_outputs(download_dir, dest, *, manifest, record_fields, log)
 
 
 def launch(bundle_dir, approval_path, transport, datasets, *, reports=REPORTS,
-           clock=time.monotonic, sleep=time.sleep):
-    """Approved push, bounded wait, collection and record for one run; never retried."""
+           clock=time.monotonic, sleep=time.sleep, collect=None):
+    """Approved push, bounded wait, collection and record for one run; never retried.
+
+    `collect` checks and files the downloaded outputs; it defaults to the profiling
+    result's `collect_profile_outputs` (the checkpoint proof passes its own)."""
+    collect = collect or collect_profile_outputs
     manifest, manifest_sha = load_bundle(bundle_dir)
     approval_raw = _read_regular(Path(approval_path), 65536)
     validate_approval(json.loads(approval_raw), manifest, manifest_sha)
@@ -401,9 +410,9 @@ def launch(bundle_dir, approval_path, transport, datasets, *, reports=REPORTS,
     if status != 'complete':
         fail('status', status, receipt=receipt_fields, download=str(download), log_status=log['status'])
     try:
-        return collect_profile_outputs(download, reports / f'run-{run}', manifest=manifest, log=log,
-                                       record_fields={**fields, 'receipt': receipt_fields,
-                                                      'terminal_status': status})
+        return collect(download, reports / f'run-{run}', manifest=manifest, log=log,
+                       record_fields={**fields, 'receipt': receipt_fields,
+                                      'terminal_status': status})
     except (Amazon4UError, OSError, ValueError, KeyError) as exc:
         fail('collection', str(exc), download=str(download))
 
