@@ -276,3 +276,24 @@ contrast list: KG + GNN minus each core baseline, for NDCG@10/HitRate@10 in each
 category/condition. No test-based contrast/metric selection is allowed. The conditional Kaggle
 capacity plan and 20% contingency reserve are documented in the compute plan;
 2–3 tuning configurations is a planning range, not a frozen trial budget.
+
+## Protocol v2.1.0 amendment: execution choices and learning-rate tuning (2026-10-26)
+
+Agreed by the user before any comparative training or tuning result. It supersedes the
+pending items in the section above. That section is kept as written for history.
+
+| Item | Frozen in v2.1.0 | User's words |
+|---|---|---|
+| Learning rate | Tuned over 0.0005, 0.001 and 0.002, constant within a run, for both learned methods. Replaces the constant 0.001 in Block 2 ([amendment](learning-rate-tuning-amendment.md)) | "Option A as your recommend look good to me." |
+| Tuning | 3 configurations per method and condition, varying the learning rate only. Seed 42. Selection by validation NDCG@10, exact ties kept in listed order | Same; "seed 42 is ok to me." |
+| Trial reuse | The selected configuration's tuning run is final seed 42. Final runs train seeds 2026 and 3407 | "yes, wining tuning should count as a final run." |
+| Validation frequency | Full-ranking validation every epoch. Patience of 10 checks is 10 epochs | "yes please use validation every epoch." |
+| Batch size | LightGCN 2048; Heterogeneous KG + GNN 1024 | Training settings record |
+| LightGCN ID initialization | Normal, mean 0, std 0.1, as for the heterogeneous encoder's IDs | "1, 2, 3 OK" |
+| KG + GNN neighborhoods | The full permitted neighborhood at every layer, in training and inference. No neighbor sampling or fanout | "1, 2, 3 OK" |
+| LightGCN propagation | Exact full fixed-graph propagation at every step (Option B) | "1, 2, 3 OK" |
+
+Every value except the learning rate grid is what Musical_Instruments profiling measured,
+so the profiled costs apply. Checkpoint spacing and the GPU budget are execution
+settings, recorded in [the training settings](musical-instruments-training-settings.md).
+None of this authorizes training.

@@ -301,3 +301,23 @@ ESCALATE remains preserved as noncritical recovery history.
 
 This acceptance does not authorize real-data training, optimizer updates,
 profiling, Kaggle execution, comparative training or deployment.
+
+### User-approved v2.1.0 amendment (2026-10-26)
+
+`amazon4u-protocol-v2.1.0` is a minor, methodological amendment:
+
+- the learning rate is tuned over 0.0005, 0.001 and 0.002;
+- the execution choices that were still pending are frozen: batch sizes, validation every
+  epoch, LightGCN initialization, full KG + GNN neighborhoods and exact LightGCN
+  propagation;
+- the tuning seed and trial-reuse rules are fixed.
+
+See [training semantics](training-semantics.md#protocol-v210-amendment-execution-choices-and-learning-rate-tuning-2026-10-26)
+and the [learning-rate amendment](learning-rate-tuning-amendment.md).
+
+- **Recorded before any comparative training, tuning or held-out result.**
+- **Earlier snapshots are intact.** The v2.0.0 snapshot and manifest are unchanged, and
+  v2.1.0's snapshot under `configs/protocols/v2.1.0/` names v2.0.0 as its predecessor.
+- **The lifecycle state is unchanged.** It stays `IMPLEMENTATION_REGRESSION_VERIFICATION`.
+- **Nothing is authorized.** Training, profiling and deployment authorizations are
+  unchanged: none, none and `NOT_AUTHORIZED`.

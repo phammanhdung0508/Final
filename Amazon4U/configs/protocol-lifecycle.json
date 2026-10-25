@@ -22,7 +22,7 @@
     },
     "new_implementation_verification_experiment_or_deployment_authority": false
   },
-  "protocol_version": "amazon4u-protocol-v2.0.0",
+  "protocol_version": "amazon4u-protocol-v2.1.0",
   "lifecycle_state": "IMPLEMENTATION_REGRESSION_VERIFICATION",
   "decision_status": "step_3c_differentiable_models_graphs_integrated_regression_verified_execution_pending",
   "execution_revision": null,
@@ -872,7 +872,7 @@
   "deployment_decision": "NOT_AUTHORIZED",
   "profiling_scope": null,
   "comparative_training_scope": null,
-  "baseline_manifest": "configs/protocols/v2.0.0/baseline-manifest.json",
+  "baseline_manifest": "configs/protocols/v2.1.0/baseline-manifest.json",
   "documentation": "docs/protocol-lifecycle.md",
   "lifecycle_order": [
     "DRAFT",
@@ -893,13 +893,15 @@
   },
   "pending_before_comparative_training": [
     "implementation_and_independent_regression_verification",
+    "explicit_comparative_training_authorization"
+  ],
+  "resolved_before_comparative_training_v2_1_0": [
     "LightGCN_ID_initialization_distribution",
     "model_specific_batch_sizes",
     "GraphSAGE_neighbor_sampling_execution_fanouts_and_inference",
     "LightGCN_exact_propagation_execution",
     "validation_frequency_after_authorized_profiling",
-    "tuning_search_spaces_trial_budgets_seed_and_reuse_policy",
-    "explicit_comparative_training_authorization"
+    "tuning_search_spaces_trial_budgets_seed_and_reuse_policy"
   ],
   "history": [
     {
@@ -1104,6 +1106,9 @@
       "heldout_model_results_exposed": false,
       "profiling_or_training_authorized_by_event": false,
       "deployment_decision": "NOT_AUTHORIZED"
-    }
+    },
+
+{"event":"learning_rate_tuning_and_execution_choices_amendment","from_state":"IMPLEMENTATION_REGRESSION_VERIFICATION","to_state":"IMPLEMENTATION_REGRESSION_VERIFICATION","prior_protocol_version":"amazon4u-protocol-v2.0.0","protocol_version":"amazon4u-protocol-v2.1.0","version_bump":"minor_substantive_methodological_amendment","approval":"user_approved_option_A_learning_rate_grid_seed_42_trial_reuse_every_epoch_validation_and_three_execution_choices_2026-10-26","user_words":["ok, i agreed. Option A as your recommend look good to me.","1. seed 42 is ok to me. 2. yes, wining tuning should count as a final run. 3. oh, yes please use validation every epoch.","1, 2, 3 OK"],"amendment_documents":["docs/learning-rate-tuning-amendment.md","docs/training-semantics.md"],"baseline_manifest":"configs/protocols/v2.1.0/baseline-manifest.json","prior_baseline_manifest":"configs/protocols/v2.0.0/baseline-manifest.json","heldout_model_results_exposed":false,"comparative_or_tuning_results_exposed":false,"profiling_or_training_authorized_by_event":false,"deployment_decision":"NOT_AUTHORIZED"}
+
   ]
 }

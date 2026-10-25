@@ -1,0 +1,321 @@
+# Pre-training evaluation protocol
+
+Status: **BASELINE_PROTOCOL_FROZEN — `amazon4u-protocol-v2.0.0`.**
+The user-approved [suite amendment](bpr-mf-removal-amendment.md) removes BPR-MF
+entirely; the preceding v1.0.0 snapshot and historical decisions are preserved.
+Implementation/regression verification and execution settings remain pending;
+profiling and comparative training are **not authorized**. See
+[version and lifecycle policy](protocol-lifecycle.md) and
+`configs/protocol-lifecycle.json`.
+No models have been trained for Amazon4U. This document must be finalized and
+version-controlled before training or inspecting comparative model results.
+
+The structural [KG-v1 schema](kg-schema.md) and `configs/kg-v1.json` are now
+implemented: separate per-category training graphs with category-path and explicit
+Brand relations, training-product catalog only, no node features or embeddings.
+See [audit findings](kg-input-audit.md). This graph construction policy does not
+finalize the model protocol. The task is top-K ranking; all ratings are the
+primary condition and >=4 feedback is the planned sensitivity condition. The
+[candidate and cold-start protocol](candidates-and-cold-start.md) now specifies
+warm-only full ranking and frozen-model train+validation history filtering at test.
+The metric/ranking/reporting section is now frozen in
+`configs/evaluation-metrics.json`; remaining training decisions are not yet frozen.
+
+## Data and splits
+
+- Categories: Electronics, Toys_and_Games, Musical_Instruments.
+- Source: Amazon Reviews 2023; revision and downloaded files recorded in
+  `data/raw/download_manifest_all.json`.
+- Interactions: published `benchmark/5core/last_out` train/valid/test CSVs.
+- Product metadata: complete `raw_meta_<Category>` Parquet shards.
+- Join key: `parent_asin`; user key: `user_id`.
+- Retain published split assignments; do not randomly re-split.
+- Before finalizing, audit duplicate user-item pairs, split overlap, per-user
+  chronology, timestamp ties, and the publisher's precise last-out convention.
+- Published per-category last-out splits are not necessarily a global time split.
+- 5-core selection uses the overall collection; document its selection bias.
+- Any development subset needs a reproducible selection rule, seed, counts,
+  degree checks and preserved split assignments, fixed before training.
+
+## Dataset scope — agreed before model training
+
+**Decision:** use the complete downloaded benchmark splits for Electronics,
+Toys_and_Games and Musical_Instruments, evaluated independently per category.
+Do not randomly subsample interactions or evaluation users for reported experiments.
+Full metadata remains available, but KG-v1 includes training products and approved
+relations only; full download scope does not authorize extra graph nodes/features.
+
+**Execution order:** develop and measure runtime/memory on Musical_Instruments
+first (396,958 training interactions; 24,556 warm items), then apply the same
+protocol to Toys_and_Games and Electronics. Tiny synthetic fixtures are for
+correctness tests only; they are not research datasets or reported model results.
+Both all-rating and >=4 conditions apply to every category, preserving publisher
+split assignments and condition-specific eligibility/candidates.
+
+**Rationale:** avoid an additional sampling choice and fragmented user histories;
+test robustness across domains with different metadata/interaction coverage; start
+with the smallest category to assess computational feasibility. Full downloaded
+5-core collections do not imply training splits are themselves 5-core.
+
+**Status:** user-approved scope; full source data and all-rating KGs already exist.
+Model training/evaluation under this scope has not started. Configuration:
+`configs/dataset-scope.json`. If runtime or memory requires a smaller scope, propose
+and document a reproducible amendment before using a subset or observing comparative
+model results; do not silently sample users, targets or interactions. Resource
+measurements do not authorize selecting categories based on model performance.
+
+## Leakage boundaries
+
+- Build interaction graphs and train graph embeddings from training edges only.
+- Validation selects hyperparameters/checkpoints; test is reserved for final
+  evaluation, not feature selection, early stopping or repeated tuning.
+- Fit learned preprocessing on training data only. Declare whether static item
+  metadata and unseen item nodes are allowed under a transductive setting.
+- Exclude held-out ratings/reviews from user/item features and text embeddings.
+- Never use a target review as an input to predict its own interaction or rating.
+- Stored ratings remain observations; interaction encoder edges are binary and
+  rating values are not encoder features. The heterogeneous encoder controls
+  training target-edge shortcut/leakage by batch-positive masking, including
+  forward/reverse/duplicate equivalents before/during sampling while preserving
+  valid remaining KG paths. Both scores use that same masked view if BPR is adopted.
+  **Core LightGCN explicitly uses Option B:** fixed training-positive graph,
+  allowing supervised training edges in propagation without batch target masks.
+  Conventional training-edge reuse is not held-out leakage. Validation/test edges
+  remain excluded for both. See [training semantics](training-semantics.md) and
+  [LightGCN amendment](lightgcn-protocol.md). Comparisons differ in graph use as well
+  as architecture/metadata; do not attribute gains solely to metadata.
+- Cross-category history is a separate experiment. Include only allowed training
+  events before the target timestamp across categories. Restrict embedding
+  construction too; a filtered feature vector cannot fix future graph messages.
+- Record that static product metadata snapshots lack guaranteed historical
+  availability. Do not claim strictly historical evaluation without resolving it.
+- Test that changing held-out labels/reviews leaves training graphs/features
+  unchanged. Record all feature sources, availability times and fitting scope.
+
+## Excluded fields (initial policy)
+
+Exclude from model inputs:
+
+- Product `average_rating` and `rating_number`.
+- Full-collection popularity, rating/sentiment aggregates and review counts.
+- Validation/test interaction ratings and review-derived representations.
+- Target review text, title, helpfulness and any other post-interaction fields.
+- `bought_together` until its provenance and temporal availability are established.
+- IDs as numeric/ordered attributes; they are identity keys, not ordinal features.
+
+Do not assume `store` is brand. Audit metadata missingness, malformed values,
+category hierarchies, duplicates and conflicts before approving attributes.
+For KG-v1 only, `categories` and explicit string `details.Brand` are approved
+structural relation sources. All remaining metadata fields are excluded, including
+`Best Sellers Rank`, full details dictionaries, price and text. No node features
+or embeddings are approved. Other fields require a new registered feature policy
+and review-derived-content/timing audits before use.
+
+## Decisions requiring finalization BEFORE training
+
+1. **Task finalized: top-K recommendation (implicit-feedback ranking).**
+   Rank candidate products for each user; explicit rating prediction is not the
+   primary task.
+2. **Feedback conditions finalized:** all ratings as positive recorded behavior
+   (primary); ratings >=4 as positive preference feedback (sensitivity).
+   Preserve the same raw split assignments and do not replace low-rated held-out
+   targets. Lower ratings and unobserved items are not verified negatives.
+   Build the condition's interaction view using its training positives only.
+   Existing KG-v1 is the all-rating structural graph, not a >=4 training artifact.
+3. **Dataset scope finalized:** full downloaded splits for all three categories,
+   independent graphs/experiments; Musical_Instruments first. No research subset
+   or evaluation-user sampling. See the scope section and configuration above.
+4. **Metrics/ranking/reporting finalized:** NDCG@10 primary; HitRate@10 and
+   CatalogCoverage@10 secondary; NDCG/HitRate at 5 and 20 supplementary. Macro-average
+   user ranking metrics, but compute coverage once over recommendations from all
+   eligible users. Report separately by category × feedback condition. See below.
+5. **Primary candidates/filtering finalized:** full ranking of training-warm
+   items; validation filters all training items; test filters all training plus
+   validation items, without supplying validation edges to the model. Exclude
+   filtered-history and cold targets from warm metrics and report them separately.
+   In >=4 sensitivity, warmth is derived from positive training edges; report the
+   resulting pool change rather than calling it a fixed-candidate ablation.
+   Exact score ties use parent_asin ascending; reject non-finite scores and report
+   users with fewer than K candidates. **>=4 training-negative eligibility is now
+   agreed:** sample only from that condition's warm pool, excluding all of the
+   user's training-rated items, not just positives; never inspect held-out data.
+   **Block 2 now agrees** uniform eligible-negative sampling, one negative per
+   positive, and skipping/reporting empty-pool positives (fail if none trainable).
+   KG-only's no-usable-positive-weight-profile fallback is now agreed as
+   condition-positive training popularity, with normal filters and subgroup
+   reporting. Empty-positive-history fallback is now agreed across methods:
+   no synthetic training positives; evaluation/inference-only popularity scoring,
+   normal filters, separate non-personalized route counts/metrics, and no model
+   input injection or scoring-failure fallback. See [training semantics](training-semantics.md), its configuration
+   and the linked candidate protocol; the sampler is not implemented yet.
+6. Final approved feature/relation list and per-field coverage.
+7. **Primary scope finalized:** independent category-only experiments with
+   `cross_category_history=false`. Cross-category history, shared fitted user
+   representations and merged interaction graphs are deferred, not prerequisites
+   for the primary protocol. See the future-experiments section below.
+8. Baselines, comparable graph/splits/candidates, validation search budget,
+   checkpoint selection rule, training seeds and reporting uncertainty.
+   **Core membership finalized:** Popularity, LightGCN, KG-only and
+   Heterogeneous KG + GNN (`configs/model-suite.json`). A matched encoder without
+   metadata relations remains an optional recommended control; no MF variant is
+   included in the active study.
+   See [models and baselines](models-and-baselines.md). Learned-ID GraphSAGE-style
+   implementations are transductive, with no cold-start claim. **Block 1 is now
+   agreed:** 64d LightGCN, 3 layers, mean 0–3/dot product;
+   2-layer 64d learned-ID heterogeneous GraphSAGE-style/dot product; KG-only
+   training-warm IDF/cosine without rating weighting or popularity bonus.
+   KG-only uses ordered mixtures 1/0, 0.75/0.25, 0.5/0.5 selected by validation
+   NDCG@10 per category/condition, with first-entry tie-breaking. Exact KG-only
+   IDF/profile/missing-channel formulas and whole-user fallback are now agreed in
+   [KG-only scoring](kg-only-scoring.md); implementation/tests are still pending.
+   Exact [heterogeneous encoder](heterogeneous-encoder.md) aggregation, inverses,
+   activations and initialization are now agreed; implementation/tests are pending.
+   Use dedicated relation/layer transforms, one node-type self term, means within
+   relations and across active relations, ReLU then identity, Normal(0,0.1²) IDs,
+   Xavier-uniform gain-1 matrices and zero biases; no dropout/normalization.
+   LightGCN methodology is now explicitly Option B: fixed training-positive graph
+   with training-edge reuse and no batch target masks. Profile exact propagation
+   and GraphSAGE batch size/fanout; heterogeneous masking remains unchanged.
+   Do not silently substitute masked/sampled LightGCN variants. Remaining
+   **Subsequent Block 2 approval** sets mean stable BPR, uniform one-negative
+   sampling, Adam (betas 0.9/0.999, epsilon 1e-8, weight decay 0), constant 0.001
+   learning rate, maximum 100 epochs, and patience 10 validation checks without
+   strict NDCG@10 improvement; earliest checkpoint wins exact ties. Empty-pool
+   updates are skipped/reported; fail if no trainable examples remain. See training
+   semantics for exact values. Batch size/fanout/validation frequency, LightGCN
+   initialization and numerical tuning budgets remain pending.
+   A separate regularization decision is now agreed: 1e-5 times mean squared L2
+   row norm over unique supervised base user/item endpoint IDs only. Exclude
+   neighbor-only/Brand/Category rows; transformation/bias/global weight decay is
+   zero. See [training semantics](training-semantics.md) for exact normalization.
+   **Block 3 agreed:** final seeds 42/2026/3407 across all learned methods/groups;
+   full provenance/determinism/resumption rules; mean ± sample SD; paired-user
+   bootstrap on seed-averaged fixed test metrics (10,000 replicates, seed 12345,
+   95% percentile intervals), exclusively post-selection. See
+   [reproducibility](reproducibility-and-uncertainty.md) and `configs/reproducibility.json`.
+   **Contrast list now frozen:** KG + GNN minus Popularity, LightGCN and KG-only,
+   each for NDCG@10/HitRate@10 in six separate category/condition groups
+   (36 planned descriptive intervals). No @5/@20 or coverage bootstrap;
+   optional methods require a pre-experiment amendment. No total-uncertainty or
+   multiplicity-controlled significance claim.
+   The [compute and tuning plan](compute-and-tuning-plan.md) records conditional
+   Kaggle capacity, a 20% reserve and a 2–3-configuration planning range. Profile
+   Musical_Instruments before freezing trial counts/search spaces; no comparative
+   results may be used to choose the budget. No profiling or model runs yet.
+9. **Cold-item policy finalized:** exclude from primary warm metrics with
+   explicit counts/proportions. Supplementary cold ranking is allowed only after
+   registering and testing a metadata-inductive architecture, learned warm
+   metadata vocabulary, training-only preprocessing and no cold ID embeddings.
+   No such model/runner is currently implemented, so no cold performance is claimed.
+   Audit unknown users (verified zero here) separately from empty positive-history
+   users (nonzero under >=4). Their agreed training-derived popularity fallback
+   is evaluation/inference-only, not synthetic training data; report it separately.
+10. Split-boundary timestamp ties (44/17/6 users across the three categories):
+    retain publisher assignments and document tie semantics, or register a
+    different protocol. No cross-category fitted representations are currently
+    allowed because category-specific train timestamps can exceed other targets.
+
+## Deferred future experiments — not primary-protocol blockers
+
+Cross-category recommendation/history is **out of the current scope**. The
+approved dataset and KG configurations retain `cross_category_history=false`;
+primary graphs, histories and fitted user representations remain category-specific.
+No cross-category design or implementation is required to make the primary
+protocol ready for training.
+
+Revisiting this experiment requires a separate approved protocol amendment before
+execution, including globally time-safe history/graph/embedding construction,
+feature provenance, candidate/evaluation rules and leakage tests. Published
+category-specific training splits must not be assumed safe to merge. Deferral
+preserves the current scope; it does not authorize future cross-category runs.
+
+## Metrics, ranking and reporting — frozen before training
+
+**Status:** user-approved decision, documented but not yet implemented in an
+Amazon4U evaluator. Configuration: `configs/evaluation-metrics.json`. This replaces
+the earlier provisional metric candidates; no Amazon4U model results were inspected.
+
+| Role | Metrics |
+|---|---|
+| Primary | **NDCG@10** |
+| Secondary | HitRate@10, CatalogCoverage@10 |
+| Supplementary | NDCG@5, NDCG@20, HitRate@5, HitRate@20 |
+| Checkpoint/hyperparameter selection | **Validation NDCG@10 only** |
+
+Relevance is binary according to the feedback condition, not graded by rating.
+For the published one-target-per-user holdouts, if the eligible relevant target
+has rank r, NDCG@K is `1/log2(r+1)` when r<=K and zero otherwise; HitRate@K is
+one when r<=K and zero otherwise. Macro-average these metrics over eligible users.
+Recall@K equals HitRate@K with a single relevant target, so it is not an additional
+registered metric. Precision and rating-prediction RMSE/MAE are not registered here.
+
+CatalogCoverage@10 is the number of unique items in eligible users' Top-10 lists
+**divided by the entire condition-specific warm pool size**, before per-user
+history filtering. It is a group-level statistic, not a per-user macro-average.
+Use identical eligible users across methods within each category/condition/split.
+Coverage is secondary; breadth alone is not evidence of better relevance.
+
+### Deterministic ranking
+
+Apply the documented history/candidate filter before selecting Top-K. Sort by
+score descending, then **parent_asin ascending for exactly equal scores**. Do not
+use held-out feedback, popularity, randomized order or an unregistered tolerance
+to break ties. Apply the same ordering to every method. Reject NaN/infinite
+scores rather than silently ranking or discarding them. If fewer than K candidates
+remain, return all available candidates without padding and report affected-user
+counts separately at each cutoff. Do not change the eligibility population by
+method to hide scoring failures.
+
+### Reporting format
+
+Report six independent groups: each of the three categories × each of the two
+feedback conditions. Keep validation-selection results separate from final test
+results. Do not pool categories into a single primary score.
+
+For each group:
+
+1. Main method-comparison table: NDCG@10, HitRate@10, CatalogCoverage@10 for
+   popularity, collaborative, KG-only and KG + GNN methods once implemented.
+2. Supplementary table: NDCG/HitRate at 5 and 20; do not select the preferred K
+   or checkpoint using these test outcomes.
+3. Population table: warm pool size; eligible validation/test users; excluded
+   low-rated, cold, history-overlapping and unknown-user targets; empty-positive
+   histories and fallback usage; users with fewer than K candidates. If exclusion
+   reasons overlap, label reason counts as overlapping and report the distinct
+   excluded total separately (or register an explicit exclusion order).
+4. Report all registered metrics per seed and mean ± sample SD under the agreed
+   Block 3 protocol; deterministic methods run once. Bootstrap fixed seed-averaged
+   per-user ranking metrics only after validation-only selection; use shared user
+   resamples and full-population point estimates. Coverage is reported per seed,
+   not per-user bootstrapped. Distinguish conditional user uncertainty from seed
+   variability, partial failed-seed results, fallback subgroups and N/A empty
+   populations. Use the frozen three core baseline contrasts and NDCG@10/HitRate@10
+   list only; share resamples across contrasts/metrics and never select them after test.
+
+A sensitivity summary compares KG + GNN against each baseline **within each
+group**, noting whether improvements occur in both feedback conditions. Absolute
+scores/coverage across conditions are not threshold-only comparisons because warm
+pools, relevance and eligible populations differ. Do not suppress an unfavorable
+condition or assume KG + GNN will win.
+
+**Rationale:** NDCG rewards placing the held-out target near the top; HitRate gives
+an interpretable retrieval-success rate; coverage measures recommendation breadth.
+Fixed supplementary cutoffs test ranking robustness without choosing K after results.
+The remaining tuning-budget and training-execution decisions still
+block training despite this section being frozen.
+
+## Freeze and amendments
+
+The approved baseline is now frozen as `amazon4u-protocol-v2.0.0`, separately
+from execution readiness and authorization. Follow the
+[version/lifecycle policy](protocol-lifecycle.md): preserve frozen snapshots,
+register approved execution revisions and scoped permissions, and append amendments.
+Before comparative training, resolve the declared pending choices, verify the
+implementation, and obtain explicit authorization. Record protocol/manifest and
+execution identifiers, authorization, Git revision/dirty source provenance, resolved
+configuration hashes, seeds and dataset counts with each run.
+
+Changes after results are observed must be logged with rationale and labeled as
+a new/exploratory protocol. Do not silently alter thresholds, features or metrics
+based on test outcomes; evaluation under a changed protocol is not the original
+pre-specified experiment.

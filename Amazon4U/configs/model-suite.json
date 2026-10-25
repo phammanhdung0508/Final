@@ -31,7 +31,9 @@
       "normalization": "standard_symmetric_training_degree_normalization",
       "training_positive_edges_used_for_supervision": "permitted_in_propagation_graph",
       "heldout_interaction_edges": "excluded_in_all_directions",
-      "exact_propagation_implementation": "pending_profiling_not_methodology_selection",
+      "exact_propagation_implementation": "exact_full_fixed_graph_propagation_every_step_protocol_v2.1.0",
+      "initialization": {"learned_node_ID_embeddings": {"distribution": "normal", "mean": 0, "std": 0.1}},
+      "batch_size": 2048,
       "target_masking": false,
       "masked_Option_A": "optional_target_edge_masked_LightGCN_variant_not_core",
       "sampled_propagation": "requires_explicit_amendment_and_sampled_LightGCN_variant_label"
@@ -112,13 +114,13 @@
       "inverse_edge_source": "permitted_training_forward_edges_only",
       "sampled_aggregation_if_adopted": "approximate_within_relation_mean_without_silently_dropping_active_relations",
       "decoder": "dot_product",
-      "batch_size": "pending_profiling",
-      "neighbor_fanout": "pending_profiling"
+      "batch_size": 1024,
+      "neighbor_fanout": "full_permitted_neighborhood_no_sampling_protocol_v2.1.0"
     }
   },
   "interaction_encoder_edges": "binary_no_rating_value_features",
   "learned_ID_encoder_claim": "transductive_no_inductive_cold_start_claim",
-  "remaining_training_hyperparameters_status": "Block_2_recipe_approved_profile_execution_LightGCN_initialization_and_tuning_budget_pending",
+  "remaining_training_hyperparameters_status": "frozen_in_amazon4u_protocol_v2.1.0_training_authorization_pending",
   "implementation_status": "documented_not_yet_implemented",
   "training_authorized": false
 }
