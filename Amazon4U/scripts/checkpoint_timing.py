@@ -23,6 +23,7 @@ import torch
 
 from scripts.checkpoint_real_data import METHODS, build
 from scripts.checkpoint_storage_cuda import publish_cuda_checkpoint, retrieve_cuda_checkpoint
+from scripts.checkpoint_v2 import publish_checkpoint_v2, retrieve_checkpoint_v2
 from scripts.gpu_runtime import environment_fingerprint, pin_global_generators
 from scripts.profiling_data import CONDITIONS, ProfilingData
 from scripts.training_harness import D2_KEYS
@@ -45,10 +46,11 @@ def main(argv=None):
     ap.add_argument('--dir', required=True)
     ap.add_argument('--epochs', type=int, default=0)
     ap.add_argument('--device', default='cpu')
+    ap.add_argument('--version', type=int, choices=(1, 2), default=1)
     args = ap.parse_args(argv)
 
     record = {'action': args.action, 'method': args.method, 'condition': args.condition,
-              'epochs': args.epochs, 'phases': []}
+              'epochs': args.epochs, 'version': args.version, 'phases': []}
 
     def phase(name, start):
         record['phases'].append({'name': name, 'seconds': round(time.perf_counter() - start, 2),
@@ -62,7 +64,8 @@ def main(argv=None):
     phase('load', start)
     start = time.perf_counter()
     trainer, expectations, identity = build(data, args.method, args.condition, device=device,
-                                            fingerprint=environment_fingerprint(device))
+                                            fingerprint=environment_fingerprint(device),
+                                            version=args.version)
     del data
     phase('build_expectations', start)
     d2 = {k: expectations[k] for k in D2_KEYS}
@@ -76,11 +79,13 @@ def main(argv=None):
                 trainer.train_epoch()
                 phase('train_epoch', start)
             start = time.perf_counter()
-            payload = trainer.cuda_payload(expectations, identity, RUN_BINDING)
+            payload = (trainer.cuda_payload(expectations, identity, RUN_BINDING) if args.version == 1
+                       else trainer.cuda_payload_v2(expectations, identity, RUN_BINDING))
             phase('build_payload', start)
             start = time.perf_counter()
-            publish_cuda_checkpoint(root, FILE_NAME, payload, expected_device=expected_device,
-                                    **d2, io_policy=expectations['io_policy'])
+            publish = publish_cuda_checkpoint if args.version == 1 else publish_checkpoint_v2
+            publish(root, FILE_NAME, payload, expected_device=expected_device,
+                    **d2, io_policy=expectations['io_policy'])
             phase('publish', start)
             path = os.path.join(args.dir, FILE_NAME)
             with open(path, 'rb') as f:
@@ -88,8 +93,9 @@ def main(argv=None):
             record['file_bytes'] = os.path.getsize(path)
         else:
             start = time.perf_counter()
-            owned = retrieve_cuda_checkpoint(root, FILE_NAME, expected_device=expected_device,
-                                             **d2, io_policy=expectations['io_policy'])
+            retrieve = retrieve_cuda_checkpoint if args.version == 1 else retrieve_checkpoint_v2
+            owned = retrieve(root, FILE_NAME, expected_device=expected_device,
+                             **d2, io_policy=expectations['io_policy'])
             phase('retrieve', start)
             record['retrieved_epoch'] = owned['progress']['epoch']
     finally:

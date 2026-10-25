@@ -17,6 +17,7 @@ from pathlib import Path
 import torch
 
 from scripts.checkpoint_identity import RELATION_SCHEMAS, build_canonical_identity
+from scripts.checkpoint_v2 import identity_reference
 from scripts.differentiable_models import build_hetero_graph
 from scripts.learned_models import LightGCNGraph
 from scripts.training_harness import D2_KEYS, PrivateRNG
@@ -106,12 +107,17 @@ def lightgcn_adjacency(graph):
 
 
 def build(data, method, condition, *, seed=42, batch_size=2048, device=torch.device('cpu'),
-          fingerprint, determinism=None):
-    """(trainer, expectations, identity dict) for one method and condition on real data.
+          fingerprint, determinism=None, version=1):
+    """(trainer, expectations, identity) for one method and condition on real data.
 
     `expectations` holds every D2/D3 keyword (`D2_KEYS` plus `io_policy`). The trainer is a
     fresh EX01 `VectorTrainer` whose model rows follow `expected_model['row_order']`.
+    Version 1: `expected_identity` and the returned identity are the full D1 dict. Version 2
+    (docs/checkpoint-identity-v2-plan.md): `expected_identity` is the trusted identity
+    object and the returned identity is its stored reference.
     """
+    if version not in (1, 2):
+        raise ValueError(f'unknown checkpoint version {version!r}')
     if method not in METHODS:
         raise ValueError(f'unknown method {method!r}')
     expectations = _fixture(method)
@@ -119,7 +125,7 @@ def build(data, method, condition, *, seed=42, batch_size=2048, device=torch.dev
     context = data.context(condition)
     kg = build_hetero_graph(context, data.product_categories, data.product_brands)
     identity_obj = build_canonical_identity(**identity_fields(data, method, condition, context, kg, settings))
-    identity = identity_obj.to_dict()
+    identity = identity_obj.to_dict() if version == 1 else identity_reference(identity_obj)
     if method == LIGHTGCN:
         graph = LightGCNGraph(context)
         gen = torch.Generator().manual_seed(seed)
@@ -133,7 +139,7 @@ def build(data, method, condition, *, seed=42, batch_size=2048, device=torch.dev
         rows = {k: list(v) for k, v in kg.node_ids.items()}
         buffers = {}
     expectations.update(
-        expected_identity=identity,
+        expected_identity=identity if version == 1 else identity_obj,
         expected_model={'method': method, 'row_order': rows, 'buffer_state': buffers},
         resource_policy=copy.deepcopy(RESOURCE_POLICY))
     expectations['io_policy'].update(IO_CHANGES)

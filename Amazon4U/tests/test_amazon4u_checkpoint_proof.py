@@ -43,7 +43,7 @@ class ProofLaunchTests(ProfileCase):
         cls._proof = tempfile.TemporaryDirectory()
         root = Path(cls._proof.name)
         cls.bundle = root / 'bundle'
-        cls.manifest = build_bundle(2, DATASET_REF, cls.sha, cls.bundle)
+        cls.manifest = build_bundle(2, DATASET_REF, cls.sha, cls.bundle, version=2)
         cls.manifest_sha = load_bundle(cls.bundle)[1]
         cls.out = root / 'working'
         cls.out.mkdir()
@@ -84,6 +84,8 @@ class ProofLaunchTests(ProfileCase):
         self.assertEqual(len(result['cases']), 4)
         self.assertEqual(sorted(p.name for p in self.out.iterdir()), ['progress.jsonl', 'result.json'])
         self.assertIn('amazon4u-ckpt-proof-mi-run-2-', self.manifest['kernel_ref'])
+        self.assertEqual(result['plan']['checkpoint_version'], 2)
+        self.assertTrue(all(c['children']['first']['checkpoint_version'] == 2 for c in result['cases']))
 
     def test_launch_books_run_2_in_the_profiling_ledger_and_collects(self):
         reports = self.case / 'reports'
