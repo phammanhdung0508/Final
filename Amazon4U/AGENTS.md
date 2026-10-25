@@ -31,10 +31,13 @@ Keep this section short and edit it in place. Record phase results in
   No model training or learned embeddings have been run.
 - GPU-READY accepted by the user on 2026-10-25 (`docs/gpu-ready-traceability.md`).
   Musical_Instruments profiling run 1 completed; its report was accepted on 2026-10-25
-  (`docs/musical-instruments-profiling-report.md`). Next gate: real-data checkpoint
-  readiness (`docs/checkpoint-real-data-readiness-plan.md`, agreed by the user
-  on 2026-10-25). Then frozen
-  settings and explicit training approval.
+  (`docs/musical-instruments-profiling-report.md`). Real-data checkpoint readiness is
+  done: identity v2 met all targets in Kaggle run 3 (`docs/checkpoint-identity-v2-plan.md`).
+  Musical_Instruments training settings agreed on 2026-10-26
+  (`docs/musical-instruments-training-settings.md`); learning-rate tuning amendment agreed
+  (`docs/learning-rate-tuning-amendment.md`, protocol v2.1.0 snapshot pending), with tuning
+  seed 42, trial reuse and validation every epoch. Next: the real-data training run, then
+  explicit training approval.
 - Still requires explicit approval: live Kaggle or GPU jobs, real-data training,
   profiling, comparative or final-test runs, held-out evaluation, production
   initialization, new execution budgets, and any change to frozen science or criteria.

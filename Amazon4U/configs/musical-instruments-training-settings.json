@@ -1,0 +1,80 @@
+{
+  "schema_version": "amazon4u-training-settings-v1",
+  "category": "Musical_Instruments",
+  "status": "AGREED_by_user_2026-10-26",
+  "documentation": "docs/musical-instruments-training-settings.md",
+  "user_words": "I would like `Tuning configurations` increase to 3. everything else lgtm.",
+  "authorizes_training": false,
+  "methods": {
+    "LightGCN": {
+      "batch_size": 2048,
+      "tuning_configurations_per_condition": 3,
+      "checkpoint_every_epochs": 20,
+      "keep_final_and_best_checkpoints": true,
+      "checkpoint_format": "identity_v2",
+      "booking_gpu_hours_per_run": 0.7
+    },
+    "Heterogeneous KG+GNN": {
+      "batch_size": 1024,
+      "tuning_configurations_per_condition": 3,
+      "checkpoint_every_epochs": 10,
+      "keep_final_and_best_checkpoints": true,
+      "checkpoint_format": "identity_v2",
+      "booking_gpu_hours_per_run": 2.1
+    }
+  },
+  "gpu_budget": {
+    "cap_gpu_hours": 24,
+    "basis": "verified_30_per_week_less_20_percent_reserve",
+    "booking": "measured_worst_case_plus_25_percent_then_actual_recorded",
+    "limit": "no_run_starts_if_booking_exceeds_cap_agent_stops_and_asks"
+  },
+  "worst_case_gpu_hours": {
+    "tuning": 12.2,
+    "final": 12.2,
+    "checkpoints": 0.3,
+    "total": 24.7,
+    "note": "superseded_by_trial_reuse_total_20.6_under_cap"
+  },
+  "unaffected": [
+    "Popularity",
+    "KG-only"
+  ],
+  "pinned_configs_left_unchanged": [
+    "configs/compute-plan.json",
+    "configs/training-semantics.json"
+  ],
+  "still_pending": [
+    "protocol_v2.1.0_snapshot",
+    "scoped_lr_check_change_in_harness_and_d2",
+    "real_data_training_run_implementation",
+    "explicit_training_approval"
+  ],
+  "tuning_search_space": {
+    "status": "AGREED_2026-10-26",
+    "record": "configs/learning-rate-tuning-amendment.json",
+    "learning_rate": [
+      0.0005,
+      0.001,
+      0.002
+    ]
+  },
+  "decisions_2026-10-26": {
+    "user_words": "1. seed 42 is ok to me. 2. yes, wining tuning should count as a final run. 3. oh, yes please use validation every epoch.",
+    "tuning_seed": 42,
+    "trial_reuse": "selected_configuration_tuning_run_is_final_seed_42",
+    "final_seeds_trained_separately": [
+      2026,
+      3407
+    ],
+    "validation_frequency": "every_epoch_full_ranking",
+    "patience_epochs": 10,
+    "worst_case_gpu_hours": {
+      "tuning": 12.2,
+      "final": 8.1,
+      "checkpoints": 0.3,
+      "total": 20.6,
+      "cap": 24
+    }
+  }
+}

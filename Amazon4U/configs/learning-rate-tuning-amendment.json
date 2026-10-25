@@ -1,0 +1,91 @@
+{
+  "schema_version": "amazon4u-amendment-v1",
+  "id": "learning-rate-tuning-v1",
+  "status": "AGREED_by_user_2026-10-26",
+  "user_words": "ok, i agreed. Option A as your recommend look good to me.",
+  "documentation": "docs/learning-rate-tuning-amendment.md",
+  "recorded_before_any_comparative_result": true,
+  "held_out_results_exposed": false,
+  "authorizes_training": false,
+  "change": {
+    "setting": "adam_learning_rate",
+    "before": {
+      "value": 0.001,
+      "kind": "frozen_constant"
+    },
+    "after": {
+      "values": [
+        0.0005,
+        0.001,
+        0.002
+      ],
+      "kind": "tuned_constant_within_run"
+    },
+    "methods": [
+      "LightGCN",
+      "Heterogeneous KG+GNN"
+    ],
+    "tuning_configurations_vary": "learning_rate_only"
+  },
+  "unchanged": [
+    "adam_betas",
+    "adam_epsilon",
+    "weight_decay_zero",
+    "endpoint_penalty",
+    "max_epochs_100",
+    "patience_10_checks",
+    "block_1_architecture",
+    "metrics",
+    "candidates",
+    "kg_only_mixture_grid"
+  ],
+  "selection": {
+    "metric": "validation_NDCG@10",
+    "per": "method_and_feedback_condition",
+    "tie": "earliest_in_order_0.0005_0.001_0.002",
+    "test_used": false,
+    "final_seeds": [
+      42,
+      2026,
+      3407
+    ]
+  },
+  "execution_approach": {
+    "agreed": "agent_proposes_user_freezes_agent_runs_no_adaptive_selection_equal_tries",
+    "whole_plan_approval": "proposed_pending_user_when_bundle_exists"
+  },
+  "consequences": {
+    "protocol_version": {
+      "from": "amazon4u-protocol-v2.0.0",
+      "to": "amazon4u-protocol-v2.1.0",
+      "snapshot": "pending_build_step"
+    },
+    "pinned_code": [
+      "scripts/training_harness.py ADAM_OPTIONS lr 0.001",
+      "scripts/checkpoint_payload.py ADAM_EXPECTED_LR 0.001 (v1, and v2 derived checks)"
+    ],
+    "pinned_code_plan": "scoped_change_allowing_exactly_the_three_values_with_tests_and_breaks_v1_kept"
+  },
+  "still_pending": [
+    "real_data_training_run",
+    "explicit_training_approval"
+  ],
+  "decisions_2026-10-26": {
+    "user_words": "1. seed 42 is ok to me. 2. yes, wining tuning should count as a final run. 3. oh, yes please use validation every epoch.",
+    "tuning_seed": 42,
+    "trial_reuse": "selected_configuration_tuning_run_is_final_seed_42",
+    "final_seeds_trained_separately": [
+      2026,
+      3407
+    ],
+    "validation_frequency": "every_epoch_full_ranking",
+    "patience_epochs": 10,
+    "worst_case_gpu_hours": {
+      "tuning": 12.2,
+      "final": 8.1,
+      "checkpoints": 0.3,
+      "total": 20.6,
+      "cap": 24
+    }
+  }
+}
