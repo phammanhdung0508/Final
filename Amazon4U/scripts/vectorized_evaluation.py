@@ -79,12 +79,28 @@ def evaluate_validation(context, users, items, user_table, item_table, targets, 
     each chunk is ranked and `'metrics'` after its per-user metrics; profiling uses it to
     time the two stages and to check its deadlines between chunks.
     """
-    if list(items) != list(context.sorted_warm_items):
-        raise ValueError('item rows must follow context.sorted_warm_items')
     if user_table.shape[0] != len(users) or item_table.shape[0] != len(items):
         raise ValueError('representation tables do not match the supplied orders')
-    device = item_table.device
     u_index = {u: i for i, u in enumerate(users)}
+
+    def score_users(chunk):
+        rows = torch.tensor([u_index[u] for u in chunk], dtype=torch.long, device=item_table.device)
+        return user_table.index_select(0, rows) @ item_table.T
+    return evaluate_scores(context, items, score_users, targets, device=item_table.device,
+                           chunk_users=chunk_users, tick=tick)
+
+
+def evaluate_scores(context, items, score_users, targets, *, route_of=None, device='cpu',
+                    chunk_users=1024, tick=None):
+    """Validation report equal to `Evaluator(context).evaluate(targets, scorer)`.
+
+    `score_users(user_ids)` returns a users-by-`items` score matrix. `route_of(user_id)`
+    gives the scorer's `(route, fallback_reason)` for a user with positive history; the
+    default is `('personalized', None)`. Users routed to `'fallback'`, and users without
+    positive history, are scored by condition-positive training popularity.
+    """
+    if list(items) != list(context.sorted_warm_items):
+        raise ValueError('item rows must follow context.sorted_warm_items')
     i_index = {p: i for i, p in enumerate(items)}
     n_items = len(items)
     warm_pool = context.warm_items
@@ -120,11 +136,12 @@ def evaluate_validation(context, users, items, user_table, item_table, targets, 
     recommended_at_10 = set()
     for start in range(0, len(eligible), chunk_users):
         chunk = eligible[start:start + chunk_users]
-        personalized = [bool(context.positive_history.get(u)) for u, _ in chunk]
-        rows = torch.tensor([u_index[u] for u, _ in chunk], dtype=torch.long, device=device)
+        routes = [(route_of(u) if route_of else ('personalized', None))
+                  if context.positive_history.get(u) else ('fallback', 'empty_positive_history')
+                  for u, _ in chunk]
         with torch.no_grad():
-            scores = user_table.index_select(0, rows) @ item_table.T
-            fallback = torch.tensor([not x for x in personalized], device=device)
+            scores = score_users([u for u, _ in chunk])
+            fallback = torch.tensor([route == 'fallback' for route, _ in routes], device=device)
             scores = torch.where(fallback.unsqueeze(1), popularity.unsqueeze(0), scores)
             candidate = torch.ones(len(chunk), n_items, dtype=torch.bool, device=device)
             hist_r, hist_c = [], []
@@ -163,10 +180,10 @@ def evaluate_validation(context, users, items, user_table, item_table, targets, 
                     metrics[f'NDCG@{k}'] = 0.0
             top_5, top_10, top_20 = ranked[:5], ranked[:10], ranked[:20]
             recommended_at_10.update(top_10)
-            route = 'personalized' if personalized[j] else 'fallback'
+            route, reason = routes[j]
             per_user.append({
                 'user_id': u, 'target_item': target, 'route': route,
-                'fallback_reason': None if personalized[j] else 'empty_positive_history',
+                'fallback_reason': reason,
                 'candidate_count': n_cand, 'metrics': metrics,
                 'top_5': top_5, 'top_10': top_10, 'top_20': top_20,
                 'top_k': {5: top_5, 10: top_10, 20: top_20},
