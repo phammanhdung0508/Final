@@ -95,6 +95,7 @@ content is identical. Only the executable bit is kept for file modes.
 | `trace-audit` | linked worktree | `95b8c3cdb5c3` | 356 | 0 | trace-audit.ignored.tar.zst |
 | `training-harness-implementation-v1` | copy | `88205c0fc2bb` | 321 | 1 | training-harness-implementation-v1.ignored.tar.zst |
 | `training-harness-review` | clone | `b007f547b137` | 394 | 2 | training-harness-review.ignored.tar.zst |
+| `training-mi` | linked worktree | `2fa6b139b254` | 567 | 96 | training-mi.ignored.tar.zst |
 
 ## Removal status
 
