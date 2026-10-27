@@ -1,0 +1,45 @@
+{
+  "schema_version": "amazon4u-amendment-v1",
+  "id": "kg-only-extended-brand-v1",
+  "status": "AGREED_by_user_2026-10-27",
+  "user_words": "2. Add only idea A",
+  "documentation": "docs/kg-only-extended-brand-amendment.md",
+  "recorded_before_any_comparative_result": false,
+  "validation_results_seen": true,
+  "held_out_results_exposed": false,
+  "authorizes_test_run": false,
+  "kind": "labeled_variant_core_unchanged",
+  "variant_label": "KG-only (extended brand grid)",
+  "change": {
+    "core_grid": [[1.0, 0.0], [0.75, 0.25], [0.5, 0.5]],
+    "variant_grid": [[1.0, 0.0], [0.75, 0.25], [0.5, 0.5], [0.25, 0.75], [0.0, 1.0]]
+  },
+  "selection": {
+    "metric": "validation_NDCG@10",
+    "per": "feedback_condition",
+    "tie": "earliest_in_variant_grid_order",
+    "test_used": false
+  },
+  "unchanged": [
+    "core_kg_only_grid_and_selection",
+    "profiles_idf_cosine",
+    "missing_channel_rule",
+    "whole_user_fallback",
+    "candidates",
+    "metrics",
+    "bootstrap_contrasts_use_core_kg_only"
+  ],
+  "motivation_seen_on_validation": {
+    "all_ratings_NDCG@10": {"1/0": 0.0011, "0.75/0.25": 0.0046, "0.5/0.5": 0.0052},
+    "rating_ge_4_NDCG@10": {"1/0": 0.0011, "0.75/0.25": 0.0049, "0.5/0.5": 0.0057}
+  },
+  "protocol_snapshot": "pending_with_research_questions_before_test",
+  "validation_result": {
+    "date": "2026-10-27",
+    "all_ratings_NDCG@10": {"1/0": 0.0011, "0.75/0.25": 0.0046, "0.5/0.5": 0.0052, "0.25/0.75": 0.0052, "0/1": 0.0030},
+    "rating_ge_4_NDCG@10": {"1/0": 0.0011, "0.75/0.25": 0.0049, "0.5/0.5": 0.0057, "0.25/0.75": 0.0056, "0/1": 0.0035},
+    "variant_selected": {"all_ratings": [0.5, 0.5], "rating_ge_4": [0.5, 0.5]},
+    "outcome": "variant_selects_same_mixture_as_core_no_gain",
+    "report": "data/reports/training-mi-v1/baselines/validation-extended.json"
+  }
+}

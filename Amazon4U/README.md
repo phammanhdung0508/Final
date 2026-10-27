@@ -1,5 +1,45 @@
 # Amazon4U dataset exploration
 
+## Research questions
+
+Status: **agreed in discussion with the user (2026-10-27)**, recorded at the user's request
+("in case i forgot can you note RQ we agree on to README.md"). Not yet frozen into a
+protocol snapshot. That happens before the test run, which still needs its own approval.
+All four are answered from one test run of the already-trained models, with no retraining.
+
+- **Main question.** Does knowledge-graph information (brand, category) improve top-K
+  recommendations over methods without it? This compares Popularity, LightGCN, KG-only and
+  Heterogeneous KG + GNN.
+- **RQ1. Similar products.** When users buy a product, how often do they later buy a similar
+  one, and do the recommendation models suggest similar products as often as users really
+  need them? "Similar" means the same sub-category with matching details such as brand.
+  It is compared with the natural rate of similar next purchases in the training data,
+  split into one-time products (such as guitars) and repeat products (such as strings).
+- **RQ2. Complementary products.** Do the models recommend complementary products, of a
+  different type that goes with what the user bought (such as strings or a capo after a
+  guitar)? This is measured as correct recommendations from a different sub-category.
+- **RQ3. Brand loyalty.** Do the recommenders capture brand loyalty, recommending products
+  from brands the user bought before? This is compared with how often users actually return
+  to a brand.
+
+Notes:
+
+- The original RQ3, re-buying the exact same product, cannot be measured. The training data
+  has no repeat purchase of the same product by the same user, and the evaluation removes
+  products a user already rated. It is future work.
+- Training-data check for RQ3 (Musical_Instruments): about 13% of later branded purchases
+  come from a brand the user bought before, against about 3% by chance. 86% of ratings
+  are 4 or 5 stars, so "liked" adds little over "bought".
+- Graph expansion (product details such as material) is not needed for RQ1. Details may be
+  used to measure similarity, not as model input. An LLM explanation and an agent
+  recommender are not needed for the research questions. Both are future work.
+- Graph enrichment options (proposed, not approved), including LLM fact extraction from
+  `title`, `features` and `description`: see
+  [`docs/kg-metadata-enrichment-options.md`](docs/kg-metadata-enrichment-options.md).
+- Validation so far (NDCG@10, all ratings): LightGCN 0.0313, KG + GNN 0.0216,
+  Popularity 0.0157, KG-only 0.0052. Test results have not been seen. See
+  [`docs/kg-only-extended-brand-amendment.md`](docs/kg-only-extended-brand-amendment.md).
+
 **Main O-OFFLINE integration: ACCEPT / task_only (2026-10-24). Deployment: NOT_AUTHORIZED.**
 Main now contains the accepted offline Kaggle adapter (`multiautoresearch/adapters/`,
 updated `post-training/scripts/kaggle_job.py`, two O test modules). All seven files match
