@@ -20,7 +20,7 @@ Keep this section short and edit it in place. Record phase results in
 `data/reports/*/review.json`, not here. Earlier status and phase history is in
 `docs/agents-history.md` and grants no current authority.
 
-- Protocol `amazon4u-protocol-v2.0.0`, lifecycle state
+- Protocol `amazon4u-protocol-v2.1.0`, lifecycle state
   `IMPLEMENTATION_REGRESSION_VERIFICATION`. A state or version change, graph build,
   audit or accepted milestone is not permission to train. See
   `docs/protocol-lifecycle.md` and `configs/protocol-lifecycle.json`.
@@ -28,16 +28,20 @@ Keep this section short and edit it in place. Record phase results in
   heterogeneous encoder references, differentiable CPU models, D1, D2, D3, H-REF and
   O-OFFLINE. The main suite has 515 tests. Full 5-core `last_out` splits and Parquet
   metadata are downloaded and the all-rating training KGs are built and validated.
-  No model training or learned embeddings have been run.
 - GPU-READY accepted by the user on 2026-10-25 (`docs/gpu-ready-traceability.md`).
   Musical_Instruments profiling run 1 completed; its report was accepted on 2026-10-25
   (`docs/musical-instruments-profiling-report.md`). Real-data checkpoint readiness is
   done: identity v2 met all targets in Kaggle run 3 (`docs/checkpoint-identity-v2-plan.md`).
   Musical_Instruments training settings agreed on 2026-10-26
   (`docs/musical-instruments-training-settings.md`); learning-rate tuning amendment agreed
-  (`docs/learning-rate-tuning-amendment.md`, protocol v2.1.0 snapshot pending), with tuning
-  seed 42, trial reuse and validation every epoch. Next: the real-data training run, then
-  explicit training approval.
+  (`docs/learning-rate-tuning-amendment.md`, snapshot `configs/protocols/v2.1.0/`), with
+  tuning seed 42, trial reuse and validation every epoch. The approved 20-run
+  Musical_Instruments campaign (LightGCN, KG + GNN) finished; validation results only, test
+  not run (`data/reports/training-mi-v1/`, README "Research questions").
+- KG-only graph enrichment on validation: `docs/kg-v2-enrichment-plan.md` (attempts A to C,
+  C is the last). Next, agreed 2026-10-28: KG + GNN on the improved graph plus a
+  no-metadata control, `docs/kg-gnn-graph-check-plan.md`. Its upload and GPU runs still need
+  approval.
 - Still requires explicit approval: live Kaggle or GPU jobs, real-data training,
   profiling, comparative or final-test runs, held-out evaluation, production
   initialization, new execution budgets, and any change to frozen science or criteria.
@@ -216,7 +220,10 @@ execution, revision budget, task reopening, research or deployment authority.
 - KG-v1 nodes: User, Product, CategoryPath, Brand. Relations: `rated`, `belongs_to`,
   `category_child_of`, `has_brand`. Only training users/products become nodes.
 - Metadata allowlist: `parent_asin`, observed `categories` path prefixes and
-  explicit string `details.Brand`. Do not treat `store`/`Manufacturer` as brand.
+  explicit string `details.Brand`. Do not treat `store`/`Manufacturer` as brand in the
+  core KG-v1. Exception: the labeled KG-v2 variants (KG-only, and KG + GNN on KG-v2 + C)
+  use `store` as a brand fallback and selected `details` fields, user-approved in
+  `docs/kg-v2-enrichment-plan.md` and `docs/kg-gnn-graph-check-plan.md`.
   Category identities are complete JSON path prefixes, not ambiguous leaf names.
 - Missing metadata does not justify fabricated edges or silently removing items.
   Fail on duplicate training pairs/metadata IDs and invalid structural inputs.
